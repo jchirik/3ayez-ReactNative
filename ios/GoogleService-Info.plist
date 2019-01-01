@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>944939788978-emcvb4ai5k4b1bj91g7uounfdb2p4uvt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.944939788978-emcvb4ai5k4b1bj91g7uounfdb2p4uvt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBGKD2BI8xOAgSthvxUiruZT16SrwbAQKM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>944939788978</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ayez.ayezcustomer</string>
+	<key>PROJECT_ID</key>
+	<string>ayez-d4cea</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ayez-d4cea.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:944939788978:ios:6c2f734e96f8ada9</string>
+	<key>DATABASE_URL</key>
+	<string>https://ayez-d4cea.firebaseio.com</string>
+</dict>
+</plist>

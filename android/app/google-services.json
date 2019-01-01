@@ -1,0 +1,191 @@
+{
+  "project_info": {
+    "project_number": "944939788978",
+    "firebase_url": "https://ayez-d4cea.firebaseio.com",
+    "project_id": "ayez-d4cea",
+    "storage_bucket": "ayez-d4cea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944939788978:android:6c2f734e96f8ada9",
+        "android_client_info": {
+          "package_name": "com.ayez.ayezcustomer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944939788978-3ctrun6cn2h48pauu8cl62iae5pr1p19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayez.ayezcustomer",
+            "certificate_hash": "8a66b2ae6b790299803a499f2bebd3a85f5b021f"
+          }
+        },
+        {
+          "client_id": "944939788978-thkaa2v4gkr945b38mvqu2gbb3ggu3lr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayez.ayezcustomer",
+            "certificate_hash": "0f194f18b45b13b7dc25c61b6d5917890430c059"
+          }
+        },
+        {
+          "client_id": "944939788978-iimsqnf8brdri7jbk5cnjh1hj2mclpu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayez.ayezcustomer",
+            "certificate_hash": "9926908feac6aca1721ebd20b4f98dc76ab2f61a"
+          }
+        },
+        {
+          "client_id": "944939788978-i1o2jftnhouj67blfnujqnhkgpvgfe4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeFXUxKT23S8Y4jC53aERpZ0IY9cCz_1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944939788978-i1o2jftnhouj67blfnujqnhkgpvgfe4p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944939788978-rn7v2qj5kegaatcbc9ol4k46me0dagkq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ayez.ayezcallcenter"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944939788978:android:8c5e1d7c99cc141d",
+        "android_client_info": {
+          "package_name": "com.ayez.ayezdriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944939788978-i1o2jftnhouj67blfnujqnhkgpvgfe4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeFXUxKT23S8Y4jC53aERpZ0IY9cCz_1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944939788978:android:f1deb0d0cf725f4f",
+        "android_client_info": {
+          "package_name": "com.ayez.ayezscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944939788978-i1o2jftnhouj67blfnujqnhkgpvgfe4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeFXUxKT23S8Y4jC53aERpZ0IY9cCz_1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944939788978:android:3021b318ffbbc767",
+        "android_client_info": {
+          "package_name": "com.ayez.ayezseller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944939788978-nhlgd91ofsa277pl4re72h189d10uat4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayez.ayezseller",
+            "certificate_hash": "b6454ae67fd4d0789791d771e70a9d297d0ff7c1"
+          }
+        },
+        {
+          "client_id": "944939788978-i1o2jftnhouj67blfnujqnhkgpvgfe4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeFXUxKT23S8Y4jC53aERpZ0IY9cCz_1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944939788978-i1o2jftnhouj67blfnujqnhkgpvgfe4p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944939788978-rn7v2qj5kegaatcbc9ol4k46me0dagkq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ayez.ayezcallcenter"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
