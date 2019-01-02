@@ -204,6 +204,9 @@ dependencies {
   // Crashlytics
   implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
     transitive = true
+
+  // RNSound
+  implementation project(':react-native-sound')
   }
 
   /* --------------------------------

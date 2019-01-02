@@ -10,14 +10,15 @@ const swoosh = new Sound('swoosh.mp3', Sound.MAIN_BUNDLE, (error) => {
     console.log('failed to load the sound', error);
     return;
   }
-  console.log('duration in seconds: ' + swoosh.getDuration() + 'number of channels: ' + swoosh.getNumberOfChannels());
+  console.log('swoosh sound (s): ' + swoosh.getDuration());
 });
+
 const success = new Sound('success.wav', Sound.MAIN_BUNDLE, (error) => {
   if (error) {
     console.log('failed to load the sound', error);
     return;
   }
-  console.log('duration in seconds: ' + swoosh.getDuration() + 'number of channels: ' + swoosh.getNumberOfChannels());
+  console.log('success sound (s): ' + success.getDuration());
 });
 
 // -------------------------------------------------
@@ -28,14 +29,13 @@ export const SOUND_SUCCESS = 'SOUND_SUCCESS';
 
 // main sound function
 export const playSound = (key) => {
-
   let sound = null;
   switch (key) {
     case 'SOUND_SWOOSH':
-      sound =
+      sound = swoosh;
       break;
     case 'SOUND_SUCCESS':
-      state[p.key] = p.value;
+      sound = success;
       break;
     default:
       console.log('No valid sound key');

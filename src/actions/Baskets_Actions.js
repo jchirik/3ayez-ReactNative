@@ -1,7 +1,7 @@
 
 
 import { AsyncStorage } from 'react-native';
-// import { playSound, SOUND_SWOOSH, SOUND_SUCCESS } from './sounds'
+import { playSound, SOUND_SWOOSH } from './sounds'
 import {
   LOAD_BASKETS,
   RECHECK_PRICES,
@@ -28,7 +28,7 @@ export const loadBaskets = () => {
 }
 
 export const addToBasket = (item, seller_id) => {
-  // playSound(SOUND_SWOOSH);
+  playSound(SOUND_SWOOSH);
   return { type: BASKET_ITEM_INCR, payload: { item, seller_id } };
 };
 

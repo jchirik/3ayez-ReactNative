@@ -1,0 +1,2 @@
+for Android: 'android/app/src/main/res/raw'
+for iOS: directly in 'ayezcustomer' in XCode
