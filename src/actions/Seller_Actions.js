@@ -10,7 +10,7 @@ import {
 
   SELLER_PROMOTIONS_FETCH_END,
   SELLER_RECENTS_FETCH_END,
-  SELLER_HOME_FETCH_END,
+  SELLER_FEATURED_FETCH_END,
   SELLER_CATEGORIES_FETCH_END
 } from './types';
 
@@ -26,39 +26,33 @@ const fetchPromotions = (seller_id, page, dispatch) => {
 };
 
 const fetchRecents = (seller_id, page, dispatch) => {
-  // const { currentUser } = firebase.auth();
-  // if (currentUser) {
-  //   const customerID = currentUser.uid;
-  //
-  //   algoliaIndex.getObjects(recentUPCs, (err, content) => {
-  //     if (err) throw err;
-  //     let results = content.results.filter(result => result !== null).map(result => result.thumbnail_url)
-  //     results = results.splice(0, 4);
-  //     console.log('got recent back', results);
-  //     dispatch({
-  //       type: CHECK_IF_RECENT_SET,
-  //       payload: {
-  //         recentUPCImages: results
-  //       }
-  //     });
-  //   });
-  // }
+//   const { currentUser } = firebase.auth();
+//   if (currentUser) {
+//     const customerID = currentUser.uid;
+//
+//     algoliaIndex.getObjects(recentUPCs, (err, content) => {
+//       if (err) throw err;
+//       let results = content.results.filter(result => result !== null).map(result => result.thumbnail_url)
+//       results = results.splice(0, 4);
+//       console.log('got recent back', results);
+//       dispatch({
+//         type: CHECK_IF_RECENT_SET,
+//         payload: {
+//           recentUPCImages: results
+//         }
+//       });
+//     });
+//   }
 };
 
-const fetchHome = (seller_id, dispatch) => {
-  // firebase.firestore().collection('sellers').doc(seller.id).collection('data').doc('featured')
-  // .get().then((document) => {
-  //   const featured = document.data() ? document.data().featured : [];
-  //   console.log('fetched featured', featured);
-  //
-  //  dispatch({ type: CURRENT_SELLER_SELECT, payload: { featured } });
-};
-
-const fetchCategories = (seller_id, dispatch) => {
+const fetchStoreData = (seller_id, dispatch) => {
   const sellerRef = firebase.firestore().collection('sellers').doc(seller_id)
-  sellerRef.collection('data').doc('featured').get().then((document) => {
-    const categories = document.data() ? document.data().featured : [];
-    console.log('fetchCategories', categories);
+  sellerRef.collection('data').doc('app').get().then((document) => {
+    const featured = document.data() ? document.data().featured : [];
+    const categories = document.data() ? document.data().categories : [];
+    console.log('fetchStoreData FEATURED', featured);
+    console.log('fetchStoreData CATEGORIES', categories);
+    dispatch({ type: SELLER_FEATURED_FETCH_END, payload: { featured } });
     dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { categories } });
   });
 };
@@ -68,9 +62,19 @@ export const selectSeller = (seller) => {
     dispatch({ type: SELLER_SELECT, payload: { seller } });
     dispatch({ type: BASKET_INIT, payload: { seller_id: seller.id } });
     Actions.storePage(); // navigate to store page
+    fetchStoreData(seller.id, dispatch) /* fetch featured & categories */
     fetchPromotions(seller.id, 0, dispatch) /* fetch discounts */
     fetchRecents(seller.id, 0, dispatch) /* fetch recents */
-    fetchHome(seller.id, dispatch) /* fetch home */
-    fetchCategories(seller.id, dispatch) /* fetch categories */
+  };
+};
+
+
+export const initSellerBLINK22 = (seller) => {
+  return (dispatch) => {
+    dispatch({ type: SELLER_SELECT, payload: { seller } });
+    dispatch({ type: BASKET_INIT, payload: { seller_id: seller.id } });
+    // Actions.storePage(); // navigate to store page
+    fetchStoreData(seller.id, dispatch) /* fetch featured & categories */
+    fetchPromotions(seller.id, 0, dispatch) /* fetch discounts */
   };
 };

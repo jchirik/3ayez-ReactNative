@@ -39,8 +39,6 @@ export const selectSubcategory = (subcategory, columnIndex) => {
 };
 
 
-
-
 const cleanAlgoliaItems = (allItems) => {
   // ONLY use items that have images
   const safeItems = [];
@@ -122,9 +120,6 @@ export const onSelectCategory = (sellerID, category) => {
 
 
 
-
-// fetch ALL items/images for its subcategories here (only upc, title_arab, price, image_url)
-// paginate subcategory loading?
 export const fetchPromotionItems = (sellerID) => {
 
   return (dispatch) => {
@@ -153,56 +148,6 @@ export const fetchPromotionItems = (sellerID) => {
 
 
 
-
-export const fetchRecentItems = (sellerID, recentUPCs) => {
-
-  return (dispatch) => {
-
-    dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: { searchQuery: strings('SpecialtyBlock.recent') } });
-
-    const { currentUser } = firebase.auth();
-    if (!currentUser) {
-      dispatch({
-        type: ITEM_SEARCH_DATA_SET,
-        payload: {
-          results: []
-        }
-      });
-      return;
-    }
-    const customerID = currentUser.uid;
-
-    const algoliaIndex = algoliaClient.initIndex(sellerID);
-    // console.log('Fetching promotion items', sellerID)
-
-    algoliaIndex.getObjects(recentUPCs, (err, content) => {
-                if (err) throw err;
-                let results = content.results.filter(result => result !== null);
-                // console.log('got recent back', results);
-
-                if (!results) {
-                  dispatch({
-                    type: ITEM_SEARCH_DATA_SET,
-                    payload: {
-                      results: []
-                    }
-                  });
-                } else {
-                  dispatch({
-                    type: ITEM_SEARCH_DATA_SET,
-                    payload: {
-                      results: cleanAlgoliaItems(results)
-                    }
-                  });
-                }
-              });
-  };
-};
-
-
-
-// SUBSTITUTION_OPTIONS_BEGIN,
-// SUBSTITUTION_OPTIONS_SET,
 
 // for swapping substitutions
 export const fetchSubstitutionOptions = (sellerID, itemsToSubstitute) => {
@@ -309,57 +254,6 @@ export const fetchQueryResults = ({ sellerID, query }) => {
     });
   };
 };
-
-
-
-
-// export const fetchQueryItems = ({ sellerID, query, category, subcategory, page }) => {
-//   return (dispatch) => {
-//     dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: {
-//       isLoadingSearchData: (page === 0),
-//       searchQuery: query,
-//       searchCategory: category,
-//       searchSubcategory: subcategory
-//     }});
-//     const algoliaIndex = algoliaClient.initIndex(sellerID);
-//
-//     let facetFilters = [];
-//     if (category) {
-//       facetFilters.push(`${category.type}:${category.filter}`)
-//     }
-//     if (subcategory) {
-//       facetFilters.push(`${subcategory.type}:${subcategory.filter}`)
-//     }
-//
-//     console.log('FETCHING QUERY ITEMS')
-//     console.log('for search query: ' + query)
-//
-//     console.log(facetFilters);
-//
-//     algoliaIndex.search({
-//       query,
-//       facetFilters,
-//       filters: 'online',
-//       page,
-//       hitsPerPage: 15
-//     }).then(res => {
-//       // console.log(page >= res.nbPages);
-//       // console.log(`${page} of ${res.nbPages}`);
-//       dispatch({
-//         type: ITEM_SEARCH_DATA_SET,
-//         payload: {
-//           results: cleanAlgoliaItems(res.hits),
-//           noMorePages: (page >= res.nbPages),
-//           page
-//         }
-//       });
-//     });
-//   };
-// };
-
-
-
-
 
 
 

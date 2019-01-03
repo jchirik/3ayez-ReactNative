@@ -132,23 +132,6 @@ class WorkingBasket extends Component {
           {afterPrice}
           {beforePrice}
         </View>
-        {/* call button */}
-        <TouchableOpacity
-          style={styles.callButton}
-          activeOpacity={0.6}
-          onPress={() => Actions.supportChat()}
-        >
-        <Image
-          source={chatButtonImage}
-          style={{
-            width: 34,
-            height: 34,
-            tintColor: 'white'
-          }}
-          resizeMode={'contain'}
-        />
-
-        </TouchableOpacity>
         { /* <Text style={styles.callButtonText}>{strings('WorkingBasket.callForProblem')}</Text> */}
 
         {/* back button */}
@@ -259,38 +242,20 @@ class WorkingBasket extends Component {
       } else {
 
         // continue onwards
-        Actions.checkoutFlow({ isLoggedIn: (firebase.auth().currentUser) });
+        // Actions.checkoutFlow({ isLoggedIn: (firebase.auth().currentUser) });
       }
-
-
-      // if (firebase.auth().currentUser === null) { // || this.props.customerName === ''
-      //   Actions.auth({ originPage: 'workingBasket' });
-      // } else {
-      //   Actions.addressSelect({ originPage: 'workingBasket' });
-      // }
     }
 
 
     renderCouponButton() {
-
-      const { coupon } = this.props;
-
       let couponText = strings('CouponBanner.addCoupon')
-      if (coupon) {
-        let typeText = 'off';
-        if (coupon.type === 'pound_discount') { typeText = 'EGP'; }
-        else if (coupon.type === 'percent_discount') { typeText = '%'; }
-
-        couponText = `${coupon.code}: -${coupon.amount}${typeText}`
-      }
-
 
       return (
         <BlockButton
             text={couponText}
-            outline={!coupon}
+            outline
             style={{ marginBottom: 5, shadowOpacity: 0, elevation: 0 }}
-            onPress={() => this.props.toggleCouponModal()}
+            onPress={() => console.log('Open Coupon Modal')}
             color='#b413c6'
           />
       );
@@ -313,7 +278,7 @@ class WorkingBasket extends Component {
   render() {
 
     const { seller } = this.props;
-    const sellerName = seller.display_name ? localizeDN(seller.display_name) : seller.name;
+    const sellerName = localizeDN(seller.display_name);
 
     return (
       <View style={{ flex: 1 }}>

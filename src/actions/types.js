@@ -2,14 +2,17 @@
 types for action-reducer
 */
 
+// if the TYPE is being used in this version of the app, add it to this block
+
 export const SELLERS_FETCH_BEGIN = 'SELLERS_FETCH_BEGIN';
 export const SELLERS_FETCH_END = 'SELLERS_FETCH_END';
+export const SELLERS_FETCH_ERROR = 'SELLERS_FETCH_ERROR';
 
 export const SELLER_SELECT = 'SELLER_SELECT';
 
 export const SELLER_PROMOTIONS_FETCH_END = 'SELLER_PROMOTIONS_FETCH_END';
 export const SELLER_RECENTS_FETCH_END = 'SELLER_RECENTS_FETCH_END';
-export const SELLER_HOME_FETCH_END = 'SELLER_HOME_FETCH_END';
+export const SELLER_FEATURED_FETCH_END = 'SELLER_FEATURED_FETCH_END';
 export const SELLER_CATEGORIES_FETCH_END = 'SELLER_CATEGORIES_FETCH_END';
 
 export const LOAD_BASKETS = 'LOAD_BASKETS';
@@ -33,14 +36,15 @@ export const TIP_SET = 'TIP_SET';
 export const ORDER_NOTES_SET = 'ORDER_NOTES_SET';
 export const PAYMENT_METHOD_SET = 'PAYMENT_METHOD_SET';
 
-
 /* Address Creation */
-
 export const ADDRESS_CREATE_RESET = 'ADDRESS_CREATE_RESET';
 export const ADDRESS_REGION_SET = 'ADDRESS_REGION_SET';
 export const ADDRESS_DETAILS_SET = 'ADDRESS_DETAILS_SET';
 
+// for getting coord details from google places
+export const ADDRESS_LOCATION_BEGIN = 'ADDRESS_LOCATION_BEGIN';
 export const ADDRESS_LOCATION_SET = 'ADDRESS_LOCATION_SET';
+export const ADDRESS_LOCATION_ERROR = 'ADDRESS_LOCATION_ERROR';
 
 export const CURRENT_LOCATION_BEGIN = 'CURRENT_LOCATION_BEGIN';
 export const CURRENT_LOCATION_SET = 'CURRENT_LOCATION_SET';
@@ -55,21 +59,27 @@ export const LOCATION_REVERSE_SEARCH_SET = 'LOCATION_REVERSE_SEARCH_SET';
 
 
 
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
 
+// OLD TYPES from migration below
+// they will be deleted, so if you are using any, place them above
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
 
 
 /* Location */

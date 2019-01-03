@@ -81,7 +81,7 @@ class StoreCategory extends Component {
     Actions.storeShelf({ items: subcategory.items });
   }
 
-  renderTinyPhoto({ image_url, thumbnail_url }) { // CHANGE TO thumbnail_url
+  renderTinyPhoto({ image_url, thumbnail_url }) {
     return (
         <View style={{
           width: 85,
@@ -95,6 +95,7 @@ class StoreCategory extends Component {
             }}
             defaultSource={loadingCircleGray}
             resizeMode={'contain'}
+            // use thumbnail if image not avail
             source={{ uri: thumbnail_url || image_url }}
           />
         </View>
@@ -120,7 +121,7 @@ class StoreCategory extends Component {
       );
     }
 
-    // necessary for knowing which column to jump to in the next page
+    // columnIndex necessary for knowing which column to jump to in the next page
     const columnIndex = Math.floor(index / 2);
     return (
       <TouchableOpacity
@@ -135,13 +136,11 @@ class StoreCategory extends Component {
 
   }
 
-  renderItem({ item, index }) {
+  renderSubcategoryRow({ item, index }) {
 
     const subcategory = item;
-
     const subcategoryTitle = subcategory.name ? localizeDN(subcategory.name) : subcategory.title;
 
-// look into this FlatList in a FlatList!!!!
     return (
       <View
         style={{
@@ -168,14 +167,8 @@ class StoreCategory extends Component {
   renderListHeader() {
     const { category } = this.props;
     return (
-      <View style={{ height: window.width*0.3 }}>
-        <View style={{
-          position: 'absolute',
-          top: window.width*0.3,
-          width: window.width,
-          backgroundColor: '#f7f7f7',
-          height: 1
-        }} />
+      <View style={{ height: 20, marginTop: 30 }}>
+        <Text>{this.props.category.filter}</Text>
       </View>
     );
   }
@@ -201,7 +194,6 @@ class StoreCategory extends Component {
     }
   }
 
-
   render() {
 
     const {
@@ -220,7 +212,7 @@ class StoreCategory extends Component {
         ListHeaderComponent={this.renderListHeader.bind(this)}
         ListFooterComponent={(<View style={{ height: 60 }} />)}
         ListEmptyComponent={this.renderNoItems.bind(this)}
-        renderItem={this.renderItem.bind(this)}
+        renderItem={this.renderSubcategoryRow.bind(this)}
         data={categoryData}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index}
@@ -249,7 +241,6 @@ const mapStateToProps = ({ ItemSearch }) => {
   if (categoryData) {
     categoryDataWithItems = categoryData.filter(subcategory => subcategory.items.length > 0);
   }
-
   return {
     category,
     categoryData: categoryDataWithItems,

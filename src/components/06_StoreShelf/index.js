@@ -24,6 +24,10 @@ import AnimatedCheckmarkOverlay from './AnimatedCheckmarkOverlay';
 import BasketBlockButton from './BasketBlockButton';
 import ItemCell from './ItemCell';
 
+import {
+  BackButton
+} from '../_common';
+
 // const ITEM_HEIGHT = (Dimensions.get('window').width/3) + 42;
 
 const window = Dimensions.get('window');
@@ -116,7 +120,7 @@ class StoreShelf extends Component {
       <View style={{ flex: 1 }}>
       <FlatList
         ref={(ref) => this.tableRef = ref}
-        style={{ flex: 1, backgroundColor: 'white' }}
+        style={{ flex: 1, backgroundColor: 'white', marginTop: 60 }}
         onLayout={(event) => {
           const { height } = event.nativeEvent.layout;
           this.setState({ itemHeight: height / 2 });
@@ -126,7 +130,7 @@ class StoreShelf extends Component {
         ListEmptyComponent={
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: window.width}}>
             <Text style={{
-              fontFamily: 'BahijJanna',
+              fontFamily: 'Poppins-Regular',
               color: 'black',
               fontSize: 20
             }}>{strings('StoreSubcategories.noItemsAvailable')}</Text>
@@ -138,10 +142,11 @@ class StoreShelf extends Component {
       />
       <BasketBlockButton />
       <AnimatedCheckmarkOverlay />
+
+      <BackButton type='cross_circled' />
       </View>
     );
   }
-
 }
 
 

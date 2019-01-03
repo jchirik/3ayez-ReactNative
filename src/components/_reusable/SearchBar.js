@@ -96,7 +96,6 @@ const styles = {
 searchPlaceholderText: {
   flex: 1,
   position: 'relative',
-  fontFamily: 'BahijJanna',
   fontSize: 20,
   marginRight: 8,
   padding: 0, // added for android

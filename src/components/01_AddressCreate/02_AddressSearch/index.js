@@ -76,7 +76,27 @@ class AddressSearch extends Component {
       );
   }
 
+  // show subtle loading, and make unclickable when getting details
+  renderLoadingOverlay() {
+    if (this.props.coordinate_loading) {
+      return (
+        <View style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          backgroundColor: 'rgba(52, 52, 52, 0.2)'
+        }}>
+          <ActivityIndicator size="small" style={{ flex: 1 }} />
+        </View>
+      )
+    }
+    return null;
+  }
+
   render() {
+
     return (
       <View style={{
         flex: 1,
@@ -103,17 +123,23 @@ class AddressSearch extends Component {
           keyExtractor={(item, index) => index}
         />
         <BackButton type='cross_circled' />
+        { this.renderLoadingOverlay() }
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ AddressSearch }) => {
+const mapStateToProps = ({ AddressSearch, AddressPlaceDetails }) => {
   const { query, is_loading, results } = AddressSearch;
+  const coordinate_loading = AddressPlaceDetails.is_loading;
+  const coordinate_error = AddressPlaceDetails.error;
+
   return {
     query,
     is_loading,
-    results
+    results,
+    coordinate_loading,
+    coordinate_error
   };
 };
 

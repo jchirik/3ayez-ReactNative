@@ -7,7 +7,9 @@ import {
   ADDRESS_SEARCH_BEGIN,
   ADDRESS_SEARCH_SET,
 
-  ADDRESS_LOCATION_SET
+  ADDRESS_LOCATION_BEGIN,
+  ADDRESS_LOCATION_SET,
+  ADDRESS_LOCATION_ERROR
 } from './types';
 
 const googlePlacesKey = 'AIzaSyDPWckRr8Yb1stsXBWeh1ME_UDjR9Y_GC0';
@@ -67,10 +69,15 @@ export const searchAddresses = (query) => {
 
 // LOADING NEEDED !!!!
 // given a selected autocomplete result, fetches the coordinate
+// then set the Address Location as this coordinate to begin
 export const selectGooglePlaceResult = (google_place) => {
   return (dispatch) => {
+      const { place_id } = google_place;
+
       // fetch details
       const request = new XMLHttpRequest();
+      dispatch({ type: ADDRESS_LOCATION_BEGIN });
+
       request.timeout = 20000;
       request.ontimeout = () => console.warn('google places autocomplete: request timeout');
       request.onreadystatechange = () => {
@@ -90,15 +97,17 @@ export const selectGooglePlaceResult = (google_place) => {
 
         } else {
           console.warn('google places autocomplete: ' + responseJSON.status);
+          dispatch({ type: ADDRESS_LOCATION_ERROR, payload: { error: responseJSON.status } });
         }
       } else {
         console.warn(request.responseText);
+        dispatch({ type: ADDRESS_LOCATION_ERROR, payload: { error: request.responseText } });
       }
     };
 
     const jsonRequest = qs.stringify({
       key: googlePlacesKey,
-      placeid: google_place.place_id
+      placeid: place_id
     });
     request.open(
       'GET',

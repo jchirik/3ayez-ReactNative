@@ -8,6 +8,7 @@ import ReduxThunk from 'redux-thunk';
 import Address from './Address_Reducer';
 import AddressCreate from './AddressCreate_Reducer';
 import AddressSearch from './AddressSearch_Reducer';
+import AddressPlaceDetails from './AddressPlaceDetails_Reducer';
 import AddressReverseSearch from './AddressReverseSearch_Reducer';
 import CurrentLocation from './CurrentLocation_Reducer';
 
@@ -57,6 +58,7 @@ const reducers = combineReducers({
   Address,
   AddressCreate,
   AddressSearch,
+  AddressPlaceDetails,
   AddressReverseSearch,
   CurrentLocation,
 

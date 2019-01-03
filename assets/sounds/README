@@ -1,2 +1,2 @@
 for Android: 'android/app/src/main/res/raw'
-for iOS: in 'ayezcustomer' in XCode, linking to the Android raw file
+for iOS: added in 'ayezcustomer' in XCode, linking to the Android raw file

@@ -17,6 +17,10 @@ export const resetAddressCreate = () => {
   return { type: ADDRESS_CREATE_RESET };
 };
 
+export const setAddressLocation = (point) => {
+  return { type: ADDRESS_LOCATION_SET, payload: { point } };
+};
+
 export const setAddressRegion = (region) => {
   return { type: ADDRESS_REGION_SET, payload: { region } };
 };

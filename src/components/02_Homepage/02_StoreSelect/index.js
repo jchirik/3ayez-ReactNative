@@ -69,13 +69,13 @@ class StoreSelect extends Component {
   componentDidMount() {
     console.log('Store Select mounted')
     const { point } = this.props;
-    this.props.fetchNearbySellers(point); // load nearby stores upon open
+    this.props.fetchNearbySellers(point, 'kafr_abdo'); // load nearby stores upon open
   }
 
   componentDidUpdate(prevProps) {
     const { point } = this.props;
     if (point !== prevProps.point) {
-      this.props.fetchNearbySellers(point); // load nearby stores upon change
+      this.props.fetchNearbySellers(point, 'kafr_abdo'); // load nearby stores upon change
     }
   }
 
@@ -459,6 +459,33 @@ renderItem({ item, index }) {
     );
 }
 
+renderSellerList() {
+
+  if (this.props.error) {
+    return (
+      <Text>No Internet</Text>
+    );
+  }
+
+  return (
+    <FlatList
+      data={this.props.sellers}
+      renderItem={this.renderItem.bind(this)}
+      style={{ marginTop: 46, flex: 1, backgroundColor: '#f7f7f7' }}
+
+      removeClippedSubviews
+      ListHeaderComponent={null}
+      ListEmptyComponent={null}
+      ListFooterComponent={null}
+
+
+      scrollEventThrottle={16}
+      showsVerticalScrollIndicator={false}
+      keyExtractor={(item, index) => index}
+    />
+  )
+}
+
   render() {
 
     // return (
@@ -481,23 +508,8 @@ renderItem({ item, index }) {
           >
           <Text>Address</Text>
         </TouchableOpacity>
-
-        <FlatList
-          data={this.props.sellers}
-          renderItem={this.renderItem.bind(this)}
-            style={{ marginTop: 46, flex: 1, backgroundColor: '#f7f7f7' }}
-
-            removeClippedSubviews
-            ListHeaderComponent={null}
-            ListEmptyComponent={null}
-            ListFooterComponent={null}
-
-
-            scrollEventThrottle={16}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item, index) => index}
-          />
-          <BackButton type='cross_circled' />
+        {this.renderSellerList()}
+        <BackButton type='cross_circled' />
       </View>
     );
   }
@@ -537,13 +549,14 @@ renderItem({ item, index }) {
 
 const mapStateToProps = ({ Address, SellerSearch }) => {
   const { street, point } = Address;
-  const { sellers, is_loading } = SellerSearch;
+  const { sellers, is_loading, error } = SellerSearch;
   return {
     street,
     point,
 
     sellers,
-    is_loading
+    is_loading,
+    error
   };
 };
 

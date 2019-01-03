@@ -4,7 +4,7 @@ import {
 
   SELLER_PROMOTIONS_FETCH_END,
   SELLER_RECENTS_FETCH_END,
-  SELLER_HOME_FETCH_END,
+  SELLER_FEATURED_FETCH_END,
   SELLER_CATEGORIES_FETCH_END
 } from '../actions/types';
 
@@ -12,7 +12,9 @@ import {
 const INITIAL_STATE = {
   // ... from the seller doc
   id: null, // we know how to get this (via create acccount or login account)
-  name: '',
+  logo_url: '',
+  display_name: {},
+  minimum: 100,
   phone: '',
 
   delivery_fee: 3,
@@ -25,8 +27,8 @@ const INITIAL_STATE = {
   recents: [],
 
   // Section 2 of Store Home
-  home: [], // contains an array OF categories (query, name, page, item array)
-  categories: [],
+  featured: [],
+  categories: [], // contains an array OF categories (query, name, page, item array)
   categories_loading: true
 };
 
@@ -44,6 +46,8 @@ export default (state = INITIAL_STATE, action) => {
           promotions_loading: false
         };
       }
+    case SELLER_FEATURED_FETCH_END:
+      return { ...state, featured: p.featured };
     case SELLER_CATEGORIES_FETCH_END:
       return { ...state, categories: p.categories, categories_loading: false };
     default:

@@ -28,6 +28,7 @@ import Support from './components/02_Homepage/03_Support';
 import UniversalSearch from './components/02_Homepage/04_UniversalSearch';
 
 import StorePage from './components/03_StorePage';
+import StoreSearch from './components/04_StoreSearch';
 import StoreCategory from './components/05_StoreCategory';
 import StoreShelf from './components/06_StoreShelf';
 import ItemPage from './components/07_ItemPage';
@@ -262,7 +263,12 @@ class RouterComponent extends Component {
 
           <Scene
             key="storePage"
+            initial
             component={StorePage}
+          />
+          <Scene
+            key="storeSearch"
+            component={StoreSearch}
           />
           <Scene
             key="storeCategory"

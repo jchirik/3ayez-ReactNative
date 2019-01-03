@@ -19,7 +19,6 @@ const INITIAL_STATE = {
   subcategoryColumnIndex: 0,
   catagoryData: [],
   isLoadingCategoryData: false,
-  searchRequestTime: 0,
 
   results: [],
   searchQuery: '',
@@ -35,9 +34,7 @@ export default (state = INITIAL_STATE, action) => {
     case CATEGORY_DATA_BEGIN:
       return { ...state, categoryData: [], category: p.category, isLoadingCategoryData: true };
     case CATEGORY_DATA_SET:
-      // ensure any data here is the LAST data you requested (like aborting)
-      if (p.searchRequestTime < state.searchRequestTime) { return state; }
-      return { ...state, categoryData: p.categoryData, isLoadingCategoryData: false, searchRequestTime: p.searchRequestTime }
+      return { ...state, categoryData: p.categoryData, isLoadingCategoryData: false }
     case SUBCATEGORY_SET:
       return { ...state, subcategory: p.subcategory, subcategoryColumnIndex: p.columnIndex }
     case ITEM_SEARCH_QUERY_SET:

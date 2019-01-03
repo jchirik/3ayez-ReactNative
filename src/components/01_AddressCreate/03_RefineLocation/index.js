@@ -18,15 +18,12 @@ import {
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
-// import {
-//   setArea,
-//   fetchAreas,
-//   detectCurrentLocation,
-//   searchAreas
-// } from '../../actions';
+import {
+  setAddressLocation
+} from '../../../actions';
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
-// const comingSoonImage = require('../../../assets/images/coming_soon.png');
+const pinIcon = require('../../../../assets/images_v2/AddressCreate/pin.png');
 
 
 
@@ -53,25 +50,76 @@ import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 
 class RefineLocation extends Component {
 
+  onRegionChange(region) {
+    this.props.setAddressLocation({
+      lat: region.latitude,
+      lng: region.longitude
+    });
+  }
+
+  renderPinOverlay() {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+        pointerEvents="none"
+      >
+        <Image
+          source={pinIcon}
+          style={{
+              width: 36,
+              height: 36,
+              marginBottom: 36
+            }}
+          resizeMode={'contain'}
+        />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={{
         flex: 1,
         backgroundColor: 'white'
       }}>
-        <Text>{this.props.region}</Text>
-        <MapView
-          ref={map => { this.map = map }}
+        <Text
+          style={{ marginTop: 40 }}
+        >{this.props.region} LAT {this.props.point.lat}, LNG {this.props.point.lng}</Text>
+
+        <View
           style={{ flex: 1 }}
-          showsUserLocation
-          provider={ PROVIDER_GOOGLE }
-          initialRegion={{
-            latitude: this.props.point.lat,
-            longitude: this.props.point.lng,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003,
-          }}
-        />
+        >
+          <MapView
+            ref={map => { this.map = map }}
+            style={{ flex: 1 }}
+            showsUserLocation
+            provider={ PROVIDER_GOOGLE }
+            initialRegion={{
+              latitude: this.props.point.lat,
+              longitude: this.props.point.lng,
+              latitudeDelta: 0.003,
+              longitudeDelta: 0.003,
+            }}
+            onRegionChange={this.onRegionChange.bind(this)}
+          />
+          {this.renderPinOverlay()}
+        </View>
+
+        <TouchableOpacity
+          style={{ height: 100 }}
+          onPress={() => Actions.addressDetails()}
+        >
+          <Text>OK</Text>
+        </TouchableOpacity>
+
         <BackButton type='cross_circled' />
       </View>
     );
@@ -88,4 +136,5 @@ const mapStateToProps = ({ AddressCreate }) => {
 };
 
 export default connect(mapStateToProps, {
+  setAddressLocation
 })(RefineLocation);

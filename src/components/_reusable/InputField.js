@@ -36,8 +36,7 @@ const styles = {
     alignSelf: 'stretch',
     fontSize: 24,
     flex: 1,
-    textAlign: 'right',
-    fontFamily: 'BahijJanna'
+    textAlign: 'right'
   },
   inputRow: {
     justifyContent: 'flex-end',
