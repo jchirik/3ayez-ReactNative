@@ -20,6 +20,10 @@ import {
   onSelectCategory
 } from '../../actions';
 
+import {
+  BackButton
+} from '../_common';
+
 
 class StorePage extends Component {
 
@@ -62,6 +66,7 @@ class StorePage extends Component {
             showsVerticalScrollIndicator={false}
             keyExtractor={(item, index) => index}
           />
+        <BackButton type='cross_circled' />
       </View>
     );
   }

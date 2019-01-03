@@ -41,11 +41,11 @@
 		A038CD85D39748E122AC50D7 /* libPods-ayezcustomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333056BA5B7ADABE709DF4A1 /* libPods-ayezcustomer.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		D27602BE21DD15810037DE81 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D27602BD21DD156A0037DE81 /* libRNSound.a */; };
-		D27602C621DD16040037DE81 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = D27602C121DD16030037DE81 /* success.wav */; };
-		D27602C721DD16040037DE81 /* bounce_mid.wav in Resources */ = {isa = PBXBuildFile; fileRef = D27602C221DD16030037DE81 /* bounce_mid.wav */; };
-		D27602C821DD16040037DE81 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = D27602C321DD16030037DE81 /* ding.wav */; };
-		D27602C921DD16040037DE81 /* bounce_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = D27602C421DD16040037DE81 /* bounce_low.wav */; };
-		D27602CA21DD16040037DE81 /* swoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D27602C521DD16040037DE81 /* swoosh.mp3 */; };
+		D276032621DD2BBD0037DE81 /* bounce_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = D276032121DD2BBD0037DE81 /* bounce_low.wav */; };
+		D276032721DD2BBD0037DE81 /* bounce_mid.wav in Resources */ = {isa = PBXBuildFile; fileRef = D276032221DD2BBD0037DE81 /* bounce_mid.wav */; };
+		D276032821DD2BBD0037DE81 /* ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = D276032321DD2BBD0037DE81 /* ding.wav */; };
+		D276032921DD2BBD0037DE81 /* swoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D276032421DD2BBD0037DE81 /* swoosh.mp3 */; };
+		D276032A21DD2BBD0037DE81 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = D276032521DD2BBD0037DE81 /* success.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,11 +370,11 @@
 		ADF4CB3C3BF44D3EBA8B78C4 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		B7AFA8AA9A1CFD17320E9074 /* Pods-ayezcustomer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ayezcustomer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer.release.xcconfig"; sourceTree = "<group>"; };
 		D276029221DD156A0037DE81 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
-		D27602C121DD16030037DE81 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = success.wav; path = ../assets/sounds/success.wav; sourceTree = "<group>"; };
-		D27602C221DD16030037DE81 /* bounce_mid.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bounce_mid.wav; path = ../assets/sounds/bounce_mid.wav; sourceTree = "<group>"; };
-		D27602C321DD16030037DE81 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ding.wav; path = ../assets/sounds/ding.wav; sourceTree = "<group>"; };
-		D27602C421DD16040037DE81 /* bounce_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bounce_low.wav; path = ../assets/sounds/bounce_low.wav; sourceTree = "<group>"; };
-		D27602C521DD16040037DE81 /* swoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swoosh.mp3; path = ../assets/sounds/swoosh.mp3; sourceTree = "<group>"; };
+		D276032121DD2BBD0037DE81 /* bounce_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bounce_low.wav; path = ../android/app/src/main/res/raw/bounce_low.wav; sourceTree = "<group>"; };
+		D276032221DD2BBD0037DE81 /* bounce_mid.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bounce_mid.wav; path = ../android/app/src/main/res/raw/bounce_mid.wav; sourceTree = "<group>"; };
+		D276032321DD2BBD0037DE81 /* ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ding.wav; path = ../android/app/src/main/res/raw/ding.wav; sourceTree = "<group>"; };
+		D276032421DD2BBD0037DE81 /* swoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = swoosh.mp3; path = ../android/app/src/main/res/raw/swoosh.mp3; sourceTree = "<group>"; };
+		D276032521DD2BBD0037DE81 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = success.wav; path = ../android/app/src/main/res/raw/success.wav; sourceTree = "<group>"; };
 		FBC8C743C046423C960F2237 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -516,11 +516,11 @@
 		13B07FAE1A68108700A75B9A /* ayezcustomer */ = {
 			isa = PBXGroup;
 			children = (
-				D27602C421DD16040037DE81 /* bounce_low.wav */,
-				D27602C221DD16030037DE81 /* bounce_mid.wav */,
-				D27602C321DD16030037DE81 /* ding.wav */,
-				D27602C121DD16030037DE81 /* success.wav */,
-				D27602C521DD16040037DE81 /* swoosh.mp3 */,
+				D276032121DD2BBD0037DE81 /* bounce_low.wav */,
+				D276032221DD2BBD0037DE81 /* bounce_mid.wav */,
+				D276032321DD2BBD0037DE81 /* ding.wav */,
+				D276032521DD2BBD0037DE81 /* success.wav */,
+				D276032421DD2BBD0037DE81 /* swoosh.mp3 */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1150,14 +1150,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D27602C921DD16040037DE81 /* bounce_low.wav in Resources */,
-				D27602C821DD16040037DE81 /* ding.wav in Resources */,
-				D27602C721DD16040037DE81 /* bounce_mid.wav in Resources */,
-				D27602CA21DD16040037DE81 /* swoosh.mp3 in Resources */,
-				D27602C621DD16040037DE81 /* success.wav in Resources */,
+				D276032A21DD2BBD0037DE81 /* success.wav in Resources */,
+				D276032821DD2BBD0037DE81 /* ding.wav in Resources */,
+				D276032721DD2BBD0037DE81 /* bounce_mid.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				8E7D4B171F8AFD9C00699FE4 /* GoogleService-Info.plist in Resources */,
+				D276032921DD2BBD0037DE81 /* swoosh.mp3 in Resources */,
+				D276032621DD2BBD0037DE81 /* bounce_low.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1246,10 +1246,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC/gRPCCertificates.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,11 +15,14 @@ import {
   BackHandler
 } from 'react-native';
 // import { Circle } from 'react-native-progress';
-
+import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
   fetchNearbySellers,
   selectSeller
 } from '../../../actions';
+import {
+  BackButton
+} from '../../_common';
 
 // findStoresForLocation,
 // setSelectedSeller,
@@ -64,6 +67,7 @@ class StoreSelect extends Component {
   }
 
   componentDidMount() {
+    console.log('Store Select mounted')
     const { point } = this.props;
     this.props.fetchNearbySellers(point); // load nearby stores upon open
   }
@@ -77,6 +81,10 @@ class StoreSelect extends Component {
 
   onSelectSeller(seller) {
     this.props.selectSeller(seller); // sets seller and navigates to store page
+  }
+
+  onAddressSelect() {
+    Actions.addressCreate();
   }
 
   // every time the app is reopened (from sleep or switching apps, > 45min),
@@ -452,9 +460,28 @@ renderItem({ item, index }) {
 }
 
   render() {
+
+    // return (
+    //   <View style={{ flex: 1, backgroundColor:'red'}}>
+    //     <MapView
+    //        ref={map => { this.map = map }}
+    //        style={{ flex: 1 }}
+    //        provider={PROVIDER_GOOGLE}
+    //        showsUserLocation
+    //      >
+    //      </MapView>
+    //   </View>
+    // )
+
     return (
       <View style={{ flex: 1, backgroundColor:'white'}}>
-        <Text>Hi</Text>
+        <TouchableOpacity
+          onPress={this.onAddressSelect.bind(this)}
+          style={{ marginTop: 46 }}
+          >
+          <Text>Address</Text>
+        </TouchableOpacity>
+
         <FlatList
           data={this.props.sellers}
           renderItem={this.renderItem.bind(this)}
@@ -470,6 +497,7 @@ renderItem({ item, index }) {
             showsVerticalScrollIndicator={false}
             keyExtractor={(item, index) => index}
           />
+          <BackButton type='cross_circled' />
       </View>
     );
   }

@@ -19,10 +19,13 @@ import {
 } from '../../../actions';
 
 
-class Discovery extends Component {
+class UniversalSearch extends Component {
 
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    console.log('UniversalSearch mounted')
   }
 
   render() {
@@ -40,4 +43,4 @@ const mapStateToProps = ({ }) => {
 };
 
 export default connect(mapStateToProps, {
-})(Discovery);
+})(UniversalSearch);

@@ -19,16 +19,19 @@ import {
 } from '../../../actions';
 
 
-class Discovery extends Component {
+class Support extends Component {
 
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    console.log('Support mounted')
   }
 
   render() {
     return (
       <View style={{ flex: 1, backgroundColor:'white'}}>
-        <Text>Discovery</Text>
+        <Text>Support</Text>
       </View>
     );
   }
@@ -40,4 +43,4 @@ const mapStateToProps = ({ }) => {
 };
 
 export default connect(mapStateToProps, {
-})(Discovery);
+})(Support);

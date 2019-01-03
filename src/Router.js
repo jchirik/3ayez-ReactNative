@@ -13,11 +13,15 @@ import {
   loadLocale
 } from './actions';
 
-import { Scene, Router, Modal, Stack } from 'react-native-router-flux';
+import { Scene, Tabs, Router, Modal, Stack } from 'react-native-router-flux';
 
-import AddressSelect from './components/01_AddressSelect';
+import RegionSelect from './components/01_AddressCreate/01_RegionSelect';
 
+import Discovery from './components/02_Homepage/01_Discovery';
 import StoreSelect from './components/02_Homepage/02_StoreSelect';
+import Support from './components/02_Homepage/03_Support';
+import UniversalSearch from './components/02_Homepage/04_UniversalSearch';
+
 import StorePage from './components/03_StorePage';
 import StoreCategory from './components/05_StoreCategory';
 import StoreShelf from './components/06_StoreShelf';
@@ -185,6 +189,17 @@ import WorkingBasket from './components/08_WorkingBasket';
 //   component={LocationDetails}
 // />
 
+// <Scene
+//   key="myTab"
+//   title="My Tab"
+//   icon={MyTabIcon}
+//   onPress={()=> {
+//     Actions.myTab_1({type: ActionConst.REFRESH});
+//   }}
+//  >
+//     <Scene key="myTab_1" component={MyTabComponent} hideNavBar/>
+// </Scene>
+
 
 class RouterComponent extends Component {
 
@@ -210,10 +225,36 @@ class RouterComponent extends Component {
           duration={0}
           animationEnabled={false}
         >
-          <Scene
-            key="storeSelect"
-            component={StoreSelect}
-          />
+          <Tabs
+            key="homepage"
+            hideNavBar
+            >
+              <Scene
+                hideNavBar
+                title="Today"
+                key="discovery"
+                component={Discovery}
+              />
+              <Scene
+                hideNavBar
+                title="Stores"
+                key="storeSelect"
+                component={StoreSelect}
+              />
+              <Scene
+                hideNavBar
+                title="Support"
+                key="support"
+                component={Support}
+              />
+              <Scene
+                hideNavBar
+                title="Search"
+                key="universalSearch"
+                component={UniversalSearch}
+              />
+          </Tabs>
+
           <Scene
             key="storePage"
             component={StorePage}
@@ -234,10 +275,16 @@ class RouterComponent extends Component {
             key="workingBasket"
             component={WorkingBasket}
           />
-          <Scene
-            key="addressSelect"
-            component={AddressSelect}
-          />
+
+          <Stack
+            key="addressCreate"
+            hideNavBar
+          >
+            <Scene
+              key="regionSelect"
+              component={RegionSelect}
+            />
+          </Stack>
         </Stack>
       </Router>
     );

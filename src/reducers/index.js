@@ -6,6 +6,11 @@ import ReduxThunk from 'redux-thunk';
 // import AppSettings from './AppSettings_Reducer';
 //
 import Address from './Address_Reducer';
+import AddressCreate from './AddressCreate_Reducer';
+import AddressSearch from './AddressSearch_Reducer';
+import AddressReverseSearch from './AddressReverseSearch_Reducer';
+import CurrentLocation from './CurrentLocation_Reducer';
+
 import Baskets from './Baskets_Reducer'
 import SellerSearch from './SellerSearch_Reducer';
 import Seller from './Seller_Reducer';
@@ -48,7 +53,13 @@ import Settings from './Settings_Reducer';
 
 const reducers = combineReducers({
   Baskets,
+
   Address,
+  AddressCreate,
+  AddressSearch,
+  AddressReverseSearch,
+  CurrentLocation,
+
   Checkout,
   Coupon,
   SellerSearch,
