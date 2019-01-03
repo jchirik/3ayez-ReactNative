@@ -17,7 +17,7 @@ import {
   BackButton
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
-// import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 // import {
 //   setArea,
 //   fetchAreas,
@@ -57,19 +57,34 @@ class RefineLocation extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: 'white'
       }}>
-        <Text>refine location</Text>
+        <Text>{this.props.region}</Text>
+        <MapView
+          ref={map => { this.map = map }}
+          style={{ flex: 1 }}
+          showsUserLocation
+          provider={ PROVIDER_GOOGLE }
+          initialRegion={{
+            latitude: this.props.point.lat,
+            longitude: this.props.point.lng,
+            latitudeDelta: 0.003,
+            longitudeDelta: 0.003,
+          }}
+        />
         <BackButton type='cross_circled' />
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {};
+const mapStateToProps = ({ AddressCreate }) => {
+  const { region, street, point } = AddressCreate;
+  return {
+    region,
+    street,
+    point
+  };
 };
 
 export default connect(mapStateToProps, {

@@ -28,9 +28,9 @@ export default (state = INITIAL_STATE, action) => {
     case ADDRESS_REGION_SET:
       return { ...state, region: p.region };
     case ADDRESS_LOCATION_SET:
-      return { ...state, street: p.point };
+      return { ...state, point: p.point };
     case CURRENT_LOCATION_SET:
-      return { ...state, street: p.point };
+      return { ...state, point: p.point };
     case LOCATION_REVERSE_SEARCH_SET:
       return { ...state, street: p.street };
     case ADDRESS_DETAILS_SET:

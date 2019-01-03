@@ -22,7 +22,8 @@ import {
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
   resetAddressSearch,
-  searchAddresses
+  searchAddresses,
+  selectGooglePlaceResult
 } from '../../../actions';
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
@@ -60,9 +61,16 @@ class AddressSearch extends Component {
     this.props.resetAddressSearch();
   }
 
+  setAddressLocation(google_place) {
+    this.props.selectGooglePlaceResult(google_place);
+  }
+
   renderItem({ item, index }) {
       return (
-        <TouchableOpacity style={{ height: 100 }}>
+        <TouchableOpacity
+          style={{ height: 100 }}
+          onPress={this.setAddressLocation.bind(this, item)}
+        >
           <Text>{item.structured_formatting.main_text} - {item.structured_formatting.secondary_text}</Text>
         </TouchableOpacity>
       );
@@ -86,20 +94,14 @@ class AddressSearch extends Component {
           data={this.props.results}
           renderItem={this.renderItem.bind(this)}
           style={{ marginTop: 46, flex: 1, backgroundColor: '#f7f7f7' }}
-
           removeClippedSubviews
           ListHeaderComponent={null}
           ListEmptyComponent={null}
           ListFooterComponent={null}
-
-
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index}
         />
-
-
-
         <BackButton type='cross_circled' />
       </View>
     );
@@ -117,5 +119,6 @@ const mapStateToProps = ({ AddressSearch }) => {
 
 export default connect(mapStateToProps, {
   resetAddressSearch,
-  searchAddresses
+  searchAddresses,
+  selectGooglePlaceResult
 })(AddressSearch);

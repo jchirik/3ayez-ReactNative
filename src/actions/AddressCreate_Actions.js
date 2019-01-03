@@ -21,10 +21,6 @@ export const setAddressRegion = (region) => {
   return { type: ADDRESS_REGION_SET, payload: { region } };
 };
 
-export const setAddressLocation = (point) => {
-  return { type: ADDRESS_LOCATION_SET, payload: { point } };
-};
-
 export const setAddressDetails = (details) => {
   return { type: ADDRESS_DETAILS_SET, payload: { ...details } };
 };

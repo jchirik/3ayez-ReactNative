@@ -1,10 +1,13 @@
 
 import qs from 'qs';
 import firebase from 'react-native-firebase';
+import { Actions } from 'react-native-router-flux';
 import {
   ADDRESS_SEARCH_RESET,
   ADDRESS_SEARCH_BEGIN,
-  ADDRESS_SEARCH_SET
+  ADDRESS_SEARCH_SET,
+
+  ADDRESS_LOCATION_SET
 } from './types';
 
 const googlePlacesKey = 'AIzaSyDPWckRr8Yb1stsXBWeh1ME_UDjR9Y_GC0';
@@ -20,7 +23,6 @@ export const searchAddresses = (query) => {
       dispatch({ type: ADDRESS_SEARCH_RESET });
       return;
     }
-
     // otherwise search
     const request = new XMLHttpRequest();
     dispatch({ type: ADDRESS_SEARCH_BEGIN, payload: { query, request } });
@@ -59,7 +61,49 @@ export const searchAddresses = (query) => {
     );
 
     console.log(requestURL)
+    request.send();
+  };
+};
 
+// LOADING NEEDED !!!!
+// given a selected autocomplete result, fetches the coordinate
+export const selectGooglePlaceResult = (google_place) => {
+  return (dispatch) => {
+      // fetch details
+      const request = new XMLHttpRequest();
+      request.timeout = 20000;
+      request.ontimeout = () => console.warn('google places autocomplete: request timeout');
+      request.onreadystatechange = () => {
+      if (request.readyState !== 4) return;
+
+      if (request.status === 200) {
+        const responseJSON = JSON.parse(request.responseText);
+        if (responseJSON.status === 'OK') {
+          const title = google_place.structured_formatting.main_text;
+          const details = responseJSON.result;
+          const { lat, lng } = details.geometry.location;
+          const point = { lat, lng };
+
+          dispatch({ type: ADDRESS_LOCATION_SET, payload: { point } })
+          console.log(point);
+          Actions.refineLocation();
+
+        } else {
+          console.warn('google places autocomplete: ' + responseJSON.status);
+        }
+      } else {
+        console.warn(request.responseText);
+      }
+    };
+
+    const jsonRequest = qs.stringify({
+      key: googlePlacesKey,
+      placeid: google_place.place_id
+    });
+    request.open(
+      'GET',
+      `https://maps.googleapis.com/maps/api/place/details/json?${jsonRequest}`
+    );
     request.send();
   };
 };
