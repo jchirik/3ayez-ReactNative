@@ -82,7 +82,7 @@ class StorePage extends Component {
           style={{ height: 60 }}
           onPress={this.storeSearch.bind(this)}
           >
-          <Text style={{ color: '#0094ff'}}>Store Search --> </Text>
+          <Text style={{ color: '#0094ff', fontFamily: 'Poppins-Light' }}>Store Search --> </Text>
         </TouchableOpacity>
 
         <Text>CATEGORIES</Text>
