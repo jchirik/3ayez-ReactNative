@@ -25,6 +25,7 @@
     "algoliasearch": "^3.32.0",
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
+    "qs": "^6.6.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-firebase": "^5.1.1",

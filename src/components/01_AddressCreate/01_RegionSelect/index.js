@@ -17,7 +17,8 @@ import {
   BackButton
 } from '../../_common';
 import {
-  setCurrentLocation
+  resetAddressCreate,
+  setAddressRegion
 } from '../../../actions';
 
 // import { Circle } from 'react-native-progress';
@@ -56,9 +57,13 @@ class RegionSelect extends Component {
     super(props);
   }
   componentDidMount() {
-    this.props.setCurrentLocation();
+    this.props.resetAddressCreate();
   }
 
+  setAddressRegion(region) {
+    this.props.setAddressRegion(region);
+    Actions.addressSearch();
+  }
 
   render() {
     return (
@@ -68,7 +73,15 @@ class RegionSelect extends Component {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
-        <Text>HelloWorld</Text>
+
+        <TouchableOpacity onPress={this.setAddressRegion.bind(this, 'CAIRO')}>
+          <Text>CAIRO</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.setAddressRegion.bind(this, 'ALEXANDRIA')}>
+          <Text>ALEXANDRIA</Text>
+        </TouchableOpacity>
+
         <BackButton type='cross_circled' />
       </View>
     );
@@ -80,5 +93,6 @@ const mapStateToProps = ({ }) => {
 };
 
 export default connect(mapStateToProps, {
-  setCurrentLocation
+  resetAddressCreate,
+  setAddressRegion
 })(RegionSelect);

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  TextInput,
-  FlatList,
    Image,
    ActivityIndicator,
    TouchableOpacity,
@@ -20,10 +18,12 @@ import {
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
-import {
-  resetAddressSearch,
-  searchAddresses
-} from '../../../actions';
+// import {
+//   setArea,
+//   fetchAreas,
+//   detectCurrentLocation,
+//   searchAreas
+// } from '../../actions';
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 // const comingSoonImage = require('../../../assets/images/coming_soon.png');
@@ -51,71 +51,26 @@ import {
 // every other time -> go to discover page to start
 
 
-class AddressSearch extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    this.props.resetAddressSearch();
-  }
-
-  renderItem({ item, index }) {
-      return (
-        <TouchableOpacity style={{ height: 100 }}>
-          <Text>{item.structured_formatting.main_text} - {item.structured_formatting.secondary_text}</Text>
-        </TouchableOpacity>
-      );
-  }
+class RefineLocation extends Component {
 
   render() {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}>
-        <TextInput
-          style={{ width: 300, height: 60, backgroundColor: 'red' }}
-          value={this.props.query}
-          onChangeText={(query) => this.props.searchAddresses(query)}
-          autoCapitalize={'none'}
-          underlineColorAndroid='transparent'
-          autoFocus
-          />
-        <FlatList
-          data={this.props.results}
-          renderItem={this.renderItem.bind(this)}
-          style={{ marginTop: 46, flex: 1, backgroundColor: '#f7f7f7' }}
-
-          removeClippedSubviews
-          ListHeaderComponent={null}
-          ListEmptyComponent={null}
-          ListFooterComponent={null}
-
-
-          scrollEventThrottle={16}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index}
-        />
-
-
-
+        <Text>refine location</Text>
         <BackButton type='cross_circled' />
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ AddressSearch }) => {
-  const { query, is_loading, results } = AddressSearch;
-  return {
-    query,
-    is_loading,
-    results
-  };
+const mapStateToProps = ({ }) => {
+  return {};
 };
 
 export default connect(mapStateToProps, {
-  resetAddressSearch,
-  searchAddresses
-})(AddressSearch);
+})(RefineLocation);

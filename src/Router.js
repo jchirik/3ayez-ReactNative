@@ -16,6 +16,11 @@ import {
 import { Scene, Tabs, Router, Modal, Stack } from 'react-native-router-flux';
 
 import RegionSelect from './components/01_AddressCreate/01_RegionSelect';
+import AddressSearch from './components/01_AddressCreate/02_AddressSearch';
+import RefineLocation from './components/01_AddressCreate/03_RefineLocation';
+import AddressDetails from './components/01_AddressCreate/04_AddressDetails';
+import AddressDetailEdit from './components/01_AddressCreate/05_AddressDetailEdit';
+import AddressConfirm from './components/01_AddressCreate/06_AddressConfirm';
 
 import Discovery from './components/02_Homepage/01_Discovery';
 import StoreSelect from './components/02_Homepage/02_StoreSelect';
@@ -283,6 +288,26 @@ class RouterComponent extends Component {
             <Scene
               key="regionSelect"
               component={RegionSelect}
+            />
+            <Scene
+              key="addressSearch"
+              component={AddressSearch}
+            />
+            <Scene
+              key="refineLocation"
+              component={RefineLocation}
+            />
+            <Scene
+              key="addressDetails"
+              component={AddressDetails}
+            />
+            <Scene
+              key="addressDetailEdit"
+              component={AddressDetailEdit}
+            />
+            <Scene
+              key="addressConfirm"
+              component={AddressConfirm}
             />
           </Stack>
         </Stack>

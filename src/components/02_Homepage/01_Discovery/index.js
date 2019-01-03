@@ -24,6 +24,9 @@ class Discovery extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    console.log('Discovery mounted')
+  }
 
   render() {
     return (
