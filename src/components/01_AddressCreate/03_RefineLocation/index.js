@@ -14,12 +14,14 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  Header
+  Header,
+  BlockButton
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
-  setAddressLocation
+  setAddressLocation,
+  reverseSearchAddress
 } from '../../../actions';
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
@@ -50,10 +52,10 @@ const pinIcon = require('../../../../assets/images_v2/AddressCreate/pin.png');
 
 class RefineLocation extends Component {
 
-  onRegionChange(region) {
+  onRegionChange(point) {
     this.props.setAddressLocation({
-      lat: region.latitude,
-      lng: region.longitude
+      lat: point.latitude,
+      lng: point.longitude
     });
   }
 
@@ -84,16 +86,64 @@ class RefineLocation extends Component {
     );
   }
 
+  renderGoogleTitle() {
+
+    let loadingSymbol = null;
+    if (this.props.is_loading) {
+      loadingSymbol = (
+        <ActivityIndicator
+        size="small"
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          backgroundColor: 'rgba(255, 255, 255, 0.6)'
+        }} />
+      )
+    }
+
+    return (
+      <View style={{
+        marginTop: 8,
+        marginBottom: 12,
+        flexDirection: 'row',
+        justifyContent: 'center'
+      }}>
+        <Text style={{
+          fontColor: 'black',
+          fontFamily: 'Poppins-Bold',
+          fontSize: 24,
+        }}>
+          {this.props.title}
+        </Text>
+        {loadingSymbol}
+      </View>
+    )
+  }
+
   render() {
+
     return (
       <View style={{
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
         <Header title={'REFINE LOCATION'}/>
-        <Text
-          style={{ marginTop: 40 }}
-        >{this.props.region} LAT {this.props.point.lat}, LNG {this.props.point.lng}</Text>
+
+
+        <Text style={{
+          textAlign: 'center',
+          fontColor: 'black',
+          fontFamily: 'Poppins-SemiBold',
+          fontSize: 14,
+          marginTop: 20
+        }}>
+          Refine your location by dragging the pin
+        </Text>
+
+        {this.renderGoogleTitle()}
 
         <View
           style={{ flex: 1 }}
@@ -110,30 +160,48 @@ class RefineLocation extends Component {
               longitudeDelta: 0.003,
             }}
             onRegionChange={this.onRegionChange.bind(this)}
+            onRegionChangeComplete={() => this.props.reverseSearchAddress(this.props.point)}
           />
           {this.renderPinOverlay()}
         </View>
 
-        <TouchableOpacity
-          style={{ height: 100 }}
-          onPress={() => Actions.addressDetails()}
-        >
-          <Text>OK</Text>
-        </TouchableOpacity>
+        <View style={{
+          position: 'absolute',
+          bottom: 20,
+          left: 0,
+          right: 0,
+          justifyContent: 'center'
+        }}>
+          <BlockButton
+            text={'SELECT LOCATION'}
+            style={{
+              marginLeft: 18,
+              marginRight: 18,
+              alignSelf: 'stretch'
+            }}
+            onPress={() => Actions.addressDetails()}
+            />
+        </View>
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ AddressCreate }) => {
-  const { region, street, point } = AddressCreate;
+const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
+  const { point } = AddressCreate;
+  const {
+    title,
+    is_loading
+  } = AddressReverseSearch;
   return {
-    region,
-    street,
-    point
+    point,
+
+    title,
+    is_loading
   };
 };
 
 export default connect(mapStateToProps, {
-  setAddressLocation
+  setAddressLocation,
+  reverseSearchAddress
 })(RefineLocation);

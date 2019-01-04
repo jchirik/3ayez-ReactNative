@@ -123,7 +123,7 @@ class AddressSearch extends Component {
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(52, 52, 52, 0.2)'
+          backgroundColor: 'rgba(255, 255, 255, 0.6)'
         }}>
           <ActivityIndicator size="small" style={{ flex: 1 }} />
         </View>

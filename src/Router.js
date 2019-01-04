@@ -217,7 +217,19 @@ class RouterComponent extends Component {
     this.props.loadBaskets();
     this.props.loadLocale();
   }
+  // <Scene
+  //   hideNavBar
+  //   title="Today"
+  //   key="discovery"
+  //   component={Discovery}
+  // />
 
+  // <Scene
+  //   hideNavBar
+  //   title="Search"
+  //   key="universalSearch"
+  //   component={UniversalSearch}
+  // />
   render() {
     return (
       <Router
@@ -237,12 +249,6 @@ class RouterComponent extends Component {
             >
               <Scene
                 hideNavBar
-                title="Today"
-                key="discovery"
-                component={Discovery}
-              />
-              <Scene
-                hideNavBar
                 title="Stores"
                 key="storeSelect"
                 component={StoreSelect}
@@ -252,12 +258,6 @@ class RouterComponent extends Component {
                 title="Support"
                 key="support"
                 component={Support}
-              />
-              <Scene
-                hideNavBar
-                title="Search"
-                key="universalSearch"
-                component={UniversalSearch}
               />
           </Tabs>
 

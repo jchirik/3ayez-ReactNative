@@ -5,30 +5,28 @@ import {
   ADDRESS_CREATE_RESET,
   ADDRESS_REGION_SET,
   ADDRESS_LOCATION_SET,
-  ADDRESS_DETAILS_SET,
+  ADDRESS_DETAIL_SET,
 
   CURRENT_LOCATION_BEGIN,
   CURRENT_LOCATION_SET,
   CURRENT_LOCATION_ERROR
 } from './types';
 
-
 export const resetAddressCreate = () => {
   return { type: ADDRESS_CREATE_RESET };
-};
-
-export const setAddressLocation = (point) => {
-  return { type: ADDRESS_LOCATION_SET, payload: { point } };
 };
 
 export const setAddressRegion = (region) => {
   return { type: ADDRESS_REGION_SET, payload: { region } };
 };
 
-export const setAddressDetails = (details) => {
-  return { type: ADDRESS_DETAILS_SET, payload: { ...details } };
+export const setAddressDetail = (payload) => {
+  return { type: ADDRESS_DETAIL_SET, payload };
 };
 
+export const setAddressLocation = (point) => {
+  return { type: ADDRESS_LOCATION_SET, payload: { point } };
+};
 
 // Show permission Dialog on Android
 // Only needed on Andorid
@@ -68,6 +66,7 @@ export const setCurrentLocation = () => {
             const point = { lat: latitude, lng: longitude };
             // update the current location locally and save
             dispatch({ type: CURRENT_LOCATION_SET, payload: { point }});
+            dispatch({ type: ADDRESS_LOCATION_SET, payload: { point } });
           } else {
             console.log('Error getting position');
             dispatch({ type: CURRENT_LOCATION_ERROR, payload: { error: 'NO_GPS_AVAILABLE' } });

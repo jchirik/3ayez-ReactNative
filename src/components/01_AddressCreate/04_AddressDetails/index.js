@@ -2,20 +2,28 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
+  TextInput,
    Image,
    ActivityIndicator,
    TouchableOpacity,
    SectionList,
    Platform,
    BackHandler,
-   AsyncStorage
+   KeyboardAvoidingView,
+   AsyncStorage,
+   ScrollView
  } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  Header
+  Header,
+  BlockButton
 } from '../../_common';
+import {
+  setAddressDetail
+} from '../../../actions';
+
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 // import {
@@ -53,6 +61,60 @@ import {
 
 class AddressDetails extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if (this.props.google_type === 'route') {
+      this.props.setAddressDetail({ street: this.props.google_title });
+    }
+  }
+
+
+  onChangeText(param, text) {
+    const update = {};
+    update[param] = text;
+    this.props.setAddressDetail(update);
+  }
+
+  renderInputField(title, param, required=true, multiline=false) {
+    return (
+      <View style={{
+        height: 60,
+        paddingLeft: 16,
+        paddingRight: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderColor: '#EAEAEA',
+        borderBottomWidth: 1
+      }}>
+        <Text style={{
+          fontFamily: 'Poppins-SemiBold',
+          fontSize: 15,
+          width: 126
+        }}>
+          {title}
+        </Text>
+        <TextInput
+          style={{
+            flex: 1,
+            alignItems: 'stretch',
+            paddingLeft: 12,
+            fontSize: 14,
+            fontFamily: 'Poppins-Medium',
+          }}
+          placeholder={required ? 'required' : 'optional'}
+          placeholderTextColor={'#8E8E93'}
+          value={this.props[param]}
+          onChangeText={(text) => this.onChangeText(param, text)}
+          underlineColorAndroid='transparent'
+          autoCorrect={false}
+          />
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={{
@@ -60,15 +122,61 @@ class AddressDetails extends Component {
         backgroundColor: '#FAFCFD'
       }}>
         <Header title={'ENTER ADDRESS'}/>
-        <Text>address details</Text>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+        >
+          <ScrollView style={{ flex: 1 }}>
+            <Text style={{
+              fontFamily: 'Poppins-Bold',
+              fontSize: 32,
+              padding: 16,
+            }}>Delivering to:</Text>
+
+            { this.renderInputField('Street:', 'street') }
+            { this.renderInputField('Building no.:', 'building') }
+            { this.renderInputField('Apt no.:', 'apt') }
+            { this.renderInputField('Instructions:', 'notes', false, true) }
+            <BlockButton
+              text={'CONFIRM'}
+              style={{
+                marginTop: 20,
+                marginBottom: 24,
+                marginLeft: 18,
+                marginRight: 18,
+                alignSelf: 'stretch'
+              }}
+              onPress={() => Actions.addressConfirm()}
+              />
+            </ScrollView>
+          </KeyboardAvoidingView>
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {};
+const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
+  const {
+    street,
+    building,
+    apt,
+    notes,
+    type
+  } = AddressCreate;
+
+  console.log(AddressReverseSearch);
+
+  return {
+    street,
+    building,
+    apt,
+    notes,
+    type,
+    google_title: AddressReverseSearch.title,
+    google_type: AddressReverseSearch.type
+  };
 };
 
 export default connect(mapStateToProps, {
+  setAddressDetail
 })(AddressDetails);

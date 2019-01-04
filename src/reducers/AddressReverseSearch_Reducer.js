@@ -5,7 +5,9 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  query: '',
+  title: '',
+  type: '',
+  request: null,
   is_loading: false
 };
 
@@ -13,12 +15,10 @@ export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
   switch (action.type) {
     case LOCATION_REVERSE_SEARCH_BEGIN:
-      return { ...state, is_loading: true, query: p.query };
+      if (state.request) { state.request.abort() } // abort any previous request
+      return { ...state, is_loading: true, request: p.request };
     case LOCATION_REVERSE_SEARCH_SET:
-      if (p.query === state.query) {
-        // stop loading once the last query's response returns
-        return { ...state, is_loading: false };
-      }
+      return { ...state, is_loading: false, title: p.title, type: p.type };
     default:
       return state;
   }

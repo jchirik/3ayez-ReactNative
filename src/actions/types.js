@@ -30,7 +30,11 @@ export const COUPON_CODE_LOADING = 'COUPON_CODE_LOADING';
 
 export const LOCALE_SET = 'LOCALE_SET';
 
-export const ADDRESS_SET = 'ADDRESS_SET';
+export const FIRST_LAUNCH_STATUS_SET = 'FIRST_LAUNCH_STATUS_SET';
+
+export const ADDRESSES_SET = 'ADDRESSES_SET';
+export const ADDRESS_INDEX_SET = 'ADDRESS_INDEX_SET';
+
 export const TIMESLOT_SET = 'TIMESLOT_SET';
 export const TIP_SET = 'TIP_SET';
 export const ORDER_NOTES_SET = 'ORDER_NOTES_SET';
@@ -39,7 +43,7 @@ export const PAYMENT_METHOD_SET = 'PAYMENT_METHOD_SET';
 /* Address Creation */
 export const ADDRESS_CREATE_RESET = 'ADDRESS_CREATE_RESET';
 export const ADDRESS_REGION_SET = 'ADDRESS_REGION_SET';
-export const ADDRESS_DETAILS_SET = 'ADDRESS_DETAILS_SET';
+export const ADDRESS_DETAIL_SET = 'ADDRESS_DETAIL_SET';
 
 // for getting coord details from google places
 export const ADDRESS_LOCATION_BEGIN = 'ADDRESS_LOCATION_BEGIN';

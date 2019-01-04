@@ -3,17 +3,16 @@ import {
   ADDRESS_CREATE_RESET,
   ADDRESS_REGION_SET,
   ADDRESS_LOCATION_SET,
-  CURRENT_LOCATION_SET,
-  ADDRESS_DETAILS_SET,
-  LOCATION_REVERSE_SEARCH_SET
+
+  ADDRESS_DETAIL_SET
 } from '../actions/types';
 
 const INITIAL_STATE = {
   region: '',
   point: null,
 
+  title: '',
   street: '',
-
   building: '', // merge with floor
   apt: '',
   notes: '',
@@ -29,12 +28,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, region: p.region };
     case ADDRESS_LOCATION_SET:
       return { ...state, point: p.point };
-    case CURRENT_LOCATION_SET:
-      return { ...state, point: p.point };
-    case LOCATION_REVERSE_SEARCH_SET:
-      return { ...state, street: p.street };
-    case ADDRESS_DETAILS_SET:
-      return { ...state, ...p.details };
+    case ADDRESS_DETAIL_SET:
+      return { ...state, ...p };
     default:
       return state;
   }

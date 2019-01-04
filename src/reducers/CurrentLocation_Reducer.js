@@ -6,6 +6,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  point: null,
   is_loading: false,
   error: null
 };
@@ -16,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case CURRENT_LOCATION_BEGIN:
       return { ...state, is_loading: true };
     case CURRENT_LOCATION_SET:
-      return { ...state, is_loading: false };
+      return { ...state, is_loading: false, point: p.point };
     case CURRENT_LOCATION_ERROR:
         return { ...state, is_loading: false, error: p.error };
     default:

@@ -9,10 +9,13 @@ import {
 
   ADDRESS_LOCATION_BEGIN,
   ADDRESS_LOCATION_SET,
-  ADDRESS_LOCATION_ERROR
+  ADDRESS_LOCATION_ERROR,
+
+  LOCATION_REVERSE_SEARCH_SET
 } from './types';
 
 const googlePlacesKey = 'AIzaSyDPWckRr8Yb1stsXBWeh1ME_UDjR9Y_GC0';
+import { getTitleFromGooglePlace } from './Address_Helpers';
 
 export const resetAddressSearch = () => {
   return { type: ADDRESS_SEARCH_RESET };
@@ -86,15 +89,18 @@ export const selectGooglePlaceResult = (google_place) => {
       if (request.status === 200) {
         const responseJSON = JSON.parse(request.responseText);
         if (responseJSON.status === 'OK') {
-          const title = google_place.structured_formatting.main_text;
-          const details = responseJSON.result;
-          const { lat, lng } = details.geometry.location;
+          const { result } = responseJSON;
+          const { lat, lng } = result.geometry.location;
           const point = { lat, lng };
 
           dispatch({ type: ADDRESS_LOCATION_SET, payload: { point } })
           console.log(point);
-          Actions.refineLocation();
 
+          // provide the location details, without reverse search yet
+          const { title, type } = getTitleFromGooglePlace(result);
+          dispatch({ type: LOCATION_REVERSE_SEARCH_SET, payload: { title, type } });
+
+          Actions.refineLocation();
         } else {
           console.warn('google places autocomplete: ' + responseJSON.status);
           dispatch({ type: ADDRESS_LOCATION_ERROR, payload: { error: responseJSON.status } });
