@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 
 import {
-  initSellerBLINK22,
   onSelectCategory
 } from '../../actions';
 
@@ -31,17 +30,7 @@ class StorePage extends Component {
   }
 
   componentDidMount() {
-    // FOR TESTING - hard coding zahran_smouha as the selected store.
-    // usually, the store is selected & this runs before entering the store
-    this.props.initSellerBLINK22({
-      id: 'zahran_smouha',
-      display_name: {
-        en: 'Zahran Smouha',
-        ar: 'زهران سموحه'
-      },
-      minimum: 100,
-      logo_url: 'https://firebasestorage.googleapis.com/v0/b/ayez-d4cea.appspot.com/o/sellers%2Fzahran%2Flogo.jpg?alt=media&token=7ee8fb02-9ac2-4cf6-b589-2e0ba7d261bf'
-    });
+
   }
 
   onSelectCategory(category) {
@@ -123,6 +112,5 @@ const mapStateToProps = ({ Seller }) => {
 };
 
 export default connect(mapStateToProps, {
-  initSellerBLINK22,
   onSelectCategory
 })(StorePage);

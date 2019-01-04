@@ -263,7 +263,6 @@ class RouterComponent extends Component {
 
           <Scene
             key="storePage"
-            initial
             component={StorePage}
           />
           <Scene

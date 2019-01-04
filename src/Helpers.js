@@ -110,6 +110,13 @@ export const isAndroid = (Platform.OS === 'android');
 
 
 
+export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
+
+
+
+
+
+
 //
 //
 // export const onAddressSelectComplete = (originPage) => {

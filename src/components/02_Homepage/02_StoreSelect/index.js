@@ -12,7 +12,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Image,
-  BackHandler
+  BackHandler,
+  Dimensions
 } from 'react-native';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -21,9 +22,13 @@ import {
   selectSeller
 } from '../../../actions';
 import {
-  BackButton
+  BackButton,
+  BlockButton
 } from '../../_common';
 
+const star_icon = require('../../../../assets/images_v2/Common/star.png');
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 // findStoresForLocation,
 // setSelectedSeller,
 // setBaskets,
@@ -35,7 +40,7 @@ import {
 // getContacts
 
 
-// import { statusBarMargin, isAndroid, strings, padNumberZeros, checkIfOpen, localizeDN } from '../../Helpers.js';
+import { STATUS_BAR_HEIGHT } from '../../../Helpers.js';
 // import { OrderStatusBar, Header, ModalPanel, InputField, BlockButton } from '../_reusable';
 //
 // import StoreSelectionHeader from './StoreSelectionHeader';
@@ -66,16 +71,18 @@ class StoreSelect extends Component {
     super(props);
   }
 
+  fetchNearbySellers() {
+    this.props.fetchNearbySellers(this.props.point, 'kafr_abdo'); // load nearby stores upon open
+  }
+
   componentDidMount() {
     console.log('Store Select mounted')
-    const { point } = this.props;
-    this.props.fetchNearbySellers(point, 'kafr_abdo'); // load nearby stores upon open
+    this.fetchNearbySellers();
   }
 
   componentDidUpdate(prevProps) {
-    const { point } = this.props;
-    if (point !== prevProps.point) {
-      this.props.fetchNearbySellers(point, 'kafr_abdo'); // load nearby stores upon change
+    if (this.props.point !== prevProps.point) {
+      this.fetchNearbySellers(); // load nearby stores upon change
     }
   }
 
@@ -451,35 +458,168 @@ class StoreSelect extends Component {
 
 // Actions.addressSelect();
 
+
+
+renderAddressHeader() {
+  const street = 'Haram St.';
+  return (
+    <TouchableOpacity
+      onPress={this.onAddressSelect.bind(this)}
+      style={{
+        marginTop: STATUS_BAR_HEIGHT + 6,
+        paddingBottom: 3,
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        borderBottomWidth: 1,
+        borderColor: '#EAEAEA'
+      }}
+    >
+      <Text style={{
+        color: '#2DD38F',
+        fontSize: 12,
+        fontFamily: 'Poppins-Medium',
+        textAlign: 'center',
+
+      }}>DELIVERING TO</Text>
+      <Text style={{
+        color: 'black',
+        fontSize: 28,
+        fontFamily: 'Poppins-SemiBold',
+        textAlign: 'center'
+      }}>Haram St.</Text>
+    </TouchableOpacity>
+  )
+}
+
+renderNoInternetConnection() {
+  return (
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <Text style={{
+        color: '#8E8E93',
+        fontSize: 18,
+        fontFamily: 'Poppins-Regular',
+        margin: 10
+      }}>No Internet</Text>
+      <BlockButton
+        text={'Refresh'}
+        color={'#666666'}
+        style={{ width: 200 }}
+        onPress={() => this.fetchNearbySellers()}
+        />
+    </View>
+  );
+}
+
+
 renderItem({ item, index }) {
     return (
-      <TouchableOpacity onPress={this.onSelectSeller.bind(this, item)}>
-        <Text>{item.id} - {item.stars} - {item.index}</Text>
+      <TouchableOpacity
+        style={{
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          padding: 12,
+          borderColor: '#EAEAEA',
+          borderBottomWidth: 1
+        }}
+        onPress={this.onSelectSeller.bind(this, item)}
+        >
+        <View style={{
+          backgroundColor: 'gray',
+          borderRadius: 4,
+          height: SCREEN_WIDTH/3
+        }} />
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 5
+        }}>
+          <Text style={{
+            fontSize: 16,
+            fontFamily: 'Poppins-Regular'
+          }}>{item.display_name.en.toUpperCase()}</Text>
+          <Image
+            source={{ uri: item.logo_url }}
+            resizeMode={'contain'}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 4
+            }}
+          />
+        </View>
+
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 4
+        }}>
+          <Text style={styles.storeDetailText}>Min. {item.minimum} EGP</Text>
+          <Text style={styles.storeDetailText}>Open {item.hours.start} - {item.hours.end}</Text>
+        </View>
+
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 2
+        }}>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{
+              fontSize: 11,
+              color: '#2DD38F',
+              fontFamily: 'Poppins-SemiBold'
+            }}>{item.num_stars.toFixed(1)}</Text>
+
+            <Image
+              source={star_icon}
+              style={{
+                width: 14,
+                height: 14,
+                tintColor: '#2DD38F',
+                marginBottom: 3,
+                marginLeft: 4,
+                marginRight: 7
+              }}
+              resizeMode={'contain'}
+            />
+
+            <Text style={styles.storeDetailText}>120 Ratings</Text>
+          </View>
+          <Text style={styles.storeDetailText}>{item.delivery_time} Min Delivery</Text>
+        </View>
+
       </TouchableOpacity>
     );
 }
 
 renderSellerList() {
 
-  if (this.props.error) {
+  if (this.props.is_loading) {
     return (
-      <Text>No Internet</Text>
-    );
+      <ActivityIndicator size="small" style={{ flex: 1 }} />
+    )
   }
-
+  if (this.props.error) {
+    return this.renderNoInternetConnection();
+  }
   return (
     <FlatList
       data={this.props.sellers}
       renderItem={this.renderItem.bind(this)}
-      style={{ marginTop: 46, flex: 1, backgroundColor: '#f7f7f7' }}
+      style={{ flex: 1 }}
 
       removeClippedSubviews
       ListHeaderComponent={null}
       ListEmptyComponent={null}
       ListFooterComponent={null}
 
-
-      scrollEventThrottle={16}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => index}
     />
@@ -502,14 +642,8 @@ renderSellerList() {
 
     return (
       <View style={{ flex: 1, backgroundColor:'white'}}>
-        <TouchableOpacity
-          onPress={this.onAddressSelect.bind(this)}
-          style={{ marginTop: 46 }}
-          >
-          <Text>Address</Text>
-        </TouchableOpacity>
+        {this.renderAddressHeader()}
         {this.renderSellerList()}
-        <BackButton type='cross_circled' />
       </View>
     );
   }
@@ -523,29 +657,13 @@ renderSellerList() {
 
 
 
-// const styles = {
-//   titleText: {
-//     marginTop: 5,
-//     textAlign: 'center',
-//     fontFamily: 'BahijJanna-Bold',
-//     fontSize: 22,
-//     color: 'black'
-//   },
-//
-//   noStoresText: {
-//     fontFamily: 'BahijJanna',
-//     fontSize: 22,
-//     color: 'black'
-//   },
-//
-//   carouselNavigationOverlay: {
-//     position: 'absolute',
-//     width: 40,
-//     top: 0,
-//     bottom: 0,
-//     backgroundColor: 'transparent'
-//   }
-// };
+const styles = {
+  storeDetailText: {
+    fontSize: 11,
+    color: '#8E8E93',
+    fontFamily: 'Poppins-ExtraLight'
+  }
+};
 
 const mapStateToProps = ({ Address, SellerSearch }) => {
   const { street, point } = Address;

@@ -14,7 +14,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BackButton
+  Header
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -57,12 +57,10 @@ class AddressDetails extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#FAFCFD'
       }}>
+        <Header title={'ENTER ADDRESS'}/>
         <Text>address details</Text>
-        <BackButton type='cross_circled' />
       </View>
     );
   }

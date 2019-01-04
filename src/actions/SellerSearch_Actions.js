@@ -20,6 +20,7 @@ export const fetchNearbySellers = (point, area_id) => {
       aroundRadius: 25000,
       hitsPerPage: 200
     }).then(res => {
+      console.log('RES',res);
       // why is THIS not sufficient??
       console.log('fetchNearbySellers res.hits', res.hits);
 

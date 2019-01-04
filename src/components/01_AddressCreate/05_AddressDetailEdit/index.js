@@ -57,9 +57,7 @@ class AddressDetailEdit extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#FAFCFD'
       }}>
         <Text>address detail edit</Text>
         <BackButton type='cross_circled' />

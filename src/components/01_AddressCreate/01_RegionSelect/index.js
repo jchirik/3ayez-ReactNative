@@ -14,7 +14,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BackButton
+  Header
 } from '../../_common';
 import {
   resetAddressCreate,
@@ -69,10 +69,9 @@ class RegionSelect extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#FAFCFD'
       }}>
+        <Header title={'SELECT REGION'}/>
 
         <TouchableOpacity onPress={this.setAddressRegion.bind(this, 'CAIRO')}>
           <Text>CAIRO</Text>
@@ -81,8 +80,6 @@ class RegionSelect extends Component {
         <TouchableOpacity onPress={this.setAddressRegion.bind(this, 'ALEXANDRIA')}>
           <Text>ALEXANDRIA</Text>
         </TouchableOpacity>
-
-        <BackButton type='cross_circled' />
       </View>
     );
   }

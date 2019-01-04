@@ -16,7 +16,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BackButton
+  Header
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -25,6 +25,10 @@ import {
   searchAddresses,
   selectGooglePlaceResult
 } from '../../../actions';
+
+const search_icon = require('../../../../assets/images_v2/Search/search.png');
+const clear_icon = require('../../../../assets/images_v2/Search/clear.png');
+const result_pin_icon = require('../../../../assets/images_v2/Search/result_pin.png');
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 // const comingSoonImage = require('../../../assets/images/coming_soon.png');
@@ -68,13 +72,46 @@ class AddressSearch extends Component {
   renderItem({ item, index }) {
       return (
         <TouchableOpacity
-          style={{ height: 100 }}
+          style={{
+            flexDirection: 'row',
+            borderColor: '#EAEAEA',
+            borderBottomWidth: 1,
+            alignItems: 'center',
+            height: 60
+          }}
           onPress={this.setAddressLocation.bind(this, item)}
         >
-          <Text>{item.structured_formatting.main_text} - {item.structured_formatting.secondary_text}</Text>
+          <Image
+            source={result_pin_icon}
+            style={{
+              width: 24,
+              height: 24,
+              marginLeft: 10,
+              marginRight: 8
+             }}
+            resizeMode={'contain'}
+          />
+          <View style={{
+            flex: 1,
+            flexDirection: 'column'
+          }}>
+            <Text style={{
+              fontSize: 15,
+              color: 'black',
+              fontFamily: 'Poppins-SemiBold'
+            }}>{item.structured_formatting.main_text}</Text>
+            <Text style={{
+              fontSize: 14,
+              color: '#8E8E93',
+              fontFamily: 'Poppins-Regular'
+            }}>{item.structured_formatting.secondary_text}</Text>
+          </View>
         </TouchableOpacity>
       );
   }
+
+
+
 
   // show subtle loading, and make unclickable when getting details
   renderLoadingOverlay() {
@@ -95,34 +132,133 @@ class AddressSearch extends Component {
     return null;
   }
 
+
+  renderSearchBar() {
+
+
+    let clearSearchButton = null;
+    if (this.props.query) {
+      clearSearchButton = (
+        <TouchableOpacity
+          style={{
+            alignSelf: 'stretch',
+            width: 36,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          onPress={() => this.props.resetAddressSearch()}
+        >
+        <Image
+          source={clear_icon}
+          style={{
+            width: 20,
+            height: 20
+           }}
+          resizeMode={'contain'}
+        />
+        </TouchableOpacity>
+      )
+    }
+
+    return (
+      <View style={{
+        height: 36,
+        borderRadius: 8,
+        backgroundColor: '#EDEEF0',
+        margin: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+      }}>
+      <Image
+        source={search_icon}
+        style={{
+          width: 20,
+          height: 20,
+          tintColor: '#8E8E93',
+          marginLeft: 12
+         }}
+        resizeMode={'contain'}
+      />
+        <TextInput
+          style={{
+            flex: 1,
+            alignSelf: 'stretch',
+            paddingLeft: 12,
+            fontSize: 14,
+            fontFamily: 'Poppins-Regular',
+          }}
+          placeholder={'search for new address, city, street'}
+          placeholderTextColor={'#8E8E93'}
+          value={this.props.query}
+          onChangeText={(query) => this.props.searchAddresses(query)}
+          autoCapitalize={'none'}
+          underlineColorAndroid='transparent'
+          autoCorrect={false}
+          autoFocus
+          />
+        { clearSearchButton }
+      </View>
+    )
+  }
+
+  renderEmptyComponent() {
+
+    // if there are no results, and loading, then show spinner
+    if (this.props.is_loading) {
+      return (
+        <ActivityIndicator size="small" style={{ flex: 1 }} />
+      );
+    }
+    // if no results returned, say so
+    if (this.props.query) {
+      return (
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{
+            margin: 40,
+            color: '#8E8E93',
+            fontSize: 15,
+            fontFamily: 'Poppins-Regular'
+          }}>No Results</Text>
+        </View>
+      )
+    }
+
+    // otherwise instructions
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{
+          margin: 40,
+          width: 200,
+          textAlign: 'center',
+          color: '#8E8E93',
+          fontSize: 15,
+          fontFamily: 'Poppins-Regular'
+        }}>Let us know where you are to send your orders.</Text>
+      </View>
+    )
+  }
+
   render() {
 
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#FAFCFD'
       }}>
-        <TextInput
-          style={{ width: 300, height: 60, backgroundColor: 'red' }}
-          value={this.props.query}
-          onChangeText={(query) => this.props.searchAddresses(query)}
-          autoCapitalize={'none'}
-          underlineColorAndroid='transparent'
-          autoFocus
-          />
+        <Header title={'DELIVERY ADDRESS'}/>
+        {this.renderSearchBar()}
         <FlatList
           data={this.props.results}
           renderItem={this.renderItem.bind(this)}
-          style={{ marginTop: 46, flex: 1, backgroundColor: '#f7f7f7' }}
+          style={{ marginTop: 6, flex: 1 }}
           removeClippedSubviews
           ListHeaderComponent={null}
-          ListEmptyComponent={null}
+          ListEmptyComponent={this.renderEmptyComponent()}
           ListFooterComponent={null}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index}
         />
-        <BackButton type='cross_circled' />
         { this.renderLoadingOverlay() }
       </View>
     );

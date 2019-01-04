@@ -2,79 +2,35 @@ import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
-  statusBarMargin
+  STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
 
-const backArrow = require('../../../assets/images/back_arrow.png');
-const closeX = require('../../../assets/images/close_x.png');
-const closeXCircled = require('../../../assets/images/close_x_circled.png');
+const back_icon = require('../../../assets/images_v2/Common/back.png');
 
 const BackButton = ({
-  color = 'black',
+  color = '#2DD38F',
   onPress = Actions.pop,
-  type = 'back',
   style
 }) => {
 
-  if (type === 'backArrow') {
-    return (
+  return (
       <TouchableOpacity
         style={[styles.backButton, style]}
         onPress={onPress}
       >
         <Image
-          source={backArrow}
-          style={{ width: 28, height: 28, tintColor: color }}
+          source={back_icon}
+          style={{ width: 24, height: 24, tintColor: color }}
           resizeMode={'contain'}
         />
       </TouchableOpacity>
-    );
-  } else if (type === 'cross_circled') {
-    return (
-      <TouchableOpacity
-        style={{ ...styles.backButton, ...style, right: 10 }}
-        onPress={onPress}
-      >
-        <Image
-          source={closeXCircled}
-          style={{ width: 35, height: 35 }}
-          resizeMode={'contain'}
-        />
-      </TouchableOpacity>
-    );
-  }
-
-
-  return (
-    <TouchableOpacity
-      style={[styles.crossButton, style]}
-      onPress={onPress}
-    >
-      <Image
-        source={closeX}
-        style={{ width: 20, height: 20 }}
-        resizeMode={'contain'}
-      />
-    </TouchableOpacity>
   );
 };
 
 const styles = {
   backButton: {
-    position: 'absolute',
-    width: 40,
-    height: 46,
-    top: statusBarMargin,
-    right: 4,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  crossButton: {
-    position: 'absolute',
-    width: 42,
-    height: 45,
-    top: statusBarMargin,
-    right: 5,
+    width: 48,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center'
   }

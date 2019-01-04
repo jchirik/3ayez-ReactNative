@@ -14,7 +14,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BackButton
+  Header
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -88,8 +88,9 @@ class RefineLocation extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#FAFCFD'
       }}>
+        <Header title={'REFINE LOCATION'}/>
         <Text
           style={{ marginTop: 40 }}
         >{this.props.region} LAT {this.props.point.lat}, LNG {this.props.point.lng}</Text>
@@ -119,8 +120,6 @@ class RefineLocation extends Component {
         >
           <Text>OK</Text>
         </TouchableOpacity>
-
-        <BackButton type='cross_circled' />
       </View>
     );
   }
