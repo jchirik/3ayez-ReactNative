@@ -83,7 +83,7 @@ class TutorialSwipe extends Component {
             marginRight: 18,
             alignSelf: 'stretch'
           }}
-          onPress={() => console.log('registering')}
+          onPress={() => Actions.auth()}
         />
 
         <TouchableOpacity

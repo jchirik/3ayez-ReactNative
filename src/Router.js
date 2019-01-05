@@ -40,6 +40,10 @@ import StoreCategory from './components/05_StoreCategory';
 import StoreShelf from './components/06_StoreShelf';
 import ItemPage from './components/07_ItemPage';
 import WorkingBasket from './components/08_WorkingBasket';
+
+
+import SettingsMenu from './components/11_Settings/01_SettingsMenu';
+
 // import LocationDetails from './components/02_LocationDetails';
 // import StoreSelector from './components/03_StoreSelector';
 
@@ -255,6 +259,7 @@ class RouterComponent extends Component {
           <Tabs
             key="homepage"
             hideNavBar
+            initial
             >
               <Scene
                 hideNavBar
@@ -269,6 +274,7 @@ class RouterComponent extends Component {
                 component={Support}
               />
           </Tabs>
+
           <Scene
             key="storePage"
             component={StorePage}
@@ -294,6 +300,20 @@ class RouterComponent extends Component {
             component={WorkingBasket}
           />
 
+
+
+          <Stack
+            key="settings"
+            hideNavBar
+          >
+            <Scene
+              key="settingsMenu"
+              component={SettingsMenu}
+            />
+          </Stack>
+
+
+
           <Stack
             key="tutorial"
             hideNavBar
@@ -305,6 +325,20 @@ class RouterComponent extends Component {
             <Scene
               key="tutorialSwipe"
               component={TutorialSwipe}
+            />
+          </Stack>
+
+          <Stack
+            key="auth"
+            hideNavBar
+          >
+            <Scene
+              key="phoneEntry"
+              component={PhoneEntry}
+            />
+            <Scene
+              key="verifyCode"
+              component={VerifyCode}
             />
           </Stack>
 
@@ -335,20 +369,6 @@ class RouterComponent extends Component {
             <Scene
               key="addressConfirm"
               component={AddressConfirm}
-            />
-          </Stack>
-
-          <Stack
-            key="auth"
-            hideNavBar
-          >
-            <Scene
-              key="phoneEntry"
-              component={PhoneEntry}
-            />
-            <Scene
-              key="verifyCode"
-              component={VerifyCode}
             />
           </Stack>
 

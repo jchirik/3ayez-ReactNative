@@ -17,10 +17,6 @@ import {
 const googlePlacesKey = 'AIzaSyDPWckRr8Yb1stsXBWeh1ME_UDjR9Y_GC0';
 import { getTitleFromGooglePlace } from './Address_Helpers';
 
-export const resetAddressSearch = () => {
-  return { type: ADDRESS_SEARCH_RESET };
-};
-
 export const searchAddresses = (query) => {
   return (dispatch) => {
     // if an empty query, reset the search screen

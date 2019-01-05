@@ -18,7 +18,7 @@ export const createNewAddress = (address, addresses_t) => {
   return (dispatch) => {
     let addresses = addresses_t || [];
     addresses = [ address, ...addresses ];
-    let address_index = addresses.length - 1;
+    let address_index = 0;
 
     AsyncStorage.setItem('ALL_ADDRESSES', JSON.stringify(addresses), () => {
       console.log('set addresses in async storage', addresses)
@@ -30,7 +30,7 @@ export const createNewAddress = (address, addresses_t) => {
     dispatch({ type: ADDRESSES_SET, payload: { addresses } });
     dispatch({ type: ADDRESS_INDEX_SET, payload: { address_index } });
 
-    Actions.popTo('homepage');
+    Actions.reset('homepage');
     // if logged in, save addresses to account??
   };
 };

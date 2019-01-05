@@ -16,24 +16,20 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  Header
+  Header,
+  SearchBar
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
-  resetAddressSearch,
   searchAddresses,
   selectGooglePlaceResult
 } from '../../../actions';
 
-const search_icon = require('../../../../assets/images_v2/Search/search.png');
-const clear_icon = require('../../../../assets/images_v2/Search/clear.png');
 const result_pin_icon = require('../../../../assets/images_v2/Search/result_pin.png');
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 // const comingSoonImage = require('../../../assets/images/coming_soon.png');
-
-
 
 
 // add language select + very short tutorial
@@ -62,7 +58,7 @@ class AddressSearch extends Component {
     super(props);
   }
   componentDidMount() {
-    this.props.resetAddressSearch();
+    this.props.searchAddresses('');
   }
 
   setAddressLocation(google_place) {
@@ -132,75 +128,6 @@ class AddressSearch extends Component {
     return null;
   }
 
-
-  renderSearchBar() {
-
-
-    let clearSearchButton = null;
-    if (this.props.query) {
-      clearSearchButton = (
-        <TouchableOpacity
-          style={{
-            alignSelf: 'stretch',
-            width: 36,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-          onPress={() => this.props.resetAddressSearch()}
-        >
-        <Image
-          source={clear_icon}
-          style={{
-            width: 20,
-            height: 20
-           }}
-          resizeMode={'contain'}
-        />
-        </TouchableOpacity>
-      )
-    }
-
-    return (
-      <View style={{
-        height: 36,
-        borderRadius: 8,
-        backgroundColor: '#EDEEF0',
-        margin: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
-      }}>
-      <Image
-        source={search_icon}
-        style={{
-          width: 20,
-          height: 20,
-          tintColor: '#8E8E93',
-          marginLeft: 12
-         }}
-        resizeMode={'contain'}
-      />
-        <TextInput
-          style={{
-            flex: 1,
-            alignSelf: 'stretch',
-            paddingLeft: 12,
-            fontSize: 14,
-            fontFamily: 'Poppins-Regular',
-          }}
-          placeholder={'search for new address, city, street'}
-          placeholderTextColor={'#8E8E93'}
-          value={this.props.query}
-          onChangeText={(query) => this.props.searchAddresses(query)}
-          autoCapitalize={'none'}
-          underlineColorAndroid='transparent'
-          autoCorrect={false}
-          autoFocus
-          />
-        { clearSearchButton }
-      </View>
-    )
-  }
-
   renderEmptyComponent() {
 
     // if there are no results, and loading, then show spinner
@@ -246,7 +173,12 @@ class AddressSearch extends Component {
         backgroundColor: '#FAFCFD'
       }}>
         <Header title={'DELIVERY ADDRESS'}/>
-        {this.renderSearchBar()}
+        <SearchBar
+          value={this.props.query}
+          onChangeText={this.props.searchAddresses.bind(this)}
+          placeholder={'search for new address, city, street'}
+          autofocus
+        />
         <FlatList
           data={this.props.results}
           renderItem={this.renderItem.bind(this)}
@@ -280,7 +212,6 @@ const mapStateToProps = ({ AddressSearch, AddressPlaceDetails }) => {
 };
 
 export default connect(mapStateToProps, {
-  resetAddressSearch,
   searchAddresses,
   selectGooglePlaceResult
 })(AddressSearch);

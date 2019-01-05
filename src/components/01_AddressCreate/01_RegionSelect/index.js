@@ -14,12 +14,16 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  Header
+  BackButton
 } from '../../_common';
 import {
   resetAddressCreate,
   setAddressRegion
 } from '../../../actions';
+
+const alexandria_icon = require('../../../../assets/images_v2/Regions/alexandria.png');
+const giza_icon = require('../../../../assets/images_v2/Regions/giza.png');
+const cairo_icon = require('../../../../assets/images_v2/Regions/cairo.png');
 
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -65,21 +69,96 @@ class RegionSelect extends Component {
     Actions.addressSearch();
   }
 
+  renderCityButton(region) {
+
+    let region_icon = null;
+    switch (region) {
+      case 'CAIRO':
+        region_icon = cairo_icon;
+        break;
+      case 'ALEXANDRIA':
+        region_icon = alexandria_icon;
+        break;
+      case 'GIZA':
+        region_icon = giza_icon;
+        break;
+      default:
+        return;
+    }
+
+    return (
+      <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          borderRadius: 8,
+          marginTop: 10,
+          marginBottom: 10,
+          marginLeft: 16,
+          marginRight: 16,
+
+          shadowColor: '#000',
+          shadowOffset: { width: -1, height: 3 },
+          shadowOpacity: 0.15,
+          shadowRadius: 4,
+          elevation: 2,
+        }}
+        onPress={this.setAddressRegion.bind(this, region)}
+        >
+        <Image
+          source={region_icon}
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 24,
+            margin: 6,
+            marginLeft: 20,
+            marginRight: 24,
+           }}
+          resizeMode={'contain'}
+          />
+        <Text style={{
+          color: 'black',
+          fontFamily: 'Poppins-Medium',
+          fontSize: 15
+        }}>{region}</Text>
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     return (
       <View style={{
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'SELECT REGION'}/>
 
-        <TouchableOpacity onPress={this.setAddressRegion.bind(this, 'CAIRO')}>
-          <Text>CAIRO</Text>
-        </TouchableOpacity>
+        <Image
+          source={null}
+          style={{
+            flex: 1,
+            backgroundColor: '#cecece'
+           }}
+          resizeMode={'contain'}
+        />
 
-        <TouchableOpacity onPress={this.setAddressRegion.bind(this, 'ALEXANDRIA')}>
-          <Text>ALEXANDRIA</Text>
-        </TouchableOpacity>
+        <Text style={{
+          fontSize: 15,
+          marginTop: 40,
+          marginLeft: 22,
+          marginBottom: 20,
+          color: 'black',
+          fontFamily: 'Poppins-Bold'
+        }}>Select your city</Text>
+
+        { this.renderCityButton('ALEXANDRIA') }
+        { this.renderCityButton('CAIRO') }
+        { this.renderCityButton('GIZA') }
+
+        <View style={{ height: 60 }} />
+
+        <BackButton fixed />
       </View>
     );
   }

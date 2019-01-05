@@ -16,6 +16,10 @@ import {
 } from 'react-native';
 
 import {
+  STATUS_BAR_HEIGHT
+} from '../../../Helpers.js';
+
+import {
 } from '../../../actions';
 
 
@@ -31,7 +35,21 @@ class Support extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor:'white'}}>
-        <Text>Support</Text>
+
+        <Text style={{
+          marginTop: STATUS_BAR_HEIGHT,
+          marginLeft: 4,
+          fontFamily: 'Poppins-Bold',
+          fontSize: 32,
+          padding: 16,
+        }}>Support</Text>
+
+
+        <TouchableOpacity
+          onPress={() => Actions.settings()}
+        >
+          <Text>Settings</Text>
+        </TouchableOpacity>
       </View>
     );
   }

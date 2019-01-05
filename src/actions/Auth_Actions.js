@@ -27,12 +27,15 @@ export const authCountryCodeSet = (country_code, call_code) => {
   return { type: AUTH_COUNTRY_CODE_SET, payload: { country_code, call_code } };
 };
 
-export const authVerificationSet = (verification) => {
+export const authVerificationSet = (verification_t) => {
+  const verification = verification_t.replace(/\D/g, '').substring(0, 6);
   return { type: AUTH_VERIFICATION_SET, payload: { verification } };
 };
 
 export const authPhoneLogin = (phone, call_code) => {
   const formatted_phone = `+${call_code}${phone}`.replace(/\s/g, '');
+  console.log('authPhoneLogin', phone, call_code, formatted_phone);
+
   firebase.auth().signOut();
 
   return (dispatch) => {
@@ -46,7 +49,6 @@ export const authPhoneLogin = (phone, call_code) => {
     // Note: this catch may encompass errors beyond the login process itself
   };
 };
-
 
 export const authPhoneVerify = (code, confirmation_function, onProceed) => {
   return (dispatch) => {
