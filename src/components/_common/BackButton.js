@@ -10,12 +10,13 @@ const back_icon = require('../../../assets/images_v2/Common/back.png');
 const BackButton = ({
   color = '#2DD38F',
   onPress = Actions.pop,
+  fixed = false,
   style
 }) => {
 
   return (
       <TouchableOpacity
-        style={[styles.backButton, style]}
+        style={[styles.backButton, (fixed ? styles.fixedButton : {}), style]}
         onPress={onPress}
       >
         <Image
@@ -33,6 +34,11 @@ const styles = {
     height: 48,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  fixedButton: {
+    position: 'absolute',
+    top: STATUS_BAR_HEIGHT + 6,
+    left: 2,
   }
 };
 

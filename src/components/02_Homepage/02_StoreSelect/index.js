@@ -461,7 +461,6 @@ class StoreSelect extends Component {
 
 
 renderAddressHeader() {
-  const street = 'Haram St.';
   return (
     <TouchableOpacity
       onPress={this.onAddressSelect.bind(this)}
@@ -486,7 +485,7 @@ renderAddressHeader() {
         fontSize: 28,
         fontFamily: 'Poppins-SemiBold',
         textAlign: 'center'
-      }}>Haram St.</Text>
+      }}>{this.props.street}</Text>
     </TouchableOpacity>
   )
 }
@@ -640,6 +639,12 @@ renderSellerList() {
     //   </View>
     // )
 
+    if (this.props.inital_loading) {
+      return (
+        <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
+      );
+    }
+
     return (
       <View style={{ flex: 1, backgroundColor:'white'}}>
         {this.renderAddressHeader()}
@@ -665,12 +670,23 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ Address, SellerSearch }) => {
-  const { street, point } = Address;
+const mapStateToProps = ({ Addresses, SellerSearch }) => {
+  const { addresses, address_index } = Addresses;
+  const inital_loading = Addresses.is_loading;
+  let address = {};
+  if (addresses && address_index !== null) {
+    address = addresses[address_index];
+  }
+  const { street, point } = address;
+
+  console.log('addresses', addresses, address_index)
+
   const { sellers, is_loading, error } = SellerSearch;
   return {
+    address,
     street,
     point,
+    inital_loading,
 
     sellers,
     is_loading,

@@ -26,7 +26,7 @@ const BlockButton = ({
         justifyContent: 'center',
         borderRadius: 4
       }}
-      activeOpacity={0.85}
+      activeOpacity={0.5}
       disabled={deactivated}
     >
       <Text style={[styles.textStyle, { color: outline ? color : 'white' }, textStyle]}>

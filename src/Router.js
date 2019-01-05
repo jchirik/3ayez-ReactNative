@@ -10,10 +10,17 @@ import { connect } from 'react-redux';
 // all root-level functions should take place here
 import {
   loadBaskets,
-  loadLocale
+  loadLocale,
+  loadAddresses
 } from './actions';
 
 import { Scene, Tabs, Router, Modal, Stack } from 'react-native-router-flux';
+
+import LanguageSelect from './components/00_Tutorial/01_LanguageSelect';
+import TutorialSwipe from './components/00_Tutorial/02_TutorialSwipe';
+
+import PhoneEntry from './components/14_Authentication/01_PhoneEntry';
+import VerifyCode from './components/14_Authentication/02_VerifyCode';
 
 import RegionSelect from './components/01_AddressCreate/01_RegionSelect';
 import AddressSearch from './components/01_AddressCreate/02_AddressSearch';
@@ -216,6 +223,7 @@ class RouterComponent extends Component {
   componentDidMount() {
     this.props.loadBaskets();
     this.props.loadLocale();
+    this.props.loadAddresses();
   }
   // <Scene
   //   hideNavBar
@@ -230,6 +238,7 @@ class RouterComponent extends Component {
   //   key="universalSearch"
   //   component={UniversalSearch}
   // />
+
   render() {
     return (
       <Router
@@ -260,7 +269,6 @@ class RouterComponent extends Component {
                 component={Support}
               />
           </Tabs>
-
           <Scene
             key="storePage"
             component={StorePage}
@@ -285,6 +293,20 @@ class RouterComponent extends Component {
             key="workingBasket"
             component={WorkingBasket}
           />
+
+          <Stack
+            key="tutorial"
+            hideNavBar
+          >
+            <Scene
+              key="languageSelect"
+              component={LanguageSelect}
+            />
+            <Scene
+              key="tutorialSwipe"
+              component={TutorialSwipe}
+            />
+          </Stack>
 
           <Stack
             key="addressCreate"
@@ -315,6 +337,21 @@ class RouterComponent extends Component {
               component={AddressConfirm}
             />
           </Stack>
+
+          <Stack
+            key="auth"
+            hideNavBar
+          >
+            <Scene
+              key="phoneEntry"
+              component={PhoneEntry}
+            />
+            <Scene
+              key="verifyCode"
+              component={VerifyCode}
+            />
+          </Stack>
+
         </Stack>
       </Router>
     );
@@ -323,5 +360,6 @@ class RouterComponent extends Component {
 
 export default connect(null, {
   loadBaskets,
-  loadLocale
+  loadLocale,
+  loadAddresses
 })(RouterComponent);

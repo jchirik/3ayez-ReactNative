@@ -21,6 +21,7 @@ import {
   BlockButton
 } from '../../_common';
 import {
+  createNewAddress,
   setAddressDetail
 } from '../../../actions';
 
@@ -63,6 +64,10 @@ class AddressDetails extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  createNewAddress() {
+    this.props.createNewAddress(this.props.new_address, this.props.addresses);
   }
 
   componentDidMount() {
@@ -146,7 +151,7 @@ class AddressDetails extends Component {
                 marginRight: 18,
                 alignSelf: 'stretch'
               }}
-              onPress={() => Actions.addressConfirm()}
+              onPress={this.createNewAddress.bind(this)}
               />
             </ScrollView>
           </KeyboardAvoidingView>
@@ -155,7 +160,7 @@ class AddressDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
+const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Addresses }) => {
   const {
     street,
     building,
@@ -163,10 +168,15 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
     notes,
     type
   } = AddressCreate;
+  const new_address = AddressCreate;
+  const { addresses } = Addresses;
 
   console.log(AddressReverseSearch);
 
   return {
+    new_address,
+    addresses,
+
     street,
     building,
     apt,
@@ -178,5 +188,6 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
 };
 
 export default connect(mapStateToProps, {
+  createNewAddress,
   setAddressDetail
 })(AddressDetails);

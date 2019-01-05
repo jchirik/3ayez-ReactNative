@@ -5,7 +5,9 @@ import ReduxThunk from 'redux-thunk';
 
 // import AppSettings from './AppSettings_Reducer';
 //
-import Address from './Address_Reducer';
+
+import Auth from './Auth_Reducer';
+import Addresses from './Addresses_Reducer';
 import AddressCreate from './AddressCreate_Reducer';
 import AddressSearch from './AddressSearch_Reducer';
 import AddressPlaceDetails from './AddressPlaceDetails_Reducer';
@@ -53,9 +55,10 @@ import Settings from './Settings_Reducer';
 // All Orders = all past orders
 
 const reducers = combineReducers({
+  Auth,
   Baskets,
 
-  Address,
+  Addresses,
   AddressCreate,
   AddressSearch,
   AddressPlaceDetails,
