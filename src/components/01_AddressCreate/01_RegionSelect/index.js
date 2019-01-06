@@ -164,11 +164,11 @@ class RegionSelect extends Component {
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {};
-};
+// const mapStateToProps = ({ }) => {
+//   return {};
+// };
 
-export default connect(mapStateToProps, {
+export default connect(null, {
   resetAddressCreate,
   setAddressRegion
 })(RegionSelect);

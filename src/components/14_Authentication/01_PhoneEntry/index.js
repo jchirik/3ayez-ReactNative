@@ -19,7 +19,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   Header,
-  BlockButton
+  BlockButton,
+  LoadingOverlay
 } from '../../_common';
 
 const dropdown_icon = require('../../../../assets/images_v2/Common/dropdown.png');
@@ -27,7 +28,6 @@ const dropdown_icon = require('../../../../assets/images_v2/Common/dropdown.png'
 import {
   authPhoneSet,
   authCountryCodeSet,
-  resetAuth,
   authPhoneLogin
 } from '../../../actions';
 
@@ -36,10 +36,7 @@ class PhoneEntry extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    this.props.resetAuth();
-  }
-
+  
   authPhoneLogin() {
     this.props.authPhoneLogin(this.props.phone, this.props.call_code);
   }
@@ -131,37 +128,38 @@ class PhoneEntry extends Component {
         backgroundColor: '#FAFCFD'
       }}>
         <Header title={'REGISTER USER'}/>
+        <View>
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: 'Poppins-Bold',
+              marginTop: 22,
+              marginLeft: 26
+            }}
+          >Enter your phone number below</Text>
 
-        <Text
-          style={{
-            fontSize: 14,
-            fontFamily: 'Poppins-Bold',
-            marginTop: 22,
-            marginLeft: 26
-          }}
-        >Enter your phone number below</Text>
+          { this.renderPhoneInput() }
+          { this.renderCountryPickerModal() }
 
-        { this.renderPhoneInput() }
-        { this.renderCountryPickerModal() }
-
-        <Text
-          style={{
-            fontSize: 12,
-            fontFamily: 'Poppins-Light',
-            textAlign: 'center',
-            marginTop: 18,
-            marginBottom: 10
-          }}
-        >Tap Next to get an SMS confirmation</Text>
-        <BlockButton
-          text={'NEXT'}
-          style={{
-            marginLeft: 18,
-            marginRight: 18
-          }}
-          onPress={this.authPhoneLogin.bind(this)}
-        />
-
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: 'Poppins-Light',
+              textAlign: 'center',
+              marginTop: 18,
+              marginBottom: 10
+            }}
+          >Tap Next to get an SMS confirmation</Text>
+          <BlockButton
+            text={'NEXT'}
+            style={{
+              marginLeft: 18,
+              marginRight: 18
+            }}
+            onPress={this.authPhoneLogin.bind(this)}
+          />
+          <LoadingOverlay isVisible={this.props.phone_loading} />
+        </View>
       </View>
     );
   }
@@ -187,6 +185,5 @@ const mapStateToProps = ({ Auth }) => {
 export default connect(mapStateToProps, {
   authPhoneSet,
   authCountryCodeSet,
-  resetAuth,
   authPhoneLogin
 })(PhoneEntry);

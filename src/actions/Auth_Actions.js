@@ -7,7 +7,7 @@ import {
   AUTH_COUNTRY_CODE_SET,
   AUTH_VERIFICATION_SET,
 
-  AUTH_RESET,
+  AUTH_INIT,
 
   // login attempt
   PHONE_ENTRY_BEGIN,
@@ -53,9 +53,9 @@ export const authPhoneLogin = (phone, call_code) => {
 export const authPhoneVerify = (code, confirmation_function, onProceed) => {
   return (dispatch) => {
     dispatch({ type: VERIFICATION_BEGIN });
-
     confirmation_function.confirm(code)
       .then(() => {
+        console.log('authPhoneVerify successful')
         dispatch({ type: VERIFICATION_SUCCESS });
         onProceed();
       }) // User is logged in){
@@ -63,8 +63,8 @@ export const authPhoneVerify = (code, confirmation_function, onProceed) => {
   };
 };
 
-export const resetAuth = () => {
-  return { type: AUTH_RESET };
+export const initAuth = (onComplete) => {
+  return { type: AUTH_INIT, payload: { onComplete } };
 };
 
 // execute logout & update logout attempt state accordingly

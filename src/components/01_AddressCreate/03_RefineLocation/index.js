@@ -15,7 +15,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   Header,
-  BlockButton
+  BlockButton,
+  LoadingOverlay
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -87,23 +88,6 @@ class RefineLocation extends Component {
   }
 
   renderGoogleTitle() {
-
-    let loadingSymbol = null;
-    if (this.props.is_loading) {
-      loadingSymbol = (
-        <ActivityIndicator
-        size="small"
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          backgroundColor: 'rgba(255, 255, 255, 0.6)'
-        }} />
-      )
-    }
-
     return (
       <View style={{
         marginTop: 8,
@@ -118,7 +102,7 @@ class RefineLocation extends Component {
         }}>
           {this.props.title}
         </Text>
-        {loadingSymbol}
+        <LoadingOverlay isVisible={this.props.is_loading} />
       </View>
     )
   }

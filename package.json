@@ -29,6 +29,7 @@
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-country-picker-modal": "^0.6.2",
+    "react-native-device-info": "^0.23.0",
     "react-native-firebase": "^5.1.1",
     "react-native-maps": "git+https://github.com/Titozzz/react-native-maps.git#cf5c310fa8655f04b4389fa48190b110d498f1c4",
     "react-native-router-flux": "^4.0.6",

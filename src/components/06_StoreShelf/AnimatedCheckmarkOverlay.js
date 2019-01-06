@@ -20,9 +20,9 @@ class AnimatedCheckmarkOverlay extends Component {
   }
 
 
-  componentDidMount() {
-
-  }
+  // componentDidMount() {
+  //
+  // }
 
 
   componentDidUpdate(prevProps) {

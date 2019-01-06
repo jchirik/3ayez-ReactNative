@@ -15,8 +15,8 @@ import {
   BackHandler
 } from 'react-native';
 
-import {
-} from '../../../actions';
+// import {
+// } from '../../../actions';
 
 
 class Discovery extends Component {
@@ -37,10 +37,9 @@ class Discovery extends Component {
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {
-  };
-};
+// const mapStateToProps = ({ }) => {
+//   return {
+//   };
+// };
 
-export default connect(mapStateToProps, {
-})(Discovery);
+export default connect(null, null)(Discovery);

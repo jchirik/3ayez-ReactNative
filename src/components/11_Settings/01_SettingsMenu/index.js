@@ -18,8 +18,8 @@ import {
   Header
 } from '../../_common';
 
-import {
-} from '../../../actions';
+// import {
+// } from '../../../actions';
 
 class SettingsMenu extends Component {
 
@@ -35,23 +35,21 @@ class SettingsMenu extends Component {
       }}>
         <Header title={'SETTINGS'}/>
 
-
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ Auth }) => {
-  const {
-    phone,
-    country_code,
-    call_code,
-    phone_loading,
-    phone_error
-  } = Auth;
-  return {
-  };
-};
+// const mapStateToProps = ({ Auth }) => {
+//   const {
+//     phone,
+//     country_code,
+//     call_code,
+//     phone_loading,
+//     phone_error
+//   } = Auth;
+//   return {
+//   };
+// };
 
-export default connect(mapStateToProps, {
-})(SettingsMenu);
+export default connect(null, null)(SettingsMenu);

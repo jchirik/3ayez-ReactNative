@@ -212,6 +212,8 @@ dependencies {
 
   implementation project(':react-native-maps')
 
+  implementation project(':react-native-device-info')
+
   /* --------------------------------
    *  OPTIONAL SUPPORT LIBS
    * -------------------------------- */

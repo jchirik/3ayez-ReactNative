@@ -6,6 +6,8 @@ export * from './AddressCreate_Actions';
 export * from './AddressReverseSearch_Actions';
 export * from './AddressSearch_Actions';
 
+export * from './Customer_Actions';
+
 export * from './Seller_Actions';
 export * from './SellerSearch_Actions';
 export * from './Baskets_Actions';

@@ -11,7 +11,9 @@ import { connect } from 'react-redux';
 import {
   loadBaskets,
   loadLocale,
-  loadAddresses
+  loadAddresses,
+  loadDeviceID,
+  listenCustomerAuthStatus
 } from './actions';
 
 import { Scene, Tabs, Router, Modal, Stack } from 'react-native-router-flux';
@@ -228,6 +230,8 @@ class RouterComponent extends Component {
     this.props.loadBaskets();
     this.props.loadLocale();
     this.props.loadAddresses();
+    this.props.loadDeviceID();
+    this.props.listenCustomerAuthStatus();
   }
   // <Scene
   //   hideNavBar
@@ -381,5 +385,7 @@ class RouterComponent extends Component {
 export default connect(null, {
   loadBaskets,
   loadLocale,
-  loadAddresses
+  loadAddresses,
+  loadDeviceID,
+  listenCustomerAuthStatus
 })(RouterComponent);

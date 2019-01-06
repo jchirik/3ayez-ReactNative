@@ -30,6 +30,8 @@ import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,7 +67,8 @@ public class MainApplication extends Application implements ReactApplication {
         new RNFirebaseStoragePackage(),
 
         new RNSoundPackage(),
-        new MapsPackage()
+        new MapsPackage(),
+        new RNDeviceInfo()
       );
     }
 

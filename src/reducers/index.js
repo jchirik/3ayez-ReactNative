@@ -14,6 +14,8 @@ import AddressPlaceDetails from './AddressPlaceDetails_Reducer';
 import AddressReverseSearch from './AddressReverseSearch_Reducer';
 import CurrentLocation from './CurrentLocation_Reducer';
 
+import Customer from './Customer_Reducer'
+
 import Baskets from './Baskets_Reducer'
 import SellerSearch from './SellerSearch_Reducer';
 import Seller from './Seller_Reducer';
@@ -57,6 +59,7 @@ import Settings from './Settings_Reducer';
 const reducers = combineReducers({
   Auth,
   Baskets,
+  Customer,
 
   Addresses,
   AddressCreate,

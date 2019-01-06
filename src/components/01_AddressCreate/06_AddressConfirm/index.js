@@ -65,9 +65,9 @@ class AddressConfirm extends Component {
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {};
-};
+// const mapStateToProps = ({ }) => {
+//   return {};
+// };
 
-export default connect(mapStateToProps, {
+export default connect(null, {
 })(AddressConfirm);

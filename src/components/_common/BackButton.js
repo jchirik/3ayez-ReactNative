@@ -2,13 +2,14 @@ import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
-  STATUS_BAR_HEIGHT
+  STATUS_BAR_HEIGHT,
+  AYEZ_GREEN
 } from '../../Helpers.js';
 
 const back_icon = require('../../../assets/images_v2/Common/back.png');
 
 const BackButton = ({
-  color = '#2DD38F',
+  color = AYEZ_GREEN,
   onPress = Actions.pop,
   fixed = false,
   style

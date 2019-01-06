@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
-  STATUS_BAR_HEIGHT
+  STATUS_BAR_HEIGHT,
+  AYEZ_GREEN
 } from '../../Helpers.js';
 import { BackButton } from './BackButton';
 import { strings } from '../../Helpers.js';
@@ -10,7 +11,7 @@ import { strings } from '../../Helpers.js';
 const Header = ({
   title = 'Title',
   hasBackButton = true,
-  color='#2DD38F',
+  color=AYEZ_GREEN,
   onBackButtonPress
 }) => {
 
@@ -46,7 +47,7 @@ const Header = ({
       }}
     >
       {leftElement}
-      
+
       <Text style={{
         fontSize: 16,
         color,

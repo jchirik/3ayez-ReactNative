@@ -17,7 +17,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   Header,
-  SearchBar
+  SearchBar,
+  LoadingOverlay
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -106,28 +107,6 @@ class AddressSearch extends Component {
       );
   }
 
-
-
-
-  // show subtle loading, and make unclickable when getting details
-  renderLoadingOverlay() {
-    if (this.props.coordinate_loading) {
-      return (
-        <View style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          backgroundColor: 'rgba(255, 255, 255, 0.6)'
-        }}>
-          <ActivityIndicator size="small" style={{ flex: 1 }} />
-        </View>
-      )
-    }
-    return null;
-  }
-
   renderEmptyComponent() {
 
     // if there are no results, and loading, then show spinner
@@ -191,7 +170,7 @@ class AddressSearch extends Component {
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index}
         />
-        { this.renderLoadingOverlay() }
+        <LoadingOverlay isVisible={this.props.loading} />
       </View>
     );
   }

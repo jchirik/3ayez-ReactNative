@@ -678,9 +678,6 @@ const mapStateToProps = ({ Addresses, SellerSearch }) => {
     address = addresses[address_index];
   }
   const { street, point } = address;
-
-  console.log('addresses', addresses, address_index)
-
   const { sellers, is_loading, error } = SellerSearch;
   return {
     address,

@@ -17,7 +17,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   Header,
-  BlockButton
+  BlockButton,
+  LoadingOverlay
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -34,8 +35,8 @@ class VerifyCode extends Component {
 
   authPhoneVerify() {
     console.log('verify');
-    const { verification, confirmation_function } = this.props;
-    // this.props.authPhoneVerify(verification, confirmation_function, onProceed);
+    const { verification, confirmation_function, onComplete } = this.props;
+    this.props.authPhoneVerify(verification, confirmation_function, onComplete);
   }
 
   renderSquare(digit) {
@@ -98,37 +99,38 @@ class VerifyCode extends Component {
         backgroundColor: '#FAFCFD'
       }}>
         <Header title={'VERIFICATION CODE'}/>
+        <View>
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: 'Poppins-Bold',
+              marginTop: 22,
+              marginLeft: 26,
+              marginBottom: 10
+            }}
+          >Enter the code sent to you below</Text>
 
-        <Text
-          style={{
-            fontSize: 14,
-            fontFamily: 'Poppins-Bold',
-            marginTop: 22,
-            marginLeft: 26,
-            marginBottom: 10
-          }}
-        >Enter the code sent to you below</Text>
+          { this.renderVerificationInput() }
 
-        { this.renderVerificationInput() }
-
-        <Text
-          style={{
-            fontSize: 12,
-            fontFamily: 'Poppins-Light',
-            textAlign: 'center',
-            marginTop: 22,
-            marginBottom: 10
-          }}
-        >Didn't receive code? Resend</Text>
-        <BlockButton
-          text={'CONFIRM'}
-          style={{
-            marginLeft: 18,
-            marginRight: 18
-          }}
-          onPress={this.authPhoneVerify.bind(this)}
-        />
-
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: 'Poppins-Light',
+              textAlign: 'center',
+              marginTop: 22,
+              marginBottom: 10
+            }}
+          >Didn't receive code? Resend</Text>
+          <BlockButton
+            text={'CONFIRM'}
+            style={{
+              marginLeft: 18,
+              marginRight: 18
+            }}
+            onPress={this.authPhoneVerify.bind(this)}
+          />
+          <LoadingOverlay isVisible={this.props.verification_loading} />
+        </View>
       </View>
     );
   }
@@ -139,13 +141,15 @@ const mapStateToProps = ({ Auth }) => {
     verification,
     verification_loading,
     verification_error,
-    confirmation_function
+    confirmation_function,
+    onComplete
   } = Auth;
   return {
     verification,
     verification_loading,
     verification_error,
-    confirmation_function
+    confirmation_function,
+    onComplete
   };
 };
 

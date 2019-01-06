@@ -1,10 +1,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import {
+  AYEZ_GREEN
+} from '../../Helpers.js';
 
 const BlockButton = ({
   onPress,
   text,
-  color = '#2DD38F',
+  color = AYEZ_GREEN,
   style,
   textStyle,
   deactivated,

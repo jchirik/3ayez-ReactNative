@@ -16,8 +16,8 @@ import {
   Image
 } from 'react-native';
 
-import {
-} from '../../actions';
+// import {
+// } from '../../actions';
 import { statusBarMargin, strings } from '../../Helpers.js';
 
 import AnimatedCheckmarkOverlay from './AnimatedCheckmarkOverlay';
@@ -150,8 +150,7 @@ class StoreShelf extends Component {
 }
 
 
-const styles = {
-};
+// const styles = {
+// };
 
-export default connect(null, {
-})(StoreShelf);
+export default connect(null, null)(StoreShelf);

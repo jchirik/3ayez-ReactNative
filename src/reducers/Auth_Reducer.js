@@ -4,7 +4,7 @@ import {
   AUTH_COUNTRY_CODE_SET,
   AUTH_VERIFICATION_SET,
 
-  AUTH_RESET,
+  AUTH_INIT,
 
   // login attempt
   PHONE_ENTRY_BEGIN,
@@ -27,12 +27,16 @@ const INITIAL_STATE = {
   verification_loading: false,
   verification_error: '',
 
-  confirmation_function: null
+  confirmation_function: null,
+
+  onComplete: null
 };
 
 export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
   switch (action.type) {
+    case AUTH_INIT:
+      return { ...INITIAL_STATE, onComplete: p.onComplete };
     case AUTH_PHONE_SET:
       return { ...state, phone: p.phone };
     case AUTH_COUNTRY_CODE_SET:
@@ -55,8 +59,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, verification_loading: false };
     case VERIFICATION_FAIL:
       return { ...state, verification_error: p.error, verification_loading: false };
-    case AUTH_RESET:
-      return INITIAL_STATE;
     default:
       return state;
   }

@@ -29,9 +29,9 @@ class StorePage extends Component {
     super(props);
   }
 
-  componentDidMount() {
-
-  }
+  // componentDidMount() {
+  //
+  // }
 
   onSelectCategory(category) {
     this.props.onSelectCategory(this.props.seller_id, category);

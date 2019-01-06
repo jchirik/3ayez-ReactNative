@@ -15,8 +15,8 @@ import {
   BackHandler
 } from 'react-native';
 
-import {
-} from '../../../actions';
+// import {
+// } from '../../../actions';
 
 
 class UniversalSearch extends Component {
@@ -37,10 +37,9 @@ class UniversalSearch extends Component {
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {
-  };
-};
+// const mapStateToProps = ({ }) => {
+//   return {
+//   };
+// };
 
-export default connect(mapStateToProps, {
-})(UniversalSearch);
+export default connect(null, null)(UniversalSearch);

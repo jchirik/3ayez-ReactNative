@@ -25,8 +25,8 @@ import {
 
 const loadingCircleGreen = require('../../../assets/images/loading_circle_green.png');
 
-import {
-} from '../../actions';
+// import {
+// } from '../../actions';
 import { statusBarMargin, strings, localizeItem } from '../../Helpers.js';
 
 // const ImgCacheLib = require('react-native-img-cache');
@@ -41,8 +41,8 @@ class ItemPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    // this.state = {
+    // };
   }
 
 
@@ -214,5 +214,4 @@ const mapStateToProps = ({ Baskets, Seller }) => {
   };
 };
 
-export default connect(mapStateToProps, {
-})(ItemPage);
+export default connect(mapStateToProps,null)(ItemPage);

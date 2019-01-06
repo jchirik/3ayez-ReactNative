@@ -20,8 +20,14 @@ import {
   BlockButton,
   BackButton
 } from '../../_common';
+
 import {
+  initAuth
 } from '../../../actions';
+
+import {
+  AYEZ_GREEN
+} from '../../../Helpers.js';
 
 class TutorialSwipe extends Component {
 
@@ -46,7 +52,7 @@ class TutorialSwipe extends Component {
           height: 10,
           width: 10,
           borderRadius: 5,
-          backgroundColor: '#2DD38F'
+          backgroundColor: AYEZ_GREEN
         }}
       />
     );
@@ -83,7 +89,11 @@ class TutorialSwipe extends Component {
             marginRight: 18,
             alignSelf: 'stretch'
           }}
-          onPress={() => Actions.auth()}
+          onPress={() => {
+            // proceed to address create after auth
+            this.props.initAuth(() => Actions.addressCreate())
+            Actions.auth();
+          }}
         />
 
         <TouchableOpacity
@@ -107,9 +117,10 @@ class TutorialSwipe extends Component {
   }
 }
 
-const mapStateToProps = ({ }) => {
-  return {};
-};
+// const mapStateToProps = ({ }) => {
+//   return {};
+// };
 
-export default connect(mapStateToProps, {
+export default connect(null, {
+  initAuth
 })(TutorialSwipe);
