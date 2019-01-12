@@ -170,6 +170,9 @@ dependencies {
   implementation "com.google.android.gms:play-services-base:16.0.1"
   implementation "com.google.android.gms:play-services-maps:16.0.0"
 
+  // For animated GIF support
+  implementation "com.facebook.fresco:animated-gif:1.10.0"
+
   /* -------------------------
    *   OPTIONAL FIREBASE SDKS
    * ------------------------- */

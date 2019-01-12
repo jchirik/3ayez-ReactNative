@@ -86,7 +86,7 @@ class WorkingBasket extends Component {
     const afterPrice = (
       <Text style={[
         styles.afterPrice,
-        { color: (this.props.coupon && promotionApplied) ? '#b413c6' : 'black'}
+        { color: (this.props.coupon) ? '#b413c6' : 'black'}
       ]}>
         {`${this.props.total.toFixed(2)} LE`}
       </Text>
@@ -153,9 +153,6 @@ class WorkingBasket extends Component {
       />
     );
   }
-
-
-
 
 
 
@@ -240,7 +237,7 @@ class WorkingBasket extends Component {
         // below the minimum, so indicate in a popup
         this.setState({ belowMinimumModal: true })
       } else {
-
+        Actions.timeslotSelect();
         // continue onwards
         // Actions.checkoutFlow({ isLoggedIn: (firebase.auth().currentUser) });
       }

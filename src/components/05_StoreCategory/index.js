@@ -203,6 +203,7 @@ class StoreCategory extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <BackButton type='cross_circled' />
         <FlatList
         style={{ flex: 1 }}
         removeClippedSubviews
@@ -217,7 +218,6 @@ class StoreCategory extends Component {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index}
       />
-      <BackButton type='cross_circled' />
       </View>
     );
   }

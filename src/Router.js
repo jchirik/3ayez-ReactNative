@@ -16,7 +16,7 @@ import {
   listenCustomerAuthStatus
 } from './actions';
 
-import { Scene, Tabs, Router, Modal, Stack } from 'react-native-router-flux';
+import { Scene, Tabs, Router, Lightbox, Stack } from 'react-native-router-flux';
 
 import LanguageSelect from './components/00_Tutorial/01_LanguageSelect';
 import TutorialSwipe from './components/00_Tutorial/02_TutorialSwipe';
@@ -44,7 +44,14 @@ import ItemPage from './components/07_ItemPage';
 import WorkingBasket from './components/08_WorkingBasket';
 
 
+import TimeslotSelect from './components/09_TimeslotSelect';
+import Checkout from './components/10_Checkout';
+
+
 import SettingsMenu from './components/11_Settings/01_SettingsMenu';
+
+
+import CouponModal from './components/12_CouponModal';
 
 // import LocationDetails from './components/02_LocationDetails';
 // import StoreSelector from './components/03_StoreSelector';
@@ -252,131 +259,150 @@ class RouterComponent extends Component {
       <Router
         sceneStyle={{ paddingTop: 0 }}
       >
-        <Stack
-          key="main"
-          hideNavBar
-          initial
-          panHandlers={null}
-          duration={0}
-          animationEnabled={false}
-        >
-          <Tabs
-            key="homepage"
+        <Lightbox>
+          <Stack
+            key="main"
             hideNavBar
             initial
+            panHandlers={null}
+            duration={0}
+            animationEnabled={false}
+          >
+            <Tabs
+              key="homepage"
+              hideNavBar
+              initial
+              >
+                <Scene
+                  hideNavBar
+                  title="Stores"
+                  key="storeSelect"
+                  component={StoreSelect}
+                />
+                <Scene
+                  hideNavBar
+                  title="Support"
+                  key="support"
+                  component={Support}
+                />
+            </Tabs>
+
+            <Scene
+              key="storePage"
+              component={StorePage}
+            />
+            <Scene
+              key="storeSearch"
+              component={StoreSearch}
+            />
+            <Scene
+              key="storeCategory"
+              component={StoreCategory}
+            />
+            <Scene
+              key="storeShelf"
+              component={StoreShelf}
+            />
+            <Scene
+              key="itemPage"
+              component={ItemPage}
+            />
+            <Scene
+              key="workingBasket"
+              component={WorkingBasket}
+            />
+
+            <Scene
+              key="timeslotSelect"
+              component={TimeslotSelect}
+            />
+
+            <Scene
+              key="checkout"
+              component={Checkout}
+            />
+
+
+
+            <Stack
+              key="settings"
+              hideNavBar
             >
               <Scene
-                hideNavBar
-                title="Stores"
-                key="storeSelect"
-                component={StoreSelect}
+                key="settingsMenu"
+                component={SettingsMenu}
+              />
+            </Stack>
+
+
+
+            <Stack
+              key="tutorial"
+              hideNavBar
+            >
+              <Scene
+                key="languageSelect"
+                component={LanguageSelect}
               />
               <Scene
-                hideNavBar
-                title="Support"
-                key="support"
-                component={Support}
+                key="tutorialSwipe"
+                component={TutorialSwipe}
               />
-          </Tabs>
+            </Stack>
 
-          <Scene
-            key="storePage"
-            component={StorePage}
-          />
-          <Scene
-            key="storeSearch"
-            component={StoreSearch}
-          />
-          <Scene
-            key="storeCategory"
-            component={StoreCategory}
-          />
-          <Scene
-            key="storeShelf"
-            component={StoreShelf}
-          />
-          <Scene
-            key="itemPage"
-            component={ItemPage}
-          />
-          <Scene
-            key="workingBasket"
-            component={WorkingBasket}
-          />
+            <Stack
+              key="auth"
+              hideNavBar
+            >
+              <Scene
+                key="phoneEntry"
+                component={PhoneEntry}
+              />
+              <Scene
+                key="verifyCode"
+                component={VerifyCode}
+              />
+            </Stack>
 
-
-
-          <Stack
-            key="settings"
-            hideNavBar
-          >
-            <Scene
-              key="settingsMenu"
-              component={SettingsMenu}
-            />
+            <Stack
+              key="addressCreate"
+              hideNavBar
+            >
+              <Scene
+                key="regionSelect"
+                component={RegionSelect}
+              />
+              <Scene
+                key="addressSearch"
+                component={AddressSearch}
+              />
+              <Scene
+                key="refineLocation"
+                component={RefineLocation}
+              />
+              <Scene
+                key="addressDetails"
+                component={AddressDetails}
+              />
+              <Scene
+                key="addressDetailEdit"
+                component={AddressDetailEdit}
+              />
+              <Scene
+                key="addressConfirm"
+                component={AddressConfirm}
+              />
+            </Stack>
           </Stack>
 
 
 
-          <Stack
-            key="tutorial"
-            hideNavBar
-          >
-            <Scene
-              key="languageSelect"
-              component={LanguageSelect}
-            />
-            <Scene
-              key="tutorialSwipe"
-              component={TutorialSwipe}
-            />
-          </Stack>
 
-          <Stack
-            key="auth"
-            hideNavBar
-          >
-            <Scene
-              key="phoneEntry"
-              component={PhoneEntry}
-            />
-            <Scene
-              key="verifyCode"
-              component={VerifyCode}
-            />
-          </Stack>
-
-          <Stack
-            key="addressCreate"
-            hideNavBar
-          >
-            <Scene
-              key="regionSelect"
-              component={RegionSelect}
-            />
-            <Scene
-              key="addressSearch"
-              component={AddressSearch}
-            />
-            <Scene
-              key="refineLocation"
-              component={RefineLocation}
-            />
-            <Scene
-              key="addressDetails"
-              component={AddressDetails}
-            />
-            <Scene
-              key="addressDetailEdit"
-              component={AddressDetailEdit}
-            />
-            <Scene
-              key="addressConfirm"
-              component={AddressConfirm}
-            />
-          </Stack>
-
-        </Stack>
+          <Scene
+            key="couponModal"
+            component={CouponModal}
+          />
+        </Lightbox>
       </Router>
     );
   }

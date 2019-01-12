@@ -38,7 +38,6 @@ export const applyCoupon = (code) => {
   };
 };
 
-
 export const resetCoupon = () => {
   return { type: COUPON_CODE_RESET };
 };

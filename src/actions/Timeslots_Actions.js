@@ -1,20 +1,26 @@
+import firebase from 'react-native-firebase';
+import Moment from 'moment';
+import {
+  TIMESLOTS_FETCH_BEGIN,
+  TIMESLOTS_FETCH_SET,
+  TIMESLOTS_FETCH_ERROR
+} from './types';
 
-export const fetchTimeslots = (sellerID) => {
+export const fetchTimeslots = (seller_id) => {
   return (dispatch) => {
-  dispatch({ type: TIMESLOTS_BEGIN });
+  dispatch({ type: TIMESLOTS_FETCH_BEGIN });
 
   const fetchTimeslotsRemotely = firebase.functions().httpsCallable('fetchTimeslots');
-  fetchTimeslotsRemotely({ seller_id: sellerID }).then((result) => {
+  fetchTimeslotsRemotely({ seller_id }).then((result) => {
      // delivery fee linked to TIMESLOT + distance ==> should be fetched from cloud FX
-
 
     // Read result of the Cloud Function.
     const { timeslots, error } = result.data;
     timeslots.sort((slotA, slotB) => { return slotA.start - slotB.start; });
 
     if (error) {
-      console.log('ERROR', error);
-      dispatch({ type: TIMESLOTS_FETCH_SET, payload: { timeslotDays: [] } });
+      console.log('fetchTimeslots error', error);
+      dispatch({ type: TIMESLOTS_FETCH_ERROR });
       return;
     }
 
@@ -43,14 +49,14 @@ export const fetchTimeslots = (sellerID) => {
     });
 
     timeslotDays.push(day);
-    console.log('Timeslot Days', timeslotDays);
+    console.log('fetchTimeslots timeslots', timeslotDays);
     dispatch({
       type: TIMESLOTS_FETCH_SET,
-      payload: { timeslotDays }
+      payload: { timeslots: timeslotDays }
     });
   }).catch((error) => {
-      console.log('ERROR', error);
-      dispatch({ type: TIMESLOTS_FETCH_SET, payload: { timeslotDays: [] } });
+      console.log('fetchTimeslots error', error);
+      dispatch({ type: TIMESLOTS_FETCH_ERROR });
       return;
     });
   };

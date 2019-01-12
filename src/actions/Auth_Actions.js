@@ -36,7 +36,7 @@ export const authPhoneLogin = (phone, call_code) => {
   const formatted_phone = `+${call_code}${phone}`.replace(/\s/g, '');
   console.log('authPhoneLogin', phone, call_code, formatted_phone);
 
-  firebase.auth().signOut();
+  // try { firebase.auth().signOut(); }
 
   return (dispatch) => {
     dispatch({ type: PHONE_ENTRY_BEGIN });
@@ -45,7 +45,10 @@ export const authPhoneLogin = (phone, call_code) => {
       dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
       Actions.verifyCode();
     }) // save confirm result to use with the manual verification code)
-    .catch(error => dispatch({ type: PHONE_ENTRY_FAIL, payload: { error } }));
+    .catch(error => {
+      console.log(error);
+      dispatch({ type: PHONE_ENTRY_FAIL, payload: { error } })
+    });
     // Note: this catch may encompass errors beyond the login process itself
   };
 };

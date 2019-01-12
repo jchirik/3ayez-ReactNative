@@ -72,7 +72,7 @@ class StoreSelect extends Component {
   }
 
   fetchNearbySellers() {
-    this.props.fetchNearbySellers(this.props.point, 'kafr_abdo'); // load nearby stores upon open
+    this.props.fetchNearbySellers(this.props.point, '10th_of_ramadan'); // load nearby stores upon open
   }
 
   componentDidMount() {

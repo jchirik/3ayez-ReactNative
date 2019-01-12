@@ -56,6 +56,7 @@ class StorePage extends Component {
   render() {
     return (
       <View style={{ flex: 1, marginTop: 30, backgroundColor:'white'}}>
+        <BackButton type='cross_circled' />
         <Text>{this.props.seller_id}</Text>
         <Image
           source={{ uri: this.props.logo_url }}
@@ -87,7 +88,6 @@ class StorePage extends Component {
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index}
           />
-        <BackButton type='cross_circled' />
       </View>
     );
   }

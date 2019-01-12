@@ -24,6 +24,7 @@ import {
 
 const support_tile = require('../../../../assets/images_v2/Support/support_tile.png');
 const start_side_arrow = require('../../../../assets/images_v2/Support/start_side_arrow.png');
+const silhouette_icon = require('../../../../assets/images_v2/Support/silhouette_icon.png');
 
 
 class Support extends Component {
@@ -130,11 +131,38 @@ class Support extends Component {
         </TouchableOpacity>
 
 
+        <TouchableOpacity
+          onPress={() => Actions.couponModal()}
+        >
+          <Text>Coupon Modal</Text>
+        </TouchableOpacity>
+
+
 
         <TouchableOpacity
+          style={{
+            position: 'absolute',
+            top: STATUS_BAR_HEIGHT+7,
+            right: 10,
+            padding: 10,
+            alignItems: 'center'
+          }}
           onPress={() => Actions.settings()}
         >
-          <Text>Settings</Text>
+          <Image
+            source={silhouette_icon}
+            style={{
+              width: 30,
+              height: 30,
+              tintColor: '#0094ff'
+             }}
+            resizeMode={'contain'}
+            />
+            <Text style={{
+              color: '#0094ff',
+              fontFamily: 'Poppins-SemiBold',
+              fontSize: 10
+            }}>SETTINGS</Text>
         </TouchableOpacity>
       </View>
     );

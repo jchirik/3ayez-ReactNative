@@ -24,6 +24,8 @@ import Checkout from './Checkout_Reducer';
 
 import ItemSearch from './ItemSearch_Reducer';
 import Settings from './Settings_Reducer';
+
+import Timeslots from './Timeslots_Reducer';
 //
 // import Addresses from './Addresses_Reducer';
 //
@@ -73,7 +75,9 @@ const reducers = combineReducers({
   SellerSearch,
   Seller,
   ItemSearch,
-  Settings
+  Settings,
+
+  Timeslots
 });
 
 export default createStore(reducers, {}, applyMiddleware(ReduxThunk));
