@@ -15,36 +15,106 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  Header
+  BottomChoiceSelection,
+  Header,
+  BlockButton
 } from '../../_common';
 
-// import {
-// } from '../../../actions';
-
+import {
+  setLocale,
+  logoutUser,
+  onCompleteAuth
+} from '../../../actions';
 
 // { text: 'Credit Cards', action: null, icon: '' },
-const sections = [
-  {title: 'My Account', data: [
-    { text: 'Address Book', action: null, icon: '' },
-    { text: 'Language', action: null, icon: '' },
-    { text: 'Previous Orders', action: null, icon: '' }
-  ]},
-  {title: 'Information', data: [
-    { text: 'Terms & Conditions', action: null },
-    { text: 'Privacy Policy', action: null },
-  ]}
-];
 
 class SettingsMenu extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      logoutConfirm: false,
+      languageSelect: false
+    };
   }
+
+  openLanguageSelect() { this.setState({ languageSelect: true }); }
+  closeLanguageSelect() { this.setState({ languageSelect: false }); }
+  setLocaleEnglish() {
+    this.closeLanguageSelect();
+    this.props.setLocale('en');
+  }
+  setLocaleArabic() {
+    this.closeLanguageSelect();
+    this.props.setLocale('ar');
+  }
+
+  openLogoutConfirm() { this.setState({ logoutConfirm: true }); }
+  closeLogoutConfirm() { this.setState({ logoutConfirm: false }); }
+
+  logoutUser() {
+    this.closeLogoutConfirm();
+    this.props.logoutUser();
+  }
+
+  loginUser() {
+    this.props.onCompleteAuth(() => Actions.popTo('homepage'))
+    Actions.auth();
+  }
+
+  renderHeader() {
+    if (!this.props.phone) {
+      return (
+        <BlockButton
+          onPress={this.loginUser.bind(this)}
+          text={'Login'}
+          color={'#0094ff'}
+          style={{
+            marginLeft: 20,
+            marginRight: 20,
+            marginTop: 30,
+            marginBottom: 10
+          }}
+          />
+      )
+    }
+    return (
+      <View style={{
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 30,
+        marginBottom: 10
+      }}>
+        <Text style={{
+          fontFamily: 'Poppins-SemiBold',
+          fontSize: 22,
+          color: 'black',
+        }}>Welcome {this.props.name}</Text>
+      </View>
+    );
+  }
+
+  renderFooter() {
+    return (
+      <View>
+        <Text style={{
+          fontFamily: 'Poppins-Regular',
+          fontSize: 10,
+          color: 'black',
+          textAlign: 'center',
+          marginTop: 30,
+          marginBottom: 30
+        }}>Made in 🇪🇬</Text>
+      </View>
+    )
+  }
+
 
   renderItem({item: {text, action, icon}, index, section}) {
     return (
-      <View
+      <TouchableOpacity
         key={index}
+        onPress={action}
         style={{
           height: 60,
           flexDirection: 'row',
@@ -60,7 +130,7 @@ class SettingsMenu extends Component {
           fontSize: 12,
           color: '#4E4E4E',
         }}>{text}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 
@@ -85,33 +155,87 @@ class SettingsMenu extends Component {
   }
 
   render() {
+
+    const accountSection = {title: 'My Account', data: [
+      { text: 'Address Book', action: null, icon: '' },
+      { text: 'Language', action: this.openLanguageSelect.bind(this), icon: '' },
+      { text: 'Previous Orders', action: () => Actions.orderHistory(), icon: '' },
+      { text: 'Logout', action: this.openLogoutConfirm.bind(this), icon: ''}
+    ]};
+
+    const infoSection = {title: 'Information', data: [
+      { text: 'Terms & Conditions', action: null },
+      { text: 'Privacy Policy', action: null },
+    ]};
+
+
+    // different sections based on logged in/out
+    let sections = [infoSection];
+    if (this.props.phone) {
+      sections = [accountSection, infoSection];
+    }
+
     return (
       <View style={{
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'ACCOUNT'}/>
+        <Header title={'SETTINGS'}/>
         <SectionList
+          ListHeaderComponent={this.renderHeader.bind(this)}
+          ListFooterComponent={this.renderFooter.bind(this)}
           renderItem={this.renderItem.bind(this)}
           renderSectionHeader={this.renderSectionHeader.bind(this)}
           sections={sections}
           keyExtractor={(item, index) => item + index}
+        />
+
+
+
+
+        <BottomChoiceSelection
+          isVisible={this.state.languageSelect}
+          onClose={this.closeLanguageSelect.bind(this)}
+          title='Select your language'
+          buttons={[
+            { text: 'Arabic', action: this.setLocaleArabic.bind(this) },
+            { text: 'English', action: this.setLocaleEnglish.bind(this) }
+          ]}
+        />
+
+        <BottomChoiceSelection
+          isVisible={this.state.logoutConfirm}
+          onClose={this.closeLogoutConfirm.bind(this)}
+          title='Are you sure you want to log out?'
+          backgroundColor='#E64E47'
+          buttons={[
+            { text: 'Yes, sure', action: this.logoutUser.bind(this) },
+            { text: 'No, cancel', action: this.closeLogoutConfirm.bind(this) }
+          ]}
         />
       </View>
     );
   }
 }
 
-// const mapStateToProps = ({ Auth }) => {
-//   const {
-//     phone,
-//     country_code,
-//     call_code,
-//     phone_loading,
-//     phone_error
-//   } = Auth;
-//   return {
-//   };
-// };
+const mapStateToProps = ({ Customer, Settings }) => {
+  const {
+    locale
+  } = Settings;
+  const {
+    name,
+    phone
+  } = Customer;
+  return {
+    locale,
 
-export default connect(null, null)(SettingsMenu);
+    name,
+    phone
+  };
+};
+
+export default connect(mapStateToProps, {
+  setLocale,
+  logoutUser,
+  onCompleteAuth
+})(SettingsMenu);

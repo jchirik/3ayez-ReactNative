@@ -13,7 +13,11 @@ import {
 
   VERIFICATION_BEGIN,
   VERIFICATION_SUCCESS,
-  VERIFICATION_FAIL
+  VERIFICATION_FAIL,
+
+  GUEST_LOGIN_BEGIN,
+  GUEST_LOGIN_SUCCESS,
+  GUEST_LOGIN_FAIL
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,6 +30,10 @@ const INITIAL_STATE = {
   verification: '',
   verification_loading: false,
   verification_error: '',
+
+
+  guestlogin_loading: false,
+  guestlogin_error: '',
 
   confirmation_function: null,
 
@@ -59,6 +67,12 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, verification_loading: false };
     case VERIFICATION_FAIL:
       return { ...state, verification_error: p.error, verification_loading: false };
+    case GUEST_LOGIN_BEGIN:
+      return { ...state, guestlogin_error: '', guestlogin_loading: true };
+    case GUEST_LOGIN_SUCCESS:
+      return { ...state, guestlogin_loading: false };
+    case GUEST_LOGIN_FAIL:
+      return { ...state, guestlogin_error: p.error, guestlogin_loading: false };
     default:
       return state;
   }

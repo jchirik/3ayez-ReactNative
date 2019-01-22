@@ -25,6 +25,10 @@ import Checkout from './Checkout_Reducer';
 import ItemSearch from './ItemSearch_Reducer';
 import Settings from './Settings_Reducer';
 
+import OrderHistory from './OrderHistory_Reducer';
+import OrderTracker from './OrderTracker_Reducer';
+import OngoingOrders from './OngoingOrders_Reducer';
+
 import Timeslots from './Timeslots_Reducer';
 //
 // import Addresses from './Addresses_Reducer';
@@ -38,7 +42,7 @@ import Timeslots from './Timeslots_Reducer';
 //
 // import PlacedOrders from './PlacedOrders_Reducer';
 //
-// import SupportChat from './SupportChat_Reducer';
+import SupportChat from './SupportChat_Reducer';
 //
 // import DriverLocation from './DriverLocation_Reducer';
 // import CurrentArea from './CurrentArea_Reducer';
@@ -77,7 +81,13 @@ const reducers = combineReducers({
   ItemSearch,
   Settings,
 
-  Timeslots
+  Timeslots,
+
+  OrderHistory,
+  OrderTracker,
+  OngoingOrders,
+
+  SupportChat
 });
 
 export default createStore(reducers, {}, applyMiddleware(ReduxThunk));

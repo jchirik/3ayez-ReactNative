@@ -16,7 +16,13 @@ import {
 
   VERIFICATION_BEGIN,
   VERIFICATION_SUCCESS,
-  VERIFICATION_FAIL
+  VERIFICATION_FAIL,
+
+  CUSTOMER_DATA_RESET,
+
+  GUEST_LOGIN_BEGIN,
+  GUEST_LOGIN_SUCCESS,
+  GUEST_LOGIN_FAIL
 } from './types';
 
 export const authPhoneSet = (phone) => {
@@ -32,12 +38,28 @@ export const authVerificationSet = (verification_t) => {
   return { type: AUTH_VERIFICATION_SET, payload: { verification } };
 };
 
+
+export const authGuestLogin = (onProceed) => {
+  return (dispatch) => {
+    dispatch({ type: GUEST_LOGIN_BEGIN });
+    firebase.auth().signInAnonymously()
+    .then(() => {
+      console.log('authGuestLogin successful')
+      dispatch({ type: GUEST_LOGIN_SUCCESS });
+      onProceed();
+    })
+    .catch(error => {
+      console.log('authGuestLogin', error);
+      dispatch({ type: GUEST_LOGIN_FAIL, payload: { error } })
+    });
+  };
+};
+
+
 export const authPhoneLogin = (phone, call_code) => {
   const formatted_phone = `+${call_code}${phone}`.replace(/\s/g, '');
   console.log('authPhoneLogin', phone, call_code, formatted_phone);
-
   // try { firebase.auth().signOut(); }
-
   return (dispatch) => {
     dispatch({ type: PHONE_ENTRY_BEGIN });
     firebase.auth().signInWithPhoneNumber(formatted_phone)
@@ -56,17 +78,43 @@ export const authPhoneLogin = (phone, call_code) => {
 export const authPhoneVerify = (code, confirmation_function, onProceed) => {
   return (dispatch) => {
     dispatch({ type: VERIFICATION_BEGIN });
+
+    // check if currently logged in (anonymously)
+    const prevUser = firebase.auth().currentUser;
+
     confirmation_function.confirm(code)
-      .then(() => {
+      .then((user) => {
         console.log('authPhoneVerify successful')
-        dispatch({ type: VERIFICATION_SUCCESS });
-        onProceed();
+        // if previously logged in anonymously, run a CloudFX that migrates all data
+        if (prevUser) {
+          console.log('migrating guest account with phone account', prevUser.uid, user.uid);
+
+          const migrateGuestAccount = firebase.functions().httpsCallable('migrateGuestAccount');
+          migrateGuestAccount({ guest_uid: prevUser.uid, user_uid: user.uid }).then((result) => {
+            if (result.data && result.data.success) {
+              dispatch({ type: VERIFICATION_SUCCESS });
+              onProceed();
+            } else {
+              dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } })
+            }
+          }).catch((error) => {
+            dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } });
+          });
+
+        } else {
+          // otherwise, its successful! continue.
+          dispatch({ type: VERIFICATION_SUCCESS });
+          onProceed();
+        }
       }) // User is logged in){
-      .catch(error => dispatch({ type: VERIFICATION_FAIL, payload: { error } }));
+      .catch(error => {
+        console.log('authPhoneVerify', error)
+        dispatch({ type: VERIFICATION_FAIL, payload: { error } })
+      });
   };
 };
 
-export const initAuth = (onComplete) => {
+export const onCompleteAuth = (onComplete) => {
   return { type: AUTH_INIT, payload: { onComplete } };
 };
 

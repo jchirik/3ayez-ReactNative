@@ -18,7 +18,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   Header,
-  BlockButton
+  BlockButton,
+  LoadingOverlay
 } from '../../_common';
 import {
   createNewAddress,
@@ -67,7 +68,26 @@ class AddressDetails extends Component {
   }
 
   createNewAddress() {
-    this.props.createNewAddress(this.props.new_address, this.props.addresses);
+    const {
+      region,
+      point,
+      title,
+      street,
+      building,
+      apt,
+      notes,
+      type
+    } = this.props;
+    this.props.createNewAddress({
+      region,
+      point,
+      title,
+      street,
+      building,
+      apt,
+      notes,
+      type
+    });
   }
 
   componentDidMount() {
@@ -155,35 +175,42 @@ class AddressDetails extends Component {
               />
             </ScrollView>
           </KeyboardAvoidingView>
+
+          <LoadingOverlay isVisible={this.props.is_loading} />
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Addresses }) => {
+const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
   const {
+    region,
+    point,
+    title,
     street,
     building,
     apt,
     notes,
-    type
+    type,
+
+    is_loading
   } = AddressCreate;
-  const new_address = AddressCreate;
-  const { addresses } = Addresses;
 
   console.log(AddressReverseSearch);
 
   return {
-    new_address,
-    addresses,
-
+    region,
+    point,
+    title,
     street,
     building,
     apt,
     notes,
     type,
     google_title: AddressReverseSearch.title,
-    google_type: AddressReverseSearch.type
+    google_type: AddressReverseSearch.type,
+
+    is_loading
   };
 };
 

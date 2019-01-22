@@ -49,7 +49,11 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>$(DISPLAY_NAME) needs your location to help find nearby stores</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(DISPLAY_NAME) would like access to your photo gallery for chat</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(DISPLAY_NAME) would like to use your camera for chat</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Cairo-Black.ttf</string>

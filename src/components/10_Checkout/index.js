@@ -517,8 +517,7 @@ class Checkout extends Component {
       error
     } = Checkout;
 
-    const { addresses, address_index } = Addresses;
-    const address = addresses[address_index];
+    const { address } = Addresses;
 
     return {
       customer,

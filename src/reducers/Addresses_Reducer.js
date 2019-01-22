@@ -1,12 +1,14 @@
 
 import {
   ADDRESSES_SET,
-  ADDRESS_INDEX_SET
+  ADDRESSES_LISTENER_SET,
+  CUSTOMER_DATA_RESET
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  addresses: null,
-  address_index: null,
+  address: null, // the working address
+  addresses: {},
+  addressesListener: null,
   is_loading: true
 };
 
@@ -14,9 +16,13 @@ export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
   switch (action.type) {
     case ADDRESSES_SET:
-      return { ...state, addresses: p.addresses, is_loading: false };
-    case ADDRESS_INDEX_SET:
-      return { ...state, address_index: p.address_index };
+      return { ...state, addresses: p.addresses, address: p.address, is_loading: false };
+    case ADDRESSES_LISTENER_SET:
+      if (state.addressesListener !== null) { state.addressesListener(); }
+      return { ...INITIAL_STATE, addressesListener: p.addressesListener };
+    case CUSTOMER_DATA_RESET:
+        if (state.addressesListener !== null) { state.addressesListener(); }
+        return INITIAL_STATE;
     default:
       return state;
   }

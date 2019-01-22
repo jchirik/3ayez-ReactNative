@@ -62,9 +62,9 @@ export const submitOrder = (order_t) => {
         dispatch({ type: BASKET_ITEMS_CLEAR, payload: { seller_id: seller.id } });
         dispatch({ type: COUPON_CODE_RESET });
         Actions.reset('homepage');
-        // setTimeout(() => {
-        //   Actions.tracker({ orderID: docRef.id }); // you might have to refresh
-        // }, 1500);
+        setTimeout(() => {
+          Actions.orderTracker({ order_id: docRef.id }); // you might have to refresh
+        }, 1500);
       })
       .catch((error) => {
         const { code, message, details } = error;

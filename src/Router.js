@@ -11,8 +11,6 @@ import { connect } from 'react-redux';
 import {
   loadBaskets,
   loadLocale,
-  loadAddresses,
-  loadDeviceID,
   listenCustomerAuthStatus
 } from './actions';
 
@@ -31,10 +29,11 @@ import AddressDetails from './components/01_AddressCreate/04_AddressDetails';
 import AddressDetailEdit from './components/01_AddressCreate/05_AddressDetailEdit';
 import AddressConfirm from './components/01_AddressCreate/06_AddressConfirm';
 
-import Discovery from './components/02_Homepage/01_Discovery';
-import StoreSelect from './components/02_Homepage/02_StoreSelect';
-import Support from './components/02_Homepage/03_Support';
-import UniversalSearch from './components/02_Homepage/04_UniversalSearch';
+import Homepage from './components/02_Homepage';
+// import Discovery from './components/02_Homepage/01_Discovery';
+// import StoreSelect from './components/02_Homepage/02_StoreSelect';
+// import Support from './components/02_Homepage/03_Support';
+// import UniversalSearch from './components/02_Homepage/04_UniversalSearch';
 
 import StorePage from './components/03_StorePage';
 import StoreSearch from './components/04_StoreSearch';
@@ -47,12 +46,18 @@ import WorkingBasket from './components/08_WorkingBasket';
 import TimeslotSelect from './components/09_TimeslotSelect';
 import Checkout from './components/10_Checkout';
 
+import OrderTracker from './components/10_OrderTracker';
 
 import SettingsMenu from './components/11_Settings/01_SettingsMenu';
+import OrderHistory from './components/11_Settings/02_OrderHistory';
 
 
 import CouponModal from './components/12_CouponModal';
 
+
+import SupportChat from './components/15_SupportChat';
+
+import SupportDetail from './components/16_SupportDetail';
 // import LocationDetails from './components/02_LocationDetails';
 // import StoreSelector from './components/03_StoreSelector';
 
@@ -227,6 +232,20 @@ import CouponModal from './components/12_CouponModal';
 // </Scene>
 
 
+
+// <Scene
+//   hideNavBar
+//   title="Stores"
+//   key="storeSelect"
+//   component={StoreSelect}
+// />
+// <Scene
+//   hideNavBar
+//   title="Support"
+//   key="support"
+//   component={Support}
+// />
+
 class RouterComponent extends Component {
 
   constructor(props) {
@@ -236,8 +255,6 @@ class RouterComponent extends Component {
   componentDidMount() {
     this.props.loadBaskets();
     this.props.loadLocale();
-    this.props.loadAddresses();
-    this.props.loadDeviceID();
     this.props.listenCustomerAuthStatus();
   }
   // <Scene
@@ -254,6 +271,7 @@ class RouterComponent extends Component {
   //   component={UniversalSearch}
   // />
 
+
   render() {
     return (
       <Router
@@ -265,28 +283,14 @@ class RouterComponent extends Component {
             hideNavBar
             initial
             panHandlers={null}
-            duration={0}
-            animationEnabled={false}
+            animationEnabled={true}
           >
-            <Tabs
-              key="homepage"
+            <Scene
               hideNavBar
+              key="homepage"
+              component={Homepage}
               initial
-              >
-                <Scene
-                  hideNavBar
-                  title="Stores"
-                  key="storeSelect"
-                  component={StoreSelect}
-                />
-                <Scene
-                  hideNavBar
-                  title="Support"
-                  key="support"
-                  component={Support}
-                />
-            </Tabs>
-
+            />
             <Scene
               key="storePage"
               component={StorePage}
@@ -331,6 +335,10 @@ class RouterComponent extends Component {
               <Scene
                 key="settingsMenu"
                 component={SettingsMenu}
+              />
+              <Scene
+                key="orderHistory"
+                component={OrderHistory}
               />
             </Stack>
 
@@ -393,15 +401,34 @@ class RouterComponent extends Component {
                 component={AddressConfirm}
               />
             </Stack>
-          </Stack>
 
 
+
+          <Scene
+            key="supportChat"
+            component={SupportChat}
+          />
+          <Scene
+            key="supportDetail"
+            component={SupportDetail}
+          />
+
+          <Scene
+            key="orderTracker"
+            component={OrderTracker}
+          />
 
 
           <Scene
             key="couponModal"
             component={CouponModal}
           />
+
+
+
+
+
+          </Stack>
         </Lightbox>
       </Router>
     );
@@ -411,7 +438,5 @@ class RouterComponent extends Component {
 export default connect(null, {
   loadBaskets,
   loadLocale,
-  loadAddresses,
-  loadDeviceID,
   listenCustomerAuthStatus
 })(RouterComponent);

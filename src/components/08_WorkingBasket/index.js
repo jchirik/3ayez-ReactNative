@@ -16,7 +16,8 @@ import { Actions } from 'react-native-router-flux';
 // import call from 'react-native-phone-call';
 import {
   emptyBasket,
-  resetCoupon
+  resetCoupon,
+  onCompleteAuth
 } from '../../actions';
 import {
   BlockButton,
@@ -260,6 +261,22 @@ class WorkingBasket extends Component {
 
     renderBottomButton() {
 
+      if (!this.props.phone) {
+        return (
+          <View style={styles.submitButtonContainer}>
+            <BlockButton
+              text={'Please Signup to Continue'}
+              onPress={() => {
+                // proceed to address create after auth
+                this.props.onCompleteAuth(() => Actions.popTo('workingBasket'))
+                Actions.auth();
+              }}
+              color='#0094ff'
+            />
+          </View>
+        );
+      }
+
       return (
         <View style={styles.submitButtonContainer}>
           { this.renderCouponButton() }
@@ -428,8 +445,9 @@ class WorkingBasket extends Component {
     }
   };
 
-  const mapStateToProps = ({ Baskets, Seller, Checkout, Coupon }) => {
+  const mapStateToProps = ({ Customer, Baskets, Seller, Checkout, Coupon }) => {
 
+    const { phone } = Customer;
     const seller = Seller;
     const basket = Baskets.baskets[Seller.id];
     // this is for submitting to Checkout in componentDidMount only
@@ -441,6 +459,7 @@ class WorkingBasket extends Component {
     // const { coupon_discount } = orderData;
 
     return {
+      phone,
       items_array,
       subtotal,
       basket_quantity,
@@ -459,6 +478,7 @@ class WorkingBasket extends Component {
   export default connect(mapStateToProps,
     {
       emptyBasket,
-      resetCoupon
+      resetCoupon,
+      onCompleteAuth
     }
   )(WorkingBasket);

@@ -5,3 +5,5 @@ export * from './SearchBar';
 export * from './LoadingOverlay';
 export * from './InputField';
 export * from './SubtleButton';
+
+export BottomChoiceSelection from './BottomChoiceSelection';

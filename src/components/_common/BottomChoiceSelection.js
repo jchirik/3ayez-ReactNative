@@ -1,221 +1,163 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import {
-  AYEZ_GREEN
-} from '../../Helpers.js';
-
-// when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
-// when isvisible set to false, initiate reverse animation, then set the modal's visiblity
-
-// INPUT FORMAT: {
-//   backgroundColor:
-//   title:
-//   buttons: [{ text, action, backgroundColor, color }]
-// }
-
-
-
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
   Image,
   Platform,
   Animated,
-  Easing,
+  Easing
 } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import {
+  AYEZ_GREEN
+} from '../../Helpers.js';
+import { BlockButton } from './BlockButton';
 
-const tooltipTriangle = require('../../../assets/images/triangle_hard.png');
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
+// when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
+// when isvisible set to false, initiate reverse animation, then set the modal's visiblity
 
+// NO animation for now
 
-class Tooltip extends PureComponent {
+// INPUT FORMAT: {
+//   isVisible:
+//   backgroundColor:
+//   title:
+//   buttons: [{ text, action, buttonColor, textColor }]
+// }
+
+class BottomChoiceSelection extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      tooltipTrack: new Animated.Value(0)
+      animationTrack: new Animated.Value(0),
+      modalHeight: 1000,
+      unclickable: false
     };
   }
 
-  // // loop the number times specified
-  // Animated.loop(
-  //   Animated.timing(this.state.tooltipTrack, {
-  //     toValue: 200,
-  //     duration: 2000,
-  //     easing: Easing.linear(),
-  //     useNativeDriver: true, // <-- Add this
-  //   }),
-  //   { iterations: duration }
-  // ).start(() => {
-  //     // close the tooltip
-  //     Animated.timing(this.state.tooltipTrack, {
-  //       toValue: 0,
-  //       duration: 350,
-  //       easing: Easing.elastic(1),
-  //       useNativeDriver: true, // <-- Add this
-  //     }).start();
+  onClose() {
+    this.setState({ unclickable: true });
+    // closing animation
+    Animated.timing(
+      this.state.animationTrack,
+      {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true
+      }
+    ).start(() => {
+      // then trigger onClose from the parent
+      this.props.onClose();
+      this.setState({ unclickable: false });
+    });
+  }
 
   componentDidUpdate(prevProps) {
-    const {
-      isVisible, // whether or not the modal should be visible
-      duration = 3000, // number of milliseconds seen
-    } = this.props;
-
-  if (isVisible && !prevProps.isVisible) {
-    // enter animation
-    const enterAnimation = Animated.timing(this.state.tooltipTrack, {
-      toValue: 100,
-      duration: 200,
-      easing: Easing.elastic(1),
-      useNativeDriver: true, // <-- Add this
-    })
-    // // exit animation
-    const exitAnimation = Animated.timing(this.state.tooltipTrack, {
-      toValue: 0,
-      duration: 200,
-      easing: Easing.elastic(1),
-      useNativeDriver: true, // <-- Add this
-    })
-    Animated.stagger(duration, [enterAnimation, exitAnimation]).start();
+    if (this.props.isVisible && !prevProps.isVisible) {
+      this.setState({ unclickable: true });
+      // enter animation
+      Animated.timing(
+        this.state.animationTrack,
+        {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true
+        }
+      ).start(() => {
+        this.setState({ unclickable: false });
+      });
+    }
   }
-}
+
 
   render() {
     const {
+      isVisible,
+      backgroundColor = AYEZ_GREEN,
       title,
-      textColor = 'white',
-      backgroundColor = '#F05C64',
-      offsetRight = 20,
-      offsetLeft = null,
-      style,
-      isVisible
+      buttons = []
     } = this.props;
 
-    const tooltipScale = (this.state.tooltipTrack.interpolate({
-        inputRange: [ 0, 100 ],
-        outputRange: [ 0.6, 1]
-      }));
-    const tooltipOpacity = (this.state.tooltipTrack.interpolate({
-        inputRange: [ 0, 100 ],
-        outputRange: [ 0, 1 ]
+    const animatePosition = (this.state.animationTrack.interpolate({
+        inputRange: [ 0, 1 ],
+        outputRange: [ this.state.modalHeight, 0 ]
       }));
 
-    let arrowPosition = { right: offsetRight };
-    if (offsetLeft) { arrowPosition = { left: offsetLeft }; }
 
+    const buttonComponents = buttons.map(({ text, action, buttonColor, textColor }) =>
+      <BlockButton
+        onPress={action}
+        text={text.toUpperCase()}
+        color={buttonColor || 'white'}
+        style={{ marginTop: 10, marginBottom: 10 }}
+        textStyle={{
+          color: (textColor || backgroundColor),
+          fontFamily: 'Poppins-Light'
+        }}
+        />
+    )
+
+    const unclickableOverlay = this.state.unclickable ? (
+      <View style={{
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0
+      }}/>
+    ) : null;
 
     return (
-      <Animated.View style={[
-        {
-        position: 'absolute',
-        top: 8,
-        alignItems: 'flex-end',
-        opacity: isVisible ? tooltipOpacity : 0,
-        transform: [ { scale: tooltipScale } ]
-      }, style
-      ]}
-      pointerEvents="none"
+      <Modal
+        animationType="none"
+        visible={isVisible}
+        onDismiss={this.onClose.bind(this)}
+        transparent
       >
-
-        <Image
-          source={tooltipTriangle}
-          style={[{
-              position: 'absolute',
-              width: 28,
-              height: 14,
-              tintColor: backgroundColor
-            },
-            arrowPosition
-          ]}
-          resizeMode={'stretch'}
+        <AnimatedTouchableOpacity
+          onPress={this.onClose.bind(this)}
+          style={{
+            opacity: this.state.animationTrack,
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            flex: 1
+          }}
+          activeOpacity={1}
         />
-        <View style={
-          {
-          marginTop: 12,
-          borderRadius: 10,
+
+        <Animated.View style={{
           backgroundColor,
-          maxWidth: 200,
-        }
-        }>
+          paddingTop: 20,
+          paddingLeft: 20,
+          paddingRight: 20,
+          paddingBottom: 30,
+          transform: [ { translateY: animatePosition } ]
+          }}
+          onLayout={(event) => {
+            const {x, y, width, height} = event.nativeEvent.layout;
+            this.setState({ modalHeight: height });
+          }}
+          >
           <Text style={{
-            color: textColor,
-            backgroundColor: 'transparent',
-            fontFamily: 'BahijJanna',
-            fontSize: 18,
+            color: 'white',
+            textAlign: 'center',
+            fontSize: 14,
+            fontFamily: 'Poppins-Bold',
             padding: 6,
             paddingRight: 10,
             paddingLeft: 10
           }}>{title}</Text>
-        </View>
-      </Animated.View>
+          {buttonComponents}
+        </Animated.View>
+
+        { unclickableOverlay }
+      </Modal>
     );
 
   }
 }
 
-export default connect(null, null )(Tooltip);
-
-
-
-const BlockButton = ({
-  onPress,
-  text,
-  color = AYEZ_GREEN,
-  style,
-  textStyle,
-  deactivated,
-  outline
-}) => {
-  return (
-
-    <View style={[
-      styles.buttonStyle,
-      style,
-      { backgroundColor: ((deactivated) ? '#bababa' : color) },
-      (outline ? { backgroundColor: 'white', borderColor: color, borderWidth: 1.5 } : null)
-    ]}>
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        backgroundColor: 'transparent',
-        flex: 1,
-        justifyContent: 'center',
-        borderRadius: 4
-      }}
-      activeOpacity={0.5}
-      disabled={deactivated}
-    >
-      <Text style={[styles.textStyle, { color: outline ? color : 'white' }, textStyle]}>
-        {text}
-      </Text>
-    </TouchableOpacity>
-    </View>
-  );
-};
-
-const styles = {
-  textStyle: {
-    alignSelf: 'center',
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold'
-  },
-  buttonStyle: {
-    height: 42,
-    // alignSelf: 'stretch',
-    borderRadius: 6,
-    // borderWidth: 1,
-    // borderColor: '#007aff',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: -1, height: 3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  }
-};
-
-export { BlockButton };
+export default BottomChoiceSelection;

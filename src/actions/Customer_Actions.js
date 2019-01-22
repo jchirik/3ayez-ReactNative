@@ -6,7 +6,15 @@ import { setPushToken } from './PushToken_Helpers';
 import {
   CUSTOMER_DATA_SET,
   CUSTOMER_DATA_LISTENER_SET,
-  CUSTOMER_DATA_RESET
+  CUSTOMER_DATA_RESET,
+
+  ONGOING_ORDERS_SET,
+  ONGOING_ORDERS_LISTENER_SET,
+  REVIEW_ORDER_SET,
+  ONGOING_ORDERS_RESET,
+
+  ADDRESSES_SET,
+  ADDRESSES_LISTENER_SET
 } from './types';
 
 export const listenCustomerAuthStatus = () => {
@@ -17,10 +25,14 @@ export const listenCustomerAuthStatus = () => {
         console.log('onAuthStateChanged', user);
         firebase.crashlytics().setUserIdentifier(user.uid);
         listenCustomerData(dispatch);
+        listenToOngoingOrders(dispatch);
+        listenToAddresses(dispatch);
         setPushToken(firebase.firestore().collection('customers').doc(user.uid));
       } else {
         console.log('onAuthStateChanged logged out');
         dispatch({ type: CUSTOMER_DATA_RESET });
+        dispatch({ type: ONGOING_ORDERS_RESET });
+        Actions.tutorial();
       }
     });
   };
@@ -50,5 +62,71 @@ const listenCustomerData = (dispatch) => {
           }
         });
     dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener } });
+  }
+};
+
+const listenToOngoingOrders = (dispatch) => {
+  // ensure there is a current user & seller
+  const { currentUser } = firebase.auth();
+  if (currentUser) {
+    // realtime listening
+    const ongoingOrdersRef = firebase.firestore().collection('orders')
+      .where('customer.id', '==', currentUser.uid)
+      .where('within_4_hours', '==', true);
+
+    const ongoingOrdersListener = ongoingOrdersRef.onSnapshot((ongoingOrdersT) => {
+      let orders = ongoingOrdersT.docs.map(order => {
+        const id = order.id;
+        const data = order.data();
+        return ({
+          ...data,
+          id,
+          status_log: data.status_log ? data.status_log : []
+        });
+      });
+      // activeOrders = activeOrders.filter(order => (order.status !== 300));
+      dispatch({ type: ONGOING_ORDERS_SET, payload: { orders } });
+
+      const review_order = orders.find(order => order.requires_review);
+      dispatch({ type: REVIEW_ORDER_SET, payload: { review_order } });
+    });
+
+    dispatch({ type: ONGOING_ORDERS_LISTENER_SET, payload: { ongoingOrdersListener } });
+  }
+};
+
+
+const listenToAddresses = (dispatch) => {
+  // ensure there is a current user & seller
+  const { currentUser } = firebase.auth();
+  if (currentUser) {
+    // realtime listening
+    const addressesRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+      .collection('addresses');
+
+    const addressesListener = addressesRef.onSnapshot((addressesT) => {
+      let addresses = addressesT.docs.map(addressDoc => {
+        const id = addressDoc.id;
+        const data = addressDoc.data();
+        return ({
+          ...data,
+          id
+        });
+      });
+
+      // get the most recent address that was selected (greatest timestamp)
+      let address = null;
+      if (addresses.length) {
+        address = addresses[0];
+        for (var i = 1; i < addresses.length; i++) {
+            if (addresses[i].timestamp > address.timestamp) {
+                address = addresses[i];
+            }
+        }
+      }
+      dispatch({ type: ADDRESSES_SET, payload: { addresses, address } });
+    });
+
+    dispatch({ type: ADDRESSES_LISTENER_SET, payload: { addressesListener } });
   }
 };

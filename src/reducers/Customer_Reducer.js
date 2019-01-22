@@ -6,6 +6,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  logged_in: false,
   name: '',
   phone: '',
 
@@ -21,10 +22,10 @@ export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
   switch (action.type) {
     case CUSTOMER_DATA_SET:
-      return { ...state, ...p };
+      return { ...state, ...p, logged_in: true };
     case CUSTOMER_DATA_LISTENER_SET:
       if (state.listener !== null) { state.listener(); }
-      return { ...INITIAL_STATE, listener: p.listener };
+      return { ...state, listener: p.listener };
     case CUSTOMER_DATA_RESET:
         if (state.listener !== null) { state.listener(); }
         return INITIAL_STATE;

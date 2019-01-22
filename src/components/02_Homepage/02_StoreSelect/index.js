@@ -81,6 +81,7 @@ class StoreSelect extends Component {
   }
 
   componentDidUpdate(prevProps) {
+
     if (this.props.point !== prevProps.point) {
       this.fetchNearbySellers(); // load nearby stores upon change
     }
@@ -639,12 +640,6 @@ renderSellerList() {
     //   </View>
     // )
 
-    if (this.props.inital_loading) {
-      return (
-        <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
-      );
-    }
-
     return (
       <View style={{ flex: 1, backgroundColor:'white'}}>
         {this.renderAddressHeader()}
@@ -671,19 +666,16 @@ const styles = {
 };
 
 const mapStateToProps = ({ Addresses, SellerSearch }) => {
-  const { addresses, address_index } = Addresses;
-  const inital_loading = Addresses.is_loading;
-  let address = {};
-  if (addresses && address_index !== null) {
-    address = addresses[address_index];
-  }
-  const { street, point } = address;
+  const { addresses, address } = Addresses;
+
+  const street = address ? address.street : null;
+  const point = address ? address.point : null;
+
   const { sellers, is_loading, error } = SellerSearch;
   return {
     address,
     street,
     point,
-    inital_loading,
 
     sellers,
     is_loading,

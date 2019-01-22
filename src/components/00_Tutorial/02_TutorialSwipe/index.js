@@ -8,7 +8,8 @@ import {
    SectionList,
    Platform,
    BackHandler,
-   AsyncStorage
+   AsyncStorage,
+   Dimensions
  } from 'react-native';
 
 import { IndicatorViewPager, PagerDotIndicator } from 'rn-viewpager';
@@ -18,16 +19,25 @@ import { connect } from 'react-redux';
 import {
   Header,
   BlockButton,
-  BackButton
+  BackButton,
+  LoadingOverlay
 } from '../../_common';
 
 import {
-  initAuth
+  onCompleteAuth,
+  authGuestLogin
 } from '../../../actions';
 
 import {
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  STATUS_BAR_HEIGHT
 } from '../../../Helpers.js';
+
+const tutorial_1 = require('../../../../assets/images_v2/Tutorial/tutorial_1.jpg');
+const tutorial_2 = require('../../../../assets/images_v2/Tutorial/tutorial_2.jpg');
+const tutorial_3 = require('../../../../assets/images_v2/Tutorial/tutorial_3.jpg');
+
+const window = Dimensions.get('window');
 
 class TutorialSwipe extends Component {
 
@@ -66,18 +76,51 @@ class TutorialSwipe extends Component {
       }}>
 
         <IndicatorViewPager
-            style={{ flex: 1 }}
+            style={{ flex: 1, marginTop: STATUS_BAR_HEIGHT + 20 }}
             indicator={this.renderDotIndicator()}
           >
-          <View style={{ backgroundColor: 'transparent', flex: 1 }}>
-            <Text>Hello Swiper</Text>
-          </View>
-          <View style={{ backgroundColor: 'transparent', flex: 1}}>
-            <Text >Beautiful</Text>
-          </View>
-          <View style={{ backgroundColor: 'transparent', flex: 1}}>
-            <Text>And simple</Text>
-          </View>
+          <View style={{ flex: 1, alignItems: 'center' }}>
+              <Image
+                source={tutorial_1}
+                style={{
+                  alignSelf: 'center',
+                  height: window.width,
+                  width: window.width
+                }}
+                resizeMode={'contain'}
+              />
+              <Text style={{
+                marginTop: 20
+              }}>Conveniently order online</Text>
+            </View>
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              <Image
+                source={tutorial_2}
+                style={{
+                  alignSelf: 'center',
+                  height: window.width,
+                  width: window.width
+                }}
+                resizeMode={'contain'}
+              />
+              <Text style={{
+                marginTop: 20
+              }}>Shop easier</Text>
+            </View>
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              <Image
+                source={tutorial_3}
+                style={{
+                  alignSelf: 'center',
+                  height: window.width,
+                  width: window.width
+                }}
+                resizeMode={'contain'}
+              />
+              <Text style={{
+                marginTop: 20
+              }}>Track your delivery in real time</Text>
+            </View>
         </IndicatorViewPager>
 
         <BlockButton
@@ -91,7 +134,7 @@ class TutorialSwipe extends Component {
           }}
           onPress={() => {
             // proceed to address create after auth
-            this.props.initAuth(() => Actions.addressCreate())
+            this.props.onCompleteAuth(() => Actions.addressCreate())
             Actions.auth();
           }}
         />
@@ -101,7 +144,9 @@ class TutorialSwipe extends Component {
               paddingTop: 12,
               paddingBottom: 16
             }}
-            onPress={() => Actions.addressCreate()}
+            onPress={() => {
+              this.props.authGuestLogin(() => Actions.addressCreate())
+            }}
           >
           <Text style={{
             fontFamily: 'Poppins-Bold',
@@ -112,15 +157,24 @@ class TutorialSwipe extends Component {
           </Text>
          </TouchableOpacity>
          <BackButton fixed />
+         <LoadingOverlay isVisible={this.props.guestlogin_loading} />
       </View>
     );
   }
 }
 
-// const mapStateToProps = ({ }) => {
-//   return {};
-// };
+const mapStateToProps = ({ Auth }) => {
+  const {
+    guestlogin_loading,
+    guestlogin_error
+  } = Auth;
+  return {
+    guestlogin_loading,
+    guestlogin_error
+  };
+};
 
-export default connect(null, {
-  initAuth
+export default connect(mapStateToProps, {
+  onCompleteAuth,
+  authGuestLogin
 })(TutorialSwipe);

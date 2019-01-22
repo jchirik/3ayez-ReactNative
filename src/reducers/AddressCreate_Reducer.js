@@ -4,7 +4,11 @@ import {
   ADDRESS_REGION_SET,
   ADDRESS_LOCATION_SET,
 
-  ADDRESS_DETAIL_SET
+  ADDRESS_DETAIL_SET,
+
+  ADDRESS_SUBMIT_BEGIN,
+  ADDRESS_SUBMIT_SUCCESS,
+  ADDRESS_SUBMIT_FAILURE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,7 +20,9 @@ const INITIAL_STATE = {
   building: '', // merge with floor
   apt: '',
   notes: '',
-  type: 'HOME'
+  type: 'HOME',
+
+  is_loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,11 +36,16 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, point: p.point };
     case ADDRESS_DETAIL_SET:
       return { ...state, ...p };
+    case ADDRESS_SUBMIT_BEGIN:
+      return { ...state, is_loading: true };
+    case ADDRESS_SUBMIT_SUCCESS:
+      return { ...state, is_loading: false };
+    case ADDRESS_SUBMIT_FAILURE:
+      return { ...state, is_loading: false };
     default:
       return state;
   }
 };
-
 
 
 

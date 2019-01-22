@@ -158,17 +158,20 @@ class RegionSelect extends Component {
 
         <View style={{ height: 60 }} />
 
-        <BackButton fixed />
+        { this.props.addresses.length ? (<BackButton fixed />) : null }
       </View>
     );
   }
 }
 
-// const mapStateToProps = ({ }) => {
-//   return {};
-// };
+const mapStateToProps = ({ Addresses }) => {
+  const { addresses } = Addresses;
+  return {
+    addresses
+  };
+};
 
-export default connect(null, {
+export default connect(mapStateToProps, {
   resetAddressCreate,
   setAddressRegion
 })(RegionSelect);

@@ -20,6 +20,15 @@ import {
   setLocale
 } from '../../../actions';
 
+import {
+  STATUS_BAR_HEIGHT,
+  AYEZ_GREEN
+} from '../../../Helpers.js';
+
+const opening_video = require('../../../../assets/images_v2/Tutorial/opening_video.gif');
+
+const logo = require('../../../../assets/images_v2/Common/logo.png');
+
 // add language select + very short tutorial
 
 // steps:
@@ -57,8 +66,28 @@ class LanguageSelect extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <View style={{ flex: 1 }} />
 
+        <Image
+          source={logo}
+          style={{
+            width: 160,
+            alignSelf: 'center',
+            height: 50,
+            tintColor: AYEZ_GREEN,
+            marginTop: STATUS_BAR_HEIGHT + 10
+          }}
+          resizeMode={'contain'}
+        />
+
+        <Image
+          source={opening_video}
+          style={{
+            width: 350,
+            alignSelf: 'center',
+            flex: 1
+          }}
+          resizeMode={'contain'}
+        />
         <BlockButton
           text={'العربيه'}
           color={'white'}
@@ -66,8 +95,7 @@ class LanguageSelect extends Component {
             marginTop: 10,
             marginBottom: 10,
             marginLeft: 18,
-            marginRight: 18,
-            alignSelf: 'stretch'
+            marginRight: 18
           }}
           textStyle={{
             color: 'black',
@@ -82,8 +110,7 @@ class LanguageSelect extends Component {
             marginTop: 10,
             marginBottom: 36,
             marginLeft: 18,
-            marginRight: 18,
-            alignSelf: 'stretch'
+            marginRight: 18
           }}
           textStyle={{
             color: 'black',
