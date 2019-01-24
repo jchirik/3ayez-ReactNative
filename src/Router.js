@@ -45,6 +45,8 @@ import WorkingBasket from './components/08_WorkingBasket';
 
 import TimeslotSelect from './components/09_TimeslotSelect';
 import Checkout from './components/10_Checkout';
+import CheckoutNotesDetail from './components/10_Checkout/01_CheckoutNotesDetail';
+
 
 import OrderTracker from './components/10_OrderTracker';
 
@@ -329,6 +331,10 @@ class RouterComponent extends Component {
             <Scene
               key="checkout"
               component={Checkout}
+            />
+            <Scene
+              key="checkoutNotesDetail"
+              component={CheckoutNotesDetail}
             />
 
 

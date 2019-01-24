@@ -13,6 +13,7 @@ import {
   TIMESLOT_SET,
   PAYMENT_METHOD_SET,
   TIP_SET,
+  ORDER_NOTES_SET,
 
   // after successfully sending order
   BASKET_ITEMS_CLEAR,
@@ -100,6 +101,15 @@ export const setTip = (tip) => {
     payload: { tip }
   };
 };
+
+
+export const setOrderNotes = (notes) => {
+  return {
+    type: ORDER_NOTES_SET,
+    payload: { notes }
+  };
+};
+
 
 export const setTimeslot = (timeslot) => {
   return {

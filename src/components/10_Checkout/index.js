@@ -256,7 +256,14 @@ class Checkout extends Component {
 
     return (
       <View>
-        <Row disabled title={'Tip:'}>
+        <Row disabled title={'Tip: '}>
+          <View>
+
+          <Text style={{
+            fontSize: 12,
+            color: '#ffa30f',
+            fontFamily: 'Poppins-Regular'
+          }}>Smart tip suggestions help you round your total</Text>
           <FlatList
             data={tipData}
             horizontal={true}
@@ -272,6 +279,7 @@ class Checkout extends Component {
                   paddingLeft: 10,
                   paddingRight: 10,
                   marginRight: 8,
+                  marginTop: 10,
                   borderRadius: 50,
                   borderWidth: 1,
                   borderColor: color
@@ -285,7 +293,9 @@ class Checkout extends Component {
               )
             }}
           />
+          </View>
         </Row>
+
       </View>
     )
   }
@@ -296,6 +306,47 @@ class Checkout extends Component {
     return (
       <ReceiptRow title={`Coupon (${coupon.code})`} cost={coupon.amount} color={'#D33B2D'} />
     )
+  }
+
+
+  renderNotes() {
+    const { notes } = this.props;
+
+    let notesButtonText = 'Edit'
+    if (!notes) { notesButtonText = 'Add' }
+
+    return (
+      <View>
+        <Row
+          onPress={() => Actions.checkoutNotesDetail()}
+          title={'Additional Notes :'}>
+          <Text style={{
+            fontSize: 16,
+            color: '#0094ff',
+            fontFamily: 'Poppins-Regular'
+          }}>{ notesButtonText }</Text>
+        </Row>
+
+        <TouchableOpacity
+          onPress={() => Actions.checkoutNotesDetail()}
+          activeOpacity={1}
+          style={{
+            backgroundColor: 'white',
+            paddingLeft: 20,
+            paddingRight: 20,
+            paddingTop: 5,
+            paddingBottom: 12,
+            borderBottomWidth: 1,
+            borderColor: '#f7f7f7',
+          }}>
+          <Text style={{
+            fontSize: 14,
+            color: '#353333',
+            fontFamily: 'Poppins-Regular'
+          }}>{notes}</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
 
@@ -380,6 +431,10 @@ class Checkout extends Component {
         <View style={{ height: 18 }} />
 
         {this.renderTip()}
+
+        <View style={{ height: 18 }} />
+
+        {this.renderNotes()}
 
         <View style={{ height: 18 }} />
 
