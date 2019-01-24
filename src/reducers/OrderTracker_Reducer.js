@@ -8,11 +8,16 @@ import {
 const INITIAL_STATE = {
   id: null,
   order_number: '',
+  is_timeslot_ongoing: false,
+  timeslot: {},
 
-  items: null,
+  seller: {},
+
+  items: [],
 
   orderListener: null,
   itemsListener: null,
+
   order_loading: false,
   items_loading: false
 };

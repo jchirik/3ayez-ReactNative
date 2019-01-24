@@ -112,14 +112,13 @@ class Checkout extends Component {
       customer,
       seller,
       coupon,
-      items_array,
       payment_method,
       timeslot,
       delivery_fee,
       tip,
       notes,
       address
-    });
+    }, items_array);
   }
 
 

@@ -22,7 +22,7 @@ import {
   CHECKOUT_RESET
 } from './types';
 
-export const submitOrder = (order_t) => {
+export const submitOrder = (order_t, items_array) => {
   const {
     customer,
     seller
@@ -55,7 +55,18 @@ export const submitOrder = (order_t) => {
     // Actions.popTo('homepage');
 
     dispatch({ type: ORDER_SUBMIT_BEGIN });
-    firebase.firestore().collection('orders').add(order)
+    const batch = firebase.firestore().batch();
+
+    const orderRef = firebase.firestore().collection('orders').doc();
+    batch.set(orderRef, order);
+
+    const order_id = orderRef.id;
+    items_array.forEach(item => {
+      const itemRef = firebase.firestore().collection("orders").doc(order_id).collection("items").doc(item.upc);
+      batch.set(itemRef, item);
+    });
+
+    batch.commit()
       .then((docRef) => {
         console.log('submitOrder success', docRef);
 
@@ -63,9 +74,9 @@ export const submitOrder = (order_t) => {
         dispatch({ type: ORDER_SUBMIT_SUCCESS });
         dispatch({ type: BASKET_ITEMS_CLEAR, payload: { seller_id: seller.id } });
         dispatch({ type: COUPON_CODE_RESET });
-        Actions.reset('homepage');
+        Actions.popTo('homepage');
         setTimeout(() => {
-          Actions.orderTracker({ order_id: docRef.id }); // you might have to refresh
+          Actions.orderTracker({ order_id }); // you might have to refresh
         }, 1500);
       })
       .catch((error) => {

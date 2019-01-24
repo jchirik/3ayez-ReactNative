@@ -35,7 +35,6 @@ export const listenToOrder = (order_id) => {
             const data = item.data();
             return ({ ...data, id });
           });
-          if (items.length === 0) { items = null; }
           dispatch({ type: ORDER_ITEMS_TRACK_DATA_SET, payload: { items } });
       });
 
@@ -51,12 +50,12 @@ export const endListeningToOrder = () => {
 };
 
 
-export const markOrderReceived = (orderID) => {
+export const markOrderCustomerReceived = (orderID) => {
   return () => {
     firebase.firestore()
       .collection('orders')
       .doc(orderID)
-      .update({ customer_received: true, requires_review: false })
+      .update({ customer_received: true })
     .then(() => console.log('updated to received'));
   };
 };
@@ -66,7 +65,7 @@ export const markOrderCancelled= (orderID) => {
     firebase.firestore()
       .collection('orders')
       .doc(orderID)
-      .update({ status: 300, requires_review: false })
+      .update({ status: 300 })
     .then(() => console.log('updated 300'));
   };
 };
