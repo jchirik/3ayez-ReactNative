@@ -16,6 +16,9 @@ import CurrentLocation from './CurrentLocation_Reducer';
 
 import Customer from './Customer_Reducer'
 
+import CreditCards from './CreditCards_Reducer';
+import CreditCardCreate from './CreditCardCreate_Reducer';
+
 import Baskets from './Baskets_Reducer'
 import SellerSearch from './SellerSearch_Reducer';
 import Seller from './Seller_Reducer';
@@ -73,6 +76,9 @@ const reducers = combineReducers({
   AddressPlaceDetails,
   AddressReverseSearch,
   CurrentLocation,
+
+  CreditCards,
+  CreditCardCreate,
 
   Checkout,
   Coupon,

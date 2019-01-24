@@ -40,22 +40,13 @@ class SettingsMenu extends Component {
 
   openLanguageSelect() { this.setState({ languageSelect: true }); }
   closeLanguageSelect() { this.setState({ languageSelect: false }); }
-  setLocaleEnglish() {
-    this.closeLanguageSelect();
-    this.props.setLocale('en');
-  }
-  setLocaleArabic() {
-    this.closeLanguageSelect();
-    this.props.setLocale('ar');
-  }
+  setLocaleEnglish() { this.props.setLocale('en'); }
+  setLocaleArabic() { this.props.setLocale('ar'); }
 
   openLogoutConfirm() { this.setState({ logoutConfirm: true }); }
   closeLogoutConfirm() { this.setState({ logoutConfirm: false }); }
 
-  logoutUser() {
-    this.closeLogoutConfirm();
-    this.props.logoutUser();
-  }
+  logoutUser() { this.props.logoutUser(); }
 
   loginUser() {
     this.props.onCompleteAuth(() => Actions.popTo('homepage'))
@@ -157,7 +148,8 @@ class SettingsMenu extends Component {
   render() {
 
     const accountSection = {title: 'My Account', data: [
-      { text: 'Address Book', action: null, icon: '' },
+      { text: 'Address Book', action: () => Actions.addressManager(), icon: '' },
+      { text: 'Credit Cards', action: () => Actions.creditCardManager(), icon: '' },
       { text: 'Language', action: this.openLanguageSelect.bind(this), icon: '' },
       { text: 'Previous Orders', action: () => Actions.orderHistory(), icon: '' },
       { text: 'Logout', action: this.openLogoutConfirm.bind(this), icon: ''}
@@ -210,7 +202,7 @@ class SettingsMenu extends Component {
           backgroundColor='#E64E47'
           buttons={[
             { text: 'Yes, sure', action: this.logoutUser.bind(this) },
-            { text: 'No, cancel', action: this.closeLogoutConfirm.bind(this) }
+            { text: 'No, cancel', action: () => console.log('closing') }
           ]}
         />
       </View>

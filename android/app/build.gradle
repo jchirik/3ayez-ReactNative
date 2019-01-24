@@ -220,6 +220,7 @@ dependencies {
 
 
   implementation project(':react-native-image-picker')
+  implementation project(':tipsi-stripe')
   /* --------------------------------
    *  OPTIONAL SUPPORT LIBS
    * -------------------------------- */

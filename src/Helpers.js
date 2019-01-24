@@ -59,6 +59,31 @@ export const calculateTotal = (basket, checkout, coupon) => {
 }
 
 
+export const calculateSuggestedTips = (preTipTotal) => {
+  let lowerBound = preTipTotal;
+  let upperBound = preTipTotal * 1.20;
+  lowerBound = Math.ceil(lowerBound/5)*5;
+
+  let finalTotals = [];
+  for (let i = lowerBound; i < upperBound; i+=5) {
+    finalTotals.push(i);
+  }
+
+  // if more than 4 suggestions, filter to only those divisible by 10, 20 or 50
+  if (finalTotals.length > 4) {
+    finalTotals = finalTotals.filter(total => !(total%10) || !(total%20) || !(total%50))
+  }
+
+  // if more than 4 suggestions, filter to only those divisible by 10, 20 or 50
+  if (finalTotals.length > 4) {
+    finalTotals = finalTotals.filter(total => !(total%20) || !(total%50))
+  }
+
+  const finalTips = finalTotals.map(total => total-preTipTotal);
+  return [ 0.00, ...finalTips ];
+}
+
+
 
 
 
@@ -195,8 +220,8 @@ export const parseTimestamp = (timestamp) => {
 // const cashIcon = require('../assets/images/payment_methods/cash.png');
 // const cardIcon = require('../assets/images/payment_methods/card.png');
 // const cardReaderIcon = require('../assets/images/payment_methods/card_reader.png');
-
-
+//
+//
 // export const parsePayment = (payment) => {
 //   if (!payment) { return {}; }
 //
@@ -388,3 +413,30 @@ export const padNumberZeros = (num, size) => {
     while (s.length < size) s = "0" + s;
     return s;
 }
+
+
+
+
+
+export const creditCardIcon = (brand) => {
+  if (!brand) { return null; }
+  const dir = '../assets/images_v2/Payment/creditcards';
+  switch (brand.toUpperCase()) {
+    case 'VISA':
+      return require(`${dir}/visa.png`);
+    case 'MASTERCARD':
+      return require(`${dir}/mastercard.png`);
+    case 'AMERICAN EXPRESS':
+      return require(`${dir}/amex.png`);
+    case 'MAESTRO':
+      return require(`${dir}/maestro.png`);
+    case 'DISCOVER':
+      return require(`${dir}/discover.png`);
+    case 'DINERS CLUB':
+      return require(`${dir}/diners.png`);
+    case 'JCB':
+      return require(`${dir}/jcb.png`);
+    default:
+      return require(`${dir}/credit.png`);
+  }
+};

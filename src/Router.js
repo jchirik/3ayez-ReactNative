@@ -58,6 +58,11 @@ import CouponModal from './components/12_CouponModal';
 import SupportChat from './components/15_SupportChat';
 
 import SupportDetail from './components/16_SupportDetail';
+import CreditCardManager from './components/17_CreditCardManager';
+import CreditCardCreate from './components/18_CreditCardCreate';
+
+
+import AddressManager from './components/19_AddressManager';
 // import LocationDetails from './components/02_LocationDetails';
 // import StoreSelector from './components/03_StoreSelector';
 
@@ -372,38 +377,6 @@ class RouterComponent extends Component {
               />
             </Stack>
 
-            <Stack
-              key="addressCreate"
-              hideNavBar
-            >
-              <Scene
-                key="regionSelect"
-                component={RegionSelect}
-              />
-              <Scene
-                key="addressSearch"
-                component={AddressSearch}
-              />
-              <Scene
-                key="refineLocation"
-                component={RefineLocation}
-              />
-              <Scene
-                key="addressDetails"
-                component={AddressDetails}
-              />
-              <Scene
-                key="addressDetailEdit"
-                component={AddressDetailEdit}
-              />
-              <Scene
-                key="addressConfirm"
-                component={AddressConfirm}
-              />
-            </Stack>
-
-
-
           <Scene
             key="supportChat"
             component={SupportChat}
@@ -414,9 +387,25 @@ class RouterComponent extends Component {
           />
 
           <Scene
+            key="creditCardManager"
+            component={CreditCardManager}
+          />
+          <Scene
+            key="creditCardCreate"
+            component={CreditCardCreate}
+          />
+
+
+          <Scene
             key="orderTracker"
             component={OrderTracker}
           />
+
+          <Scene
+            key="addressManager"
+            component={AddressManager}
+          />
+
 
 
           <Scene
@@ -426,7 +415,35 @@ class RouterComponent extends Component {
 
 
 
-
+          <Stack
+            key="addressCreate"
+            hideNavBar
+          >
+            <Scene
+              key="regionSelect"
+              component={RegionSelect}
+            />
+            <Scene
+              key="addressSearch"
+              component={AddressSearch}
+            />
+            <Scene
+              key="refineLocation"
+              component={RefineLocation}
+            />
+            <Scene
+              key="addressDetails"
+              component={AddressDetails}
+            />
+            <Scene
+              key="addressDetailEdit"
+              component={AddressDetailEdit}
+            />
+            <Scene
+              key="addressConfirm"
+              component={AddressConfirm}
+            />
+          </Stack>
 
           </Stack>
         </Lightbox>

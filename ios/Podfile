@@ -53,12 +53,13 @@ target 'ayezcustomer' do
 
   pod 'RNDeviceInfo', :path => "../node_modules/react-native-device-info"
 
+  pod 'Stripe'
+
   # react-native-maps dependencies
   pod 'react-native-maps', path: rn_maps_path
   pod 'react-native-google-maps', path: rn_maps_path
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
-  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
 end
 

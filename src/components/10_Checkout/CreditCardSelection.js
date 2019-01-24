@@ -10,9 +10,16 @@ import {
   Easing
 } from 'react-native';
 import {
+  creditCardIcon,
   AYEZ_GREEN
 } from '../../Helpers.js';
-import { BlockButton } from './BlockButton';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { BlockButton } from '../_common/BlockButton';
+
+import {
+  setPaymentMethod
+} from '../../actions';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 // when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
@@ -32,7 +39,7 @@ const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpaci
 // onClose says what we do WHENEVER the selection closes
 // action for each button should NOT duplicate this action
 
-class BottomChoiceSelection extends Component {
+class CreditCardSelection extends Component {
 
   constructor(props) {
     super(props);
@@ -82,9 +89,8 @@ class BottomChoiceSelection extends Component {
   render() {
     const {
       isVisible,
-      backgroundColor = AYEZ_GREEN,
-      title,
-      buttons = []
+      credit_cards,
+      backgroundColor = AYEZ_GREEN
     } = this.props;
 
     const animatePosition = (this.state.animationTrack.interpolate({
@@ -92,26 +98,39 @@ class BottomChoiceSelection extends Component {
         outputRange: [ this.state.modalHeight, 0 ]
       }));
 
-    const buttonComponents = buttons.map(({ text, action, buttonColor, textColor }) =>
-      <BlockButton
-        onPress={() => {
-          action();
-          this.onClose()
-        }}
-        text={text.toUpperCase()}
-        color={buttonColor || 'white'}
-        style={{ marginTop: 10, marginBottom: 10 }}
-        textStyle={{
-          color: (textColor || backgroundColor),
-          fontFamily: 'Poppins-Regular'
-        }}
-        />
-    )
-
-
     if (!isVisible) {
       return null;
     }
+
+    const cardComponents = credit_cards.slice(0, 5).map(card => (
+      <TouchableOpacity style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: 8,
+        paddingBottom: 8
+       }}
+       onPress={() => {
+         this.onClose();
+         this.props.setPaymentMethod(card);
+       }}
+       >
+        <Image
+          source={creditCardIcon(card.brand)}
+          style={{
+            width: 50,
+            height: 50,
+            marginLeft: 20,
+            marginRight: 20
+          }}
+          resizeMode={'contain'}
+        />
+        <Text style={{
+          fontFamily: 'Poppins-Medium',
+          fontSize: 14,
+          color: 'white'
+        }}>{card.brand} (**** {card.last4})</Text>
+      </TouchableOpacity>
+    ));
 
     return (
       <View
@@ -163,14 +182,34 @@ class BottomChoiceSelection extends Component {
             padding: 6,
             paddingRight: 10,
             paddingLeft: 10
-          }}>{title}</Text>
-          {buttonComponents}
+          }}>SAVED CARDS</Text>
+
+          { cardComponents }
+
+          <BlockButton
+            onPress={() => {
+              this.onClose()
+              Actions.creditCardCreate()
+            }}
+            text={'ADD NEW CARD'}
+            color={'#3B7A60'}
+            style={{ marginTop: 10, marginBottom: 10 }}
+            textStyle={{
+              fontFamily: 'Poppins-Regular'
+            }}
+            />
         </Animated.View>
 
       </View>
     );
-
   }
 }
 
-export default BottomChoiceSelection;
+const mapStateToProps = ({ CreditCards }) => {
+  const { credit_cards } = CreditCards;
+  return { credit_cards };
+};
+
+export default connect(mapStateToProps, {
+  setPaymentMethod
+})(CreditCardSelection);

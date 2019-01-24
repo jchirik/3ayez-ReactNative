@@ -17,7 +17,7 @@ import {
 const INITIAL_STATE = {
   notes: '',
   timeslot: null,
-  payment_method: 'CASH',
+  payment_method: { type: 'CASH' },
   tip: 0.0,
   delivery_fee: 0.0,
 

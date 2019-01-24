@@ -4,6 +4,7 @@ import {
   Text,
   Image,
   TextInput,
+  FlatList,
   TouchableOpacity,
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -18,6 +19,8 @@ import { connect } from 'react-redux';
 import Moment from 'moment';
 import { Actions } from 'react-native-router-flux';
 import {
+  setPaymentMethod,
+  setTip,
   submitOrder
 } from '../../actions';
 // setPushToken,
@@ -32,20 +35,28 @@ import {
 } from '../_common';
 import { Row } from './Row';
 import { ReceiptRow } from './ReceiptRow';
+import CreditCardSelection from './CreditCardSelection';
 
 import {
   STATUS_BAR_HEIGHT,
+  AYEZ_GREEN,
 
   calculateTotal,
+  calculateSuggestedTips,
 
   strings,
   parsePayment,
-  calculateOrderData
+
+  creditCardIcon
 } from '../../Helpers.js';
 
 
 const cash_icon = require('../../../assets/images_v2/Payment/cash.png');
 const creditcard_icon = require('../../../assets/images_v2/Payment/credit-card.png');
+
+const toggle_selected = require('../../../assets/images_v2/Common/toggle_selected.png');
+const toggle_unselected = require('../../../assets/images_v2/Common/toggle_unselected.png');
+
 
 const window = Dimensions.get('window');
 
@@ -54,6 +65,9 @@ class Checkout extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isCardSelectionVisible: false
+    };
   }
 
   // componentDidMount() {
@@ -109,190 +123,57 @@ class Checkout extends Component {
   }
 
 
-
-  renderNotes() {
-    return null;
-    return (
-      <View style={{marginTop: 20}}>
-      <Text style={styles.notesTitleStyle}>{strings('Checkout.notesTitle')}</Text>
-      <TextInput
-      height={140}
-      maxLength={240}
-      multiline = {true}
-      style={styles.notesTextStyle}
-      onChangeText={(notes) => this.setState({ notes })}
-      value={this.state.notes}
-      underlineColorAndroid='transparent'
-      />
-      </View>
-    );
-  }
-
-
-
-
-
-  renderAddressCell() {
-
-    const { address } = this.props;
-    if (!address) { return null; }
-
-    const addressText = `${address.street}, ${address.building}, ${address.apt}`;
-
-    return (
-      <View style={styles.standardCell}>
-        <Text
-          style={[
-            styles.standardCellText,
-            { color: '#00C36C', maxWidth: window.width-110 }
-          ]}
-          numberOfLines={1}
-        >{addressText}</Text>
-        <Text
-          style={styles.standardCellText}
-        >{strings('Checkout.addressTitle')}</Text>
-      </View>
-    );
-  }
-
-  renderCouponCell() {
-
-    const { coupon } = this.props;
-    if (!coupon) { return null; }
-
-    return (
-      <View style={styles.standardCell}>
-        <Text
-          style={[
-            styles.standardCellText,
-            { maxWidth: window.width-110 }
-          ]}
-          numberOfLines={1}
-        >{coupon.code}</Text>
-        <Text
-          style={styles.standardCellText}
-        >{strings('Checkout.couponTitle')}</Text>
-      </View>
-    );
-  }
-
-
-  renderPaymentCell() {
-    const { payment_method } = this.props;
-
-    const { text, icon } = parsePayment(payment_method);
-
-    return (
-      <TouchableOpacity
-        onPress={() => this.setState({ isPaymentToggled: !this.state.isPaymentToggled })}
-        style={styles.standardCell}
-        activeOpacity={0.8}
-      >
-        <View style={{ flexDirection: 'row', alignSelf: 'stretch', alignItems: 'center' }}>
-          <Text style={styles.standardCellText}>{text}</Text>
-          <Image
-            style={{height: 40, width: 40, marginLeft: 10 }}
-            source={icon}
-            resizeMode={'contain'}
-          />
-        </View>
-        <Text
-          style={styles.standardCellText}
-        >{strings('Checkout.paymentTitle')}</Text>
-      </TouchableOpacity>
-    );
-  }
-
-
-  onSelectPaymentMethod(method) {
-
-    if (method.type === 'ADDCARD') {
-      Actions.addCreditCard();
+  onCreditCardToggle() {
+    // if no credit cards exist, bring directly to credit card creator
+    if (this.props.credit_cards.length === 0) {
+      Actions.creditCardCreate();
     } else {
-      this.props.setPaymentMethod(method, this.props.seller.id);
-      this.props.setDefaultPaymentMethod(method);
-      this.setState({ isPaymentToggled: false });
+      this.setState({ isCardSelectionVisible: true });
     }
   }
-
-
-  renderPaymentMethodCell(method) {
-    const { payment_method } = this.props;
-
-    const isSelected = ((method.type === payment_method.type) && (method.card_id === payment_method.card_id));
-    const { text, icon } = parsePayment(method);
-
-    return (
-      <TouchableOpacity
-        onPress={this.onSelectPaymentMethod.bind(this, method)}
-        style={styles.standardCell}
-        activeOpacity={0.8}
-      >
-
-        <View style={styles.bullseyeOuter}>
-            <View style={(isSelected ? styles.bullseyeSelected : null)} />
-        </View>
-
-        <View style={{ flexDirection: 'row', alignSelf: 'stretch', alignItems: 'center' }}>
-          <Text style={styles.standardCellText}>{text}</Text>
-          <Image
-            style={{height: 40, width: 40, marginLeft: 10 }}
-            source={icon}
-            resizeMode={'contain'}
-          />
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
-  renderPaymentMethods() {
-
-    const { credit_cards } = this.props;
-
-    if (!this.state.isPaymentToggled) { return null; }
-
-// CLEAN THIS UP, make a uniform method for saving + display paymentOptions internally
-// ONLY push the
-
-    let paymentMethods = [
-        { type: 'CASH' },
-        { type: 'CARDREADER' },
-        { type: 'ADDCARD' }
-    ];
-    const creditCardMethods = []
-    credit_cards.forEach((card) => {
-      creditCardMethods.push({
-        type: 'CREDIT',
-        card_id: card.id,
-        last4: card.last4,
-        brand: card.brand
-      });
-    });
-    paymentMethods = [ ...creditCardMethods, ...paymentMethods ];
-
-    return paymentMethods.map(method => this.renderPaymentMethodCell(method));
-  }
-
 
   renderPayment() {
 
     const { payment_method } = this.props;
 
-    let payment_text = null;
-    let payment_image = null;
-
-    if (payment_method === 'CASH') {
-      payment_text = 'Cash';
-      payment_image = cash_icon;
-    } else if (payment_method === 'CREDIT') {
-      payment_text = 'Credit Card';
-      payment_image = creditcard_icon;
+    let payment_text = 'Cash';
+    let payment_image = cash_icon;
+    if (payment_method.type === 'CREDIT') {
+      payment_text = `**** ${payment_method.last4}`;
+      payment_image = creditCardIcon(payment_method.brand);
     }
 
-    return (
-      <Row disabled title={'Payment Method :'}>
+    const selectedCircle = (
+      <Image
+        style={{height: 24, width: 24 }}
+        source={toggle_selected}
+        resizeMode={'contain'}
+      />
+    );
+
+    const unselectedCircle = (
+      <Image
+        style={{height: 24, width: 24 }}
+        source={toggle_unselected}
+        resizeMode={'contain'}
+      />
+    );
+
+    const cashToggle = (
+      <TouchableOpacity
+        onPress={() => this.props.setPaymentMethod({ type: 'CASH' })}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          backgroundColor: 'white',
+          paddingLeft: 24,
+          paddingRight: 24,
+          borderBottomWidth: 1,
+          borderColor: '#f7f7f7',
+        }}>
         <Image
-          source={payment_image}
+          source={cash_icon}
           style={{
             width: 24,
             height: 24,
@@ -302,10 +183,110 @@ class Checkout extends Component {
           />
         <Text style={{
           fontSize: 16,
-          color: 'black',
-          fontFamily: 'Poppins-Bold'
-        }}>{payment_text}</Text>
-      </Row>
+          color: '#353333',
+          fontFamily: 'Poppins-Regular'
+        }}>Cash</Text>
+        <View style={{ flex: 1 }} />
+        {(payment_method.type === 'CASH') ? selectedCircle : unselectedCircle}
+      </TouchableOpacity>
+    );
+    const creditToggle = (
+      <TouchableOpacity
+        onPress={this.onCreditCardToggle.bind(this)}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: 50,
+          backgroundColor: 'white',
+          paddingLeft: 24,
+          paddingRight: 24,
+          borderBottomWidth: 1,
+          borderColor: '#f7f7f7',
+         }}
+        >
+        <Image
+          source={creditcard_icon}
+          style={{
+            width: 24,
+            height: 24,
+            marginRight: 10
+           }}
+          resizeMode={'contain'}
+          />
+        <Text style={{
+          fontSize: 16,
+          color: '#353333',
+          fontFamily: 'Poppins-Regular'
+        }}>Credit Card</Text>
+        <View style={{ flex: 1 }} />
+        {(payment_method.type === 'CREDIT') ? selectedCircle : unselectedCircle}
+      </TouchableOpacity>
+    );
+    return (
+      <View>
+        <Row disabled title={'Payment Method :'}>
+          <Image
+            source={payment_image}
+            style={{
+              width: 24,
+              height: 24,
+              marginRight: 10
+             }}
+            resizeMode={'contain'}
+            />
+          <Text style={{
+            fontSize: 16,
+            color: 'black',
+            fontFamily: 'Poppins-Bold'
+          }}>{payment_text}</Text>
+        </Row>
+        { cashToggle }
+        { creditToggle }
+      </View>
+    )
+  }
+
+  renderTip() {
+
+    // const { payment_method } = this.props;
+    const { total, tip } = this.props;
+
+    // get the suggested tips for the total BEFORE tip
+    const tipData = calculateSuggestedTips(total - tip);
+
+    return (
+      <View>
+        <Row disabled title={'Tip:'}>
+          <FlatList
+            data={tipData}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => {
+              const color = (item === tip) ? AYEZ_GREEN : '#8E8E93';
+              return (
+                <TouchableOpacity
+                onPress={() => this.props.setTip(item)}
+                style={{
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                  marginRight: 8,
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  borderColor: color
+                }}>
+                  <Text style={{
+                    fontSize: 15,
+                    color: color,
+                    fontFamily: 'Poppins-Light'
+                  }}>{item.toFixed(2)} EGP</Text>
+                </TouchableOpacity>
+              )
+            }}
+          />
+        </Row>
+      </View>
     )
   }
 
@@ -398,6 +379,10 @@ class Checkout extends Component {
 
         <View style={{ height: 18 }} />
 
+        {this.renderTip()}
+
+        <View style={{ height: 18 }} />
+
         <Text
         style={{
           fontSize: 20,
@@ -410,7 +395,7 @@ class Checkout extends Component {
 
         <ReceiptRow title={'Subtotal'} cost={subtotal} />
         <ReceiptRow title={'Delivery Cost'} cost={delivery_fee} />
-        <ReceiptRow title={'Tip'} cost={0} />
+        <ReceiptRow title={'Tip'} cost={tip} />
         { this.renderCouponReceiptRow() }
 
         <View style={{ marginTop: 6, marginBottom: 6, height: 1, backgroundColor: '#eeeeee' }} />
@@ -428,9 +413,14 @@ class Checkout extends Component {
         />
       </View>
 
+      <CreditCardSelection
+        onClose={() => this.setState({ isCardSelectionVisible: false })}
+        isVisible={this.state.isCardSelectionVisible}
+        />
+
       <LoadingOverlay isVisible={this.props.is_loading} />
 
-        </View>
+      </View>
       );
     }
   }
@@ -495,7 +485,7 @@ class Checkout extends Component {
   };
 
 
-  const mapStateToProps = ({ Baskets, Customer, Seller, Checkout, Coupon, Addresses }) => {
+  const mapStateToProps = ({ Baskets, Customer, Seller, Checkout, Coupon, CreditCards, Addresses }) => {
 
     const customer = Customer;
     const seller = Seller;
@@ -517,6 +507,8 @@ class Checkout extends Component {
       error
     } = Checkout;
 
+    const { credit_cards } = CreditCards;
+
     const { address } = Addresses;
 
     return {
@@ -537,7 +529,9 @@ class Checkout extends Component {
       address,
 
       is_loading,
-      error
+      error,
+
+      credit_cards
     };
 
     // coupon_discount,
@@ -578,6 +572,8 @@ class Checkout extends Component {
 
   export default connect(mapStateToProps,
     {
+      setPaymentMethod,
+      setTip,
       submitOrder
     }
   )(Checkout);

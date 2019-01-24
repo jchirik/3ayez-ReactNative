@@ -170,7 +170,7 @@ class AddressSearch extends Component {
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index}
         />
-        <LoadingOverlay isVisible={this.props.loading} />
+        <LoadingOverlay isVisible={this.props.coordinate_loading} />
       </View>
     );
   }

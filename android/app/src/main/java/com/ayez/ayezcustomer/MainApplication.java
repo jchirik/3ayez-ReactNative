@@ -27,6 +27,7 @@ import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
+import com.gettipsi.stripe.StripeReactPackage;
 
 import com.zmxv.RNSound.RNSoundPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -50,6 +51,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.asList(
         new MainReactPackage(),
         new ImagePickerPackage(),
+        new StripeReactPackage(),
         new RNFirebasePackage(),
         // add/remove these packages as appropriate
         new RNFirebaseAdMobPackage(),

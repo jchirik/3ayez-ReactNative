@@ -12,6 +12,7 @@ import {
 
   TIMESLOT_SET,
   PAYMENT_METHOD_SET,
+  TIP_SET,
 
   // after successfully sending order
   BASKET_ITEMS_CLEAR,
@@ -90,6 +91,13 @@ export const setPaymentMethod = (payment_method) => {
   return {
     type: PAYMENT_METHOD_SET,
     payload: { payment_method }
+  };
+};
+
+export const setTip = (tip) => {
+  return {
+    type: TIP_SET,
+    payload: { tip }
   };
 };
 

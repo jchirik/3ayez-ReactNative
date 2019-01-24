@@ -46,6 +46,21 @@ export const createNewAddress = (address) => {
   };
 };
 
+
+
+export const deleteAddress = (address_id) => {
+  return (dispatch) => {
+    console.log('deleteAddress', address_id);
+    const { currentUser } = firebase.auth();
+    const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+      .collection('addresses').doc(address_id);
+    addressRef.delete().then(() => {
+      console.log('deleteAddress successful', address_id, currentUser.uid);
+    })
+  }
+}
+
+
 // export const setAddressIndex = (address_index) => {
 //   return (dispatch) => {
 //     AsyncStorage.setItem('ADDRESS_INDEX', JSON.stringify(address_index), () => {

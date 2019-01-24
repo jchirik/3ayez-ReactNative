@@ -14,7 +14,10 @@ import {
   ONGOING_ORDERS_RESET,
 
   ADDRESSES_SET,
-  ADDRESSES_LISTENER_SET
+  ADDRESSES_LISTENER_SET,
+
+  CREDITCARDS_SET,
+  CREDITCARDS_LISTENER_SET
 } from './types';
 
 export const listenCustomerAuthStatus = () => {
@@ -27,6 +30,7 @@ export const listenCustomerAuthStatus = () => {
         listenCustomerData(dispatch);
         listenToOngoingOrders(dispatch);
         listenToAddresses(dispatch);
+        listenToCreditCards(dispatch);
         setPushToken(firebase.firestore().collection('customers').doc(user.uid));
       } else {
         console.log('onAuthStateChanged logged out');
@@ -64,6 +68,16 @@ const listenCustomerData = (dispatch) => {
     dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener } });
   }
 };
+
+
+
+
+
+
+
+
+
+
 
 const listenToOngoingOrders = (dispatch) => {
   // ensure there is a current user & seller
@@ -128,5 +142,24 @@ const listenToAddresses = (dispatch) => {
     });
 
     dispatch({ type: ADDRESSES_LISTENER_SET, payload: { addressesListener } });
+  }
+};
+
+const listenToCreditCards = (dispatch) => {
+  // ensure there is a current user & seller
+  const { currentUser } = firebase.auth();
+  if (currentUser) {
+    // realtime listening
+    const creditCardsRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+      .collection('cards');
+    const creditCardsListener = creditCardsRef.onSnapshot((creditCardsT) => {
+      const credit_cards = creditCardsT.docs.map(card => {
+        const id = card.id;
+        const data = card.data();
+        return ({ ...data, id, type: 'CREDIT' });
+      });
+      dispatch({ type: CREDITCARDS_SET, payload: { credit_cards } });
+    });
+    dispatch({ type: CREDITCARDS_LISTENER_SET, payload: { creditCardsListener } });
   }
 };

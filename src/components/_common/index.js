@@ -6,4 +6,5 @@ export * from './LoadingOverlay';
 export * from './InputField';
 export * from './SubtleButton';
 
+export LoadingOverlay from './LoadingOverlay';
 export BottomChoiceSelection from './BottomChoiceSelection';

@@ -275,6 +275,7 @@ PODS:
     - React/RCTBlob
   - RNDeviceInfo (0.21.5):
     - React
+  - Stripe (13.2.0)
   - yoga (0.57.1.React)
 
 DEPENDENCIES:
@@ -312,6 +313,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - Stripe
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 SPEC REPOS:
@@ -351,6 +353,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - Stripe
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -413,8 +416,9 @@ SPEC CHECKSUMS:
   react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
+  Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: a58b5572d903aae1d59f91b438c48beade5aeb6d
+PODFILE CHECKSUM: 4704b34a706cd1049d1688874dbef6d77b54e01f
 
 COCOAPODS: 1.5.3
