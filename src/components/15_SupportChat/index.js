@@ -256,7 +256,6 @@ class SupportChat extends Component {
           renderAvatar={null}
           renderInputToolbar={this.renderInputToolbar}
           textInputProps={{
-            color: 'black',
             fontSize: 14,
             fontFamily: 'Poppins-Medium',
           }}
