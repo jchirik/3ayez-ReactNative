@@ -24,7 +24,8 @@ import {
 import {
   Header,
   BlockButton,
-  BottomChoiceSelection
+  BottomChoiceSelection,
+  AyezText
 } from '../_common';
 
 import {
@@ -54,26 +55,18 @@ class AddressManager extends Component {
           }}
       >
         <View style={{ flex: 1, marginLeft: 26 }}>
-          <Text style={{
-            fontFamily: 'Poppins-Medium',
-            fontSize: 14,
-            color: 'black'
-          }}>{item.street} {(item.area && item.area.display_name) ? item.area.display_name.ar : null}</Text>
-          <Text style={{
-            fontFamily: 'Poppins-Regular',
-            fontSize: 14,
-            color: 'black'
-          }}>Building #{item.building}</Text>
-          <Text style={{
-            fontFamily: 'Poppins-Regular',
-            fontSize: 14,
-            color: 'black'
-          }}>Apt #{item.apt}</Text>
-          <Text style={{
-            fontFamily: 'Poppins-Regular',
-            fontSize: 14,
-            color: 'black'
-          }}>{item.name}</Text>
+          <AyezText medium style={{
+            fontSize: 14
+          }}>{item.street} {(item.area && item.area.display_name) ? item.area.display_name.ar : null}</AyezText>
+          <AyezText regular style={{
+            fontSize: 14
+          }}>Building #{item.building}</AyezText>
+          <AyezText regular style={{
+            fontSize: 14
+          }}>Apt #{item.apt}</AyezText>
+          <AyezText regular style={{
+            fontSize: 14
+          }}>{item.name}</AyezText>
         </View>
 
         <TouchableOpacity

@@ -20,7 +20,8 @@ import {
   BlockButton,
   InputField,
   SubtleButton,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../_common';
 
 const coupon_shape = require('../../../assets/images_v2/CouponModal/coupon_shape.png');
@@ -78,22 +79,19 @@ class CouponModal extends Component {
            }}
           resizeMode={'contain'}
         />
-        <Text style={{
+        <AyezText bold style={{
           marginTop: 14,
           textAlign: 'center',
-          fontSize: 18,
-          color: 'black',
-          fontFamily: 'Poppins-Bold',
-        }}>{error_description}</Text>
-        <Text style={{
+          fontSize: 18
+        }}>{error_description}</AyezText>
+        <AyezText light style={{
           marginTop: 10,
           marginLeft: 48,
           marginRight: 48,
           textAlign: 'center',
           fontSize: 15,
-          color: '#8E8E93',
-          fontFamily: 'Poppins-Light'
-        }}>Please revise the coupon entered and continue</Text>
+          color: '#8E8E93'
+        }}>Please revise the coupon entered and continue</AyezText>
         <BlockButton
           text={'Reenter Coupon'}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
@@ -122,20 +120,17 @@ class CouponModal extends Component {
            }}
           resizeMode={'contain'}
         />
-        <Text style={{
+        <AyezText bold style={{
           marginTop: 40,
           textAlign: 'center',
-          fontSize: 18,
-          color: 'black',
-          fontFamily: 'Poppins-Bold',
-        }}>Submit Coupon</Text>
-        <Text style={{
+          fontSize: 18
+        }}>Submit Coupon</AyezText>
+        <AyezText light style={{
           marginTop: 14,
           textAlign: 'center',
           fontSize: 15,
-          color: '#8E8E93',
-          fontFamily: 'Poppins-Light'
-        }}>Apply coupon code for discounts</Text>
+          color: '#8E8E93'
+        }}>Apply coupon code for discounts</AyezText>
 
         <View style={{ flex: 1 }} />
 
@@ -172,22 +167,19 @@ class CouponModal extends Component {
         backgroundColor: 'white',
         borderRadius: 14
       }}>
-        <Text style={{
+        <AyezText bold style={{
           marginTop: 24,
           textAlign: 'center',
-          fontSize: 18,
-          color: 'black',
-          fontFamily: 'Poppins-Bold',
-        }}>{coupon.code} accepted!</Text>
-        <Text style={{
+          fontSize: 18
+        }}>{coupon.code} accepted!</AyezText>
+        <AyezText light style={{
           marginTop: 10,
           marginLeft: 48,
           marginRight: 48,
           textAlign: 'center',
           fontSize: 15,
-          color: '#8E8E93',
-          fontFamily: 'Poppins-Light'
-        }}>{coupon.amount.toFixed(2)} EGP off your order</Text>
+          color: '#8E8E93'
+        }}>{coupon.amount.toFixed(2)} EGP off your order</AyezText>
         <BlockButton
           text={'OK'}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}

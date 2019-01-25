@@ -27,7 +27,8 @@ import {
 import {
   Header,
   BlockButton,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../_common';
 
 class CreditCardCreate extends Component {
@@ -91,13 +92,12 @@ class CreditCardCreate extends Component {
     let errorText = null;
     if (this.props.error) {
       errorText = (
-        <Text style={{
+        <AyezText medium style={{
           fontSize: 16,
-          fontFamily: 'Poppins-Medium',
           color: 'red',
           textAlign: 'center',
           marginTop: 20
-        }}>Error adding card</Text>
+        }}>Error adding card</AyezText>
       )
     }
 

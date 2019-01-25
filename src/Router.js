@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Easing,
     StyleSheet,
-    Animated
+    Animated,
+    ActivityIndicator
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -457,6 +458,7 @@ class RouterComponent extends Component {
     );
   }
 };
+
 
 export default connect(null, {
   loadBaskets,

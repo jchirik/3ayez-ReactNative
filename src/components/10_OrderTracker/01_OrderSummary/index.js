@@ -30,7 +30,8 @@ import {
 import {
   Header,
   BlockButton,
-  BackButton
+  BackButton,
+  AyezText
 } from '../../_common';
 
 
@@ -40,13 +41,13 @@ class OrderSummary extends Component {
     const { payment_method, auto_total } = this.props;
     return (
       <View>
-        <Text>Payment method</Text>
+        <AyezText regular>Payment method</AyezText>
         <View>
           <Image
             source={null}
             resizeMode={'contain'}
           />
-          <Text>{(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</Text>
+          <AyezText regular>{(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</AyezText>
         </View>
       </View>
     );
@@ -60,11 +61,11 @@ class OrderSummary extends Component {
     // if (area && area.display_name) { addressArea = localizeDN(area.display_name); }
     return (
       <View>
-        <Text>{street}</Text>
-        <Text>{(area && area.display_name) ? `${area.display_name.ar}, ` : ''}{region}</Text>
-        <Text>Building {building}</Text>
-        <Text>Floor {floor}</Text>
-        <Text>Apt {apt}</Text>
+        <AyezText regular>{street}</AyezText>
+        <AyezText regular>{(area && area.display_name) ? `${area.display_name.ar}, ` : ''}{region}</AyezText>
+        <AyezText regular>Building {building}</AyezText>
+        <AyezText regular>Floor {floor}</AyezText>
+        <AyezText regular>Apt {apt}</AyezText>
       </View>
     );
   }
@@ -89,9 +90,9 @@ class OrderSummary extends Component {
 
     return (
       <View>
-        <Text>Delivery time</Text>
-        <Text>{timeString}</Text>
-        <Text>{dateString}</Text>
+        <AyezText regular>Delivery time</AyezText>
+        <AyezText regular>{timeString}</AyezText>
+        <AyezText regular>{dateString}</AyezText>
       </View>
     );
   }
@@ -108,13 +109,13 @@ renderItems() {
 
   const basketItems = items.map(item => (
     <View>
-      <Text>{item.title_arab}</Text>
+      <AyezText regular>{item.title_arab}</AyezText>
     </View>
   ));
 
   return (
     <View>
-      <Text>Order items</Text>
+      <AyezText regular>Order items</AyezText>
       { basketItems }
     </View>
   );

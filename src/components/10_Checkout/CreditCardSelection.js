@@ -15,7 +15,10 @@ import {
 } from '../../Helpers.js';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { BlockButton } from '../_common/BlockButton';
+import {
+  BlockButton,
+  AyezText
+} from '../_common';
 
 import {
   setPaymentMethod
@@ -124,11 +127,10 @@ class CreditCardSelection extends Component {
           }}
           resizeMode={'contain'}
         />
-        <Text style={{
-          fontFamily: 'Poppins-Medium',
+        <AyezText medium style={{
           fontSize: 14,
           color: 'white'
-        }}>{card.brand} (**** {card.last4})</Text>
+        }}>{card.brand} (**** {card.last4})</AyezText>
       </TouchableOpacity>
     ));
 
@@ -174,15 +176,14 @@ class CreditCardSelection extends Component {
             this.setState({ modalHeight: height });
           }}
           >
-          <Text style={{
+          <AyezText bold style={{
             color: 'white',
             textAlign: 'center',
             fontSize: 14,
-            fontFamily: 'Poppins-Bold',
             padding: 6,
             paddingRight: 10,
             paddingLeft: 10
-          }}>SAVED CARDS</Text>
+          }}>SAVED CARDS</AyezText>
 
           { cardComponents }
 

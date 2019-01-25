@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   View,
   Modal,
-  Image,
   Platform,
   Animated,
   Easing

@@ -25,7 +25,8 @@ import {
   setTimeslot
 } from '../../actions';
 import {
-  Header
+  Header,
+  AyezText
 } from '../_common';
 
 import {
@@ -72,10 +73,9 @@ class TimeslotSelect extends Component {
         paddingLeft: 30,
         alignItems: 'center'
       }}>
-        <Text style={{
-          fontFamily: 'Cairo-Bold',
+        <AyezText bold style={{
           fontSize: 20,
-        }}>{section.title}</Text>
+        }}>{section.title}</AyezText>
       </View>
     )
   }
@@ -96,21 +96,20 @@ class TimeslotSelect extends Component {
         onPress={this.setTimeslot.bind(this, item)}
         disabled={item.invalid}
       >
-        <Text style={{
-          fontFamily: 'Poppins-Regular',
+        <AyezText regular style={{
           marginLeft: 30,
           fontSize: 14,
           color: (item.invalid ? '#cecece' : 'black'),
           textDecorationLine: (item.invalid ? 'line-through' : 'none'),
           textDecorationStyle: 'solid'
-        }} key={index}>{startTime} - {endTime}</Text>
+        }} key={index}>{startTime} - {endTime}</AyezText>
 
-        <Text style={{
+        <AyezText light style={{
           fontFamily: 'Poppins-Light',
           marginRight: 30,
           fontSize: 14,
           color: (item.invalid ? '#cecece' : '#8E8E93')
-        }}>{item.delivery_fee.toFixed(2)} EGP</Text>
+        }}>{item.delivery_fee.toFixed(2)} EGP</AyezText>
       </TouchableOpacity>
     )
   }

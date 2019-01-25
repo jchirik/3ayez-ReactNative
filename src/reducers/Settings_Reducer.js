@@ -6,7 +6,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  locale: 'ar',
+  locale: null,
   device_id: null
 };
 

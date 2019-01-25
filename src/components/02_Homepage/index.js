@@ -57,7 +57,7 @@ class Homepage extends Component {
 
   render() {
 
-    if (this.props.is_loading) {
+    if (this.props.is_loading || !this.props.locale) {
       return (
         <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
       );
@@ -85,9 +85,11 @@ class Homepage extends Component {
   }
 }
 
-const mapStateToProps = ({ Addresses }) => {
+const mapStateToProps = ({ Addresses, Settings }) => {
   const { address, is_loading } = Addresses;
+  const { locale } = Settings;
   return {
+    locale,
     address,
     is_loading
   };

@@ -18,7 +18,8 @@ import { connect } from 'react-redux';
 import {
   Header,
   BlockButton,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -55,10 +56,9 @@ class VerifyCode extends Component {
         shadowRadius: 4,
         elevation: 2,
       }}>
-        <Text style={{
-          fontSize: 24,
-          fontFamily: 'Poppins-SemiBold',
-        }}>{digit}</Text>
+        <AyezText semibold style={{
+          fontSize: 24
+        }}>{digit}</AyezText>
       </View>
     )
   }
@@ -100,27 +100,25 @@ class VerifyCode extends Component {
       }}>
         <Header title={'VERIFICATION CODE'}/>
         <View>
-          <Text
+          <AyezText bold
             style={{
               fontSize: 14,
-              fontFamily: 'Poppins-Bold',
               marginTop: 22,
               marginLeft: 26,
               marginBottom: 10
             }}
-          >Enter the code sent to you below</Text>
+          >Enter the code sent to you below</AyezText>
 
           { this.renderVerificationInput() }
 
-          <Text
+          <AyezText light
             style={{
               fontSize: 12,
-              fontFamily: 'Poppins-Light',
               textAlign: 'center',
               marginTop: 22,
               marginBottom: 10
             }}
-          >Didn't receive code? Resend</Text>
+          >Didn't receive code? Resend</AyezText>
           <BlockButton
             text={'CONFIRM'}
             style={{

@@ -40,7 +40,8 @@ const chatSendIcon = require('../../../assets/images_v2/Support/chat_send.png');
 
 import {
   Header,
-  LoadingOverlay
+  LoadingOverlay,
+  RTLImage
 } from '../_common';
 
 // a big comoonent
@@ -160,7 +161,7 @@ class SupportChat extends Component {
         <TouchableOpacity
           onPress={() => this.props.onSendSupportImage()}
         >
-          <Image
+          <RTLImage
             style={{
               backgroundColor: 'transparent',
               width: 32,
@@ -184,7 +185,7 @@ class SupportChat extends Component {
         }}>
           <Composer {...props} />
           <Send {...props} containerStyle={{ backgroundColor: 'transparent' }}>
-            <Image
+            <RTLImage
               style={{
                 backgroundColor: 'transparent',
                 width: 38,

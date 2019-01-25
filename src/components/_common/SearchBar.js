@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
+
+import { RTLImage } from './RTLImage';
 
 const search_icon = require('../../../assets/images_v2/Search/search.png');
 const clear_icon = require('../../../assets/images_v2/Search/clear.png');
@@ -27,7 +29,7 @@ const SearchBar = ({
         }}
         onPress={() => onChangeText('')}
       >
-      <Image
+      <RTLImage
         source={clear_icon}
         style={{
           width: 20,
@@ -48,7 +50,7 @@ const SearchBar = ({
       flexDirection: 'row',
       alignItems: 'center'
     }}>
-    <Image
+    <RTLImage
       source={search_icon}
       style={{
         width: 20,
@@ -61,7 +63,6 @@ const SearchBar = ({
       <TextInput
         style={{
           flex: 1,
-          alignSelf: 'stretch',
           paddingLeft: 12,
           fontSize: 14,
           fontFamily: 'Poppins-Regular',

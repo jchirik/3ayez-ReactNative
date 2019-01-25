@@ -66,21 +66,15 @@ class CreditCardManager extends Component {
         />
 
         <View style={{ flex: 1 }}>
-          <Text style={{
-            fontFamily: 'Poppins-Medium',
+          <AyezText medium style={{
+            fontSize: 14
+          }}>{item.brand} (**** {item.last4})</AyezText>
+          <AyezText regular style={{
             fontSize: 14,
-            color: 'black'
-          }}>{item.brand} (**** {item.last4})</Text>
-          <Text style={{
-            fontFamily: 'Poppins-Regular',
+          }}>Exp {padNumberZeros(item.exp_month, 2)}/{item.exp_year}</AyezText>
+          <AyezText regular style={{
             fontSize: 14,
-            color: 'black'
-          }}>Exp {padNumberZeros(item.exp_month, 2)}/{item.exp_year}</Text>
-          <Text style={{
-            fontFamily: 'Poppins-Regular',
-            fontSize: 14,
-            color: 'black'
-          }}>{item.name}</Text>
+          }}>{item.name}</AyezText>
         </View>
 
         <TouchableOpacity

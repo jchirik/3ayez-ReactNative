@@ -24,7 +24,8 @@ import {
 } from '../../../actions';
 
 import {
-  Header
+  Header,
+  AyezText
 } from '../../_common';
 
 
@@ -484,9 +485,9 @@ class OrderHistory extends Component {
       >
 
         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end', marginRight: 18}}>
-          <Text style={styles.orderNumber}>{order.seller.display_name ? localizeDN(order.seller.display_name) : order.seller.name}</Text>
-          <Text style={styles.orderTime}>{timeString}</Text>
-          <Text style={[ styles.orderStatus, { color: statusColor }]}>{statusText}</Text>
+          <AyezText regular style={styles.orderNumber}>{order.seller.display_name ? localizeDN(order.seller.display_name) : order.seller.name}</AyezText>
+          <AyezText regular style={styles.orderTime}>{timeString}</AyezText>
+          <AyezText regular style={[ styles.orderStatus, { color: statusColor }]}>{statusText}</AyezText>
         </View>
 
       </TouchableOpacity>
@@ -496,7 +497,7 @@ class OrderHistory extends Component {
   renderSectionHeader({ section }) {
     return (
       <View style={styles.sectionHeaderContainer}>
-        <Text style={styles.sectionHeaderText}>{section.title}</Text>
+        <AyezText bold style={styles.sectionHeaderText}>{section.title}</AyezText>
       </View>
     );
   }
@@ -548,17 +549,14 @@ const styles = {
     borderColor: '#F2F2F2'
   },
   orderNumber: {
-    fontFamily: 'Poppins',
     fontSize: 15,
     color: 'black'
   },
   orderTime: {
-    fontFamily: 'Poppins',
     fontSize: 15,
     color: 'black'
   },
   orderStatus: {
-    fontFamily: 'Poppins',
     fontSize: 15,
     color: 'black'
   },
@@ -570,7 +568,6 @@ const styles = {
     borderColor: '#F2F2F2'
   },
   sectionHeaderText: {
-    fontFamily: 'Poppins-Bold',
     color: 'black',
     textAlign: 'right',
     fontSize: 19,

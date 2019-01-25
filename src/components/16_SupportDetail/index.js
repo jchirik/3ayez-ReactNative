@@ -21,7 +21,8 @@ import {
 } from 'react-native';
 
 import {
-  Header
+  Header,
+  AyezText
 } from '../_common';
 
 // a big comoonent
@@ -33,7 +34,7 @@ class SupportDetail extends Component {
         style={{ flex: 1, backgroundColor: 'white'}}
       >
         <Header title={title.en} />
-        <Text>{description.en}</Text>
+        <AyezText regular>{description.en}</AyezText>
       </View>
     );
   }

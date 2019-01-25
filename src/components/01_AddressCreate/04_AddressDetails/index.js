@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   TextInput,
    Image,
    ActivityIndicator,
@@ -19,7 +18,8 @@ import { connect } from 'react-redux';
 import {
   Header,
   BlockButton,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../../_common';
 import {
   createNewAddress,
@@ -114,13 +114,12 @@ class AddressDetails extends Component {
         borderColor: '#EAEAEA',
         borderBottomWidth: 1
       }}>
-        <Text style={{
-          fontFamily: 'Poppins-SemiBold',
+        <AyezText semibold style={{
           fontSize: 15,
           width: 126
         }}>
           {title}
-        </Text>
+        </AyezText>
         <TextInput
           style={{
             flex: 1,
@@ -152,11 +151,10 @@ class AddressDetails extends Component {
           behavior={Platform.OS === 'ios' ? 'padding' : null}
         >
           <ScrollView style={{ flex: 1 }}>
-            <Text style={{
-              fontFamily: 'Poppins-Bold',
+            <AyezText bold style={{
               fontSize: 32,
               padding: 16,
-            }}>Delivering to:</Text>
+            }}>Delivering to:</AyezText>
 
             { this.renderInputField('Street:', 'street') }
             { this.renderInputField('Building no.:', 'building') }

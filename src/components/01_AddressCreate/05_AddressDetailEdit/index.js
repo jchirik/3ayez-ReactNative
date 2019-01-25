@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
    Image,
    ActivityIndicator,
    TouchableOpacity,
@@ -14,7 +13,8 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BackButton
+  BackButton,
+  AyezText
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -59,7 +59,7 @@ class AddressDetailEdit extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Text>address detail edit</Text>
+        <AyezText regular >address detail edit</AyezText>
         <BackButton type='cross_circled' />
       </View>
     );

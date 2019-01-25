@@ -73,6 +73,7 @@
 		D27603A021DEA2650037DE81 /* Poppins-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D276038821DEA2650037DE81 /* Poppins-BoldItalic.otf */; };
 		D27603A121DEA2650037DE81 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D276038921DEA2650037DE81 /* Poppins-ExtraLight.otf */; };
 		D27603B121DEA3EA0037DE81 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7D4B151F8AFD6F00699FE4 /* libRNFirebase.a */; };
+		D2BB1C3D21FB21C0003F70C9 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BB1C1F21FB219D003F70C9 /* libRCTRestart.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,6 +378,13 @@
 			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
 			remoteInfo = RNSound;
 		};
+		D2BB1C1E21FB219D003F70C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTRestart;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -442,6 +450,8 @@
 		D276038721DEA2650037DE81 /* Cairo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Light.ttf"; path = "../../assets/fonts/Cairo-Light.ttf"; sourceTree = "<group>"; };
 		D276038821DEA2650037DE81 /* Poppins-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.otf"; path = "../../assets/fonts/Poppins-BoldItalic.otf"; sourceTree = "<group>"; };
 		D276038921DEA2650037DE81 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.otf"; path = "../../assets/fonts/Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
+		D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
+		D2BB1C4F21FB5A3A003F70C9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D2CE0EA621E0F66F00D6EF99 /* ayezcustomer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ayezcustomer.entitlements; path = ayezcustomer/ayezcustomer.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -458,6 +468,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BB1C3D21FB21C0003F70C9 /* libRCTRestart.a in Frameworks */,
 				D23012C821F7E2F5006332ED /* libTPSStripe.a in Frameworks */,
 				D2096BBC21F7873B0033390F /* libRNImagePicker.a in Frameworks */,
 				D27603B121DEA3EA0037DE81 /* libRNFirebase.a in Frameworks */,
@@ -655,6 +666,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */,
 				D23012C121F7E2D7006332ED /* TPSStripe.xcodeproj */,
 				D2096B8F21F7871F0033390F /* RNImagePicker.xcodeproj */,
 				D276029221DD156A0037DE81 /* RNSound.xcodeproj */,
@@ -790,6 +802,14 @@
 				D276037321DEA2650037DE81 /* Poppins-ThinItalic.otf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D2BB1C0F21FB219D003F70C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB1C1F21FB219D003F70C9 /* libRCTRestart.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -944,6 +964,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = D2BB1C0F21FB219D003F70C9 /* Products */;
+					ProjectRef = D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1280,6 +1304,13 @@
 			remoteRef = D27602BC21DD156A0037DE81 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D2BB1C1F21FB219D003F70C9 /* libRCTRestart.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTRestart.a;
+			remoteRef = D2BB1C1E21FB219D003F70C9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1487,6 +1518,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				13B07FB21A68108700A75B9A /* Base */,
+				D2BB1C4F21FB5A3A003F70C9 /* ar */,
 			);
 			name = LaunchScreen.xib;
 			path = ayezcustomer;
@@ -1563,6 +1595,7 @@
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"${SRCROOT}/../../../ios/Pods/Headers/Public",
 					"$(SRCROOT)/../../react-native/React",
+					"$(SRCROOT)/../node_modules/react-native-restart/**",
 				);
 				INFOPLIST_FILE = ayezcustomer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1591,6 +1624,7 @@
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"${SRCROOT}/../../../ios/Pods/Headers/Public",
 					"$(SRCROOT)/../../react-native/React",
+					"$(SRCROOT)/../node_modules/react-native-restart/**",
 				);
 				INFOPLIST_FILE = ayezcustomer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1727,6 +1761,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1780,6 +1815,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

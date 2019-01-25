@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   Image,
   TextInput,
   FlatList,
@@ -31,7 +30,8 @@ import {
 import {
   BackButton,
   BlockButton,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../_common';
 import { Row } from './Row';
 import { ReceiptRow } from './ReceiptRow';
@@ -180,11 +180,10 @@ class Checkout extends Component {
            }}
           resizeMode={'contain'}
           />
-        <Text style={{
+        <AyezText regular style={{
           fontSize: 16,
-          color: '#353333',
-          fontFamily: 'Poppins-Regular'
-        }}>Cash</Text>
+          color: '#353333'
+        }}>Cash</AyezText>
         <View style={{ flex: 1 }} />
         {(payment_method.type === 'CASH') ? selectedCircle : unselectedCircle}
       </TouchableOpacity>
@@ -212,11 +211,10 @@ class Checkout extends Component {
            }}
           resizeMode={'contain'}
           />
-        <Text style={{
+        <AyezText regular style={{
           fontSize: 16,
-          color: '#353333',
-          fontFamily: 'Poppins-Regular'
-        }}>Credit Card</Text>
+          color: '#353333'
+        }}>Credit Card</AyezText>
         <View style={{ flex: 1 }} />
         {(payment_method.type === 'CREDIT') ? selectedCircle : unselectedCircle}
       </TouchableOpacity>
@@ -233,11 +231,10 @@ class Checkout extends Component {
              }}
             resizeMode={'contain'}
             />
-          <Text style={{
+          <AyezText bold style={{
             fontSize: 16,
-            color: 'black',
-            fontFamily: 'Poppins-Bold'
-          }}>{payment_text}</Text>
+            color: 'black'
+          }}>{payment_text}</AyezText>
         </Row>
         { cashToggle }
         { creditToggle }
@@ -258,11 +255,10 @@ class Checkout extends Component {
         <Row disabled title={'Tip: '}>
           <View>
 
-          <Text style={{
+          <AyezText regular style={{
             fontSize: 12,
-            color: '#ffa30f',
-            fontFamily: 'Poppins-Regular'
-          }}>Smart tip suggestions help you round your total</Text>
+            color: '#ffa30f'
+          }}>Smart tip suggestions help you round your total</AyezText>
           <FlatList
             data={tipData}
             horizontal={true}
@@ -283,11 +279,10 @@ class Checkout extends Component {
                   borderWidth: 1,
                   borderColor: color
                 }}>
-                  <Text style={{
+                  <AyezText light style={{
                     fontSize: 15,
-                    color: color,
-                    fontFamily: 'Poppins-Light'
-                  }}>{item.toFixed(2)} EGP</Text>
+                    color: color
+                  }}>{item.toFixed(2)} EGP</AyezText>
                 </TouchableOpacity>
               )
             }}
@@ -319,11 +314,10 @@ class Checkout extends Component {
         <Row
           onPress={() => Actions.checkoutNotesDetail()}
           title={'Additional Notes :'}>
-          <Text style={{
+          <AyezText regular style={{
             fontSize: 16,
-            color: '#0094ff',
-            fontFamily: 'Poppins-Regular'
-          }}>{ notesButtonText }</Text>
+            color: '#0094ff'
+          }}>{ notesButtonText }</AyezText>
         </Row>
 
         <TouchableOpacity
@@ -338,11 +332,10 @@ class Checkout extends Component {
             borderBottomWidth: 1,
             borderColor: '#f7f7f7',
           }}>
-          <Text style={{
+          <AyezText regular style={{
             fontSize: 14,
-            color: '#353333',
-            fontFamily: 'Poppins-Regular'
-          }}>{notes}</Text>
+            color: '#353333'
+          }}>{notes}</AyezText>
         </TouchableOpacity>
       </View>
     );
@@ -391,36 +384,33 @@ class Checkout extends Component {
 
       <BackButton fixed />
 
-      <Text
+      <AyezText bold
       style={{
         fontSize: 28,
         color: 'black',
-        fontFamily: 'Poppins-Bold',
         marginTop: STATUS_BAR_HEIGHT + 60,
         marginLeft: 20
-      }}>Checkout</Text>
+      }}>Checkout</AyezText>
 
       <ScrollView style={{ flex: 1 }}>
 
          <View style={{ height: 18 }} />
 
         <Row disabled title={'Address :'}>
-          <Text
+          <AyezText regular
           style={{
             fontSize: 16,
             color: 'black',
-            fontFamily: 'Poppins-Regular'
-          }}>{address.street}, Building {address.building}, Apt {address.apt}</Text>
+          }}>{address.street}, Building {address.building}, Apt {address.apt}</AyezText>
         </Row>
 
         <View style={{ height: 18 }} />
 
         <Row disabled title={'Delivery Time :'}>
-          <Text style={{
+          <AyezText regular style={{
             fontSize: 16,
             color: 'black',
-            fontFamily: 'Poppins-Regular'
-          }}>{timeslotDay} {timeslotStart} - {timeslotEnd}</Text>
+          }}>{timeslotDay} {timeslotStart} - {timeslotEnd}</AyezText>
         </Row>
 
         <View style={{ height: 18 }} />
@@ -437,15 +427,14 @@ class Checkout extends Component {
 
         <View style={{ height: 18 }} />
 
-        <Text
+        <AyezText bold
         style={{
           fontSize: 20,
           color: 'black',
-          fontFamily: 'Poppins-Bold',
           marginTop: 20,
           marginLeft: 20,
           marginBottom: 10
-        }}>Summary</Text>
+        }}>Summary</AyezText>
 
         <ReceiptRow title={'Subtotal'} cost={subtotal} />
         <ReceiptRow title={'Delivery Cost'} cost={delivery_fee} />

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
-   Image,
+  Image,
    ActivityIndicator,
    TouchableOpacity,
    SectionList,
@@ -14,7 +13,9 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BlockButton
+  BlockButton,
+  RTLImage,
+  AyezText
 } from '../../_common';
 import {
   setLocale
@@ -55,12 +56,25 @@ class LanguageSelect extends Component {
     super(props);
   }
 
-  selectLanguage(lang) {
-    this.props.setLocale(lang)
-    Actions.tutorialSwipe();
+  switchLanguage(switchLocale) {
+    this.props.setLocale(switchLocale)
   }
 
   render() {
+
+    if (!this.props.locale) {
+      return (
+        <ActivityIndicator size="small" />
+      )
+    }
+
+    let switchText = 'Switch to English';
+    let switchLocale = 'en';
+    if (this.props.locale === 'en') {
+      switchText = 'Switch to Arabic ';
+      switchLocale = 'ar';
+    }
+
     return (
       <View style={{
         flex: 1,
@@ -79,7 +93,7 @@ class LanguageSelect extends Component {
           resizeMode={'contain'}
         />
 
-        <Image
+        <RTLImage
           source={opening_video}
           style={{
             width: 350,
@@ -89,7 +103,7 @@ class LanguageSelect extends Component {
           resizeMode={'contain'}
         />
         <BlockButton
-          text={'العربيه'}
+          text={'Get Started'}
           color={'white'}
           style={{
             marginTop: 10,
@@ -101,32 +115,33 @@ class LanguageSelect extends Component {
             color: 'black',
             fontFamily: 'Poppins-Medium'
           }}
-          onPress={this.selectLanguage.bind(this, 'ar')}
+          onPress={() => Actions.tutorialSwipe()}
           />
-        <BlockButton
-          text={'ENGLISH'}
-          color={'white'}
+
+
+      <TouchableOpacity
           style={{
-            marginTop: 10,
-            marginBottom: 36,
-            marginLeft: 18,
-            marginRight: 18
+            paddingTop: 12,
+            paddingBottom: 16
           }}
-          textStyle={{
-            color: 'black',
-            fontFamily: 'Poppins-Medium'
-          }}
-          onPress={this.selectLanguage.bind(this, 'en')}
-          />
+          onPress={this.switchLanguage.bind(this, switchLocale)}
+        >
+        <AyezText bold style={{
+          fontSize: 14,
+          textAlign: 'center'
+        }}>{switchText}</AyezText>
+       </TouchableOpacity>
+
       </View>
     );
   }
 }
 
-// const mapStateToProps = ({ }) => {
-//   return {};
-// };
+const mapStateToProps = ({ Settings }) => {
+  const { locale } = Settings;
+  return { locale };
+};
 
-export default connect(null, {
+export default connect(mapStateToProps, {
   setLocale
 })(LanguageSelect);

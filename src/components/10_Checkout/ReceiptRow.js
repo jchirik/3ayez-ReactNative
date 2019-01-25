@@ -1,6 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import {
+  AyezText
+} from '../_common';
 
 // title on the left, all other children on the right
 
@@ -22,10 +25,9 @@ const ReceiptRow = ({
           alignItems: 'center'
         }}
       >
-        <Text style={{
-          fontFamily: 'Poppins-Regular',
+        <AyezText regular style={{
           fontSize: 15, color: '#8E8E93'
-        }}>{title}</Text>
+        }}>{title}</AyezText>
 
         <Text style={{
           fontFamily: 'Poppins-Bold',

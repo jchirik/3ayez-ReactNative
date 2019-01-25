@@ -8,3 +8,6 @@ export * from './SubtleButton';
 
 export LoadingOverlay from './LoadingOverlay';
 export BottomChoiceSelection from './BottomChoiceSelection';
+
+export * from './RTLImage';
+export AyezText from './AyezText';

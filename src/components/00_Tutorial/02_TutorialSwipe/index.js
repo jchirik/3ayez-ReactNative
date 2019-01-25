@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
    Image,
    ActivityIndicator,
    TouchableOpacity,
@@ -20,7 +19,9 @@ import {
   Header,
   BlockButton,
   BackButton,
-  LoadingOverlay
+  LoadingOverlay,
+  RTLImage,
+  AyezText
 } from '../../_common';
 
 import {
@@ -80,7 +81,7 @@ class TutorialSwipe extends Component {
             indicator={this.renderDotIndicator()}
           >
           <View style={{ flex: 1, alignItems: 'center' }}>
-              <Image
+              <RTLImage
                 source={tutorial_1}
                 style={{
                   alignSelf: 'center',
@@ -94,7 +95,7 @@ class TutorialSwipe extends Component {
               }}>Conveniently order online</Text>
             </View>
             <View style={{ flex: 1, alignItems: 'center' }}>
-              <Image
+              <RTLImage
                 source={tutorial_2}
                 style={{
                   alignSelf: 'center',
@@ -108,7 +109,7 @@ class TutorialSwipe extends Component {
               }}>Shop easier</Text>
             </View>
             <View style={{ flex: 1, alignItems: 'center' }}>
-              <Image
+              <RTLImage
                 source={tutorial_3}
                 style={{
                   alignSelf: 'center',
@@ -148,13 +149,12 @@ class TutorialSwipe extends Component {
               this.props.authGuestLogin(() => Actions.addressCreate())
             }}
           >
-          <Text style={{
-            fontFamily: 'Poppins-Bold',
+          <AyezText bold style={{
             fontSize: 14,
             textAlign: 'center'
           }}>
             CONTINUE AS GUEST
-          </Text>
+          </AyezText>
          </TouchableOpacity>
          <BackButton fixed />
          <LoadingOverlay isVisible={this.props.guestlogin_loading} />

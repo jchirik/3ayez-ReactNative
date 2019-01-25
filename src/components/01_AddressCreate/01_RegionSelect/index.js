@@ -14,7 +14,8 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
-  BackButton
+  BackButton,
+  AyezText
 } from '../../_common';
 import {
   resetAddressCreate,
@@ -118,11 +119,10 @@ class RegionSelect extends Component {
            }}
           resizeMode={'contain'}
           />
-        <Text style={{
+        <AyezText medium style={{
           color: 'black',
-          fontFamily: 'Poppins-Medium',
           fontSize: 15
-        }}>{region}</Text>
+        }}>{region}</AyezText>
       </TouchableOpacity>
     )
   }
@@ -142,15 +142,13 @@ class RegionSelect extends Component {
            }}
           resizeMode={'contain'}
         />
-
-        <Text style={{
+        <AyezText bold style={{
           fontSize: 15,
           marginTop: 40,
           marginLeft: 22,
           marginBottom: 20,
           color: 'black',
-          fontFamily: 'Poppins-Bold'
-        }}>Select your city</Text>
+        }}>Select your city</AyezText>
 
         { this.renderCityButton('ALEXANDRIA') }
         { this.renderCityButton('CAIRO') }

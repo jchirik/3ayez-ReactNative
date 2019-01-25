@@ -17,7 +17,8 @@ import { connect } from 'react-redux';
 import {
   BottomChoiceSelection,
   Header,
-  BlockButton
+  BlockButton,
+  AyezText
 } from '../../_common';
 
 import {
@@ -76,11 +77,10 @@ class SettingsMenu extends Component {
         marginTop: 30,
         marginBottom: 10
       }}>
-        <Text style={{
-          fontFamily: 'Poppins-SemiBold',
+        <AyezText semibold style={{
           fontSize: 22,
           color: 'black',
-        }}>Welcome {this.props.name}</Text>
+        }}>Welcome {this.props.name}</AyezText>
       </View>
     );
   }
@@ -88,14 +88,13 @@ class SettingsMenu extends Component {
   renderFooter() {
     return (
       <View>
-        <Text style={{
-          fontFamily: 'Poppins-Regular',
+        <AyezText regular style={{
           fontSize: 10,
           color: 'black',
           textAlign: 'center',
           marginTop: 30,
           marginBottom: 30
-        }}>Made in 🇪🇬</Text>
+        }}>Made in 🇪🇬</AyezText>
       </View>
     )
   }
@@ -116,11 +115,10 @@ class SettingsMenu extends Component {
           borderBottomWidth: 1
         }}
       >
-        <Text style={{
-          fontFamily: 'Poppins-Light',
+        <AyezText light style={{
           fontSize: 12,
           color: '#4E4E4E',
-        }}>{text}</Text>
+        }}>{text}</AyezText>
       </TouchableOpacity>
     );
   }
@@ -132,15 +130,15 @@ class SettingsMenu extends Component {
         paddingLeft: 20,
         paddingBottom: 10,
         backgroundColor: '#FAFCFD',
+        alignItems: 'flex-start',
         justifyContent: 'flex-end',
         borderColor: '#f7f7f7',
         borderBottomWidth: 1
       }}>
-        <Text style={{
-          fontFamily: 'Poppins-Medium',
+        <AyezText medium style={{
           fontSize: 12,
           color: 'black',
-        }}>{title.toUpperCase()}</Text>
+        }}>{title.toUpperCase()}</AyezText>
       </View>
     );
   }
@@ -150,12 +148,12 @@ class SettingsMenu extends Component {
     const accountSection = {title: 'My Account', data: [
       { text: 'Address Book', action: () => Actions.addressManager(), icon: '' },
       { text: 'Credit Cards', action: () => Actions.creditCardManager(), icon: '' },
-      { text: 'Language', action: this.openLanguageSelect.bind(this), icon: '' },
       { text: 'Previous Orders', action: () => Actions.orderHistory(), icon: '' },
       { text: 'Logout', action: this.openLogoutConfirm.bind(this), icon: ''}
     ]};
 
     const infoSection = {title: 'Information', data: [
+      { text: 'Language', action: this.openLanguageSelect.bind(this), icon: '' },
       { text: 'Terms & Conditions', action: null },
       { text: 'Privacy Policy', action: null },
     ]};

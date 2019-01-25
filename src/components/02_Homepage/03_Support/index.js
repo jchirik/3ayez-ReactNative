@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {
   View,
   FlatList,
-  Text,
   Platform,
   Animated,
   Easing,
@@ -18,6 +17,11 @@ import {
 import {
   STATUS_BAR_HEIGHT
 } from '../../../Helpers.js';
+
+import {
+  RTLImage,
+  AyezText
+} from '../../_common';
 
 // import {
 // } from '../../../actions';
@@ -70,24 +74,22 @@ class Support extends Component {
         <View style={{
           flex: 1,
           alignSelf: 'stretch',
+          alignItems: 'flex-start',
           paddingTop: 18,
           paddingBottom: 10,
           paddingLeft: 13
         }}>
-          <Text style={{
+          <AyezText semibold style={{
             color: '#2DD38F',
-            fontFamily: 'Poppins-SemiBold',
             fontSize: 11
-          }}>CONTACT 3AYEZ</Text>
-          <Text style={{
+          }}>CONTACT 3AYEZ</AyezText>
+          <AyezText medium style={{
             color: 'black',
-            fontFamily: 'Poppins-Medium',
             fontSize: 22
-          }}>Chat with us</Text>
+          }}>Chat with us</AyezText>
           <View style={{ flex: 1 }} />
 
           <View style={{
-            alignSelf: 'flex-start',
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: '#2DD38F',
@@ -97,12 +99,11 @@ class Support extends Component {
             paddingRight: 16,
             borderRadius: 8
           }}>
-            <Text style={{
+            <AyezText semibold style={{
               color: 'white',
-              fontFamily: 'Poppins-SemiBold',
               fontSize: 10
-            }}>START</Text>
-            <Image
+            }}>START</AyezText>
+            <RTLImage
               source={start_side_arrow}
               style={{
                 width: 10,
@@ -116,7 +117,7 @@ class Support extends Component {
 
         </View>
 
-        <Image
+        <RTLImage
           source={support_tile}
           style={{
             width: 160,
@@ -140,7 +141,7 @@ class Support extends Component {
       }}
       onPress={() => Actions.settings()}
     >
-      <Image
+      <RTLImage
         source={silhouette_icon}
         style={{
           width: 30,
@@ -149,11 +150,10 @@ class Support extends Component {
          }}
         resizeMode={'contain'}
         />
-        <Text style={{
+        <AyezText semibold style={{
           color: '#0094ff',
-          fontFamily: 'Poppins-SemiBold',
           fontSize: 10
-        }}>SETTINGS</Text>
+        }}>SETTINGS</AyezText>
     </TouchableOpacity>
   )
   }
@@ -165,18 +165,17 @@ class Support extends Component {
           style={styles.tileStyle}
           onPress={() => Actions.supportDetail({ data: item })}
         >
-            <Text style={{
+            <AyezText semibold style={{
               flex: 1,
               fontSize: 14,
               color: '#696A6C',
-              fontFamily: 'Poppins-SemiBold',
               marginLeft: 20,
               marginTop: 16,
               marginBottom: 16,
               marginRight: 20
-            }}>{item.title.en}</Text>
+            }}>{item.title.en}</AyezText>
 
-            <Image
+            <RTLImage
               source={issue_side_arrow}
               style={{
                 width: 10,
@@ -197,13 +196,13 @@ class Support extends Component {
         backgroundColor:'#FAFCFD'
       }}>
 
-        <Text style={{
+        <AyezText bold style={{
           marginTop: STATUS_BAR_HEIGHT,
           marginLeft: 4,
-          fontFamily: 'Poppins-Bold',
           fontSize: 32,
           padding: 16,
-        }}>Support</Text>
+          alignSelf: 'flex-start'
+        }}>Support</AyezText>
 
 
         <FlatList

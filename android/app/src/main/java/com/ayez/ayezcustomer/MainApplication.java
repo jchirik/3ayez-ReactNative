@@ -33,6 +33,7 @@ import com.zmxv.RNSound.RNSoundPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.reactcommunity.rnlanguages.RNLanguagesPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -72,7 +73,8 @@ public class MainApplication extends Application implements ReactApplication {
 
         new RNSoundPackage(),
         new MapsPackage(),
-        new RNDeviceInfo()
+        new RNDeviceInfo(),
+        new RNLanguagesPackage()
       );
     }
 

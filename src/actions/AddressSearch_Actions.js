@@ -17,7 +17,7 @@ import {
 const googlePlacesKey = 'AIzaSyDPWckRr8Yb1stsXBWeh1ME_UDjR9Y_GC0';
 import { getTitleFromGooglePlace } from './Address_Helpers';
 
-export const searchAddresses = (query) => {
+export const searchAddresses = (query, locale) => {
   return (dispatch) => {
     // if an empty query, reset the search screen
     if (!query) {
@@ -51,7 +51,7 @@ export const searchAddresses = (query) => {
     const queryObject = {
       input: query,
       key: googlePlacesKey,
-      language: 'en',
+      language: locale,
       components: 'country:eg'
     };
     const jsonRequest = qs.stringify(queryObject);

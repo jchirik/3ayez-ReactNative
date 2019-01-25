@@ -20,7 +20,8 @@ import { connect } from 'react-redux';
 import {
   Header,
   BlockButton,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../../_common';
 
 const dropdown_icon = require('../../../../assets/images_v2/Common/dropdown.png');
@@ -36,7 +37,7 @@ class PhoneEntry extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   authPhoneLogin() {
     this.props.authPhoneLogin(this.props.phone, this.props.call_code);
   }
@@ -68,12 +69,12 @@ class PhoneEntry extends Component {
           }}
           onPress={() => this.countryPicker.openModal()}
         >
-          <Text
+          <AyezText
+            regular
             style={{
-              fontSize: 14,
-              fontFamily: 'Poppins-Regular'
+              fontSize: 14
             }}
-          >+{this.props.call_code}</Text>
+          >+{this.props.call_code}</AyezText>
           <Image
             source={dropdown_icon}
             style={{
@@ -129,27 +130,25 @@ class PhoneEntry extends Component {
       }}>
         <Header title={'REGISTER USER'}/>
         <View>
-          <Text
+          <AyezText bold
             style={{
               fontSize: 14,
-              fontFamily: 'Poppins-Bold',
               marginTop: 22,
               marginLeft: 26
             }}
-          >Enter your phone number below</Text>
+          >Enter your phone number below</AyezText>
 
           { this.renderPhoneInput() }
           { this.renderCountryPickerModal() }
 
-          <Text
+          <AyezText light
             style={{
               fontSize: 12,
-              fontFamily: 'Poppins-Light',
               textAlign: 'center',
               marginTop: 18,
               marginBottom: 10
             }}
-          >Tap Next to get an SMS confirmation</Text>
+          >Tap Next to get an SMS confirmation</AyezText>
           <BlockButton
             text={'NEXT'}
             style={{

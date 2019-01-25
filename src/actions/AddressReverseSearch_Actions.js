@@ -17,7 +17,7 @@ import { getTitleFromGooglePlace } from './Address_Helpers';
 // ************
 // ************
 
-export const reverseSearchAddress = (point) => {
+export const reverseSearchAddress = (point, locale) => {
   return (dispatch) => {
     // otherwise search
     const request = new XMLHttpRequest();
@@ -57,7 +57,7 @@ export const reverseSearchAddress = (point) => {
     const queryObject = {
       latlng: `${point.lat},${point.lng}`,
       key: googlePlacesKey,
-      language: 'en'
+      language: locale
     };
     const jsonRequest = qs.stringify(queryObject);
     const requestURL = `https://maps.googleapis.com/maps/api/geocode/json?${jsonRequest}`;

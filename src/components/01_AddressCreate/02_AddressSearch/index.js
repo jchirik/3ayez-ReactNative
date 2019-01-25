@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   TextInput,
   FlatList,
    Image,
@@ -18,7 +17,8 @@ import { connect } from 'react-redux';
 import {
   Header,
   SearchBar,
-  LoadingOverlay
+  LoadingOverlay,
+  AyezText
 } from '../../_common';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -90,18 +90,17 @@ class AddressSearch extends Component {
           />
           <View style={{
             flex: 1,
+            alignItems: 'flex-start',
             flexDirection: 'column'
           }}>
-            <Text style={{
+            <AyezText semibold style={{
               fontSize: 15,
-              color: 'black',
-              fontFamily: 'Poppins-SemiBold'
-            }}>{item.structured_formatting.main_text}</Text>
-            <Text style={{
+              color: 'black'
+            }}>{item.structured_formatting.main_text}</AyezText>
+            <AyezText regular style={{
               fontSize: 14,
               color: '#8E8E93',
-              fontFamily: 'Poppins-Regular'
-            }}>{item.structured_formatting.secondary_text}</Text>
+            }}>{item.structured_formatting.secondary_text}</AyezText>
           </View>
         </TouchableOpacity>
       );
@@ -119,12 +118,11 @@ class AddressSearch extends Component {
     if (this.props.query) {
       return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{
+          <AyezText regular style={{
             margin: 40,
             color: '#8E8E93',
-            fontSize: 15,
-            fontFamily: 'Poppins-Regular'
-          }}>No Results</Text>
+            fontSize: 15
+          }}>No Results</AyezText>
         </View>
       )
     }
@@ -132,14 +130,13 @@ class AddressSearch extends Component {
     // otherwise instructions
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{
+        <AyezText regular style={{
           margin: 40,
           width: 200,
           textAlign: 'center',
           color: '#8E8E93',
-          fontSize: 15,
-          fontFamily: 'Poppins-Regular'
-        }}>Let us know where you are to send your orders.</Text>
+          fontSize: 15
+        }}>Let us know where you are to send your orders.</AyezText>
       </View>
     )
   }
