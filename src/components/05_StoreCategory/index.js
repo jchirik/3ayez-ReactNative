@@ -22,7 +22,10 @@ import {
 import {
   selectSubcategory
 } from '../../actions';
-import { strings, statusBarMargin, fetchCategoryImage, localizeDN } from '../../Helpers.js';
+import { statusBarMargin, fetchCategoryImage } from '../../Helpers.js';
+
+import { strings, translate } from '../../i18n.js';
+
 import {
   BackButton
 } from '../_common';
@@ -139,7 +142,7 @@ class StoreCategory extends Component {
   renderSubcategoryRow({ item, index }) {
 
     const subcategory = item;
-    const subcategoryTitle = subcategory.name ? localizeDN(subcategory.name) : subcategory.title;
+    const subcategoryTitle = subcategory.name ? translate(subcategory.name) : subcategory.title;
 
     return (
       <View

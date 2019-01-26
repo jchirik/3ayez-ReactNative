@@ -26,6 +26,11 @@ import {
   AYEZ_GREEN
 } from '../../../Helpers.js';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 const opening_video = require('../../../../assets/images_v2/Tutorial/opening_video.gif');
 
 const logo = require('../../../../assets/images_v2/Common/logo.png');

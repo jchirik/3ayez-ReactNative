@@ -34,6 +34,11 @@ import {
   STATUS_BAR_HEIGHT
 } from '../../../Helpers.js';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 const tutorial_1 = require('../../../../assets/images_v2/Tutorial/tutorial_1.jpg');
 const tutorial_2 = require('../../../../assets/images_v2/Tutorial/tutorial_2.jpg');
 const tutorial_3 = require('../../../../assets/images_v2/Tutorial/tutorial_3.jpg');
@@ -90,9 +95,9 @@ class TutorialSwipe extends Component {
                 }}
                 resizeMode={'contain'}
               />
-              <Text style={{
+              <AyezText semibold style={{
                 marginTop: 20
-              }}>Conveniently order online</Text>
+              }}>Conveniently order online</AyezText>
             </View>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <RTLImage
@@ -104,9 +109,9 @@ class TutorialSwipe extends Component {
                 }}
                 resizeMode={'contain'}
               />
-              <Text style={{
+              <AyezText semibold style={{
                 marginTop: 20
-              }}>Shop easier</Text>
+              }}>Shop easier</AyezText>
             </View>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <RTLImage
@@ -118,9 +123,9 @@ class TutorialSwipe extends Component {
                 }}
                 resizeMode={'contain'}
               />
-              <Text style={{
+              <AyezText semibold style={{
                 marginTop: 20
-              }}>Track your delivery in real time</Text>
+              }}>Track your delivery in real time</AyezText>
             </View>
         </IndicatorViewPager>
 

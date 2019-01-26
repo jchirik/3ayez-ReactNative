@@ -30,6 +30,7 @@ import Settings from './Settings_Reducer';
 
 import OrderHistory from './OrderHistory_Reducer';
 import OrderTracker from './OrderTracker_Reducer';
+import DriverTracker from './DriverTracker_Reducer';
 import OngoingOrders from './OngoingOrders_Reducer';
 
 import Timeslots from './Timeslots_Reducer';
@@ -91,6 +92,7 @@ const reducers = combineReducers({
 
   OrderHistory,
   OrderTracker,
+  DriverTracker,
   OngoingOrders,
 
   SupportChat

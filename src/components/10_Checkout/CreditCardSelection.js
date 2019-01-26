@@ -10,7 +10,7 @@ import {
   Easing
 } from 'react-native';
 import {
-  creditCardIcon,
+  paymentIcon,
   AYEZ_GREEN
 } from '../../Helpers.js';
 import { Actions } from 'react-native-router-flux';
@@ -23,6 +23,11 @@ import {
 import {
   setPaymentMethod
 } from '../../actions';
+
+import {
+  strings,
+  translate
+} from '../../i18n.js';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 // when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
@@ -118,7 +123,7 @@ class CreditCardSelection extends Component {
        }}
        >
         <Image
-          source={creditCardIcon(card.brand)}
+          source={paymentIcon(card.brand, 'CREDIT')}
           style={{
             width: 50,
             height: 50,

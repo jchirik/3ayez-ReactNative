@@ -25,6 +25,11 @@ import {
   AyezText
 } from '../_common';
 
+import {
+  strings,
+  translate
+} from '../../i18n.js';
+
 // a big comoonent
 class SupportDetail extends Component {
   render() {

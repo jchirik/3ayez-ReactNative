@@ -21,8 +21,9 @@ import {
 } from '../../Helpers.js';
 
 import {
-
-} from '../../actions';
+  strings,
+  translate
+} from '../../i18n.js';
 
 class Homepage extends Component {
 

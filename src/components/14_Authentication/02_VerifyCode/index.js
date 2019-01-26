@@ -28,6 +28,11 @@ import {
   authPhoneVerify
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 class VerifyCode extends Component {
 
   constructor(props) {
@@ -105,7 +110,8 @@ class VerifyCode extends Component {
               fontSize: 14,
               marginTop: 22,
               marginLeft: 26,
-              marginBottom: 10
+              marginBottom: 10,
+              alignSelf: 'flex-start'
             }}
           >Enter the code sent to you below</AyezText>
 

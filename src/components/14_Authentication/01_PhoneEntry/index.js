@@ -32,6 +32,11 @@ import {
   authPhoneLogin
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 class PhoneEntry extends Component {
 
   constructor(props) {
@@ -134,7 +139,8 @@ class PhoneEntry extends Component {
             style={{
               fontSize: 14,
               marginTop: 22,
-              marginLeft: 26
+              marginLeft: 26,
+              alignSelf: 'flex-start'
             }}
           >Enter your phone number below</AyezText>
 

@@ -22,6 +22,11 @@ import {
   setOrderNotes
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 
 class CheckoutNotesDetail extends Component {
 

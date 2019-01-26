@@ -23,6 +23,10 @@ import {
   AyezText
 } from '../../_common';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
 // import {
 // } from '../../../actions';
 

@@ -30,10 +30,9 @@ import {
 } from '../_common';
 
 import {
-  strings
-} from '../../Helpers.js';
-
-
+  strings,
+  translate
+} from '../../i18n.js';
 
 
 
@@ -135,6 +134,7 @@ class TimeslotSelect extends Component {
         <Header
           title={'Schedule Order'}
           onBackButtonPress={() => Actions.pop()}
+          blackStyle
         />
         <SectionList
           style={{ flex: 1 }}

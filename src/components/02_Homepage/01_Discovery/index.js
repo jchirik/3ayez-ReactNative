@@ -18,6 +18,10 @@ import {
 // import {
 // } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
 
 class Discovery extends Component {
 

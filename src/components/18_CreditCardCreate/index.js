@@ -21,8 +21,9 @@ import {
 } from '../../actions';
 
 import {
-  strings
-} from '../../Helpers.js';
+  strings,
+  translate
+} from '../../i18n.js';
 
 import {
   Header,

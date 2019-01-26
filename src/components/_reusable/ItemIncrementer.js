@@ -6,7 +6,8 @@ import {
   removeFromBasket
 } from '../../actions';
 
-import { strings, isAndroid } from '../../Helpers.js';
+import { isAndroid } from '../../Helpers.js';
+import { strings } from '../../i18n.js';
 
 const plusIcon = require('../../../assets/images/incr_plus.png');
 const minusIcon = require('../../../assets/images/incr_minus.png');

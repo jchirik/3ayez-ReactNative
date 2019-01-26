@@ -25,7 +25,12 @@ import {
   BlockButton,
   AyezText
 } from '../../_common';
-import { strings, translate } from '../../../i18n.js';
+
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 const star_icon = require('../../../../assets/images_v2/Common/star.png');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;

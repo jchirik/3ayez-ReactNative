@@ -30,10 +30,13 @@ import {
 } from '../../actions';
 
 import {
-  AYEZ_GREEN,
-  strings,
-  statusBarMargin
+  AYEZ_GREEN
 } from '../../Helpers.js';
+
+import {
+  strings,
+  translate
+} from '../../i18n.js';
 
 const cameraIcon = require('../../../assets/images_v2/Support/camera.png');
 const chatSendIcon = require('../../../assets/images_v2/Support/chat_send.png');

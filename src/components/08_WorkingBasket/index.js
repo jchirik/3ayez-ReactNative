@@ -27,11 +27,14 @@ import {
 } from '../_reusable';
 
 import {
-  strings,
-  localizeDN,
   statusBarMargin,
   calculateTotal
 } from '../../Helpers.js';
+
+import {
+  strings,
+  translate
+} from '../../i18n.js';
 
 const window = Dimensions.get('window');
 const skeuomorphBasket = require('../../../assets/images/skeuomorph_basket.png');
@@ -292,7 +295,7 @@ class WorkingBasket extends Component {
   render() {
 
     const { seller } = this.props;
-    const sellerName = localizeDN(seller.display_name);
+    const sellerName = translate(seller.display_name);
 
     return (
       <View style={{ flex: 1 }}>

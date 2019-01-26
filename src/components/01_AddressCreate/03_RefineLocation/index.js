@@ -24,6 +24,11 @@ import {
   setAddressLocation,
   reverseSearchAddress
 } from '../../../actions';
+
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 const pinIcon = require('../../../../assets/images_v2/AddressCreate/pin.png');
@@ -142,7 +147,7 @@ class RefineLocation extends Component {
               longitudeDelta: 0.003,
             }}
             onRegionChange={this.onRegionChange.bind(this)}
-            onRegionChangeComplete={() => this.props.reverseSearchAddress(this.props.point)}
+            onRegionChangeComplete={() => this.props.reverseSearchAddress(this.props.point, this.props.locale)}
           />
           {this.renderPinOverlay()}
         </View>
@@ -169,17 +174,21 @@ class RefineLocation extends Component {
   }
 }
 
-const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
+const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Settings }) => {
   const { point } = AddressCreate;
   const {
     title,
     is_loading
   } = AddressReverseSearch;
+  const {
+    locale
+  } = Settings;
   return {
     point,
 
     title,
-    is_loading
+    is_loading,
+    locale
   };
 };
 

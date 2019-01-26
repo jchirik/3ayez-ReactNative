@@ -30,6 +30,10 @@ import {
 
 import {
   strings,
+  translate
+} from '../../i18n.js';
+
+import {
   padNumberZeros,
   creditCardIcon
 } from '../../Helpers.js';

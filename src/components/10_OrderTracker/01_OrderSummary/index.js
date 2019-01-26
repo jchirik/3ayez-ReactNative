@@ -21,62 +21,107 @@ import {
 } from '../../../actions';
 
 import {
-  strings,
-  localizeDN,
-  parsePayment,
-  parseTimestamp
+  parseTimestamp,
+
+
+  paymentIcon,
+  AYEZ_GREEN
 } from '../../../Helpers.js';
+
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 
 import {
   Header,
   BlockButton,
   BackButton,
-  AyezText
+  AyezText,
+  BottomChoiceSelection
 } from '../../_common';
+
+import { SummarySection } from './SummarySection';
 
 
 class OrderSummary extends Component {
 
-  renderPayment() {
-    const { payment_method, auto_total } = this.props;
-    return (
-      <View>
-        <AyezText regular>Payment method</AyezText>
-        <View>
-          <Image
-            source={null}
-            resizeMode={'contain'}
-          />
-          <AyezText regular>{(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</AyezText>
-        </View>
-      </View>
-    );
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cancelConfirm: false
+    };
   }
 
+  // 1. Order Number
+  renderOrderNumber() {
+    const { order_number } = this.props;
+    return (
+      <AyezText bold size={30}>Order #{order_number}</AyezText>
+    )
+  }
+
+  // 2. Seller
+  renderSeller() {
+    const { seller } = this.props;
+    return (
+      <AyezText medium>{translate(seller.display_name)}</AyezText>
+    )
+  }
+
+  // 3. Status
+  renderStatus() {
+    const {
+      status,
+      timeslot,
+      is_timeslot_ongoing
+    } = this.props;
+
+    let statusText = '-'
+    if (status === 0) {
+      if (is_timeslot_ongoing) { statusText = 'Awaiting Store' }
+      else if (Date.now() < timeslot.start) { statusText = 'Scheduled' }
+    } else if (status <= 50) {
+      statusText = 'Preparing in Store';
+    } else if (status < 100) {
+      statusText = 'Assigning Driver';
+    } else if (status < 200) {
+      statusText = 'On the way';
+    } else if (status === 200) {
+      statusText = 'Complete';
+    } else if (status === 300) {
+      statusText = 'Cancelled';
+    } else if (status === 400) {
+      statusText = 'Rejected by Store';
+    }
+    return (
+      <AyezText medium>Status: {statusText}</AyezText>
+    )
+  }
+
+  // 4. Address
   renderAddress() {
     if (!this.props.address) { return null; }
     const { street, building, floor, apt, area, region } = this.props.address;
-    // const addressHeader = `${street}`;
-    // let addressArea = '';
-    // if (area && area.display_name) { addressArea = localizeDN(area.display_name); }
     return (
-      <View>
-        <AyezText regular>{street}</AyezText>
-        <AyezText regular>{(area && area.display_name) ? `${area.display_name.ar}, ` : ''}{region}</AyezText>
-        <AyezText regular>Building {building}</AyezText>
-        <AyezText regular>Floor {floor}</AyezText>
-        <AyezText regular>Apt {apt}</AyezText>
-      </View>
+      <SummarySection>
+        <AyezText regular color={AYEZ_GREEN} size={15}>ADDRESS</AyezText>
+        <AyezText medium>{street}</AyezText>
+        <AyezText medium>{translate(area)} {region}</AyezText>
+        <AyezText medium>Building {building}</AyezText>
+        <AyezText medium>Floor {floor}</AyezText>
+        <AyezText medium>Apt {apt}</AyezText>
+      </SummarySection>
     );
   }
 
-
+  // 5. Delivery Time
   renderTimeslot() {
-
     const { timeslot, timestamp } = this.props;
     let timeString = '';
     let dateString = '';
-
     if (timeslot && timeslot.start) {
       const timeslotStart = parseTimestamp(timeslot.start);
       const timeslotEnd = parseTimestamp(timeslot.end);
@@ -87,100 +132,151 @@ class OrderSummary extends Component {
       timeString = `${timestamp.timeString}${timestamp.ampmString}`;
       dateString = `${timestamp.dateString}`;
     }
-
     return (
-      <View>
-        <AyezText regular>Delivery time</AyezText>
-        <AyezText regular>{timeString}</AyezText>
-        <AyezText regular>{dateString}</AyezText>
-      </View>
+      <SummarySection>
+        <AyezText regular color={AYEZ_GREEN} size={15}>DELIVERY TIME</AyezText>
+        <AyezText medium>{dateString}</AyezText>
+        <AyezText medium>{timeString}</AyezText>
+      </SummarySection>
     );
   }
 
-renderItems() {
+  // 6. Payment
+  renderPayment() {
+    const { payment_method, auto_total } = this.props;
 
-  const { items, items_loading } = this.props;
+    if (!payment_method) { return null; }
 
-  if (items_loading) {
+    let payment_text = 'Cash';
+    if (payment_method.type === 'CREDIT') {
+      payment_text = `**** ${payment_method.last4}`;
+    }
+    const payment_image = paymentIcon(payment_method.brand, payment_method.type);
+
     return (
-      <ActivityIndicator size="small" style={{ margin: 20, height: 40 }} />
-    )
+      <SummarySection>
+        <AyezText regular color={AYEZ_GREEN} size={15}>PAYMENT</AyezText>
+        <View>
+          <AyezText medium>{(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</AyezText>
+          <View style={{ flexDirection: 'row' }}>
+            <Image
+              source={payment_image}
+              style={{
+                width: 30,
+                height: 20
+               }}
+              resizeMode={'contain'}
+              />
+            <AyezText regular style={{ alignSelf: 'center', marginLeft: 6 }}>{payment_text}</AyezText>
+          </View>
+        </View>
+      </SummarySection>
+    );
   }
 
-  const basketItems = items.map(item => (
-    <View>
-      <AyezText regular>{item.title_arab}</AyezText>
-    </View>
-  ));
+  // 7. Items
+  renderItems() {
+    const { items, items_loading } = this.props;
+    if (items_loading) {
+      return (
+        <ActivityIndicator size="small" style={{ margin: 20, height: 40 }} />
+      )
+    }
+    const basketItems = items.map(item => (
+      <View>
+        <AyezText regular>{translate(item)}</AyezText>
+      </View>
+    ));
+    return (
+      <SummarySection>
+        <AyezText regular color={AYEZ_GREEN} size={15}>ORDER ITEMS</AyezText>
+        { basketItems }
+      </SummarySection>
+    );
+  }
 
-  return (
-    <View>
-      <AyezText regular>Order items</AyezText>
-      { basketItems }
-    </View>
-  );
-}
+  // 8. summary
+  renderSummary() {
+    const {
+      delivery_fee,
+      tip,
+      coupon,
+      auto_item_total,
+      auto_total
+    } = this.props;
+
+    return (
+      <SummarySection>
+        <AyezText regular color={AYEZ_GREEN} size={15}>SUMMARY</AyezText>
+        <View>
+          <AyezText medium>Subtotal: {(parseFloat(auto_item_total) ? parseFloat(auto_item_total).toFixed(2) : '-')} EGP</AyezText>
+          <AyezText medium>Delivery: {(parseFloat(delivery_fee) ? parseFloat(delivery_fee).toFixed(2) : '-')} EGP</AyezText>
+          <AyezText medium>Tip: {(parseFloat(tip) ? parseFloat(tip).toFixed(2) : '0.00')} EGP</AyezText>
+          <AyezText medium>Coupon: {(coupon && parseFloat(coupon.amount) ? `${parseFloat(coupon.amount).toFixed(2)} EGP` : '-')}</AyezText>
+          <AyezText medium>Total: {(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</AyezText>
+        </View>
+      </SummarySection>
+    );
+  }
 
 
 
   render() {
-
-    const {
-      id,
-      order_number,
-      seller,
-      status,
-      items_loading
-    } = this.props;
-
     return (
       <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
-        <Text>Review your order</Text>
-        <Text>Order #{order_number}</Text>
-        <Text>{seller.display_name ? seller.display_name.ar : ''}</Text>
-        <Text>Status: Scheduled</Text>
-        { this.renderAddress() }
-        { this.renderTimeslot() }
-        { this.renderPayment() }
-        { this.renderItems() }
+        <Header title='Order Summary' blackStyle />
+        <ScrollView>
+          <SummarySection>
+            { this.renderOrderNumber() }
+            { this.renderSeller() }
+            { this.renderStatus() }
+          </SummarySection>
+          { this.renderAddress() }
+          { this.renderTimeslot() }
+          { this.renderPayment() }
+          { this.renderItems() }
+          { this.renderSummary() }
 
-        <BackButton fixed />
+
+          <BlockButton
+            onPress={() => Actions.supportChat()}
+            text={'SUPPORT'}
+            style={{
+              marginTop: 20,
+              marginLeft: 30,
+              marginRight: 30
+            }}
+            />
+          { (this.props.status < 200) ? (
+            <BlockButton
+              onPress={() => this.setState({ cancelConfirm: true })}
+              text={'CANCEL YOUR ORDER'}
+              color={'#E64E47'}
+              style={{
+                marginTop: 20,
+                marginLeft: 30,
+                marginRight: 30
+              }}
+              />
+            ) : null }
+          <View style={{ height: 40 }} />
+        </ScrollView>
+
+        <BottomChoiceSelection
+          isVisible={this.state.cancelConfirm}
+          onClose={() => this.setState({ cancelConfirm: false })}
+          title='Are you sure you want to cancel?'
+          backgroundColor='#E64E47'
+          buttons={[
+            { text: 'Yes, sure', action: () => this.props.markOrderCancelled(this.props.id) },
+            { text: 'No, cancel', action: () => console.log('closing') }
+          ]}
+        />
       </View>
     );
   }
 }
 
-
-
-
-
-          // <ScrollView style={{ flex: 1 }}>
-          //
-          //   <View style={{ marginBottom: 5 }}>
-          //     { this.renderSectionHeader(strings('OrderTracker.detailsHeader')) }
-          //
-          //
-          //
-          //   </View>
-          //
-          //
-          //
-          //   <BlockButton
-          //     onPress={() => Actions.supportChat()}
-          //     style={{ margin: 20, marginTop: 40, marginBottom: 10, height: 60 }}
-          //     text={strings('OrderTracker.problem')}
-          //     color='black'
-          //   />
-          //
-          //   { (status >= 100) ? null : (
-          //     <BlockButton
-          //       onPress={() => this.props.markOrderCancelled(id)}
-          //       style={{ margin: 20, marginTop: 0, marginBottom: 30, height: 60 }}
-          //       text={strings('OrderTracker.cancelOrder')}
-          //       color='#4f4f4f'
-          //     />
-          //   )}
-          // </ScrollView>
 
 const mapStateToProps = ({ OrderTracker }) => {
 
@@ -192,11 +288,18 @@ const mapStateToProps = ({ OrderTracker }) => {
     status,
     status_log,
     payment_method,
-    auto_total,
     address,
     timeslot,
     timestamp,
     notes,
+
+    delivery_fee,
+    tip,
+    coupon,
+    auto_item_total,
+    auto_total,
+
+    is_timeslot_ongoing,
 
     items_loading
   } = OrderTracker;
@@ -209,11 +312,18 @@ const mapStateToProps = ({ OrderTracker }) => {
     status,
     status_log,
     payment_method,
-    auto_total,
     address,
     timeslot,
     timestamp,
     notes,
+
+    delivery_fee,
+    tip,
+    coupon,
+    auto_item_total,
+    auto_total,
+
+    is_timeslot_ongoing,
 
     items_loading
    };

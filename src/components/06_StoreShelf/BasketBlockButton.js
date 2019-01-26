@@ -8,7 +8,10 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { strings, isIPhoneX } from '../../Helpers.js';
+import { isIPhoneX } from '../../Helpers.js';
+
+
+import { strings } from '../../i18n.js';
 
 const window = Dimensions.get('window');
 

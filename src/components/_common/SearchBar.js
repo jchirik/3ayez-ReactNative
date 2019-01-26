@@ -63,6 +63,7 @@ const SearchBar = ({
       <TextInput
         style={{
           flex: 1,
+          alignSelf: 'stretch',
           paddingLeft: 12,
           fontSize: 14,
           fontFamily: 'Poppins-Regular',

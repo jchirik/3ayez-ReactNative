@@ -27,6 +27,11 @@ import {
   selectGooglePlaceResult
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 const result_pin_icon = require('../../../../assets/images_v2/Search/result_pin.png');
 // import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
@@ -59,7 +64,7 @@ class AddressSearch extends Component {
     super(props);
   }
   componentDidMount() {
-    this.props.searchAddresses('');
+    this.props.searchAddresses('', this.props.locale);
   }
 
   setAddressLocation(google_place) {
@@ -151,7 +156,7 @@ class AddressSearch extends Component {
         <Header title={'DELIVERY ADDRESS'}/>
         <SearchBar
           value={this.props.query}
-          onChangeText={this.props.searchAddresses.bind(this)}
+          onChangeText={(text) => this.props.searchAddresses(text, this.props.locale)}
           placeholder={'search for new address, city, street'}
           autofocus
         />
@@ -173,17 +178,21 @@ class AddressSearch extends Component {
   }
 }
 
-const mapStateToProps = ({ AddressSearch, AddressPlaceDetails }) => {
+const mapStateToProps = ({ AddressSearch, AddressPlaceDetails, Settings }) => {
   const { query, is_loading, results } = AddressSearch;
   const coordinate_loading = AddressPlaceDetails.is_loading;
   const coordinate_error = AddressPlaceDetails.error;
+
+  const { locale } = Settings;
 
   return {
     query,
     is_loading,
     results,
     coordinate_loading,
-    coordinate_error
+    coordinate_error,
+
+    locale
   };
 };
 

@@ -24,14 +24,19 @@ import {
 import {
   Header,
   BlockButton,
-  BottomChoiceSelection
+  BottomChoiceSelection,
+  AyezText
 } from '../_common';
 
 import {
-  strings,
   padNumberZeros,
-  creditCardIcon
+  paymentIcon
 } from '../../Helpers.js';
+
+import {
+  strings,
+  translate
+} from '../../i18n.js';
 
 const delete_icon = require('../../../assets/images_v2/Common/delete.png');
 
@@ -55,7 +60,7 @@ class CreditCardManager extends Component {
           }}
       >
         <Image
-          source={creditCardIcon(item.brand)}
+          source={paymentIcon(item.brand, 'CREDIT')}
           style={{
             width: 50,
             height: 50,

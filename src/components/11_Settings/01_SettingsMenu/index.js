@@ -27,6 +27,11 @@ import {
   onCompleteAuth
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 // { text: 'Credit Cards', action: null, icon: '' },
 
 class SettingsMenu extends Component {
@@ -80,6 +85,7 @@ class SettingsMenu extends Component {
         <AyezText semibold style={{
           fontSize: 22,
           color: 'black',
+          alignSelf: 'flex-start'
         }}>Welcome {this.props.name}</AyezText>
       </View>
     );

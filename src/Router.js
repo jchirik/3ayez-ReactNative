@@ -50,6 +50,8 @@ import CheckoutNotesDetail from './components/10_Checkout/01_CheckoutNotesDetail
 
 
 import OrderTracker from './components/10_OrderTracker';
+import OrderSummary from './components/10_OrderTracker/01_OrderSummary';
+import DriverTracker from './components/10_OrderTracker/02_DriverTracker';
 
 import SettingsMenu from './components/11_Settings/01_SettingsMenu';
 import OrderHistory from './components/11_Settings/02_OrderHistory';
@@ -407,7 +409,14 @@ class RouterComponent extends Component {
             key="orderTracker"
             component={OrderTracker}
           />
-
+          <Scene
+            key="orderSummary"
+            component={OrderSummary}
+          />
+          <Scene
+            key="driverTracker"
+            component={DriverTracker}
+          />
           <Scene
             key="addressManager"
             component={AddressManager}

@@ -11,6 +11,9 @@ class AyezText extends Component {
       style,
       children,
 
+      color='black',
+      size=14,
+
       regular=false,
       medium=false,
       semibold=false,
@@ -57,7 +60,8 @@ class AyezText extends Component {
 
     return (
       <Text style={{
-        color: 'black',
+        color,
+        fontSize: size,
         ...style,
         fontFamily
       }}>{children}</Text>

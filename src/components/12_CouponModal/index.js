@@ -32,6 +32,11 @@ import {
   resetCoupon
 } from '../../actions';
 
+import {
+  strings,
+  translate
+} from '../../i18n.js';
+
 class CouponModal extends Component {
 
   constructor(props) {

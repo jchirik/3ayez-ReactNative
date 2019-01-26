@@ -14,10 +14,13 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import {
-  strings,
-  parseTimestamp,
-  localizeDN
+  parseTimestamp
 } from '../../../Helpers.js';
+
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
 
 import {
   fetchOrderHistory
@@ -484,8 +487,8 @@ class OrderHistory extends Component {
         style={styles.orderContainer}
       >
 
-        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end', marginRight: 18}}>
-          <AyezText regular style={styles.orderNumber}>{order.seller.display_name ? localizeDN(order.seller.display_name) : order.seller.name}</AyezText>
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginLeft: 18}}>
+          <AyezText regular style={styles.orderNumber}>{translate(order.seller.display_name)}</AyezText>
           <AyezText regular style={styles.orderTime}>{timeString}</AyezText>
           <AyezText regular style={[ styles.orderStatus, { color: statusColor }]}>{statusText}</AyezText>
         </View>
@@ -561,7 +564,7 @@ const styles = {
     color: 'black'
   },
   sectionHeaderContainer: {
-    paddingRight: 15,
+    paddingLeft: 15,
     paddingTop: 10,
     backgroundColor: 'white',
     borderBottomWidth: 1,
@@ -569,7 +572,6 @@ const styles = {
   },
   sectionHeaderText: {
     color: 'black',
-    textAlign: 'right',
     fontSize: 19,
   }
 };

@@ -7,5 +7,224 @@
     "openHours": "Open {{start}} - {{end}}",
     "numRatings": "{{num_reviews}} Ratings",
     "deliveryTime": "{{delivery_time}} Min Delivery"
+  },
+
+
+
+
+
+  "LocationSelector": {
+    "CAIRO": "Cairo",
+    "ALEXANDRIA": "Alexandria",
+    "searchNeighborhood": "Search your neighborhood",
+    "selectNeighborhood": "Select your neighborhood",
+    "currentLocation": "Current Location",
+    "fetchingLocation": "Fetching Location",
+    "noLocationAvailable": "Current Location Unavailable"
+  },
+  "FirstTimeModal": {
+    "orderingFrom": "Are you ordering from "
+  },
+  "StoreSelector": {
+    "pricesMayVary": "Prices may vary in the application",
+    "select": "SELECT",
+    "noStores": "Coming Soon",
+    "whatsNeighborhood": "What's your neighborhood?",
+    "chooseNeighborhood": "Choose another neighborhood",
+    "change": "change"
+  },
+  "StoreCategories": {
+    "poweredBy": "powered by ",
+    "myAddress": "My Address",
+    "myOrders": "My Orders",
+    "itemsInYourBasket": "items in your basket!"
+  },
+  "StoreSubcategories": {
+    "noItemsAvailable": "No items currently available"
+  },
+  "Item": {
+    "limit": "limit",
+  },
+  "OrderTrackBanner": {
+    "viewPlaced": "View Placed Orders",
+    "active": "Active",
+    "order#": "Order #"
+  },
+  "OrderHistory": {
+    "header": "Placed Orders",
+    "active": "Active",
+    "past": "Past",
+    "order#": "Order #"
+  },
+  "AddCreditCard": {
+    "header": "Add a Credit Card",
+    "number": "Card Number",
+    "expiry": "Expiry Date",
+    "cvc": "CVC",
+    "name": "Name",
+    "submitCard": "Submit Card"
+  },
+  "AddressSelect": {
+    "header": "Choose your Address",
+    "addAddress": "Add an Address"
+  },
+  "CreateAddress": {
+    "header": "Details for Delivery",
+    "fieldRequired": "This field is required",
+    "streetInputTitle": "What is your street?",
+    "buildingInputTitle": "What is your building?",
+    "apartmentInputTitle": "What is your apartment?",
+    "symbolInputTitle": "Any unique symbols?",
+    "confirmLocationPoint": "Confirm Location"
+  },
+  "OrderStatuses": {
+    "50": "Order seen by store",
+    "90": "Order approved by store",
+    "100": "Out for delivery",
+
+    "0": "Order sent to store",
+    "150": "Order dropped off by driver",
+    "200": "Order completed",
+    "300": "Cancelled",
+    "400": "Declined by Store"
+  },
+  "OrderTracker": {
+    "problem": "Problem",
+    "itemsHeader": "Items",
+    "detailsHeader": "Delivery Details",
+    "order#": "Order #",
+
+    "receivedOrderButton": "I have received this order",
+    "statusHistory": "Status History",
+    "receipt": "Receipt",
+    "cancelOrder": "Cancel Order"
+  },
+  "Payment": {
+    "cash": "Cash on Delivery",
+    "cardreader": "Card on Delivery",
+    "addcard": "+ Add Card"
+  },
+  "Regions": {
+    "alexandria": "Alexandria",
+    "sahel": "Sahel",
+    "cairo": "Cairo"
+  },
+  "SearchBar": {
+    "placeholder": "What would you like?"
+  },
+  "Authentication": {
+    "phoneEntryTitle": "Whats your phone number?",
+    "verificationEntryTitle": "Please enter the verification code sent to you",
+    "invalidVerificationCode": "The code you entered is invalid",
+    "nameEntryTitle": "Whats your name?",
+    "yalla": "Yalla!",
+  },
+  "AddressDetail": {
+    "region": "Region:",
+    "name": "Name",
+    "phone": "Phone Number",
+    "street": "Street",
+    "building": "Building",
+    "building_name": "Building Name",
+    "floor": "Floor",
+    "apt": "Apt",
+    "notes": "Notes"
+  },
+  "WorkingBasket": {
+    "subtotal": "SUBTOTAL",
+    "submitButton": "OK",
+    "callForProblem": "Call Store",
+    "addAddress": "🏠 Provide an address...",
+    "changeAddress": "Change Address",
+    "clearOrder": "Clear Basket",
+    "nothingInBasket": "Nothing in your basket!",
+    "clearOrderModalHeader": "Are you sure you want to clear your basket?",
+    "clearOrderModalButton": "CLEAR",
+    "weightsVary": "Exact weight may vary"
+  },
+  "Checkout": {
+    "header": "Review",
+    "addressTitle": "Address",
+    "couponTitle": "Coupon",
+    "paymentTitle": "Payment",
+    "submitButton": "Submit",
+    "deliveryFee": "Delivery Fee",
+    "notesTitle": "Any additional notes?"
+  },
+  "ShoppingComponent": {
+    "3ayezButton": "3ayez",
+    "basketButtonTitle": "Basket",
+  },
+  "DeliveryTimePicker": {
+    "header": "Select a Delivery Time",
+    "pickLaterTime": "Pick a Later Time"
+  },
+  "CouponBanner": {
+    "addCoupon": "Add Coupon",
+    "minimum": "Order minimum:",
+    "off": "off"
+  },
+  "CouponModal": {
+    "header": "Enter your coupon code",
+    "submitCouponButton": "Apply",
+    "successHeader": "Successfully Applied",
+    "percentOff": "percent off",
+    "poundsOff": "pounds off",
+    "minimum": "Order minimum:",
+    "ok": "OK",
+    "removeCoupon": "Remove Coupon",
+    "BADCONNECTION": "Bad internet connection",
+    "NOTCOUPON": "Invalid coupon code",
+    "MAXUSED": "Coupon already used",
+    "EXPIRED": "Coupon expired",
+    "SELLERINVALID": "Does not apply to this store",
+    "FIRSTTIMEONLY": "Can only be used on your first order",
+    "ALREADYUSED": "Coupon already used",
+    "DEFAULTERROR": "Cannot apply coupon"
+  },
+  "Confirmation": {
+    "tamam": "Send"
+  },
+  "Header": {
+    "searchButton": "Search"
+  },
+  "SupportChat": {
+    "header": "3ayez Support",
+  },
+  "Settings": {
+    "header": "Settings",
+    "language": "Language",
+    "orderHistory": "Order History",
+    "contactUs": "Customer Service",
+    "logout": "Logout"
+  },
+  "SpecialtyBlock": {
+    "promotions": "Promotions",
+    "recent": "Recent"
+  },
+  "Ratings": {
+    "rateLastOrder": "Rate your last order at",
+    "thanksFeedback": "Thanks for your feedback!",
+    "submitReview": "Submit Review",
+    "1stars": "Terrible 😠",
+    "2stars": "Dislike it",
+    "3stars": "Okay 😕",
+    "4stars": "Good but i had a problem",
+    "5stars": "Awesome 😇",
+    "neverReceived": "I didn't receive the order",
+    "rudeService": "Rude service",
+    "wrongPrices": "Wrong Prices",
+    "slowDelivery": "Slow Delivery",
+    "wrongItem": "Wrong Item",
+    "badProduct": "Bad Product"
+  },
+  "Substitution": {
+    "header": "Order Change Required",
+    "subheader": "Your order has some items that are out of stock",
+    "goButton": "GO",
+    "replaceAlternativesHeader": "Replace with any of these alternatives?",
+    "declineReplacement": "I don’t want a replacement",
+    "ok": "OK",
+    "outOfStock": "Out of Stock"
   }
 }

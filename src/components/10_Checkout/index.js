@@ -40,16 +40,15 @@ import CreditCardSelection from './CreditCardSelection';
 import {
   STATUS_BAR_HEIGHT,
   AYEZ_GREEN,
-
   calculateTotal,
   calculateSuggestedTips,
-
-  strings,
-  parsePayment,
-
-  creditCardIcon
+  paymentIcon
 } from '../../Helpers.js';
 
+import {
+  strings,
+  translate
+} from '../../i18n.js';
 
 const cash_icon = require('../../../assets/images_v2/Payment/cash.png');
 const creditcard_icon = require('../../../assets/images_v2/Payment/credit-card.png');
@@ -136,11 +135,10 @@ class Checkout extends Component {
     const { payment_method } = this.props;
 
     let payment_text = 'Cash';
-    let payment_image = cash_icon;
     if (payment_method.type === 'CREDIT') {
       payment_text = `**** ${payment_method.last4}`;
-      payment_image = creditCardIcon(payment_method.brand);
     }
+    const payment_image = paymentIcon(payment_method.brand, payment_method.type);
 
     const selectedCircle = (
       <Image
@@ -427,6 +425,8 @@ class Checkout extends Component {
 
         <View style={{ height: 18 }} />
 
+
+
         <AyezText bold
         style={{
           fontSize: 20,
@@ -443,6 +443,9 @@ class Checkout extends Component {
 
         <View style={{ marginTop: 6, marginBottom: 6, height: 1, backgroundColor: '#eeeeee' }} />
         <ReceiptRow title={'Total'} cost={total} />
+
+
+
 
         <View style={{ height: 20 }} />
 

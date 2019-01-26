@@ -26,6 +26,11 @@ import {
   setAddressDetail
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 // import {
@@ -154,6 +159,7 @@ class AddressDetails extends Component {
             <AyezText bold style={{
               fontSize: 32,
               padding: 16,
+              alignSelf: 'flex-start'
             }}>Delivering to:</AyezText>
 
             { this.renderInputField('Street:', 'street') }

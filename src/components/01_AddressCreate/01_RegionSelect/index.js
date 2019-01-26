@@ -22,6 +22,11 @@ import {
   setAddressRegion
 } from '../../../actions';
 
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
+
 const alexandria_icon = require('../../../../assets/images_v2/Regions/alexandria.png');
 const giza_icon = require('../../../../assets/images_v2/Regions/giza.png');
 const cairo_icon = require('../../../../assets/images_v2/Regions/cairo.png');
@@ -147,7 +152,7 @@ class RegionSelect extends Component {
           marginTop: 40,
           marginLeft: 22,
           marginBottom: 20,
-          color: 'black',
+          alignSelf: 'flex-start'
         }}>Select your city</AyezText>
 
         { this.renderCityButton('ALEXANDRIA') }

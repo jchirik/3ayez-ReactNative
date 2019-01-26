@@ -17,6 +17,10 @@ import {
 
 // import {
 // } from '../../../actions';
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
 
 
 class UniversalSearch extends Component {

@@ -8,6 +8,74 @@ import Moment from 'moment';
 import { Actions } from 'react-native-router-flux';
 import store from './reducers';
 
+
+export const isIPhoneX = () => {
+  const { height, width } = Dimensions.get('window');
+  return (
+    // has to be ios
+    Platform.OS === 'ios' &&
+    // Accounting for the height in either orientation
+    (height === 812 || width === 812)
+  );
+};
+
+export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
+export const AYEZ_GREEN = '#2DD38F';
+
+export const padNumberZeros = (num, size) => {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+
+export const paymentIcon = (brand, type) => {
+  const dir = '../assets/images_v2/Payment/creditcards';
+  if (type === 'CASH') { return require(`${dir}/money.png`); }
+  switch (brand.toUpperCase()) {
+    case 'VISA':
+      return require(`${dir}/visa.png`);
+    case 'MASTERCARD':
+      return require(`${dir}/mastercard.png`);
+    case 'AMERICAN EXPRESS':
+      return require(`${dir}/amex.png`);
+    case 'MAESTRO':
+      return require(`${dir}/maestro.png`);
+    case 'DISCOVER':
+      return require(`${dir}/discover.png`);
+    case 'DINERS CLUB':
+      return require(`${dir}/diners.png`);
+    case 'JCB':
+      return require(`${dir}/jcb.png`);
+    default:
+      return require(`${dir}/credit.png`);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import en from '../locales/en.json';
 import ar from '../locales/ar.json';
 
@@ -117,16 +185,6 @@ export const localizeItem = (item) => {
   return item.title_arab;
 }
 
-export const isIPhoneX = () => {
-  const { height, width } = Dimensions.get('window');
-  return (
-    // has to be ios
-    Platform.OS === 'ios' &&
-    // Accounting for the height in either orientation
-    (height === 812 || width === 812)
-  );
-};
-
 
 export const statusBarMargin = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
 
@@ -135,8 +193,7 @@ export const isAndroid = (Platform.OS === 'android');
 
 
 
-export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
-export const AYEZ_GREEN = '#2DD38F';
+
 
 
 
@@ -217,117 +274,6 @@ export const parseTimestamp = (timestamp) => {
 
 
 
-// const cashIcon = require('../assets/images/payment_methods/cash.png');
-// const cardIcon = require('../assets/images/payment_methods/card.png');
-// const cardReaderIcon = require('../assets/images/payment_methods/card_reader.png');
-//
-//
-// export const parsePayment = (payment) => {
-//   if (!payment) { return {}; }
-//
-//   switch (payment.type) {
-//     case 'CASH':
-//       return { text: strings('Payment.cash'), icon: cashIcon };
-//     case 'CARDREADER':
-//       return { text: strings('Payment.cardreader'), icon: cardReaderIcon };
-//     case 'ADDCARD':
-//       return { text: strings('Payment.addcard'), icon: cardIcon };
-//     default:
-//       return { text: `${payment.brand} ${payment.last4}`, icon: cardIcon };
-//   }
-// };
-
-
-
-// const baby = require('../assets/images/bundled_categories/baby.png');
-// const bakery = require('../assets/images/bundled_categories/bakery.png');
-// const beauty_hygiene = require('../assets/images/bundled_categories/beauty_hygiene.png');
-// const canned = require('../assets/images/bundled_categories/canned.png');
-// const coffee_tea = require('../assets/images/bundled_categories/coffee_tea.png');
-// const dairy = require('../assets/images/bundled_categories/dairy.png');
-// const deli = require('../assets/images/bundled_categories/deli.png');
-// const frozen = require('../assets/images/bundled_categories/frozen.png');
-// const household = require('../assets/images/bundled_categories/household.png');
-// const meat_fish = require('../assets/images/bundled_categories/meat_fish.jpg');
-// const nuts = require('../assets/images/bundled_categories/nuts.jpg');
-// const pantry = require('../assets/images/bundled_categories/pantry.jpg');
-// const pets = require('../assets/images/bundled_categories/pets.jpg');
-// const produce = require('../assets/images/bundled_categories/produce.jpg');
-// const snacks = require('../assets/images/bundled_categories/snacks.jpg');
-// const spices = require('../assets/images/bundled_categories/spices.jpg');
-
-
-
-
-// const bakery = require('../assets/images/bundled_categories/bakery.jpg');
-// const baking = require('../assets/images/bundled_categories/baking.jpg');
-// const beverages = require('../assets/images/bundled_categories/beverages.jpg');
-//
-// const canned = require('../assets/images/bundled_categories/canned.jpg');
-// const cereals_oats = require('../assets/images/bundled_categories/cereals_oats.jpg');
-// const child_care = require('../assets/images/bundled_categories/child_care.jpg');
-//
-// const cooking = require('../assets/images/bundled_categories/cooking.jpg');
-// const dairy = require('../assets/images/bundled_categories/dairy.jpg');
-// const deli = require('../assets/images/bundled_categories/deli.jpg');
-//
-// const frozen = require('../assets/images/bundled_categories/frozen.jpg');
-// const health_hygiene = require('../assets/images/bundled_categories/health_hygiene.jpg');
-// const hot_drinks = require('../assets/images/bundled_categories/hot_drinks.jpg');
-//
-// const household = require('../assets/images/bundled_categories/household.jpg');
-// const jams_spreads = require('../assets/images/bundled_categories/jams_spreads.jpg');
-// const meat_poultry = require('../assets/images/bundled_categories/meat_poultry.jpg');
-//
-// const nuts_seeds = require('../assets/images/bundled_categories/nuts_seeds.jpg');
-// const oils_vinegars = require('../assets/images/bundled_categories/oils_vinegars.jpg');
-// const pets = require('../assets/images/bundled_categories/pets.jpg');
-//
-// const produce = require('../assets/images/bundled_categories/produce.jpg');
-// const pulses_grains = require('../assets/images/bundled_categories/pulses_grains.jpg');
-// const rice_pasta = require('../assets/images/bundled_categories/rice_pasta.jpg');
-//
-// const sauces = require('../assets/images/bundled_categories/sauces.jpg');
-// const sweets_snacks = require('../assets/images/bundled_categories/sweets_snacks.jpg');
-// const water = require('../assets/images/bundled_categories/water.jpg');
-//
-// const bundledCategoryImages = {
-//   bakery,
-//   baking,
-//   beverages,
-//   canned,
-//   cereals_oats,
-//   child_care,
-//   cooking,
-//   dairy,
-//   deli,
-//   frozen,
-//   health_hygiene,
-//   hot_drinks,
-//   household,
-//   jams_spreads,
-//   meat_poultry,
-//   nuts_seeds,
-//   oils_vinegars,
-//   pets,
-//   produce,
-//   pulses_grains,
-//   rice_pasta,
-//   sauces,
-//   sweets_snacks,
-//   water
-// };
-//
-//
-//
-// export const fetchCategoryImage = (filterCode) => {
-//   const bundledImage = bundledCategoryImages[filterCode];
-//   if (bundledImage) {
-//     return bundledImage;
-//   } else {
-//     return null;
-//   }
-// };
 
 
 export const parseCouponError = (error) => {
@@ -406,37 +352,3 @@ export const checkIfOpen = (hours) => {
 //       return null;
 //   }
 // };
-
-
-export const padNumberZeros = (num, size) => {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
-}
-
-
-
-
-
-export const creditCardIcon = (brand) => {
-  if (!brand) { return null; }
-  const dir = '../assets/images_v2/Payment/creditcards';
-  switch (brand.toUpperCase()) {
-    case 'VISA':
-      return require(`${dir}/visa.png`);
-    case 'MASTERCARD':
-      return require(`${dir}/mastercard.png`);
-    case 'AMERICAN EXPRESS':
-      return require(`${dir}/amex.png`);
-    case 'MAESTRO':
-      return require(`${dir}/maestro.png`);
-    case 'DISCOVER':
-      return require(`${dir}/discover.png`);
-    case 'DINERS CLUB':
-      return require(`${dir}/diners.png`);
-    case 'JCB':
-      return require(`${dir}/jcb.png`);
-    default:
-      return require(`${dir}/credit.png`);
-  }
-};

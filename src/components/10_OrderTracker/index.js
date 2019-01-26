@@ -30,17 +30,28 @@ import {
   // markOrderCustomerShown,
 
 import {
-  strings,
-  localizeDN,
   parsePayment,
   parseTimestamp,
-  padNumberZeros
+  padNumberZeros,
+  AYEZ_GREEN
 } from '../../Helpers.js';
 
 import {
+  strings,
+  translate
+} from '../../i18n.js';
+
+
+import {
   Header,
-  BlockButton
+  BlockButton,
+  AyezText
 } from '../_common';
+
+import { StatusLog } from './StatusLog'
+
+const order_summary_icon = require('../../../assets/images_v2/OrderTracker/order_summary.png');
+
 
 
 class OrderTracker extends Component {
@@ -49,7 +60,8 @@ class OrderTracker extends Component {
     super(props);
 
     this.state = {
-      timerText: ''
+      timerText: '',
+      timerTextLoading: true
     };
   }
 
@@ -71,7 +83,7 @@ class OrderTracker extends Component {
       }
       const remainingTime = timerEnd - Date.now();
       if (remainingTime < 0) {
-        this.setState({ timerText: 'Overdue' });
+        this.setState({ timerText: '', timerTextLoading: false });
         return;
       }
       let seconds = Math.round(remainingTime/1000);
@@ -84,15 +96,13 @@ class OrderTracker extends Component {
       if (hours > 0) {
         timerText = `${hours}:${padNumberZeros(minutes, 2)}:${padNumberZeros(seconds, 2)}`;
       }
-
-      this.setState({ timerText })
+      this.setState({ timerText, timerTextLoading: false })
     }, 1000);
-
   }
 
   componentWillUnmount() {
     console.log('OrderTracker unmounting')
-    this.props.endListeningToOrder(); // this fires too late
+    this.props.endListeningToOrder(this.props.order_id);
     timer.clearTimeout(this);
     BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
@@ -102,137 +112,47 @@ class OrderTracker extends Component {
     return true;
   }
 
+  renderTimer() {
 
+    const {
+      status,
+      driver_id
+    } = this.props;
 
-
-
-
-renderStatusPath(timestamp, isFirst, isLast, height) {
-
-  const { status } = this.props;
-
-  // fill all the circle automatcially if the status between 100 & 200
-  const shouldFillCircle = (timestamp || (status >= 100 && status <= 200));
-
-  const topLine = (
-    <View style={{
-      position: 'absolute',
-      left: 28,
-      backgroundColor: '#20C74B',
-      height: 35,
-      width: 4
-    }} />
-  );
-
-  const bottomLine = (
-    <View style={{
-      position: 'absolute',
-      left: 28,
-      top: 35,
-      backgroundColor: '#20C74B',
-      height: height-35,
-      width: 4
-    }} />
-  );
-
-  return (
-    <View style={{ width: 60, height }}>
-
-      {(isFirst ? null : topLine)}
-      {(isLast ? null : bottomLine)}
-
-      <View style={{
-        position: 'absolute',
-        top: 20,
-        left: 15,
-        borderRadius: 15,
-        width: 30,
-        height: 30,
-        backgroundColor: (shouldFillCircle ? '#20C74B' : 'white'),
-        borderColor: '#20C74B',
-        borderWidth: 4
-      }} />
-    </View>
-  )
-}
-
-
-renderLogItem(status, timestamp) {
-
-  const height = 120;
-
-  const isFirst = (status === 50);
-  const isLast = (status === 100);
-
-  let { dateString, timeString, ampmString } = parseTimestamp(timestamp);
-  if (!timestamp) {
-    dateString = '';
-    timeString = '';
-    ampmString = '';
-  }
-
-  return (
-    <View style={{ height, borderBottomWidth: 1, borderColor: '#EDEDED', flexDirection: 'row' }}>
-      <View style={{ flex: 1, paddingTop: 25 }}>
-        <Text style={styles.logStatus}>{strings(`OrderStatuses.${status}`)}</Text>
-      </View>
-
-      { this.renderStatusPath(timestamp, isFirst, isLast, height) }
-
-      <View style={{ width: 105, paddingTop: 22}}>
-        <Text style={styles.dayText}>{dateString}</Text>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.timeText}>{timeString}</Text>
-          <Text style={styles.AMPMText}>{ampmString}</Text>
-        </View>
-      </View>
-
-    </View>
-  )
-}
-
-  renderStatusLog() {
-    const { status, status_log } = this.props;
-
-    if (status === 400) {
-      return (
-        <View style={{ padding: 20, backgroundColor: 'red', flexDirection: 'column', justifyContent: 'center'}}>
-          <Text style={{ textAlign: 'right', color:'white', fontSize: 20,
-          fontFamily: 'Poppins-Bold', }}>Cancelled by the store</Text>
-        </View>
-      );
+    if (this.state.timerTextLoading) {
+      return <ActivityIndicator size="small" style={{ margin: 20 }} />
     }
 
-
-    if (status === 300) {
+    if (driver_id && (status >= 100)) {
       return (
-        <View style={{ padding: 20, backgroundColor: '#4f4f4f', flexDirection: 'column', justifyContent: 'center'}}>
-          <Text style={{ textAlign: 'right', color:'white', fontSize: 20,
-          fontFamily: 'Poppins-Bold', }}>{strings('OrderStatuses.300')}</Text>
-        </View>
-      );
+        <BlockButton
+          onPress={() => Actions.driverTracker({ driver_id })}
+          text={'TRACK ORDER'}
+          style={{
+            marginTop: 20,
+            marginBottom: 20,
+            marginLeft: 30,
+            marginRight: 30
+          }}
+          />
+      )
     }
 
-
-    if (!status_log) { return (
-      <ActivityIndicator size="large" style={{ margin: 20, height: 40 }} />
-    ); }
-
-    let timestamp_50 = null;
-    let timestamp_90 = null;
-    let timestamp_100 = null;
-
-    status_log.forEach(logItem => {
-      if (logItem.status === 50) { timestamp_50 = logItem.timestamp; }
-      else if (logItem.status === 90) { timestamp_90 = logItem.timestamp; }
-      else if (logItem.status === 100) { timestamp_100 = logItem.timestamp; }
-    });
-
+    if (!this.state.timerText) { return null; }
     return (
-      <View>
-        { this.renderLogItem(50, timestamp_50) }
-        { this.renderLogItem(90, timestamp_90) }
-        { this.renderLogItem(100, timestamp_100) }
+      <View style={{
+        marginTop: 20,
+        marginBottom: 20,
+        width: 200,
+        height: 200,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#E6E6E6',
+        borderRadius: 100
+      }}>
+        <AyezText bold size={34} color={AYEZ_GREEN}>{this.state.timerText}</AyezText>
       </View>
     );
   }
@@ -241,163 +161,49 @@ renderLogItem(status, timestamp) {
 
     const {
       id,
+      seller,
       is_timeslot_ongoing,
       order_number,
       status,
+      status_log,
       order_loading
     } = this.props;
 
-    if (order_loading) {
-      return (
-        <View style={{ flex: 1 }}>
-          <ActivityIndicator size="large" style={{ height: 40, flex: 1 }} />
-        </View>
-      );
+    if (order_loading || !order_number) {
+      return <ActivityIndicator size="large" style={{ flex: 1, backgroundColor: '#FAFCFD' }} />;
     }
 
-    if (!is_timeslot_ongoing) {
+    if (!is_timeslot_ongoing || status >= 200) {
       return (
         <OrderSummary />
       );
     }
 
-
     return (
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
           <Header
-            title={order_number ? `${strings('OrderTracker.order#')}${order_number}` : '...'}
+            title={'Track Your Order'}
+            blackStyle
+            rightButton={{
+              text: 'Summary',
+              image_source: order_summary_icon,
+              onPress: () => Actions.orderSummary()
+            }}
             />
-
-          <Text>{this.state.timerText}</Text>
           <ScrollView style={{ flex: 1 }}>
-            { this.renderStatusLog() }
+            {this.renderTimer()}
+            <StatusLog status_log={status_log} seller={seller} />
           </ScrollView>
       </View>
     );
   }
 }
 
-// { this.renderDriverMap() }
-// { this.renderCurrentStatus() }
-
-// { this.renderCompletionButton() }
-
-
-// ListHeaderComponent={this.renderHeader()}
-
-
-const styles = {
-
-  statusText: {
-    fontSize: 22,
-    fontFamily: 'Poppins-Bold',
-    color: 'white',
-    textAlign: 'right',
-    marginBottom: 5
-  },
-
-
-  receivedOrderButtonContainer: {
-    paddingTop: 4,
-    paddingLeft: 12,
-    paddingRight: 12,
-    paddingBottom: 10,
-    borderTopWidth: 1,
-    borderColor: '#f4f4f4',
-    backgroundColor: 'white'
-  },
-
-
-  statusSubtitleText: {
-    fontSize: 20,
-    lineHeight: 24,
-    fontFamily: 'Poppins',
-    color: 'white',
-    textAlign: 'right'
-  },
-
-  logStatus: {
-    textAlign: 'right',
-    marginLeft: 25,
-    marginRight: 4,
-    color: 'black',
-    fontSize: 18,
-    lineHeight: 24,
-    fontFamily: 'Poppins-Bold'
-  },
-  dayText: {
-    color: '#CDCDCD',
-    fontSize: 16,
-    lineHeight: 20,
-    fontFamily: 'Poppins-Bold'
-  },
-  timeText: {
-    color: 'black',
-    fontSize: 24,
-    lineHeight: 30,
-    fontFamily: 'Poppins-Bold'
-  },
-  AMPMText: {
-    marginLeft: 3,
-    color: 'black',
-    fontSize: 15,
-    fontFamily: 'Poppins-Bold'
-  },
-
-  notesContainer: {
-    borderBottomWidth: 1,
-    borderColor: '#f7f7f7'
-  },
-  notesText: {
-    padding: 15,
-    fontFamily: 'Poppins',
-    textAlign: 'center',
-    color: 'black',
-    fontSize: 18,
-  },
-
-  detailContainer: {
-    borderBottomWidth: 1,
-    borderColor: '#f7f7f7',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  },
-  detailTextContainer: {
-    flexDirection: 'column',
-    flex: 1,
-    marginRight: 15,
-    marginLeft: 15,
-  },
-  detailTitleText: {
-    marginTop: 10,
-    color: 'black',
-    paddingLeft: 20,
-    fontSize: 18,
-    lineHeight: 24,
-    fontFamily: 'Poppins-Bold',
-    textAlign: 'right'
-  },
-  detailSubtitleText: {
-    marginBottom: 10,
-    color: '#7B7B7B',
-    fontSize: 18,
-    lineHeight: 24,
-    height: 22,
-    fontFamily: 'Poppins',
-    textAlign: 'right'
-  },
-  detailImage: {
-    width: 32,
-    height: 32,
-    marginRight: 20
-  }
-};
-
 const mapStateToProps = ({ OrderTracker }) => {
 
   const {
     id,
+    seller,
     items,
     order_number,
     status,
@@ -409,12 +215,14 @@ const mapStateToProps = ({ OrderTracker }) => {
     timestamp,
     notes,
     is_timeslot_ongoing,
+    driver_id,
 
     order_loading
   } = OrderTracker;
 
   return {
     id,
+    seller,
     items,
     order_number,
     status,
@@ -426,18 +234,12 @@ const mapStateToProps = ({ OrderTracker }) => {
     timestamp,
     notes,
     is_timeslot_ongoing,
+    driver_id,
 
     order_loading
    };
  };
- //
- // listenToOrder,
- // endListeningToOrder,
- // markOrderCustomerShown,
- // markOrderComplete,
- // markOrderCancelled,
- // listenToDriverLocation,
- // endListeningToDriverLocation
+
 export default connect(mapStateToProps,
   {
     listenToOrder,

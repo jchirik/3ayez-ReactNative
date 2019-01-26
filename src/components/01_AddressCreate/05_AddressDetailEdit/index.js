@@ -16,6 +16,11 @@ import {
   BackButton,
   AyezText
 } from '../../_common';
+
+import {
+  strings,
+  translate
+} from '../../../i18n.js';
 // import { Circle } from 'react-native-progress';
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 // import {

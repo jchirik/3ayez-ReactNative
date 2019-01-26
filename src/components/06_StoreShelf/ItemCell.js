@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 import { Actions } from 'react-native-router-flux';
 
-import { localizeItem, strings } from '../../Helpers.js';
+import { translate, strings } from '../../i18n.js';
 
 import {
   addToBasket
@@ -282,7 +282,7 @@ class ItemCell extends PureComponent {
       </Animated.View>
 
       { this.renderPrice(price, promotion_price, item) }
-      <Text style={styles.titleText}>{localizeItem(item)}</Text>
+      <Text style={styles.titleText}>{translate(item)}</Text>
       <ItemIncrementer item={item} quantity={quantity} seller={this.props.seller} style={{ marginTop: 6 }} />
     </View>
     );

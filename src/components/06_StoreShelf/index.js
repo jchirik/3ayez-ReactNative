@@ -18,7 +18,9 @@ import {
 
 // import {
 // } from '../../actions';
-import { statusBarMargin, strings } from '../../Helpers.js';
+import { statusBarMargin } from '../../Helpers.js';
+
+import { strings } from '../../i18n.js';
 
 import AnimatedCheckmarkOverlay from './AnimatedCheckmarkOverlay';
 import BasketBlockButton from './BasketBlockButton';
