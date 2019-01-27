@@ -8,6 +8,13 @@
     "numRatings": "{{num_reviews}} Ratings",
     "deliveryTime": "{{delivery_time}} Min Delivery"
   },
+  "OrderStatusBar": {
+    "trackOrder": "لمتابعة اخر اوردر",
+    "multipleOrders": "Multiple ongoing orders"
+  },
+
+
+
 
 
 

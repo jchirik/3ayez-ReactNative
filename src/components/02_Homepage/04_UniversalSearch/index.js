@@ -34,7 +34,7 @@ class UniversalSearch extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor:'white'}}>
+      <View style={{ flex: 1 }}>
         <Text>Discovery</Text>
       </View>
     );

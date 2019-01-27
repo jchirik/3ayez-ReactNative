@@ -342,19 +342,14 @@ class RouterComponent extends Component {
 
 
 
-            <Stack
+            <Scene
               key="settings"
-              hideNavBar
-            >
-              <Scene
-                key="settingsMenu"
-                component={SettingsMenu}
-              />
-              <Scene
-                key="orderHistory"
-                component={OrderHistory}
-              />
-            </Stack>
+              component={SettingsMenu}
+            />
+            <Scene
+              key="orderHistory"
+              component={OrderHistory}
+            />
 
 
 

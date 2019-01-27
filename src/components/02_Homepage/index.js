@@ -17,6 +17,10 @@ import Support from './03_Support';
 // import UniversalSearch from './components/02_Homepage/04_UniversalSearch';
 
 import {
+  OrderStatusBar
+} from '../_common';
+
+import {
   AYEZ_GREEN
 } from '../../Helpers.js';
 
@@ -63,25 +67,30 @@ class Homepage extends Component {
         <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
       );
     }
+
+
     return (
-      <TabView
-        navigationState={this.state}
-        renderScene={SceneMap({
-          first: StoreSelect,
-          second: Support,
-        })}
-        onIndexChange={index => this.setState({ index })}
-        initialLayout={{ width: Dimensions.get('window').width }}
-        tabBarPosition={'bottom'}
-        renderTabBar={props =>
-          <TabBar
-            {...props}
-            useNativeDriver
-            style={{ backgroundColor: AYEZ_GREEN }}
-            indicatorStyle={{ backgroundColor: 'pink' }}
-          />
-        }
-      />
+      <View style={{ backgroundColor:'#FAFCFD', flex: 1 }}>
+        <OrderStatusBar />
+        <TabView
+          navigationState={this.state}
+          renderScene={SceneMap({
+            first: StoreSelect,
+            second: Support,
+          })}
+          onIndexChange={index => this.setState({ index })}
+          initialLayout={{ width: Dimensions.get('window').width }}
+          tabBarPosition={'bottom'}
+          renderTabBar={props =>
+            <TabBar
+              {...props}
+              useNativeDriver
+              style={{ backgroundColor: AYEZ_GREEN }}
+              indicatorStyle={{ backgroundColor: 'pink' }}
+            />
+          }
+        />
+      </View>
     )
   }
 }

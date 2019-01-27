@@ -76,9 +76,6 @@ const listenCustomerData = (dispatch) => {
 
 
 
-
-
-
 const listenToOngoingOrders = (dispatch) => {
   // ensure there is a current user & seller
   const { currentUser } = firebase.auth();
@@ -86,7 +83,7 @@ const listenToOngoingOrders = (dispatch) => {
     // realtime listening
     const ongoingOrdersRef = firebase.firestore().collection('orders')
       .where('customer.id', '==', currentUser.uid)
-      .where('within_4_hours', '==', true);
+      .where('is_timeslot_ongoing', '==', true);
 
     const ongoingOrdersListener = ongoingOrdersRef.onSnapshot((ongoingOrdersT) => {
       let orders = ongoingOrdersT.docs.map(order => {
@@ -108,6 +105,7 @@ const listenToOngoingOrders = (dispatch) => {
     dispatch({ type: ONGOING_ORDERS_LISTENER_SET, payload: { ongoingOrdersListener } });
   }
 };
+
 
 
 const listenToAddresses = (dispatch) => {

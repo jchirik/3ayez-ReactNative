@@ -14,9 +14,6 @@ import {
   BackHandler
 } from 'react-native';
 
-import {
-  STATUS_BAR_HEIGHT
-} from '../../../Helpers.js';
 
 import {
   RTLImage,
@@ -138,7 +135,7 @@ class Support extends Component {
       <TouchableOpacity
       style={{
         position: 'absolute',
-        top: STATUS_BAR_HEIGHT+7,
+        top: 7,
         right: 10,
         padding: 10,
         alignItems: 'center'
@@ -197,11 +194,9 @@ class Support extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor:'#FAFCFD'
       }}>
 
         <AyezText bold style={{
-          marginTop: STATUS_BAR_HEIGHT,
           marginLeft: 4,
           fontSize: 32,
           padding: 16,

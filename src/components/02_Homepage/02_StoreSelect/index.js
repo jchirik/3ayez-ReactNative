@@ -44,8 +44,6 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 // markOrderComplete,
 // getContacts
 
-
-import { STATUS_BAR_HEIGHT } from '../../../Helpers.js';
 // import { OrderStatusBar, Header, ModalPanel, InputField, BlockButton } from '../_reusable';
 //
 // import StoreSelectionHeader from './StoreSelectionHeader';
@@ -112,7 +110,7 @@ renderAddressHeader() {
     <TouchableOpacity
       onPress={this.onAddressSelect.bind(this)}
       style={{
-        marginTop: STATUS_BAR_HEIGHT + 6,
+        marginTop: 6,
         paddingBottom: 3,
         flexDirection: 'column',
         alignItems: 'stretch',
@@ -278,7 +276,7 @@ renderSellerList() {
     // )
 
     return (
-      <View style={{ flex: 1, backgroundColor:'white'}}>
+      <View style={{ flex: 1 }}>
         {this.renderAddressHeader()}
         {this.renderSellerList()}
       </View>
