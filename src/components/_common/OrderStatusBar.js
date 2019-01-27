@@ -16,7 +16,10 @@ import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
 
-import { AyezText } from '../_common';
+
+const status_bar_truck = require('../../../assets/images_v2/OrderTracker/status_bar_truck.png');
+
+import { AyezText, RTLImage } from '../_common';
 import { strings, translate } from '../../i18n.js';
 
 
@@ -47,11 +50,13 @@ class OrderStatusBar extends PureComponent {
       return (
           <TouchableOpacity
             style={{
-              backgroundColor: AYEZ_GREEN,
-              paddingTop: STATUS_BAR_HEIGHT + 4,
-              marginBottom: 4,
-              paddingBottom: 10,
+              flexDirection: 'row',
+              justifyContent: 'center',
               alignItems: 'center',
+              backgroundColor: AYEZ_GREEN,
+              paddingTop: STATUS_BAR_HEIGHT + 6,
+              marginBottom: 4,
+              paddingBottom: 11,
               shadowColor: '#000',
               shadowOffset: { width: -1, height: 2 },
               shadowOpacity: 0.2,
@@ -60,7 +65,12 @@ class OrderStatusBar extends PureComponent {
             }}
             onPress={() => onPress()}
           >
-              <AyezText semibold color={'white'} size={16}>{text}</AyezText>
+              <AyezText semibold color={'white'} size={15}>{text}</AyezText>
+              <RTLImage
+                source={status_bar_truck}
+                style={{ width: 24, height: 24, marginLeft: 10 }}
+                resizeMode={'contain'}
+              />
           </TouchableOpacity>
       );
     }

@@ -11,6 +11,7 @@ import {
   ONGOING_ORDERS_SET,
   ONGOING_ORDERS_LISTENER_SET,
   REVIEW_ORDER_SET,
+  FEEDBACK_ORDER_SET,
   ONGOING_ORDERS_RESET,
 
   ADDRESSES_SET,
@@ -98,8 +99,14 @@ const listenToOngoingOrders = (dispatch) => {
       // activeOrders = activeOrders.filter(order => (order.status !== 300));
       dispatch({ type: ONGOING_ORDERS_SET, payload: { orders } });
 
+      console.log('ONGOING_ORDERS_SET', orders)
+
       const review_order = orders.find(order => order.requires_review);
       dispatch({ type: REVIEW_ORDER_SET, payload: { review_order } });
+
+      const feedback_order = orders.find(order => ((order.status === 200) && (!order.customer_feedback)));
+      console.log('FEEDBACK_ORDER_SET', feedback_order)
+      dispatch({ type: FEEDBACK_ORDER_SET, payload: { feedback_order } });
     });
 
     dispatch({ type: ONGOING_ORDERS_LISTENER_SET, payload: { ongoingOrdersListener } });

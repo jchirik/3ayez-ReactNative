@@ -33,6 +33,8 @@ import OrderTracker from './OrderTracker_Reducer';
 import DriverTracker from './DriverTracker_Reducer';
 import OngoingOrders from './OngoingOrders_Reducer';
 
+import CustomerFeedback from './CustomerFeedback_Reducer';
+
 import Timeslots from './Timeslots_Reducer';
 //
 // import Addresses from './Addresses_Reducer';
@@ -80,6 +82,8 @@ const reducers = combineReducers({
 
   CreditCards,
   CreditCardCreate,
+
+  CustomerFeedback,
 
   Checkout,
   Coupon,

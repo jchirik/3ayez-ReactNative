@@ -123,10 +123,20 @@ export const DRIVER_TRACK_LISTENER_RESET = 'DRIVER_TRACK_LISTENER_RESET';
 export const ONGOING_ORDERS_SET = 'ONGOING_ORDERS_SET';
 export const ONGOING_ORDERS_LISTENER_SET = 'ONGOING_ORDERS_LISTENER_SET';
 export const REVIEW_ORDER_SET = 'REVIEW_ORDER_SET';
+export const FEEDBACK_ORDER_SET = 'FEEDBACK_ORDER_SET';
 export const ONGOING_ORDERS_RESET = 'ONGOING_ORDERS_RESET';
 
 
 
+
+export const FEEDBACK_RESET = 'FEEDBACK_RESET';
+export const FEEDBACK_STORE_RATING_SET = 'FEEDBACK_STORE_RATING_SET';
+export const FEEDBACK_AYEZ_RATING_SET = 'FEEDBACK_AYEZ_RATING_SET';
+export const FEEDBACK_SELLER_SET = 'FEEDBACK_SELLER_SET';
+
+export const FEEDBACK_SUBMIT_BEGIN = 'FEEDBACK_SUBMIT_BEGIN';
+export const FEEDBACK_SUBMIT_SUCCESS = 'FEEDBACK_SUBMIT_SUCCESS';
+export const FEEDBACK_SUBMIT_ERROR = 'FEEDBACK_SUBMIT_ERROR';
 
 /* ************************************************************************* */
 /* ************************************************************************* */

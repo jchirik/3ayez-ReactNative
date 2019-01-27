@@ -16,11 +16,6 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import {
-  markOrderCustomerReceived,
-  markOrderCancelled
-} from '../../../actions';
-
-import {
   parseTimestamp,
 
 
@@ -46,14 +41,6 @@ import { SummarySection } from './SummarySection';
 
 
 class OrderSummary extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      cancelConfirm: false
-    };
-  }
 
   // 1. Order Number
   renderOrderNumber() {
@@ -237,41 +224,18 @@ class OrderSummary extends Component {
           { this.renderItems() }
           { this.renderSummary() }
 
-
           <BlockButton
-            onPress={() => Actions.supportChat()}
-            text={'SUPPORT'}
+            onPress={() => Actions.orderProblem()}
+            text={'ANY PROBLEM?'}
+            color={'black'}
             style={{
               marginTop: 20,
               marginLeft: 30,
-              marginRight: 30
+              marginRight: 30,
+              marginBottom: 20
             }}
-            />
-          { (this.props.status < 200) ? (
-            <BlockButton
-              onPress={() => this.setState({ cancelConfirm: true })}
-              text={'CANCEL YOUR ORDER'}
-              color={'#E64E47'}
-              style={{
-                marginTop: 20,
-                marginLeft: 30,
-                marginRight: 30
-              }}
-              />
-            ) : null }
-          <View style={{ height: 40 }} />
+          />
         </ScrollView>
-
-        <BottomChoiceSelection
-          isVisible={this.state.cancelConfirm}
-          onClose={() => this.setState({ cancelConfirm: false })}
-          title='Are you sure you want to cancel?'
-          backgroundColor='#E64E47'
-          buttons={[
-            { text: 'Yes, sure', action: () => this.props.markOrderCancelled(this.props.id) },
-            { text: 'No, cancel', action: () => console.log('closing') }
-          ]}
-        />
       </View>
     );
   }
@@ -329,9 +293,4 @@ const mapStateToProps = ({ OrderTracker }) => {
    };
  };
 
-export default connect(mapStateToProps,
-  {
-    markOrderCustomerReceived,
-    markOrderCancelled
-  }
-)(OrderSummary);
+export default connect(mapStateToProps, null)(OrderSummary);

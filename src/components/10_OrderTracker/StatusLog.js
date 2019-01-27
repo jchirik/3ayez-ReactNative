@@ -217,7 +217,7 @@ const StatusLog = ({
   });
 
   return (
-    <View>
+    <View style={{ borderBottomWidth: 1, borderColor: '#EAEAEA' }}>
       { logComponents }
     </View>
   );

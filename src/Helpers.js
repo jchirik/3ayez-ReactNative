@@ -21,6 +21,7 @@ export const isIPhoneX = () => {
 
 export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
 export const AYEZ_GREEN = '#2DD38F';
+export const AYEZ_BACKGROUND_COLOR = '#FAFCFD';
 
 export const padNumberZeros = (num, size) => {
     var s = num+"";

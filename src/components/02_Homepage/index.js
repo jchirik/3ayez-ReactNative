@@ -21,7 +21,8 @@ import {
 } from '../_common';
 
 import {
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  AYEZ_BACKGROUND_COLOR
 } from '../../Helpers.js';
 
 import {
@@ -53,11 +54,9 @@ class Homepage extends Component {
       // open create address
     // otherwise, open address selection
 
-    // if (!this.props.is_loading && prevProps.is_loading) {
-    //   if (!this.props.address) {
-    //     Actions.addressCreate();
-    //   }
-    // }
+    if (this.props.feedback_order && !prevProps.feedback_order) {
+      Actions.customerFeedback({ order: this.props.feedback_order });
+    }
   }
 
   render() {
@@ -70,7 +69,7 @@ class Homepage extends Component {
 
 
     return (
-      <View style={{ backgroundColor:'#FAFCFD', flex: 1 }}>
+      <View style={{ backgroundColor: AYEZ_BACKGROUND_COLOR, flex: 1 }}>
         <OrderStatusBar />
         <TabView
           navigationState={this.state}
@@ -95,13 +94,17 @@ class Homepage extends Component {
   }
 }
 
-const mapStateToProps = ({ Addresses, Settings }) => {
+const mapStateToProps = ({ Addresses, Settings, OngoingOrders }) => {
   const { address, is_loading } = Addresses;
+  const { review_order, feedback_order } = OngoingOrders;
   const { locale } = Settings;
   return {
     locale,
     address,
-    is_loading
+    is_loading,
+
+    review_order,
+    feedback_order
   };
 };
 

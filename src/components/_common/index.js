@@ -1,4 +1,5 @@
 export * from './BackButton';
+export * from './CloseButton';
 export * from './BlockButton';
 export * from './Header';
 export * from './SearchBar';

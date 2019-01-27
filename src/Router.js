@@ -52,6 +52,8 @@ import CheckoutNotesDetail from './components/10_Checkout/01_CheckoutNotesDetail
 import OrderTracker from './components/10_OrderTracker';
 import OrderSummary from './components/10_OrderTracker/01_OrderSummary';
 import DriverTracker from './components/10_OrderTracker/02_DriverTracker';
+import OrderProblem from './components/10_OrderTracker/03_OrderProblem';
+
 
 import SettingsMenu from './components/11_Settings/01_SettingsMenu';
 import OrderHistory from './components/11_Settings/02_OrderHistory';
@@ -68,6 +70,8 @@ import CreditCardCreate from './components/18_CreditCardCreate';
 
 
 import AddressManager from './components/19_AddressManager';
+
+import CustomerFeedback from './components/20_CustomerFeedback';
 // import LocationDetails from './components/02_LocationDetails';
 // import StoreSelector from './components/03_StoreSelector';
 
@@ -409,6 +413,10 @@ class RouterComponent extends Component {
             component={OrderSummary}
           />
           <Scene
+            key="orderProblem"
+            component={OrderProblem}
+          />
+          <Scene
             key="driverTracker"
             component={DriverTracker}
           />
@@ -455,6 +463,12 @@ class RouterComponent extends Component {
               component={AddressConfirm}
             />
           </Stack>
+
+
+          <Scene
+            key="customerFeedback"
+            component={CustomerFeedback}
+          />
 
           </Stack>
         </Lightbox>

@@ -193,6 +193,17 @@ class OrderTracker extends Component {
           <ScrollView style={{ flex: 1 }}>
             {this.renderTimer()}
             <StatusLog status_log={status_log} seller={seller} />
+            <BlockButton
+              onPress={() => Actions.orderProblem()}
+              text={'ANY PROBLEM?'}
+              color={'black'}
+              style={{
+                marginTop: 20,
+                marginLeft: 30,
+                marginRight: 30,
+                marginBottom: 20
+              }}
+            />
           </ScrollView>
       </View>
     );

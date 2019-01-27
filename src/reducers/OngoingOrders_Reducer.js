@@ -2,11 +2,14 @@ import {
   ONGOING_ORDERS_SET,
   ONGOING_ORDERS_LISTENER_SET,
   REVIEW_ORDER_SET,
+  FEEDBACK_ORDER_SET,
   ONGOING_ORDERS_RESET
 } from '../actions/types';
 
 const INITIAL_STATE = {
   review_order: null,
+  feedback_order: null,
+
   orders: [],
   ongoingOrdersListener: null,
 
@@ -20,6 +23,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, orders: p.orders, loading: false };
     case REVIEW_ORDER_SET:
       return { ...state, review_order: p.review_order };
+    case FEEDBACK_ORDER_SET:
+      return { ...state, feedback_order: p.feedback_order };
     case ONGOING_ORDERS_LISTENER_SET:
       if (state.ongoingOrdersListener !== null) { state.ongoingOrdersListener(); }
       return { ...state, ongoingOrdersListener: p.ongoingOrdersListener, loading: true };
