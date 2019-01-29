@@ -75,7 +75,7 @@ class AddressDetails extends Component {
   createNewAddress() {
     const {
       region,
-      point,
+      location,
       title,
       street,
       building,
@@ -85,7 +85,7 @@ class AddressDetails extends Component {
     } = this.props;
     this.props.createNewAddress({
       region,
-      point,
+      location,
       title,
       street,
       building,
@@ -189,7 +189,7 @@ class AddressDetails extends Component {
 const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
   const {
     region,
-    point,
+    location,
     title,
     street,
     building,
@@ -204,7 +204,7 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
 
   return {
     region,
-    point,
+    location,
     title,
     street,
     building,

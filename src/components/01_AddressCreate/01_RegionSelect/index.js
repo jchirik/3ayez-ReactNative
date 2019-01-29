@@ -11,7 +11,6 @@ import {
    AsyncStorage
  } from 'react-native';
 
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   BackButton,
@@ -26,6 +25,8 @@ import {
   strings,
   translate
 } from '../../../i18n.js';
+
+import CurrentLocationModal from './CurrentLocationModal';
 
 const alexandria_icon = require('../../../../assets/images_v2/Regions/alexandria.png');
 const giza_icon = require('../../../../assets/images_v2/Regions/giza.png');
@@ -65,14 +66,19 @@ class RegionSelect extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      currentLocationModal: false
+    };
   }
+
   componentDidMount() {
     this.props.resetAddressCreate();
   }
 
   setAddressRegion(region) {
+    this.props.resetAddressCreate();
     this.props.setAddressRegion(region);
-    Actions.addressSearch();
+    this.setState({ currentLocationModal: true });
   }
 
   renderCityButton(region) {
@@ -162,6 +168,12 @@ class RegionSelect extends Component {
         <View style={{ height: 60 }} />
 
         { this.props.addresses.length ? (<BackButton fixed />) : null }
+        <CurrentLocationModal
+          visible={this.state.currentLocationModal}
+          onClose={() => {
+            this.setState({ currentLocationModal: false });
+          }}
+        />
       </View>
     );
   }

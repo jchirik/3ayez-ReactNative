@@ -8,7 +8,6 @@ import {
   ADDRESS_DETAIL_SET,
 
   CURRENT_LOCATION_BEGIN,
-  CURRENT_LOCATION_SET,
   CURRENT_LOCATION_ERROR
 } from './types';
 
@@ -24,8 +23,8 @@ export const setAddressDetail = (payload) => {
   return { type: ADDRESS_DETAIL_SET, payload };
 };
 
-export const setAddressLocation = (point) => {
-  return { type: ADDRESS_LOCATION_SET, payload: { point } };
+export const setAddressLocation = (location) => {
+  return { type: ADDRESS_LOCATION_SET, payload: { location } };
 };
 
 // Show permission Dialog on Android
@@ -61,12 +60,11 @@ export const setCurrentLocation = () => {
       navigator.geolocation.getCurrentPosition(
          (position) => {
            console.log('Position:', position)
-           if (position) {
+           if (position && position.coords && position.coords.latitude && position.coords.longitude) {
             const { latitude, longitude } = position.coords;
-            const point = { lat: latitude, lng: longitude };
+            const location = { lat: latitude, lng: longitude };
             // update the current location locally and save
-            dispatch({ type: CURRENT_LOCATION_SET, payload: { point }});
-            dispatch({ type: ADDRESS_LOCATION_SET, payload: { point } });
+            dispatch({ type: ADDRESS_LOCATION_SET, payload: { location } });
           } else {
             console.log('Error getting position');
             dispatch({ type: CURRENT_LOCATION_ERROR, payload: { error: 'NO_GPS_AVAILABLE' } });

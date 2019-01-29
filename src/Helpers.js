@@ -8,7 +8,6 @@ import Moment from 'moment';
 import { Actions } from 'react-native-router-flux';
 import store from './reducers';
 
-
 export const isIPhoneX = () => {
   const { height, width } = Dimensions.get('window');
   return (

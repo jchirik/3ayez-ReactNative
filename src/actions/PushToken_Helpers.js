@@ -1,12 +1,17 @@
 
 import firebase from 'react-native-firebase';
+import store from '../reducers';
 
 // HELPER function for setPushToken
 const uploadPushToken = (ref) => {
+  // get the locale for the language the push tokens should be in
+  const locale = store.getState().Settings.locale;
   firebase.messaging().getToken().then(push_token => {
     // stores the token in the user's document
     console.log('uploadPushToken', push_token, ref);
-    ref.set({ push_token }, { merge: true });
+    const update = { push_token };
+    if (locale) { update.locale = locale; }
+    ref.set(update, { merge: true });
   });
 }
 

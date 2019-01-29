@@ -1,12 +1,11 @@
 
 import {
   CURRENT_LOCATION_BEGIN,
-  CURRENT_LOCATION_SET,
-  CURRENT_LOCATION_ERROR
+  CURRENT_LOCATION_ERROR,
+  ADDRESS_LOCATION_SET
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  point: null,
   is_loading: false,
   error: null
 };
@@ -15,11 +14,11 @@ export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
   switch (action.type) {
     case CURRENT_LOCATION_BEGIN:
-      return { ...state, is_loading: true };
-    case CURRENT_LOCATION_SET:
-      return { ...state, is_loading: false, point: p.point };
+      return { ...state, is_loading: true, error: null };
     case CURRENT_LOCATION_ERROR:
-        return { ...state, is_loading: false, error: p.error };
+      return { ...state, is_loading: false, error: p.error };
+    case ADDRESS_LOCATION_SET:
+      return { ...state, is_loading: false, error: null };
     default:
       return state;
   }

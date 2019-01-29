@@ -17,7 +17,7 @@ import { getTitleFromGooglePlace } from './Address_Helpers';
 // ************
 // ************
 
-export const reverseSearchAddress = (point, locale) => {
+export const reverseSearchAddress = (location, locale) => {
   return (dispatch) => {
     // otherwise search
     const request = new XMLHttpRequest();
@@ -55,7 +55,7 @@ export const reverseSearchAddress = (point, locale) => {
       }
     };
     const queryObject = {
-      latlng: `${point.lat},${point.lng}`,
+      latlng: `${location.lat},${location.lng}`,
       key: googlePlacesKey,
       language: locale
     };

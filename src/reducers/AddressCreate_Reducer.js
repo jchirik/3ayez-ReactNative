@@ -4,6 +4,8 @@ import {
   ADDRESS_REGION_SET,
   ADDRESS_LOCATION_SET,
 
+  CURRENT_LOCATION_BEGIN,
+
   ADDRESS_DETAIL_SET,
 
   ADDRESS_SUBMIT_BEGIN,
@@ -13,7 +15,7 @@ import {
 
 const INITIAL_STATE = {
   region: '',
-  point: null,
+  location: null,
 
   title: '',
   street: '',
@@ -32,8 +34,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...INITIAL_STATE };
     case ADDRESS_REGION_SET:
       return { ...state, region: p.region };
+    case CURRENT_LOCATION_BEGIN:
+      return { ...state, location: null };
     case ADDRESS_LOCATION_SET:
-      return { ...state, point: p.point };
+      return { ...state, location: p.location };
     case ADDRESS_DETAIL_SET:
       return { ...state, ...p };
     case ADDRESS_SUBMIT_BEGIN:

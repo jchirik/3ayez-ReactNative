@@ -87,10 +87,10 @@ export const selectGooglePlaceResult = (google_place) => {
         if (responseJSON.status === 'OK') {
           const { result } = responseJSON;
           const { lat, lng } = result.geometry.location;
-          const point = { lat, lng };
+          const location = { lat, lng };
 
-          dispatch({ type: ADDRESS_LOCATION_SET, payload: { point } })
-          console.log(point);
+          dispatch({ type: ADDRESS_LOCATION_SET, payload: { location } })
+          console.log(location);
 
           // provide the location details, without reverse search yet
           const { title, type } = getTitleFromGooglePlace(result);

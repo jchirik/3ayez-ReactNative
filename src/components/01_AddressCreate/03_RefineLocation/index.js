@@ -58,10 +58,10 @@ const pinIcon = require('../../../../assets/images_v2/AddressCreate/pin.png');
 
 class RefineLocation extends Component {
 
-  onRegionChange(point) {
+  onRegionChange(location) {
     this.props.setAddressLocation({
-      lat: point.latitude,
-      lng: point.longitude
+      lat: location.latitude,
+      lng: location.longitude
     });
   }
 
@@ -141,13 +141,13 @@ class RefineLocation extends Component {
             showsUserLocation
             provider={ PROVIDER_GOOGLE }
             initialRegion={{
-              latitude: this.props.point.lat,
-              longitude: this.props.point.lng,
+              latitude: this.props.location.lat,
+              longitude: this.props.location.lng,
               latitudeDelta: 0.003,
               longitudeDelta: 0.003,
             }}
             onRegionChange={this.onRegionChange.bind(this)}
-            onRegionChangeComplete={() => this.props.reverseSearchAddress(this.props.point, this.props.locale)}
+            onRegionChangeComplete={() => this.props.reverseSearchAddress(this.props.location, this.props.locale)}
           />
           {this.renderPinOverlay()}
         </View>
@@ -175,7 +175,7 @@ class RefineLocation extends Component {
 }
 
 const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Settings }) => {
-  const { point } = AddressCreate;
+  const { location } = AddressCreate;
   const {
     title,
     is_loading
@@ -184,7 +184,7 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Settings }) => {
     locale
   } = Settings;
   return {
-    point,
+    location,
 
     title,
     is_loading,
