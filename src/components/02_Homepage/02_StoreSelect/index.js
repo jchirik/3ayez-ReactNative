@@ -16,6 +16,9 @@ import {
 } from 'react-native';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
+
+import AddressSelection from './AddressSelection';
+
 import {
   fetchNearbySellers,
   selectSeller
@@ -72,6 +75,9 @@ class StoreSelect extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isAddressSelectionVisible: false
+    };
   }
 
   fetchNearbySellers() {
@@ -94,10 +100,6 @@ class StoreSelect extends Component {
     this.props.selectSeller(seller); // sets seller and navigates to store page
   }
 
-  onAddressSelect() {
-    Actions.addressCreate();
-  }
-
   // every time the app is reopened (from sleep or switching apps, > 45min),
   // IF the app is reopened, refetch sellers
   // handleAppReopen = (nextAppState) => {
@@ -108,7 +110,7 @@ class StoreSelect extends Component {
 renderAddressHeader() {
   return (
     <TouchableOpacity
-      onPress={this.onAddressSelect.bind(this)}
+      onPress={() => this.setState({ isAddressSelectionVisible: true })}
       style={{
         marginTop: 6,
         paddingBottom: 3,
@@ -279,6 +281,11 @@ renderSellerList() {
       <View style={{ flex: 1 }}>
         {this.renderAddressHeader()}
         {this.renderSellerList()}
+
+        <AddressSelection
+          onClose={() => this.setState({ isAddressSelectionVisible: false })}
+          isVisible={this.state.isAddressSelectionVisible}
+          />
       </View>
     );
   }

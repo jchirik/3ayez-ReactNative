@@ -8,8 +8,10 @@ import ReduxThunk from 'redux-thunk';
 
 import Auth from './Auth_Reducer';
 import Addresses from './Addresses_Reducer';
+import AddressArea from './AddressArea_Reducer';
 import AddressCreate from './AddressCreate_Reducer';
 import AddressSearch from './AddressSearch_Reducer';
+import AddressSelect from './AddressSelect_Reducer';
 import AddressPlaceDetails from './AddressPlaceDetails_Reducer';
 import AddressReverseSearch from './AddressReverseSearch_Reducer';
 import CurrentLocation from './CurrentLocation_Reducer';
@@ -32,6 +34,7 @@ import OrderHistory from './OrderHistory_Reducer';
 import OrderTracker from './OrderTracker_Reducer';
 import DriverTracker from './DriverTracker_Reducer';
 import OngoingOrders from './OngoingOrders_Reducer';
+import ReviewOrder from './ReviewOrder_Reducer';
 
 import CustomerFeedback from './CustomerFeedback_Reducer';
 
@@ -74,6 +77,8 @@ const reducers = combineReducers({
   Customer,
 
   Addresses,
+  AddressArea,
+  AddressSelect,
   AddressCreate,
   AddressSearch,
   AddressPlaceDetails,

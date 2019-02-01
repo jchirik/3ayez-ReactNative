@@ -1,6 +1,7 @@
 export * from './BackButton';
 export * from './CloseButton';
 export * from './BlockButton';
+export * from './BlockUnderButton';
 export * from './Header';
 export * from './SearchBar';
 export * from './LoadingOverlay';

@@ -113,6 +113,10 @@ class RefineLocation extends Component {
 
   render() {
 
+    if (!this.props.location) {
+      return null;
+    }
+
     return (
       <View style={{
         flex: 1,

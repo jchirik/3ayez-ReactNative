@@ -23,7 +23,7 @@ import TutorialSwipe from './components/00_Tutorial/02_TutorialSwipe';
 import PhoneEntry from './components/14_Authentication/01_PhoneEntry';
 import VerifyCode from './components/14_Authentication/02_VerifyCode';
 
-import RegionSelect from './components/01_AddressCreate/01_RegionSelect';
+import CurrentLocationSelect from './components/01_AddressCreate/01_CurrentLocationSelect';
 import AddressSearch from './components/01_AddressCreate/02_AddressSearch';
 import RefineLocation from './components/01_AddressCreate/03_RefineLocation';
 import AddressDetails from './components/01_AddressCreate/04_AddressDetails';
@@ -60,7 +60,7 @@ import OrderHistory from './components/11_Settings/02_OrderHistory';
 
 
 import CouponModal from './components/12_CouponModal';
-
+import OrderReview from './components/13_OrderReview';
 
 import SupportChat from './components/15_SupportChat';
 
@@ -432,6 +432,13 @@ class RouterComponent extends Component {
             component={CouponModal}
           />
 
+          <Scene
+            key="orderReview"
+            component={OrderReview}
+          />
+
+
+
 
 
           <Stack
@@ -439,8 +446,8 @@ class RouterComponent extends Component {
             hideNavBar
           >
             <Scene
-              key="regionSelect"
-              component={RegionSelect}
+              key="currentLocationSelect"
+              component={CurrentLocationSelect}
             />
             <Scene
               key="addressSearch"

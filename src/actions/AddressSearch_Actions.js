@@ -90,13 +90,12 @@ export const selectGooglePlaceResult = (google_place) => {
           const location = { lat, lng };
 
           dispatch({ type: ADDRESS_LOCATION_SET, payload: { location } })
-          console.log(location);
+          console.log('ADDRESS_LOCATION_SET', location);
 
           // provide the location details, without reverse search yet
           const { title, type } = getTitleFromGooglePlace(result);
           dispatch({ type: LOCATION_REVERSE_SEARCH_SET, payload: { title, type } });
 
-          Actions.refineLocation();
         } else {
           console.warn('google places autocomplete: ' + responseJSON.status);
           dispatch({ type: ADDRESS_LOCATION_ERROR, payload: { error: responseJSON.status } });

@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import {
   Header,
   BlockButton,
+  BlockUnderButton,
   BackButton,
   LoadingOverlay,
   RTLImage,
@@ -133,7 +134,6 @@ class TutorialSwipe extends Component {
           text={'REGISTER AS A CUSTOMER'}
           style={{
             marginTop: 10,
-            marginBottom: 10,
             marginLeft: 18,
             marginRight: 18,
             alignSelf: 'stretch'
@@ -145,22 +145,13 @@ class TutorialSwipe extends Component {
           }}
         />
 
-        <TouchableOpacity
-            style={{
-              paddingTop: 12,
-              paddingBottom: 16
-            }}
-            onPress={() => {
-              this.props.authGuestLogin(() => Actions.addressCreate())
-            }}
-          >
-          <AyezText bold style={{
-            fontSize: 14,
-            textAlign: 'center'
-          }}>
-            CONTINUE AS GUEST
-          </AyezText>
-         </TouchableOpacity>
+        <BlockUnderButton
+          text={'CONTINUE AS GUEST'}
+          onPress={() => {
+            this.props.authGuestLogin(() => Actions.addressCreate())
+          }}
+        />
+
          <BackButton fixed />
          <LoadingOverlay isVisible={this.props.guestlogin_loading} />
       </View>

@@ -1,7 +1,8 @@
 
 import {
   ADDRESS_CREATE_RESET,
-  ADDRESS_REGION_SET,
+
+  ADDRESS_LOCATION_BEGIN,
   ADDRESS_LOCATION_SET,
 
   CURRENT_LOCATION_BEGIN,
@@ -10,11 +11,13 @@ import {
 
   ADDRESS_SUBMIT_BEGIN,
   ADDRESS_SUBMIT_SUCCESS,
-  ADDRESS_SUBMIT_FAILURE
+  ADDRESS_SUBMIT_ERROR,
+
+  ADDRESS_AREA_BEGIN,
+  ADDRESS_AREA_SET
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  region: '',
   location: null,
 
   title: '',
@@ -23,8 +26,10 @@ const INITIAL_STATE = {
   apt: '',
   notes: '',
   type: 'HOME',
+  area: null,
 
-  is_loading: false
+  is_loading: false,
+  error: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,20 +37,24 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADDRESS_CREATE_RESET:
       return { ...INITIAL_STATE };
-    case ADDRESS_REGION_SET:
-      return { ...state, region: p.region };
     case CURRENT_LOCATION_BEGIN:
+      return { ...state, location: null };
+    case ADDRESS_LOCATION_BEGIN:
       return { ...state, location: null };
     case ADDRESS_LOCATION_SET:
       return { ...state, location: p.location };
+    case ADDRESS_AREA_BEGIN:
+      return { ...state, area: null };
+    case ADDRESS_AREA_SET:
+      return { ...state, area: p.area };
     case ADDRESS_DETAIL_SET:
       return { ...state, ...p };
     case ADDRESS_SUBMIT_BEGIN:
       return { ...state, is_loading: true };
     case ADDRESS_SUBMIT_SUCCESS:
       return { ...state, is_loading: false };
-    case ADDRESS_SUBMIT_FAILURE:
-      return { ...state, is_loading: false };
+    case ADDRESS_SUBMIT_ERROR:
+      return { ...state, is_loading: false, error: p.error };
     default:
       return state;
   }

@@ -54,6 +54,10 @@ class Homepage extends Component {
       // open create address
     // otherwise, open address selection
 
+    if (this.props.review_order && !prevProps.review_order) {
+      Actions.substitutionModal({ order: this.props.review_order });
+    }
+
     if (this.props.feedback_order && !prevProps.feedback_order) {
       Actions.customerFeedback({ order: this.props.feedback_order });
     }

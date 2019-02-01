@@ -3,20 +3,19 @@ import firebase from 'react-native-firebase';
 import { Platform, PermissionsAndroid } from 'react-native';
 import {
   ADDRESS_CREATE_RESET,
-  ADDRESS_REGION_SET,
   ADDRESS_LOCATION_SET,
   ADDRESS_DETAIL_SET,
 
   CURRENT_LOCATION_BEGIN,
-  CURRENT_LOCATION_ERROR
+  CURRENT_LOCATION_ERROR,
+
+  ADDRESS_AREA_BEGIN,
+  ADDRESS_AREA_SET,
+  ADDRESS_AREA_ERROR
 } from './types';
 
 export const resetAddressCreate = () => {
   return { type: ADDRESS_CREATE_RESET };
-};
-
-export const setAddressRegion = (region) => {
-  return { type: ADDRESS_REGION_SET, payload: { region } };
 };
 
 export const setAddressDetail = (payload) => {
@@ -74,8 +73,31 @@ export const setCurrentLocation = () => {
           console.log(error.message)
           dispatch({ type: CURRENT_LOCATION_ERROR, payload: { error: error.message } });
         },
-        { enableHighAccuracy: true, timeout: 20000 }
+        { enableHighAccuracy: true, timeout: 0 }
       );
 		});
   };
 };
+
+
+export const calculateAreaForLocation = (location) => {
+  return (dispatch) => {
+  dispatch({ type: ADDRESS_AREA_BEGIN });
+
+  // fetch neighborhood for current location, save ID in the object
+  const calculateAreaForCoordinate = firebase.functions().httpsCallable('calculateAreaForCoordinate');
+  calculateAreaForCoordinate(location).then((result) => {
+    // Read result of the Cloud Function.
+    console.log('fetched area', result.data);
+
+    if (result.data) {
+      dispatch({ type: ADDRESS_AREA_SET, payload: { area: result.data }});
+    } else {
+      dispatch({ type: ADDRESS_AREA_ERROR, payload: { error: 'NO_VALID_AREA' }});
+    }
+  }).catch((error) => {
+    console.log('failed to fetch location', error);
+    dispatch({ type: ADDRESS_AREA_ERROR, payload: { error: 'FAILED_CALCULATE_AREA' }});
+  });
+
+}}

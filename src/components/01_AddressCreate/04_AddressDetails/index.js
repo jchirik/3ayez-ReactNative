@@ -23,6 +23,7 @@ import {
 } from '../../_common';
 import {
   createNewAddress,
+  calculateAreaForLocation,
   setAddressDetail
 } from '../../../actions';
 
@@ -74,24 +75,25 @@ class AddressDetails extends Component {
 
   createNewAddress() {
     const {
-      region,
       location,
       title,
       street,
       building,
       apt,
       notes,
-      type
+      type,
+      area
     } = this.props;
+
     this.props.createNewAddress({
-      region,
       location,
       title,
       street,
       building,
       apt,
       notes,
-      type
+      type,
+      area
     });
   }
 
@@ -99,6 +101,7 @@ class AddressDetails extends Component {
     if (this.props.google_type === 'route') {
       this.props.setAddressDetail({ street: this.props.google_title });
     }
+    this.props.calculateAreaForLocation(this.props.location);
   }
 
 
@@ -106,6 +109,54 @@ class AddressDetails extends Component {
     const update = {};
     update[param] = text;
     this.props.setAddressDetail(update);
+  }
+
+  renderTitle() {
+
+    let loadingComponent = null;
+    if (this.props.area_loading) {
+      loadingComponent = (
+        <ActivityIndicator size="small" style={{ marginLeft: 24 }} />
+      )
+    }
+
+    return (
+      <View style={{
+        paddingLeft: 16,
+        paddingTop: 16,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+      }}>
+        <AyezText bold size={32}>Delivering to:</AyezText>
+        { loadingComponent }
+      </View>
+    )
+  }
+
+  renderArea() {
+    if (this.props.area) {
+      return (
+        <View style={{
+          paddingLeft: 16,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+          <AyezText semibold size={13}>
+            Region:
+          </AyezText>
+          <AyezText semibold size={13} style={{
+            flex: 1,
+            alignItems: 'stretch',
+            paddingLeft: 6,
+            color: '#0094ff'
+          }}>
+            {translate(this.props.area.display_name)}
+          </AyezText>
+        </View>
+      )
+    }
+    return null
   }
 
   renderInputField(title, param, required=true, multiline=false) {
@@ -132,6 +183,7 @@ class AddressDetails extends Component {
             paddingLeft: 12,
             fontSize: 14,
             fontFamily: 'Poppins-Medium',
+            color: ('black')
           }}
           placeholder={required ? 'required' : 'optional'}
           placeholderTextColor={'#8E8E93'}
@@ -142,6 +194,26 @@ class AddressDetails extends Component {
           />
       </View>
     )
+  }
+
+  renderError() {
+    const { error } = this.props;
+    if (error === 'INVALID_PARAMETERS') {
+      return (
+        <AyezText
+          regular
+          color={'red'}
+          style={{ textAlign: 'center' }}
+          >Please fill all information</AyezText>
+      )
+    } else if (error === 'BAD_CONNECTION') {
+      <AyezText
+      regular
+      color={'red'}
+      style={{ textAlign: 'center' }}
+      >Bad internet connection</AyezText>
+    }
+    return null;
   }
 
   render() {
@@ -156,20 +228,24 @@ class AddressDetails extends Component {
           behavior={Platform.OS === 'ios' ? 'padding' : null}
         >
           <ScrollView style={{ flex: 1 }}>
-            <AyezText bold style={{
-              fontSize: 32,
-              padding: 16,
-              alignSelf: 'flex-start'
-            }}>Delivering to:</AyezText>
+            { this.renderTitle() }
+            { this.renderArea() }
+
+
+            <View style={{ height: 20 }} />
 
             { this.renderInputField('Street:', 'street') }
             { this.renderInputField('Building no.:', 'building') }
             { this.renderInputField('Apt no.:', 'apt') }
             { this.renderInputField('Instructions:', 'notes', false, true) }
+
+            <View style={{ height: 20 }} />
+
+            {this.renderError() }
             <BlockButton
               text={'CONFIRM'}
               style={{
-                marginTop: 20,
+                marginTop: 4,
                 marginBottom: 24,
                 marginLeft: 18,
                 marginRight: 18,
@@ -186,9 +262,8 @@ class AddressDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
+const mapStateToProps = ({ AddressReverseSearch, AddressCreate, AddressArea }) => {
   const {
-    region,
     location,
     title,
     street,
@@ -196,14 +271,17 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
     apt,
     notes,
     type,
+    area,
 
-    is_loading
+    is_loading,
+    error
   } = AddressCreate;
+
+  const area_loading = AddressArea.is_loading;
 
   console.log(AddressReverseSearch);
 
   return {
-    region,
     location,
     title,
     street,
@@ -211,14 +289,19 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate }) => {
     apt,
     notes,
     type,
+    area,
+    area_loading,
+
     google_title: AddressReverseSearch.title,
     google_type: AddressReverseSearch.type,
 
-    is_loading
+    is_loading,
+    error
   };
 };
 
 export default connect(mapStateToProps, {
   createNewAddress,
+  calculateAreaForLocation,
   setAddressDetail
 })(AddressDetails);

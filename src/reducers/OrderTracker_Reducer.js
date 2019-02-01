@@ -36,11 +36,9 @@ export default (state = INITIAL_STATE, action) => {
     case ORDER_TRACK_LISTENER_RESET:
       // make sure we end listening to the correct order,
       // because of lag in componentWillUnmount
-      if (p.order_id === state.id) {
-        if (state.orderListener !== null) { state.orderListener(); }
-        if (state.itemsListener !== null) { state.itemsListener(); }
-        return INITIAL_STATE;
-      }
+      if (state.orderListener !== null) { state.orderListener(); }
+      if (state.itemsListener !== null) { state.itemsListener(); }
+      return INITIAL_STATE;
     default:
       return state;
   }

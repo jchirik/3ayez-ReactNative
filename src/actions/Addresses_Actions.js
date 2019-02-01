@@ -5,7 +5,11 @@ import { AsyncStorage } from 'react-native';
 import {
   ADDRESS_SUBMIT_BEGIN,
   ADDRESS_SUBMIT_SUCCESS,
-  ADDRESS_SUBMIT_FAILURE
+  ADDRESS_SUBMIT_ERROR,
+
+  ADDRESS_SELECT_BEGIN,
+  ADDRESS_SELECT_SUCCESS,
+  ADDRESS_SELECT_ERROR
 } from './types';
 
 
@@ -24,6 +28,12 @@ export const createNewAddress = (address) => {
     const { currentUser } = firebase.auth();
 
     dispatch({ type: ADDRESS_SUBMIT_BEGIN });
+
+    if (!address.street || !address.building || !address.apt) {
+      dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
+      return;
+    }
+
     // post the address to firestore
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc();
     addressRef.set({ ...address, timestamp: Date.now() }).then(() => {
@@ -31,18 +41,28 @@ export const createNewAddress = (address) => {
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
       Actions.popTo('homepage');
     }).catch(() => {
-      dispatch({ type: ADDRESS_SUBMIT_FAILURE });
+      dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })
-    //
-    // batch.update(addressRef, );
-    //
-    // // // save selected_address_id to user's firestore
-    // // const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid);
-    // // batch.update(customerRef, { selected_address_id: addressRef.id });
-    //
-    // batch.commit().then(() => {
-    //   console.log('created user in database');
-    // })
+  };
+};
+
+
+
+export const selectAddress = (address, onClose=null) => {
+  return (dispatch) => {
+    // const batch = firebase.firestore().batch();
+    const { currentUser } = firebase.auth();
+
+    dispatch({ type: ADDRESS_SELECT_BEGIN });
+    // post the address to firestore
+    const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc(address.id);
+    addressRef.update({ timestamp: Date.now() }).then(() => {
+      console.log('selectAddress success');
+      dispatch({ type: ADDRESS_SELECT_SUCCESS });
+      onClose();
+    }).catch(() => {
+      dispatch({ type: ADDRESS_SELECT_ERROR, payload: { error: 'BAD_CONNECTION' } });
+    })
   };
 };
 

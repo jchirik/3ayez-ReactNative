@@ -71,7 +71,6 @@ class OrderTracker extends Component {
     // IFF status between 100 & 200, and driver_id exists
     // get items_array from the subcollection too
     this.props.listenToOrder(this.props.order_id);
-
     // this.props.markOrderCustomerShown(this.props.order_id);
     BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
 
@@ -100,15 +99,25 @@ class OrderTracker extends Component {
     }, 1000);
   }
 
-  componentWillUnmount() {
-    console.log('OrderTracker unmounting')
-    this.props.endListeningToOrder(this.props.order_id);
+
+  // doing this because componentWillUnmount is glitching -
+  // fires way too late after
+  onBackPress() {
+    console.log('OrderTracker exiting')
+    Actions.pop(); // Android back press
+
+    this.props.endListeningToOrder();
     timer.clearTimeout(this);
     BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
 
+
+
+
+
+
   onAndroidBackPress = () => {
-    Actions.pop(); // Android back press
+    this.onBackPress();
     return true;
   }
 
@@ -183,6 +192,7 @@ class OrderTracker extends Component {
       <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
           <Header
             title={'Track Your Order'}
+            onBackButtonPress={this.onBackPress.bind(this)}
             blackStyle
             rightButton={{
               text: 'Summary',

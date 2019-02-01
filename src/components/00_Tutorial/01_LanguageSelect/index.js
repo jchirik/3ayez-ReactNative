@@ -14,6 +14,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   BlockButton,
+  BlockUnderButton,
   RTLImage,
   AyezText
 } from '../../_common';
@@ -109,34 +110,17 @@ class LanguageSelect extends Component {
         />
         <BlockButton
           text={'Get Started'}
-          color={'white'}
           style={{
             marginTop: 10,
-            marginBottom: 10,
             marginLeft: 18,
             marginRight: 18
           }}
-          textStyle={{
-            color: 'black',
-            fontFamily: 'Poppins-Medium'
-          }}
           onPress={() => Actions.tutorialSwipe()}
           />
-
-
-      <TouchableOpacity
-          style={{
-            paddingTop: 12,
-            paddingBottom: 16
-          }}
+        <BlockUnderButton
+          text={switchText}
           onPress={this.switchLanguage.bind(this, switchLocale)}
-        >
-        <AyezText bold style={{
-          fontSize: 14,
-          textAlign: 'center'
-        }}>{switchText}</AyezText>
-       </TouchableOpacity>
-
+        />
       </View>
     );
   }

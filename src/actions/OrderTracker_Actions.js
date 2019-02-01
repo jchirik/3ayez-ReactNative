@@ -43,9 +43,9 @@ export const listenToOrder = (order_id) => {
   };
 };
 
-export const endListeningToOrder = (order_id) => {
+export const endListeningToOrder = () => {
   return (dispatch) => {
-    dispatch({ type: ORDER_TRACK_LISTENER_RESET, payload: { order_id } });
+    dispatch({ type: ORDER_TRACK_LISTENER_RESET });
   };
 };
 
