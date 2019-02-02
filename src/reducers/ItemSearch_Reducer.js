@@ -9,7 +9,12 @@ import {
   ITEM_SEARCH_DATA_RESET,
 
   SET_CUSTOM_ITEM_MODAL,
-  HIDE_CUSTOM_ITEM_MODAL
+  HIDE_CUSTOM_ITEM_MODAL,
+
+
+
+  SEARCH_SUBCATEGORY_DATA_BEGIN,
+  SEARCH_SUBCATEGORY_DATA_END
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -20,8 +25,11 @@ const INITIAL_STATE = {
   catagoryData: [],
   isLoadingCategoryData: false,
 
-  results: [],
-  searchQuery: '',
+  subcategoryResults: [],
+  subcategorySelectLoading: false,
+  categoryResults: [],
+  itemResults: [],
+  query: '',
   isLoadingSearchData: false,
 
   customItemModalVisible: false,
@@ -38,20 +46,35 @@ export default (state = INITIAL_STATE, action) => {
     case SUBCATEGORY_SET:
       return { ...state, subcategory: p.subcategory, subcategoryColumnIndex: p.columnIndex }
     case ITEM_SEARCH_QUERY_SET:
-      return { ...state, results: [], isLoadingSearchData: true, searchQuery: p.searchQuery };
+      return { ...state, isLoadingSearchData: true, query: p.query };
     case ITEM_SEARCH_DATA_SET:
-      return { ...state, results: p.results, isLoadingSearchData: false };
+      if (p.query === state.query) {
+        return {
+          ...state,
+          subcategoryResults: p.subcategoryResults,
+          categoryResults: p.categoryResults,
+          itemResults: p.itemResults,
+          isLoadingSearchData: false
+        };
+      }
     case ITEM_SEARCH_DATA_RESET:
       return {
         ...state,
-        results: [],
-        searchQuery: '',
+        subcategoryResults: [],
+        categoryResults: [],
+        itemResults: [],
+        query: '',
         isLoadingSearchData: false
       };
     case SET_CUSTOM_ITEM_MODAL:
       return { ...state, customItemModalVisible: true, customItemModalText: action.payload };
     case HIDE_CUSTOM_ITEM_MODAL:
       return { ...state, customItemModalVisible: false, customItemModalText: '' };
+
+    case SEARCH_SUBCATEGORY_DATA_BEGIN:
+      return { ...state, subcategorySelectLoading: true };
+    case SEARCH_SUBCATEGORY_DATA_END:
+      return { ...state, subcategorySelectLoading: false };
     default:
       return state;
   }

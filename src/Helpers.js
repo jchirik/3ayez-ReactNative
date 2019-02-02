@@ -8,6 +8,9 @@ import Moment from 'moment';
 import { Actions } from 'react-native-router-flux';
 import store from './reducers';
 
+
+export const getScreenDimensions = () => Dimensions.get('window');
+
 export const isIPhoneX = () => {
   const { height, width } = Dimensions.get('window');
   return (
@@ -50,6 +53,43 @@ export const paymentIcon = (brand, type) => {
       return require(`${dir}/credit.png`);
   }
 };
+
+export const getTitleFromGooglePlace = (result) => {
+  let title = '';
+  let type = '';
+  const relevant_components = result.address_components.filter(cmp => {
+    // get rid of street_address from the components (never accurate)
+    const not_street_number = !cmp.types.includes('street_number');
+    const not_unnamed_en = (cmp.short_name !== 'Unnamed Road');
+    return not_street_number && not_unnamed_en;
+  });
+  // get the most precise component after that
+  if (relevant_components.length > 0) {
+    title = relevant_components[0].short_name;
+    type = relevant_components[0].types[0];
+  }
+  console.log('getTitleFromGooglePlace', title, type);
+  return { title, type };
+};
+
+export const cleanAlgoliaItems = (allItems) => {
+  // ONLY use items that have images
+  const safeItems = [];
+  allItems.forEach((item) => {
+    if (item.image_url && item.thumbnail_url) {
+      const safeItem = item;
+      safeItem.price = parseFloat(item.price) || null;
+      safeItem.promotion_price = parseFloat(item.promotion_price) || null;
+      safeItem.max_per_basket = parseFloat(item.max_per_basket) || null;
+      // safeItem.increment = parseFloat(item.increment) || 1;
+      safeItem.incr = parseFloat(item.incr) || 1;
+      safeItem.unit = (item.unit ? item.unit : '');
+      safeItems.push(safeItem);
+    }
+  });
+  return safeItems;
+};
+
 
 
 

@@ -60,3 +60,17 @@ export const incrementItem = (basket, item, quantity) => {
   items_array = items_array.filter(item => item.quantity > 0);
   return updateBasket({ ...basket, items_array });
 }
+
+
+
+// addSpecialRequests(baskets[seller_id], p.upc, p.special_requests)
+export const addSpecialRequests = (basket, upc, special_requests) => {
+  let items_array = basket.items_array ? [ ...basket.items_array ] : [];
+  // find the item in our basket array + update quantity
+  const foundIndex = items_array.findIndex((item_og) => { return item_og.upc === upc; });
+  if (foundIndex >= 0) {
+    const foundItem = items_array[foundIndex];
+    items_array[foundIndex] = { ...foundItem, ...special_requests };
+  }
+  return { ...basket, items_array };
+}

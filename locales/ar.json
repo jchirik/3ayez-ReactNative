@@ -6,6 +6,46 @@
 
 
 
+  "StoreHome": {
+      "featuredTab": "Featured",
+      "categoreisTab": "Categories",
+      "discountsCorridor": "Discounts",
+      "featuredCorridor": "Featured",
+      "viewCorridor": "View corridors",
+      "writeYourProduct": "Write your product",
+      "writeYourProductSubTitle": "Order anything that can be found in the store"
+    },
+    "StoreCategories": {
+      "poweredBy": "مدعوم عن طريق ",
+      "myAddress": "عنواني",
+      "myOrders": "طلباتي",
+      "itemsInYourBasket": "صنف في السلة"
+    },
+    "StoreSubcategories": {
+      "noItemsAvailable": "لا توجد اصناف متاحه",
+      "header": "Select sub category",
+      "backTo": "Back To"
+    },
+    "Item": {
+      "limit": "فقط"
+    },
+  "WorkingBasket": {
+    "subtotal": "SUBTOTAL",
+    "submitButton": "OK",
+    "callForProblem": "للإتصال بلمحل",
+    "addAddress": "‏العنوان بالتفصيل . . 🏠",
+    "changeAddress": "تغيير البيانات",
+    "clearOrder": "مسح كل المشتريات",
+    "nothingInBasket": "مفيش حاجة في السلة!",
+    "clearOrderModalHeader": "تأكيد خلو السلة",
+    "clearOrderModalButton": "CLEAR",
+    "weightsVary": "قد تختلف الأسعار طبقا للوزن"
+  },
+
+
+
+
+
 
 
 
@@ -29,18 +69,6 @@
     "whatsNeighborhood": "انت فين؟",
     "chooseNeighborhood": "اختر مكان آخر",
     "change": "تغيير"
-  },
-  "StoreCategories": {
-    "poweredBy": "مدعوم عن طريق ",
-    "myAddress": "عنواني",
-    "myOrders": "طلباتي",
-    "itemsInYourBasket": "صنف في السلة"
-  },
-  "StoreSubcategories": {
-    "noItemsAvailable": "لا توجد اصناف متاحه"
-  },
-  "Item": {
-    "limit": "فقط",
   },
   "OrderTrackBanner": {
     "viewPlaced": "مشاهدة الطلبات السابقة",
@@ -126,18 +154,6 @@
     "floor": "الدور",
     "apt": "الشقة رقم",
     "notes": "علامة مميزة ؟"
-  },
-  "WorkingBasket": {
-    "subtotal": "SUBTOTAL",
-    "submitButton": "OK",
-    "callForProblem": "للإتصال بلمحل",
-    "addAddress": "‏العنوان بالتفصيل . . 🏠",
-    "changeAddress": "تغيير البيانات",
-    "clearOrder": "مسح كل المشتريات",
-    "nothingInBasket": "مفيش حاجة في السلة!",
-    "clearOrderModalHeader": "تأكيد خلو السلة",
-    "clearOrderModalButton": "CLEAR",
-    "weightsVary": "قد تختلف الأسعار طبقا للوزن"
   },
   "Checkout": {
     "header": "مراجعة",

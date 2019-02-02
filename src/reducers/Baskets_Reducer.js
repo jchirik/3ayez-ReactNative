@@ -6,10 +6,12 @@ import {
   BASKET_INIT,
   BASKET_ITEM_INCR,
   BASKET_ITEM_DECR,
-  BASKET_ITEMS_CLEAR
+  BASKET_ITEMS_CLEAR,
+
+  BASKET_ITEM_SPECIAL_REQ
 } from '../actions/types';
 
-import { saveBaskets, incrementItem } from './Baskets_Helpers'
+import { saveBaskets, incrementItem, addSpecialRequests } from './Baskets_Helpers'
 
 const INITIAL_STATE = {
   baskets: {}
@@ -47,6 +49,9 @@ export default (state = INITIAL_STATE, action) => {
       return saveBaskets(baskets);
     case BASKET_ITEMS_CLEAR: // if customer clears basket
       baskets[seller_id] = { ...NEW_BASKET };
+      return saveBaskets(baskets);
+    case BASKET_ITEM_SPECIAL_REQ:
+      baskets[seller_id] = addSpecialRequests(baskets[seller_id], p.upc, p.special_requests)
       return saveBaskets(baskets);
     default:
       return state;

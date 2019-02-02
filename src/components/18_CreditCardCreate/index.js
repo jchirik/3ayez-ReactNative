@@ -113,8 +113,8 @@ class CreditCardCreate extends Component {
             cvc: strings('AddCreditCard.cvc'),
             name: strings('AddCreditCard.name')
           }}
-          labelStyle={{ fontSize: 16, fontFamily: 'Poppins-Medium', fontWeight: 'normal', color: 'black' }}
-          inputStyle={{ fontSize: 18, fontFamily: 'Poppins-Regular', color: 'black' }}
+          labelStyle={{ fontSize: 13, fontFamily: 'Poppins-Medium', color: 'black' }}
+          inputStyle={{ fontSize: 15, fontFamily: 'Poppins-Regular', color: 'black' }}
           onChange={this.onChange.bind(this)}
           requiresName
           autoFocus

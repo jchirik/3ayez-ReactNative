@@ -14,6 +14,77 @@
   },
 
 
+  "StoreHome": {
+      "featuredTab": "Featured",
+      "categoreisTab": "Categories",
+      "discountsCorridor": "Discounts",
+      "featuredCorridor": "Featured",
+      "viewMore": "View more",
+      "writeYourProduct": "Write your product",
+      "writeYourProductSubTitle": "Order anything that can be found in the store"
+    },
+    "StoreCategories": {
+      "poweredBy": "powered by ",
+      "myAddress": "My Address",
+      "myOrders": "My Orders",
+      "itemsInYourBasket": "items in your basket!"
+    },
+    "StoreSubcategories": {
+      "noItemsAvailable": "No items currently available",
+      "header": "Select sub category",
+      "backTo": "Back To"
+    },
+    "Item": {
+      "limit": "limit"
+    },
+
+    "WorkingBasket": {
+    "total": "Total",
+    "subtotal": "SUBTOTAL",
+    "submitButton": "OK",
+    "callForProblem": "Call Store",
+    "addAddress": "🏠 Provide an address...",
+    "changeAddress": "Change Address",
+    "clearOrder": "Empty Basket",
+    "nothingInBasket": "Nothing in your basket!",
+    "clearOrderModalHeader": "Are you sure you want to\nremove all items from the cart?",
+    "dontClearOrderModalButton": "No, It was a mistake",
+    "clearOrderModalButton": "Yes, Sure",
+    "weightsVary": "Exact weight may vary",
+    "yourCartisEmptyTitle": "Your cart is empty",
+    "yourCartisEmptySubitle": "Make your basket happy and add products to it",
+    "continue": "Continue"
+  },
+  "ItemView": {
+    "selectProductRipe": "Select Produce Ripeness:",
+    "additionalInstructions": "Additional Instructions:",
+    "callMe": "Call me when selecting this product",
+    "writeYourInstructions": "Write your request",
+    "addPrice": "{0} EGP",
+    "switchConfirmation": "Yes",
+    "switchDecline": "No",
+    "ripe": "Ripe",
+    "normal": "Normal",
+    "green": "Green",
+    "relatedProducts": "Related Products",
+    "moreThanSixProducts": "You may have selected more than 6 products The delivery may take longer than usual",
+    "moreThanSixProductsConfirmation": "OK"
+  },
+  "AddProduct": {
+    "headerTitle": "ADD SPECIAL PRODUCT",
+    "headerMessage": "We will do our best to find your product in the store",
+    "productNameInputLabel": "Product Name :",
+    "productNameInputPlaceholder": "Name of the item",
+    "productDescriptionInputLabel": "Prodcut Description :",
+    "productDescriptionInputPlaceholder": "More details about the item",
+    "unitTabHeader": "Units",
+    "weightTabHeader": "Weight",
+    "addButtonLabel": "ADD"
+  },
+
+
+
+
 
 
 
@@ -40,18 +111,6 @@
     "chooseNeighborhood": "Choose another neighborhood",
     "change": "change"
   },
-  "StoreCategories": {
-    "poweredBy": "powered by ",
-    "myAddress": "My Address",
-    "myOrders": "My Orders",
-    "itemsInYourBasket": "items in your basket!"
-  },
-  "StoreSubcategories": {
-    "noItemsAvailable": "No items currently available"
-  },
-  "Item": {
-    "limit": "limit",
-  },
   "OrderTrackBanner": {
     "viewPlaced": "View Placed Orders",
     "active": "Active",
@@ -66,7 +125,7 @@
   "AddCreditCard": {
     "header": "Add a Credit Card",
     "number": "Card Number",
-    "expiry": "Expiry Date",
+    "expiry": "Expiry",
     "cvc": "CVC",
     "name": "Name",
     "submitCard": "Submit Card"
@@ -136,18 +195,6 @@
     "floor": "Floor",
     "apt": "Apt",
     "notes": "Notes"
-  },
-  "WorkingBasket": {
-    "subtotal": "SUBTOTAL",
-    "submitButton": "OK",
-    "callForProblem": "Call Store",
-    "addAddress": "🏠 Provide an address...",
-    "changeAddress": "Change Address",
-    "clearOrder": "Clear Basket",
-    "nothingInBasket": "Nothing in your basket!",
-    "clearOrderModalHeader": "Are you sure you want to clear your basket?",
-    "clearOrderModalButton": "CLEAR",
-    "weightsVary": "Exact weight may vary"
   },
   "Checkout": {
     "header": "Review",

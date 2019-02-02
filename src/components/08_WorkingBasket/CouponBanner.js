@@ -7,10 +7,7 @@ import {
   Platform
 } from 'react-native';
 
-import {
-  strings,
-  translate
-} from '../../i18n.js';
+import { strings } from '../../i18n.js';
 
 const removeIcon = require('../../../assets/images/remove.png');
 

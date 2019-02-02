@@ -235,6 +235,8 @@ dependencies {
   implementation project(':react-native-image-picker')
   implementation project(':tipsi-stripe')
 
+  implementation project(':react-native-fast-image')
+
   implementation project(':react-native-languages')
   /* --------------------------------
    *  OPTIONAL SUPPORT LIBS

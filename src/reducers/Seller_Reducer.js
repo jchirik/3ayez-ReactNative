@@ -2,8 +2,6 @@
 import {
   SELLER_SELECT,
 
-  SELLER_PROMOTIONS_FETCH_END,
-  SELLER_RECENTS_FETCH_END,
   SELLER_FEATURED_FETCH_END,
   SELLER_CATEGORIES_FETCH_END
 } from '../actions/types';
@@ -19,15 +17,10 @@ const INITIAL_STATE = {
 
   delivery_fee: 3,
 
-  // Section 1 of Store Home
-  promotions: [],
-  promotions_page: -1,
-  promotions_loading: true,
-
-  recents: [],
 
   // Section 2 of Store Home
   featured: [],
+  featured_loading: true,
   categories: [], // contains an array OF categories (query, name, page, item array)
   categories_loading: true
 };
@@ -37,17 +30,8 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SELLER_SELECT:
       return { ...INITIAL_STATE, ...p.seller };
-    case SELLER_PROMOTIONS_FETCH_END:
-      if (p.promotions_page > state.promotions_page) {
-        return {
-          ...state,
-          promotions: [ ...state.promotions, ...p.promotions ], // append results
-          promotions_page: p.promotions_page,
-          promotions_loading: false
-        };
-      }
     case SELLER_FEATURED_FETCH_END:
-      return { ...state, featured: p.featured };
+      return { ...state, featured: p.featured, featured_loading: false };
     case SELLER_CATEGORIES_FETCH_END:
       return { ...state, categories: p.categories, categories_loading: false };
     default:

@@ -7,8 +7,13 @@ export * from './ModalPanel';
 export * from './InputField';
 export * from './KeyboardDismissableView';
 
+
+export * from './FilterButton';
+export * from './SearchBarButton';
+
 export Tooltip from './Tooltip';
-export ItemCell from './ItemCell';
+
 export ApplyCouponModal from './ApplyCouponModal';
 export ItemIncrementer from './ItemIncrementer';
+export Incrementer from './Incrementer';
 export OrderStatusBar from './OrderStatusBar';

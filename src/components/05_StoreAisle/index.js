@@ -1,0 +1,268 @@
+import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import FastImage from 'react-native-fast-image';
+import {
+  View,
+  FlatList,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+  InteractionManager,
+  findNodeHandle
+} from 'react-native';
+import styles from './styles';
+import { selectSubcategory } from '../../actions';
+import { strings, translate } from '../../i18n.js';
+import { SearchBarButton } from '../_reusable';
+import { AnimatedCheckmarkOverlay, BackButton, BasketBlockButton } from '../_common';
+import loadingCircleGray from '../../../assets/images/loading_circle_gray.png';
+import basketButton from '../../../assets/images_v2/basket_button.png';
+
+class StoreAisle extends Component {
+  state = {};
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+    InteractionManager.runAfterInteractions(() => {
+      setTimeout(() => {
+        this.setState({
+          bluredViewRef: findNodeHandle(this.refs['09_Corridors'])
+        });
+      }, 100);
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.props.onUnmount) {
+      this.props.onUnmount();
+    }
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.onAndroidBackPress
+    );
+  }
+
+  onAndroidBackPress = () => {
+    Actions.pop(); // Android back press
+    return true;
+  };
+
+  didSelectSubcategory(subcategory, columnIndex) {
+    this.props.selectSubcategory(subcategory, columnIndex);
+    Actions.storeShelf({
+      title: subcategory.name,
+      parent_title: this.props.category.name,
+      items: subcategory.items,
+      jumpIndex: columnIndex
+    });
+  }
+
+  renderTinyPhoto(subcategory, index) {
+    if (index >= subcategory.items.length) return null;
+    const { image_url, thumbnail_url } = subcategory.items[index];
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.didSelectSubcategory(
+            subcategory,
+            (index % 2 == 0 ? index : index - 1) / 2
+          );
+        }}
+        activeOpacity={1.0}
+      >
+        <FastImage
+          style={styles.tinyPhoto}
+          defaultSource={loadingCircleGray}
+          resizeMode={'contain'}
+          source={{
+            uri: thumbnail_url || image_url
+          }}
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  renderTinyPhotoColumn(subcategory, { item, index }) {
+    const numRows = 2;
+    if (index % numRows !== 0) return null;
+    return (
+      <TouchableOpacity style={styles.tinyPhotoColumn}>
+        {this.renderTinyPhoto(subcategory, index)}
+        {this.renderTinyPhoto(subcategory, index + 1)}
+      </TouchableOpacity>
+    );
+  }
+
+  renderSubcategoryRow({ item, index }) {
+    const subcategory = item;
+    const subcategoryTitle = subcategory.name
+      ? translate(subcategory.name)
+      : subcategory.title;
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.subcategoryHeader}>
+          <Text style={styles.subcategoryHeaderText}>{subcategoryTitle}</Text>
+          <TouchableOpacity
+            style={styles.viewCorridorContainer}
+            onPress={() => this.didSelectSubcategory(subcategory, 0)}
+          >
+            <Text style={styles.viewCorridorText}>
+              {strings('StoreHome.viewMore')} >
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.subcategoryContainerShadow}>
+          <FlatList
+            horizontal
+            style={styles.subcategoryContainer}
+            removeClippedSubviews
+            initialNumToRender={5}
+            windowSize={2}
+            renderItem={this.renderTinyPhotoColumn.bind(this, subcategory)}
+            data={subcategory.items}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item1, index1) => index1.toString()}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  renderListHeader() {
+    const { categoryData } = this.props;
+    return (
+      <View style={styles.categoryList}>
+        <FlatList
+          horizontal
+          windowSize={2}
+          contentContainerStyle={styles.categoryListContainer}
+          renderItem={this.renderCategory.bind(this)}
+          data={categoryData}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item1, index1) => index1.toString()}
+        />
+      </View>
+    );
+  }
+
+  renderCategory({ item, index }) {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.tableRef.scrollToIndex({
+            animated: true,
+            index: index
+          });
+        }}
+        style={styles.categoryItemContainer}
+      >
+        <Text style={styles.categoryItemText}>{translate(item.name)}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  renderNoItems() {
+    if (this.props.isLoadingCategoryData) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" style={styles.activityIndecator} />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.noItemAvailableText}>
+            {strings('StoreSubcategories.noItemsAvailable')}
+          </Text>
+        </View>
+      );
+    }
+  }
+  storeSearch() {
+    Actions.storeSearch();
+  }
+  renderSubcategoryItems(categoryData) {
+    return (
+      <FlatList
+        ref={ref => (this.tableRef = ref)}
+        style={styles.container}
+        removeClippedSubviews
+        initialNumToRender={3}
+        alwaysBounceVertical={false}
+        bounces={false}
+        ListFooterComponent={<View style={styles.subcategoryItemsFooter} />}
+        ListEmptyComponent={this.renderNoItems.bind(this)}
+        renderItem={this.renderSubcategoryRow.bind(this)}
+        data={categoryData}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    );
+  }
+  render() {
+    const { categoryData, display_name: displayName } = this.props;
+    return (
+      <View style={styles.screenContainer} ref={'09_Corridors'}>
+        <View style={styles.headerContainer}>
+          <View style={styles.searchBarContainer}>
+            <BackButton />
+            <SearchBarButton displayName={displayName} />
+            {this.renderBasketButton()}
+          </View>
+          {this.renderListHeader()}
+        </View>
+        {this.renderSubcategoryItems(categoryData)}
+        <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
+        <AnimatedCheckmarkOverlay />
+      </View>
+    );
+  }
+
+  renderBasketButton() {
+    return (
+      <TouchableOpacity
+        style={styles.basketButton}
+        onPress={() =>
+          Actions.checkoutFlow({ bluredViewRef: this.state.bluredViewRef })
+        }
+      >
+        <Image
+          source={basketButton}
+          style={styles.basketButtonImage}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  const { category, categoryData, isLoadingCategoryData } = state.ItemSearch;
+  const { display_name } = state.Seller;
+  let categoryDataWithItems = [];
+  if (categoryData) {
+    categoryDataWithItems = categoryData.filter(
+      subcategory => subcategory.items.length > 0
+    );
+  }
+  return {
+    display_name,
+    category,
+    categoryData: categoryDataWithItems,
+    isLoadingCategoryData
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    selectSubcategory
+  }
+)(StoreAisle);

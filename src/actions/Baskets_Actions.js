@@ -8,7 +8,9 @@ import {
 
   BASKET_ITEM_INCR,
   BASKET_ITEM_DECR,
-  BASKET_ITEMS_CLEAR
+  BASKET_ITEMS_CLEAR,
+
+  BASKET_ITEM_SPECIAL_REQ
 } from './types';
 
 
@@ -26,6 +28,10 @@ export const loadBaskets = () => {
     });
   }
 }
+
+export const saveItemSpecialRequests = (upc, seller_id, special_requests) => {
+  return { type: BASKET_ITEM_SPECIAL_REQ, payload: { upc, seller_id, special_requests } };
+};
 
 export const addToBasket = (item, seller_id) => {
   playSound(SOUND_SWOOSH);

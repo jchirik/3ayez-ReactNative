@@ -38,10 +38,12 @@ import Homepage from './components/02_Homepage';
 
 import StorePage from './components/03_StorePage';
 import StoreSearch from './components/04_StoreSearch';
-import StoreCategory from './components/05_StoreCategory';
+import StoreAisle from './components/05_StoreAisle';
 import StoreShelf from './components/06_StoreShelf';
 import ItemPage from './components/07_ItemPage';
+import ItemImageView from './components/07_ItemPage/_components/ItemImageView';
 import WorkingBasket from './components/08_WorkingBasket';
+import AddProduct from './components/10_AddProduct';
 
 
 import TimeslotSelect from './components/09_TimeslotSelect';
@@ -72,6 +74,8 @@ import CreditCardCreate from './components/18_CreditCardCreate';
 import AddressManager from './components/19_AddressManager';
 
 import CustomerFeedback from './components/20_CustomerFeedback';
+
+import AdditionalNotes from './components/21_AdditionalNotes';
 // import LocationDetails from './components/02_LocationDetails';
 // import StoreSelector from './components/03_StoreSelector';
 
@@ -176,30 +180,30 @@ import CustomerFeedback from './components/20_CustomerFeedback';
 //   };
 // };
 //
-// const verticalTransitionConfig = () => {
-//   return {
-//     transitionSpec: {
-//       duration: 400,
-//       easing: Easing.out(Easing.poly(4)),
-//       timing: Animated.timing,
-//       useNativeDriver: true,
-//     },
-//     screenInterpolator: sceneProps => {
-//       const { layout, position, scene } = sceneProps;
-//
-//       const thisSceneIndex = scene.index;
-//
-//       const height = layout.initHeight;
-//
-//       const translateY = position.interpolate({
-//         inputRange: [thisSceneIndex - 1, thisSceneIndex],
-//         outputRange: [height, 0],
-//       });
-//
-//       return { transform: [{ translateY }] };
-//     },
-//   };
-// };
+const verticalTransitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 400,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {
+      const { layout, position, scene } = sceneProps;
+
+      const thisSceneIndex = scene.index;
+
+      const height = layout.initHeight;
+
+      const translateY = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex],
+        outputRange: [height, 0],
+      });
+
+      return { transform: [{ translateY }] };
+    },
+  };
+};
 //
 //
 // const zoomTransitionConfig = () => {
@@ -292,192 +296,84 @@ class RouterComponent extends Component {
         sceneStyle={{ paddingTop: 0 }}
       >
         <Lightbox>
-          <Stack
-            key="main"
-            hideNavBar
-            initial
-            panHandlers={null}
-            animationEnabled={true}
-          >
-            <Scene
-              hideNavBar
-              key="homepage"
-              component={Homepage}
-              initial
-            />
-            <Scene
-              key="storePage"
-              component={StorePage}
-            />
-            <Scene
-              key="storeSearch"
-              component={StoreSearch}
-            />
-            <Scene
-              key="storeCategory"
-              component={StoreCategory}
-            />
-            <Scene
-              key="storeShelf"
-              component={StoreShelf}
-            />
-            <Scene
-              key="itemPage"
-              component={ItemPage}
-            />
-            <Scene
-              key="workingBasket"
-              component={WorkingBasket}
-            />
 
-            <Scene
-              key="timeslotSelect"
-              component={TimeslotSelect}
-            />
+          <Stack animationEnabled={true} modal headerMode={'none'}>
+                <Stack
+                  key="main"
+                  hideNavBar
+                  initial
+                  animationEnabled={true}
+                  modal={false}
+                  panHandlers={null}
+                >
+                    <Scene hideNavBar key="homepage" component={Homepage} initial />
 
-            <Scene
-              key="checkout"
-              component={Checkout}
-            />
-            <Scene
-              key="checkoutNotesDetail"
-              component={CheckoutNotesDetail}
-            />
+                    <Scene key="storePage" component={StorePage} />
+                    <Scene key="storeSearch" component={StoreSearch} />
+                    <Scene key="storeAisle" component={StoreAisle} />
+                    <Scene key="storeShelf" component={StoreShelf} />
+                    <Scene key="itemPage" component={ItemPage} />
+                    <Scene key="itemImageView" component={ItemImageView} />
+                    <Scene key="addProduct" component={AddProduct} />
 
+                    <Scene key="settings" component={SettingsMenu} />
+                    <Scene key="orderHistory" component={OrderHistory} />
 
+                    <Scene key="supportChat" component={SupportChat} />
+                    <Scene key="supportDetail" component={SupportDetail} />
 
-            <Scene
-              key="settings"
-              component={SettingsMenu}
-            />
-            <Scene
-              key="orderHistory"
-              component={OrderHistory}
-            />
+                  <Scene key="creditCardManager" component={CreditCardManager} />
+                  <Scene key="creditCardCreate" component={CreditCardCreate} />
+                  <Scene key="orderTracker" component={OrderTracker} />
+                  <Scene key="orderSummary" component={OrderSummary} />
+                  <Scene key="orderProblem" component={OrderProblem} />
+                  <Scene key="driverTracker" component={DriverTracker} />
+                  <Scene key="addressManager" component={AddressManager} />
 
+                  <Scene key="additionalNotes" component={AdditionalNotes} />
+              </Stack>
 
+          {/* any modals */}
 
-            <Stack
-              key="tutorial"
-              hideNavBar
-            >
-              <Scene
-                key="languageSelect"
-                component={LanguageSelect}
-              />
-              <Scene
-                key="tutorialSwipe"
-                component={TutorialSwipe}
-              />
-            </Stack>
-
-            <Stack
-              key="auth"
-              hideNavBar
-            >
-              <Scene
-                key="phoneEntry"
-                component={PhoneEntry}
-              />
-              <Scene
-                key="verifyCode"
-                component={VerifyCode}
-              />
-            </Stack>
-
-          <Scene
-            key="supportChat"
-            component={SupportChat}
-          />
-          <Scene
-            key="supportDetail"
-            component={SupportDetail}
-          />
-
-          <Scene
-            key="creditCardManager"
-            component={CreditCardManager}
-          />
-          <Scene
-            key="creditCardCreate"
-            component={CreditCardCreate}
-          />
-
-
-          <Scene
-            key="orderTracker"
-            component={OrderTracker}
-          />
-          <Scene
-            key="orderSummary"
-            component={OrderSummary}
-          />
-          <Scene
-            key="orderProblem"
-            component={OrderProblem}
-          />
-          <Scene
-            key="driverTracker"
-            component={DriverTracker}
-          />
-          <Scene
-            key="addressManager"
-            component={AddressManager}
-          />
-
-
-
-          <Scene
-            key="couponModal"
-            component={CouponModal}
-          />
-
-          <Scene
-            key="orderReview"
-            component={OrderReview}
-          />
-
-
-
-
-
-          <Stack
-            key="addressCreate"
-            hideNavBar
-          >
-            <Scene
-              key="currentLocationSelect"
-              component={CurrentLocationSelect}
-            />
-            <Scene
-              key="addressSearch"
-              component={AddressSearch}
-            />
-            <Scene
-              key="refineLocation"
-              component={RefineLocation}
-            />
-            <Scene
-              key="addressDetails"
-              component={AddressDetails}
-            />
-            <Scene
-              key="addressDetailEdit"
-              component={AddressDetailEdit}
-            />
-            <Scene
-              key="addressConfirm"
-              component={AddressConfirm}
-            />
+          <Stack key="tutorial" hideNavBar panHandlers={null}>
+            <Scene key="languageSelect" component={LanguageSelect} />
+            <Scene key="tutorialSwipe" component={TutorialSwipe} />
           </Stack>
 
 
-          <Scene
-            key="customerFeedback"
-            component={CustomerFeedback}
-          />
-
+          <Stack key="checkoutFlow" headerMode={'none'} animationEnabled={true}>
+            <Scene key="workingBasket" component={WorkingBasket} />
+            <Scene key="timeslotSelect" component={TimeslotSelect} panHandlers={null} />
+            <Scene key="checkout" component={Checkout} panHandlers={null} />
+            <Scene key="checkoutNotesDetail" component={CheckoutNotesDetail} panHandlers={null} />
           </Stack>
+
+          <Stack key="auth" hideNavBar panHandlers={null}>
+            <Scene key="phoneEntry" component={PhoneEntry} />
+            <Scene key="verifyCode" component={VerifyCode} />
+          </Stack>
+
+          <Stack key="addressCreate" hideNavBar panHandlers={null}>
+            <Scene key="currentLocationSelect" component={CurrentLocationSelect} />
+            <Scene key="addressSearch" component={AddressSearch} />
+            <Scene key="refineLocation" component={RefineLocation} />
+            <Scene key="addressDetails" component={AddressDetails} />
+            <Scene key="addressDetailEdit" component={AddressDetailEdit} />
+            <Scene key="addressConfirm" component={AddressConfirm} />
+          </Stack>
+
+
+          <Scene key="orderReview" component={OrderReview} panHandlers={null}/>
+          <Scene key="customerFeedback" component={CustomerFeedback} panHandlers={null}/>
+
+
+        </Stack>
+
+        {/* Any global modals (in Lightbox) */}
+        <Scene
+          key="couponModal"
+          component={CouponModal}
+        />
         </Lightbox>
       </Router>
     );

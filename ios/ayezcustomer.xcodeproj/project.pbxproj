@@ -73,6 +73,7 @@
 		D27603A021DEA2650037DE81 /* Poppins-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D276038821DEA2650037DE81 /* Poppins-BoldItalic.otf */; };
 		D27603A121DEA2650037DE81 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D276038921DEA2650037DE81 /* Poppins-ExtraLight.otf */; };
 		D27603B121DEA3EA0037DE81 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7D4B151F8AFD6F00699FE4 /* libRNFirebase.a */; };
+		D2B136E9220465C200D3B109 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B136AA2204651700D3B109 /* libFastImage.a */; };
 		D2BB1C3D21FB21C0003F70C9 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BB1C1F21FB219D003F70C9 /* libRCTRestart.a */; };
 /* End PBXBuildFile section */
 
@@ -378,6 +379,13 @@
 			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
 			remoteInfo = RNSound;
 		};
+		D2B136A92204651700D3B109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2B136A42204651600D3B109 /* FastImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A287971D1DE0C0A60081BDFA;
+			remoteInfo = FastImage;
+		};
 		D2BB1C1E21FB219D003F70C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */;
@@ -450,6 +458,7 @@
 		D276038721DEA2650037DE81 /* Cairo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Cairo-Light.ttf"; path = "../../assets/fonts/Cairo-Light.ttf"; sourceTree = "<group>"; };
 		D276038821DEA2650037DE81 /* Poppins-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-BoldItalic.otf"; path = "../../assets/fonts/Poppins-BoldItalic.otf"; sourceTree = "<group>"; };
 		D276038921DEA2650037DE81 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.otf"; path = "../../assets/fonts/Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
+		D2B136A42204651600D3B109 /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		D2BB1C4F21FB5A3A003F70C9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D2CE0EA621E0F66F00D6EF99 /* ayezcustomer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ayezcustomer.entitlements; path = ayezcustomer/ayezcustomer.entitlements; sourceTree = "<group>"; };
@@ -468,6 +477,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B136E9220465C200D3B109 /* libFastImage.a in Frameworks */,
 				D2BB1C3D21FB21C0003F70C9 /* libRCTRestart.a in Frameworks */,
 				D23012C821F7E2F5006332ED /* libTPSStripe.a in Frameworks */,
 				D2096BBC21F7873B0033390F /* libRNImagePicker.a in Frameworks */,
@@ -666,6 +676,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D2B136A42204651600D3B109 /* FastImage.xcodeproj */,
 				D2BB1C0E21FB219D003F70C9 /* RCTRestart.xcodeproj */,
 				D23012C121F7E2D7006332ED /* TPSStripe.xcodeproj */,
 				D2096B8F21F7871F0033390F /* RNImagePicker.xcodeproj */,
@@ -804,6 +815,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D2B136A52204651600D3B109 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2B136AA2204651700D3B109 /* libFastImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D2BB1C0F21FB219D003F70C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,6 +956,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = D2B136A52204651600D3B109 /* Products */;
+					ProjectRef = D2B136A42204651600D3B109 /* FastImage.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1302,6 +1325,13 @@
 			fileType = archive.ar;
 			path = libRNSound.a;
 			remoteRef = D27602BC21DD156A0037DE81 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2B136AA2204651700D3B109 /* libFastImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFastImage.a;
+			remoteRef = D2B136A92204651700D3B109 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2BB1C1F21FB219D003F70C9 /* libRCTRestart.a */ = {

@@ -8,7 +8,7 @@ import {
 
 import qs from 'qs';
 const googlePlacesKey = 'AIzaSyDPWckRr8Yb1stsXBWeh1ME_UDjR9Y_GC0';
-import { getTitleFromGooglePlace } from './Address_Helpers';
+import { getTitleFromGooglePlace } from '../Helpers';
 
 // ************
 // ************

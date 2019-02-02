@@ -12,7 +12,7 @@ import {
   SectionList,
   BackHandler
 } from 'react-native';
-import firebase from 'react-native-firebase';
+
 import Moment from 'moment';
 require('moment/locale/en-gb');
 

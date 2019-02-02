@@ -59,12 +59,14 @@ class AyezText extends Component {
     }
 
     return (
-      <Text style={{
-        color,
-        fontSize: size,
-        ...style,
-        fontFamily
-      }}>{children}</Text>
+      <Text
+        {...this.props}
+        style={{
+          color,
+          fontSize: size,
+          ...style,
+          fontFamily
+        }}>{children}</Text>
     )
   }
 }

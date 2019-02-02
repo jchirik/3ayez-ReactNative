@@ -34,6 +34,7 @@ import com.airbnb.android.react.maps.MapsPackage;
 
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactcommunity.rnlanguages.RNLanguagesPackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -74,7 +75,8 @@ public class MainApplication extends Application implements ReactApplication {
         new RNSoundPackage(),
         new MapsPackage(),
         new RNDeviceInfo(),
-        new RNLanguagesPackage()
+        new RNLanguagesPackage(),
+        new FastImageViewPackage()
       );
     }
 

@@ -1,158 +1,163 @@
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+
+import colors from '../../theme/colors';
+import styles from './styles';
+import { Actions } from 'react-native-router-flux';
 import {
   View,
-  Modal,
   FlatList,
   Text,
-  Platform,
-  Animated,
-  ActivityIndicator,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  TextInput,
-  Dimensions,
-  Image
+  Image,
+  InteractionManager,
+  findNodeHandle,
+  TouchableOpacity
 } from 'react-native';
-
-// import {
-// } from '../../actions';
-import { statusBarMargin } from '../../Helpers.js';
-
-import { strings } from '../../i18n.js';
-
-import AnimatedCheckmarkOverlay from './AnimatedCheckmarkOverlay';
-import BasketBlockButton from './BasketBlockButton';
-import ItemCell from './ItemCell';
-
-import {
-  BackButton
-} from '../_common';
-
-// const ITEM_HEIGHT = (Dimensions.get('window').width/3) + 42;
-
-const window = Dimensions.get('window');
-
+import {} from '../../actions';
+import { strings, translate } from '../../i18n.js';
+import { AyezText, ItemTile, BackButton, AnimatedCheckmarkOverlay, BasketBlockButton } from '../_common';
+import { DragContainer } from '../_common/DragComponent';
 
 
 class StoreShelf extends Component {
-
   constructor(props) {
     super(props);
-
     this.state = {
       itemHeight: 0,
       scrollEnabled: true
     };
   }
 
-  // for each subcategory, load 12 items
-  // upon scroll to right, load more
-
-
   componentDidMount() {
-    // animate table to the right column (timeout necessary due to React glitch)
-    const { jumpToColumnIndex } = this.props;
-    if (jumpToColumnIndex) {
-      const wait = new Promise((resolve) => setTimeout(resolve, 100));
-      wait.then(() => {
-          this.tableRef.scrollToIndex({ animated: true, index: jumpToColumnIndex });
-      });
-    }
+    InteractionManager.runAfterInteractions(() => {
+      setTimeout(() => {
+        const ref = findNodeHandle(this.refs['06_StoreShelf']);
+        this.setState({
+          bluredViewRef: ref
+        });
+      }, 100);
+    });
+  }
+  _renderEmptyView() {
+    return (
+      <View style={styles.emptyComponentContainer}>
+        <Text style={styles.emptyComponentText}>
+          {strings('StoreSubcategories.noItemsAvailable')}
+        </Text>
+      </View>
+    );
   }
 
-  renderItem(items, { item, index }) {
-
-    const { itemHeight } = this.state;
+  _renderItem(items, { _, index }) {
+    const itemHeight = this.state.itemHeight;
     const itemWidth = itemHeight * 0.58;
-
-    console.log('RowHeight', itemHeight, 'RowWidth', itemWidth)
-
-    // provide the SEARCH RESULTS
     const numRows = 2;
-    if (index % numRows !== 0) return null;
 
-    const topCell = (
-      <ItemCell
-        item={items[index]}
-        height={itemHeight}
-        width={itemWidth}
-        row={0}
-        onDragStart={() => this.tableRef.setNativeProps({ scrollEnabled: false })}
-        onDragEnd={() => this.tableRef.setNativeProps({ scrollEnabled: true })}
-      />
-    );
+    if (index % numRows !== 0) return null;
+    const topCell = <ItemTile item={items[index]} height={itemHeight} width={itemWidth} draggable />;
     let bottomCell = null;
     if (index + 1 < items.length) {
-      bottomCell = (
-        <ItemCell
-          item={items[index + 1]}
-          height={itemHeight}
-          width={itemWidth}
-          row={1}
-          onDragStart={() => this.tableRef.setNativeProps({ scrollEnabled: false })}
-          onDragEnd={() => this.tableRef.setNativeProps({ scrollEnabled: true })}
-        />
-      );
+      bottomCell = <ItemTile item={items[index + 1]} height={itemHeight} width={itemWidth} draggable />;
     }
 
     return (
-      <View style={{ height: itemHeight * 2, width: itemWidth }}>
+      <View style={[styles.itemCell]}>
         {topCell}
         {bottomCell}
       </View>
     );
   }
-
-  render() {
-    const {
-      items
-    } = this.props;
-
-    const { itemHeight } = this.state;
-    const itemWidth = itemHeight * 0.58;
-
-
-// this is causing issues:
-    // getItemLayout={(data, index) => (
-    //   { length: itemWidth, offset: itemWidth * index, index }
-    // )}
+  _renderHeader() {
+    const { title, parent_title } = this.props;
     return (
-      <View style={{ flex: 1 }}>
-      <FlatList
-        ref={(ref) => this.tableRef = ref}
-        style={{ flex: 1, backgroundColor: 'white', marginTop: 60 }}
-        onLayout={(event) => {
-          const { height } = event.nativeEvent.layout;
-          this.setState({ itemHeight: height / 2 });
+      <View style={styles.headerContainer}>
+        <BackButton style={{ marginLeft: 5 }} />
+        <View style={{ flex: 1 }}>
+          <AyezText medium size={18}>
+            {translate(title)}
+          </AyezText>
+          <View style={{ flexDirection: 'row' }}>
+            <AyezText regular size={13}>{strings('StoreSubcategories.backTo')}</AyezText>
+            <AyezText regular size={13} color={'#0094ff'} style={{ marginLeft: 4 }}>{translate(parent_title)}</AyezText>
+          </View>
+        </View>
+        {this._renderMagnifyingImage()}
+      </View>
+    );
+  }
+  _renderMagnifyingImage() {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          Actions.storeSearch();
         }}
+      >
+        <Image
+          style={styles.magnifyingImage}
+          resizeMode="contain"
+          source={require('../../../assets/images/magnifying_glass.png')}
+        />
+      </TouchableOpacity>
+    );
+  }
+  _onLayout(jumpIndex, event) {
+    const { height } = event.nativeEvent.layout;
+    this.setState({ itemHeight: height / 2 }, () => {
+      this.tableRef.scrollToOffset({
+        animated: true,
+        offset: this.state.itemHeight * 0.58 * jumpIndex
+      });
+    });
+  }
+  _onScrollToIndexFailed(info) {
+    this.tableRef.scrollToOffset({
+      animated: true,
+      offset: (this.state.itemHeight / 2) * 0.58 * info.index
+    });
+  }
+  _renderItemList() {
+    const { items, jumpIndex } = this.props;
+    return (
+      <FlatList
+        ref={ref => (this.tableRef = ref)}
+        style={styles.container}
+        onLayout={this._onLayout.bind(this, jumpIndex)}
         horizontal
-        renderItem={this.renderItem.bind(this, items)}
-        ListEmptyComponent={
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: window.width}}>
-            <Text style={{
-              fontFamily: 'Poppins-Regular',
-              color: 'black',
-              fontSize: 20
-            }}>{strings('StoreSubcategories.noItemsAvailable')}</Text>
-            </View>
-          }
+        onScrollToIndexFailed={this._onScrollToIndexFailed.bind(this)}
+        renderItem={this._renderItem.bind(this, items)}
+        ListEmptyComponent={this._renderEmptyView.bind(this)}
         data={items}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index.toString()}
       />
-      <BasketBlockButton />
-      <AnimatedCheckmarkOverlay />
-
-      <BackButton type='cross_circled' />
+    );
+  }
+  _renderDragComponent() {
+    return (
+      <DragContainer
+        onDragStart={() =>
+          this.tableRef.setNativeProps({ scrollEnabled: false })
+        }
+        onDragEnd={() => this.tableRef.setNativeProps({ scrollEnabled: true })}
+        style={styles.container}
+      >
+        {this._renderItemList()}
+      </DragContainer>
+    );
+  }
+  render() {
+    return (
+      <View style={styles.container} ref={'06_StoreShelf'}>
+        {this._renderHeader()}
+        {this._renderDragComponent()}
+        <BasketBlockButton
+          bluredViewRef={this.state.bluredViewRef}
+          showBasketImage={true}
+        />
+        <AnimatedCheckmarkOverlay />
       </View>
     );
   }
 }
 
-
-// const styles = {
-// };
-
-export default connect(null, null)(StoreShelf);
+export default StoreShelf;

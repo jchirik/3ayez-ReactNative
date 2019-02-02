@@ -1,217 +1,282 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { format } from '../../utils/string';
 import {
   View,
-  Modal,
-  FlatList,
   ScrollView,
   Text,
-  Platform,
-  Animated,
-  ActivityIndicator,
-  TouchableOpacity,
-  KeyboardAvoidingView,
+  Image,
   TextInput,
-  Dimensions,
-  Image
+  TouchableOpacity,
+  FlatList,
+  BackHandler,
+  Switch
 } from 'react-native';
-
 import {
   BackButton,
-  ItemIncrementer
-} from '../_reusable';
+  AyezText,
+  Row
+} from '../_common';
+
+import { ItemIncrementer } from '../_reusable';
+
+import {
+  Divider,
+  RipenessSlider,
+  PriceLabel,
+  PromotionBadge,
+  RelatedProduct,
+  Modal
+} from './_components';
+import styles, {
+  additionalInstructionsTextInputPlaceholderColor
+} from './styles';
 
 const loadingCircleGreen = require('../../../assets/images/loading_circle_green.png');
+const shareIcon = require('../../../assets/images_v2/share_icon.png');
 
-// import {
-// } from '../../actions';
-import { statusBarMargin, strings, localizeItem } from '../../Helpers.js';
+import { addToBasket, saveItemSpecialRequests } from '../../actions';
+import { strings, translate } from '../../i18n.js';
+import { Actions } from 'react-native-router-flux';
+import images from '../../theme/images';
 
-// const ImgCacheLib = require('react-native-img-cache');
-// const CachedImage = ImgCacheLib.CachedImage;
-
-// const ITEM_HEIGHT = (Dimensions.get('window').width/3) + 42;
-
-const window = Dimensions.get('window');
+const SHOW_DELAY_DELIVERY_MODAL_QUANTITY = 6;
+const PRODUCE_CATEGORY = 'produce';
 
 class ItemPage extends Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      ripeness: 0,
+      requires_call: false,
+      instructions: '',
 
-    // this.state = {
-    // };
+      showedMoreThanSixItemsModal: false
+    };
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+    const { items_array, item } = this.props;
 
-  // red circle that floats atop a discounted item
-  renderPromotionBadge(price, promotionPrice) {
-    if (price === null || promotionPrice === null) { return null; }
+    const foundItem = items_array.find(w_item => w_item.upc === item.upc);
 
-    const savingsPercent = Math.round(((price - promotionPrice) * 100) / price);
-    if (savingsPercent === 0) { return null; }
+    if (foundItem) {
+      this.setState({
+        ripeness: foundItem.ripeness || 0,
+        requires_call: foundItem.requires_call || false,
+        instructions: foundItem.instructions || ''
+      })
+    }
+  }
 
-    return (
-      <View
-        style={styles.savingsPercentContainer}
-        pointerEvents={'none'}
-      >
-        <Text style={styles.savingsPercent}>-{savingsPercent}%</Text>
-      </View>
+  onBackPress() {
+    // save the ripeness, requires_call, and instructions with the item in basket
+    const { ripeness, requires_call, instructions } = this.state;
+    const { item, seller } = this.props;
+    this.props.saveItemSpecialRequests(item.upc, seller.id, {
+      ripeness, requires_call, instructions
+    });
+    Actions.pop()
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener(
+      'hardwareBackPress',
+      this.onAndroidBackPress
     );
   }
 
-  // text block displaying price (with original price + savings, if avail)
-  renderPrice(price, promotion_price, item) {
-    let mainPriceText = '-';
-    let previousPriceText = '';
-    let savingsText = '';
+  onAndroidBackPress = () => {
+    this.onBackPress();
+    return true;
+  };
 
-    let multiplier = item.increment || 1;
+  _addToBasket = () => {
+    this.props.addToBasket(this.props.item, this.props.seller.id);
+  };
 
-    if (price !== null) {
-      mainPriceText = `${(price * multiplier).toFixed(2)} LE`;
-
-      if (promotion_price !== null) {
-        mainPriceText = `${(promotion_price * multiplier).toFixed(2)} LE`;
-        previousPriceText = `${(price * multiplier).toFixed(2)}`;
-        const savingsAmount = price - promotion_price;
-        if (savingsAmount !== 0) { savingsText = `وفر ${savingsAmount.toFixed(2)} جنيه`; }
-      }
-    }
-
-    if (item.unit) {
-      mainPriceText += ` / ${multiplier}${item.unit}`;
-    } else if (item.increment && item.increment !== 1) {
-      mainPriceText += ` / ${item.increment}`;
-    }
-
+  _showDeliveryDelayModal() {
     return (
-      <View style={{ marginRight: 20 }}>
-        <Text style={styles.savings}>{savingsText}</Text>
-        <View style={styles.priceContainer}>
-          <Text style={styles.previousPrice}>{previousPriceText}</Text>
-          <Text style={styles.mainPrice}>{mainPriceText}</Text>
-        </View>
-      </View>
+      <Modal
+        callback={() => this.setState({ showedMoreThanSixItemsModal: true })}
+        image={images.flyingPersonImg}
+        text={strings('ItemView.moreThanSixProducts')}
+        confirmation={strings('ItemView.moreThanSixProductsConfirmation')}
+      />
     );
   }
 
+  _isProduce(item) {
+    if (
+      item &&
+      item.categories &&
+      item.categories.lvl0 &&
+      item.categories.lvl0.length > 0 &&
+      item.categories.lvl0[0] === PRODUCE_CATEGORY
+    ) {
+      return true;
+    }
+    return false;
+  }
 
-
+//<Image source={shareIcon} style={styles.shareIconStyle} />
   render() {
-    const {
-      item,
-      seller,
-      items_array
-    } = this.props;
+    const { item, seller, items_array } = this.props;
 
-    const { upc, image_url, thumbnail_url, price, promotion_price } = item;
-    // derive quantity from working basket hash
-    const foundItem = items_array.find((w_item) => (w_item.upc === item.upc));
+    const { image_url, price, promotion_price } = item;
+    const foundItem = items_array.find(w_item => w_item.upc === item.upc);
     const quantity = foundItem ? foundItem.quantity : 0;
-
-    console.log(item);
-
     return (
-      <View style={{ flex: 1, backgroundColor: 'white' }}>
-      <ScrollView style={{ flex: 1, paddingTop: statusBarMargin+40 }}>
-        <Image
-          style={{ marginLeft: 20, width: (window.width-40), height: (window.width-40)}}
-          resizeMode={'contain'}
-          defaultSource={loadingCircleGreen}
-          source={{ uri: image_url }}
-        />
-        { this.renderPromotionBadge(price, promotion_price) }
+      <View style={styles.container}>
+        {!this.state.showedMoreThanSixItemsModal &&
+          items_array.reduce((total, item) => {
+            return total + (item.quantity ? item.quantity : 0);
+          }, 0) === SHOW_DELAY_DELIVERY_MODAL_QUANTITY &&
+          this._showDeliveryDelayModal()}
 
-        <Text style={styles.titleText}>{localizeItem(item)}</Text>
-        { this.renderPrice(price, promotion_price, item) }
-      </ScrollView>
 
-        <View style={{ borderTopWidth: 1, borderColor: '#cecece', height: 80 }}>
-          <ItemIncrementer fullscreen item={item} quantity={quantity} seller={seller} style={{ flex: 1, marginLeft: 18, marginRight: 18, marginTop: 12, marginBottom: 12 }} />
+
+
+        <ScrollView style={{ flex: 1, paddingTop: 48, paddingLeft: 24, paddingRight: 24 }}>
+            <TouchableOpacity
+              onPress={() => Actions.itemImageView({ imageUrl: image_url })}
+              style={{ alignSelf: 'center' }}
+            >
+              <Image
+                style={styles.itemImageStyle}
+                resizeMode={'contain'}
+                defaultSource={loadingCircleGreen}
+                source={{ uri: image_url }}
+              />
+            </TouchableOpacity>
+          <PromotionBadge price={price} promotion_price={promotion_price} />
+
+          <View style={{ height: 4 }} />
+
+          <AyezText semibold size={18} >{translate(item)}</AyezText>
+
+          <View style={{ height: 22 }} />
+
+          {this._isProduce(item) ? (
+            <View>
+              <AyezText medium>{strings('ItemView.selectProductRipe')}</AyezText>
+              <RipenessSlider
+                onValueChange={(value) => this.setState({ ripeness: value })}
+                value={this.state.ripeness}
+                />
+              <View style={{ height: 18 }} />
+            </View>
+          ) : null }
+
+
+
+          <Row
+            style={{ paddingLeft: 0, paddingRight: 0 }}
+            onPress={() => Actions.additionalNotes({
+              title: 'Item instructions',
+              initText: this.state.instructions,
+              onSubmit: (text) => this.setState({ instructions: text })
+            })}
+            title={'Additional Instructions :'}>
+            {this.state.instructions ? (
+              <AyezText regular style={{
+                fontSize: 15,
+              }}>{ this.state.instructions }</AyezText>
+            ) : (
+              <AyezText regular style={{
+                fontSize: 15,
+                color: '#cecece'
+              }}>Add notes</AyezText>
+            )}
+          </Row>
+
+          <View style={{ height: 10 }} />
+
+          <Row
+            disabled
+            style={{ paddingLeft: 0, paddingRight: 0 }}
+            title={'Call me when selecting this product :'}>
+            <Switch
+              style={{ marginBottom: 5 }}
+              value={this.state.requires_call}
+              onValueChange={(val) => this.setState({ requires_call: val })}
+              />
+          </Row>
+
+
+          {/*
+          <View>
+            <Text style={styles.relatedProductsText}>
+              {strings('ItemView.relatedProducts')}
+            </Text>
+            {this.props.subcategory && (
+              <FlatList
+                horizontal={true}
+                style={styles.relatedProducts}
+                data={this.props.subcategory.items}
+                renderItem={item => (
+                  <RelatedProduct
+                    image_url={item.item.image_url}
+                    price={item.item.price}
+                    name={translate(item.item)}
+                    onPress={() => {
+                      Actions.itemPage({ item: item.item });
+                    }}
+                  />
+                )}
+                keyExtractor={(_, index) => index.toString()}
+              />
+            )}
+          </View> */}
+        </ScrollView>
+
+
+        <View style={{
+          height: 70,
+          backgroundColor: 'white',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderTopWidth: 1,
+          borderColor: '#f7f7f7'
+        }}>
+          <ItemIncrementer
+            fullscreen
+            item={item}
+            quantity={quantity}
+            seller={seller}
+            style={{
+              width: 160,
+              height: 48,
+              marginRight: 24
+            }}
+          />
+          <PriceLabel
+            price={price}
+            promotion_price={promotion_price}
+            item={item}
+          />
         </View>
-
-        <BackButton type={'cross'} />
+        <BackButton fixed onPress={() => this.onBackPress()}/>
       </View>
     );
   }
-
 }
 
-
-const styles = {
-  titleText: {
-    textAlign: 'right',
-    fontSize: 22,
-    includeFontPadding: false,
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 20,
-    color: 'black',
-  },
-  savingsPercentContainer: {
-    position: 'absolute',
-    top: 10,
-    left: 20,
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    backgroundColor: '#F05C64',
-    justifyContent: 'center'
-  },
-  savingsPercent: {
-    textAlign: 'center',
-    fontSize: 20,
-    color: 'white',
-    backgroundColor: 'transparent'
-  },
-  mainPrice: {
-    textAlign: 'right',
-    fontSize: 22,
-    lineHeight: 28,
-    height: 24,
-    color: 'black',
-    backgroundColor: 'transparent'
-  },
-  previousPrice: {
-    fontSize: 20,
-    lineHeight: 27,
-    height: 24,
-      color: 'black',
-      textDecorationLine: 'line-through',
-      textDecorationStyle: 'solid',
-      textAlign: 'right',
-      marginRight: 8,
-      backgroundColor: 'transparent'
-  },
-  savings: {
-    color: '#F05C64',
-    textAlign: 'right',
-    fontSize: 18
-  },
-  priceContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginBottom: -4,
-    paddingLeft: 2,
-    backgroundColor: 'transparent'
-  },
-};
-
-const mapStateToProps = ({ Baskets, Seller }) => {
-
+const mapStateToProps = ({ Baskets, Seller, ItemSearch }) => {
   const seller = Seller;
   const { items_array } = Baskets.baskets[Seller.id];
-
+  const { subcategory } = ItemSearch;
   return {
     seller,
-    items_array
+    items_array,
+    subcategory,
+    addToBasket
   };
 };
 
-export default connect(mapStateToProps,null)(ItemPage);
+export default connect(
+  mapStateToProps,
+  { saveItemSpecialRequests }
+)(ItemPage);

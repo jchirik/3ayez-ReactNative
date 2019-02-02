@@ -47,6 +47,7 @@ export const listenCustomerAuthStatus = () => {
 const listenCustomerData = (dispatch) => {
   const { currentUser } = firebase.auth();
   if (currentUser) {
+    dispatch({ type: CUSTOMER_DATA_SET, payload: { phone: currentUser.phoneNumber } });
     // realtime listening
     const listener = firebase.firestore().collection('customers').doc(currentUser.uid)
         .onSnapshot((document) => {
@@ -69,9 +70,6 @@ const listenCustomerData = (dispatch) => {
     dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener } });
   }
 };
-
-
-
 
 
 
