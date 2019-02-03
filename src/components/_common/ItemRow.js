@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import FastImage from 'react-native-fast-image';
 
 import { AyezText } from '../_common';
-import { ItemIncrementer } from '../_reusable';
+import { ItemIncrementer } from '.';
 import { strings, translate } from '../../i18n.js';
 import colors from '../../theme/colors';
 
@@ -70,25 +70,23 @@ class ItemRow extends Component {
       }
 
       return (
-        <Text
+        <AyezText
+          regular
           style={{
-            fontSize: 16,
-            height: 26,
-            marginLeft: 18,
-            textAlign: 'left',
+            marginHorizontal: 10,
             opacity: item.invalid ? 0.4 : 1,
-            color: 'black'
           }}
         >
           {item.invalid ? 0 : displayedQuantity}
-        </Text>
+        </AyezText>
       );
     }
 
     let weightNotification = null;
     if (item.unit) {
       weightNotification = (
-        <Text
+        <AyezText
+          regular
           style={{
             color: '#f27407',
             fontSize: 16,
@@ -98,7 +96,7 @@ class ItemRow extends Component {
           }}
         >
           {strings('WorkingBasket.weightsVary')}
-        </Text>
+        </AyezText>
       );
     }
 

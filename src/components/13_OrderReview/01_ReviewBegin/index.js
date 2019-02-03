@@ -18,7 +18,8 @@ import { Actions } from 'react-native-router-flux';
 import {
   parseTimestamp,
   paymentIcon,
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  STATUS_BAR_HEIGHT
 } from '../../../Helpers.js';
 
 import {
@@ -34,6 +35,7 @@ import {
   BottomChoiceSelection
 } from '../../_common';
 
+const reviewBackground = require('../../../../assets/images_v2/ReviewOrder/reviewBackground.png');
 
 class ReviewBegin extends Component {
 
@@ -45,7 +47,7 @@ class ReviewBegin extends Component {
 
     let imageComponents = review_items.map(item => (
       <Image
-        style={{ width: 120, height: 120 }}
+        style={{ width: 80, height: 80, marginHorizontal: 4 }}
         resizeMode={'contain'}
         source={{ uri: item.thumbnail_url }}
       />
@@ -55,35 +57,60 @@ class ReviewBegin extends Component {
       const overCount = imageComponents.length - 3;
       imageComponents = imageComponents.slice(0, 3);
       imageComponents.push(
-        <Text>+{overCount}</Text>
+        <View style={{
+          marginLeft: 10,
+          backgroundColor: '#FE6668',
+          width: 40, height: 40,
+          borderRadius: 20,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <AyezText regular color={'white'}>+{overCount}</AyezText>
+        </View>
       )
     }
 
     return (
         <View style={{
-          backgroundColor: 'white'
+          flex: 1,
         }}>
-          <Image
-            source={null}
+          <AyezText bold
+            size={26}
             style={{
-              marginTop: 10,
-              height: 180,
-              backgroundColor: 'red'
+            marginTop: STATUS_BAR_HEIGHT + 24,
+            marginBottom: 18,
+            marginLeft: 48,
+            marginRight: 48
+          }}>Review Required</AyezText>
+
+          <Image
+            source={reviewBackground}
+            style={{
+              alignSelf: 'center',
+              height: 240,
+              width: 340
              }}
             resizeMode={'contain'}
           />
-          <AyezText bold style={{
-            marginTop: 14,
-            textAlign: 'center',
-            fontSize: 18
+          <View style={{ flex: 1 }} />
+          <AyezText medium style={{
+            marginHorizontal: 10,
+            marginBottom: 24,
+            textAlign: 'center'
           }}>Your order requires some action. Please revise these items and continue.</AyezText>
 
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center'
+             }}>
             {imageComponents}
           </View>
 
+          <View style={{ flex: 1 }} />
+
           <BlockButton
-            text={'Review your order'}
+            text={'Take action'}
             style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
             onPress={() => this.props.onProceed()}
             />

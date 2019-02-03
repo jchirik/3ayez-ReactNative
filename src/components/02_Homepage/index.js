@@ -7,6 +7,7 @@ import {
   View,
   FlatList,
   Text,
+  Image,
   ActivityIndicator,
   Dimensions
 } from 'react-native';
@@ -17,6 +18,7 @@ import Support from './03_Support';
 // import UniversalSearch from './components/02_Homepage/04_UniversalSearch';
 
 import {
+  AyezText,
   OrderStatusBar
 } from '../_common';
 
@@ -30,15 +32,19 @@ import {
   translate
 } from '../../i18n.js';
 
+const stores_icon = require('../../../assets/images_v2/Home/stores.png');
+const support_icon = require('../../../assets/images_v2/Home/support.png');
+
 class Homepage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       index: 0,
+      current_key: 'first',
       routes: [
-        { key: 'first', title: 'Stores' },
-        { key: 'second', title: 'Support' },
+        { key: 'first', title: 'Stores', icon: stores_icon },
+        { key: 'second', title: 'Support', icon: support_icon },
       ],
     };
   }
@@ -55,7 +61,7 @@ class Homepage extends Component {
     // otherwise, open address selection
 
     if (this.props.review_order && !prevProps.review_order) {
-      Actions.substitutionModal({ order: this.props.review_order });
+      Actions.orderReview({ order: this.props.review_order });
     }
 
     if (this.props.feedback_order && !prevProps.feedback_order) {
@@ -71,7 +77,6 @@ class Homepage extends Component {
       );
     }
 
-
     return (
       <View style={{ backgroundColor: AYEZ_BACKGROUND_COLOR, flex: 1 }}>
         <OrderStatusBar />
@@ -81,15 +86,43 @@ class Homepage extends Component {
             first: StoreSelect,
             second: Support,
           })}
-          onIndexChange={index => this.setState({ index })}
+          onIndexChange={index => {
+            const current_key = this.state.routes[index].key;
+            this.setState({ index, current_key })
+          }}
           initialLayout={{ width: Dimensions.get('window').width }}
           tabBarPosition={'bottom'}
           renderTabBar={props =>
             <TabBar
               {...props}
               useNativeDriver
-              style={{ backgroundColor: AYEZ_GREEN }}
-              indicatorStyle={{ backgroundColor: 'pink' }}
+              renderLabel={({ route }) => {
+                const { title, key, icon } = route;
+                return (
+                  <View style={{ alignItems: 'center' }}>
+                  <Image
+                    source={icon}
+                    style={{
+                      width: 24,
+                      height: 24,
+                      tintColor: (key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'
+                     }}
+                    resizeMode={'contain'}
+                    />
+                  <AyezText
+                    regular
+                    size={12}
+                    color={(key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'}
+                    >{title}</AyezText>
+                  </View>
+                )
+              }}
+              style={{ backgroundColor: 'white',
+                borderTopWidth: 1,
+                borderColor: '#e6e6e6'
+               }}
+              renderIndicator={() => null}
+              // indicatorStyle={{ backgroundColor: AYEZ_GREEN }}
             />
           }
         />

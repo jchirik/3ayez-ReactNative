@@ -174,7 +174,9 @@ export const calculateSuggestedTips = (preTipTotal) => {
 
   let finalTotals = [];
   for (let i = lowerBound; i < upperBound; i+=5) {
-    finalTotals.push(i);
+    if (i !== preTipTotal) {
+      finalTotals.push(i);
+    }
   }
 
   // if more than 4 suggestions, filter to only those divisible by 10, 20 or 50

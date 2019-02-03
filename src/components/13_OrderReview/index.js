@@ -144,8 +144,13 @@
   } from '../_common';
 
   import {
+    AYEZ_BACKGROUND_COLOR
+  } from '../../Helpers';
+
+  import {
     submitOrderChanges,
-    fetchReviewOrderItems
+    fetchReviewOrderItems,
+    fetchSubstitutionOptions
   } from '../../actions';
 
   import {
@@ -171,17 +176,33 @@
       this.props.fetchReviewOrderItems(this.props.order.id)
     }
 
+    onProceed() {
+      const page_index = this.state.page_index + 1;
+      const { review_items, review_order } = this.props;
+      if (page_index < review_items.length) {
+        this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index]);
+      }
+      this.setState({ page_index })
+    }
+
+    onBack() {
+      const page_index = this.state.page_index - 1;
+      const { review_items, review_order } = this.props;
+      if (page_index > -1) {
+        this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index])
+      }
+      this.setState({ page_index })
+    }
+
     submitOrderChanges() {
       this.props.submitOrderChanges(this.props.order.id, this.props.review_items, this.props.substitutions);
       // this FX will pop back, after submitting successful
     }
 
     render() {
-
       const {
         page_index
       } = this.state;
-
       const {
         items,
         review_items,
@@ -199,33 +220,39 @@
       if (page_index === -1) {
         // return the intro page
         mainComponent = (
-            <ReviewBegin
-              review_items={review_items}
-              onProceed={() => this.setState({ page_index: page_index + 1 })}
-            />
+          <ReviewBegin
+            review_items={review_items}
+            onProceed={this.onProceed.bind(this)}
+          />
         )
       } else if (page_index < review_items.length) {
         // return the item page
         mainComponent = (
           <SubstitutionPage
             item={review_items[page_index]}
-            onProceed={() => this.setState({ page_index: page_index + 1 })}
-            onBack={() => this.setState({ page_index: page_index - 1 })}
+            index={page_index}
+            review_items={review_items}
+            onProceed={this.onProceed.bind(this)}
+            onBack={this.onBack.bind(this)}
           />
         )
       } else {
         // return the final overview page
         mainComponent = (
           <ReviewSummary
-            item={review_items[page_index]}
+            items={items}
+            substitutions={substitutions}
             onProceed={this.submitOrderChanges.bind(this)}
-            onBack={() => this.setState({ page_index: page_index - 1 })}
+            onBack={this.onBack.bind(this)}
           />
         )
       }
 
       return (
-        <View>
+        <View style={{
+          flex: 1,
+          backgroundColor: AYEZ_BACKGROUND_COLOR
+        }}>
           {mainComponent}
           <Text>Countdown</Text>
         </View>
@@ -234,6 +261,7 @@
   }
 
   const mapStateToProps = ({ OngoingOrders, ReviewOrder }) => {
+
     const {
       review_order
     } = OngoingOrders;
@@ -257,5 +285,6 @@
 
   export default connect(mapStateToProps, {
     submitOrderChanges,
-    fetchReviewOrderItems
+    fetchReviewOrderItems,
+    fetchSubstitutionOptions
   })(OrderReview);

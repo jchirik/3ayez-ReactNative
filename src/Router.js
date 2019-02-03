@@ -323,7 +323,7 @@ class RouterComponent extends Component {
                     <Scene key="supportDetail" component={SupportDetail} />
 
                   <Scene key="creditCardManager" component={CreditCardManager} />
-                  <Scene key="creditCardCreate" component={CreditCardCreate} />
+
                   <Scene key="orderTracker" component={OrderTracker} />
                   <Scene key="orderSummary" component={OrderSummary} />
                   <Scene key="orderProblem" component={OrderProblem} />
@@ -362,6 +362,8 @@ class RouterComponent extends Component {
             <Scene key="addressConfirm" component={AddressConfirm} />
           </Stack>
 
+
+          <Scene key="creditCardCreate" component={CreditCardCreate} />
 
           <Scene key="orderReview" component={OrderReview} panHandlers={null}/>
           <Scene key="customerFeedback" component={CustomerFeedback} panHandlers={null}/>

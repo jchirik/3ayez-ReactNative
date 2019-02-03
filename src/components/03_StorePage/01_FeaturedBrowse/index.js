@@ -27,7 +27,8 @@ import {
 } from '../../../actions';
 
 import {
-  STATUS_BAR_HEIGHT
+  STATUS_BAR_HEIGHT,
+  AYEZ_GREEN
 } from '../../../Helpers.js';
 
 
@@ -75,6 +76,23 @@ class FeaturedBrowse extends Component {
     });
   }
 
+  renderFeaturedEnd(item) {
+    return (
+      <TouchableOpacity
+        style={{ width: 120, flex: 1,
+          justifyContent: 'center', alignItems: 'center' }}
+        onPress={() => this.goToShelf(item)}>
+
+        <View style={{ width: 100, height: 100, borderRadius: 50,
+          backgroundColor: AYEZ_GREEN, justifyContent: 'center', alignItems: 'center' }}>
+            <AyezText medium color={'white'} size={16}>
+              {'see all'}
+            </AyezText>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   renderFeaturedRows({ item, index }) {
     return (
       <View style={styles.featuredRowStyle}>
@@ -94,9 +112,10 @@ class FeaturedBrowse extends Component {
           style={styles.horizontalListViewStyle}
           horizontal
           renderItem={this.renderFeaturedItem.bind(this)}
-          data={item.items}
+          data={item.items.slice(0, 6)}
           showsHorizontalScrollIndicator={false}
           ListHeaderComponent={<View style={{ width: 16 }} />}
+          ListFooterComponent={this.renderFeaturedEnd.bind(this, item)}
           keyExtractor={(item, index) => index.toString()}
           bounces={false}
         />

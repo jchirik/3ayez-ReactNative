@@ -18,4 +18,7 @@ export AyezText from './AyezText';
 export AnimatedCheckmarkOverlay from './AnimatedCheckmarkOverlay';
 export BasketBlockButton from './BasketBlockButton';
 
+export ItemIncrementer from './ItemIncrementer';
+export Incrementer from './Incrementer';
+
 export * from './RTLImage';

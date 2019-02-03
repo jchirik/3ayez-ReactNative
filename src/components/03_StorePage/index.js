@@ -26,7 +26,8 @@ import {
   AnimatedCheckmarkOverlay,
   ItemTile,
   BasketBlockButton,
-  BackButton
+  BackButton,
+  AyezText
 } from '../_common';
 
 import {
@@ -115,22 +116,27 @@ class StorePage extends Component {
   renderItem({ item, index }) {
     return (
       <TouchableOpacity
-        style={[
-          styles.categoryItem,
-          {
-            marginLeft: index % 2 == 0 ? '5.3%' : '1.4%',
-            marginRight: index % 2 == 0 ? '1.4%' : '5.3%'
-          }
-        ]}
+        style={{
+          marginBottom: 2,
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: window.width/2,
+          height: 140,
+          paddingLeft: index % 2 == 0 ? '5.3%' : '1.4%',
+          paddingRight: index % 2 == 0 ? '1.4%' : '5.3%'
+        }}
         onPress={this.onSelectCategory.bind(this, item)}
       >
         <View style={styles.categoryCard}>
           <FastImage
             source={{ uri: item.image_url }}
             style={styles.categoryImage}
+            resizeMode={'cover'}
           />
         </View>
-        <Text style={styles.categoryText}>{translate(item.name)}</Text>
+
+        <AyezText size={12}
+          regular style={{ marginTop: 6 }}>{translate(item.name)}</AyezText>
       </TouchableOpacity>
     );
   }

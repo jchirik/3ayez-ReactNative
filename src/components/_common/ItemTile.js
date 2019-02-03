@@ -6,7 +6,7 @@ import { translate, strings } from '../../i18n.js';
 import { addToBasket } from '../../actions';
 import colors from '../../theme/colors';
 import fonts from '../../theme/fonts';
-import { ItemIncrementer } from '../_reusable';
+import { ItemIncrementer } from '.';
 import { Draggable } from './DragComponent';
 import FastImage from 'react-native-fast-image';
 
@@ -125,23 +125,34 @@ class ItemTile extends PureComponent {
   }
 
   _renderItemIncrementer(item, quantity) {
+    let incrementer = (
+      <ItemIncrementer
+        style={{ height: '100%' }}
+        item={item}
+        quantity={quantity}
+        seller={this.props.seller}
+      />
+    )
+
+    if (this.props.customIncrementer) {
+      incrementer = this.props.customIncrementer;
+    }
+
     return (
       <View style={{ height: BUTTON_HEIGHT_RATIO }}>
-        <ItemIncrementer
-          style={{ height: '100%' }}
-          item={item}
-          quantity={quantity}
-          seller={this.props.seller}
-        />
+        {incrementer}
       </View>
     );
   }
   _renderImage(url, unit, draggable) {
+    const disabled = (this.props.customerIncrementer);
+
     const mainComponent = (
       <TouchableOpacity
         onPress={() => Actions.itemPage({ item: this.props.item })}
         style={{ alignSelf: 'stretch' }}
-        // activeOpacity={0.8}
+        activeOpacity={disabled ? 1 : 0.7}
+        disabled={disabled}
       >
         <FastImage
           style={{ width: '100%', height: '98%' }}
@@ -169,7 +180,7 @@ class ItemTile extends PureComponent {
 
   }
   render() {
-    const { item, items_array, width, height, draggable, style } = this.props;
+    const { item, customIncrementer, items_array, width, height, draggable, style } = this.props;
     const {
       thumbnail_url,
       image_url,
@@ -180,17 +191,20 @@ class ItemTile extends PureComponent {
     } = item;
     const url = thumbnail_url || image_url;
     // derive quantity from working basket hash
-    const foundItem = items_array.find(w_item => w_item.upc === item.upc);
+    let foundItem = null;
+    if (!customIncrementer) {
+      foundItem = items_array.find(w_item => w_item.upc === item.upc);
+    }
     const quantity = foundItem ? foundItem.quantity : 0;
 
     return (
-      <TouchableOpacity style={[styles.itemCellContainer, { width, height }, style]}>
+      <View style={[styles.itemCellContainer, { width, height }, style]}>
         {this._renderImage(url, unit, draggable)}
         {this._renderItemText(price, promotion_price, item)}
         {this._renderItemIncrementer(item, quantity)}
         {this._renderPromotionBadge(item.price, item.promotion_price)}
         {this._renderMaxBadge(max_per_basket)}
-      </TouchableOpacity>
+      </View>
     );
   }
 }
@@ -314,7 +328,11 @@ const styles = {
 
 const mapStateToProps = ({ Baskets, Seller }) => {
   const seller = Seller;
-  const { items_array } = Baskets.baskets[Seller.id];
+  let items_array = [];
+  if (Seller.id) {
+    items_array = Baskets.baskets[Seller.id].items_array
+  }
+
 
   return {
     seller,

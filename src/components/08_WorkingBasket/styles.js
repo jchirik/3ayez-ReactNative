@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     right: 0,
-    backgroundColor: '#898989'
+    backgroundColor: '#e7e7e7'
   },
   clearBasketTitle: {
     color: '#353333',

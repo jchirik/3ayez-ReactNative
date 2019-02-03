@@ -98,6 +98,7 @@ const reducers = combineReducers({
   Settings,
 
   Timeslots,
+  ReviewOrder,
 
   OrderHistory,
   OrderTracker,

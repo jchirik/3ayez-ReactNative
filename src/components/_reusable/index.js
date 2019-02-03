@@ -14,6 +14,4 @@ export * from './SearchBarButton';
 export Tooltip from './Tooltip';
 
 export ApplyCouponModal from './ApplyCouponModal';
-export ItemIncrementer from './ItemIncrementer';
-export Incrementer from './Incrementer';
 export OrderStatusBar from './OrderStatusBar';

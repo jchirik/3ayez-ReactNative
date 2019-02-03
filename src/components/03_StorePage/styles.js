@@ -30,19 +30,6 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 5
   },
-  categoryItem: {
-    flex: 1,
-    marginBottom: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 148
-  },
-  categoryText: {
-    marginTop: 8,
-    fontSize: 10,
-    fontFamily: fonts.poppinsLight,
-    color: colors.black
-  },
   categoryList: {
     flex: 1,
     marginTop: 20
