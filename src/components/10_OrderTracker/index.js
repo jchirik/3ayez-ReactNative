@@ -31,7 +31,6 @@ import {
 
 import {
   parsePayment,
-  parseTimestamp,
   padNumberZeros,
   AYEZ_GREEN
 } from '../../Helpers.js';

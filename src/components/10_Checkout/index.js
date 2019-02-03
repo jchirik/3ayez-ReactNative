@@ -15,7 +15,6 @@ import {
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 
-import Moment from 'moment';
 import { Actions } from 'react-native-router-flux';
 import {
   setPaymentMethod,
@@ -47,7 +46,9 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  formatTimestamp,
+  formatDay
 } from '../../i18n.js';
 
 const cash_icon = require('../../../assets/images_v2/Payment/cash.png');
@@ -365,14 +366,9 @@ class Checkout extends Component {
     //     </View>
     //   );
     // }
-    const timeslotDay = Moment(timeslotStart).locale('ar').calendar(null, {
-      sameDay: '[اليوم]',
-      nextDay: '[غدًا]',
-      nextWeek: 'dddd',
-      sameElse: 'L'
-    });
-    const timeslotStart = Moment(timeslot.start).locale('en-gb').format("h:mmA");
-    const timeslotEnd = Moment(timeslot.end).locale('en-gb').format("h:mmA");
+    const timeslotDay = formatDay(timeslotStart);
+    const timeslotStart = formatTimestamp(timeslot.start, "h:mmA");
+    const timeslotEnd = formatTimestamp(timeslot.end, "h:mmA");
 
     return (
       <View style={{

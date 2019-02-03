@@ -13,7 +13,6 @@ import {
   BackHandler
 } from 'react-native';
 import firebase from 'react-native-firebase';
-import Moment from 'moment';
 
 import { Actions } from 'react-native-router-flux';
 // import { Tabs } from 'antd-mobile';

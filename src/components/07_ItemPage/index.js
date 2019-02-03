@@ -15,10 +15,9 @@ import {
 import {
   BackButton,
   AyezText,
-  Row
+  Row,
+  ItemIncrementer
 } from '../_common';
-
-import { ItemIncrementer } from '../_reusable';
 
 import {
   Divider,

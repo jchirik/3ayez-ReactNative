@@ -293,24 +293,6 @@ export const isAndroid = (Platform.OS === 'android');
 //   400: { text: strings('OrderStatuses.400'), icon: ORDER_PROBLEM, color: '#D91212' }
 // };
 
-export const parseTimestamp = (timestamp) => {
-
-  let monthString = Moment(timestamp).locale('ar').format('MMMM');
-  let dayString = Moment(timestamp).locale('en-gb').format('DD');
-
-  let dateString = `${monthString} ${dayString}`;
-  let yearString = Moment(timestamp).locale('en-gb').format('YYYY');
-  // use 'today' instead of date string if applicable
-  const today = new Date();
-  const time_t = new Date(timestamp);
-  const isToday = (today.toDateString() === time_t.toDateString());
-  if (isToday) { dateString = 'اليوم'; }
-
-  const timeString = Moment(timestamp).locale('en-gb').format('h:mm');
-  const ampmString = Moment(timestamp).locale('en-gb').format('A');
-
-  return ({ dateString, yearString, timeString, ampmString });
-};
 
 
 
@@ -358,6 +340,7 @@ export const checkIfOpen = (hours) => {
 
   // get the milliseconds into the day
   const currentTime = Date.now();
+  // FIX THE MOMENT BELOW (rely on timezone?)
   const currentLocaleTime = Moment(currentTime).tz('Africa/Cairo');
 	const midnightLocaleTime = Moment(currentTime).tz('Africa/Cairo');
 	midnightLocaleTime.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });

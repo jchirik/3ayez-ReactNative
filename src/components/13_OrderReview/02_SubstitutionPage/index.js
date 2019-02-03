@@ -20,7 +20,6 @@ import {
 } from '../../../actions';
 
 import {
-  parseTimestamp,
   paymentIcon,
   AYEZ_GREEN
 } from '../../../Helpers.js';

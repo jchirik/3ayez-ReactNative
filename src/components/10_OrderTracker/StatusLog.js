@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, Image, View, ActivityIndicator } from 'react-native';
 import {
-  AYEZ_GREEN,
-  parseTimestamp
+  AYEZ_GREEN
 } from '../../Helpers.js';
 
 import {
   strings,
-  translate
+  translate,
+  formatTimestamp
 } from '../../i18n.js';
 
 import {
@@ -80,12 +80,6 @@ const StatusLog = ({
   //   const isFirst = (status === 50);
   //   const isLast = (status === 100);
   //
-  //   let { dateString, timeString, ampmString } = parseTimestamp(timestamp);
-  //   if (!timestamp) {
-  //     dateString = '';
-  //     timeString = '';
-  //     ampmString = '';
-  //   }
   //
   //   return (
   //     <View style={{ height, borderBottomWidth: 1, borderColor: '#EDEDED', flexDirection: 'row' }}>
@@ -154,8 +148,7 @@ const StatusLog = ({
 
     // if there exists a timestamp for this item, proceed
     if (timestamp) {
-      const { dateString, timeString, ampmString } = parseTimestamp(timestamp);
-      timestamp_text = `${timeString} ${ampmString}`
+      timestamp_text = formatTimestamp(timestamp, 'h:mm A');
     }
 
     if (status === 50) {

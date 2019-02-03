@@ -14,12 +14,10 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import {
-  parseTimestamp
-} from '../../../Helpers.js';
-
-import {
   strings,
-  translate
+  translate,
+  formatTimestamp,
+  formatDay
 } from '../../../i18n.js';
 
 import {
@@ -454,18 +452,13 @@ class OrderHistory extends Component {
 
     let timeString = '';
     if (order.timeslot && order.timeslot.start) {
-      // { dateString, yearString, timeString, ampmString }
-      const timeslotStart = parseTimestamp(order.timeslot.start);
-      const timeslotEnd = parseTimestamp(order.timeslot.end);
-
       if (order.status >= 200) {
-        timeString = timeslotStart.dateString;
+        timeString = formatDay(order.timeslot.start)
       } else {
-        timeString = `${timeslotStart.dateString}, ${timeslotStart.timeString} - ${timeslotEnd.timeString}${timeslotEnd.ampmString}`;
+        timeString = `${formatDay(order.timeslot.start)}, ${formatTimestamp(order.timeslot.start, 'h:mm')} - ${formatTimestamp(order.timeslot.end, 'h:mm A')}`;
       }
     } else {
-      const timestamp = parseTimestamp(order.timestamp);
-      timeString = `${timestamp.dateString}, ${timestamp.timeString}${timestamp.ampmString}`;
+      timeString = `${formatDay(order.timestamp)}, ${formatTimestamp(order.timestamp, 'h:mm A')}`;
     }
 
     let statusText = 'Processing';

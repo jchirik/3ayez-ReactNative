@@ -13,9 +13,6 @@ import {
   BackHandler
 } from 'react-native';
 
-import Moment from 'moment';
-require('moment/locale/en-gb');
-
 import { Actions } from 'react-native-router-flux';
 // import { Tabs } from 'antd-mobile';
 import { connect } from 'react-redux';
@@ -31,7 +28,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  formatTimestamp
 } from '../../i18n.js';
 
 
@@ -82,8 +80,8 @@ class TimeslotSelect extends Component {
 
 
   renderItem({ item, index }) {
-    const startTime = Moment(item.start).locale('en-gb').format("h:mm A");
-    const endTime = Moment(item.end).locale('en-gb').format("h:mm A");
+    const startTime = formatTimestamp(item.start, "h:mm A")
+    const endTime = formatTimestamp(item.end, "h:mm A")
 
     return (
       <TouchableOpacity

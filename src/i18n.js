@@ -6,6 +6,10 @@ import store from './reducers';
 import en from '../locales/en.json';
 import ar from '../locales/ar.json';
 
+import moment from 'moment';
+import enMomentLocalization from 'moment/locale/en-gb'
+import arMomentLocalization from 'moment/locale/ar'
+
 I18n.defaultLocale = 'en';
 I18n.fallbacks = true;
 I18n.translations = { en, ar };
@@ -21,7 +25,6 @@ export const strings = (key, params = {}) => {
   // output = 'Welcome John'
 };
 
-
 export const translate = (data) => {
   const locale = store.getState().Settings.locale;
   if (!data) { return ''; }
@@ -34,3 +37,59 @@ export const translate = (data) => {
   }
   return '';
 }
+
+
+
+export const formatTimestamp = (string, format) => {
+  const locale = store.getState().Settings.locale;
+  if (locale === 'en') {
+    return moment(string).locale('en-gb', enMomentLocalization).format(format);
+  } else if (locale === 'ar') {
+    return moment(string).locale('ar', arMomentLocalization).format(format);
+  }
+  return '';
+}
+
+export const formatDay = (string) => {
+  // provide natural day text for a given date
+  const locale = store.getState().Settings.locale;
+  if (locale === 'en') {
+    return moment(string).locale('en-gb', enMomentLocalization).calendar(null, {
+      sameDay: '[Today]',
+      nextDay: '[Tomorrow]',
+      nextWeek: 'dddd',
+      sameElse: 'L'
+    });
+  } else if (locale === 'ar') {
+    return moment(string).locale('ar', arMomentLocalization).calendar(null, {
+      sameDay: '[اليوم]',
+      nextDay: '[غدًا]',
+      nextWeek: 'dddd',
+      sameElse: 'L'
+    });
+  }
+  return '';
+}
+
+
+
+
+
+// export const parseTimestamp = (timestamp) => {
+//
+//   let monthString = Moment(timestamp).locale('ar').format('MMMM');
+//   let dayString = Moment(timestamp).locale('en-gb').format('DD');
+//
+//   let dateString = `${monthString} ${dayString}`;
+//   let yearString = Moment(timestamp).locale('en-gb').format('YYYY');
+//   // use 'today' instead of date string if applicable
+//   const today = new Date();
+//   const time_t = new Date(timestamp);
+//   const isToday = (today.toDateString() === time_t.toDateString());
+//   if (isToday) { dateString = 'اليوم'; }
+//
+//   const timeString = Moment(timestamp).locale('en-gb').format('h:mm');
+//   const ampmString = Moment(timestamp).locale('en-gb').format('A');
+//
+//   return ({ dateString, yearString, timeString, ampmString });
+// };

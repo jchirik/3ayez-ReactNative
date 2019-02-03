@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import {
-  parseTimestamp,
   paymentIcon,
   AYEZ_GREEN,
   STATUS_BAR_HEIGHT

@@ -1,10 +1,14 @@
 import firebase from 'react-native-firebase';
-import Moment from 'moment';
+
 import {
   TIMESLOTS_FETCH_BEGIN,
   TIMESLOTS_FETCH_SET,
   TIMESLOTS_FETCH_ERROR
 } from './types';
+
+import {
+  formatDay
+} from '../i18n.js';
 
 export const fetchTimeslots = (seller_id) => {
   return (dispatch) => {
@@ -31,13 +35,7 @@ export const fetchTimeslots = (seller_id) => {
     let day = { title: null, data: [] };
 
     timeslots.forEach(timeslot => {
-      const sectionTitle = Moment(timeslot.start).locale('ar').calendar(null, {
-        sameDay: '[اليوم]',
-        nextDay: '[غدًا]',
-        nextWeek: 'dddd',
-        sameElse: 'L'
-      });
-
+      const sectionTitle = formatDay(timeslot.start);
       if (day.title === null) {
         day.title = sectionTitle;
       } else if (day.title !== sectionTitle) {

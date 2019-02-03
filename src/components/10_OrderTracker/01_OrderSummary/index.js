@@ -16,16 +16,15 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import {
-  parseTimestamp,
-
-
   paymentIcon,
   AYEZ_GREEN
 } from '../../../Helpers.js';
 
 import {
   strings,
-  translate
+  translate,
+  formatTimestamp,
+  formatDay
 } from '../../../i18n.js';
 
 
@@ -110,14 +109,11 @@ class OrderSummary extends Component {
     let timeString = '';
     let dateString = '';
     if (timeslot && timeslot.start) {
-      const timeslotStart = parseTimestamp(timeslot.start);
-      const timeslotEnd = parseTimestamp(timeslot.end);
-      timeString = `${timeslotStart.timeString}${timeslotStart.ampmString} - ${timeslotEnd.timeString}${timeslotEnd.ampmString}`;
-      dateString = `${timeslotStart.dateString}`;
+      timeString = `${formatTimestamp(timeslot.start, 'h:mmA')} - ${formatTimestamp(timeslot.end, 'h:mmA')}`;
+      dateString = formatDay(timeslot.start);
     } else {
-      const timestamp = parseTimestamp(timestamp);
-      timeString = `${timestamp.timeString}${timestamp.ampmString}`;
-      dateString = `${timestamp.dateString}`;
+      timeString = formatTimestamp(timestamp, 'h:mmA');
+      dateString = formatDay(timestamp);
     }
     return (
       <SummarySection>
