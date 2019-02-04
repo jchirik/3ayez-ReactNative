@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
    Image,
    ActivityIndicator,
    TouchableOpacity,
@@ -84,9 +83,9 @@ class CurrentLocationSelect extends Component {
       return (
         <View>
           <AyezText
-          regular style={{ textAlign: 'center' }}>Issue determining location.</AyezText>
+          regular style={{ textAlign: 'center' }}>{strings('AddressCreate.issueDeterminingCL')}</AyezText>
           <BlockButton
-            text={'OK'}
+            text={strings('Common.OK')}
             color={'black'}
             style={{
               marginTop: 10,
@@ -105,7 +104,7 @@ class CurrentLocationSelect extends Component {
     return (
       <View>
         <BlockButton
-          text={'YES, ALLOW'}
+          text={strings('AddressCreate.allowCL')}
           style={{
             marginTop: 10,
             marginLeft: 18,
@@ -117,7 +116,7 @@ class CurrentLocationSelect extends Component {
           />
 
         <BlockUnderButton
-          text={'Search for my location manually'}
+          text={strings('AddressCreate.denyCL')}
           onPress={() => {
             Actions.addressSearch();
           }}
@@ -147,7 +146,7 @@ class CurrentLocationSelect extends Component {
           semibold
           size={16}
           style={{ textAlign: 'center', marginTop: 20, marginLeft: 20, marginRight: 20 }}
-          >Would you like to use your location to find stores in your area?</AyezText>
+          >{strings('AddressCreate.queryCL')}</AyezText>
         <View style={{ flex: 1 }} />
 
         { this.renderLocationPermissionButtons() }

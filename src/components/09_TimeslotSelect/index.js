@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   Image,
   TextInput,
   TouchableOpacity,
@@ -29,7 +28,8 @@ import {
 import {
   strings,
   translate,
-  formatTimestamp
+  formatTimestamp,
+  formatCurrency
 } from '../../i18n.js';
 
 
@@ -95,18 +95,15 @@ class TimeslotSelect extends Component {
       >
         <AyezText regular style={{
           marginLeft: 30,
-          fontSize: 14,
           color: (item.invalid ? '#cecece' : 'black'),
           textDecorationLine: (item.invalid ? 'line-through' : 'none'),
           textDecorationStyle: 'solid'
         }} key={index}>{startTime} - {endTime}</AyezText>
 
         <AyezText light style={{
-          fontFamily: 'Poppins-Light',
           marginRight: 30,
-          fontSize: 14,
           color: (item.invalid ? '#cecece' : '#8E8E93')
-        }}>{item.delivery_fee.toFixed(2)} EGP</AyezText>
+        }}>{formatCurrency(item.delivery_fee)}</AyezText>
       </TouchableOpacity>
     )
   }
@@ -130,7 +127,7 @@ class TimeslotSelect extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
-          title={'Schedule Order'}
+          title={strings('TimeslotSelect.header')}
           onBackButtonPress={() => Actions.pop()}
           blackStyle
         />

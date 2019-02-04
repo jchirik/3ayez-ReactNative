@@ -18,10 +18,6 @@ class AnimatedCheckmarkOverlay extends Component {
     };
   }
 
-  componentDidMount() {
-
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.basket_quantity < this.props.basket_quantity) {
 

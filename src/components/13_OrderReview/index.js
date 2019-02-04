@@ -120,7 +120,6 @@
   import React, { Component } from 'react';
   import {
     View,
-    Text,
     TextInput,
      Image,
      ActivityIndicator,
@@ -254,7 +253,7 @@
           backgroundColor: AYEZ_BACKGROUND_COLOR
         }}>
           {mainComponent}
-          <Text>Countdown</Text>
+          <AyezText regular>{strings('OrderReview.countdown', {time: '0:00'})}</AyezText>
         </View>
       )
     }

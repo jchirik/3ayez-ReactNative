@@ -127,7 +127,7 @@ class AddressSearch extends Component {
             margin: 40,
             color: '#8E8E93',
             fontSize: 15
-          }}>No Results</AyezText>
+          }}>{strings('AddressCreate.noLocationSearchResults')}</AyezText>
         </View>
       )
     }
@@ -141,7 +141,7 @@ class AddressSearch extends Component {
           textAlign: 'center',
           color: '#8E8E93',
           fontSize: 15
-        }}>Let us know where you are to send your orders.</AyezText>
+        }}>{strings('AddressCreate.addressSearchInstruction')}</AyezText>
       </View>
     )
   }
@@ -153,11 +153,11 @@ class AddressSearch extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'DELIVERY ADDRESS'}/>
+        <Header title={strings('AddressCreate.addressSearchHeader')}/>
         <SearchBar
           value={this.props.query}
           onChangeText={(text) => this.props.searchAddresses(text, this.props.locale)}
-          placeholder={'search for new address, city, street'}
+          placeholder={strings('AddressCreate.addressSearchPlaceholder')}
           autofocus
         />
         <FlatList

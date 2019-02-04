@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   TextInput,
    Image,
    ActivityIndicator,
@@ -16,7 +15,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   Header,
-  BlockButton
+  BlockButton,
+  AyezText
 } from '../../_common';
 import {
   setOrderNotes
@@ -24,7 +24,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT
 } from '../../../i18n.js';
 
 
@@ -37,7 +38,7 @@ class CheckoutNotesDetail extends Component {
         backgroundColor: '#FAFCFD'
       }}>
         <Header
-          title={'Additional Notes'}
+          title={strings('Checkout.additionalNotesHeader')}
         />
         <TextInput
           style={{
@@ -46,7 +47,7 @@ class CheckoutNotesDetail extends Component {
             borderColor: '#EAEAEA',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            fontFamily: 'Poppins-Regular',
+            fontFamily: TEXT_INPUT_FONT,
             fontSize: 14
           }}
           onChangeText={(text) => this.props.setOrderNotes(text)}
@@ -55,7 +56,7 @@ class CheckoutNotesDetail extends Component {
           autoFocus
         />
         <BlockButton
-          text={'OK'}
+          text={strings('Common.OK')}
           style={{ marginLeft: 20, marginRight: 20, marginTop: 10 }}
           onPress={() => Actions.pop()}
         />

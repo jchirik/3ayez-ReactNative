@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   TextInput,
    Image,
    ActivityIndicator,
@@ -64,7 +63,7 @@ class SettingsMenu extends Component {
       return (
         <BlockButton
           onPress={this.loginUser.bind(this)}
-          text={'Login'}
+          text={strings('Common.login')}
           color={'#0094ff'}
           style={{
             marginLeft: 20,
@@ -84,9 +83,8 @@ class SettingsMenu extends Component {
       }}>
         <AyezText semibold style={{
           fontSize: 22,
-          color: 'black',
           alignSelf: 'flex-start'
-        }}>Welcome {this.props.name}</AyezText>
+        }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
       </View>
     );
   }
@@ -100,7 +98,7 @@ class SettingsMenu extends Component {
           textAlign: 'center',
           marginTop: 30,
           marginBottom: 30
-        }}>Made in 🇪🇬</AyezText>
+        }}>{strings('Settings.madeinEG')}</AyezText>
       </View>
     )
   }
@@ -151,17 +149,17 @@ class SettingsMenu extends Component {
 
   render() {
 
-    const accountSection = {title: 'My Account', data: [
-      { text: 'Address Book', action: () => Actions.addressManager(), icon: '' },
-      { text: 'Credit Cards', action: () => Actions.creditCardManager(), icon: '' },
-      { text: 'Previous Orders', action: () => Actions.orderHistory(), icon: '' },
-      { text: 'Logout', action: this.openLogoutConfirm.bind(this), icon: ''}
+    const accountSection = {title: strings('Settings.myAccount'), data: [
+      { text: strings('Settings.addressBook'), action: () => Actions.addressManager(), icon: '' },
+      { text: strings('Settings.creditCards'), action: () => Actions.creditCardManager(), icon: '' },
+      { text: strings('Settings.previousOrders'), action: () => Actions.orderHistory(), icon: '' },
+      { text: strings('Common.logout'), action: this.openLogoutConfirm.bind(this), icon: ''}
     ]};
 
-    const infoSection = {title: 'Information', data: [
-      { text: 'Language', action: this.openLanguageSelect.bind(this), icon: '' },
-      { text: 'Terms & Conditions', action: null },
-      { text: 'Privacy Policy', action: null },
+    const infoSection = {title: strings('Settings.information'), data: [
+      { text: strings('Settings.language'), action: this.openLanguageSelect.bind(this), icon: '' },
+      { text: strings('Settings.termsConditions'), action: null },
+      { text: strings('Settings.privacyPolicy'), action: null },
     ]};
 
 
@@ -176,7 +174,7 @@ class SettingsMenu extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'SETTINGS'}/>
+        <Header title={strings('Settings.header')}/>
         <SectionList
           ListHeaderComponent={this.renderHeader.bind(this)}
           ListFooterComponent={this.renderFooter.bind(this)}
@@ -192,21 +190,21 @@ class SettingsMenu extends Component {
         <BottomChoiceSelection
           isVisible={this.state.languageSelect}
           onClose={this.closeLanguageSelect.bind(this)}
-          title='Select your language'
+          title={strings('Settings.selectLanguage')}
           buttons={[
-            { text: 'Arabic', action: this.setLocaleArabic.bind(this) },
-            { text: 'English', action: this.setLocaleEnglish.bind(this) }
+            { text: strings('Common.arabic'), action: this.setLocaleArabic.bind(this) },
+            { text: strings('Common.english'), action: this.setLocaleEnglish.bind(this) }
           ]}
         />
 
         <BottomChoiceSelection
           isVisible={this.state.logoutConfirm}
           onClose={this.closeLogoutConfirm.bind(this)}
-          title='Are you sure you want to log out?'
+          title={strings('Settings.logoutModal')}
           backgroundColor='#E64E47'
           buttons={[
-            { text: 'Yes, sure', action: this.logoutUser.bind(this) },
-            { text: 'No, cancel', action: () => console.log('closing') }
+            { text: strings('Settings.logoutConfirm'), action: this.logoutUser.bind(this) },
+            { text: strings('Settings.logoutCancel'), action: () => console.log('closing') }
           ]}
         />
       </View>

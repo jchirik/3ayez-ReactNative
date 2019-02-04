@@ -7,6 +7,7 @@ import {
 import Moment from 'moment';
 import { Actions } from 'react-native-router-flux';
 import store from './reducers';
+import { strings } from './i18n';
 
 
 export const getScreenDimensions = () => Dimensions.get('window');
@@ -90,51 +91,54 @@ export const cleanAlgoliaItems = (allItems) => {
   return safeItems;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import en from '../locales/en.json';
-import ar from '../locales/ar.json';
-
-export const strings = (key) => {
-  const locale = store.getState().Settings.locale
-  // if none, set it to arabic and save persistently
-  let string = {};
-  switch (locale) {
-    case 'ar':
-      string = ar;
-      break;
-    case 'en':
-      string = en;
-      break;
+export const formatStatusText = (status, is_timeslot_ongoing, timeslot) => {
+  let statusText = '-'
+  if (status === 0) {
+    if (is_timeslot_ongoing) { statusText = strings('OrderStatus.awaitingStore') }
+    else if (timeslot && (Date.now() < timeslot.start)) { statusText = strings('OrderStatus.scheduled') }
+  } else if (status <= 50) {
+    statusText = strings('OrderStatus.preparingInStore');
+  } else if (status < 100) {
+    statusText = strings('OrderStatus.assigningDriver');
+  } else if (status < 200) {
+    statusText = strings('OrderStatus.inDelivery');
+  } else if (status === 200) {
+    statusText = strings('OrderStatus.completed');
+  } else if (status === 300) {
+    statusText = strings('OrderStatus.cancelled');
+  } else if (status === 400) {
+    statusText = strings('OrderStatus.rejectedByStore');
   }
-  // recursively dig in to the dictionary
-  key.split('.').forEach((keyLayer) => { string = string[keyLayer]; });
-  return string;
-};
+  return statusText;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, Image, Platform } from 'react-native';
+import { TouchableOpacity, View, Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import FastImage from 'react-native-fast-image';
 
-import { AyezText } from '../_common';
-import { ItemIncrementer } from '.';
-import { strings, translate } from '../../i18n.js';
+import { AyezText, ItemIncrementer } from '.';
+import { strings, translate, formatCurrency } from '../../i18n.js';
 import colors from '../../theme/colors';
 
 
@@ -22,14 +21,14 @@ class ItemRow extends Component {
     let savingsText = '';
 
     if (price) {
-      mainPriceText = `${price.toFixed(2)} LE`;
+      mainPriceText = formatCurrency(price);
 
       if (promotion_price) {
-        mainPriceText = `${promotion_price.toFixed(2)} LE`;
-        previousPriceText = `${price.toFixed(2)}`;
+        mainPriceText = formatCurrency(promotion_price);
+        previousPriceText = formatCurrency(price);
         const savingsAmount = price - promotion_price;
         if (savingsAmount !== 0) {
-          savingsText = `وفر ${savingsAmount.toFixed(2)} جنيه`;
+          savingsText = strings('Items.savingsText', {savings: formatCurrency(savingsAmount)});
         }
       }
     }
@@ -95,7 +94,7 @@ class ItemRow extends Component {
             marginLeft: 3
           }}
         >
-          {strings('WorkingBasket.weightsVary')}
+          {strings('Items.weightsVary')}
         </AyezText>
       );
     }
@@ -172,21 +171,24 @@ class ItemRow extends Component {
           <View style={{ opacity: item.invalid ? 0.3 : 1 }}>
             {this.renderPrice(price, promotionPrice, item)}
           </View>
-          <Text
-            style={[
-              styles.itemTextStyle,
-              {
-                color: item.invalid ? 'red' : 'black',
+          <AyezText
+            regular
+            size={12}
+            color={item.invalid ? 'red' : 'black'}
+            style={{
+                marginBottom: 6,
+                backgroundColor: 'transparent',
                 textDecorationStyle: 'solid',
                 textDecorationLine: item.invalid ? 'line-through' : 'none'
-              }
-            ]}
+            }}
           >
             {translate(item)}
-          </Text>
-          <Text style={styles.itemIncrTextStyle}>
-            {item.incr + ' ' + item.unit}
-          </Text>
+          </AyezText>
+          {(item.incr !== 1 || item.unit) ? (
+            <AyezText regular size={12} color={colors.steel}>
+              {item.incr + ' ' + item.unit}
+            </AyezText>
+          ) : null}
         </View>
         {noQuantity ? null : this.renderQuantity(item, mutableQuantity)}
       </View>
@@ -194,19 +196,6 @@ class ItemRow extends Component {
   }
 }
 
-const styles = {
-  itemTextStyle: {
-    fontFamily: 'Poppins',
-    fontSize: 12,
-    marginBottom: 6,
-    backgroundColor: 'transparent'
-  },
-  itemIncrTextStyle: {
-    fontFamily: 'Poppins',
-    fontSize: 12,
-    color: colors.steel
-  }
-};
 
 export default connect(
   null,

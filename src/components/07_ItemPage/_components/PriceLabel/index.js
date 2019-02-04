@@ -1,15 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import styles from './styles';
 import colors from '../../../../theme/colors';
 import {
   AyezText
 } from '../../../_common';
-
-const formatCurrency = (amount) => {
-  return `${amount.toFixed(2)} EGP`;
-}
-
+import { strings, formatCurrency } from '../../../../i18n.js';
 
 export default ({ price, promotion_price, item }) => {
   let mainPriceText = '-';
@@ -22,7 +18,7 @@ export default ({ price, promotion_price, item }) => {
       previousPriceText = formatCurrency(price);
       const savingsAmount = price - promotion_price;
       if (savingsAmount !== 0) {
-        savingsText = `Save ${formatCurrency(savingsAmount)}`;
+        savingsText = strings('Items.savingsText', { savings: formatCurrency(savingsAmount) });
       }
     }
   }

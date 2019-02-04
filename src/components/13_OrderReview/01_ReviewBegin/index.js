@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -58,13 +57,15 @@ class ReviewBegin extends Component {
       imageComponents.push(
         <View style={{
           marginLeft: 10,
+          flexDirection: 'row',
           backgroundColor: '#FE6668',
           width: 40, height: 40,
           borderRadius: 20,
           justifyContent: 'center',
           alignItems: 'center'
         }}>
-          <AyezText regular color={'white'}>+{overCount}</AyezText>
+          <AyezText regular color={'white'}>+</AyezText>
+          <AyezText regular color={'white'}>{overCount}</AyezText>
         </View>
       )
     }
@@ -80,7 +81,7 @@ class ReviewBegin extends Component {
             marginBottom: 18,
             marginLeft: 48,
             marginRight: 48
-          }}>Review Required</AyezText>
+          }}>{strings('OrderReview.reviewRequired')}</AyezText>
 
           <Image
             source={reviewBackground}
@@ -96,7 +97,7 @@ class ReviewBegin extends Component {
             marginHorizontal: 10,
             marginBottom: 24,
             textAlign: 'center'
-          }}>Your order requires some action. Please revise these items and continue.</AyezText>
+          }}>{strings('OrderReview.reviewDescription')}</AyezText>
 
           <View style={{
               flexDirection: 'row',
@@ -109,7 +110,7 @@ class ReviewBegin extends Component {
           <View style={{ flex: 1 }} />
 
           <BlockButton
-            text={'Take action'}
+            text={strings('OrderReview.start')}
             style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
             onPress={() => this.props.onProceed()}
             />

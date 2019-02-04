@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { addToBasket, removeFromBasket } from '../../actions';
 
@@ -12,6 +12,7 @@ class ItemIncrementer extends PureComponent {
     this.incrementItem = this.incrementItem.bind(this);
     this.decrementItem = this.decrementItem.bind(this);
   }
+
   incrementItem() {
     if (this.props.incrementFunction) {
       this.props.incrementFunction();
@@ -39,9 +40,9 @@ class ItemIncrementer extends PureComponent {
           style={{ ...styles.mainContainer, ...style }}
           onPress={this.incrementItem}
         >
-          <Text style={{ ...styles.addItemText, color }}>
-            {strings('ShoppingComponent.3ayezButton')}
-          </Text>
+          <AyezText style={{ ...styles.addItemText, color }}>
+            {strings('Common.3ayez')}
+          </AyezText>
         </TouchableOpacity>
       );
     }

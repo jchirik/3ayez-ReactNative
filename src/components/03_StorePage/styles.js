@@ -89,11 +89,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5
   },
-  sectionTitleText: {
-    color: 'white',
-    fontSize: 12,
-    fontFamily: 'Poppins-Light'
-  },
   searchBarSectionStyle: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -126,12 +121,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 20
-  },
-  viewCorridorTextStyle: {
-    fontSize: 14,
-    color: '#62DEAB',
-    fontFamily: 'Poppins-Light',
-    marginRight: 20
   },
   horizontalListViewStyle: {
     backgroundColor: 'rgba(255, 255, 255, 0.5)'

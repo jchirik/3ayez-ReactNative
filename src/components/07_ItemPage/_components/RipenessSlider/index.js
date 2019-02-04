@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Slider } from 'react-native';
+import { View, Slider } from 'react-native';
 import styles, { tintColor, trackColor, getItemStyle } from './styles';
 import { strings } from '../../../../i18n.js';
 import {
@@ -38,21 +38,21 @@ export default class RipenessSlider extends Component {
             onPress={() => this._setValue(-1)}
             style={getItemStyle(this.props.value, -1)}
           >
-            {strings('ItemView.green')}
+            {strings('ItemView.ripenessGreen')}
           </AyezText>
           <AyezText
             regular
             onPress={() => this._setValue(0)}
             style={getItemStyle(this.props.value, 0)}
           >
-            {strings('ItemView.normal')}
+            {strings('ItemView.ripenessNormal')}
           </AyezText>
           <AyezText
             regular
             onPress={() => this._setValue(1)}
             style={getItemStyle(this.props.value, 1)}
           >
-            {strings('ItemView.ripe')}
+            {strings('ItemView.ripenessRipe')}
           </AyezText>
         </View>
       </View>

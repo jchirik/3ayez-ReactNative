@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 const plusIcon = require('../../../assets/images/incr_plus.png');
 const minusIcon = require('../../../assets/images/incr_minus.png');
+import { AyezText } from '.';
 
 export default class Incrementer extends PureComponent {
   render() {
@@ -35,14 +36,15 @@ export default class Incrementer extends PureComponent {
           />
         </TouchableOpacity>
 
-        <Text
+        <AyezText
+          medium
           adjustsFontSizeToFit
           numberOfLines={1}
           minimumFontScale={0.5}
           style={styles.incrementText}
         >
           {quantityText}
-        </Text>
+        </AyezText>
 
         <TouchableOpacity
           style={styles.iconContainer}
@@ -84,11 +86,9 @@ const styles = {
     alignSelf: 'center'
   },
   incrementText: {
-    fontSize: 14,
     flex: 1,
     textAlign: 'center',
-    alignSelf: 'center',
-    color: 'black'
+    alignSelf: 'center'
   },
   iconContainer: {
     width: 32,

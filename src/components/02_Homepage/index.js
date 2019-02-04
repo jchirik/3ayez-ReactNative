@@ -6,7 +6,6 @@ import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import {
   View,
   FlatList,
-  Text,
   Image,
   ActivityIndicator,
   Dimensions
@@ -43,8 +42,8 @@ class Homepage extends Component {
       index: 0,
       current_key: 'first',
       routes: [
-        { key: 'first', title: 'Stores', icon: stores_icon },
-        { key: 'second', title: 'Support', icon: support_icon },
+        { key: 'first', title: strings('HomeTabs.stores'), icon: stores_icon },
+        { key: 'second', title: strings('HomeTabs.support'), icon: support_icon },
       ],
     };
   }

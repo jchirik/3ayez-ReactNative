@@ -2,6 +2,9 @@ import React from 'react';
 import { TouchableOpacity, Image, Text } from 'react-native';
 import styles, { activeOpacity } from './styles';
 import FastImage from 'react-native-fast-image';
+import {
+  AyezText
+} from '../../../_common';
 
 export default ({ image_url, price, name, onPress }) => (
   <TouchableOpacity
@@ -14,7 +17,7 @@ export default ({ image_url, price, name, onPress }) => (
       source={{ uri: image_url }}
       resizeMode={'contain'}
     />
-    <Text style={styles.price}>{price}</Text>
-    <Text style={styles.name}>{name}</Text>
+    <AyezText medium size={15}>{price}</AyezText>
+    <AyezText extralight size={11}>{name}</AyezText>
   </TouchableOpacity>
 );

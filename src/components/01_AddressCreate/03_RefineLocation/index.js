@@ -122,16 +122,14 @@ class RefineLocation extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'REFINE LOCATION'}/>
+        <Header title={strings('AddressCreate.addressRefineHeader')}/>
 
 
         <AyezText semibold style={{
           textAlign: 'center',
-          fontColor: 'black',
-          fontSize: 14,
           marginTop: 20
         }}>
-          Refine your location by dragging the pin
+          {strings('AddressCreate.addressRefineInstruction')}
         </AyezText>
 
         {this.renderGoogleTitle()}
@@ -164,7 +162,7 @@ class RefineLocation extends Component {
           justifyContent: 'center'
         }}>
           <BlockButton
-            text={'SELECT LOCATION'}
+            text={strings('AddressCreate.addressRefineConfirm')}
             style={{
               marginLeft: 18,
               marginRight: 18,

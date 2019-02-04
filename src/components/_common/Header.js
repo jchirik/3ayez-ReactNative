@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   STATUS_BAR_HEIGHT,
@@ -7,7 +7,6 @@ import {
 } from '../../Helpers.js';
 import { BackButton } from './BackButton';
 import AyezText from './AyezText';
-import { strings } from '../../Helpers.js';
 
 const Header = ({
   title = 'Title',

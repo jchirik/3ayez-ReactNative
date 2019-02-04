@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, Animated, Text } from 'react-native';
-import { SearchBarButton } from '../_reusable';
-import { AyezText } from '../_common';
+import { View, Image, Animated } from 'react-native';
+import { AyezText, SearchBarButton } from '../_common';
 import styles from './styles';
 
 import {
@@ -68,15 +67,14 @@ export default class StoreHeader extends Component {
             {
               width: window.width - 70,
               flexDirection: 'row',
-              justifyContent: 'space-between'
+              justifyContent: 'center'
             },
             disappearingAnimation
           ]}
         >
-          <Text style={styles.sectionTitleText}>
-            {delivery_time} mins. of scheduled delivery
-          </Text>
-          <Text style={styles.sectionTitleText}>Delivery: {delivery_fee}</Text>
+          <AyezText light color={'white'} size={12}>
+            {strings('StoreSelect.deliveryTime', { delivery_time })}
+          </AyezText>
         </Animated.View>
 
         <AnimatedSearchBarButton

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { localizeDN } from '../../Helpers';
+import { strings, translate } from '../../i18n';
 import { Actions } from 'react-native-router-flux';
 import colors from '../../theme/colors';
 import searchBarImage from '../../../assets/images_v2/search.png';
@@ -15,10 +15,9 @@ class SearchBarButton extends React.Component {
     } = this.props;
     let placeHolder = '';
     if (fullName !== '') {
-      placeHolder = localizeDN(fullName);
+      placeHolder = translate(fullName);
     } else if (displayName !== '') {
-      placeHolder =
-        'Find in ' + localizeDN(displayName) + " 1000's of products";
+      placeHolder = strings('StoreSearch.placeholder', { seller_name: translate(displayName) });
     }
     return (
       <View style={[styles.searchBar, { width }, style]}>

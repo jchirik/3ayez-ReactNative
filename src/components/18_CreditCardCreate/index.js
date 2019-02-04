@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import firebase from 'react-native-firebase';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,

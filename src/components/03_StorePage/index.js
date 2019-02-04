@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {
   View,
   FlatList,
-  Text,
   Animated,
   TouchableOpacity,
   Image,
@@ -32,7 +31,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT_LIGHT
 } from '../../i18n.js';
 
 import styles from './styles';
@@ -163,8 +163,8 @@ class StorePage extends Component {
 
   renderTabs() {
     const tabs = [
-      strings('StoreHome.featuredTab'),
-      strings('StoreHome.categoreisTab')
+      strings('StoreHome.featured'),
+      strings('StoreHome.categories')
     ];
     return (
       <Animated.View
@@ -198,14 +198,12 @@ class StorePage extends Component {
           tabTextStyle={{
             fontSize: 14,
             color: '#8E8E93',
-            fontFamily: 'Poppins-Light',
-            fontWeight: '400'
+            fontFamily: TEXT_INPUT_FONT_LIGHT
           }}
           activeTabTextStyle={{
             fontSize: 14,
             color: '#2DD38F',
-            fontFamily: 'Poppins-Light',
-            fontWeight: '400'
+            fontFamily: TEXT_INPUT_FONT_LIGHT
           }}
         />
         <View
@@ -255,9 +253,9 @@ class StorePage extends Component {
         />
         {this.props.basket_quantity > 0 ? (
           <View style={styles.basketQuantityBadgeTextStyle}>
-            <Text style={{ fontSize: 10, color: '#2DD38F' }}>
+            <AyezText regular size={10} color={'#2DD38F'}>
               {this.props.basket_quantity}
-            </Text>
+            </AyezText>
           </View>
         ) : null}
       </TouchableOpacity>

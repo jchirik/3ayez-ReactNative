@@ -39,6 +39,50 @@ export const translate = (data) => {
 }
 
 
+export const TEXT_INPUT_FONT = () => {
+  const locale = store.getState().Settings.locale;
+  if (locale === 'ar') {
+    return 'Cairo-Regular'
+  } else if (locale === 'en') {
+    return 'Poppins-Regular'
+  }
+  return '';
+}
+
+export const TEXT_INPUT_FONT_MEDIUM = () => {
+  const locale = store.getState().Settings.locale;
+  if (locale === 'ar') {
+    return 'Cairo-SemiBold'
+  } else if (locale === 'en') {
+    return 'Poppins-Medium'
+  }
+  return '';
+}
+
+export const TEXT_INPUT_FONT_LIGHT = () => {
+  const locale = store.getState().Settings.locale;
+  if (locale === 'ar') {
+    return 'Cairo-Light'
+  } else if (locale === 'en') {
+    return 'Poppins-Light'
+  }
+  return '';
+}
+
+
+
+export const formatCurrency = (amount_t) => {
+  let amount = parseFloat(amount_t);
+  if (isNaN(amount)) { return null }
+  amount = amount.toFixed(2);
+  const locale = store.getState().Settings.locale;
+  if (locale === 'en') {
+    return `${amount} EGP`;
+  } else if (locale === 'ar') {
+    return `${amount} LE`;
+  }
+  return null;
+}
 
 export const formatTimestamp = (string, format) => {
   const locale = store.getState().Settings.locale;

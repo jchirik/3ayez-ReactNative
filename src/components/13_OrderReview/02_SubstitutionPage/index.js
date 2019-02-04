@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -119,7 +118,7 @@ class SubstitutionPage extends Component {
 
         <View style={{ flex: 1 }} />
         <BlockButton
-          text={'Confirm replacement'}
+          text={strings('OrderReview.confirmReplacement')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
           onPress={() => {
             this.props.setReviewItemSubstitution(this.props.index, { ...item, quantity });
@@ -165,7 +164,7 @@ class SubstitutionPage extends Component {
         <AyezText regular style={{
           marginVertical: 12,
           marginLeft: 22
-        }}>Replace with another item</AyezText>
+        }}>{strings('OrderReview.replaceInstruction')}</AyezText>
         <FlatList
           ref={ref => (this.tableRef = ref)}
           style={{
@@ -185,7 +184,7 @@ class SubstitutionPage extends Component {
         />
         <View style={{ flex: 1 }} />
         <BlockButton
-          text={'Skip this item'}
+          text={strings('OrderReview.skipItem')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
           onPress={() => {
             this.props.setReviewItemSubstitution(this.props.index, null);
@@ -216,7 +215,7 @@ class SubstitutionPage extends Component {
           backgroundColor: 'white'
         }}>
           <Header
-            title={`Review Item (${index+1}/${review_items.length})`}
+            title={strings('OrderReview.reviewItemHeader', { index: index+1, total: review_items.length})}
             blackStyle
             onBackButtonPress={() => {
               if (this.state.quantity > 0) {
@@ -246,7 +245,7 @@ class SubstitutionPage extends Component {
               <AyezText regular>{translate(item)}</AyezText>
             </View>
 
-            <AyezText regular color={'red'}>Out of Stock</AyezText>
+            <AyezText regular color={'red'}>{strings('Items.outOfStock')}</AyezText>
           </View>
 
 

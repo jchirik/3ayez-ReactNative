@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -25,6 +24,7 @@ import {
 } from '../../../i18n.js';
 
 import {
+  AyezText,
   BackButton
 } from '../../_common';
 const location_dot = require('../../../../assets/images_v2/OrderTracker/location_dot.png');
@@ -49,7 +49,7 @@ class DriverTracker extends Component {
     if (!location) {
       return (
         <View style={{ flex: 1 }}>
-          <Text>Issues with the driver's phone</Text>
+          <AyezText medium>{strings('DriverTracker.noLocation')}</AyezText>
           <BackButton fixed />
         </View>
       );

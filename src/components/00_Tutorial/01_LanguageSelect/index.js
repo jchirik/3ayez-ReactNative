@@ -74,10 +74,10 @@ class LanguageSelect extends Component {
       )
     }
 
-    let switchText = 'Switch to English';
+    let switchText = strings('Tutorial.switchEnglish');
     let switchLocale = 'en';
     if (this.props.locale === 'en') {
-      switchText = 'Switch to Arabic ';
+      switchText = strings('Tutorial.switchArabic');
       switchLocale = 'ar';
     }
 
@@ -109,7 +109,7 @@ class LanguageSelect extends Component {
           resizeMode={'contain'}
         />
         <BlockButton
-          text={'Get Started'}
+          text={strings('Tutorial.getStarted')}
           style={{
             marginTop: 10,
             marginLeft: 18,

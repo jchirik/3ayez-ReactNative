@@ -28,7 +28,7 @@ import AddressSearch from './components/01_AddressCreate/02_AddressSearch';
 import RefineLocation from './components/01_AddressCreate/03_RefineLocation';
 import AddressDetails from './components/01_AddressCreate/04_AddressDetails';
 import AddressDetailEdit from './components/01_AddressCreate/05_AddressDetailEdit';
-import AddressConfirm from './components/01_AddressCreate/06_AddressConfirm';
+// import AddressConfirm from './components/01_AddressCreate/06_AddressConfirm';
 
 import Homepage from './components/02_Homepage';
 // import Discovery from './components/02_Homepage/01_Discovery';
@@ -359,7 +359,6 @@ class RouterComponent extends Component {
             <Scene key="refineLocation" component={RefineLocation} />
             <Scene key="addressDetails" component={AddressDetails} />
             <Scene key="addressDetailEdit" component={AddressDetailEdit} />
-            <Scene key="addressConfirm" component={AddressConfirm} />
           </Stack>
 
 

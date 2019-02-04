@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -16,8 +15,6 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import {
-  parseTimestamp,
-
 
   paymentIcon,
   AYEZ_GREEN,
@@ -83,7 +80,7 @@ class ReviewSummary extends Component {
         flex: 1
       }}>
       <Header
-        title={`Review`}
+        title={strings('OrderReview.reviewSummaryHeader')}
         blackStyle
         onBackButtonPress={() => onBack()}
         />
@@ -94,15 +91,15 @@ class ReviewSummary extends Component {
           renderItem={this.renderItem.bind(this)}
           renderSectionHeader={this.renderSectionHeader.bind(this)}
           sections={[
-            { title: 'New Items', data: substitutions.filter(item => item) },
-            { title: 'Existing', data: items.filter(item => (item.quantity > 0)) },
-            { title: 'Removed', data: items.filter(item => (item.quantity === 0)) }
+            { title: strings('OrderReview.newItems'), data: substitutions.filter(item => item) },
+            { title: strings('OrderReview.existingItems'), data: items.filter(item => (item.quantity > 0)) },
+            { title: strings('OrderReview.removedItems'), data: items.filter(item => (item.quantity === 0)) }
           ]}
           keyExtractor={(item, index) => index.toString()}
         />
 
         <BlockButton
-          text={'Send to Store'}
+          text={strings('Checkout.sendOrder')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
           onPress={() => this.props.onProceed()}
           />

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   Image,
   TouchableOpacity,
   ActivityIndicator,
@@ -31,7 +30,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  formatCurrency
 } from '../../i18n.js';
 
 const window = Dimensions.get('window');
@@ -84,7 +84,7 @@ class WorkingBasket extends Component {
             paddingRight: 15
           }}
           >
-          <AyezText regular color={'#353333'}>{`Discount: ${coupon.amount} EGP`}</AyezText>
+          <AyezText regular color={'#353333'}>{strings('WorkingBasket.couponDiscount', { amount: coupon.amount })}</AyezText>
           <AyezText
             regular
             color={'#d33b2d'}
@@ -95,7 +95,7 @@ class WorkingBasket extends Component {
               regular
               color={'#0094ff'}
               style={{ marginLeft: 10 }}
-              >Edit</AyezText>
+              >{strings('Common.edit')}</AyezText>
         </TouchableOpacity>
       );
     }
@@ -113,7 +113,7 @@ class WorkingBasket extends Component {
           backgroundColor: '#0094ff'
         }}
         >
-        <AyezText semibold size={13} color={'white'}>{`+ Add Coupon`}</AyezText>
+        <AyezText semibold size={13} color={'white'}>{strings('WorkingBasket.addCoupon')}</AyezText>
       </TouchableOpacity>
     );
   }
@@ -137,10 +137,10 @@ class WorkingBasket extends Component {
         <View style={styles.headerDetailsContainer}>
           {/* price */}
           <AyezText regular size={18}>
-            {strings('WorkingBasket.total')}
+            {strings('Receipt.subtotal')}
           </AyezText>
           <AyezText medium size={18}>
-            {`${this.props.total.toFixed(2)} EGP`}
+            {formatCurrency(this.props.total)}
           </AyezText>
           {this.renderCouponButton()}
         </View>
@@ -159,9 +159,9 @@ class WorkingBasket extends Component {
           style={styles.emptyBasket}
           onPress={() => this.setState({ clearBasketModal: true })}
         >
-          <Text style={styles.clearOrderTextStyle}>
+          <AyezText regular style={styles.clearOrderTextStyle}>
             {strings('WorkingBasket.clearOrder')}
-          </Text>
+          </AyezText>
         </TouchableOpacity>
       );
 
@@ -204,9 +204,9 @@ class WorkingBasket extends Component {
         style={styles.itemsList}
         ListFooterComponent={this.renderTableFooter()}
         ListEmptyComponent={
-          <Text style={styles.emptyCartStyle}>
+          <AyezText regular style={styles.emptyCartStyle}>
             {strings('WorkingBasket.nothingInBasket')}
-          </Text>
+          </AyezText>
         }
         keyExtractor={(item, index) => index.toString()}
       />
@@ -217,12 +217,12 @@ class WorkingBasket extends Component {
     return (
       <View style={styles.emptyBasketContainer}>
         <Image source={emptyBasketIcon} style={{ width: 60, height: 60 }} />
-        <Text style={styles.emptyBasketTitle}>
-          {strings('WorkingBasket.yourCartisEmptyTitle')}
-        </Text>
-        <Text style={styles.emptyBasketSubtitle}>
-          {strings('WorkingBasket.yourCartisEmptySubitle')}
-        </Text>
+        <AyezText regular style={styles.emptyBasketTitle}>
+          {strings('WorkingBasket.emptyCartTitle')}
+        </AyezText>
+        <AyezText regular style={styles.emptyBasketSubtitle}>
+          {strings('WorkingBasket.emptyCartSubtitle')}
+        </AyezText>
       </View>
     );
   }
@@ -279,7 +279,7 @@ class WorkingBasket extends Component {
               this.props.onCompleteAuth(() => Actions.popTo('workingBasket'))
               Actions.auth();
             }}
-            text={'Login to continue'}
+            text={strings('WorkingBasket.loginToContinue')}
           />
         </View>
       );
@@ -289,7 +289,7 @@ class WorkingBasket extends Component {
         <BlockButton
           color={colors.greenBlue}
           onPress={this.onContinuePress.bind(this)}
-          text={strings('WorkingBasket.continue')}
+          text={strings('Common.continue')}
         />
       </View>
     );
@@ -333,13 +333,13 @@ class WorkingBasket extends Component {
                 style={styles.clearBasketImage}
                 resizeMode="contain"
               />
-              <Text style={styles.clearBasketTitle}>
-                {strings('WorkingBasket.clearOrderModalHeader')}
-              </Text>
+              <AyezText regular multiline style={styles.clearBasketTitle}>
+                {strings('WorkingBasket.clearBasketModalHeader')}
+              </AyezText>
               <BlockButton
                 style={{ width: 300, marginBottom: 10 }}
                 color={'#fe6668'}
-                text={strings('WorkingBasket.dontClearOrderModalButton')}
+                text={strings('WorkingBasket.clearBasketModalCancel')}
                 onPress={() => {
                   this.setState({ clearBasketModal: false });
                 }}
@@ -347,7 +347,7 @@ class WorkingBasket extends Component {
               <BlockButton
                 style={{ width: 300 }}
                 color={colors.greenBlue}
-                text={strings('WorkingBasket.clearOrderModalButton')}
+                text={strings('WorkingBasket.clearBasketModalConfirm')}
                 onPress={() => {
                   emptyBasket(seller.id);
                   this.setState({ clearBasketModal: false });
@@ -358,7 +358,7 @@ class WorkingBasket extends Component {
 
           <ModalPanel
             type={'bigButton'}
-            button1Text={'OK'}
+            button1Text={strings('Common.OK')}
             onButton1Press={() => {
               this.setState({ belowMinimumModal: false });
             }}
@@ -366,7 +366,7 @@ class WorkingBasket extends Component {
             visible={this.state.belowMinimumModal}
           >
             <AyezText medium style={{ textAlign: 'center', marginTop: 20 }}>
-                min. {seller.minimum} EGP for {sellerName}
+                {strings('WorkingBasket.minimumOrderModal', { min: formatCurrency(seller.minimum), seller_name: sellerName })}
               </AyezText>
 
           </ModalPanel>

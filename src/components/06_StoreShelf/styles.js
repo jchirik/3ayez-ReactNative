@@ -45,7 +45,6 @@ export default StyleSheet.create({
     width: window.width
   },
   emptyComponentText: {
-    fontFamily: 'Poppins-Regular',
     color: 'black',
     fontSize: 20
   }

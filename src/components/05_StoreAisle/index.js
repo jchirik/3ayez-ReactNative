@@ -5,7 +5,6 @@ import FastImage from 'react-native-fast-image';
 import {
   View,
   FlatList,
-  Text,
   ActivityIndicator,
   TouchableOpacity,
   Image,
@@ -16,10 +15,17 @@ import {
 import styles from './styles';
 import { selectSubcategory } from '../../actions';
 import { strings, translate } from '../../i18n.js';
-import { SearchBarButton } from '../_reusable';
-import { AnimatedCheckmarkOverlay, BackButton, BasketBlockButton } from '../_common';
+import {
+  AnimatedCheckmarkOverlay,
+  BackButton,
+  BasketBlockButton,
+  AyezText,
+
+  SearchBarButton
+ } from '../_common';
 import loadingCircleGray from '../../../assets/images/loading_circle_gray.png';
 import basketButton from '../../../assets/images_v2/basket_button.png';
+
 
 class StoreAisle extends Component {
   state = {};
@@ -57,7 +63,7 @@ class StoreAisle extends Component {
     this.props.selectSubcategory(subcategory, columnIndex);
     Actions.storeShelf({
       title: subcategory.name,
-      parent_title: this.props.category.name,
+      parent_title: translate(this.props.category.name),
       items: subcategory.items,
       jumpIndex: columnIndex
     });
@@ -108,14 +114,14 @@ class StoreAisle extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.subcategoryHeader}>
-          <Text style={styles.subcategoryHeaderText}>{subcategoryTitle}</Text>
+          <AyezText light style={styles.subcategoryHeaderText}>{subcategoryTitle}</AyezText>
           <TouchableOpacity
             style={styles.viewCorridorContainer}
             onPress={() => this.didSelectSubcategory(subcategory, 0)}
           >
-            <Text style={styles.viewCorridorText}>
-              {strings('StoreHome.viewMore')} >
-            </Text>
+            <AyezText light style={styles.viewCorridorText}>
+              {strings('Common.viewMore')} >
+            </AyezText>
           </TouchableOpacity>
         </View>
         <View style={styles.subcategoryContainerShadow}>
@@ -163,7 +169,7 @@ class StoreAisle extends Component {
         }}
         style={styles.categoryItemContainer}
       >
-        <Text style={styles.categoryItemText}>{translate(item.name)}</Text>
+        <AyezText light style={styles.categoryItemText}>{translate(item.name)}</AyezText>
       </TouchableOpacity>
     );
   }
@@ -178,9 +184,9 @@ class StoreAisle extends Component {
     } else {
       return (
         <View style={styles.container}>
-          <Text style={styles.noItemAvailableText}>
-            {strings('StoreSubcategories.noItemsAvailable')}
-          </Text>
+          <AyezText regular style={styles.noItemAvailableText}>
+            {strings('Common.noResults')}
+          </AyezText>
         </View>
       );
     }

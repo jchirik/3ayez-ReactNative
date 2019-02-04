@@ -15,18 +15,15 @@ const styles = StyleSheet.create({
 
   destinationTypeImage: { width: 22, height: 22, marginLeft: 22 },
   destinationTypeTitle: {
-    fontFamily: 'Poppins',
     fontSize: 12,
     color: colors.darkGrayishRed,
     minWidth: 105
   },
   destinationName: {
-    fontFamily: 'Poppins',
     fontSize: 18,
     color: colors.darkGrayishRed
   },
   destinationAddress: {
-    fontFamily: 'Poppins',
     fontSize: 14,
     color: colors.darkGrayishRed
   },

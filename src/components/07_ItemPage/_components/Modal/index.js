@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, Modal } from 'react-native';
+import { View, Image, TouchableOpacity, Modal } from 'react-native';
 // import Modal from 'react-native-modal';
 import { Divider } from '..';
+
+import {
+  AyezText
+} from '../../../_common';
 
 import styles from './styles';
 
@@ -30,15 +34,15 @@ export default class _ extends Component {
         <View style={styles.container}>
           <View style={styles.modal}>
             <Image source={this.props.image} style={styles.image} />
-            <Text style={styles.title}>{this.props.text}</Text>
+            <AyezText regular style={styles.title}>{this.props.text}</AyezText>
             <TouchableOpacity
               style={styles.confirmationContainer}
               onPress={this._toggle}
             >
               <Divider style={styles.divider} />
-              <Text style={styles.confirmationText}>
+              <AyezText regular style={styles.confirmationText}>
                 {this.props.confirmation}
-              </Text>
+              </AyezText>
             </TouchableOpacity>
           </View>
         </View>

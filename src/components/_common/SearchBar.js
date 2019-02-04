@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
+
+import { TEXT_INPUT_FONT } from '../../i18n.js';
 
 import { RTLImage } from './RTLImage';
 
@@ -66,7 +68,7 @@ const SearchBar = ({
           alignSelf: 'stretch',
           paddingLeft: 12,
           fontSize: 14,
-          fontFamily: 'Poppins-Regular',
+          fontFamily: TEXT_INPUT_FONT,
         }}
         placeholder={placeholder}
         placeholderTextColor={'#8E8E93'}

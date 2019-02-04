@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Text,
   TouchableOpacity,
   View,
   Modal,
@@ -145,7 +144,7 @@ class AddressSelection extends Component {
           }}>{address.street}</AyezText>
           <AyezText medium style={{
             color: 'white'
-          }}>Building {address.building}, Apt. {address.apt}</AyezText>
+          }}>{strings('Address.detail', { building: address.building, apt: address.apt })}</AyezText>
         </View>
 
         <Image
@@ -210,7 +209,7 @@ class AddressSelection extends Component {
             fontSize: 14,
             marginTop: 6,
             marginBottom: 8
-          }}>RECENT ADDRESSES</AyezText>
+          }}>{strings('AddressSelection.header')}</AyezText>
 
 
           <TouchableOpacity style={{
@@ -228,7 +227,7 @@ class AddressSelection extends Component {
             <AyezText medium style={{
               fontSize: 14,
               color: 'white'
-            }}>Edit</AyezText>
+            }}>{strings('Common.edit')}</AyezText>
           </TouchableOpacity>
 
 
@@ -239,12 +238,9 @@ class AddressSelection extends Component {
               this.onClose()
               Actions.addressCreate()
             }}
-            text={'ADD NEW ADDRESS'}
+            text={strings('AddressSelection.addNewAddress')}
             color={'#3B7A60'}
             style={{ marginTop: 14, marginBottom: 10 }}
-            textStyle={{
-              fontFamily: 'Poppins-Regular'
-            }}
             />
         </Animated.View>
 

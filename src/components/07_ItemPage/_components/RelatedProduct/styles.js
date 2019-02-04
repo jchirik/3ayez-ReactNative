@@ -14,15 +14,5 @@ export default StyleSheet.create({
   image: {
     height: 150,
     width: '100%'
-  },
-  price: {
-    fontFamily: fonts.poppinsMedium,
-    color: colors.black,
-    fontSize: 15
-  },
-  name: {
-    fontFamily: fonts.poppinsExtraLight,
-    color: colors.black,
-    fontSize: 11
   }
 });

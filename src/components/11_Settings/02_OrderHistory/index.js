@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'react-native-firebase';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -19,6 +18,11 @@ import {
   formatTimestamp,
   formatDay
 } from '../../../i18n.js';
+
+import {
+  formatStatusText
+} from '../../../Helpers.js';
+
 
 import {
   fetchOrderHistory
@@ -461,16 +465,14 @@ class OrderHistory extends Component {
       timeString = `${formatDay(order.timestamp)}, ${formatTimestamp(order.timestamp, 'h:mm A')}`;
     }
 
-    let statusText = 'Processing';
+
+    let statusText = formatStatusText(order.status, order.is_timeslot_ongoing, order.timeslot);
     let statusColor = '#0094ff';
     if (order.status === 200) {
-      statusText = 'Delivered';
       statusColor = '#45CA00';
     } else if (order.status === 300) {
-      statusText = strings('OrderStatuses.300');
       statusColor = '#cecece';
     } else if (order.status >= 400) {
-      statusText = strings('OrderStatuses.400');
       statusColor = '#E80000';
     }
 
@@ -524,7 +526,7 @@ class OrderHistory extends Component {
 
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
-        <Header title={'Order History'} />
+        <Header title={strings('OrderHistory.header')} />
         {mainList}
       </View>
     );
@@ -585,10 +587,13 @@ const mapStateToProps = ({ OrderHistory }) => {
     }
   });
 
-  const sectionedOrders = [
-    { title: strings('OrderHistory.active'), data: activeOrders },
-    { title: strings('OrderHistory.past'), data: inactiveOrders }
-  ];
+  const sectionedOrders = [];
+  if (activeOrders.length) {
+    sectionedOrders.push({ title: strings('OrderHistory.active'), data: activeOrders })
+  }
+  if (inactiveOrders.length) {
+    sectionedOrders.push({ title: strings('OrderHistory.past'), data: inactiveOrders })
+  }
 
   return {
     sectionedOrders,

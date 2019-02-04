@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Text, TouchableOpacity, View, Image, Dimensions } from 'react-native';
+import { TouchableOpacity, View, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { strings, isIPhoneX } from '../../Helpers.js';
+import { isIPhoneX } from '../../Helpers.js';
+import { strings, formatCurrency } from '../../i18n.js';
 import { AyezText } from '.';
 
 const window = Dimensions.get('window');
@@ -25,7 +26,7 @@ class BasketBlockButton extends PureComponent {
   }
 
   render() {
-    const { showBasketImage } = this.props;
+    const { showBasketImage, subtotal } = this.props;
     let isSmallScreen = false;
     if (window.height <= 580) {
       isSmallScreen = true;
@@ -87,7 +88,7 @@ class BasketBlockButton extends PureComponent {
               marginTop: 7
             }}
           >
-            <AyezText medium size={15} color={'white'}>My Basket</AyezText>
+            <AyezText medium size={15} color={'white'}>{strings('Common.myBasket')}</AyezText>
           </View>
 
           <View
@@ -114,11 +115,7 @@ class BasketBlockButton extends PureComponent {
               right: 12
             }}
           >
-            <AyezText medium color={'white'}>
-              {this.props.subtotal
-                ? `${this.props.subtotal.toFixed(2)} EGP`
-                : '0.00 EGP'}
-            </AyezText>
+            <AyezText medium color={'white'}>{formatCurrency(subtotal)}</AyezText>
 
           </View>
         </TouchableOpacity>
@@ -126,17 +123,6 @@ class BasketBlockButton extends PureComponent {
     );
   }
 }
-
-const styles = {
-  textStyle: {
-    color: '#fff',
-    fontSize: 12,
-    fontFamily: 'Poppins-Light',
-    fontWeight: '400',
-    letterSpacing: 0.3,
-    lineHeight: 16
-  }
-};
 
 const mapStateToProps = ({ Seller, Baskets }) => {
   const { subtotal, basket_quantity } = Baskets.baskets[Seller.id];

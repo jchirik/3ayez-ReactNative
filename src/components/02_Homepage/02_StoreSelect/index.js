@@ -31,7 +31,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  formatCurrency
 } from '../../../i18n.js';
 
 const star_icon = require('../../../../assets/images_v2/Common/star.png');
@@ -145,9 +146,9 @@ renderNoInternetConnection() {
         color: '#8E8E93',
         fontSize: 18,
         margin: 10
-      }}>{strings('StoreSelect.noInternet')}</AyezText>
+      }}>{strings('Common.noInternet')}</AyezText>
       <BlockButton
-        text={strings('StoreSelect.refresh')}
+        text={strings('Common.refresh')}
         color={'#666666'}
         style={{ width: 200 }}
         onPress={() => this.fetchNearbySellers()}
@@ -200,7 +201,7 @@ renderItem({ item, index }) {
           alignItems: 'center',
           marginTop: 4
         }}>
-          <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: item.minimum})}</AyezText>
+          <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: formatCurrency(item.minimum)})}</AyezText>
           <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.openHours', {start: item.hours.start, end: item.hours.end})}</AyezText>
         </View>
 
@@ -213,8 +214,7 @@ renderItem({ item, index }) {
           <View style={{ flexDirection: 'row' }}>
             <AyezText semibold style={{
               fontSize: 11,
-              color: '#2DD38F',
-              fontFamily: 'Poppins-SemiBold'
+              color: '#2DD38F'
             }}>{item.num_stars.toFixed(1)}</AyezText>
             <Image
               source={star_icon}

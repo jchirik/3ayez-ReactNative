@@ -8,7 +8,6 @@ import {
   View,
   Modal,
   SectionList,
-  Text,
   Platform,
   Animated,
   ActivityIndicator,

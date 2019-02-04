@@ -14,6 +14,10 @@ import {
   ADDRESS_AREA_ERROR
 } from './types';
 
+import {
+  strings
+} from '../i18n.js';
+
 export const resetAddressCreate = () => {
   return { type: ADDRESS_CREATE_RESET };
 };
@@ -35,8 +39,8 @@ const requestLocationPermission = async () => {
 	return await PermissionsAndroid.request(
 		PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
 		{
-      title: "3ayez Location Permission",
-      message: "3ayez needs your current location to find nearby stores"
+      title: strings('SystemPermissions.currentLocationTitle'),
+      message: strings('SystemPermissions.currentLocationMessage')
 		}
 	);
 };

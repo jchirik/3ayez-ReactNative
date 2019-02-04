@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import {
   AYEZ_GREEN
 } from '../../Helpers.js';
+import { AyezText } from '.';
 
 const SubtleButton = ({
   onPress,
@@ -18,11 +19,10 @@ const SubtleButton = ({
         styles.buttonStyle,
         style
       ]}>
-      <Text style={[
+      <AyezText light size={13} color={color} style={[
         styles.textStyle,
-        { color: color },
         textStyle
-      ]}>{text}</Text>
+      ]}>{text}</AyezText>
     </TouchableOpacity>
   );
 };
@@ -30,8 +30,6 @@ const SubtleButton = ({
 const styles = {
   textStyle: {
     padding: 16,
-    fontFamily: 'Poppins-Light',
-    fontSize: 13,
     textDecorationLine: 'underline'
   },
   buttonStyle: {

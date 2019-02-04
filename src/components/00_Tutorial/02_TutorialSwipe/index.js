@@ -98,7 +98,7 @@ class TutorialSwipe extends Component {
               />
               <AyezText semibold style={{
                 marginTop: 20
-              }}>Conveniently order online</AyezText>
+              }}>{strings('Tutorial.t1header')}</AyezText>
             </View>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <RTLImage
@@ -112,7 +112,7 @@ class TutorialSwipe extends Component {
               />
               <AyezText semibold style={{
                 marginTop: 20
-              }}>Shop easier</AyezText>
+              }}>{strings('Tutorial.t2header')}</AyezText>
             </View>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <RTLImage
@@ -126,12 +126,12 @@ class TutorialSwipe extends Component {
               />
               <AyezText semibold style={{
                 marginTop: 20
-              }}>Track your delivery in real time</AyezText>
+              }}>{strings('Tutorial.t3header')}</AyezText>
             </View>
         </IndicatorViewPager>
 
         <BlockButton
-          text={'REGISTER AS A CUSTOMER'}
+          text={strings('Tutorial.registerCustomer')}
           style={{
             marginTop: 10,
             marginLeft: 18,
@@ -146,7 +146,7 @@ class TutorialSwipe extends Component {
         />
 
         <BlockUnderButton
-          text={'CONTINUE AS GUEST'}
+          text={strings('Tutorial.continueGuest')}
           onPress={() => {
             this.props.authGuestLogin(() => Actions.addressCreate())
           }}

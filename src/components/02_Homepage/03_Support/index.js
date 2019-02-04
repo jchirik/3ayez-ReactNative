@@ -83,11 +83,10 @@ class Support extends Component {
           <AyezText semibold style={{
             color: '#2DD38F',
             fontSize: 11
-          }}>CONTACT 3AYEZ</AyezText>
+          }}>{strings('Support.contact3ayez')}</AyezText>
           <AyezText medium style={{
-            color: 'black',
             fontSize: 22
-          }}>Chat with us</AyezText>
+          }}>{strings('Support.chatWithUs')}</AyezText>
           <View style={{ flex: 1 }} />
 
           <View style={{
@@ -103,7 +102,7 @@ class Support extends Component {
             <AyezText semibold style={{
               color: 'white',
               fontSize: 10
-            }}>START</AyezText>
+            }}>{strings('Support.start')}</AyezText>
             <RTLImage
               source={start_side_arrow}
               style={{
@@ -154,7 +153,7 @@ class Support extends Component {
         <AyezText semibold style={{
           color: '#0094ff',
           fontSize: 10
-        }}>SETTINGS</AyezText>
+        }}>{strings('Support.settings')}</AyezText>
     </TouchableOpacity>
   )
   }
@@ -174,7 +173,7 @@ class Support extends Component {
               marginTop: 16,
               marginBottom: 16,
               marginRight: 20
-            }}>{item.title.en}</AyezText>
+            }}>{translate(item.title)}</AyezText>
 
             <RTLImage
               source={issue_side_arrow}
@@ -201,7 +200,7 @@ class Support extends Component {
           fontSize: 32,
           padding: 16,
           alignSelf: 'flex-start'
-        }}>Support</AyezText>
+        }}>{strings('Support.header')}</AyezText>
 
 
         <FlatList

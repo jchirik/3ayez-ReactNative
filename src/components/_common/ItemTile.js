@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { translate, strings } from '../../i18n.js';
+import { translate, strings, formatCurrency } from '../../i18n.js';
 import { addToBasket } from '../../actions';
 import colors from '../../theme/colors';
 import fonts from '../../theme/fonts';
-import { ItemIncrementer } from '.';
+import { AyezText, ItemIncrementer } from '.';
 import { Draggable } from './DragComponent';
 import FastImage from 'react-native-fast-image';
 
@@ -21,9 +21,6 @@ const PRICE_HEIGHT_RATIO = '30%';
 const NAME_HEIGHT_RATIO = '50%';
 const UNIT_HEIGHT_RATIO = '20%';
 
-const formatCurrency = (amount) => {
-  return `${amount.toFixed(2)} EGP`;
-}
 
 class ItemTile extends PureComponent {
   constructor(props) {
@@ -42,7 +39,8 @@ class ItemTile extends PureComponent {
 
     return (
       <View style={styles.savingsPercentContainer} pointerEvents={'none'}>
-        <Text style={styles.savingsPercent}>-{savingsPercent}%</Text>
+        <AyezText regular size={12} color={'white'}
+          style={styles.savingsPercent}>-{savingsPercent}%</AyezText>
       </View>
     );
   }
@@ -54,9 +52,10 @@ class ItemTile extends PureComponent {
 
     return (
       <View style={styles.maxPerBasketContainer} pointerEvents={'none'}>
-        <Text style={styles.maxPerBasketText}>
-          {strings('Item.limit')} {max_per_basket}
-        </Text>
+        <AyezText regular size={15} color={'white'}
+          style={styles.maxPerBasketText}>
+          {strings('Items.limit', { max_limit: max_per_basket })}
+        </AyezText>
       </View>
     );
   }
@@ -81,7 +80,7 @@ class ItemTile extends PureComponent {
         previousPriceText = formatCurrency(price);
         const savingsAmount = price - promotion_price;
         if (savingsAmount !== 0) {
-          savingsText = `Save ${formatCurrency(savingsAmount)}`;
+          savingsText = strings('Items.savingsText', {savings: formatCurrency(savingsAmount)});
         }
       }
     }
@@ -94,32 +93,34 @@ class ItemTile extends PureComponent {
     return (
       <View style={styles.textContainer}>
         <View style={styles.priceContainer}>
-          <Text
+          <AyezText
+            medium
             adjustsFontSizeToFit
             minimumFontScale={0.5}
             numberOfLines={1}
             style={styles.mainPrice}
           >
             {mainPriceText + ' '}
-          </Text>
+          </AyezText>
           {previousPriceText !== '' && (
-            <Text
+            <AyezText
+              medium
               adjustsFontSizeToFit
               minimumFontScale={0.5}
               numberOfLines={1}
               style={styles.previousPrice}
             >
               {previousPriceText}
-            </Text>
+            </AyezText>
           )}
         </View>
         <View style={styles.titleTextContianer}>
-          <Text numberOfLines={2} style={styles.titleText}>
+          <AyezText extralight numberOfLines={2} style={styles.titleText}>
             {translate(item)}
-          </Text>
+          </AyezText>
         </View>
 
-        <Text style={styles.unitText}>{item.incr + item.unit}</Text>
+        <AyezText regular style={styles.unitText}>{item.incr + item.unit}</AyezText>
       </View>
     );
   }
@@ -247,7 +248,6 @@ const styles = {
   titleText: {
     flex: 1,
     alignSelf: 'stretch',
-    fontFamily: fonts.poppinsExtraLight,
     opacity: 1,
     textAlign: 'left',
     fontSize: 12,
@@ -258,7 +258,6 @@ const styles = {
     flexWrap: 'nowrap',
     letterSpacing: 0,
     textAlign: 'left',
-    fontFamily: fonts.poppinsMedium,
     fontSize: 14,
     color: 'black'
   },
@@ -266,7 +265,6 @@ const styles = {
     letterSpacing: 0,
     fontSize: 14,
     alignSelf: 'stretch',
-    fontFamily: fonts.poppinsMedium,
     color: 'red',
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
@@ -306,16 +304,12 @@ const styles = {
   },
   savingsPercent: {
     textAlign: 'center',
-    fontSize: 11,
-    color: 'white',
     backgroundColor: 'transparent'
   },
   maxPerBasketText: {
     textAlign: 'center',
-    fontSize: 15,
     marginLeft: 8,
     marginRight: 8,
-    color: 'white',
     backgroundColor: 'transparent'
   },
   itemImageContainer: {

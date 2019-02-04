@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import {
   View,
-  Text,
   ImageBackground,
   BackHandler,
   TextInput,
@@ -15,8 +14,9 @@ import addProductGradientMask from '../../../assets/images_v2/add_product_gradie
 import closeCircle from '../../../assets/images_v2/close_add_product.png';
 import { strings } from '../../i18n.js';
 import styles, { TIPlaceholderColor } from './styles';
-import { Divider, AddButton } from '../07_ItemPage/_components';
+import { Divider } from '../07_ItemPage/_components';
 import { Incrementer } from '../_reusable';
+import { AyezText, BlockButton } from '../_common';
 import colors from '../../theme/colors';
 
 class AddProduct extends Component {
@@ -71,38 +71,38 @@ class AddProduct extends Component {
             source={addProductGradientMask}
           >
             <View style={styles.headerContainer}>
-              <Text style={styles.headerTitle}>
-                {strings('AddProduct.headerTitle')}
-              </Text>
-              <Text style={styles.headerMessage}>
-                {strings('AddProduct.headerMessage')}
-              </Text>
+              <AyezText semibold style={styles.headerTitle}>
+                {strings('CustomProduct.header')}
+              </AyezText>
+              <AyezText medium style={styles.headerMessage}>
+                {strings('CustomProduct.detail')}
+              </AyezText>
             </View>
           </ImageBackground>
           <Divider style={styles.divider} />
           <View style={styles.inputProductContainer}>
-            <Text style={styles.productNameInputLabel}>
-              {strings('AddProduct.productNameInputLabel')}
-            </Text>
+            <AyezText medium style={styles.productNameInputLabel}>
+              {strings('CustomProduct.productName')}
+            </AyezText>
             <TextInput
               style={styles.additionalInstructionsTextInputStyle}
               onChangeText={itemName => this.setState({ itemName })}
               value={this.state.itemName}
-              placeholder={strings('AddProduct.productNameInputPlaceholder')}
+              placeholder={strings('CustomProduct.productNamePlaceholder')}
               placeholderTextColor={TIPlaceholderColor}
             />
           </View>
           <Divider />
           <View style={styles.inputProductContainer}>
-            <Text style={styles.productDetailsInputLabel}>
-              {strings('AddProduct.productDescriptionInputLabel')}
-            </Text>
+            <AyezText medium style={styles.productDetailsInputLabel}>
+              {strings('CustomProduct.productDescription')}
+            </AyezText>
             <TextInput
               style={styles.additionalInstructionsTextInputStyle}
               onChangeText={details => this.setState({ details })}
               value={this.state.details}
               placeholder={strings(
-                'AddProduct.productDescriptionInputPlaceholder'
+                'CustomProduct.productDescriptionPlaceholder'
               )}
               placeholderTextColor={TIPlaceholderColor}
             />
@@ -115,8 +115,8 @@ class AddProduct extends Component {
 
           <SegmentedControlTab
             values={[
-              strings('AddProduct.unitTabHeader'),
-              strings('AddProduct.weightTabHeader')
+              strings('CustomProduct.unitTabHeader'),
+              strings('CustomProduct.weightTabHeader')
             ]}
             tabsContainerStyle={styles.tabContainerStyle}
             activeTabStyle={styles.activeTabStyle}
@@ -169,8 +169,8 @@ class AddProduct extends Component {
                 });
               }}
             />
-            <AddButton
-              text={strings('AddProduct.addButtonLabel')}
+            <BlockButton
+              text={strings('CustomProduct.addButtonLabel')}
               style={styles.addButton}
               textStyle={styles.addButtonTextStyle}
               onPress={() => {}}

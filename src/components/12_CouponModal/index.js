@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   TextInput,
    Image,
    ActivityIndicator,
@@ -34,7 +33,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  formatCurrency
 } from '../../i18n.js';
 
 class CouponModal extends Component {
@@ -62,12 +62,12 @@ class CouponModal extends Component {
 
   renderCouponError() {
     const { error } = this.props;
-    let error_description = 'Oops, invalid coupon!'
+    let error_description = strings('CouponModal.invalid')
 
     if (error === 'FIRSTTIMEONLY') {
-      error_description = 'For new users only';
+      error_description = strings('CouponModal.firstTimeModal');
     } else if (error === 'ALREADYUSED') {
-      error_description = 'Already used';
+      error_description = strings('CouponModal.alreadyUsed');
     }
 
     return (
@@ -96,14 +96,14 @@ class CouponModal extends Component {
           textAlign: 'center',
           fontSize: 15,
           color: '#8E8E93'
-        }}>Please revise the coupon entered and continue</AyezText>
+        }}>{strings('CouponModal.couponError')}</AyezText>
         <BlockButton
-          text={'Reenter Coupon'}
+          text={strings('CouponModal.reenterCoupon')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
           onPress={this.resetCoupon.bind(this)}
           />
         <SubtleButton
-          text={'Close'}
+          text={strings('Common.close')}
           onPress={()=> Actions.pop()}
         />
       </View>
@@ -129,13 +129,13 @@ class CouponModal extends Component {
           marginTop: 40,
           textAlign: 'center',
           fontSize: 18
-        }}>Submit Coupon</AyezText>
+        }}>{strings('CouponModal.header')}</AyezText>
         <AyezText light style={{
           marginTop: 14,
           textAlign: 'center',
           fontSize: 15,
           color: '#8E8E93'
-        }}>Apply coupon code for discounts</AyezText>
+        }}>{strings('CouponModal.description')}</AyezText>
 
         <View style={{ flex: 1 }} />
 
@@ -150,11 +150,11 @@ class CouponModal extends Component {
             value={this.state.code}
             onChangeText={(code) => this.setState({ code })}
             onSubmitEditing={this.applyCoupon.bind(this)}
-            placeholder={'write your coupon code here'}
+            placeholder={strings('CouponModal.placeholder')}
             editable={!this.props.is_loading}
           />
           <BlockButton
-            text={'SUBMIT'}
+            text={strings('Common.submit')}
             style={{ marginBottom: 24 }}
             onPress={this.applyCoupon.bind(this)}
             />
@@ -176,7 +176,7 @@ class CouponModal extends Component {
           marginTop: 24,
           textAlign: 'center',
           fontSize: 18
-        }}>{coupon.code} accepted!</AyezText>
+        }}>{strings('CouponModal.accepted', {code: coupon.code})}</AyezText>
         <AyezText light style={{
           marginTop: 10,
           marginLeft: 48,
@@ -184,14 +184,14 @@ class CouponModal extends Component {
           textAlign: 'center',
           fontSize: 15,
           color: '#8E8E93'
-        }}>{coupon.amount.toFixed(2)} EGP off your order</AyezText>
+        }}>{strings('CouponModal.couponSavings',{ amount: formatCurrency(coupon.amount) })}</AyezText>
         <BlockButton
-          text={'OK'}
+          text={strings('Common.OK')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
           onPress={()=> Actions.pop()}
           />
         <SubtleButton
-          text={'Remove Coupon'}
+          text={strings('CouponModal.removeCoupon')}
           onPress={this.resetCoupon.bind(this)}
         />
       </View>

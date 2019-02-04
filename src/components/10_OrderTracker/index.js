@@ -135,7 +135,7 @@ class OrderTracker extends Component {
       return (
         <BlockButton
           onPress={() => Actions.driverTracker({ driver_id })}
-          text={'TRACK ORDER'}
+          text={strings('OrderTracker.trackDelivery')}
           style={{
             marginTop: 20,
             marginBottom: 20,
@@ -190,11 +190,11 @@ class OrderTracker extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
           <Header
-            title={'Track Your Order'}
+            title={strings('OrderTracker.header')}
             onBackButtonPress={this.onBackPress.bind(this)}
             blackStyle
             rightButton={{
-              text: 'Summary',
+              text: strings('Receipt.summary'),
               image_source: order_summary_icon,
               onPress: () => Actions.orderSummary()
             }}
@@ -204,7 +204,7 @@ class OrderTracker extends Component {
             <StatusLog status_log={status_log} seller={seller} />
             <BlockButton
               onPress={() => Actions.orderProblem()}
-              text={'ANY PROBLEM?'}
+              text={strings('OrderTracker.problem')}
               color={'black'}
               style={{
                 marginTop: 20,

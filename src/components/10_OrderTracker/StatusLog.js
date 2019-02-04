@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, View, ActivityIndicator } from 'react-native';
+import { Image, View, ActivityIndicator } from 'react-native';
 import {
   AYEZ_GREEN
 } from '../../Helpers.js';
@@ -152,13 +152,13 @@ const StatusLog = ({
     }
 
     if (status === 50) {
-      status_text = `${translate(seller.display_name)} confirmed your order`
+      status_text = strings('OrderStatusLog.confirmedOrder', { seller_name: translate(seller.display_name) })
     } else if (status === 90) {
-      status_text = `${translate(seller.display_name)} finished preparing your order`
+      status_text = strings('OrderStatusLog.preparedOrder', { seller_name: translate(seller.display_name) })
     } else if (status === 100) {
-      status_text = `Driver left the store with your order`
+      status_text = strings('OrderStatusLog.deliveringOrder')
     } else if (status === 200) {
-      status_text = `Order succesfully delivered`
+      status_text = strings('OrderStatusLog.completedOrder')
     }
 
     return (

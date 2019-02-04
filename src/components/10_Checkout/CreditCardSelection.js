@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Text,
   TouchableOpacity,
   View,
   Modal,
@@ -188,7 +187,7 @@ class CreditCardSelection extends Component {
             padding: 6,
             paddingRight: 10,
             paddingLeft: 10
-          }}>SAVED CARDS</AyezText>
+          }}>{strings('CreditCardSelection.header')}</AyezText>
 
           { cardComponents }
 
@@ -197,12 +196,9 @@ class CreditCardSelection extends Component {
               this.onClose()
               Actions.creditCardCreate()
             }}
-            text={'ADD NEW CARD'}
+            text={strings('CreditCardSelection.addNewCard')}
             color={'#3B7A60'}
             style={{ marginTop: 10, marginBottom: 10 }}
-            textStyle={{
-              fontFamily: 'Poppins-Regular'
-            }}
             />
         </Animated.View>
 

@@ -29,7 +29,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT_MEDIUM
 } from '../../../i18n.js';
 
 // import { Circle } from 'react-native-progress';
@@ -128,7 +129,7 @@ class AddressDetails extends Component {
         justifyContent: 'flex-start',
         alignItems: 'center'
       }}>
-        <AyezText bold size={32}>Delivering to:</AyezText>
+        <AyezText bold size={32}>{strings('AddressCreate.confirmDeliveringTo')}</AyezText>
         { loadingComponent }
       </View>
     )
@@ -143,7 +144,7 @@ class AddressDetails extends Component {
           alignItems: 'center',
         }}>
           <AyezText semibold size={13}>
-            Region:
+            {strings('Address.region')}
           </AyezText>
           <AyezText semibold size={13} style={{
             flex: 1,
@@ -182,8 +183,8 @@ class AddressDetails extends Component {
             alignItems: 'stretch',
             paddingLeft: 12,
             fontSize: 14,
-            fontFamily: 'Poppins-Medium',
-            color: ('black')
+            fontFamily: TEXT_INPUT_FONT_MEDIUM,
+            color: 'black'
           }}
           placeholder={required ? 'required' : 'optional'}
           placeholderTextColor={'#8E8E93'}
@@ -204,14 +205,14 @@ class AddressDetails extends Component {
           regular
           color={'red'}
           style={{ textAlign: 'center' }}
-          >Please fill all information</AyezText>
+          >{strings('AddressCreate.confirmMissingInformation')}</AyezText>
       )
     } else if (error === 'BAD_CONNECTION') {
       <AyezText
       regular
       color={'red'}
       style={{ textAlign: 'center' }}
-      >Bad internet connection</AyezText>
+      >{strings('Common.noInternet')}</AyezText>
     }
     return null;
   }
@@ -222,7 +223,7 @@ class AddressDetails extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'ENTER ADDRESS'}/>
+        <Header title={strings('AddressCreate.confirmHeader')}/>
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : null}
@@ -234,16 +235,16 @@ class AddressDetails extends Component {
 
             <View style={{ height: 20 }} />
 
-            { this.renderInputField('Street:', 'street') }
-            { this.renderInputField('Building no.:', 'building') }
-            { this.renderInputField('Apt no.:', 'apt') }
-            { this.renderInputField('Instructions:', 'notes', false, true) }
+            { this.renderInputField(strings('Address.street'), 'street') }
+            { this.renderInputField(strings('Address.building'), 'building') }
+            { this.renderInputField(strings('Address.apt'), 'apt') }
+            { this.renderInputField(strings('Address.instructions'), 'notes', false, true) }
 
             <View style={{ height: 20 }} />
 
             {this.renderError() }
             <BlockButton
-              text={'CONFIRM'}
+              text={strings('Common.confirm')}
               style={{
                 marginTop: 4,
                 marginBottom: 24,
@@ -278,8 +279,6 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate, AddressArea }) =
   } = AddressCreate;
 
   const area_loading = AddressArea.is_loading;
-
-  console.log(AddressReverseSearch);
 
   return {
     location,

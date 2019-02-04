@@ -7,15 +7,19 @@ import { Actions } from 'react-native-router-flux';
 import {
   View,
   FlatList,
-  Text,
   Image,
   InteractionManager,
   findNodeHandle,
   TouchableOpacity
 } from 'react-native';
-import {} from '../../actions';
 import { strings, translate } from '../../i18n.js';
-import { AyezText, ItemTile, BackButton, AnimatedCheckmarkOverlay, BasketBlockButton } from '../_common';
+import {
+  AyezText,
+  ItemTile,
+  BackButton,
+  AnimatedCheckmarkOverlay,
+  BasketBlockButton
+} from '../_common';
 import { DragContainer } from '../_common/DragComponent';
 
 
@@ -41,9 +45,9 @@ class StoreShelf extends Component {
   _renderEmptyView() {
     return (
       <View style={styles.emptyComponentContainer}>
-        <Text style={styles.emptyComponentText}>
-          {strings('StoreSubcategories.noItemsAvailable')}
-        </Text>
+        <AyezText regular style={styles.emptyComponentText}>
+          {strings('Common.noResults')}
+        </AyezText>
       </View>
     );
   }
@@ -77,8 +81,8 @@ class StoreShelf extends Component {
             {translate(title)}
           </AyezText>
           <View style={{ flexDirection: 'row' }}>
-            <AyezText regular size={13}>{strings('StoreSubcategories.backTo')}</AyezText>
-            <AyezText regular size={13} color={'#0094ff'} style={{ marginLeft: 4 }}>{translate(parent_title)}</AyezText>
+            <AyezText regular size={13}>{strings('StoreShelf.backTo')}</AyezText>
+            <AyezText regular size={13} color={'#0094ff'} style={{ marginLeft: 4 }}>{parent_title}</AyezText>
           </View>
         </View>
         {this._renderMagnifyingImage()}

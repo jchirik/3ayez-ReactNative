@@ -48,7 +48,8 @@ import {
   strings,
   translate,
   formatTimestamp,
-  formatDay
+  formatDay,
+  formatCurrency
 } from '../../i18n.js';
 
 const cash_icon = require('../../../assets/images_v2/Payment/cash.png');
@@ -135,7 +136,7 @@ class Checkout extends Component {
 
     const { payment_method } = this.props;
 
-    let payment_text = 'Cash';
+    let payment_text = strings('PaymentMethod.cash');
     if (payment_method.type === 'CREDIT') {
       payment_text = `**** ${payment_method.last4}`;
     }
@@ -182,7 +183,7 @@ class Checkout extends Component {
         <AyezText regular style={{
           fontSize: 16,
           color: '#353333'
-        }}>Cash</AyezText>
+        }}>{strings('PaymentMethod.cash')}</AyezText>
         <View style={{ flex: 1 }} />
         {(payment_method.type === 'CASH') ? selectedCircle : unselectedCircle}
       </TouchableOpacity>
@@ -213,14 +214,14 @@ class Checkout extends Component {
         <AyezText regular style={{
           fontSize: 16,
           color: '#353333'
-        }}>Credit Card</AyezText>
+        }}>{strings('PaymentMethod.creditCard')}</AyezText>
         <View style={{ flex: 1 }} />
         {(payment_method.type === 'CREDIT') ? selectedCircle : unselectedCircle}
       </TouchableOpacity>
     );
     return (
       <View>
-        <Row disabled title={'Payment Method :'}>
+        <Row disabled title={strings('Checkout.paymentMethodField')}>
           <Image
             source={payment_image}
             style={{
@@ -251,13 +252,13 @@ class Checkout extends Component {
 
     return (
       <View>
-        <Row disabled title={'Tip: '}>
+        <Row disabled title={strings('Checkout.tipField')}>
           <View>
 
           <AyezText regular style={{
             fontSize: 12,
             color: '#ffa30f'
-          }}>Smart tip suggestions help you round your total</AyezText>
+          }}>{strings('Checkout.smartTipSuggestions')}</AyezText>
           <FlatList
             data={tipData}
             horizontal={true}
@@ -281,7 +282,7 @@ class Checkout extends Component {
                   <AyezText light style={{
                     fontSize: 15,
                     color: color
-                  }}>{item.toFixed(2)} EGP</AyezText>
+                  }}>{formatCurrency(item)}</AyezText>
                 </TouchableOpacity>
               )
             }}
@@ -297,7 +298,7 @@ class Checkout extends Component {
     const { coupon } = this.props;
     if (!coupon) { return null; }
     return (
-      <ReceiptRow title={`Coupon (${coupon.code})`} cost={coupon.amount} color={'#D33B2D'} />
+      <ReceiptRow title={strings('Receipt.coupon', { code: coupon.code })} cost={coupon.amount} color={'#D33B2D'} />
     )
   }
 
@@ -305,14 +306,14 @@ class Checkout extends Component {
   renderNotes() {
     const { notes } = this.props;
 
-    let notesButtonText = 'Edit'
-    if (!notes) { notesButtonText = 'Add' }
+    let notesButtonText = strings('Common.edit')
+    if (!notes) { notesButtonText = strings('Common.add') }
 
     return (
       <View>
         <Row
           onPress={() => Actions.checkoutNotesDetail()}
-          title={'Additional Notes :'}>
+          title={strings('Checkout.additionalNotesField')}>
           <AyezText regular style={{
             fontSize: 16,
             color: '#0094ff'
@@ -384,23 +385,22 @@ class Checkout extends Component {
         color: 'black',
         marginTop: STATUS_BAR_HEIGHT + 60,
         marginLeft: 20
-      }}>Checkout</AyezText>
+      }}>{strings('Checkout.header')}</AyezText>
 
       <ScrollView style={{ flex: 1 }}>
 
          <View style={{ height: 18 }} />
 
-        <Row disabled title={'Address :'}>
+        <Row disabled title={strings('Checkout.addressField')}>
           <AyezText regular
           style={{
-            fontSize: 16,
-            color: 'black',
-          }}>{address.street}, Building {address.building}, Apt {address.apt}</AyezText>
+            fontSize: 16
+          }}>{strings('Address.singleLine', {street: address.street, building: address.building, apt: address.apt })}</AyezText>
         </Row>
 
         <View style={{ height: 18 }} />
 
-        <Row disabled title={'Delivery Time :'}>
+        <Row disabled title={strings('Checkout.deliveryTimeField')}>
           <AyezText regular style={{
             fontSize: 16,
             color: 'black',
@@ -430,15 +430,15 @@ class Checkout extends Component {
           marginTop: 20,
           marginLeft: 20,
           marginBottom: 10
-        }}>Summary</AyezText>
+        }}>{strings('Receipt.summary')}</AyezText>
 
-        <ReceiptRow title={'Subtotal'} cost={subtotal} />
-        <ReceiptRow title={'Delivery Cost'} cost={delivery_fee} />
-        <ReceiptRow title={'Tip'} cost={tip} />
+        <ReceiptRow title={strings('Receipt.subtotal')} cost={subtotal} />
+        <ReceiptRow title={strings('Receipt.deliveryFee')} cost={delivery_fee} />
+        <ReceiptRow title={strings('Receipt.tip')} cost={tip} />
         { this.renderCouponReceiptRow() }
 
         <View style={{ marginTop: 6, marginBottom: 6, height: 1, backgroundColor: '#eeeeee' }} />
-        <ReceiptRow title={'Total'} cost={total} />
+        <ReceiptRow title={strings('Receipt.total')} cost={total} />
 
 
 
@@ -450,7 +450,7 @@ class Checkout extends Component {
 
       <View style={styles.submitButtonContainer}>
         <BlockButton
-          text={'SEND ORDER'}
+          text={strings('Checkout.sendOrder')}
           onPress={this.submitOrder.bind(this)}
         />
       </View>

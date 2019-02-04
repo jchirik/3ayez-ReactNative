@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import {
   AYEZ_GREEN
 } from '../../Helpers.js';
+import { AyezText } from '.';
 
 const BlockButton = ({
   onPress,
@@ -32,20 +33,15 @@ const BlockButton = ({
       activeOpacity={0.5}
       disabled={deactivated}
     >
-      <Text style={[styles.textStyle, { color: outline ? color : 'white' }, textStyle]}>
+      <AyezText bold style={[{ alignSelf: 'center', color: outline ? color : 'white' }, textStyle]}>
         {text}
-      </Text>
+      </AyezText>
     </TouchableOpacity>
     </View>
   );
 };
 
 const styles = {
-  textStyle: {
-    alignSelf: 'center',
-    fontSize: 14,
-    fontFamily: 'Poppins-Bold'
-  },
   buttonStyle: {
     height: 42,
     // alignSelf: 'stretch',

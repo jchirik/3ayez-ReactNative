@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {
   View,
   FlatList,
-  Text,
   Platform,
   Animated,
   Easing,
@@ -14,6 +13,10 @@ import {
   Image,
   BackHandler
 } from 'react-native';
+
+import {
+  AyezText
+} from '../../_common';
 
 // import {
 // } from '../../../actions';
@@ -34,9 +37,9 @@ class Discovery extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <AyezText regular style={{ flex: 1 }}>
         <Text>Discovery</Text>
-      </View>
+      </AyezText>
     );
   }
 }

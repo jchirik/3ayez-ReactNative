@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {
   View,
   FlatList,
-  Text,
   Platform,
   Animated,
   Easing,
@@ -22,6 +21,11 @@ import {
   translate
 } from '../../../i18n.js';
 
+import {
+  AyezText
+} from '../../_common';
+
+
 
 class UniversalSearch extends Component {
 
@@ -35,7 +39,7 @@ class UniversalSearch extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text>Discovery</Text>
+        <AyezText regular>Discovery</AyezText>
       </View>
     );
   }

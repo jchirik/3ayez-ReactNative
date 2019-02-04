@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -52,11 +51,11 @@ class OrderProblem extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
-        <Header title='Order Problem' blackStyle />
+        <Header title={strings('OrderProblem.header')} blackStyle />
 
         <BlockButton
           onPress={() => Actions.supportChat()}
-          text={'CONTACT SUPPORT'}
+          text={strings('OrderProblem.contactSupport')}
           style={{
             marginTop: 20,
             marginLeft: 30,
@@ -66,7 +65,7 @@ class OrderProblem extends Component {
         { (this.props.status < 100) ? (
           <BlockButton
             onPress={() => this.setState({ cancelConfirm: true })}
-            text={'CANCEL YOUR ORDER'}
+            text={strings('OrderProblem.cancelOrder')}
             color={'#E64E47'}
             style={{
               marginTop: 10,
@@ -80,11 +79,11 @@ class OrderProblem extends Component {
           <BottomChoiceSelection
             isVisible={this.state.cancelConfirm}
             onClose={() => this.setState({ cancelConfirm: false })}
-            title='Are you sure you want to cancel?'
+            title={strings('OrderProblem.cancelOrderModal')}
             backgroundColor='#E64E47'
             buttons={[
-              { text: 'Yes, sure', action: () => this.props.markOrderCancelled(this.props.id) },
-              { text: 'No, cancel', action: () => console.log('closing') }
+              { text: strings('OrderProblem.cancelOrderConfirm'), action: () => this.props.markOrderCancelled(this.props.id) },
+              { text: strings('OrderProblem.cancelOrderCancel'), action: () => console.log('closing') }
             ]}
           />
       </View>

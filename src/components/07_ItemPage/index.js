@@ -4,7 +4,6 @@ import { format } from '../../utils/string';
 import {
   View,
   ScrollView,
-  Text,
   Image,
   TextInput,
   TouchableOpacity,
@@ -48,9 +47,7 @@ class ItemPage extends Component {
     this.state = {
       ripeness: 0,
       requires_call: false,
-      instructions: '',
-
-      showedMoreThanSixItemsModal: false
+      instructions: ''
     };
   }
 
@@ -76,7 +73,7 @@ class ItemPage extends Component {
     this.props.saveItemSpecialRequests(item.upc, seller.id, {
       ripeness, requires_call, instructions
     });
-    Actions.pop()
+    Actions.pop();
   }
 
   componentWillUnmount() {
@@ -95,16 +92,16 @@ class ItemPage extends Component {
     this.props.addToBasket(this.props.item, this.props.seller.id);
   };
 
-  _showDeliveryDelayModal() {
-    return (
-      <Modal
-        callback={() => this.setState({ showedMoreThanSixItemsModal: true })}
-        image={images.flyingPersonImg}
-        text={strings('ItemView.moreThanSixProducts')}
-        confirmation={strings('ItemView.moreThanSixProductsConfirmation')}
-      />
-    );
-  }
+  // _showDeliveryDelayModal() {
+  //   return (
+  //     <Modal
+  //       callback={() => this.setState({ showedMoreThanSixItemsModal: true })}
+  //       image={images.flyingPersonImg}
+  //       text={strings('ItemView.moreThanSixProducts')}
+  //       confirmation={strings('ItemView.moreThanSixProductsConfirmation')}
+  //     />
+  //   );
+  // }
 
   _isProduce(item) {
     if (
@@ -126,17 +123,15 @@ class ItemPage extends Component {
     const { image_url, price, promotion_price } = item;
     const foundItem = items_array.find(w_item => w_item.upc === item.upc);
     const quantity = foundItem ? foundItem.quantity : 0;
+
+
+      // {!this.state.showedMoreThanSixItemsModal &&
+      //   items_array.reduce((total, item) => {
+      //     return total + (item.quantity ? item.quantity : 0);
+      //   }, 0) === SHOW_DELAY_DELIVERY_MODAL_QUANTITY &&
+      //   this._showDeliveryDelayModal()}
     return (
       <View style={styles.container}>
-        {!this.state.showedMoreThanSixItemsModal &&
-          items_array.reduce((total, item) => {
-            return total + (item.quantity ? item.quantity : 0);
-          }, 0) === SHOW_DELAY_DELIVERY_MODAL_QUANTITY &&
-          this._showDeliveryDelayModal()}
-
-
-
-
         <ScrollView style={{ flex: 1, paddingTop: 48, paddingLeft: 24, paddingRight: 24 }}>
             <TouchableOpacity
               onPress={() => Actions.itemImageView({ imageUrl: image_url })}
@@ -159,7 +154,7 @@ class ItemPage extends Component {
 
           {this._isProduce(item) ? (
             <View>
-              <AyezText medium>{strings('ItemView.selectProductRipe')}</AyezText>
+              <AyezText medium>{strings('ItemView.selectProduceRipeness')}</AyezText>
               <RipenessSlider
                 onValueChange={(value) => this.setState({ ripeness: value })}
                 value={this.state.ripeness}
@@ -168,16 +163,14 @@ class ItemPage extends Component {
             </View>
           ) : null }
 
-
-
           <Row
             style={{ paddingLeft: 0, paddingRight: 0 }}
             onPress={() => Actions.additionalNotes({
-              title: 'Item instructions',
+              title: strings('ItemView.additionalInstructionsHeader'),
               initText: this.state.instructions,
               onSubmit: (text) => this.setState({ instructions: text })
             })}
-            title={'Additional Instructions :'}>
+            title={strings('ItemView.additionalInstructionsField')}>
             {this.state.instructions ? (
               <AyezText regular style={{
                 fontSize: 15,
@@ -186,7 +179,7 @@ class ItemPage extends Component {
               <AyezText regular style={{
                 fontSize: 15,
                 color: '#cecece'
-              }}>Add notes</AyezText>
+              }}>{strings('ItemView.instructionsPlaceholder')}</AyezText>
             )}
           </Row>
 
@@ -195,7 +188,7 @@ class ItemPage extends Component {
           <Row
             disabled
             style={{ paddingLeft: 0, paddingRight: 0 }}
-            title={'Call me when selecting this product :'}>
+            title={strings('ItemView.callMe')}>
             <Switch
               style={{ marginBottom: 5 }}
               value={this.state.requires_call}

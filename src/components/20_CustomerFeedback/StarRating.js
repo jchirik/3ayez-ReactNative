@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Image, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, TouchableWithoutFeedback, View } from 'react-native';
 
 const starIcon = require('../../../assets/images_v2/Common/star.png');
 

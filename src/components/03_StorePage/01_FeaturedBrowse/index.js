@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
    Image,
    FlatList,
    ActivityIndicator,
@@ -70,7 +69,7 @@ class FeaturedBrowse extends Component {
   goToShelf(row) {
     Actions.storeShelf({
       title: row.name,
-      parent_title: { ar: 'Store Home', en: 'Store Home'},
+      parent_title: strings('StoreHome.featured'),
       items: row.items,
       jumpIndex: 0
     });
@@ -86,7 +85,7 @@ class FeaturedBrowse extends Component {
         <View style={{ width: 100, height: 100, borderRadius: 50,
           backgroundColor: AYEZ_GREEN, justifyContent: 'center', alignItems: 'center' }}>
             <AyezText medium color={'white'} size={16}>
-              {'see all'}
+              {strings('Common.seeAll')}
             </AyezText>
         </View>
       </TouchableOpacity>
@@ -101,9 +100,9 @@ class FeaturedBrowse extends Component {
             {translate(item.name)}
           </AyezText>
           <TouchableOpacity onPress={() => this.goToShelf(item)}>
-            <Text style={styles.viewCorridorTextStyle}>
-              {strings('StoreHome.viewMore')} >
-            </Text>
+            <AyezText light color={'#62DEAB'} style={{ marginRight: 20 }}>
+              {strings('Common.viewMore')} >
+            </AyezText>
           </TouchableOpacity>
         </View>
         {this.renderSeparatorView()}
@@ -125,27 +124,27 @@ class FeaturedBrowse extends Component {
   }
 
 
-    renderEndOfScroll() {
-      return (
-        <View style={{ alignItems: 'center' }}>
-          <Image source={endOfScrollImage} style={styles.endOfScrollImageStyle} />
-          <Text style={styles.typeNewProductTextStyle}>
-            {strings('StoreHome.writeYourProduct')}
-          </Text>
-          <Text style={styles.typeNewProductSubTextStyle}>
-            {strings('StoreHome.writeYourProductSubTitle')}
-          </Text>
-          <TouchableOpacity
-            style={[
-              styles.searchBarSectionStyle,
-              { marginBottom: 65, marginHorizontal: '14%', padding: 5 }
-            ]}
-            onPress={Actions.addProduct}
-          >
-          </TouchableOpacity>
-        </View>
-      );
-    }
+    // renderEndOfScroll() {
+    //   return (
+    //     <View style={{ alignItems: 'center' }}>
+    //       <Image source={endOfScrollImage} style={styles.endOfScrollImageStyle} />
+    //       <Text style={styles.typeNewProductTextStyle}>
+    //         {strings('StoreHome.writeYourProduct')}
+    //       </Text>
+    //       <Text style={styles.typeNewProductSubTextStyle}>
+    //         {strings('StoreHome.writeYourProductSubTitle')}
+    //       </Text>
+    //       <TouchableOpacity
+    //         style={[
+    //           styles.searchBarSectionStyle,
+    //           { marginBottom: 65, marginHorizontal: '14%', padding: 5 }
+    //         ]}
+    //         onPress={Actions.addProduct}
+    //       >
+    //       </TouchableOpacity>
+    //     </View>
+    //   );
+    // }
 
 
   renderEmptyFeatured() {
@@ -158,7 +157,7 @@ class FeaturedBrowse extends Component {
 
     return (
         <AyezText medium style={{ marginTop: 100, marginBottom: 100, textAlign: 'center' }}>
-          {strings('StoreSubcategories.noItemsAvailable')}
+          {strings('Common.noResults')}
         </AyezText>
     )
   }

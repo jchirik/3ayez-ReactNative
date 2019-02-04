@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import styles from './styles';
+
+import {
+  AyezText
+} from '../../../_common';
 
 export default ({ price, promotionPrice }) => {
   if (
@@ -19,7 +23,7 @@ export default ({ price, promotionPrice }) => {
 
   return (
     <View style={styles.savingsPercentContainer} pointerEvents={'none'}>
-      <Text style={styles.savingsPercent}>-{savingsPercent}%</Text>
+      <AyezText regular style={styles.savingsPercent}>-{savingsPercent}%</AyezText>
     </View>
   );
 };

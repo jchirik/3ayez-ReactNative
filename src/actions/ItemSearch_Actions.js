@@ -6,6 +6,7 @@ import algoliasearch from 'algoliasearch/reactnative';
 import firebase from 'react-native-firebase';
 
 import { cleanAlgoliaItems } from '../Helpers';
+import { strings } from '../i18n';
 import { Actions } from 'react-native-router-flux';
 
 import {
@@ -74,7 +75,7 @@ export const onSelectSearchSubcategory = (seller_id, subcategory) => {
       console.log('itemResults', itemResults)
         Actions.storeShelf({
           title: subcategory.name,
-          parent_title: { en: 'Search', ar: 'Search' },
+          parent_title: strings('Common.search'),
           items: itemResults,
           jumpIndex: 0
         });

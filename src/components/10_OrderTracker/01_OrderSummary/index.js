@@ -1,7 +1,6 @@
-
+OrderSummary
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TouchableOpacity,
   Image,
@@ -17,6 +16,7 @@ import { Actions } from 'react-native-router-flux';
 
 import {
   paymentIcon,
+  formatStatusText,
   AYEZ_GREEN
 } from '../../../Helpers.js';
 
@@ -24,7 +24,8 @@ import {
   strings,
   translate,
   formatTimestamp,
-  formatDay
+  formatDay,
+  formatCurrency
 } from '../../../i18n.js';
 
 
@@ -45,7 +46,7 @@ class OrderSummary extends Component {
   renderOrderNumber() {
     const { order_number } = this.props;
     return (
-      <AyezText bold size={30}>Order #{order_number}</AyezText>
+      <AyezText bold size={30}>{strings('Receipt.orderNumber', { order_number })}</AyezText>
     )
   }
 
@@ -65,25 +66,9 @@ class OrderSummary extends Component {
       is_timeslot_ongoing
     } = this.props;
 
-    let statusText = '-'
-    if (status === 0) {
-      if (is_timeslot_ongoing) { statusText = 'Awaiting Store' }
-      else if (Date.now() < timeslot.start) { statusText = 'Scheduled' }
-    } else if (status <= 50) {
-      statusText = 'Preparing in Store';
-    } else if (status < 100) {
-      statusText = 'Assigning Driver';
-    } else if (status < 200) {
-      statusText = 'On the way';
-    } else if (status === 200) {
-      statusText = 'Complete';
-    } else if (status === 300) {
-      statusText = 'Cancelled';
-    } else if (status === 400) {
-      statusText = 'Rejected by Store';
-    }
+    const statusText = formatStatusText(status, is_timeslot_ongoing, timeslot);
     return (
-      <AyezText medium>Status: {statusText}</AyezText>
+      <AyezText medium>{strings('OrderSummary.statusField')} {statusText}</AyezText>
     )
   }
 
@@ -93,12 +78,11 @@ class OrderSummary extends Component {
     const { street, building, floor, apt, area, region } = this.props.address;
     return (
       <SummarySection>
-        <AyezText regular color={AYEZ_GREEN} size={15}>ADDRESS</AyezText>
+        <AyezText regular color={AYEZ_GREEN} size={15}>{strings('OrderSummary.addressHeader')}</AyezText>
         <AyezText medium>{street}</AyezText>
         <AyezText medium>{translate(area)} {region}</AyezText>
-        <AyezText medium>Building {building}</AyezText>
-        <AyezText medium>Floor {floor}</AyezText>
-        <AyezText medium>Apt {apt}</AyezText>
+        <AyezText medium>{strings('Address.building')} {building}</AyezText>
+        <AyezText medium>{strings('Address.apt')} {apt}</AyezText>
       </SummarySection>
     );
   }
@@ -117,7 +101,7 @@ class OrderSummary extends Component {
     }
     return (
       <SummarySection>
-        <AyezText regular color={AYEZ_GREEN} size={15}>DELIVERY TIME</AyezText>
+        <AyezText regular color={AYEZ_GREEN} size={15}>{strings('OrderSummary.deliveryTimeHeader')}</AyezText>
         <AyezText medium>{dateString}</AyezText>
         <AyezText medium>{timeString}</AyezText>
       </SummarySection>
@@ -130,7 +114,7 @@ class OrderSummary extends Component {
 
     if (!payment_method) { return null; }
 
-    let payment_text = 'Cash';
+    let payment_text = strings('PaymentMethod.cash');
     if (payment_method.type === 'CREDIT') {
       payment_text = `**** ${payment_method.last4}`;
     }
@@ -138,9 +122,9 @@ class OrderSummary extends Component {
 
     return (
       <SummarySection>
-        <AyezText regular color={AYEZ_GREEN} size={15}>PAYMENT</AyezText>
+        <AyezText regular color={AYEZ_GREEN} size={15}>{strings('OrderSummary.paymentHeader')}</AyezText>
         <View>
-          <AyezText medium>{(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</AyezText>
+          <AyezText medium>{formatCurrency(auto_total)}</AyezText>
           <View style={{ flexDirection: 'row' }}>
             <Image
               source={payment_image}
@@ -172,7 +156,7 @@ class OrderSummary extends Component {
     ));
     return (
       <SummarySection>
-        <AyezText regular color={AYEZ_GREEN} size={15}>ORDER ITEMS</AyezText>
+        <AyezText regular color={AYEZ_GREEN} size={15}>{strings('OrderSummary.orderItemsHeader')}</AyezText>
         { basketItems }
       </SummarySection>
     );
@@ -190,13 +174,15 @@ class OrderSummary extends Component {
 
     return (
       <SummarySection>
-        <AyezText regular color={AYEZ_GREEN} size={15}>SUMMARY</AyezText>
+        <AyezText regular color={AYEZ_GREEN} size={15}>{strings('OrderSummary.summaryHeader')}</AyezText>
         <View>
-          <AyezText medium>Subtotal: {(parseFloat(auto_item_total) ? parseFloat(auto_item_total).toFixed(2) : '-')} EGP</AyezText>
-          <AyezText medium>Delivery: {(parseFloat(delivery_fee) ? parseFloat(delivery_fee).toFixed(2) : '-')} EGP</AyezText>
-          <AyezText medium>Tip: {(parseFloat(tip) ? parseFloat(tip).toFixed(2) : '0.00')} EGP</AyezText>
-          <AyezText medium>Coupon: {(coupon && parseFloat(coupon.amount) ? `${parseFloat(coupon.amount).toFixed(2)} EGP` : '-')}</AyezText>
-          <AyezText medium>Total: {(parseFloat(auto_total) ? parseFloat(auto_total).toFixed(2) : '-')} EGP</AyezText>
+          <AyezText medium>{strings('Receipt.subtotal')} {formatCurrency(auto_item_total)}</AyezText>
+          <AyezText medium>{strings('Receipt.deliveryFee')} {formatCurrency(delivery_fee)}</AyezText>
+          <AyezText medium>{strings('Receipt.tip')} {formatCurrency(tip)}</AyezText>
+          {coupon ? (
+            <AyezText medium>{strings('Receipt.coupon', {code: coupon.code})} {formatCurrency(coupon.amount)}</AyezText>
+          ) : null}
+          <AyezText medium>{strings('Receipt.total')} {formatCurrency(auto_total)}</AyezText>
         </View>
       </SummarySection>
     );
@@ -207,7 +193,7 @@ class OrderSummary extends Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
-        <Header title='Order Summary' blackStyle />
+        <Header title={strings('OrderSummary.orderSummary')} blackStyle />
         <ScrollView>
           <SummarySection>
             { this.renderOrderNumber() }
@@ -222,7 +208,7 @@ class OrderSummary extends Component {
 
           <BlockButton
             onPress={() => Actions.orderProblem()}
-            text={'ANY PROBLEM?'}
+            text={strings('OrderTracker.problem')}
             color={'black'}
             style={{
               marginTop: 20,

@@ -55,14 +55,10 @@ const styles = StyleSheet.create({
 
   clearOrderTextStyle: {
     textAlign: 'center',
-    fontFamily: 'Poppins',
-    fontSize: 14,
-    color: colors.black
   },
   emptyCartStyle: {
     fontSize: 18,
     textAlign: 'center',
-    color: 'black',
     marginTop: 25,
     flex: 1
   },
@@ -108,13 +104,10 @@ const styles = StyleSheet.create({
   },
   emptyBasketTitle: {
     marginTop: 14,
-    fontFamily: 'Poppins',
-    fontSize: 14,
     color: '#353333'
   },
   emptyBasketSubtitle: {
     marginTop: 10,
-    fontFamily: 'Poppins',
     fontSize: 10,
     color: '#8e8e93'
   },
@@ -143,7 +136,7 @@ const styles = StyleSheet.create({
   clearBasketTitle: {
     color: '#353333',
     textAlign: 'center',
-    fontFamily: 'Poppins',
+    width: 200,
     fontSize: 13,
     marginBottom: 36
   },

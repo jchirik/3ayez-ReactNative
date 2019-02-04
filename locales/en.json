@@ -1,86 +1,340 @@
+1. check for text
+2. check for currency
+3. check for text input
+4. remove _reusable
+
 {
-  "StoreSelect": {
-    "deliveringTo": "DELIVERING TO",
+  "Common": {
+    "3ayez": "3ayez",
+    "myBasket": "My Basket",
+    "OK": "OK",
+    "submit": "Submit",
+    "confirm": "Confirm",
+    "continue": "Continue",
+    "login": "Login",
+    "logout": "Logout",
+    "add": "Add",
+    "edit": "Edit",
+    "search": "Search",
+    "close": "Close",
+    "seeAll": "see all",
+    "noResults": "No results",
     "noInternet": "No Internet",
     "refresh": "Refresh",
-    "minTotal": "Min. {{min}} EGP",
-    "openHours": "Open {{start}} - {{end}}",
-    "numRatings": "{{num_reviews}} Ratings",
-    "deliveryTime": "{{delivery_time}} Min Delivery"
+    "viewMore": "View more",
+    "english": "English",
+    "arabic": "Arabic"
+  },
+  "SystemPermissions": {
+    "currentLocationTitle": "3ayez Location Permission",
+    "currentLocationMessage": "3ayez needs your current location to find nearby stores"
+  },
+  "HomeTabs": {
+    "stores": "Stores",
+    "support": "Support"
+  },
+  "Address": {
+    "singleLine": "{{street}}, Building {{building}}, Apt {{apt}}",
+    "detail": "Building {{building}}, Apt {{apt}}",
+    "region": "Region:",
+    "street": "Street:",
+    "building": "Building no.:",
+    "apt": "Apt no.:",
+    "instructions": "Instructions:",
+  },
+  "Items": {
+    "savingsText": "Save {{savings}}",
+    "savingsTextAR": "وفر {{savings}} جنيه",
+    "weightsVary": "Exact weight may vary",
+    "limit": "limit {{max_limit}} per order",
+    "outOfStock": "Out of Stock",
+  },
+  "Receipt": {
+    "summary": "Summary",
+    "orderNumber": "Order #{{order_number}}",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "tip": "Tip",
+    "coupon": "Coupon ({{code}})"
+  },
+  "PaymentMethod": {
+    "cash": "Cash",
+    "creditCard": "Credit Card"
   },
   "OrderStatusBar": {
-    "trackOrder": "لمتابعة اخر اوردر",
+    "trackOrder": "Track your order",
+    "trackOrderAR": "لمتابعة اخر اوردر",
     "multipleOrders": "Multiple ongoing orders"
+  },
+  "Tutorial": {
+    "getStarted": "Get Started",
+    "switchEnglish": "Switch to English",
+    "switchArabic": "Switch to Arabic",
+    "t1header": "Conveniently Order Online",
+    "t2header": "Shop Easier",
+    "t3header": "Track your delivery in real time",
+    "registerCustomer": "Register as a Customer",
+    "continueGuest": "Continue as a Guest"
+  },
+  "AddressCreate": {
+    "queryCL": "Would you like to use your location to find stores in your area?",
+    "allowCL": "YES, ALLOW",
+    "denyCL": "Search for my location manually",
+    "issueDeterminingCL": "Issue determining location",
+
+    "addressSearchHeader": "DELIVERY ADDRESS",
+    "addressSearchInstruction": "Let us know where you are to send your orders",
+    "addressSearchPlaceholder": "search for new address, city, street",
+    "noLocationSearchResults": "No results",
+
+    "addressRefineHeader": "REFINE LOCATION",
+    "addressRefineInstruction": "Refine your location by dragging the pin",
+    "addressRefineConfirm": "SELECT LOCATION",
+
+    "confirmHeader": "ENTER ADDRESS",
+    "confirmDeliveringTo": "Delivering to:",
+    "confirmMissingInformation": "Please fill all information"
+  },
+  "StoreSelect": {
+    "deliveringTo": "DELIVERING TO",
+    "minTotal": "Min. {{min}}",
+    "openHours": "Open {{start}} - {{end}}",
+    "numRatings": "{{num_reviews}} Ratings",
+    "deliveryTime": "{{delivery_time}} min. delivery"
+  },
+  "Support": {
+    "header": "Support",
+    "contact3ayez": "CONTACT 3AYEZ",
+    "chatWithUs": "Chat with us",
+    "start": "START",
+    "settings": "SETTINGS"
+  },
+  "StoreHome": {
+    "featured": "Featured",
+    "categories": "Categories"
+  },
+  "StoreSearch": {
+    "placeholder": "find products within {{seller_name}}"
+  },
+  "StoreShelf": {
+    "backTo": "Back To"
+  },
+  "ItemView": {
+    "selectProduceRipeness": "Select Produce Ripeness:",
+    "ripenessRipe": "Ripe",
+    "ripenessNormal": "Normal",
+    "ripenessGreen": "Green",
+    "additionalInstructionsHeader": "Additional Instructions",
+    "additionalInstructionsField": "Additional Instructions:",
+    "instructionsPlaceholder": "Write notes",
+    "callMe": "Call me when selecting this product"
+  },
+  "WorkingBasket": {
+    "couponDiscount": "Discount: {{amount}}",
+    "addCoupon": "+ Add Coupon",
+    "clearOrder": "Empty Basket",
+    "nothingInBasket": "Nothing in your basket!",
+    "emptyCartTitle": "Your cart is empty",
+    "emptyCartSubtitle": "Make your basket happy and add products to it",
+    "loginToContinue": "Login to Continue",
+    "clearBasketModalHeader": "Are you sure you want to remove all items from the cart?",
+    "clearBasketModalCancel": "No, It was a mistake",
+    "clearBasketModalConfirm": "Yes, Sure",
+    "minimumOrderModal": "min. {{min}} for {{seller_name}}"
+  },
+  "TimeslotSelect": {
+    "header": "Schedule Order"
+  },
+  "Checkout": {
+    "header": "Checkout",
+    "addressField": "Address:",
+    "deliveryTimeField": "Delivery Time:",
+    "paymentMethodField": "Payment Method:",
+    "tipField": "Tip:",
+    "additionalNotesField": "Additional Notes:",
+    "additionalNotesHeader": "Additional Notes",
+    "smartTipSuggestions": "Smart tip suggestions help you round your total",
+    "sendOrder": "SEND ORDER"
+  },
+  "CreditCardSelection": {
+    "header": "SAVED CARDS",
+    "addNewCard": "ADD NEW CARD"
+  },
+  "AddressSelection": {
+    "header": "RECENT ADDRESSES",
+    "addNewAddress": "ADD NEW ADDRESS"
+  },
+  "OrderStatus": {
+    "awaitingStore": "Awaiting Store",
+    "scheduled": "Scheduled",
+    "preparingInStore": "Preparing in Store",
+    "assigningDriver": "Assigning Driver",
+    "inDelivery": "In Delivery",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "rejectedByStore": "Rejected by Store"
+  },
+  "OrderStatusLog": {
+    "confirmedOrder": "{{seller_name}} confirmed your order",
+    "preparedOrder": "{{seller_name}} finished preparing your order",
+    "deliveringOrder": "Driver is on his way with your order",
+    "completedOrder": "Order delivered"
+  },
+  "OrderTracker": {
+    "header": "Track you order",
+    "trackDelivery": "TRACK DELIVERY ON MAP",
+    "problem": "ANY PROBLEM?"
+  },
+  "OrderSummary": {
+    "orderSummary": "Order Summary",
+    "statusField": "Status:",
+    "addressHeader": "ADDRESS",
+    "deliveryTimeHeader": "DELIVERY TIME",
+    "paymentHeader": "PAYMENT",
+    "orderItemsHeader": "ORDER ITEMS",
+    "summaryHeader": "SUMMARY"
+  },
+  "DriverTracker": {
+    "noLocation": "Driver location unavailable"
+  },
+  "OrderProblem": {
+    "header": "Order Problem",
+    "contactSupport": "CONTACT SUPPORT",
+    "cancelOrder": "CANCEL YOUR ORDER",
+
+    "cancelOrderModal": "Ae you sure you want to cancel?",
+    "cancelOrderConfirm": "Yes, sure",
+    "cancelOrderCancel": "No"
+  },
+  "Settings": {
+    "header": "SETTINGS",
+    "welcome": "Welcome {{name}}",
+    "madeinEG": "Made in 🇪🇬",
+
+    "myAccount": "My Account",
+    "information": "Information",
+
+    "addressBook": "Address Book",
+    "creditCards": "Credit Cards",
+    "previousOrders": "Previous Orders",
+    "language": "Language",
+    "termsConditions": "Terms & Conditions",
+    "privacyPolicy": "Privacy Policy",
+
+    "selectLanguage": "Select your language",
+
+    "logoutModal": "Ae you sure you want to log out?",
+    "logoutConfirm": "Yes, logout",
+    "logoutCancel": "No"
+  },
+  "OrderHistory": {
+    "header": "Order History",
+    "active": "Active",
+    "past": "Past"
+  },
+  "CouponModal": {
+    "header": "Submit Coupon",
+    "description": "Apply coupon code for discounts",
+    "placeholder": "write your coupon code here",
+
+    "accepted": "{{code}} accepted!",
+    "couponSavings": "{{amount}} off your order",
+    "removeCoupon": "Remove Coupon",
+
+    "reenterCoupon": "Reenter Coupon",
+    "couponError": "Please revise the coupon entered and continue",
+    "invalid": "Oops, invalid coupon!",
+    "firstTimeOnly": "For new users only",
+    "alreadyUsed": "Already used"
+  },
+  "OrderReview": {
+    "reviewRequired": "Review Required",
+    "reviewDescription": "Your order requires some action. Please revise these items and continue.",
+    "start": "Take action",
+
+    "reviewItemHeader": "Review Item ({{index}}/{{total}})",
+    "replaceInstruction": "Replace with another item",
+    "confirmReplacement": "Confirm Replacement",
+    "skipItem": "Skip this item",
+
+    "reviewSummaryHeader": "Review",
+    "newItems": "New Items",
+    "existingItems": "Existing",
+    "removedItems": "Removed",
+    "countdown": "{{time}} remaining"
   },
 
 
-  "StoreHome": {
-      "featuredTab": "Featured",
-      "categoreisTab": "Categories",
-      "discountsCorridor": "Discounts",
-      "featuredCorridor": "Featured",
-      "viewMore": "View more",
-      "writeYourProduct": "Write your product",
-      "writeYourProductSubTitle": "Order anything that can be found in the store"
-    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "CustomProduct": {
+    "header": "ADD SPECIAL PRODUCT",
+    "detail": "We will do our best to find your product in the store",
+    "productName": "Product Name:",
+    "productNamePlaceholder": "Name of the item",
+    "productDescription": "Prodcut Description:",
+    "productDescriptionPlaceholder": "More details about the item",
+    "unitTabHeader": "Units",
+    "weightTabHeader": "Weight",
+    "addButtonLabel": "ADD"
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     "StoreCategories": {
       "poweredBy": "powered by ",
       "myAddress": "My Address",
       "myOrders": "My Orders",
       "itemsInYourBasket": "items in your basket!"
     },
-    "StoreSubcategories": {
-      "noItemsAvailable": "No items currently available",
-      "header": "Select sub category",
-      "backTo": "Back To"
-    },
-    "Item": {
-      "limit": "limit"
-    },
 
-    "WorkingBasket": {
-    "total": "Total",
-    "subtotal": "SUBTOTAL",
-    "submitButton": "OK",
-    "callForProblem": "Call Store",
-    "addAddress": "🏠 Provide an address...",
-    "changeAddress": "Change Address",
-    "clearOrder": "Empty Basket",
-    "nothingInBasket": "Nothing in your basket!",
-    "clearOrderModalHeader": "Are you sure you want to\nremove all items from the cart?",
-    "dontClearOrderModalButton": "No, It was a mistake",
-    "clearOrderModalButton": "Yes, Sure",
-    "weightsVary": "Exact weight may vary",
-    "yourCartisEmptyTitle": "Your cart is empty",
-    "yourCartisEmptySubitle": "Make your basket happy and add products to it",
-    "continue": "Continue"
-  },
-  "ItemView": {
-    "selectProductRipe": "Select Produce Ripeness:",
-    "additionalInstructions": "Additional Instructions:",
-    "callMe": "Call me when selecting this product",
-    "writeYourInstructions": "Write your request",
-    "addPrice": "{0} EGP",
-    "switchConfirmation": "Yes",
-    "switchDecline": "No",
-    "ripe": "Ripe",
-    "normal": "Normal",
-    "green": "Green",
-    "relatedProducts": "Related Products",
-    "moreThanSixProducts": "You may have selected more than 6 products The delivery may take longer than usual",
-    "moreThanSixProductsConfirmation": "OK"
-  },
-  "AddProduct": {
-    "headerTitle": "ADD SPECIAL PRODUCT",
-    "headerMessage": "We will do our best to find your product in the store",
-    "productNameInputLabel": "Product Name :",
-    "productNameInputPlaceholder": "Name of the item",
-    "productDescriptionInputLabel": "Prodcut Description :",
-    "productDescriptionInputPlaceholder": "More details about the item",
-    "unitTabHeader": "Units",
-    "weightTabHeader": "Weight",
-    "addButtonLabel": "ADD"
-  },
+
+
+
+
+
+
+
+
+
 
 
 
@@ -143,28 +397,6 @@
     "symbolInputTitle": "Any unique symbols?",
     "confirmLocationPoint": "Confirm Location"
   },
-  "OrderStatuses": {
-    "50": "Order seen by store",
-    "90": "Order approved by store",
-    "100": "Out for delivery",
-
-    "0": "Order sent to store",
-    "150": "Order dropped off by driver",
-    "200": "Order completed",
-    "300": "Cancelled",
-    "400": "Declined by Store"
-  },
-  "OrderTracker": {
-    "problem": "Problem",
-    "itemsHeader": "Items",
-    "detailsHeader": "Delivery Details",
-    "order#": "Order #",
-
-    "receivedOrderButton": "I have received this order",
-    "statusHistory": "Status History",
-    "receipt": "Receipt",
-    "cancelOrder": "Cancel Order"
-  },
   "Payment": {
     "cash": "Cash on Delivery",
     "cardreader": "Card on Delivery",
@@ -174,9 +406,6 @@
     "alexandria": "Alexandria",
     "sahel": "Sahel",
     "cairo": "Cairo"
-  },
-  "SearchBar": {
-    "placeholder": "What would you like?"
   },
   "Authentication": {
     "phoneEntryTitle": "Whats your phone number?",
@@ -201,13 +430,8 @@
     "addressTitle": "Address",
     "couponTitle": "Coupon",
     "paymentTitle": "Payment",
-    "submitButton": "Submit",
     "deliveryFee": "Delivery Fee",
     "notesTitle": "Any additional notes?"
-  },
-  "ShoppingComponent": {
-    "3ayezButton": "3ayez",
-    "basketButtonTitle": "Basket",
   },
   "DeliveryTimePicker": {
     "header": "Select a Delivery Time",

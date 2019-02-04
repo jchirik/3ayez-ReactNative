@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Text,
   TextInput,
   View
 } from 'react-native';
@@ -34,7 +33,7 @@ const styles = {
     color: 'black',
     height: 40,
     fontSize: 13,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: TEXT_INPUT_FONT,
     backgroundColor: 'white',
     borderRadius: 8,
     paddingLeft: 20,

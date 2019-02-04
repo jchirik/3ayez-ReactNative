@@ -1,8 +1,12 @@
 import React from 'react';
-import { Text, Image, View, TouchableOpacity } from 'react-native';
+import { Image, View, TouchableOpacity } from 'react-native';
 import { RadioButtonInput } from 'react-native-simple-radio-button';
 import colors from '../../../../theme/colors';
 import styles from './styles';
+import {
+  AyezText
+} from '../../../_common';
+
 const DestinationItem = ({
   isSelected,
   destinationTypeLabel,
@@ -21,15 +25,15 @@ const DestinationItem = ({
   >
     <View style={styles.detailContainer}>
       <View style={styles.destinationTypeContainer}>
-        <Text style={styles.destinationTypeTitle}>{destinationTypeLabel}</Text>
+        <AyezText regular style={styles.destinationTypeTitle}>{destinationTypeLabel}</AyezText>
         <Image
           style={styles.destinationTypeImage}
           source={destinationIcon}
           resizeMode="contain"
         />
       </View>
-      <Text style={styles.destinationName}>{destinationName}</Text>
-      <Text style={styles.destinationAddress}>{destinationAddress}</Text>
+      <AyezText regular style={styles.destinationName}>{destinationName}</AyezText>
+      <AyezText regular style={styles.destinationAddress}>{destinationAddress}</AyezText>
     </View>
     <Image
       source={destinationAddressImage}

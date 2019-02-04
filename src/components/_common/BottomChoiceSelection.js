@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Text,
   TouchableOpacity,
   View,
   Modal,
@@ -11,7 +10,7 @@ import {
 import {
   AYEZ_GREEN
 } from '../../Helpers.js';
-import { BlockButton } from './BlockButton';
+import { AyezText, BlockButton } from '.';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 // when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
@@ -101,8 +100,7 @@ class BottomChoiceSelection extends Component {
         color={buttonColor || 'white'}
         style={{ marginTop: 10, marginBottom: 10 }}
         textStyle={{
-          color: (textColor || backgroundColor),
-          fontFamily: 'Poppins-Regular'
+          color: (textColor || backgroundColor)
         }}
         />
     )
@@ -154,15 +152,12 @@ class BottomChoiceSelection extends Component {
             this.setState({ modalHeight: height });
           }}
           >
-          <Text style={{
-            color: 'white',
+          <AyezText bold color={'white'} style={{
             textAlign: 'center',
-            fontSize: 14,
-            fontFamily: 'Poppins-Bold',
             padding: 6,
             paddingRight: 10,
             paddingLeft: 10
-          }}>{title}</Text>
+          }}>{title}</AyezText>
           {buttonComponents}
         </Animated.View>
 

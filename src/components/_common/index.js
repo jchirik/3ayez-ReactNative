@@ -7,6 +7,7 @@ export * from './SearchBar';
 export * from './LoadingOverlay';
 export * from './InputField';
 export * from './SubtleButton';
+export * from './SearchBarButton';
 export * from './Row';
 
 export ItemTile from './ItemTile';

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import {
   View,
-  Text,
   Platform,
   ActivityIndicator,
   TouchableOpacity,
@@ -130,9 +129,10 @@ class StoreSearch extends Component {
 
 
   renderSearchHeader() {
-    const { query } = this.props;
+    const { query, seller } = this.props;
     return (
       <SearchHeader
+        seller={seller}
         reference={c => (this.searchInput = c)}
         searchQuery={query}
         onQueryDidChange={this.onQueryDidChange.bind(this)}

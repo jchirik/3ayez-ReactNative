@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-
+import {
+  AyezText
+} from '../_common';
 // title on the left, all other children on the right
 
 const Row = ({
@@ -30,11 +32,10 @@ const Row = ({
         disabled={disabled}
         activeOpacity={0.8}
       >
-        <Text style={{
-          fontFamily: 'Poppins-Regular',
-          fontSize: 15, color: '#8E8E93',
+        <AyezText regular size={15} style={{
+          color: '#8E8E93',
           marginRight: 20
-        }}>{title}</Text>
+        }}>{title}</AyezText>
         <View style={{ flex: 1, justifyContent: 'flex-end', flexDirection: 'row' }}>
           {children}
         </View>

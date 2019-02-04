@@ -68,8 +68,6 @@ export default StyleSheet.create({
     marginHorizontal: 5,
     flex: 1,
     color: colors.greenBlue,
-    fontFamily: fonts.poppinsLight,
-    fontSize: 14,
     fontWeight: '300',
     fontStyle: 'normal',
     lineHeight: 26,
@@ -153,14 +151,10 @@ export default StyleSheet.create({
   },
   viewCorridorContainer: { position: 'absolute', right: 0 },
   viewCorridorText: {
-    fontSize: 14,
     color: colors.greenBlue,
-    fontFamily: 'Poppins-Light',
     marginRight: 20
   },
   subcategoryHeaderText: {
-    fontFamily: fonts.poppinsLight,
-    fontSize: 14,
     lineHeight: 41,
     letterSpacing: 0.33,
     color: colors.steel

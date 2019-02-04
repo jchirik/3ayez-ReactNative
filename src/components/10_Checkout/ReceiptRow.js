@@ -1,9 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   AyezText
 } from '../_common';
+import {
+  formatCurrency
+} from '../../i18n.js';
 
 // title on the left, all other children on the right
 
@@ -29,10 +32,7 @@ const ReceiptRow = ({
           fontSize: 15, color: '#8E8E93'
         }}>{title}</AyezText>
 
-        <Text style={{
-          fontFamily: 'Poppins-Bold',
-          fontSize: 15, color
-        }}>{cost.toFixed(2)} EGP</Text>
+        <AyezText bold color={color} size={15}>{formatCurrency(cost)}</AyezText>
       </View>
   );
 };

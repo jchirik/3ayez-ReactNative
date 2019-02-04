@@ -14,7 +14,6 @@ export default StyleSheet.create({
   headerTitle: {
     width: 168,
     opacity: 0.9,
-    fontFamily: fonts.poppinsSemiBold,
     fontSize: 11,
     fontWeight: '600',
     fontStyle: 'normal',
@@ -25,7 +24,6 @@ export default StyleSheet.create({
   },
   headerMessage: {
     width: 176,
-    fontFamily: fonts.poppinsMedium,
     fontSize: 22,
     fontWeight: '500',
     fontStyle: 'normal',
@@ -69,9 +67,7 @@ export default StyleSheet.create({
     height: 41,
     fontSize: 14,
     lineHeight: 41,
-    letterSpacing: 0.17,
-    color: colors.black,
-    fontFamily: fonts.poppinsMedium
+    letterSpacing: 0.17
   },
   productDetailsInputLabel: {
     marginLeft: 20,
@@ -79,9 +75,7 @@ export default StyleSheet.create({
     height: 41,
     fontSize: 14,
     lineHeight: 41,
-    letterSpacing: 0.17,
-    color: colors.black,
-    fontFamily: fonts.poppinsMedium
+    letterSpacing: 0.17
   },
   additionalInstructionsTextInputStyle: {
     flex: 1,
