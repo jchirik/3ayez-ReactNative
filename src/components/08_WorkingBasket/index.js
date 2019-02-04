@@ -287,7 +287,6 @@ class WorkingBasket extends Component {
     return (
       <View style={styles.submitButtonContainer}>
         <BlockButton
-          color={colors.greenBlue}
           onPress={this.onContinuePress.bind(this)}
           text={strings('Common.continue')}
         />

@@ -34,7 +34,9 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT,
+  TEXT_INPUT_FONT_MEDIUM
 } from '../../i18n.js';
 
 const cameraIcon = require('../../../assets/images_v2/Support/camera.png');
@@ -85,11 +87,11 @@ class SupportChat extends Component {
         textStyle={{
           right: {
             color: 'white',
-            fontFamily: 'Poppins-Regular'
+            fontFamily: TEXT_INPUT_FONT
           },
           left: {
             color: '#464646',
-            fontFamily: 'Poppins-Regular'
+            fontFamily: TEXT_INPUT_FONT
           }
         }}
         wrapperStyle={{
@@ -112,7 +114,7 @@ class SupportChat extends Component {
         {...props}
         textStyle={{
           color: AYEZ_GREEN,
-          fontFamily: 'Poppins-Medium',
+          fontFamily: TEXT_INPUT_FONT_MEDIUM,
           fontSize: 12,
         }}
         wrapperStyle={{
@@ -247,7 +249,7 @@ class SupportChat extends Component {
       <View
         style={{ flex: 1, backgroundColor: '#FAFCFD'}}
       >
-        <Header title={'Support Chat'} />
+        <Header title={strings('SupportChat.header')} />
         <GiftedChat
           messages={this.props.messages}
           onSend={messages => this.props.onSendSupportMessage(messages)}
@@ -260,11 +262,11 @@ class SupportChat extends Component {
           renderInputToolbar={this.renderInputToolbar}
           textInputProps={{
             fontSize: 14,
-            fontFamily: 'Poppins-Medium',
+            fontFamily: TEXT_INPUT_FONT_MEDIUM,
           }}
           bottomOffset={-12}
           dateFormat={'ll'}
-          placeholder={'Send a message...'}
+          placeholder={strings('SupportChat.inputPlaceholder')}
         />
         <LoadingOverlay isVisible={this.props.send_loading} />
       </View>

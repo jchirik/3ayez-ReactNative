@@ -67,19 +67,11 @@ class CreditCardManager extends Component {
           }}
           resizeMode={'contain'}
         />
-
         <View style={{ flex: 1 }}>
-          <AyezText medium style={{
-            fontSize: 14
-          }}>{item.brand} (**** {item.last4})</AyezText>
-          <AyezText regular style={{
-            fontSize: 14,
-          }}>Exp {padNumberZeros(item.exp_month, 2)}/{item.exp_year}</AyezText>
-          <AyezText regular style={{
-            fontSize: 14,
-          }}>{item.name}</AyezText>
+          <AyezText medium>{item.brand} (**** {item.last4})</AyezText>
+          <AyezText regular>{strings('CreditCard.expiryText', {month: padNumberZeros(item.exp_month, 2), year: item.exp_year})}</AyezText>
+          <AyezText regular>{item.name}</AyezText>
         </View>
-
         <TouchableOpacity
           onPress={() => this.setState({ cardToDelete: item.id })}
           style={{ padding: 10, marginRight: 5 }}
@@ -108,7 +100,7 @@ class CreditCardManager extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
-          title={'Credit Cards'}
+          title={strings('Settings.creditCards')}
         />
         <FlatList
           style={{ flex: 1 }}
@@ -119,7 +111,7 @@ class CreditCardManager extends Component {
         />
         <BlockButton
           style={{ margin: 20 }}
-          text={'Add a Card'}
+          text={strings('CreditCard.addCard')}
           onPress={() => Actions.creditCardCreate()}
         />
 
@@ -127,10 +119,10 @@ class CreditCardManager extends Component {
           isVisible={this.state.cardToDelete}
           onClose={this.closeDeleteCardConfirm.bind(this)}
           backgroundColor='#E64E47'
-          title='Are you sure you want to delete?'
+          title={strings('DeleteConfirmation.query')}
           buttons={[
-            { text: 'Yes, sure', action: () => this.props.deleteCreditCard(this.state.cardToDelete)},
-            { text: 'No, cancel', action: () => console.log('No')}
+            { text: strings('DeleteConfirmation.confirm'), action: () => this.props.deleteCreditCard(this.state.cardToDelete)},
+            { text: strings('DeleteConfirmation.cancel'), action: () => console.log('No')}
           ]}
         />
       </View>

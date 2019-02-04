@@ -10,7 +10,7 @@ const BlockButton = ({
   text,
   color = AYEZ_GREEN,
   style,
-  textStyle,
+  textStyle = {},
   deactivated,
   outline
 }) => {
@@ -33,7 +33,7 @@ const BlockButton = ({
       activeOpacity={0.5}
       disabled={deactivated}
     >
-      <AyezText bold style={[{ alignSelf: 'center', color: outline ? color : 'white' }, textStyle]}>
+      <AyezText bold style={{ alignSelf: 'center', color: (outline ? color : 'white'), ...textStyle }}>
         {text}
       </AyezText>
     </TouchableOpacity>

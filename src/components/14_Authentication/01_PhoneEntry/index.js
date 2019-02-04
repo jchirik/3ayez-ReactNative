@@ -33,7 +33,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT
 } from '../../../i18n.js';
 
 class PhoneEntry extends Component {
@@ -95,9 +96,9 @@ class PhoneEntry extends Component {
             flex: 1,
             paddingLeft: 6,
             fontSize: 14,
-            fontFamily: 'Poppins-Regular'
+            fontFamily: TEXT_INPUT_FONT
           }}
-          placeholder={'write your number'}
+          placeholder={strings('Authentication.numberEntryPlaceholder')}
           placeholderTextColor={'#8E8E93'}
           value={this.props.phone}
           onChangeText={(phone) => this.props.authPhoneSet(phone)}
@@ -132,7 +133,7 @@ class PhoneEntry extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'REGISTER USER'}/>
+        <Header title={strings('Authentication.numberEntryHeader')}/>
         <View>
           <AyezText bold
             style={{
@@ -141,7 +142,7 @@ class PhoneEntry extends Component {
               marginLeft: 26,
               alignSelf: 'flex-start'
             }}
-          >Enter your phone number below</AyezText>
+          >{strings('Authentication.numberEntryInstruction')}</AyezText>
 
           { this.renderPhoneInput() }
           { this.renderCountryPickerModal() }
@@ -153,9 +154,9 @@ class PhoneEntry extends Component {
               marginTop: 18,
               marginBottom: 10
             }}
-          >Tap Next to get an SMS confirmation</AyezText>
+          >{strings('Authentication.tapNextForSMS', {next: strings('Common.next')})}</AyezText>
           <BlockButton
-            text={'NEXT'}
+            text={strings('Common.next')}
             style={{
               marginLeft: 18,
               marginRight: 18

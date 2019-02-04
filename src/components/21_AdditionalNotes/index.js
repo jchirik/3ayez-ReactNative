@@ -20,7 +20,8 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT
 } from '../../i18n.js';
 
 
@@ -59,7 +60,7 @@ class AdditionalNotes extends Component {
             borderColor: '#EAEAEA',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            fontFamily: 'Poppins-Regular',
+            fontFamily: TEXT_INPUT_FONT,
             fontSize: 14
           }}
           onChangeText={(text) => this.setState({ text })}
@@ -68,7 +69,7 @@ class AdditionalNotes extends Component {
           autoFocus
         />
         <BlockButton
-          text={'OK'}
+          text={strings('Common.OK')}
           style={{ marginLeft: 20, marginRight: 20, marginTop: 10 }}
           onPress={this.onSubmitPress.bind(this)}
         />

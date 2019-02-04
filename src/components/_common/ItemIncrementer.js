@@ -3,6 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { addToBasket, removeFromBasket } from '../../actions';
 
+import { AyezText } from '.';
 import { strings } from '../../i18n.js';
 import Incrementer from './Incrementer';
 

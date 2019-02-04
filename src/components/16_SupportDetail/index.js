@@ -37,8 +37,8 @@ class SupportDetail extends Component {
       <View
         style={{ flex: 1, backgroundColor: 'white'}}
       >
-        <Header title={title.en} />
-        <AyezText regular>{description.en}</AyezText>
+        <Header title={translate(title)} />
+        <AyezText regular>{translate(description)}</AyezText>
       </View>
     );
   }

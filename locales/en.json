@@ -1,16 +1,13 @@
-1. check for text
-2. check for currency
-3. check for text input
-4. remove _reusable
-
 {
   "Common": {
     "3ayez": "3ayez",
     "myBasket": "My Basket",
     "OK": "OK",
     "submit": "Submit",
+    "next": "Next",
     "confirm": "Confirm",
     "continue": "Continue",
+    "change": "Change",
     "login": "Login",
     "logout": "Logout",
     "add": "Add",
@@ -36,6 +33,7 @@
   "Address": {
     "singleLine": "{{street}}, Building {{building}}, Apt {{apt}}",
     "detail": "Building {{building}}, Apt {{apt}}",
+    "name": "Name:",
     "region": "Region:",
     "street": "Street:",
     "building": "Building no.:",
@@ -44,7 +42,6 @@
   },
   "Items": {
     "savingsText": "Save {{savings}}",
-    "savingsTextAR": "وفر {{savings}} جنيه",
     "weightsVary": "Exact weight may vary",
     "limit": "limit {{max_limit}} per order",
     "outOfStock": "Out of Stock",
@@ -58,13 +55,26 @@
     "tip": "Tip",
     "coupon": "Coupon ({{code}})"
   },
+  "DeleteConfirmation": {
+    "query": "Are you sure you want to delete?",
+    "confirm": "Yes, delete",
+    "cancel": "No"
+  },
   "PaymentMethod": {
     "cash": "Cash",
     "creditCard": "Credit Card"
   },
+  "CreditCard": {
+    "addCard": "Add a Card",
+    "number": "Card number",
+    "expiry": "Expiry",
+    "cvc": "CVC",
+    "name": "Name",
+    "expiryText": "Exp. {{month}}/{{year}}",
+    "errorAddingCard": "Error adding card"
+  },
   "OrderStatusBar": {
     "trackOrder": "Track your order",
-    "trackOrderAR": "لمتابعة اخر اوردر",
     "multipleOrders": "Multiple ongoing orders"
   },
   "Tutorial": {
@@ -82,16 +92,13 @@
     "allowCL": "YES, ALLOW",
     "denyCL": "Search for my location manually",
     "issueDeterminingCL": "Issue determining location",
-
     "addressSearchHeader": "DELIVERY ADDRESS",
     "addressSearchInstruction": "Let us know where you are to send your orders",
     "addressSearchPlaceholder": "search for new address, city, street",
     "noLocationSearchResults": "No results",
-
     "addressRefineHeader": "REFINE LOCATION",
     "addressRefineInstruction": "Refine your location by dragging the pin",
     "addressRefineConfirm": "SELECT LOCATION",
-
     "confirmHeader": "ENTER ADDRESS",
     "confirmDeliveringTo": "Delivering to:",
     "confirmMissingInformation": "Please fill all information"
@@ -202,7 +209,6 @@
     "header": "Order Problem",
     "contactSupport": "CONTACT SUPPORT",
     "cancelOrder": "CANCEL YOUR ORDER",
-
     "cancelOrderModal": "Ae you sure you want to cancel?",
     "cancelOrderConfirm": "Yes, sure",
     "cancelOrderCancel": "No"
@@ -211,19 +217,15 @@
     "header": "SETTINGS",
     "welcome": "Welcome {{name}}",
     "madeinEG": "Made in 🇪🇬",
-
     "myAccount": "My Account",
     "information": "Information",
-
     "addressBook": "Address Book",
     "creditCards": "Credit Cards",
     "previousOrders": "Previous Orders",
     "language": "Language",
     "termsConditions": "Terms & Conditions",
     "privacyPolicy": "Privacy Policy",
-
     "selectLanguage": "Select your language",
-
     "logoutModal": "Ae you sure you want to log out?",
     "logoutConfirm": "Yes, logout",
     "logoutCancel": "No"
@@ -237,11 +239,9 @@
     "header": "Submit Coupon",
     "description": "Apply coupon code for discounts",
     "placeholder": "write your coupon code here",
-
     "accepted": "{{code}} accepted!",
     "couponSavings": "{{amount}} off your order",
     "removeCoupon": "Remove Coupon",
-
     "reenterCoupon": "Reenter Coupon",
     "couponError": "Please revise the coupon entered and continue",
     "invalid": "Oops, invalid coupon!",
@@ -252,257 +252,32 @@
     "reviewRequired": "Review Required",
     "reviewDescription": "Your order requires some action. Please revise these items and continue.",
     "start": "Take action",
-
     "reviewItemHeader": "Review Item ({{index}}/{{total}})",
     "replaceInstruction": "Replace with another item",
     "confirmReplacement": "Confirm Replacement",
     "skipItem": "Skip this item",
-
     "reviewSummaryHeader": "Review",
     "newItems": "New Items",
     "existingItems": "Existing",
     "removedItems": "Removed",
     "countdown": "{{time}} remaining"
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  "CustomProduct": {
-    "header": "ADD SPECIAL PRODUCT",
-    "detail": "We will do our best to find your product in the store",
-    "productName": "Product Name:",
-    "productNamePlaceholder": "Name of the item",
-    "productDescription": "Prodcut Description:",
-    "productDescriptionPlaceholder": "More details about the item",
-    "unitTabHeader": "Units",
-    "weightTabHeader": "Weight",
-    "addButtonLabel": "ADD"
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    "StoreCategories": {
-      "poweredBy": "powered by ",
-      "myAddress": "My Address",
-      "myOrders": "My Orders",
-      "itemsInYourBasket": "items in your basket!"
-    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  "LocationSelector": {
-    "CAIRO": "Cairo",
-    "ALEXANDRIA": "Alexandria",
-    "searchNeighborhood": "Search your neighborhood",
-    "selectNeighborhood": "Select your neighborhood",
-    "currentLocation": "Current Location",
-    "fetchingLocation": "Fetching Location",
-    "noLocationAvailable": "Current Location Unavailable"
-  },
-  "FirstTimeModal": {
-    "orderingFrom": "Are you ordering from "
-  },
-  "StoreSelector": {
-    "pricesMayVary": "Prices may vary in the application",
-    "select": "SELECT",
-    "noStores": "Coming Soon",
-    "whatsNeighborhood": "What's your neighborhood?",
-    "chooseNeighborhood": "Choose another neighborhood",
-    "change": "change"
-  },
-  "OrderTrackBanner": {
-    "viewPlaced": "View Placed Orders",
-    "active": "Active",
-    "order#": "Order #"
-  },
-  "OrderHistory": {
-    "header": "Placed Orders",
-    "active": "Active",
-    "past": "Past",
-    "order#": "Order #"
-  },
-  "AddCreditCard": {
-    "header": "Add a Credit Card",
-    "number": "Card Number",
-    "expiry": "Expiry",
-    "cvc": "CVC",
-    "name": "Name",
-    "submitCard": "Submit Card"
-  },
-  "AddressSelect": {
-    "header": "Choose your Address",
-    "addAddress": "Add an Address"
-  },
-  "CreateAddress": {
-    "header": "Details for Delivery",
-    "fieldRequired": "This field is required",
-    "streetInputTitle": "What is your street?",
-    "buildingInputTitle": "What is your building?",
-    "apartmentInputTitle": "What is your apartment?",
-    "symbolInputTitle": "Any unique symbols?",
-    "confirmLocationPoint": "Confirm Location"
-  },
-  "Payment": {
-    "cash": "Cash on Delivery",
-    "cardreader": "Card on Delivery",
-    "addcard": "+ Add Card"
-  },
-  "Regions": {
-    "alexandria": "Alexandria",
-    "sahel": "Sahel",
-    "cairo": "Cairo"
-  },
   "Authentication": {
-    "phoneEntryTitle": "Whats your phone number?",
-    "verificationEntryTitle": "Please enter the verification code sent to you",
-    "invalidVerificationCode": "The code you entered is invalid",
-    "nameEntryTitle": "Whats your name?",
-    "yalla": "Yalla!",
-  },
-  "AddressDetail": {
-    "region": "Region:",
-    "name": "Name",
-    "phone": "Phone Number",
-    "street": "Street",
-    "building": "Building",
-    "building_name": "Building Name",
-    "floor": "Floor",
-    "apt": "Apt",
-    "notes": "Notes"
-  },
-  "Checkout": {
-    "header": "Review",
-    "addressTitle": "Address",
-    "couponTitle": "Coupon",
-    "paymentTitle": "Payment",
-    "deliveryFee": "Delivery Fee",
-    "notesTitle": "Any additional notes?"
-  },
-  "DeliveryTimePicker": {
-    "header": "Select a Delivery Time",
-    "pickLaterTime": "Pick a Later Time"
-  },
-  "CouponBanner": {
-    "addCoupon": "Add Coupon",
-    "minimum": "Order minimum:",
-    "off": "off"
-  },
-  "CouponModal": {
-    "header": "Enter your coupon code",
-    "submitCouponButton": "Apply",
-    "successHeader": "Successfully Applied",
-    "percentOff": "percent off",
-    "poundsOff": "pounds off",
-    "minimum": "Order minimum:",
-    "ok": "OK",
-    "removeCoupon": "Remove Coupon",
-    "BADCONNECTION": "Bad internet connection",
-    "NOTCOUPON": "Invalid coupon code",
-    "MAXUSED": "Coupon already used",
-    "EXPIRED": "Coupon expired",
-    "SELLERINVALID": "Does not apply to this store",
-    "FIRSTTIMEONLY": "Can only be used on your first order",
-    "ALREADYUSED": "Coupon already used",
-    "DEFAULTERROR": "Cannot apply coupon"
-  },
-  "Confirmation": {
-    "tamam": "Send"
-  },
-  "Header": {
-    "searchButton": "Search"
+    "numberEntryHeader": "REGISTER USER",
+    "numberEntryInstruction": "Enter your phone number below",
+    "numberEntryPlaceholder": "write your number",
+    "tapNextForSMS": "Press {{next}} to get an SMS confirmation",
+    "verificationHeader": "VERIFICATION CODE",
+    "verificationInstruction": "Enter the code sent to you below",
+    "resend": "Didn't receive code? Resend"
   },
   "SupportChat": {
-    "header": "3ayez Support",
+    "header": "Support Chat",
+    "inputPlaceholder": "Send a message..."
   },
-  "Settings": {
-    "header": "Settings",
-    "language": "Language",
-    "orderHistory": "Order History",
-    "contactUs": "Customer Service",
-    "logout": "Logout"
-  },
-  "SpecialtyBlock": {
-    "promotions": "Promotions",
-    "recent": "Recent"
-  },
-  "Ratings": {
-    "rateLastOrder": "Rate your last order at",
-    "thanksFeedback": "Thanks for your feedback!",
-    "submitReview": "Submit Review",
-    "1stars": "Terrible 😠",
-    "2stars": "Dislike it",
-    "3stars": "Okay 😕",
-    "4stars": "Good but i had a problem",
-    "5stars": "Awesome 😇",
-    "neverReceived": "I didn't receive the order",
-    "rudeService": "Rude service",
-    "wrongPrices": "Wrong Prices",
-    "slowDelivery": "Slow Delivery",
-    "wrongItem": "Wrong Item",
-    "badProduct": "Bad Product"
-  },
-  "Substitution": {
-    "header": "Order Change Required",
-    "subheader": "Your order has some items that are out of stock",
-    "goButton": "GO",
-    "replaceAlternativesHeader": "Replace with any of these alternatives?",
-    "declineReplacement": "I don’t want a replacement",
-    "ok": "OK",
-    "outOfStock": "Out of Stock"
+  "CustomerFeedback": {
+    "orderArrived": "Your order has arrived!",
+    "rateStoreTitle": "Please rate {{seller_name}}",
+    "rate3ayezTitle": "How was the 3ayez service?"
   }
 }

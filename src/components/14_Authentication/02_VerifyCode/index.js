@@ -102,7 +102,7 @@ class VerifyCode extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={'VERIFICATION CODE'}/>
+        <Header title={strings('Authentication.verificationHeader')}/>
         <View>
           <AyezText bold
             style={{
@@ -112,7 +112,7 @@ class VerifyCode extends Component {
               marginBottom: 10,
               alignSelf: 'flex-start'
             }}
-          >Enter the code sent to you below</AyezText>
+          >{strings('Authentication.verificationInstruction')}</AyezText>
 
           { this.renderVerificationInput() }
 
@@ -123,9 +123,9 @@ class VerifyCode extends Component {
               marginTop: 22,
               marginBottom: 10
             }}
-          >Didn't receive code? Resend</AyezText>
+          >{strings('Authentication.resend')}</AyezText>
           <BlockButton
-            text={'CONFIRM'}
+            text={strings('Common.confirm')}
             style={{
               marginLeft: 18,
               marginRight: 18

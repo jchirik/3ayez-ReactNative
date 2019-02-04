@@ -96,7 +96,7 @@ class CustomerFeedback extends Component {
         paddingTop: 20,
         paddingBottom: 20
       }}>
-        <AyezText medium size={17}>Please rate {translate(this.props.order.seller.display_name)}</AyezText>
+        <AyezText medium size={17}>{strings('CustomerFeedback.rateStoreTitle', { seller_name: translate(this.props.order.seller.display_name)})}</AyezText>
         { seller_image }
         <StarRating
           value={this.props.store_rating}
@@ -115,7 +115,7 @@ class CustomerFeedback extends Component {
         paddingTop: 20,
         paddingBottom: 20
       }}>
-        <AyezText medium size={17}>How was the 3ayez service?</AyezText>
+        <AyezText medium size={17}>{strings('CustomerFeedback.rate3ayezTitle')}</AyezText>
         <Image
           style={{
             width: 60, height: 60,
@@ -161,11 +161,11 @@ class CustomerFeedback extends Component {
               <AyezText bold
               size={24}
               color={'white'}
-              >Your order has arrived!</AyezText>
+              >{strings('CustomerFeedback.orderArrived')}</AyezText>
               <AyezText medium
               size={14}
               color={'white'}
-              >Order #{order.order_number}</AyezText>
+              >{strings('Receipt.orderNumber', {orderNumber: order.order_number})}</AyezText>
             </View>
           </View>
 
@@ -175,7 +175,7 @@ class CustomerFeedback extends Component {
 
         <BlockButton
           style={{ margin: 20, marginBottom: 24 }}
-          text={'SUBMIT'}
+          text={strings('Common.submit')}
           onPress={this.submitCustomerFeedback.bind(this)}
         />
         <CloseButton onPress={this.closeCustomerFeedback.bind(this)}/>

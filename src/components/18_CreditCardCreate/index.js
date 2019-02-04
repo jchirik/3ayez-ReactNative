@@ -21,7 +21,9 @@ import {
 
 import {
   strings,
-  translate
+  translate,
+  TEXT_INPUT_FONT,
+  TEXT_INPUT_FONT_MEDIUM
 } from '../../i18n.js';
 
 import {
@@ -97,30 +99,30 @@ class CreditCardCreate extends Component {
           color: 'red',
           textAlign: 'center',
           marginTop: 20
-        }}>Error adding card</AyezText>
+        }}>{strings('CreditCard.errorAddingCard')}</AyezText>
       )
     }
 
     return (
       <View style={{ flex: 1, backgroundColor: 'white', flexDirection: 'column' }}>
-        <Header title={strings('AddCreditCard.header')} />
+        <Header title={strings('CreditCard.addCard')} />
         <View style={{ height: 12 }} />
         <CreditCardInput
           labels={{
-            number: strings('AddCreditCard.number'),
-            expiry: strings('AddCreditCard.expiry'),
-            cvc: strings('AddCreditCard.cvc'),
-            name: strings('AddCreditCard.name')
+            number: strings('CreditCard.number'),
+            expiry: strings('CreditCard.expiry'),
+            cvc: strings('CreditCard.cvc'),
+            name: strings('CreditCard.name')
           }}
-          labelStyle={{ fontSize: 13, fontFamily: 'Poppins-Medium', color: 'black' }}
-          inputStyle={{ fontSize: 15, fontFamily: 'Poppins-Regular', color: 'black' }}
+          labelStyle={{ fontSize: 13, fontFamily: TEXT_INPUT_FONT_MEDIUM, color: 'black' }}
+          inputStyle={{ fontSize: 15, fontFamily: TEXT_INPUT_FONT, color: 'black' }}
           onChange={this.onChange.bind(this)}
           requiresName
           autoFocus
         />
         {errorText}
         <BlockButton
-          text={strings('AddCreditCard.submitCard')}
+          text={strings('Common.submit')}
           style={{ margin: 20 }}
           deactivated={!this.state.is_valid}
           onPress={this.onComplete.bind(this)}

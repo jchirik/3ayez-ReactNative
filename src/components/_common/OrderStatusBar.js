@@ -75,7 +75,7 @@ class OrderStatusBar extends PureComponent {
     }
 
     return (
-      <View style={{height: STATUS_BAR_HEIGHT}} />
+      <View style={{ height: STATUS_BAR_HEIGHT }} />
     );
 
   }

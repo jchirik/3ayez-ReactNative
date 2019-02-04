@@ -39,35 +39,9 @@ export const translate = (data) => {
 }
 
 
-export const TEXT_INPUT_FONT = () => {
-  const locale = store.getState().Settings.locale;
-  if (locale === 'ar') {
-    return 'Cairo-Regular'
-  } else if (locale === 'en') {
-    return 'Poppins-Regular'
-  }
-  return '';
-}
-
-export const TEXT_INPUT_FONT_MEDIUM = () => {
-  const locale = store.getState().Settings.locale;
-  if (locale === 'ar') {
-    return 'Cairo-SemiBold'
-  } else if (locale === 'en') {
-    return 'Poppins-Medium'
-  }
-  return '';
-}
-
-export const TEXT_INPUT_FONT_LIGHT = () => {
-  const locale = store.getState().Settings.locale;
-  if (locale === 'ar') {
-    return 'Cairo-Light'
-  } else if (locale === 'en') {
-    return 'Poppins-Light'
-  }
-  return '';
-}
+export const TEXT_INPUT_FONT = (store.getState().Settings.locale === 'ar') ? 'Cairo-Regular' : 'Poppins-Regular';
+export const TEXT_INPUT_FONT_MEDIUM = (store.getState().Settings.locale === 'ar') ? 'Cairo-SemiBold' : 'Poppins-Medium';
+export const TEXT_INPUT_FONT_LIGHT = (store.getState().Settings.locale === 'ar') ? 'Cairo-Light' : 'Poppins-Light';
 
 
 

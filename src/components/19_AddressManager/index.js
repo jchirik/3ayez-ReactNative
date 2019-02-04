@@ -57,18 +57,9 @@ class AddressManager extends Component {
           }}
       >
         <View style={{ flex: 1, marginLeft: 26 }}>
-          <AyezText medium style={{
-            fontSize: 14
-          }}>{item.street} {(item.area && item.area.display_name) ? item.area.display_name.ar : null}</AyezText>
-          <AyezText regular style={{
-            fontSize: 14
-          }}>Building #{item.building}</AyezText>
-          <AyezText regular style={{
-            fontSize: 14
-          }}>Apt #{item.apt}</AyezText>
-          <AyezText regular style={{
-            fontSize: 14
-          }}>{item.name}</AyezText>
+          <AyezText medium>{item.street} {(item.area) ? translate(item.area.display_name) : null}</AyezText>
+          <AyezText regular>{strings('Address.detail', {building: item.building, apt: item.apt})}</AyezText>
+          <AyezText regular>{item.name}</AyezText>
         </View>
 
         <TouchableOpacity
@@ -99,7 +90,7 @@ class AddressManager extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
-          title={'Address Book'}
+          title={strings('Settings.addressBook')}
         />
         <FlatList
           style={{ flex: 1 }}
@@ -110,18 +101,17 @@ class AddressManager extends Component {
         />
         <BlockButton
           style={{ margin: 20 }}
-          text={'Add an Address'}
+          text={strings('AddressSelect.addAddress')}
           onPress={() => Actions.addressCreate()}
         />
-
         <BottomChoiceSelection
           isVisible={this.state.addressToDelete}
           onClose={this.closeDeleteCardConfirm.bind(this)}
           backgroundColor='#E64E47'
-          title='Are you sure you want to delete?'
+          title={strings('DeleteConfirmation.query')}
           buttons={[
-            { text: 'Yes, sure', action: () => this.props.deleteAddress(this.state.addressToDelete)},
-            { text: 'No, cancel', action: () => console.log('No')}
+            { text: strings('DeleteConfirmation.confirm'), action: () => this.props.deleteAddress(this.state.addressToDelete)},
+            { text: strings('DeleteConfirmation.cancel'), action: () => console.log('No')}
           ]}
         />
       </View>

@@ -4,6 +4,8 @@ import {
   View
 } from 'react-native';
 
+import { TEXT_INPUT_FONT } from '../../i18n.js';
+
 const InputField = ({
   style,
   placeholder,
