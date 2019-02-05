@@ -91,6 +91,8 @@ class Homepage extends Component {
             const current_key = this.state.routes[index].key;
             this.setState({ index, current_key })
           }}
+          swipeEnabled={false}
+          animationEnabled={false}
           initialLayout={{ width: Dimensions.get('window').width }}
           tabBarPosition={'bottom'}
           renderTabBar={props =>

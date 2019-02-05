@@ -116,7 +116,8 @@ class VerifyCode extends Component {
 
           { this.renderVerificationInput() }
 
-          <AyezText light
+          {/*
+            <AyezText light
             style={{
               fontSize: 12,
               textAlign: 'center',
@@ -124,9 +125,11 @@ class VerifyCode extends Component {
               marginBottom: 10
             }}
           >{strings('Authentication.resend')}</AyezText>
+          */}
           <BlockButton
             text={strings('Common.confirm')}
             style={{
+              marginTop: 32,
               marginLeft: 18,
               marginRight: 18
             }}

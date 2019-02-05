@@ -32,7 +32,7 @@ class PlaceholderFastImage extends Component {
       }
       <FastImage
         {...this.props}
-        resizeMode={'contain'}
+        resizeMode={this.props.resizeMode || 'contain'}
         source={this.props.source}
         style={[this.props.style, this.state.loaded ? {} : {width: 0, height: 0}]}
         onLoadEnd={this.onLoadEnd.bind(this)}

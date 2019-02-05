@@ -81,6 +81,7 @@ class AddressDetails extends Component {
       street,
       building,
       apt,
+      name,
       notes,
       type,
       area
@@ -92,6 +93,7 @@ class AddressDetails extends Component {
       street,
       building,
       apt,
+      name,
       notes,
       type,
       area
@@ -235,6 +237,8 @@ class AddressDetails extends Component {
             { this.renderInputField(strings('Address.street'), 'street') }
             { this.renderInputField(strings('Address.building'), 'building') }
             { this.renderInputField(strings('Address.apt'), 'apt') }
+
+            { this.renderInputField(strings('Address.name'), 'name') }
             { this.renderInputField(strings('Address.instructions'), 'notes', false, true) }
 
             <View style={{ height: 20 }} />
@@ -267,6 +271,7 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate, AddressArea }) =
     street,
     building,
     apt,
+    name,
     notes,
     type,
     area,
@@ -283,6 +288,7 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate, AddressArea }) =
     street,
     building,
     apt,
+    name,
     notes,
     type,
     area,

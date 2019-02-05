@@ -151,7 +151,7 @@ export const FEEDBACK_SUBMIT_ERROR = 'FEEDBACK_SUBMIT_ERROR';
 export const SEARCH_SUBCATEGORY_DATA_BEGIN = 'SEARCH_SUBCATEGORY_DATA_BEGIN';
 export const SEARCH_SUBCATEGORY_DATA_END = 'SEARCH_SUBCATEGORY_DATA_END';
 
-
+export const SUPPORT_MANUAL_SET = 'SUPPORT_MANUAL_SET';
 
 
 /* ************************************************************************* */

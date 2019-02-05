@@ -17,6 +17,9 @@ import {
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 
+import { ViewPager } from 'rn-viewpager';
+import FastImage from 'react-native-fast-image'
+
 import AddressSelection from './AddressSelection';
 
 import {
@@ -157,10 +160,54 @@ renderNoInternetConnection() {
   );
 }
 
+renderImageScroll(item) {
+  const { banner_images } = item;
+  let imageComponents = [];
+  if (!banner_images || banner_images.length === 0) {
+    imageComponents = [(
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={this.onSelectSeller.bind(this, item)}
+        style={{ paddingHorizontal: 4 }}>
+        <Image
+          source={null}
+          style={{
+            flex: 1,
+            backgroundColor: '#cecece',
+            borderRadius: 4
+          }}
+        />
+      </TouchableOpacity>
+    )]
+  } else {
+    imageComponents = banner_images.map(url => (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={this.onSelectSeller.bind(this, item)}
+        style={{ paddingHorizontal: 4 }}>
+        <FastImage
+          source={{ uri: url }}
+          resizeMode={'cover'}
+          style={{
+            flex: 1,
+            backgroundColor: '#cecece',
+            borderRadius: 4
+          }}
+        />
+      </TouchableOpacity>
+    ))
+  }
+
+  return (
+    <ViewPager style={{ height: SCREEN_WIDTH*3/8 }}>
+      {imageComponents}
+    </ViewPager>
+  )
+}
 
 renderItem({ item, index }) {
     return (
-      <TouchableOpacity
+      <View
         style={{
           flexDirection: 'column',
           alignItems: 'stretch',
@@ -168,71 +215,70 @@ renderItem({ item, index }) {
           borderColor: '#EAEAEA',
           borderBottomWidth: 1
         }}
-        onPress={this.onSelectSeller.bind(this, item)}
         >
-        <View style={{
-          backgroundColor: 'gray',
-          borderRadius: 4,
-          height: SCREEN_WIDTH/3
-        }} />
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: 5
-        }}>
-          <AyezText regular style={{
-            fontSize: 16,
-          }}>{translate(item.display_name).toUpperCase()}</AyezText>
-          <Image
-            source={{ uri: item.logo_url }}
-            resizeMode={'contain'}
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 4
-            }}
-          />
-        </View>
-
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: 4
-        }}>
-          <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: formatCurrency(item.minimum)})}</AyezText>
-          <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.openHours', {start: item.hours.start, end: item.hours.end})}</AyezText>
-        </View>
-
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: 2
-        }}>
-          <View style={{ flexDirection: 'row' }}>
-            <AyezText semibold style={{
-              fontSize: 11,
-              color: '#2DD38F'
-            }}>{item.num_stars.toFixed(1)}</AyezText>
+        {this.renderImageScroll(item)}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={this.onSelectSeller.bind(this, item)}>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 5
+          }}>
+            <AyezText regular style={{
+              fontSize: 16,
+            }}>{translate(item.display_name).toUpperCase()}</AyezText>
             <Image
-              source={star_icon}
-              style={{
-                width: 14,
-                height: 14,
-                tintColor: '#2DD38F',
-                marginBottom: 3,
-                marginLeft: 4,
-                marginRight: 7
-              }}
+              source={{ uri: item.logo_url }}
               resizeMode={'contain'}
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 4
+              }}
             />
-            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.numRatings', {num_reviews: 120})}</AyezText>
           </View>
-          <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.deliveryTime', {delivery_time: item.delivery_time})}</AyezText>
-        </View>
-      </TouchableOpacity>
+
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 4
+          }}>
+            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: formatCurrency(item.minimum)})}</AyezText>
+            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.openHours', {start: item.hours.start, end: item.hours.end})}</AyezText>
+          </View>
+
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 2
+          }}>
+            <View style={{ flexDirection: 'row' }}>
+              <AyezText semibold style={{
+                fontSize: 11,
+                color: '#2DD38F'
+              }}>{item.num_stars.toFixed(1)}</AyezText>
+              <Image
+                source={star_icon}
+                style={{
+                  width: 14,
+                  height: 14,
+                  tintColor: '#2DD38F',
+                  marginBottom: 3,
+                  marginLeft: 4,
+                  marginRight: 7
+                }}
+                resizeMode={'contain'}
+              />
+              <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.numRatings', {num_reviews: 120})}</AyezText>
+            </View>
+            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.deliveryTime', {delivery_time: item.delivery_time})}</AyezText>
+          </View>
+        </TouchableOpacity>
+      </View>
     );
 }
 

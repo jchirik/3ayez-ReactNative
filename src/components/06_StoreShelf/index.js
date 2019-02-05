@@ -80,10 +80,14 @@ class StoreShelf extends Component {
           <AyezText medium size={18}>
             {translate(title)}
           </AyezText>
-          <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => Actions.pop()}
+            style={{ flexDirection: 'row' }}
+          >
             <AyezText regular size={13}>{strings('StoreShelf.backTo')}</AyezText>
             <AyezText regular size={13} color={'#0094ff'} style={{ marginLeft: 4 }}>{parent_title}</AyezText>
-          </View>
+          </TouchableOpacity>
         </View>
         {this._renderMagnifyingImage()}
       </View>

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import {
   loadBaskets,
   loadLocale,
+  loadSupportManual,
   listenCustomerAuthStatus
 } from './actions';
 
@@ -273,6 +274,7 @@ class RouterComponent extends Component {
   componentDidMount() {
     this.props.loadBaskets();
     this.props.loadLocale();
+    this.props.loadSupportManual();
     this.props.listenCustomerAuthStatus();
   }
   // <Scene
@@ -385,5 +387,6 @@ class RouterComponent extends Component {
 export default connect(null, {
   loadBaskets,
   loadLocale,
+  loadSupportManual,
   listenCustomerAuthStatus
 })(RouterComponent);

@@ -32,28 +32,6 @@ const start_side_arrow = require('../../../../assets/images_v2/Support/start_sid
 const silhouette_icon = require('../../../../assets/images_v2/Support/silhouette_icon.png');
 const issue_side_arrow = require('../../../../assets/images_v2/Support/issue_side_arrow.png');
 
-const supportDictionary = [
-  {
-    title: {
-      en: 'My order didnt deliver',
-      ar: 'My order didnt deliver'
-    },
-    description: {
-      en: 'Lorem ipsum dolores',
-      ar: 'Lorem ipsum dolores'
-    }
-  },
-  {
-    title: {
-      en: 'How do I resend back some items that came by mistake to me?',
-      ar: 'How do I resend back some items that came by mistake to me?'
-    },
-    description: {
-      en: 'Lorem ipsum dolores',
-      ar: 'Lorem ipsum dolores'
-    }
-  }
-];
 
 class Support extends Component {
 
@@ -166,8 +144,6 @@ class Support extends Component {
           onPress={() => Actions.supportDetail({ data: item })}
         >
             <AyezText semibold style={{
-              flex: 1,
-              fontSize: 14,
               color: '#696A6C',
               marginLeft: 20,
               marginTop: 16,
@@ -204,7 +180,7 @@ class Support extends Component {
 
 
         <FlatList
-          data={supportDictionary}
+          data={this.props.manual}
           renderItem={this.renderItem.bind(this)}
           style={{ flex: 1 }}
           removeClippedSubviews
@@ -242,9 +218,11 @@ const styles = {
   }
 };
 
-// const mapStateToProps = ({ }) => {
-//   return {
-//   };
-// };
+const mapStateToProps = ({ SupportManual }) => {
+  const { manual } = SupportManual;
+  return {
+    manual
+  };
+};
 
-export default connect(null, null)(Support);
+export default connect(mapStateToProps, null)(Support);

@@ -35,6 +35,7 @@ import OrderTracker from './OrderTracker_Reducer';
 import DriverTracker from './DriverTracker_Reducer';
 import OngoingOrders from './OngoingOrders_Reducer';
 import ReviewOrder from './ReviewOrder_Reducer';
+import SupportManual from './SupportManual_Reducer'
 
 import CustomerFeedback from './CustomerFeedback_Reducer';
 
@@ -105,7 +106,8 @@ const reducers = combineReducers({
   DriverTracker,
   OngoingOrders,
 
-  SupportChat
+  SupportChat,
+  SupportManual
 });
 
 export default createStore(reducers, {}, applyMiddleware(ReduxThunk));

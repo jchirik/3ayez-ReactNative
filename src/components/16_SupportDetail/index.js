@@ -6,6 +6,7 @@ import firebase from 'react-native-firebase';
 import {
   View,
   Modal,
+  ScrollView,
   SectionList,
   Platform,
   Animated,
@@ -21,6 +22,8 @@ import {
 
 import {
   Header,
+  BackButton,
+  BlockButton,
   AyezText
 } from '../_common';
 
@@ -37,8 +40,33 @@ class SupportDetail extends Component {
       <View
         style={{ flex: 1, backgroundColor: 'white'}}
       >
-        <Header title={translate(title)} />
-        <AyezText regular>{translate(description)}</AyezText>
+        <ScrollView style={{
+          flex: 1,
+          marginHorizontal: 40,
+          paddingTop: 80,
+          paddingBottom: 50,
+        }}
+          contentContainerStyle={{
+            alignItems: 'flex-start',
+          }}
+        >
+          <AyezText bold size={24} style={{
+            marginBottom: 20,
+            textAlign: 'left'
+          }}>{translate(title)}</AyezText>
+          <AyezText regular style={{
+            textAlign: 'left'
+          }}>{translate(description)}</AyezText>
+          <BlockButton
+            onPress={() => Actions.supportChat()}
+            text={strings('OrderProblem.contactSupport')}
+            style={{
+              marginTop: 20,
+              alignSelf: 'stretch'
+            }}
+          />
+        </ScrollView>
+        <BackButton fixed />
       </View>
     );
   }

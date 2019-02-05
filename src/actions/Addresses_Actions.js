@@ -29,14 +29,20 @@ export const createNewAddress = (address) => {
 
     dispatch({ type: ADDRESS_SUBMIT_BEGIN });
 
-    if (!address.street || !address.building || !address.apt) {
+    if (!address.street || !address.building || !address.apt || !address.name) {
       dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
       return;
     }
 
-    // post the address to firestore
+    const batch = firebase.firestore().batch();
+
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc();
-    addressRef.set({ ...address, timestamp: Date.now() }).then(() => {
+    batch.set(addressRef, { ...address, timestamp: Date.now() })
+
+    const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+    batch.update(customerRef, { name: address.name })
+
+    batch.commit().then(() => {
       console.log('createNewAddress success');
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
       Actions.popTo('homepage');

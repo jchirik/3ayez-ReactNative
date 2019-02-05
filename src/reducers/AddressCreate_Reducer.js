@@ -24,6 +24,7 @@ const INITIAL_STATE = {
   street: '',
   building: '', // merge with floor
   apt: '',
+  name: '',
   notes: '',
   type: 'HOME',
   area: null,
