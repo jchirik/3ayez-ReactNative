@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View, Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import FastImage from 'react-native-fast-image';
 
-import { AyezText, ItemIncrementer } from '.';
+import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { strings, translate, formatCurrency } from '../../i18n.js';
 import colors from '../../theme/colors';
 
@@ -148,14 +147,13 @@ class ItemRow extends Component {
         }}
       >
         <View>
-          <FastImage
+          <PlaceholderFastImage
             style={{
               width: 58,
               height: 58,
               backgroundColor: '#fff',
               opacity: item.invalid ? 0.3 : 1
             }}
-            resizeMode={'contain'}
             source={{ uri: item.thumbnail_url }}
           />
         </View>

@@ -17,7 +17,8 @@ import {
   Dimensions,
   Image,
   BackHandler,
-  AsyncStorage
+  AsyncStorage,
+  I18nManager
 } from 'react-native';
 
 import {
@@ -256,13 +257,16 @@ class SupportChat extends Component {
           user={{ _id: currentUser.uid }}
           renderBubble={this.renderBubble}
           renderDay={this.renderDay}
+          renderFooter={() => (<View style={{height:8}} />)}
           renderComposer={this.renderComposer}
           renderSend={() => null}
           renderAvatar={null}
           renderInputToolbar={this.renderInputToolbar}
           textInputProps={{
+            lineHeight: 22,
             fontSize: 14,
             fontFamily: FONT_MEDIUM(),
+            textAlign: I18nManager.isRTL ? 'right' : 'left'
           }}
           bottomOffset={-12}
           dateFormat={'ll'}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import FastImage from 'react-native-fast-image';
 import {
   View,
   FlatList,
@@ -20,7 +19,7 @@ import {
   BackButton,
   BasketBlockButton,
   AyezText,
-
+  PlaceholderFastImage,
   SearchBarButton
  } from '../_common';
 import loadingCircleGray from '../../../assets/images/loading_circle_gray.png';
@@ -82,10 +81,8 @@ class StoreAisle extends Component {
         }}
         activeOpacity={1.0}
       >
-        <FastImage
+        <PlaceholderFastImage
           style={styles.tinyPhoto}
-          defaultSource={loadingCircleGray}
-          resizeMode={'contain'}
           source={{
             uri: thumbnail_url || image_url
           }}

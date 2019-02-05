@@ -20,7 +20,7 @@
     "refresh": "Refresh",
     "viewMore": "View more",
     "english": "English",
-    "arabic": "Arabic"
+    "arabic": "عربي"
   },
   "SystemPermissions": {
     "currentLocationTitle": "3ayez Location Permission",
@@ -80,7 +80,7 @@
   "Tutorial": {
     "getStarted": "Get Started",
     "switchEnglish": "Switch to English",
-    "switchArabic": "Switch to Arabic",
+    "switchArabic": "تحويل إلى اللغة العربية",
     "t1header": "Conveniently Order Online",
     "t2header": "Shop Easier",
     "t3header": "Track your delivery in real time",
@@ -222,7 +222,7 @@
     "addressBook": "Address Book",
     "creditCards": "Credit Cards",
     "previousOrders": "Previous Orders",
-    "language": "Language",
+    "language": "Language (اللغة)",
     "termsConditions": "Terms & Conditions",
     "privacyPolicy": "Privacy Policy",
     "selectLanguage": "Select your language",

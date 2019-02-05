@@ -6,11 +6,9 @@ import { translate, strings, formatCurrency } from '../../i18n.js';
 import { addToBasket } from '../../actions';
 import colors from '../../theme/colors';
 import fonts from '../../theme/fonts';
-import { AyezText, ItemIncrementer } from '.';
+import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { Draggable } from './DragComponent';
-import FastImage from 'react-native-fast-image';
 
-const loadingCircleGreen = require('../../../assets/images/loading_circle_green.png');
 const scaleImage = require('../../../assets/images/scale.png');
 
 const Image_HEIGHT_RATIO = '48%';
@@ -155,10 +153,8 @@ class ItemTile extends PureComponent {
         activeOpacity={disabled ? 1 : 0.7}
         disabled={disabled}
       >
-        <FastImage
+        <PlaceholderFastImage
           style={{ width: '100%', height: '98%' }}
-          resizeMode={FastImage.resizeMode.contain}
-          defaultSource={loadingCircleGreen}
           source={{ uri: url }}
         />
         {this.renderScale(unit)}

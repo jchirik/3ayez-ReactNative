@@ -67,7 +67,7 @@ class CreditCardManager extends Component {
           }}
           resizeMode={'contain'}
         />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <AyezText medium>{item.brand} (**** {item.last4})</AyezText>
           <AyezText regular>{strings('CreditCard.expiryText', {month: padNumberZeros(item.exp_month, 2), year: item.exp_year})}</AyezText>
           <AyezText regular>{item.name}</AyezText>

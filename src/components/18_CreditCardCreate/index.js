@@ -10,9 +10,11 @@ import {
   Platform,
   BackHandler
 } from 'react-native';
-import { CreditCardInput } from "react-native-credit-card-input";
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+
+
+import { CreditCardInput } from './RTL-credit-card-input';
 
 import {
   createStripeCard,
@@ -118,6 +120,7 @@ class CreditCardCreate extends Component {
           inputStyle={{ fontSize: 15, fontFamily: FONT_REGULAR(), color: 'black' }}
           onChange={this.onChange.bind(this)}
           requiresName
+          allowScroll
           autoFocus
         />
         {errorText}

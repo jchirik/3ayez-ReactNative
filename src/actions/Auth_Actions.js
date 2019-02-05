@@ -93,7 +93,7 @@ export const authPhoneVerify = (code, confirmation_function, onProceed) => {
           migrateGuestAccount({ guest_uid: prevUser.uid, user_uid: user.uid }).then((result) => {
             if (result.data && result.data.success) {
               dispatch({ type: VERIFICATION_SUCCESS });
-              onProceed();
+              onProceed(user);
             } else {
               dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } })
             }
@@ -104,7 +104,7 @@ export const authPhoneVerify = (code, confirmation_function, onProceed) => {
         } else {
           // otherwise, its successful! continue.
           dispatch({ type: VERIFICATION_SUCCESS });
-          onProceed();
+          onProceed(user);
         }
       }) // User is logged in){
       .catch(error => {
@@ -130,3 +130,37 @@ export const logoutUser = () => {
     // Note: this catch may encompass errors beyond the logout process itself
   };
 };
+
+
+
+// checks if addresses exist for the account
+// if so, pop to Homepage
+// otherwise create an address
+export const addressCreateProceedCheck = (user) => {
+  return (dispatch) => {
+    console.log('addressCreateProceedCheck user', user)
+    dispatch({ type: VERIFICATION_BEGIN });
+    const addressesRef = firebase.firestore().collection('customers').doc(user.uid)
+      .collection('addresses');
+    addressesRef.get().then((addressesT) => {
+      let addresses = addressesT.docs.map(addressDoc => {
+        const id = addressDoc.id;
+        const data = addressDoc.data();
+        return ({
+          ...data,
+          id
+        });
+      });
+      console.log('addressCreateProceedCheck addresses', addresses)
+      if (addresses.length > 0) {
+        Actions.popTo('homepage');
+      } else {
+        Actions.addressCreate();
+      }
+      dispatch({ type: VERIFICATION_SUCCESS });
+    }).catch((error) => {
+      console.log('addressCreateProceedCheck error', error)
+      dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to check addresses' } });
+    })
+  }
+}

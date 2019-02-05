@@ -56,7 +56,7 @@ class AddressManager extends Component {
           alignItems: 'center'
           }}
       >
-        <View style={{ flex: 1, marginLeft: 26 }}>
+        <View style={{ flex: 1, marginLeft: 26, alignItems: 'flex-start' }}>
           <AyezText medium>{item.street} {(item.area) ? translate(item.area.display_name) : null}</AyezText>
           <AyezText regular>{strings('Address.detail', {building: item.building, apt: item.apt})}</AyezText>
           <AyezText regular>{item.name}</AyezText>
@@ -101,7 +101,7 @@ class AddressManager extends Component {
         />
         <BlockButton
           style={{ margin: 20 }}
-          text={strings('AddressSelect.addAddress')}
+          text={strings('AddressSelection.addNewAddress')}
           onPress={() => Actions.addressCreate()}
         />
         <BottomChoiceSelection

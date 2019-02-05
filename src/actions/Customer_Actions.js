@@ -18,7 +18,9 @@ import {
   ADDRESSES_LISTENER_SET,
 
   CREDITCARDS_SET,
-  CREDITCARDS_LISTENER_SET
+  CREDITCARDS_LISTENER_SET,
+
+  AUTH_INIT
 } from './types';
 
 export const listenCustomerAuthStatus = () => {
@@ -33,6 +35,7 @@ export const listenCustomerAuthStatus = () => {
         listenToAddresses(dispatch);
         listenToCreditCards(dispatch);
         setPushToken(firebase.firestore().collection('customers').doc(user.uid));
+        // dispatch({ type: AUTH_INIT, payload: { onComplete: null }});
       } else {
         console.log('onAuthStateChanged logged out');
         dispatch({ type: CUSTOMER_DATA_RESET });

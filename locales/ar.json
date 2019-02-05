@@ -19,7 +19,7 @@
     "noInternet": "لا يوجد انترنت",
     "refresh": "تحديث",
     "viewMore": "أظهر أكثر",
-    "english": "إنجليزي",
+    "english": "English",
     "arabic": "عربي"
   },
   "SystemPermissions": {
@@ -79,7 +79,7 @@
   },
   "Tutorial": {
     "getStarted": "البدء",
-    "switchEnglish": "تحويل إلى اللغة الإنجليزية",
+    "switchEnglish": "Switch to English",
     "switchArabic": "تحويل إلى اللغة العربية",
     "t1header": "أرتاح وأطلب أونلاين",
     "t2header": "تسوق بسهولة",
@@ -222,7 +222,7 @@
     "addressBook": "دليل العناوين",
     "creditCards": "بطاقات الإئتمان",
     "previousOrders": "الطلبات السابقة",
-    "language": "اللغة",
+    "language": "اللغة (Language)",
     "termsConditions": "البنود & الإتفاقيات",
     "privacyPolicy": "سياسة الخصوصية",
     "selectLanguage": "أختار لغتك",

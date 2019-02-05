@@ -42,10 +42,12 @@ class Homepage extends Component {
       index: 0,
       current_key: 'first',
       routes: [
-        { key: 'first', title: strings('HomeTabs.stores'), icon: stores_icon },
-        { key: 'second', title: strings('HomeTabs.support'), icon: support_icon },
+        { key: 'first', title_key: 'HomeTabs.stores', icon: stores_icon },
+        { key: 'second', title_key: 'HomeTabs.support', icon: support_icon },
       ],
     };
+    // use title_key so strings fx can run during rendering
+    // otherwise, language doesnt change
   }
 
   componentDidMount() {
@@ -96,7 +98,7 @@ class Homepage extends Component {
               {...props}
               useNativeDriver
               renderLabel={({ route }) => {
-                const { title, key, icon } = route;
+                const { title_key, key, icon } = route;
                 return (
                   <View style={{ alignItems: 'center' }}>
                   <Image
@@ -112,7 +114,7 @@ class Homepage extends Component {
                     regular
                     size={12}
                     color={(key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'}
-                    >{title}</AyezText>
+                    >{strings(title_key)}</AyezText>
                   </View>
                 )
               }}

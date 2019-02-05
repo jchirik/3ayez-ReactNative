@@ -18,6 +18,7 @@ export OrderStatusBar from './OrderStatusBar';
 export AyezText from './AyezText';
 export AnimatedCheckmarkOverlay from './AnimatedCheckmarkOverlay';
 export BasketBlockButton from './BasketBlockButton';
+export PlaceholderFastImage from './PlaceholderFastImage';
 
 export ItemIncrementer from './ItemIncrementer';
 export Incrementer from './Incrementer';

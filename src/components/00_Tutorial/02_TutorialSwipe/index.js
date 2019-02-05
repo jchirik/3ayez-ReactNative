@@ -27,6 +27,7 @@ import {
 
 import {
   onCompleteAuth,
+  addressCreateProceedCheck,
   authGuestLogin
 } from '../../../actions';
 
@@ -140,7 +141,7 @@ class TutorialSwipe extends Component {
           }}
           onPress={() => {
             // proceed to address create after auth
-            this.props.onCompleteAuth(() => Actions.addressCreate())
+            this.props.onCompleteAuth(this.props.addressCreateProceedCheck)
             Actions.auth();
           }}
         />
@@ -172,5 +173,6 @@ const mapStateToProps = ({ Auth }) => {
 
 export default connect(mapStateToProps, {
   onCompleteAuth,
+  addressCreateProceedCheck,
   authGuestLogin
 })(TutorialSwipe);
