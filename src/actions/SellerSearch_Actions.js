@@ -3,34 +3,42 @@ import algoliasearch from 'algoliasearch/reactnative';
 const algoliaClient = algoliasearch('BN0VV4WPRI', 'a85a04afca53d5baf47c659ce03d897f');
 const algoliaSellers = algoliaClient.initIndex('sellers');
 
+import firebase from 'react-native-firebase';
+
 import {
   SELLERS_FETCH_BEGIN,
   SELLERS_FETCH_END,
   SELLERS_FETCH_ERROR
 } from './types';
 
-export const fetchNearbySellers = (point, area_id) => {
+
+export const fetchNearbySellers = (address) => {
   return (dispatch) => {
     dispatch({ type: SELLERS_FETCH_BEGIN });
-
-    algoliaSellers.search({
-      filters: `delivery_regions:${area_id} AND online`, // must be online, and in your region
-      // aroundLatLng: `${point.lat}, ${point.lng}`, // use this to return distance
-      getRankingInfo: true,
-      aroundRadius: 25000,
-      hitsPerPage: 200
-    }).then(res => {
-      console.log('RES',res);
-      // why is THIS not sufficient??
-      console.log('fetchNearbySellers res.hits', res.hits);
-
-      const sellers = [];
-      res.hits.forEach(seller => sellers.push({ ...seller, id: seller.objectID }));
-
-      console.log('fetchNearbySellers', sellers);
-      dispatch({ type: SELLERS_FETCH_END, payload: { sellers } });
-    }).catch(() => {
+    // fetch the location pin's REGION if none exists
+    // then get all nearby stores for the region
+    const fetchSellersForCoordinate = firebase.functions().httpsCallable('fetchSellersForCoordinate');
+    fetchSellersForCoordinate(address.location).then((result) => {
+      const { area, sellers } = result.data;
+      dispatch({ type: SELLERS_FETCH_END, payload: { area, sellers } });
+    }).catch((error) => {
       dispatch({ type: SELLERS_FETCH_ERROR });
-    })
+    });
   };
 };
+
+
+//   algoliaSellers.search({
+//     filters: `delivery_regions:${area.id} AND online`, // must be online, and in your region
+//     hitsPerPage: 200,
+//     // aroundLatLng: `${point.lat}, ${point.lng}`, // use this to return distance
+//     // getRankingInfo: true,
+//     // aroundRadius: 25000
+//   }).then(res => {
+//     const sellers = res.hits.map(seller => ({ ...seller, id: seller.objectID }));
+//
+//   }).catch(() => {
+//     dispatch({ type: SELLERS_FETCH_ERROR });
+//   })
+// } else {
+//   dispatch({ type: SELLERS_FETCH_END, payload: { sellers: [] } });

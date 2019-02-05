@@ -364,7 +364,7 @@ class WorkingBasket extends Component {
             onClose={() => this.setState({ belowMinimumModal: false })}
             visible={this.state.belowMinimumModal}
           >
-            <AyezText medium style={{ textAlign: 'center', marginTop: 20 }}>
+            <AyezText medium style={{ textAlign: 'center', marginTop: 24 }}>
                 {strings('WorkingBasket.minimumOrderModal', { min: formatCurrency(seller.minimum), seller_name: sellerName })}
               </AyezText>
 

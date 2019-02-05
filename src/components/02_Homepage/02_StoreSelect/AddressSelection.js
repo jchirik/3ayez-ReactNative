@@ -240,7 +240,7 @@ class AddressSelection extends Component {
             }}
             text={strings('AddressSelection.addNewAddress')}
             color={'#3B7A60'}
-            style={{ marginTop: 14, marginBottom: 10 }}
+            style={{ marginTop: 14, marginBottom: 0 }}
             />
         </Animated.View>
 

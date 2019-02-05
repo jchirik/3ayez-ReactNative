@@ -6,6 +6,7 @@ import {
 
 const INITIAL_STATE = {
   sellers: [],
+  area: null,
   is_loading: false,
   error: false
 };
@@ -16,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELLERS_FETCH_BEGIN:
       return { ...INITIAL_STATE, is_loading: true };
     case SELLERS_FETCH_END:
-      return { ...state, is_loading: false, sellers: p.sellers };
+      return { ...state, is_loading: false, area: p.area, sellers: p.sellers };
     case SELLERS_FETCH_ERROR:
       return { ...state, is_loading: false, error: true };
     default:

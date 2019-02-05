@@ -33,9 +33,15 @@ import {
 } from '../../_common';
 
 import {
+  AYEZ_GREEN
+} from '../../../Helpers';
+
+import {
   strings,
   translate,
-  formatCurrency
+  formatCurrency,
+  formatDay,
+  formatTimestamp
 } from '../../../i18n.js';
 
 const star_icon = require('../../../../assets/images_v2/Common/star.png');
@@ -85,7 +91,11 @@ class StoreSelect extends Component {
   }
 
   fetchNearbySellers() {
-    this.props.fetchNearbySellers(this.props.point, '10th_of_ramadan'); // load nearby stores upon open
+    const { address } = this.props;
+
+    if (address) {
+      this.props.fetchNearbySellers(address); // load nearby stores upon open
+    }
   }
 
   componentDidMount() {
@@ -94,8 +104,7 @@ class StoreSelect extends Component {
   }
 
   componentDidUpdate(prevProps) {
-
-    if (this.props.point !== prevProps.point) {
+    if (this.props.address !== prevProps.address) {
       this.fetchNearbySellers(); // load nearby stores upon change
     }
   }
@@ -206,59 +215,55 @@ renderImageScroll(item) {
 }
 
 renderItem({ item, index }) {
-    return (
-      <View
-        style={{
-          flexDirection: 'column',
-          alignItems: 'stretch',
-          padding: 12,
-          borderColor: '#EAEAEA',
-          borderBottomWidth: 1
-        }}
-        >
-        {this.renderImageScroll(item)}
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={this.onSelectSeller.bind(this, item)}>
-          <View style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 5
-          }}>
-            <AyezText regular style={{
-              fontSize: 16,
-            }}>{translate(item.display_name).toUpperCase()}</AyezText>
-            <Image
-              source={{ uri: item.logo_url }}
-              resizeMode={'contain'}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 4
-              }}
-            />
-          </View>
+  let nextTimeslotText = '-';
+  if (item.next_timeslot) {
+    const { start, end } = item.next_timeslot;
+    nextTimeslotText = `${formatDay(start)}, ${formatTimestamp(start, "h:mmA")}-${formatTimestamp(end, "h:mmA")}`
+  }
+  return (
+    <View
+      style={{
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        padding: 16,
+        borderColor: '#EAEAEA',
+        borderBottomWidth: 1
+      }}
+      >
+      {this.renderImageScroll(item)}
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={this.onSelectSeller.bind(this, item)}>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 5
+        }}>
+          <AyezText regular style={{
+            fontSize: 16,
+          }}>{translate(item.display_name).toUpperCase()}</AyezText>
+          <Image
+            source={{ uri: item.logo_url }}
+            resizeMode={'contain'}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 4
+            }}
+          />
+        </View>
 
-          <View style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 4
-          }}>
-            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: formatCurrency(item.minimum)})}</AyezText>
-            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.openHours', {start: item.hours.start, end: item.hours.end})}</AyezText>
-          </View>
-
-          <View style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 2
-          }}>
-            <View style={{ flexDirection: 'row' }}>
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 4
+        }}>
+          <View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <AyezText semibold style={{
-                fontSize: 11,
+                fontSize: 15,
                 color: '#2DD38F'
               }}>{item.num_stars.toFixed(1)}</AyezText>
               <Image
@@ -273,13 +278,21 @@ renderItem({ item, index }) {
                 }}
                 resizeMode={'contain'}
               />
-              <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.numRatings', {num_reviews: 120})}</AyezText>
+              {(item.num_reviews) ? (
+                <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.numRatings', {num_reviews: item.num_reviews})}</AyezText>
+              ) : null }
             </View>
-            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.deliveryTime', {delivery_time: item.delivery_time})}</AyezText>
+            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: formatCurrency(item.minimum)})}</AyezText>
           </View>
-        </TouchableOpacity>
-      </View>
-    );
+
+          <View style={{ alignItems: 'flex-end'}}>
+            <AyezText extralight style={styles.storeDetailText}>{'Next Delivery:'}</AyezText>
+            <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
+          </View>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 renderSellerList() {
@@ -300,7 +313,15 @@ renderSellerList() {
 
       removeClippedSubviews
       ListHeaderComponent={null}
-      ListEmptyComponent={null}
+      ListEmptyComponent={
+        (
+          <View>
+            <AyezText medium style={{ marginTop: 40, marginBottom: 100, textAlign: 'center' }}>
+              {strings('Common.comingSoon')}
+            </AyezText>
+          </View>
+        )
+      }
       ListFooterComponent={null}
 
       showsVerticalScrollIndicator={false}
@@ -347,7 +368,7 @@ renderSellerList() {
 
 const styles = {
   storeDetailText: {
-    fontSize: 11,
+    fontSize: 13,
     color: '#8E8E93'
   }
 };
@@ -356,13 +377,11 @@ const mapStateToProps = ({ Addresses, SellerSearch }) => {
   const { addresses, address } = Addresses;
 
   const street = address ? address.street : null;
-  const point = address ? address.point : null;
 
   const { sellers, is_loading, error } = SellerSearch;
   return {
     address,
     street,
-    point,
 
     sellers,
     is_loading,

@@ -103,12 +103,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   emptyBasketTitle: {
-    marginTop: 14,
+    marginTop: 16,
+    fontSize: 15,
     color: '#353333'
   },
   emptyBasketSubtitle: {
-    marginTop: 10,
-    fontSize: 10,
+    marginTop: 4,
+    fontSize: 12,
     color: '#8e8e93'
   },
   container: {
