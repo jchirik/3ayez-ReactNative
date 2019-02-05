@@ -140,6 +140,16 @@ class StoreSearch extends Component {
     );
   }
 
+  renderCustomItemPrompt() {
+    const { query, isLoadingSearchData } = this.props;
+    if (!query || isLoadingSearchData) { return null; }
+    return (
+      <View style={{ backgroundColor: 'green', height: 80}}>
+        <AyezText regular>Customitem?</AyezText>
+      </View>
+    )
+  }
+
   renderResults() {
     const { subcategoryResults, categoryResults, itemResults, isLoadingSearchData } = this.props;
 
@@ -153,6 +163,7 @@ class StoreSearch extends Component {
         <FlatList
           data={results}
           renderItem={this.renderSearchItem.bind(this)}
+          ListFooterComponent={this.renderCustomItemPrompt.bind(this)}
           keyExtractor={(item, index) => index.toString()}
         />
         <LoadingOverlay isVisible={isLoadingSearchData} />
