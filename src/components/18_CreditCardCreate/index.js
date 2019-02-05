@@ -22,8 +22,8 @@ import {
 import {
   strings,
   translate,
-  TEXT_INPUT_FONT,
-  TEXT_INPUT_FONT_MEDIUM
+  FONT_REGULAR,
+  FONT_MEDIUM
 } from '../../i18n.js';
 
 import {
@@ -114,8 +114,8 @@ class CreditCardCreate extends Component {
             cvc: strings('CreditCard.cvc'),
             name: strings('CreditCard.name')
           }}
-          labelStyle={{ fontSize: 13, fontFamily: TEXT_INPUT_FONT_MEDIUM, color: 'black' }}
-          inputStyle={{ fontSize: 15, fontFamily: TEXT_INPUT_FONT, color: 'black' }}
+          labelStyle={{ fontSize: 13, fontFamily: FONT_MEDIUM(), color: 'black' }}
+          inputStyle={{ fontSize: 15, fontFamily: FONT_REGULAR(), color: 'black' }}
           onChange={this.onChange.bind(this)}
           requiresName
           autoFocus

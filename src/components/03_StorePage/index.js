@@ -32,7 +32,7 @@ import {
 import {
   strings,
   translate,
-  TEXT_INPUT_FONT_LIGHT
+  FONT_LIGHT
 } from '../../i18n.js';
 
 import styles from './styles';
@@ -198,12 +198,12 @@ class StorePage extends Component {
           tabTextStyle={{
             fontSize: 14,
             color: '#8E8E93',
-            fontFamily: TEXT_INPUT_FONT_LIGHT
+            fontFamily: FONT_LIGHT()
           }}
           activeTabTextStyle={{
             fontSize: 14,
             color: '#2DD38F',
-            fontFamily: TEXT_INPUT_FONT_LIGHT
+            fontFamily: FONT_LIGHT()
           }}
         />
         <View

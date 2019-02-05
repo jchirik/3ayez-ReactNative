@@ -39,9 +39,17 @@ export const translate = (data) => {
 }
 
 
-export const TEXT_INPUT_FONT = (store.getState().Settings.locale === 'ar') ? 'Cairo-Regular' : 'Poppins-Regular';
-export const TEXT_INPUT_FONT_MEDIUM = (store.getState().Settings.locale === 'ar') ? 'Cairo-SemiBold' : 'Poppins-Medium';
-export const TEXT_INPUT_FONT_LIGHT = (store.getState().Settings.locale === 'ar') ? 'Cairo-Light' : 'Poppins-Light';
+export const FONT_REGULAR = () => {
+  // this HAS to be a function so it executes while rendering
+  return (store.getState().Settings.locale === 'ar') ? 'Cairo-Regular' : 'Poppins-Regular';
+}
+export const FONT_MEDIUM  = () => {
+  return (store.getState().Settings.locale === 'ar') ? 'Cairo-SemiBold' : 'Poppins-Medium';
+}
+
+export const FONT_LIGHT = () => {
+  return (store.getState().Settings.locale === 'ar') ? 'Cairo-Light' : 'Poppins-Light';
+}
 
 
 

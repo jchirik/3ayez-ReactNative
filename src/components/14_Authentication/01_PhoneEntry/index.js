@@ -34,7 +34,7 @@ import {
 import {
   strings,
   translate,
-  TEXT_INPUT_FONT
+  FONT_REGULAR
 } from '../../../i18n.js';
 
 class PhoneEntry extends Component {
@@ -96,7 +96,7 @@ class PhoneEntry extends Component {
             flex: 1,
             paddingLeft: 6,
             fontSize: 14,
-            fontFamily: TEXT_INPUT_FONT
+            fontFamily: FONT_REGULAR()
           }}
           placeholder={strings('Authentication.numberEntryPlaceholder')}
           placeholderTextColor={'#8E8E93'}

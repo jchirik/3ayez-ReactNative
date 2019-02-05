@@ -76,7 +76,7 @@ class StoreShelf extends Component {
     return (
       <View style={styles.headerContainer}>
         <BackButton style={{ marginLeft: 5 }} />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <AyezText medium size={18}>
             {translate(title)}
           </AyezText>

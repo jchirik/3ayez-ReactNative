@@ -35,8 +35,8 @@ import {
 import {
   strings,
   translate,
-  TEXT_INPUT_FONT,
-  TEXT_INPUT_FONT_MEDIUM
+  FONT_REGULAR,
+  FONT_MEDIUM
 } from '../../i18n.js';
 
 const cameraIcon = require('../../../assets/images_v2/Support/camera.png');
@@ -87,11 +87,11 @@ class SupportChat extends Component {
         textStyle={{
           right: {
             color: 'white',
-            fontFamily: TEXT_INPUT_FONT
+            fontFamily: FONT_REGULAR()
           },
           left: {
             color: '#464646',
-            fontFamily: TEXT_INPUT_FONT
+            fontFamily: FONT_REGULAR()
           }
         }}
         wrapperStyle={{
@@ -114,7 +114,7 @@ class SupportChat extends Component {
         {...props}
         textStyle={{
           color: AYEZ_GREEN,
-          fontFamily: TEXT_INPUT_FONT_MEDIUM,
+          fontFamily: FONT_MEDIUM(),
           fontSize: 12,
         }}
         wrapperStyle={{
@@ -262,7 +262,7 @@ class SupportChat extends Component {
           renderInputToolbar={this.renderInputToolbar}
           textInputProps={{
             fontSize: 14,
-            fontFamily: TEXT_INPUT_FONT_MEDIUM,
+            fontFamily: FONT_MEDIUM(),
           }}
           bottomOffset={-12}
           dateFormat={'ll'}

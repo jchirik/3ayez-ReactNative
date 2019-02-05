@@ -21,7 +21,9 @@ const SearchHeader = ({
   onFilterPress,
   onFilterValueSelected,
   radioProps,
-  showFilter
+  showFilter,
+
+  seller
 }) => (
   <View
     style={{
@@ -39,7 +41,7 @@ const SearchHeader = ({
         reference={reference}
         color={'#8e8e9359'}
         containerStyle={{ flex: 1, marginRight: 16 }}
-        placeholder={strings('StoreSearch.placeholder', { seller_name: translate(this.props.seller.display_name) })}
+        placeholder={strings('StoreSearch.placeholder', { seller_name: translate(seller.display_name) })}
         searchQuery={searchQuery}
         onQueryDidChange={onQueryDidChange}
         onSubmitEditing={onSubmitEditing}

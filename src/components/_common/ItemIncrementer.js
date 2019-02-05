@@ -41,7 +41,7 @@ class ItemIncrementer extends PureComponent {
           style={{ ...styles.mainContainer, ...style }}
           onPress={this.incrementItem}
         >
-          <AyezText style={{ ...styles.addItemText, color }}>
+          <AyezText regular style={{ ...styles.addItemText, color }}>
             {strings('Common.3ayez')}
           </AyezText>
         </TouchableOpacity>
@@ -80,7 +80,6 @@ const styles = {
     elevation: 5
   },
   addItemText: {
-    fontSize: 14,
     flex: 1,
     textAlign: 'center',
     alignSelf: 'center'

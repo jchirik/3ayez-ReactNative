@@ -4,7 +4,7 @@ import {
   View
 } from 'react-native';
 
-import { TEXT_INPUT_FONT } from '../../i18n.js';
+import { FONT_REGULAR } from '../../i18n.js';
 
 const InputField = ({
   style,
@@ -35,7 +35,7 @@ const styles = {
     color: 'black',
     height: 40,
     fontSize: 13,
-    fontFamily: TEXT_INPUT_FONT,
+    fontFamily: FONT_REGULAR(),
     backgroundColor: 'white',
     borderRadius: 8,
     paddingLeft: 20,

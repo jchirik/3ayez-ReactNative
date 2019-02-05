@@ -132,7 +132,7 @@ class ItemPage extends Component {
       //   this._showDeliveryDelayModal()}
     return (
       <View style={styles.container}>
-        <ScrollView style={{ flex: 1, paddingTop: 48, paddingLeft: 24, paddingRight: 24 }}>
+        <ScrollView style={{ flex: 1, paddingTop: 48, marginLeft: 24, marginRight: 24 }}>
             <TouchableOpacity
               onPress={() => Actions.itemImageView({ imageUrl: image_url })}
               style={{ alignSelf: 'center' }}

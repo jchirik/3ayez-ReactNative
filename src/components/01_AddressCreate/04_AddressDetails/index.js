@@ -30,7 +30,7 @@ import {
 import {
   strings,
   translate,
-  TEXT_INPUT_FONT_MEDIUM
+  FONT_MEDIUM
 } from '../../../i18n.js';
 
 // import { Circle } from 'react-native-progress';
@@ -147,7 +147,6 @@ class AddressDetails extends Component {
             {strings('Address.region')}
           </AyezText>
           <AyezText semibold size={13} style={{
-            flex: 1,
             alignItems: 'stretch',
             paddingLeft: 6,
             color: '#0094ff'
@@ -164,35 +163,33 @@ class AddressDetails extends Component {
     return (
       <View style={{
         height: 60,
-        paddingLeft: 16,
-        paddingRight: 16,
+        marginLeft: 16,
+        marginRight: 16,
         flexDirection: 'row',
         alignItems: 'center',
         borderColor: '#EAEAEA',
         borderBottomWidth: 1
       }}>
-        <AyezText semibold style={{
-          fontSize: 15,
-          width: 126
-        }}>
-          {title}
-        </AyezText>
-        <TextInput
-          style={{
-            flex: 1,
-            alignItems: 'stretch',
-            paddingLeft: 12,
-            fontSize: 14,
-            fontFamily: TEXT_INPUT_FONT_MEDIUM,
-            color: 'black'
-          }}
-          placeholder={required ? 'required' : 'optional'}
-          placeholderTextColor={'#8E8E93'}
-          value={this.props[param]}
-          onChangeText={(text) => this.onChangeText(param, text)}
-          underlineColorAndroid='transparent'
-          autoCorrect={false}
-          />
+        <View style={{ width: 126, alignItems: 'flex-start' }}>
+          <AyezText semibold size={15}>{title}</AyezText>
+        </View>
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
+          <TextInput
+            style={{
+              alignItems: 'stretch',
+              paddingLeft: 12,
+              fontSize: 14,
+              fontFamily: FONT_MEDIUM(),
+              color: 'black'
+            }}
+            placeholder={required ? 'required' : 'optional'}
+            placeholderTextColor={'#8E8E93'}
+            value={this.props[param]}
+            onChangeText={(text) => this.onChangeText(param, text)}
+            underlineColorAndroid='transparent'
+            autoCorrect={false}
+            />
+          </View>
       </View>
     )
   }

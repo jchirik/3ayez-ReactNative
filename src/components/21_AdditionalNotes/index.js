@@ -21,7 +21,7 @@ import {
 import {
   strings,
   translate,
-  TEXT_INPUT_FONT
+  FONT_REGULAR
 } from '../../i18n.js';
 
 
@@ -60,7 +60,7 @@ class AdditionalNotes extends Component {
             borderColor: '#EAEAEA',
             borderTopWidth: 1,
             borderBottomWidth: 1,
-            fontFamily: TEXT_INPUT_FONT,
+            fontFamily: FONT_REGULAR(),
             fontSize: 14
           }}
           onChangeText={(text) => this.setState({ text })}

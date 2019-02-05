@@ -5,7 +5,7 @@ import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
 
-import { TEXT_INPUT_FONT } from '../../i18n.js';
+import { FONT_REGULAR } from '../../i18n.js';
 
 import { RTLImage } from './RTLImage';
 
@@ -68,7 +68,7 @@ const SearchBar = ({
           alignSelf: 'stretch',
           paddingLeft: 12,
           fontSize: 14,
-          fontFamily: TEXT_INPUT_FONT,
+          fontFamily: FONT_REGULAR(),
         }}
         placeholder={placeholder}
         placeholderTextColor={'#8E8E93'}

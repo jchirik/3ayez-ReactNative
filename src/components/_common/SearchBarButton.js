@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { strings, translate } from '../../i18n';
+import { AyezText } from '.'
 import { Actions } from 'react-native-router-flux';
 import colors from '../../theme/colors';
 import searchBarImage from '../../../assets/images_v2/search.png';
@@ -20,28 +21,29 @@ class SearchBarButton extends React.Component {
       placeHolder = strings('StoreSearch.placeholder', { seller_name: translate(displayName) });
     }
     return (
-      <View style={[styles.searchBar, { width }, style]}>
-        <Image source={searchBarImage} style={styles.searchBarImage} />
-        <TouchableOpacity
-          style={styles.container}
-          onPress={() => {
-            Actions.storeSearch();
-          }}
-        >
-          <Text numberOfLines={1} style={styles.searchBarText}>
+      <TouchableOpacity
+        style={[styles.searchBar, { width }, style]}
+        onPress={() => {
+          Actions.storeSearch();
+        }}
+      >
+          <Image
+            source={searchBarImage}
+            resizeMode={'contain'}
+            style={styles.searchBarImage}
+            />
+          <AyezText regular numberOfLines={1} style={styles.searchBarText}>
             {placeHolder}
-          </Text>
-        </TouchableOpacity>
-      </View>
+          </AyezText>
+      </TouchableOpacity>
     );
   }
 }
 
 const styles = {
-  container: { flex: 1, backgroundColor: colors.white, marginRight: 5 },
   searchBar: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: colors.white,
     borderWidth: 0.5,
@@ -51,27 +53,15 @@ const styles = {
     borderRadius: 5,
   },
   searchBarImage: {
-    marginVertical: 20,
-    height: 25,
-    width: 25,
-    resizeMode: 'stretch',
-    alignItems: 'center',
+    height: 28,
+    width: 28,
+    marginLeft: 5,
+    marginRight: 4,
     tintColor: colors.borderGrey
   },
   searchBarText: {
-    flex: 1,
-    fontFamily: 'Poppins',
     fontSize: 12,
-    marginRight: 5,
-    lineHeight: 41,
     color: colors.steel
-  },
-  basketButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 40,
-    marginLeft: '3.5%',
-    marginRight: '7.5%'
   }
 };
 

@@ -2,67 +2,67 @@
   "Common": {
     "3ayez": "عايز",
     "myBasket": "السلة",
-    "OK": "OK",
-    "submit": "Submit",
-    "next": "Next",
-    "confirm": "Confirm",
-    "continue": "Continue",
+    "OK": "موافق",
+    "submit": "موافقة",
+    "next": "التالي",
+    "confirm": "تأكيد",
+    "continue": "إستكمال",
     "change": "تغيير",
-    "login": "Login",
-    "logout": "Logout",
-    "add": "Add",
-    "edit": "Edit",
-    "search": "Search",
-    "close": "Close",
-    "seeAll": "see all",
-    "noResults": "No results",
-    "noInternet": "No Internet",
-    "refresh": "Refresh",
-    "viewMore": "View more",
-    "english": "English",
-    "arabic": "Arabic"
+    "login": "دخول",
+    "logout": "خروج",
+    "add": "إضافة",
+    "edit": "تعديل",
+    "search": "بحث",
+    "close": "إغلاق",
+    "seeAll": "أنظر الكل",
+    "noResults": "لا توجد نتائج",
+    "noInternet": "لا يوجد انترنت",
+    "refresh": "تحديث",
+    "viewMore": "أظهر أكثر",
+    "english": "إنجليزي",
+    "arabic": "عربي"
   },
   "SystemPermissions": {
-    "currentLocationTitle": "3ayez Location Permission",
-    "currentLocationMessage": "3ayez needs your current location to find nearby stores"
+    "currentLocationTitle": "عايز إذن الموقع",
+    "currentLocationMessage": "عايز تحتاج الموقع الحالى لإيجاد أقرب محل تجاري"
   },
   "HomeTabs": {
-    "stores": "Stores",
-    "support": "Support"
+    "stores": "محلات تجارية",
+    "support": "دعم"
   },
   "Address": {
-    "singleLine": "{{street}}, Building {{building}}, Apt {{apt}}",
-    "detail": "Building {{building}}, Apt {{apt}}",
+    "singleLine": "{{street}}, مبني {{building}}, شقة {{apt}}",
+    "detail": "مبني {{building}}, شقة {{apt}}",
     "name": "الاسم:",
-    "region": "Region:",
+    "region": "المنطقة:",
     "street": "الشارع / الحي:",
     "building": "رقم المبني:",
     "apt": "الشقة رقم:",
-    "instructions": "Instructions:",
+    "instructions": "تعليمات:",
   },
   "Items": {
     "savingsText": "وفر {{savings}} جنيه",
-    "weightsVary": "Exact weight may vary",
-    "limit": "limit {{max_limit}} per order",
+    "weightsVary": "قد يختلف الوزن قليلاً",
+    "limit": "الحد {{max_limit}} للطلب الواحد ",
     "outOfStock": "لا توجد اصناف متاحه",
   },
   "Receipt": {
-    "summary": "Summary",
-    "orderNumber": "Order #{{order_number}}",
-    "total": "Total",
-    "subtotal": "Subtotal",
-    "deliveryFee": "Delivery Fee",
-    "tip": "Tip",
-    "coupon": "Coupon ({{code}})"
+    "summary": "ملخص",
+    "orderNumber": "الطلب #{{order_number}}",
+    "total": "الإجمالي",
+    "subtotal": "الجمع",
+    "deliveryFee": "رسوم التوصيل",
+    "tip": "الباقي",
+    "coupon": "الكوبون ({{code}})"
   },
   "DeleteConfirmation": {
-    "query": "Are you sure you want to delete?",
-    "confirm": "Yes, delete",
-    "cancel": "No"
+    "query": "هل أنت متأكد من الحذف ؟",
+    "confirm": "نعم , أحذف",
+    "cancel": "لا"
   },
   "PaymentMethod": {
-    "cash": "Cash",
-    "creditCard": "Credit Card"
+    "cash": "كاش",
+    "creditCard": "بطاقة الإئتمان"
   },
   "CreditCard": {
     "addCard": "بطاقة ائتمان",
@@ -70,165 +70,165 @@
     "expiry": "الإنتهاء",
     "cvc": "رمز التحقق",
     "name": "الإسم كما يظهر على البطاقة ",
-    "expiryText": "Exp. {{month}}/{{year}}",
-    "errorAddingCard": "Error adding card"
+    "expiryText": "إنتهاء. {{month}}/{{year}}",
+    "errorAddingCard": "خطأ بإضافة الكارت"
   },
   "OrderStatusBar": {
     "trackOrder": "لمتابعة اخر اوردر",
-    "multipleOrders": "Multiple ongoing orders"
+    "multipleOrders": "طلبات متعددة مستمرة"
   },
   "Tutorial": {
-    "getStarted": "Get Started",
-    "switchEnglish": "Switch to English",
-    "switchArabic": "Switch to Arabic",
-    "t1header": "Conveniently Order Online",
-    "t2header": "Shop Easier",
-    "t3header": "Track your delivery in real time",
-    "registerCustomer": "Register as a Customer",
-    "continueGuest": "Continue as a Guest"
+    "getStarted": "البدء",
+    "switchEnglish": "تحويل إلى اللغة الإنجليزية",
+    "switchArabic": "تحويل إلى اللغة العربية",
+    "t1header": "أرتاح وأطلب أونلاين",
+    "t2header": "تسوق بسهولة",
+    "t3header": "تابع طلبك في الطريق",
+    "registerCustomer": "سجل كعميل",
+    "continueGuest": "الدخول كزائر"
   },
   "AddressCreate": {
-    "queryCL": "Would you like to use your location to find stores in your area?",
-    "allowCL": "YES, ALLOW",
-    "denyCL": "Search for my location manually",
-    "issueDeterminingCL": "Issue determining location",
-    "addressSearchHeader": "DELIVERY ADDRESS",
-    "addressSearchInstruction": "Let us know where you are to send your orders",
-    "addressSearchPlaceholder": "search for new address, city, street",
-    "noLocationSearchResults": "No results",
-    "addressRefineHeader": "REFINE LOCATION",
-    "addressRefineInstruction": "Refine your location by dragging the pin",
-    "addressRefineConfirm": "SELECT LOCATION",
-    "confirmHeader": "ENTER ADDRESS",
-    "confirmDeliveringTo": "Delivering to:",
-    "confirmMissingInformation": "Please fill all information"
+    "queryCL": "هل تريد إستخدام موقعك الحالي للتعرف علي أقرب محل تجاري بالمنطقة ؟",
+    "allowCL": "نعم , أقبل",
+    "denyCL": "البحث عن موقعي يدوياً",
+    "issueDeterminingCL": "مشكلة بتحديد الموقع",
+    "addressSearchHeader": "عنوان التوصيل",
+    "addressSearchInstruction": "دعنا نتعرف علي مكانك لإرسال طلبك",
+    "addressSearchPlaceholder": "البحث عن عنوان جديد , مدينة , شارع",
+    "noLocationSearchResults": "لا توجد نتائج",
+    "addressRefineHeader": "تحديد الموقع",
+    "addressRefineInstruction": "حدد موقعك عن طريق سحب الدبوس",
+    "addressRefineConfirm": "أختار الموقع",
+    "confirmHeader": "أدخل العنوان",
+    "confirmDeliveringTo": "إرسال إلى :",
+    "confirmMissingInformation": "من فضلك أملأ كامل البيانات"
   },
   "StoreSelect": {
-    "deliveringTo": "DELIVERING TO",
-    "minTotal": "Min. {{min}}",
-    "openHours": "Open {{start}} - {{end}}",
-    "numRatings": "{{num_reviews}} Ratings",
-    "deliveryTime": "{{delivery_time}} min. delivery"
+    "deliveringTo": "توصيل إلى",
+    "minTotal": "دقيقة. {{min}}",
+    "openHours": "مفتوح {{start}} - {{end}}",
+    "numRatings": "{{num_reviews}} تقييم",
+    "deliveryTime": "{{delivery_time}} دقيقة. توصيل"
   },
   "Support": {
-    "header": "Support",
-    "contact3ayez": "CONTACT 3AYEZ",
-    "chatWithUs": "Chat with us",
-    "start": "START",
-    "settings": "SETTINGS"
+    "header": "الدعم",
+    "contact3ayez": "أتصل بعايز",
+    "chatWithUs": "تحدث معنا",
+    "start": "أبدأ",
+    "settings": "الإعدادات"
   },
   "StoreHome": {
-    "featured": "Featured",
-    "categories": "Categories"
+    "featured": "متميز",
+    "categories": "الأقسام"
   },
   "StoreSearch": {
-    "placeholder": "find products within {{seller_name}}"
+    "placeholder": "العثور على المنتجات داخل {{seller_name}}"
   },
   "StoreShelf": {
-    "backTo": "Back To"
+    "backTo": "الرجوع إلى"
   },
   "ItemView": {
-    "selectProduceRipeness": "Select Produce Ripeness:",
-    "ripenessRipe": "Ripe",
-    "ripenessNormal": "Normal",
-    "ripenessGreen": "Green",
-    "additionalInstructionsHeader": "Additional Instructions",
-    "additionalInstructionsField": "Additional Instructions:",
-    "instructionsPlaceholder": "Write notes",
-    "callMe": "Call me when selecting this product"
+    "selectProduceRipeness": "أختار نضوج المنتج",
+    "ripenessRipe": "ناضج",
+    "ripenessNormal": "طبيعي",
+    "ripenessGreen": "أخضر",
+    "additionalInstructionsHeader": "تعليمات إضافية",
+    "additionalInstructionsField": "تعليمات إضافية:",
+    "instructionsPlaceholder": "كتابة التعليقات",
+    "callMe": "أتصل بنا عند أختيارك لهذا المنتج"
   },
   "WorkingBasket": {
-    "couponDiscount": "Discount: {{amount}}",
-    "addCoupon": "+ Add Coupon",
-    "clearOrder": "Empty Basket",
-    "nothingInBasket": "Nothing in your basket!",
-    "emptyCartTitle": "Your cart is empty",
-    "emptyCartSubtitle": "Make your basket happy and add products to it",
-    "loginToContinue": "Login to Continue",
-    "clearBasketModalHeader": "Are you sure you want to remove all items from the cart?",
-    "clearBasketModalCancel": "No, It was a mistake",
-    "clearBasketModalConfirm": "Yes, Sure",
-    "minimumOrderModal": "min. {{min}} for {{seller_name}}"
+    "couponDiscount": "تخفيض: {{amount}}",
+    "addCoupon": "+ إضافة كوبون",
+    "clearOrder": "سلة فارغة",
+    "nothingInBasket": "لا شئ داخل السلة!",
+    "emptyCartTitle": "عربة التسوق فارغة",
+    "emptyCartSubtitle": "أجعل عربة التسوق سعيدة وأضف المنتجات إليها",
+    "loginToContinue": "سجل للدخول",
+    "clearBasketModalHeader": "هل أنت متأكد من إزالة كل المنتجات من عربة التسوق",
+    "clearBasketModalCancel": "لا , هذا خطأ",
+    "clearBasketModalConfirm": "نعم , بالتأكيد",
+    "minimumOrderModal": "دقيقة. {{min}} لـــ {{seller_name}}"
   },
   "TimeslotSelect": {
-    "header": "Schedule Order"
+    "header": "رتب طلبك"
   },
   "Checkout": {
-    "header": "Checkout",
-    "addressField": "Address:",
-    "deliveryTimeField": "Delivery Time:",
-    "paymentMethodField": "Payment Method:",
-    "tipField": "Tip:",
-    "additionalNotesField": "Additional Notes:",
-    "additionalNotesHeader": "Additional Notes",
-    "smartTipSuggestions": "Smart tip suggestions help you round your total",
-    "sendOrder": "SEND ORDER"
+    "header": "خروج",
+    "addressField": "العنوان:",
+    "deliveryTimeField": "وقت التوصيل :",
+    "paymentMethodField": "طريقة الدفع:",
+    "tipField": "الباقي:",
+    "additionalNotesField": "ملاحظات إضافية:",
+    "additionalNotesHeader": "ملاحظات إضافية",
+    "smartTipSuggestions": "إقتراح لتقريب المجموع الخاص بطلبك",
+    "sendOrder": "إرسال الطلب"
   },
   "CreditCardSelection": {
-    "header": "SAVED CARDS",
-    "addNewCard": "ADD NEW CARD"
+    "header": "الكروت المحفوظة",
+    "addNewCard": "إضافة كارت جديد"
   },
   "AddressSelection": {
-    "header": "RECENT ADDRESSES",
-    "addNewAddress": "ADD NEW ADDRESS"
+    "header": "أخر العناوين",
+    "addNewAddress": "إضافة عنوان جديد"
   },
   "OrderStatus": {
-    "awaitingStore": "Awaiting Store",
-    "scheduled": "Scheduled",
-    "preparingInStore": "Preparing in Store",
-    "assigningDriver": "Assigning Driver",
-    "inDelivery": "In Delivery",
-    "completed": "Completed",
-    "cancelled": "Cancelled",
-    "rejectedByStore": "Rejected by Store"
+    "awaitingStore": "في إنتظار المتجر",
+    "scheduled": "المجدول",
+    "preparingInStore": "يتم التحضير في المتجر",
+    "assigningDriver": "تعيين مندوب توصيل",
+    "inDelivery": "جاري الإرسال",
+    "completed": "أنتهى",
+    "cancelled": "ملغى",
+    "rejectedByStore": "تم الرفض بواسطة المتجر"
   },
   "OrderStatusLog": {
-    "confirmedOrder": "{{seller_name}} confirmed your order",
-    "preparedOrder": "{{seller_name}} finished preparing your order",
-    "deliveringOrder": "Driver is on his way with your order",
-    "completedOrder": "Order delivered"
+    "confirmedOrder": "{{seller_name}} أكد طلبك",
+    "preparedOrder": "{{seller_name}} أنهي تحضير طلبك",
+    "deliveringOrder": "مندوب التوصيل في الطريق بالطلب الخاص بك",
+    "completedOrder": "تم توصيل طلبك"
   },
   "OrderTracker": {
-    "header": "Track you order",
-    "trackDelivery": "TRACK DELIVERY ON MAP",
-    "problem": "ANY PROBLEM?"
+    "header": "تتبع الطلب",
+    "trackDelivery": "تتبع مندوب التوصيل علي الخريطة",
+    "problem": "هل هناك مشاكل ؟"
   },
   "OrderSummary": {
-    "orderSummary": "Order Summary",
-    "statusField": "Status:",
-    "addressHeader": "ADDRESS",
-    "deliveryTimeHeader": "DELIVERY TIME",
-    "paymentHeader": "PAYMENT",
-    "orderItemsHeader": "ORDER ITEMS",
-    "summaryHeader": "SUMMARY"
+    "orderSummary": "ملخص الطلب",
+    "statusField": "الحالة:",
+    "addressHeader": "العنوان",
+    "deliveryTimeHeader": "وقت التوصيل",
+    "paymentHeader": "الدفع",
+    "orderItemsHeader": "أصناف الطلب",
+    "summaryHeader": "الملخص"
   },
   "DriverTracker": {
-    "noLocation": "Driver location unavailable"
+    "noLocation": "موقع مندوب التوصيل غير متاح"
   },
   "OrderProblem": {
-    "header": "Order Problem",
-    "contactSupport": "CONTACT SUPPORT",
+    "header": "مشكلة الطلب",
+    "contactSupport": "أتصل بالدعم",
     "cancelOrder": "إلغاء الطلب",
-    "cancelOrderModal": "Ae you sure you want to cancel?",
-    "cancelOrderConfirm": "Yes, sure",
-    "cancelOrderCancel": "No"
+    "cancelOrderModal": "هل أنت متأكد من أنك تريد الإلغاء ؟",
+    "cancelOrderConfirm": "نعم , بالتأكيد",
+    "cancelOrderCancel": "لا"
   },
   "Settings": {
-    "header": "SETTINGS",
-    "welcome": "Welcome {{name}}",
-    "madeinEG": "Made in 🇪🇬",
-    "myAccount": "My Account",
-    "information": "Information",
-    "addressBook": "Address Book",
-    "creditCards": "Credit Cards",
-    "previousOrders": "Previous Orders",
-    "language": "Language",
-    "termsConditions": "Terms & Conditions",
-    "privacyPolicy": "Privacy Policy",
-    "selectLanguage": "Select your language",
-    "logoutModal": "Ae you sure you want to log out?",
-    "logoutConfirm": "Yes, logout",
-    "logoutCancel": "No"
+    "header": "الإعدادات",
+    "welcome": "مرحباً {{name}}",
+    "madeinEG": "صنع في مصر",
+    "myAccount": "حسابي",
+    "information": "معلومات",
+    "addressBook": "دليل العناوين",
+    "creditCards": "بطاقات الإئتمان",
+    "previousOrders": "الطلبات السابقة",
+    "language": "اللغة",
+    "termsConditions": "البنود & الإتفاقيات",
+    "privacyPolicy": "سياسة الخصوصية",
+    "selectLanguage": "أختار لغتك",
+    "logoutModal": "هل أنت متأكد من أتك تريد الخروج ؟",
+    "logoutConfirm": "نعم , أريد الخروج",
+    "logoutCancel": "لا"
   },
   "OrderHistory": {
     "header": "جميع الطلبات",
@@ -236,48 +236,48 @@
     "past": "الماضي"
   },
   "CouponModal": {
-    "header": "Submit Coupon",
-    "description": "Apply coupon code for discounts",
-    "placeholder": "write your coupon code here",
-    "accepted": "{{code}} accepted!",
-    "couponSavings": "{{amount}} off your order",
-    "removeCoupon": "Remove Coupon",
-    "reenterCoupon": "Reenter Coupon",
-    "couponError": "Please revise the coupon entered and continue",
+    "header": "تأكيد الكوبون",
+    "description": "تطبيق كود الكوبون للحصول على الخصومات",
+    "placeholder": "أكتب كود الكوبون هنا",
+    "accepted": "{{code}} مقبول!",
+    "couponSavings": "{{amount}} خارج طلبك",
+    "removeCoupon": "إزالة الكوبون",
+    "reenterCoupon": "إعادة إدخال الكوبون",
+    "couponError": "برجاء مراجعة الكوبون الذي قمت بإدخاله ثم الإستكمال",
     "invalid": "لا يمكن تطبيق الكوبون",
     "firstTimeOnly": "يستخدم فقط علي اول اوردر",
     "alreadyUsed": "الكوبون مستخدم من قبل"
   },
   "OrderReview": {
-    "reviewRequired": "Review Required",
-    "reviewDescription": "Your order requires some action. Please revise these items and continue.",
-    "start": "Take action",
-    "reviewItemHeader": "Review Item ({{index}}/{{total}})",
-    "replaceInstruction": "Replace with another item",
-    "confirmReplacement": "Confirm Replacement",
-    "skipItem": "Skip this item",
-    "reviewSummaryHeader": "Review",
-    "newItems": "New Items",
-    "existingItems": "Existing",
-    "removedItems": "Removed",
-    "countdown": "{{time}} remaining"
+    "reviewRequired": "المراجعة مطلوبة",
+    "reviewDescription": "يتطلب طلبك بعض الإجراءات. يرجى مراجعة هذه العناصر والمتابعة.",
+    "start": "أبدأ",
+    "reviewItemHeader": "مراجعة صنف ({{index}}/{{total}})",
+    "replaceInstruction": "تبديل مع صنف أخر",
+    "confirmReplacement": "تأكيد التبديل",
+    "skipItem": "تخطي هذا الصنف",
+    "reviewSummaryHeader": "مراجعة",
+    "newItems": "أصناف جديدة",
+    "existingItems": "موجودة",
+    "removedItems": "محذوفة",
+    "countdown": "{{time}} متبقي"
   },
   "Authentication": {
-    "numberEntryHeader": "REGISTER USER",
-    "numberEntryInstruction": "Enter your phone number below",
-    "numberEntryPlaceholder": "write your number",
-    "tapNextForSMS": "Press {{next}} to get an SMS confirmation",
-    "verificationHeader": "VERIFICATION CODE",
-    "verificationInstruction": "Enter the code sent to you below",
-    "resend": "Didn't receive code? Resend"
+    "numberEntryHeader": "تسجيل المستخدم",
+    "numberEntryInstruction": "أدخل رقم هاتفك أدناه",
+    "numberEntryPlaceholder": "أكتب رقمك",
+    "tapNextForSMS": "أضغط {{next}} لتلقي رسالة نصية تأكيدية",
+    "verificationHeader": "كود الـتأكيد",
+    "verificationInstruction": "أدخل الكود الذي تم إرساله أدناه",
+    "resend": "لم تتلقي الكود ؟ إعادة الإرسال"
   },
   "SupportChat": {
-    "header": "Support Chat",
-    "inputPlaceholder": "Send a message..."
+    "header": "الدعم بالدردشة",
+    "inputPlaceholder": "إرسل رسالة ..."
   },
   "CustomerFeedback": {
-    "orderArrived": "Your order has arrived!",
-    "rateStoreTitle": "Please rate {{seller_name}}",
-    "rate3ayezTitle": "How was the 3ayez service?"
+    "orderArrived": "طلبك قد وصل !",
+    "rateStoreTitle": "من فضلك قم بتقييم {{seller_name}}",
+    "rate3ayezTitle": "كيف كانت خدمة عايز ؟"
   }
 }
