@@ -109,7 +109,8 @@
     "minTotal": "دقيقة. {{min}}",
     "openHours": "مفتوح {{start}} - {{end}}",
     "numRatings": "{{num_reviews}} تقييم",
-    "deliveryTime": "{{delivery_time}} دقيقة. توصيل"
+    "deliveryTime": "{{delivery_time}} دقيقة. توصيل",
+    "nextDelivery": "الوقت التالي للطلب"
   },
   "Support": {
     "header": "الدعم",

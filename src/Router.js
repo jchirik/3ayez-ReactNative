@@ -44,7 +44,7 @@ import StoreShelf from './components/06_StoreShelf';
 import ItemPage from './components/07_ItemPage';
 import ItemImageView from './components/07_ItemPage/_components/ItemImageView';
 import WorkingBasket from './components/08_WorkingBasket';
-import AddProduct from './components/10_AddProduct';
+import CustomProduct from './components/10_CustomProduct';
 
 
 import TimeslotSelect from './components/09_TimeslotSelect';
@@ -316,7 +316,6 @@ class RouterComponent extends Component {
                     <Scene key="storeShelf" component={StoreShelf} />
                     <Scene key="itemPage" component={ItemPage} />
                     <Scene key="itemImageView" component={ItemImageView} />
-                    <Scene key="addProduct" component={AddProduct} />
 
                     <Scene key="settings" component={SettingsMenu} />
                     <Scene key="orderHistory" component={OrderHistory} />
@@ -362,6 +361,9 @@ class RouterComponent extends Component {
             <Scene key="addressDetails" component={AddressDetails} />
             <Scene key="addressDetailEdit" component={AddressDetailEdit} />
           </Stack>
+
+
+          <Scene key="customProduct" component={CustomProduct} />
 
 
           <Scene key="creditCardCreate" component={CreditCardCreate} />

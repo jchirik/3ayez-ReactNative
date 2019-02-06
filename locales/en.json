@@ -109,7 +109,8 @@
     "minTotal": "Min. {{min}}",
     "openHours": "Open {{start}} - {{end}}",
     "numRatings": "{{num_reviews}} Ratings",
-    "deliveryTime": "{{delivery_time}} min. delivery"
+    "deliveryTime": "{{delivery_time}} min. delivery",
+    "nextDelivery": "Next Delivery"
   },
   "Support": {
     "header": "Support",
@@ -280,5 +281,14 @@
     "orderArrived": "Your order has arrived!",
     "rateStoreTitle": "Please rate {{seller_name}}",
     "rate3ayezTitle": "How was the 3ayez service?"
+  },
+  "CustomProduct": {
+    "header": "ADD A CUSTOM PRODUCT",
+    "detail": "We will do our best to find your item in the store",
+    "productName": "Product name",
+    "productDescription": "Description",
+    "productQuantity": "How much?",
+    "productQuantityPlaceholder": "e.g. 8 pieces, 250g, 1 box",
+    "addToBasket": "+ Add to Basket",
   }
 }

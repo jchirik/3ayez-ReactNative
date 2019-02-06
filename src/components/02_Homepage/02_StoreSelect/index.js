@@ -286,7 +286,7 @@ renderItem({ item, index }) {
           </View>
 
           <View style={{ alignItems: 'flex-end'}}>
-            <AyezText extralight style={styles.storeDetailText}>{'Next Delivery:'}</AyezText>
+            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.nextDelivery')}</AyezText>
             <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
           </View>
         </View>

@@ -19,7 +19,8 @@ import {
   Header,
   BlockButton,
   LoadingOverlay,
-  AyezText
+  AyezText,
+  InputRow
 } from '../../_common';
 import {
   createNewAddress,
@@ -107,10 +108,9 @@ class AddressDetails extends Component {
     this.props.calculateAreaForLocation(this.props.location);
   }
 
-
-  onChangeText(param, text) {
+  onChangeText(key, value) {
     const update = {};
-    update[param] = text;
+    update[key] = value;
     this.props.setAddressDetail(update);
   }
 
@@ -161,41 +161,6 @@ class AddressDetails extends Component {
     return null
   }
 
-  renderInputField(title, param, required=true, multiline=false) {
-    return (
-      <View style={{
-        height: 60,
-        marginLeft: 16,
-        marginRight: 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderColor: '#EAEAEA',
-        borderBottomWidth: 1
-      }}>
-        <View style={{ width: 126, alignItems: 'flex-start' }}>
-          <AyezText semibold size={15}>{title}</AyezText>
-        </View>
-        <View style={{ flex: 1, alignItems: 'flex-start' }}>
-          <TextInput
-            style={{
-              alignItems: 'stretch',
-              paddingLeft: 12,
-              fontSize: 14,
-              fontFamily: FONT_MEDIUM(),
-              color: 'black'
-            }}
-            placeholder={required ? 'required' : 'optional'}
-            placeholderTextColor={'#8E8E93'}
-            value={this.props[param]}
-            onChangeText={(text) => this.onChangeText(param, text)}
-            underlineColorAndroid='transparent'
-            autoCorrect={false}
-            />
-          </View>
-      </View>
-    )
-  }
-
   renderError() {
     const { error } = this.props;
     if (error === 'INVALID_PARAMETERS') {
@@ -234,12 +199,33 @@ class AddressDetails extends Component {
 
             <View style={{ height: 20 }} />
 
-            { this.renderInputField(strings('Address.street'), 'street') }
-            { this.renderInputField(strings('Address.building'), 'building') }
-            { this.renderInputField(strings('Address.apt'), 'apt') }
-
-            { this.renderInputField(strings('Address.name'), 'name') }
-            { this.renderInputField(strings('Address.instructions'), 'notes', false, true) }
+            <InputRow
+              title={strings('Address.street')}
+              value={this.props.street}
+              onChangeText={this.onChangeText.bind(this, 'street')}
+            />
+            <InputRow
+              title={strings('Address.building')}
+              value={this.props.building}
+              onChangeText={this.onChangeText.bind(this, 'building')}
+            />
+            <InputRow
+              title={strings('Address.apt')}
+              value={this.props.apt}
+              onChangeText={this.onChangeText.bind(this, 'apt')}
+            />
+            <InputRow
+              title={strings('Address.name')}
+              value={this.props.name}
+              onChangeText={this.onChangeText.bind(this, 'name')}
+            />
+            <InputRow
+              title={strings('Address.instructions')}
+              value={this.props.notes}
+              onChangeText={this.onChangeText.bind(this, 'notes')}
+              required={false}
+              multiline={true}
+            />
 
             <View style={{ height: 20 }} />
 

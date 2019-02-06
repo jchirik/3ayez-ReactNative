@@ -28,6 +28,9 @@ import {
   translate
 } from '../../i18n.js';
 
+import customProductIcon from '../../../assets/images_v2/CustomProduct/icon.png';
+
+
 import { SearchHeader } from './_components/SearchHeader';
 
 
@@ -144,9 +147,32 @@ class StoreSearch extends Component {
     const { query, isLoadingSearchData } = this.props;
     if (!query || isLoadingSearchData) { return null; }
     return (
-      <View style={{ backgroundColor: 'green', height: 80}}>
-        <AyezText regular>Customitem?</AyezText>
-      </View>
+      <TouchableOpacity style={{
+        backgroundColor: '#f7f7f7',
+        marginVertical: 10,
+        marginHorizontal: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 8
+      }}
+      onPress={() => Actions.customProduct()}
+      >
+        <Image
+          style={{
+            width: 70,
+            height: 70,
+            marginRight: 10
+          }}
+          source={customProductIcon}
+          resizeMode={'contain'}
+          />
+        <View style={{ flex: 1 }}>
+          <AyezText medium size={16}>Can't find what you're looking for?</AyezText>
+          <AyezText regular size={13} color={'#0094ff'}>Request a product for us to find</AyezText>
+        </View>
+      </TouchableOpacity>
     )
   }
 

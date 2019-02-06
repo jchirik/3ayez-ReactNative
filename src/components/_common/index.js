@@ -12,6 +12,7 @@ export * from './Row';
 
 export ItemTile from './ItemTile';
 export ItemRow from './ItemRow';
+export InputRow from './InputRow';
 export LoadingOverlay from './LoadingOverlay';
 export BottomChoiceSelection from './BottomChoiceSelection';
 export OrderStatusBar from './OrderStatusBar';

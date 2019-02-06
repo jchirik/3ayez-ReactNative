@@ -6,25 +6,14 @@ import {
 
 import { FONT_REGULAR } from '../../i18n.js';
 
-const InputField = ({
-  style,
-  placeholder,
-  value,
-  onChangeText,
-  onSubmitEditing,
-  editable=true
-}) => {
+const InputField = (props) => {
   return (
     <TextInput
-      onChangeText={onChangeText}
-      value={value}
-      placeholder={placeholder}
+      {...props}
       autoCorrect={false}
-      style={[ styles.inputStyle, style ]}
-      onSubmitEditing={onSubmitEditing}
+      style={[ styles.inputStyle, props.style || {} ]}
       autoCapitalize={'none'}
       underlineColorAndroid='transparent'
-      editable={editable}
       autoFocus
     />
   );
