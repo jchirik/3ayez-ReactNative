@@ -24,8 +24,9 @@ import {
   strings,
   translate
 } from '../../../i18n.js';
-// import {
-// } from '../../../actions';
+import {
+  loadSupportManual
+} from '../../../actions';
 
 const support_tile = require('../../../../assets/images_v2/Support/support_tile.png');
 const start_side_arrow = require('../../../../assets/images_v2/Support/start_side_arrow.png');
@@ -39,6 +40,8 @@ class Support extends Component {
     super(props);
   }
   componentDidMount() {
+
+    this.props.loadSupportManual();
     console.log('Support mounted')
   }
 
@@ -225,4 +228,6 @@ const mapStateToProps = ({ SupportManual }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Support);
+export default connect(mapStateToProps, {
+  loadSupportManual
+})(Support);

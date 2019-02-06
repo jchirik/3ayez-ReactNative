@@ -36,7 +36,6 @@ import {
 
 const window = Dimensions.get('window');
 const skeuomorphBasket = require('../../../assets/images/skeuomorph_basket.png');
-const closeCartCross = require('../../../assets/images_v2/close_cart.png');
 const emptyBasketIcon = require('../../../assets/images_v2/empty_basket.png');
 const clearBasket = require('../../../assets/images_v2/clear_basket.png');
 import colors from '../../theme/colors';
@@ -196,10 +195,16 @@ class WorkingBasket extends Component {
     if (this.props.inventoryLoading) {
       return <ActivityIndicator />;
     }
-    // ListHeaderComponent={this.renderDestination()}
+
+    let items = this.props.items_array
+    // sort items_array s.t. custom items are at the end
+    items = items.sort((x, y) => {
+        return (x.is_custom === y.is_custom)? 0 : x.is_custom ? 1 : -1;
+    });
+
     return (
       <FlatList
-        data={this.props.items_array}
+        data={items}
         renderItem={this.renderItem.bind(this)}
         style={styles.itemsList}
         ListFooterComponent={this.renderTableFooter()}

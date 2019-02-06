@@ -135,10 +135,18 @@ export class CollapsibleHeaderScrollView extends React.Component {
           onMomentumScrollBegin={this.onMomentumScrollBegin}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
           onScrollEndDrag={this.onScrollEndDrag}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: this.scrollAnim } } }],
-            { listener: onScroll }
-          )}
+          onScroll={event => {
+            const { y } = event.nativeEvent.contentOffset;
+            const diff = y - this.scrollValue;
+            if (diff <= 0 && y > headerHeight - statusBarHeight) {
+              this.scrollValue = y;
+              return;
+            }
+            Animated.event(
+              [{ nativeEvent: { contentOffset: { y: this.scrollAnim } } }],
+              { listener: onScroll }
+            )(event);
+          }}
         />
         <Animated.View
           style={[

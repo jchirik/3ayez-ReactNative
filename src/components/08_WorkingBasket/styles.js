@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     borderColor: '#E9E9E9'
   },
   headerDetailsContainer: {
+    alignItems: 'flex-start',
     backgroundColor: 'white',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

@@ -79,7 +79,6 @@ export const onSelectSearchSubcategory = (seller_id, subcategory) => {
           items: itemResults,
           jumpIndex: 0
         });
-
       dispatch({ type: SEARCH_SUBCATEGORY_DATA_END });
     }).catch((error) => {
       dispatch({ type: SEARCH_SUBCATEGORY_DATA_END });
@@ -152,26 +151,31 @@ export const onSelectCategory = (sellerID, category) => {
 
 
 
+export const setItemSearchQuery = ({ query }) => {
+  return (dispatch) => {
+    console.log('query', query)
+    dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: { query } });
+  }
+}
+
 
 export const fetchQueryResults = ({ seller, query }) => {
   return (dispatch) => {
 
     console.log('query', query)
-    const trimmedQuery = query.trim() ? query : '';
-
-    dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: { query: trimmedQuery } });
+    dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: { query } });
     const algoliaIndex = algoliaClient.initIndex(seller.id);
-
-
 
     // return;
     // for decent performance, debounce the following part
 
+
+
+    const trimmedQuery = query.trim() ? query : '';
     if (trimmedQuery === '') {
       dispatch({
         type: ITEM_SEARCH_DATA_SET,
         payload: {
-          query: '',
           subcategoryResults: [],
           categoryResults: [],
           itemResults: []
@@ -225,7 +229,7 @@ export const fetchQueryResults = ({ seller, query }) => {
         dispatch({
           type: ITEM_SEARCH_DATA_SET,
           payload: {
-            query: trimmedQuery,
+            query,
             subcategoryResults,
             categoryResults,
             itemResults

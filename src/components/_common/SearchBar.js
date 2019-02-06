@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity, I18nManager } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   STATUS_BAR_HEIGHT
@@ -66,6 +66,7 @@ const SearchBar = ({
         style={{
           flex: 1,
           alignSelf: 'stretch',
+          textAlign: (I18nManager.isRTL ? 'right' : 'left'),
           paddingLeft: 12,
           fontSize: 14,
           fontFamily: FONT_REGULAR(),

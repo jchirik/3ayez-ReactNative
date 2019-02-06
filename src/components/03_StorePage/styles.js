@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   parallaxHeader: {
-    paddingTop: STATUS_BAR_HEIGHT + 18,
+    paddingTop: STATUS_BAR_HEIGHT + 12,
     alignItems: 'center',
     position: 'absolute',
     left: 0,
@@ -82,10 +82,9 @@ const styles = StyleSheet.create({
     right: 0
   },
   store_logo: {
-    marginTop: 10,
     marginBottom: 10,
-    width: 80,
-    height: 80,
+    width: 85,
+    height: 85,
     backgroundColor: 'white',
     borderRadius: 5
   },

@@ -172,7 +172,7 @@ class FeaturedBrowse extends Component {
         style={{ flex: 1 }}
         removeClippedSubviews
         ListEmptyComponent={this.renderEmptyFeatured.bind(this)}
-        ListFooterComponent={null}
+        ListFooterComponent={<View style={{ height: 28 }} />}
         scrollEventThrottle={10}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}

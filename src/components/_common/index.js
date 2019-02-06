@@ -9,6 +9,7 @@ export * from './InputField';
 export * from './SubtleButton';
 export * from './SearchBarButton';
 export * from './Row';
+export * from './CustomItemPrompt';
 
 export ItemTile from './ItemTile';
 export ItemRow from './ItemRow';

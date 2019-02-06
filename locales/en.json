@@ -15,6 +15,7 @@
     "search": "Search",
     "close": "Close",
     "seeAll": "see all",
+    "none": "None",
     "noResults": "No results",
     "noInternet": "No Internet",
     "comingSoon": "Coming Soon 🎉",
@@ -124,7 +125,9 @@
     "categories": "Categories"
   },
   "StoreSearch": {
-    "placeholder": "find products within {{seller_name}}"
+    "placeholder": "find products within {{seller_name}}",
+    "customItemPromptHeader": "Can't find what you're looking for?",
+    "customerItemPromptDescription": "Request a product for us to find"
   },
   "StoreShelf": {
     "backTo": "Back To"
@@ -258,6 +261,9 @@
     "replaceInstruction": "Replace with another item",
     "confirmReplacement": "Confirm Replacement",
     "skipItem": "Skip this item",
+    "quantityChangeInstruction": "There has been a change in quantity",
+    "requestedQuantity": "Requested quantity: {{quantity}}",
+    "availableQuantity": "Available stock: {{quantity}}",
     "reviewSummaryHeader": "Review",
     "newItems": "New Items",
     "existingItems": "Existing",

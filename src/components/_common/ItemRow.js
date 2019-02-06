@@ -3,9 +3,14 @@ import { TouchableOpacity, View, Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import { removeFromBasket } from '../../actions';
+
 import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { strings, translate, formatCurrency } from '../../i18n.js';
 import colors from '../../theme/colors';
+
+const customItemPlaceholder = require('../../../assets/images_v2/CustomProduct/placeholder.png');
+const removeIcon = require('../../../assets/images_v2/Common/remove.png');
 
 
 class ItemRow extends Component {
@@ -41,7 +46,7 @@ class ItemRow extends Component {
     return (
       <View style={{ flexDirection: 'row' }}>
         {previousPriceText ? (
-          <AyezText
+          <AyezText regular
             style={{
               textDecorationLine: 'line-through',
               textDecorationStyle: 'solid',
@@ -52,7 +57,7 @@ class ItemRow extends Component {
           </AyezText>
         ) : null }
 
-        <AyezText>
+        <AyezText regular>
           {mainPriceText}
         </AyezText>
       </View>
@@ -61,12 +66,10 @@ class ItemRow extends Component {
 
   renderQuantity(item, mutableQuantity) {
     if (!mutableQuantity) {
-      const displayedQuantity = `${item.quantity}`;
-
+      let displayedQuantity = `${item.quantity}`;
       if (item.unit) {
         displayedQuantity += item.unit;
       }
-
       return (
         <AyezText
           regular
@@ -79,6 +82,7 @@ class ItemRow extends Component {
         </AyezText>
       );
     }
+
 
     let weightNotification = null;
     if (item.unit) {
@@ -97,7 +101,6 @@ class ItemRow extends Component {
         </AyezText>
       );
     }
-
     return (
       <View>
         <ItemIncrementer
@@ -118,20 +121,82 @@ class ItemRow extends Component {
       mutableQuantity, // passed in as an arg
       noQuantity,
       seller,
-      orderPoints,
-      isSearchResult
+      isSearchResult,
+      invalid
     } = this.props;
 
     let price = parseFloat(item.price);
     let promotionPrice = parseFloat(item.promotion_price);
-    // if (isSearchResult || noQuantity) {
-    //   price = parseFloat(item.price);
-    //   promotionPrice = parseFloat(item.promotion_price);
-    // }
 
-    const points = parseInt(item.points, 10) * item.quantity;
 
-    const isReward = item.type === 'reward';
+
+
+
+    if (item.is_custom) {
+      return (
+        <View
+          style={{
+            borderColor: '#97979722',
+            borderBottomWidth: 1,
+            flex: 1,
+            padding: 8,
+            paddingTop: 12,
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            opacity: invalid ? 0.3 : 1
+          }}
+        >
+          <Image
+            style={{
+              width: 40,
+              height: 40,
+              margin: 9
+            }}
+            resizeMode={'contain'}
+            source={customItemPlaceholder}
+          />
+
+          <View
+            style={{
+              backgroundColor: 'transparent',
+              flex: 1,
+              paddingLeft: 10,
+              paddingRight: 10
+            }}
+          >
+            <AyezText medium size={13}>
+              {item.custom_name}
+            </AyezText>
+            <AyezText regular size={13}>
+              {item.custom_description}
+            </AyezText>
+          </View>
+
+          <AyezText regular style={{ marginHorizontal: 10 }}>
+            {item.custom_amount}
+          </AyezText>
+
+          {(mutableQuantity) ? (
+          <TouchableOpacity
+            onPress={() => this.props.removeFromBasket(item, seller.id)}>
+            <Image
+              source={removeIcon}
+              style={{ width: 14, height: 14, margin: 14, tintColor: 'black'}}
+              resizeMode={'contain'}
+              />
+          </TouchableOpacity>
+        ) : null}
+        </View>
+      );
+    }
+
+
+
+
+
+
+
 
     return (
       <View
@@ -143,20 +208,18 @@ class ItemRow extends Component {
           paddingTop: 12,
           flexDirection: 'row',
           justifyContent: 'flex-start',
-          alignItems: 'center'
+          alignItems: 'center',
+          opacity: invalid ? 0.3 : 1
         }}
       >
-        <View>
-          <PlaceholderFastImage
-            style={{
-              width: 58,
-              height: 58,
-              backgroundColor: '#fff',
-              opacity: item.invalid ? 0.3 : 1
-            }}
-            source={{ uri: item.thumbnail_url }}
-          />
-        </View>
+        <PlaceholderFastImage
+          style={{
+            width: 58,
+            height: 58,
+            backgroundColor: '#fff',
+          }}
+          source={{ uri: item.thumbnail_url }}
+        />
 
         <View
           style={{
@@ -166,18 +229,16 @@ class ItemRow extends Component {
             paddingRight: 10
           }}
         >
-          <View style={{ opacity: item.invalid ? 0.3 : 1 }}>
+          <View>
             {this.renderPrice(price, promotionPrice, item)}
           </View>
           <AyezText
             regular
             size={12}
-            color={item.invalid ? 'red' : 'black'}
+            color={'black'}
             style={{
                 marginBottom: 6,
-                backgroundColor: 'transparent',
-                textDecorationStyle: 'solid',
-                textDecorationLine: item.invalid ? 'line-through' : 'none'
+                backgroundColor: 'transparent'
             }}
           >
             {translate(item)}
@@ -197,5 +258,5 @@ class ItemRow extends Component {
 
 export default connect(
   null,
-  null
+  { removeFromBasket }
 )(ItemRow);

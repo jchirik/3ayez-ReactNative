@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, TextInput, TouchableOpacity, View, I18nManager } from 'react-native';
 
 const exitIcon = require('../../../assets/images/exit.png');
 const searchIcon = require('../../../assets/images/magnifying_glass.png');
@@ -43,7 +43,12 @@ const SearchBar = ({
   const input = (
     <TextInput
       ref={c => reference(c)}
-      style={[styles.searchPlaceholderText, { color: 'black' }]}
+      style={[
+        styles.searchPlaceholderText,
+        {
+          color: 'black',
+          textAlign: (I18nManager.isRTL ? 'right' : 'left'),
+         }]}
       placeholder={placeholder}
       onFocus={onFocus}
       placeholderTextColor={'#8e8e93'}

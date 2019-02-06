@@ -580,7 +580,8 @@ const mapStateToProps = ({ OrderHistory }) => {
   const inactiveOrders = [];
 
   orders.forEach(order => {
-    if ((order.status !== 200 && order.status !== 300) && order.is_seller_relevant) {
+    // active if status < 200, and it has been up to a day after timeslot start
+    if ((order.status < 200) && order.timeslot && (Date.now() - order.timeslot.start < 86400000)) {
       activeOrders.push(order);
     } else {
       inactiveOrders.push(order);

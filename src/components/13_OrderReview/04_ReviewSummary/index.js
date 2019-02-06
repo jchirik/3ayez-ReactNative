@@ -35,17 +35,17 @@ import {
   ItemRow
 } from '../../_common';
 
+const supportIcon = require('../../../../assets/images_v2/Support/icon.png');
+
+
 
 class ReviewSummary extends Component {
 
 
   renderItem({ item, index, section }) {
-    console.log(section)
-    if (section === 2) {
+    if (section.key === 'removed') {
       return (
-        <View style={{ opacity: 0.2 }}>
-          <ItemRow item={item} />
-        </View>
+        <ItemRow item={item} invalid />
       )
     }
     return <ItemRow item={item} />;
@@ -75,6 +75,27 @@ class ReviewSummary extends Component {
       onBack
     } = this.props;
 
+    const sections = [];
+
+    const newItems = substitutions.filter(item => item);
+    if (newItems.length) {
+      sections.push(
+        { key: 'new', title: strings('OrderReview.newItems'), data: newItems }
+      )
+    }
+    const existingItems = items.filter(item => (item.quantity > 0));
+    if (existingItems.length) {
+      sections.push(
+        { key: 'existing', title: strings('OrderReview.existingItems'), data: existingItems }
+      )
+    }
+    const removedItems = items.filter(item => (item.quantity === 0));
+    if (removedItems.length) {
+      sections.push(
+        { key: 'removed', title: strings('OrderReview.removedItems'), data: removedItems }
+      )
+    }
+
     return (
       <View style={{
         flex: 1
@@ -83,6 +104,11 @@ class ReviewSummary extends Component {
         title={strings('OrderReview.reviewSummaryHeader')}
         blackStyle
         onBackButtonPress={() => onBack()}
+        rightButton={{
+          text: strings('Support.header').toUpperCase(),
+          image_source: supportIcon,
+          onPress: () => Actions.supportChat()
+        }}
         />
 
         <SectionList
@@ -90,11 +116,7 @@ class ReviewSummary extends Component {
           removeClippedSubviews
           renderItem={this.renderItem.bind(this)}
           renderSectionHeader={this.renderSectionHeader.bind(this)}
-          sections={[
-            { title: strings('OrderReview.newItems'), data: substitutions.filter(item => item) },
-            { title: strings('OrderReview.existingItems'), data: items.filter(item => (item.quantity > 0)) },
-            { title: strings('OrderReview.removedItems'), data: items.filter(item => (item.quantity === 0)) }
-          ]}
+          sections={sections}
           keyExtractor={(item, index) => index.toString()}
         />
 

@@ -37,6 +37,7 @@ export default class StoreHeader extends Component {
         />
         <Image
           style={{
+            backgroundColor: 'transparent',
             position: 'absolute',
             height: PARALLAX_HEADER_HEIGHT,
             width: '100%',
@@ -46,39 +47,34 @@ export default class StoreHeader extends Component {
           resizeMode="cover"
         />
 
-        <Animated.View style={[
-          disappearingAnimation,
-          { backgroundColor: 'white',
-            borderRadius: 12, paddingVertical: 3,
-            paddingHorizontal: 9 }
-        ]}>
-          <AyezText color={'black'} semibold>{translate(displayName)}</AyezText>
+        <Animated.View style={{
+          ...disappearingAnimation,
+          alignItems: 'center'
+        }}>
+          <Image
+            style={styles.store_logo}
+            resizeMode={'contain'}
+            source={{
+              uri: logo_url
+            }}
+          />
+          <View style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            alignItems: 'center',
+            paddingHorizontal: 30,
+            paddingVertical: 4,
+            borderRadius: 6
+          }}>
+            <AyezText color={'white'} semibold size={13}>{translate(displayName)}</AyezText>
+            <AyezText light color={'white'} size={12}>
+              {strings('StoreSelect.deliveryTime', { delivery_time })}
+            </AyezText>
+          </View>
         </Animated.View>
 
-        <Animated.Image
-          style={[styles.store_logo, disappearingAnimation]}
-          resizeMode={'contain'}
-          source={{
-            uri: logo_url
-          }}
-        />
-        <Animated.View
-          style={[
-            {
-              width: window.width - 70,
-              flexDirection: 'row',
-              justifyContent: 'center'
-            },
-            disappearingAnimation
-          ]}
-        >
-          <AyezText light color={'white'} size={12}>
-            {strings('StoreSelect.deliveryTime', { delivery_time })}
-          </AyezText>
-        </Animated.View>
 
         <AnimatedSearchBarButton
-          style={{ marginTop: 5 }}
+          style={{ marginTop: 15 }}
           width={interpolatedHeaderTranslation('90%', '70%')}
           displayName={displayName}
         />

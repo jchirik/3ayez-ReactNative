@@ -41,9 +41,10 @@ import {
   translate
 } from '../../../i18n.js';
 
-const tutorial_1 = require('../../../../assets/images_v2/Tutorial/tutorial_1.jpg');
-const tutorial_2 = require('../../../../assets/images_v2/Tutorial/tutorial_2.jpg');
-const tutorial_3 = require('../../../../assets/images_v2/Tutorial/tutorial_3.jpg');
+const tutorial_1_en = require('../../../../assets/images_v2/Tutorial/tutorial_1_en.png');
+const tutorial_1_ar = require('../../../../assets/images_v2/Tutorial/tutorial_1_ar.png');
+const tutorial_2 = require('../../../../assets/images_v2/Tutorial/tutorial_2.png');
+const tutorial_3 = require('../../../../assets/images_v2/Tutorial/tutorial_3.png');
 
 const window = Dimensions.get('window');
 
@@ -77,6 +78,12 @@ class TutorialSwipe extends Component {
   }
 
   render() {
+
+    let tutorial_1 = tutorial_1_en;
+    if (this.props.locale === 'ar') {
+      tutorial_1 = tutorial_1_ar;
+    }
+
     return (
       <View style={{
         flex: 1,
@@ -97,7 +104,7 @@ class TutorialSwipe extends Component {
                 }}
                 resizeMode={'contain'}
               />
-              <AyezText semibold style={{
+              <AyezText semibold size={18} style={{
                 marginTop: 20
               }}>{strings('Tutorial.t1header')}</AyezText>
             </View>
@@ -111,7 +118,7 @@ class TutorialSwipe extends Component {
                 }}
                 resizeMode={'contain'}
               />
-              <AyezText semibold style={{
+              <AyezText semibold size={18} style={{
                 marginTop: 20
               }}>{strings('Tutorial.t2header')}</AyezText>
             </View>
@@ -125,7 +132,7 @@ class TutorialSwipe extends Component {
                 }}
                 resizeMode={'contain'}
               />
-              <AyezText semibold style={{
+              <AyezText semibold size={18} style={{
                 marginTop: 20
               }}>{strings('Tutorial.t3header')}</AyezText>
             </View>
@@ -160,12 +167,14 @@ class TutorialSwipe extends Component {
   }
 }
 
-const mapStateToProps = ({ Auth }) => {
+const mapStateToProps = ({ Auth, Settings }) => {
+  const { locale } = Settings;
   const {
     guestlogin_loading,
     guestlogin_error
   } = Auth;
   return {
+    locale,
     guestlogin_loading,
     guestlogin_error
   };

@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import {
   View,
-  TouchableOpacity,
   Image,
+  TouchableOpacity,
   ActivityIndicator,
   ScrollView,
   FlatList,
@@ -36,11 +36,12 @@ import {
   BottomChoiceSelection,
   LoadingOverlay,
   ItemTile,
+  PlaceholderFastImage,
 
   ItemIncrementer
 } from '../../_common';
 
-
+const supportIcon = require('../../../../assets/images_v2/Support/icon.png');
 const swapIcon = require('../../../../assets/images_v2/ReviewOrder/change.png');
 
 
@@ -224,6 +225,11 @@ class SubstitutionPage extends Component {
                 onBack()
               }
             }}
+            rightButton={{
+              text: strings('Support.header').toUpperCase(),
+              image_source: supportIcon,
+              onPress: () => Actions.supportChat()
+            }}
             />
 
           <View style={{
@@ -235,7 +241,7 @@ class SubstitutionPage extends Component {
             margin: 10,
             padding: 14
           }}>
-            <Image
+            <PlaceholderFastImage
               style={{ width: 60, height: 60 }}
               resizeMode={'contain'}
               source={{ uri: item.thumbnail_url }}

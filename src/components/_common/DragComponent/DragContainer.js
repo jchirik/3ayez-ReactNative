@@ -115,14 +115,14 @@ class DragContainer extends React.Component {
             y: 0
           }
         }).start(() => {
-          this.state.draggingComponent.ref.setOpacityTo(1);
+          this.state.draggingComponent.ref.setOpacityTo(1, 0);
           this._locked = false;
           this.setState({
             draggingComponent: null
           });
         });
       }
-      this.state.draggingComponent.ref.setOpacityTo(1);
+      this.state.draggingComponent.ref.setOpacityTo(1, 0);
       this.setState({
         draggingComponent: null
       });

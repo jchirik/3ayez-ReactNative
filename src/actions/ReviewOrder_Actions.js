@@ -22,7 +22,7 @@ const algoliaClient = algoliasearch('BN0VV4WPRI', 'a85a04afca53d5baf47c659ce03d8
 
 
 
-export const submitOrderChanges = (order_id, review_items, substitutions) => {
+export const submitOrderChanges = (order_id, review_items, substitutions, onComplete) => {
   return (dispatch) => {
     console.log(order_id, review_items, substitutions);
 
@@ -42,7 +42,7 @@ export const submitOrderChanges = (order_id, review_items, substitutions) => {
     })
 
     batch.commit().then((docRef) => {
-        Actions.pop();
+        onComplete();
       })
   }
 }
@@ -80,7 +80,7 @@ export const setReviewItemSubstitution = (index, item) => {
 
 
 // for swapping substitutions
-export const fetchSubstitutionOptions = (sellerID, item) => {
+export const fetchSubstitutionOptions = (sellerID, item, order_items) => {
 
   return (dispatch) => {
 
@@ -111,11 +111,16 @@ export const fetchSubstitutionOptions = (sellerID, item) => {
         'incr',
         'upc'
       ],
-      hitsPerPage: 8
+      hitsPerPage: 30
     }).then(res => {
       // console.log(page >= res.nbPages);
       // console.log(`${page} of ${res.nbPages}`);
-      const substitution_items = cleanAlgoliaItems(res.hits)
+      const substitution_items = cleanAlgoliaItems(res.hits).filter((item) => {
+        // filter out items that exist in our order already, so no conflicts
+        const itemExists = order_items.find(order_item => (order_item.upc === item.upc));
+        if (itemExists) { return false; }
+        return true;
+      })
       dispatch({ type: SUBSTITUTION_OPTIONS_SET, payload: { substitution_items } });
     }).catch(() => {
       dispatch({ type: SUBSTITUTION_OPTIONS_SET, payload: { substitution_items: [] } });

@@ -30,7 +30,8 @@ import {
   BlockButton,
   BackButton,
   AyezText,
-  BottomChoiceSelection
+  BottomChoiceSelection,
+  PlaceholderFastImage
 } from '../../_common';
 
 const reviewBackground = require('../../../../assets/images_v2/ReviewOrder/reviewBackground.png');
@@ -44,7 +45,7 @@ class ReviewBegin extends Component {
     } = this.props;
 
     let imageComponents = review_items.map(item => (
-      <Image
+      <PlaceholderFastImage
         style={{ width: 80, height: 80, marginHorizontal: 4 }}
         resizeMode={'contain'}
         source={{ uri: item.thumbnail_url }}

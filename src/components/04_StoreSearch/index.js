@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import FastImage from 'react-native-fast-image';
+import _ from 'lodash';
 import {
   View,
   Platform,
@@ -16,8 +17,9 @@ import {
   SectionList,
   Keyboard
 } from 'react-native';
-import { LoadingOverlay, BackButton, AyezText } from '../_common';
+import { LoadingOverlay, BackButton, AyezText, CustomItemPrompt } from '../_common';
 import {
+  setItemSearchQuery,
   fetchQueryResults,
   resetQueryItems,
   onSelectCategory,
@@ -28,9 +30,6 @@ import {
   translate
 } from '../../i18n.js';
 
-import customProductIcon from '../../../assets/images_v2/CustomProduct/icon.png';
-
-
 import { SearchHeader } from './_components/SearchHeader';
 
 
@@ -40,6 +39,8 @@ class StoreSearch extends Component {
     super(props);
     // this.debouncedfetchQueryItems = _.debounce(this.props.fetchQueryItems, 700);
     this.state = { showFilter: false };
+
+    this.fetchQueryResultsDebounced = _.debounce(this.fetchQueryResults, 600);
   }
 
   componentDidMount() {
@@ -70,12 +71,13 @@ class StoreSearch extends Component {
     return true;
   };
 
+  fetchQueryResults(seller, query) {
+    this.props.fetchQueryResults({ seller, query });
+  }
+
   onQueryDidChange(query) {
-    const seller = this.props.seller;
-    console.log(query);
-    if (seller.id) {
-      this.props.fetchQueryResults({ seller, query });
-    }
+    this.props.setItemSearchQuery({ query });
+    this.fetchQueryResultsDebounced(this.props.seller, query);
   }
 
   renderSearchItem({ item }) {
@@ -143,37 +145,39 @@ class StoreSearch extends Component {
     );
   }
 
+  renderNoResults() {
+
+    if (this.props.isLoadingSearchData) { return null; }
+    
+    // if there is no query, show the opening page
+    if (!this.props.query) {
+      return (
+        <View style={{
+          alignSelf: 'center',
+          marginTop: 40,
+          marginBottom: 32
+        }}>
+          <AyezText regular>3ayez eih?</AyezText>
+        </View>
+      )
+    }
+
+    // otherwise, show no results
+    return (
+      <View style={{
+        alignSelf: 'center',
+        marginTop: 40,
+        marginBottom: 32
+      }}>
+        <AyezText regular>{strings('Common.noResults')}</AyezText>
+      </View>
+    )
+  }
+
   renderCustomItemPrompt() {
     const { query, isLoadingSearchData } = this.props;
     if (!query || isLoadingSearchData) { return null; }
-    return (
-      <TouchableOpacity style={{
-        backgroundColor: '#f7f7f7',
-        marginVertical: 10,
-        marginHorizontal: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        paddingVertical: 8
-      }}
-      onPress={() => Actions.customProduct()}
-      >
-        <Image
-          style={{
-            width: 70,
-            height: 70,
-            marginRight: 10
-          }}
-          source={customProductIcon}
-          resizeMode={'contain'}
-          />
-        <View style={{ flex: 1 }}>
-          <AyezText medium size={16}>Can't find what you're looking for?</AyezText>
-          <AyezText regular size={13} color={'#0094ff'}>Request a product for us to find</AyezText>
-        </View>
-      </TouchableOpacity>
-    )
+    return ( <CustomItemPrompt />)
   }
 
   renderResults() {
@@ -189,6 +193,7 @@ class StoreSearch extends Component {
         <FlatList
           data={results}
           renderItem={this.renderSearchItem.bind(this)}
+          ListEmptyComponent={this.renderNoResults.bind(this)}
           ListFooterComponent={this.renderCustomItemPrompt.bind(this)}
           keyExtractor={(item, index) => index.toString()}
         />
@@ -269,6 +274,7 @@ const mapStateToProps = ({ ItemSearch, Seller, Baskets }) => {
 export default connect(
   mapStateToProps,
   {
+    setItemSearchQuery,
     fetchQueryResults,
     resetQueryItems,
 

@@ -143,8 +143,11 @@
   } from '../_common';
 
   import {
+    padNumberZeros,
     AYEZ_BACKGROUND_COLOR
   } from '../../Helpers';
+
+  const timer = require('react-native-timer');
 
   import {
     submitOrderChanges,
@@ -159,42 +162,82 @@
 
   import ReviewBegin from './01_ReviewBegin';
   import SubstitutionPage from './02_SubstitutionPage';
-  import ReviewSummary from './03_ReviewSummary';
+  import QuantityChangePage from './03_QuantityChangePage';
+  import ReviewSummary from './04_ReviewSummary';
 
   class OrderReview extends Component {
 
     constructor(props) {
       super(props);
       this.state = {
-        page_index: -1
+        page_index: -1,
+        timerText: '',
       };
     }
 
+
+    // doing this because componentWillUnmount is glitching -
+    // fires way too late after
+    onPop() {
+      console.log('OrderTracker exiting')
+      Actions.pop(); // Android back press
+
+      timer.clearTimeout(this);
+      // BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
+    }
+
+
     componentDidMount() {
       this.setState({ page_index: -1 });
-      this.props.fetchReviewOrderItems(this.props.order.id)
+      this.props.fetchReviewOrderItems(this.props.order.id);
+
+      timer.setInterval(this, 'hideMsg', () => {
+        if (!this.props.review_order) {
+          return;
+        }
+        const { substitution_deadline } = this.props.review_order;
+        if (!substitution_deadline) {
+          this.setState({ timerText: '-' });
+          return;
+        }
+
+        const remainingTime = substitution_deadline - Date.now();
+        if (remainingTime < 0) {
+          this.setState({ timerText: '-' });
+          this.onPop();
+          return;
+        }
+        let seconds = Math.round(remainingTime/1000);
+        let minutes = Math.floor(seconds/60);
+        seconds = seconds % 60;
+        minutes = minutes % 60;
+        let timerText = `${minutes}:${padNumberZeros(seconds, 2)}`;
+
+        this.setState({ timerText })
+      }, 1000);
+
     }
 
     onProceed() {
       const page_index = this.state.page_index + 1;
-      const { review_items, review_order } = this.props;
+      const { review_items, review_order, items } = this.props;
       if (page_index < review_items.length) {
-        this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index]);
+        this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index], items);
       }
       this.setState({ page_index })
     }
 
     onBack() {
       const page_index = this.state.page_index - 1;
-      const { review_items, review_order } = this.props;
+      const { review_items, review_order, items } = this.props;
       if (page_index > -1) {
-        this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index])
+        this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index], items)
       }
       this.setState({ page_index })
     }
 
     submitOrderChanges() {
-      this.props.submitOrderChanges(this.props.order.id, this.props.review_items, this.props.substitutions);
+      this.props.submitOrderChanges(this.props.order.id, this.props.review_items, this.props.substitutions, this.onPop);
       // this FX will pop back, after submitting successful
     }
 
@@ -203,14 +246,14 @@
         page_index
       } = this.state;
       const {
+        review_order,
         items,
         review_items,
         substitutions,
         is_loading
       } = this.props;
 
-
-      if (is_loading) {
+      if (!review_order) {
         return <ActivityIndicator size="small" style={{ flex: 1 }} />
       }
 
@@ -225,16 +268,30 @@
           />
         )
       } else if (page_index < review_items.length) {
-        // return the item page
-        mainComponent = (
-          <SubstitutionPage
-            item={review_items[page_index]}
-            index={page_index}
-            review_items={review_items}
-            onProceed={this.onProceed.bind(this)}
-            onBack={this.onBack.bind(this)}
-          />
-        )
+        const item = review_items[page_index];
+        if (!item.quantity) {
+          // return substitution if no quantity
+          mainComponent = (
+            <SubstitutionPage
+              item={item}
+              index={page_index}
+              review_items={review_items}
+              onProceed={this.onProceed.bind(this)}
+              onBack={this.onBack.bind(this)}
+            />
+          )
+        } else {
+          // return quantity change
+          mainComponent = (
+            <QuantityChangePage
+              item={item}
+              index={page_index}
+              review_items={review_items}
+              onProceed={this.onProceed.bind(this)}
+              onBack={this.onBack.bind(this)}
+            />
+          )
+        }
       } else {
         // return the final overview page
         mainComponent = (
@@ -253,7 +310,12 @@
           backgroundColor: AYEZ_BACKGROUND_COLOR
         }}>
           {mainComponent}
-          <AyezText regular>{strings('OrderReview.countdown', {time: '0:00'})}</AyezText>
+          <AyezText regular style={{
+            textAlign: 'center',
+            marginTop: 4,
+            marginBottom: 5
+          }}>{strings('OrderReview.countdown', {time: this.state.timerText})}</AyezText>
+          <LoadingOverlay isVisible={is_loading} />
         </View>
       )
     }

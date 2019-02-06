@@ -181,7 +181,7 @@ class OrderTracker extends Component {
       return <ActivityIndicator size="large" style={{ flex: 1, backgroundColor: '#FAFCFD' }} />;
     }
 
-    if (!is_timeslot_ongoing || status >= 200) {
+    if (status >= 200) {
       return (
         <OrderSummary />
       );

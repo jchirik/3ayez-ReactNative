@@ -15,6 +15,7 @@
     "search": "بحث",
     "close": "إغلاق",
     "seeAll": "أنظر الكل",
+    "none": "لا شئ",
     "noResults": "لا توجد نتائج",
     "noInternet": "لا يوجد انترنت",
     "comingSoon": "قريبا 🎉",
@@ -124,7 +125,9 @@
     "categories": "الأقسام"
   },
   "StoreSearch": {
-    "placeholder": "العثور على المنتجات داخل {{seller_name}}"
+    "placeholder": "العثور على المنتجات داخل {{seller_name}}",
+    "customItemPromptHeader": "لا تستطيع إيجاد ما تبحث عنه ؟",
+    "customerItemPromptDescription": "اطلب منتج لنبحث لك عنه"
   },
   "StoreShelf": {
     "backTo": "الرجوع إلى"
@@ -258,6 +261,9 @@
     "replaceInstruction": "تبديل مع صنف أخر",
     "confirmReplacement": "تأكيد التبديل",
     "skipItem": "تخطي هذا الصنف",
+    "quantityChangeInstruction": "هناك تغيير في الكمية",
+    "requestedQuantity": "الكمية المطلوبة {{quantity}}",
+    "availableQuantity": "الكمية المتاحة {{quantity}}",
     "reviewSummaryHeader": "مراجعة",
     "newItems": "أصناف جديدة",
     "existingItems": "موجودة",
@@ -281,5 +287,14 @@
     "orderArrived": "طلبك قد وصل !",
     "rateStoreTitle": "من فضلك قم بتقييم {{seller_name}}",
     "rate3ayezTitle": "كيف كانت خدمة عايز ؟"
+  },
+  "CustomProduct": {
+    "header": "إضافة منتج مخصص",
+    "detail": "سنفعل ما بوسعنا لإيجاد منتجك داخل المتجر",
+    "productName": "أسم المنتج",
+    "productDescription": "الوصف",
+    "productQuantity": "كم الثمن ؟",
+    "productQuantityPlaceholder": "مثلا 8 قطع ، 250 غرام ، صندوق واحد",
+    "addToBasket": "+ إضافة إلى السلة",
   }
 }

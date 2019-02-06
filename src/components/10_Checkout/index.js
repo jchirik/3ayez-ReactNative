@@ -334,7 +334,8 @@ class Checkout extends Component {
           }}>
           <AyezText regular style={{
             fontSize: 14,
-            color: '#353333'
+            color: '#353333',
+            textAlign: 'left'
           }}>{notes}</AyezText>
         </TouchableOpacity>
       </View>
@@ -384,7 +385,8 @@ class Checkout extends Component {
         fontSize: 28,
         color: 'black',
         marginTop: STATUS_BAR_HEIGHT + 60,
-        marginLeft: 20
+        marginLeft: 20,
+        alignSelf: 'flex-start'
       }}>{strings('Checkout.header')}</AyezText>
 
       <ScrollView style={{ flex: 1 }}>
@@ -429,7 +431,8 @@ class Checkout extends Component {
           color: 'black',
           marginTop: 20,
           marginLeft: 20,
-          marginBottom: 10
+          marginBottom: 10,
+          alignSelf: 'flex-start'
         }}>{strings('Receipt.summary')}</AyezText>
 
         <ReceiptRow title={strings('Receipt.subtotal')} cost={subtotal} />

@@ -16,7 +16,7 @@ class Draggable extends PureComponent {
   };
 
   _initiateDrag() {
-    this.refs.wrapper.setOpacityTo(0);
+    this.refs.wrapper.setOpacityTo(0, 0);
     if (!this.props.disabled)
       this.context.dragContext.onDrag(
         this.refs.wrapper,
@@ -49,7 +49,7 @@ class Draggable extends PureComponent {
   render() {
     return (
       <TouchableOpacity
-        activeOpacity={this.props.activeOpacity}
+        activeOpacity={1}
         style={[this.props.style]}
         ref="wrapper"
       >

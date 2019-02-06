@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   TextInput,
-  View
+  View,
+  I18nManager
 } from 'react-native';
 
 import { FONT_REGULAR } from '../../i18n.js';
@@ -25,6 +26,7 @@ const styles = {
     height: 40,
     fontSize: 13,
     fontFamily: FONT_REGULAR(),
+    textAlign: (I18nManager.isRTL ? 'right' : 'left'),
     backgroundColor: 'white',
     borderRadius: 8,
     paddingLeft: 20,

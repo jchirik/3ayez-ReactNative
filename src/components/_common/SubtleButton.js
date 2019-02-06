@@ -10,7 +10,7 @@ const SubtleButton = ({
   text,
   color = AYEZ_GREEN,
   style,
-  textStyle
+  textStyle = {}
 }) => {
   return (
     <TouchableOpacity
@@ -19,17 +19,17 @@ const SubtleButton = ({
         styles.buttonStyle,
         style
       ]}>
-      <AyezText light size={13} color={color} style={[
-        styles.textStyle,
-        textStyle
-      ]}>{text}</AyezText>
+      <AyezText light size={13} color={color} style={{
+        ...styles.textStyle,
+        ...textStyle
+      }}>{text}</AyezText>
     </TouchableOpacity>
   );
 };
 
 const styles = {
   textStyle: {
-    padding: 16,
+    margin: 16,
     textDecorationLine: 'underline'
   },
   buttonStyle: {

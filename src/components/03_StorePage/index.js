@@ -11,6 +11,7 @@ import {
   TextInput,
   BackHandler,
   InteractionManager,
+  ActivityIndicator,
   findNodeHandle
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -26,7 +27,8 @@ import {
   ItemTile,
   BasketBlockButton,
   BackButton,
-  AyezText
+  AyezText,
+  CustomItemPrompt
 } from '../_common';
 
 import {
@@ -141,6 +143,23 @@ class StorePage extends Component {
     );
   }
 
+  renderFooter() {
+    if (this.props.categories_loading) { return null }
+    return (
+      <View style={{ marginBottom: 15, marginHorizontal: 8 }}>
+        <CustomItemPrompt />
+      </View>
+    )
+  }
+
+  renderEmptyCategories() {
+    if (this.props.categories_loading) {
+      return (
+        <ActivityIndicator size="small" style={{ margin: 30, alignSelf: 'center' }} />
+      )
+    }
+    return null;
+  }
 
   renderCategories() {
     console.log('CATEGORIES', this.props.categories);
@@ -152,8 +171,8 @@ class StorePage extends Component {
         removeClippedSubviews
         ListHeaderComponent={null}
         numColumns={CATEGORY_COL_NUM}
-        ListEmptyComponent={null}
-        ListFooterComponent={null}
+        ListEmptyComponent={this.renderEmptyCategories.bind(this)}
+        ListFooterComponent={this.renderFooter.bind(this)}
         scrollEventThrottle={CATEGORY_SCROLL_EVENT_THROTTLE}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
@@ -282,30 +301,33 @@ class StorePage extends Component {
         {this.renderBasket()}
         <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
         <AnimatedCheckmarkOverlay />
-        <BackButton fixed />
+        <BackButton fixed color={'white'} />
       </View>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ Seller, Baskets }) => {
   const {
     id,
     logo_url,
     promotions,
     featured,
     categories,
+    categories_loading,
     delivery_fee,
     delivery_time,
     display_name
-  } = state.Seller;
-  const { basket_quantity } = state.Baskets.baskets[id];
+  } = Seller;
+
+  const { basket_quantity } = Baskets.baskets[Seller.id];
   return {
     seller_id: id,
     logo_url,
     promotions,
     featured,
     categories,
+    categories_loading,
     delivery_fee,
     delivery_time,
     display_name,

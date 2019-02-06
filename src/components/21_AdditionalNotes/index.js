@@ -8,7 +8,8 @@ import {
    SectionList,
    Platform,
    BackHandler,
-   AsyncStorage
+   AsyncStorage,
+   I18nManager
  } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -61,6 +62,7 @@ class AdditionalNotes extends Component {
             borderTopWidth: 1,
             borderBottomWidth: 1,
             fontFamily: FONT_REGULAR(),
+            textAlign: (I18nManager.isRTL ? 'right' : 'left'),
             fontSize: 14
           }}
           onChangeText={(text) => this.setState({ text })}
