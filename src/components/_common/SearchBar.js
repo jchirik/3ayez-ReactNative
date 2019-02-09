@@ -67,6 +67,7 @@ const SearchBar = ({
           flex: 1,
           alignSelf: 'stretch',
           textAlign: (I18nManager.isRTL ? 'right' : 'left'),
+          padding: 0,
           paddingLeft: 12,
           fontSize: 14,
           fontFamily: FONT_REGULAR(),

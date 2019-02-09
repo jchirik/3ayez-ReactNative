@@ -42,20 +42,6 @@ class CustomProduct extends Component {
     };
   }
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener(
-      'hardwareBackPress',
-      this.onAndroidBackPress
-    );
-  }
-  onAndroidBackPress = () => {
-    Actions.pop(); // Android back press
-    return true;
-  };
 
   addToBasket() {
     const { seller } = this.props;

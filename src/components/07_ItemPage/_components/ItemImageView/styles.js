@@ -5,7 +5,7 @@ import { getScreenDimensions } from '../.././../../Helpers';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     alignItems: 'center'
   },
   image: { width: getScreenDimensions().width - 100, flex: 1 }

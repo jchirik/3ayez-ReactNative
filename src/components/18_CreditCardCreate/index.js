@@ -50,16 +50,6 @@ class CreditCardCreate extends Component {
 
   componentDidMount() {
     this.props.createStripeCardReset()
-    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
-  }
-
-  onAndroidBackPress = () => {
-    Actions.pop(); // Android back press
-    return true;
   }
 
   onChange({ status, values }) {
@@ -116,8 +106,8 @@ class CreditCardCreate extends Component {
             cvc: strings('CreditCard.cvc'),
             name: strings('CreditCard.name')
           }}
-          labelStyle={{ fontSize: 13, fontFamily: FONT_MEDIUM(), color: 'black' }}
-          inputStyle={{ fontSize: 15, fontFamily: FONT_REGULAR(), color: 'black' }}
+          labelStyle={{ fontSize: 13, padding: 0, fontFamily: FONT_MEDIUM(), color: 'black' }}
+          inputStyle={{ fontSize: 15, padding: 0, fontFamily: FONT_REGULAR(), color: 'black' }}
           onChange={this.onChange.bind(this)}
           requiresName
           allowScroll
@@ -132,6 +122,7 @@ class CreditCardCreate extends Component {
           color='#41D567'
         />
         <LoadingOverlay
+          text={strings('CreditCard.verifyingCard')}
           isVisible={this.props.is_loading}
         />
       </View>

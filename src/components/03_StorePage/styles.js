@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 22,
     height: 22,
-    top: 36,
+    top: STATUS_BAR_HEIGHT+19,
     right: 15,
     justifyContent: 'center',
     alignItems: 'center'

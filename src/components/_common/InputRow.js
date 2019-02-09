@@ -26,9 +26,9 @@ class InputRow extends Component {
     if (placeholder) {
       placeholderText = placeholder;
     } else if (required) {
-      placeholderText = 'required';
+      placeholderText = strings('Input.required');
     } else {
-      placeholderText = 'optional';
+      placeholderText = strings('Input.optional');
     }
 
     return (

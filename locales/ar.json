@@ -24,6 +24,10 @@
     "english": "English",
     "arabic": "عربي"
   },
+  "Input": {
+    "required": "مطلوب",
+    "optional": "أختيارى"
+  },
   "SystemPermissions": {
     "currentLocationTitle": "عايز إذن الموقع",
     "currentLocationMessage": "عايز تحتاج الموقع الحالى لإيجاد أقرب محل تجاري"
@@ -73,7 +77,8 @@
     "cvc": "رمز التحقق",
     "name": "الإسم كما يظهر على البطاقة ",
     "expiryText": "إنتهاء. {{month}}/{{year}}",
-    "errorAddingCard": "خطأ بإضافة الكارت"
+    "errorAddingCard": "خطأ بإضافة الكارت",
+    "verifyingCard": "التحقق من بطاقة الائتمان"
   },
   "OrderStatusBar": {
     "trackOrder": "لمتابعة اخر اوردر",
@@ -107,7 +112,7 @@
   },
   "StoreSelect": {
     "deliveringTo": "توصيل إلى",
-    "minTotal": "دقيقة. {{min}}",
+    "minTotal": "الحد الأدنى. {{min}}",
     "openHours": "مفتوح {{start}} - {{end}}",
     "numRatings": "{{num_reviews}} تقييم",
     "deliveryTime": "{{delivery_time}} دقيقة. توصيل",

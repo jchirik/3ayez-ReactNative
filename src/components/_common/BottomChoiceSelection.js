@@ -92,6 +92,7 @@ class BottomChoiceSelection extends Component {
 
     const buttonComponents = buttons.map(({ text, action, buttonColor, textColor }) =>
       <BlockButton
+        key={text}
         onPress={() => {
           action();
           this.onClose()
@@ -117,7 +118,8 @@ class BottomChoiceSelection extends Component {
           top: 0,
           bottom: 0,
           right: 0,
-          left: 0
+          left: 0,
+          elevation: 1000
         }}
       >
         <AnimatedTouchableOpacity

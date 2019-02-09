@@ -18,7 +18,7 @@ class PlaceholderFastImage extends Component {
   }
   render() {
     const top = (this.state.style.height / 2) - 15
-    const left = this.state.style.width == 'auto' ? (window.width / 2 - 30) : (this.state.style.width / 2 - 15)
+    const left = (this.state.style.width / 2) - 15
 
     return <View style={this.props.style}>
       {
@@ -34,7 +34,7 @@ class PlaceholderFastImage extends Component {
         {...this.props}
         resizeMode={this.props.resizeMode || 'contain'}
         source={this.props.source}
-        style={[this.props.style, this.state.loaded ? {} : {width: 0, height: 0}]}
+        style={[this.props.style, this.state.loaded ? { opacity: 1 } : { opacity: 0}]}
         onLoadEnd={this.onLoadEnd.bind(this)}
       />
     </View>

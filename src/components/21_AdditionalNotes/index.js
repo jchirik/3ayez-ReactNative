@@ -36,7 +36,7 @@ class AdditionalNotes extends Component {
   }
 
   componentDidMount() {
-    this.setState({ text: this.props.initText })
+    this.setState({ text: this.props.initText || '' })
   }
 
   onSubmitPress() {
@@ -63,10 +63,12 @@ class AdditionalNotes extends Component {
             borderBottomWidth: 1,
             fontFamily: FONT_REGULAR(),
             textAlign: (I18nManager.isRTL ? 'right' : 'left'),
+            textAlignVertical: 'top',
             fontSize: 14
           }}
           onChangeText={(text) => this.setState({ text })}
           value={this.state.text}
+          underlineColorAndroid='transparent'
           multiline
           autoFocus
         />

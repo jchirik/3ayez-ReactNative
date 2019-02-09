@@ -36,7 +36,7 @@ const INITIAL_STATE = {
   guestlogin_error: '',
 
   confirmation_function: null,
-
+  
   onComplete: null
 };
 
@@ -64,7 +64,7 @@ export default (state = INITIAL_STATE, action) => {
     case VERIFICATION_BEGIN:
       return { ...state, verification_error: '', verification_loading: true };
     case VERIFICATION_SUCCESS:
-      return { ...state, verification_loading: false };
+      return { ...state, verification_loading: false, onComplete: null };
     case VERIFICATION_FAIL:
       return { ...state, verification_error: p.error, verification_loading: false };
     case GUEST_LOGIN_BEGIN:

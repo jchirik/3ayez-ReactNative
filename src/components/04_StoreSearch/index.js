@@ -29,9 +29,12 @@ import {
   strings,
   translate
 } from '../../i18n.js';
+import {
+  AYEZ_GREEN
+} from '../../Helpers.js';
 
 import { SearchHeader } from './_components/SearchHeader';
-
+const start_image = require('../../../assets/images_v2/Search/start_image.png');
 
 class StoreSearch extends Component {
 
@@ -148,16 +151,26 @@ class StoreSearch extends Component {
   renderNoResults() {
 
     if (this.props.isLoadingSearchData) { return null; }
-    
+
     // if there is no query, show the opening page
     if (!this.props.query) {
       return (
         <View style={{
           alignSelf: 'center',
-          marginTop: 40,
-          marginBottom: 32
+          marginTop: 24,
+          marginBottom: 18,
+          alignItems: 'center'
         }}>
-          <AyezText regular>3ayez eih?</AyezText>
+          <AyezText
+            medium
+            size={20}
+            color={AYEZ_GREEN}
+            >3AYEZ EIH?</AyezText>
+          <Image
+            style={{ width: 240, height: 240 }}
+            resizeMode="contain"
+            source={start_image}
+          />
         </View>
       )
     }

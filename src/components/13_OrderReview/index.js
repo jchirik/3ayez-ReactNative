@@ -176,6 +176,7 @@
     }
 
 
+
     // doing this because componentWillUnmount is glitching -
     // fires way too late after
     onPop() {
@@ -183,11 +184,10 @@
       Actions.pop(); // Android back press
 
       timer.clearTimeout(this);
-      // BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
     }
 
-
     componentDidMount() {
+      BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
       this.setState({ page_index: -1 });
       this.props.fetchReviewOrderItems(this.props.order.id);
 
@@ -215,12 +215,24 @@
 
         this.setState({ timerText })
       }, 1000);
+    }
 
+    componentWillUnmount() {
+      console.log('removing orderReview back listener')
+      BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
+    }
+
+    onAndroidBackPress = () => {
+      if (Actions.currentScene === 'orderReview') {
+        this.onBack();
+        console.log('back disabled')
+        return true;
+      }
     }
 
     onProceed() {
-      const page_index = this.state.page_index + 1;
       const { review_items, review_order, items } = this.props;
+      const page_index = Math.min(this.state.page_index + 1, review_items.length);
       if (page_index < review_items.length) {
         this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index], items);
       }
@@ -228,7 +240,7 @@
     }
 
     onBack() {
-      const page_index = this.state.page_index - 1;
+      const page_index = Math.max(this.state.page_index - 1, -1);
       const { review_items, review_order, items } = this.props;
       if (page_index > -1) {
         this.props.fetchSubstitutionOptions(review_order.seller.id, review_items[page_index], items)

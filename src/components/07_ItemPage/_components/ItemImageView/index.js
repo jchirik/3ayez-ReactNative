@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
-import { BackButton } from '../../../_reusable';
+import { CloseButton } from '../../../_common';
 import styles from './styles';
 
 export default class ItemImageView extends Component {
@@ -12,7 +12,7 @@ export default class ItemImageView extends Component {
           style={styles.image}
           resizeMode={'contain'}
         />
-        <BackButton type={'chevronRight'} />
+        <CloseButton fixed />
       </View>
     );
   }

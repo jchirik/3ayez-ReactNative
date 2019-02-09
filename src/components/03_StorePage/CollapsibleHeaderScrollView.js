@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import StoreHeader from './StoreHeader';
 import colors from '../../theme/colors';
+import { STATUS_BAR_HEIGHT } from '../../Helpers';
 
-export const PARALLAX_HEADER_HEIGHT = 244;
+export const PARALLAX_HEADER_HEIGHT = 225 + STATUS_BAR_HEIGHT;
 export const TAB_BAR_HEIGHT = 52;
 const noop = () => {};
 // credits to https://github.com/iyegoroff/react-native-collapsible-header-views
@@ -138,8 +139,8 @@ export class CollapsibleHeaderScrollView extends React.Component {
           onScroll={event => {
             const { y } = event.nativeEvent.contentOffset;
             const diff = y - this.scrollValue;
-            if (diff <= 0 && y > headerHeight - statusBarHeight) {
-              this.scrollValue = y;
+            if (diff >= 0 && y >= headerHeight - statusBarHeight) {
+              this.scrollAnim.setValue(headerHeight - statusBarHeight);
               return;
             }
             Animated.event(

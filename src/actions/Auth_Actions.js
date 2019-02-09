@@ -39,14 +39,13 @@ export const authVerificationSet = (verification_t) => {
 };
 
 
-export const authGuestLogin = (onProceed) => {
+export const authGuestLogin = () => {
   return (dispatch) => {
     dispatch({ type: GUEST_LOGIN_BEGIN });
     firebase.auth().signInAnonymously()
     .then(() => {
       console.log('authGuestLogin successful')
       dispatch({ type: GUEST_LOGIN_SUCCESS });
-      onProceed();
     })
     .catch(error => {
       console.log('authGuestLogin', error);
@@ -75,37 +74,17 @@ export const authPhoneLogin = (phone, call_code) => {
   };
 };
 
-export const authPhoneVerify = (code, confirmation_function, onProceed) => {
+export const authPhoneVerify = (code, confirmation_function) => {
   return (dispatch) => {
-    dispatch({ type: VERIFICATION_BEGIN });
 
     // check if currently logged in (anonymously)
     const prevUser = firebase.auth().currentUser;
+    dispatch({ type: VERIFICATION_BEGIN });
 
     confirmation_function.confirm(code)
       .then((user) => {
         console.log('authPhoneVerify successful')
-        // if previously logged in anonymously, run a CloudFX that migrates all data
-        if (prevUser) {
-          console.log('migrating guest account with phone account', prevUser.uid, user.uid);
-
-          const migrateGuestAccount = firebase.functions().httpsCallable('migrateGuestAccount');
-          migrateGuestAccount({ guest_uid: prevUser.uid, user_uid: user.uid }).then((result) => {
-            if (result.data && result.data.success) {
-              dispatch({ type: VERIFICATION_SUCCESS });
-              onProceed(user);
-            } else {
-              dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } })
-            }
-          }).catch((error) => {
-            dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } });
-          });
-
-        } else {
-          // otherwise, its successful! continue.
-          dispatch({ type: VERIFICATION_SUCCESS });
-          onProceed(user);
-        }
+        // continues in the Customer Actions onAuthStateChanged
       }) // User is logged in){
       .catch(error => {
         console.log('authPhoneVerify', error)
@@ -136,9 +115,10 @@ export const logoutUser = () => {
 // checks if addresses exist for the account
 // if so, pop to Homepage
 // otherwise create an address
-export const addressCreateProceedCheck = (user) => {
+export const addressCreateProceedCheck = () => {
   return (dispatch) => {
-    console.log('addressCreateProceedCheck user', user)
+    const user = firebase.auth().currentUser;
+
     dispatch({ type: VERIFICATION_BEGIN });
     const addressesRef = firebase.firestore().collection('customers').doc(user.uid)
       .collection('addresses');
@@ -155,6 +135,7 @@ export const addressCreateProceedCheck = (user) => {
       if (addresses.length > 0) {
         Actions.popTo('homepage');
       } else {
+        console.log('GOING TO ADDRESS CREATE')
         Actions.addressCreate();
       }
       dispatch({ type: VERIFICATION_SUCCESS });

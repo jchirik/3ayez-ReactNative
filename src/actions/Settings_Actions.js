@@ -9,7 +9,8 @@ import { Actions } from 'react-native-router-flux';
 import { AsyncStorage, I18nManager, Platform } from 'react-native';
 import firebase from 'react-native-firebase';
 // import DeviceInfo from 'react-native-device-info';
-import RNRestart from 'react-native-restart';
+// import RNRestart from 'react-native-restart';
+import CodePush from 'react-native-code-push';
 import RNLanguages from 'react-native-languages';
 
 import {
@@ -23,18 +24,21 @@ const setLocaleSettings = (locale, dispatch) => {
     I18nManager.forceRTL(true);
     // restart
     setTimeout(()=>{
-        if (Platform.OS === "ios") {
-      		RNRestart.Restart();
-      	}
+        // if (Platform.OS === "ios") {
+      	// 	RNRestart.Restart();
+      	// }
+
+        CodePush.restartApp();
 
       },200);
   } else if ((locale === 'en') && (I18nManager.isRTL)) {
     I18nManager.forceRTL(false);
     // restart
     setTimeout(()=>{
-        if (Platform.OS === "ios") {
-          RNRestart.Restart();
-        }
+        // if (Platform.OS === "ios") {
+        //   RNRestart.Restart();
+        // }
+        CodePush.restartApp();
     },200);
   }
   dispatch({ type: LOCALE_SET, payload: { locale } });

@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 
 import { Actions } from 'react-native-router-flux';
 import {
+  setOrderNotes,
   setPaymentMethod,
   setTip,
   submitOrder
@@ -303,6 +304,14 @@ class Checkout extends Component {
   }
 
 
+  editCheckoutNotes(){
+    Actions.additionalNotes({
+      initText: this.props.notes,
+      title: strings('Checkout.additionalNotesHeader'),
+      onSubmit: (text) => this.props.setOrderNotes(text)
+    });
+  }
+
   renderNotes() {
     const { notes } = this.props;
 
@@ -312,7 +321,7 @@ class Checkout extends Component {
     return (
       <View>
         <Row
-          onPress={() => Actions.checkoutNotesDetail()}
+          onPress={this.editCheckoutNotes.bind(this)}
           title={strings('Checkout.additionalNotesField')}>
           <AyezText regular style={{
             fontSize: 16,
@@ -321,7 +330,7 @@ class Checkout extends Component {
         </Row>
 
         <TouchableOpacity
-          onPress={() => Actions.checkoutNotesDetail()}
+          onPress={this.editCheckoutNotes.bind(this)}
           activeOpacity={1}
           style={{
             backgroundColor: 'white',
@@ -617,6 +626,7 @@ class Checkout extends Component {
 
   export default connect(mapStateToProps,
     {
+      setOrderNotes,
       setPaymentMethod,
       setTip,
       submitOrder

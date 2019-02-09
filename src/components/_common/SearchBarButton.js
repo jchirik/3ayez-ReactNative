@@ -51,6 +51,7 @@ const styles = {
     height: 40,
     width: '70%',
     borderRadius: 5,
+    paddingRight: 40
   },
   searchBarImage: {
     height: 28,

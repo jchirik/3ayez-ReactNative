@@ -62,12 +62,27 @@ class LanguageSelect extends Component {
     super(props);
   }
 
+  /* BackHandler for Android */
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
+  }
+  onAndroidBackPress = () => {
+    if (Actions.currentScene === 'languageSelect') {
+      console.log('back disabled')
+      return true;
+    }
+  }
+  /* --------------------- */
+
+
   switchLanguage(switchLocale) {
     this.props.setLocale(switchLocale)
   }
 
   render() {
-
     if (!this.props.locale) {
       return (
         <ActivityIndicator size="small" />
@@ -102,7 +117,8 @@ class LanguageSelect extends Component {
         <RTLImage
           source={opening_video}
           style={{
-            width: 350,
+            width: 300,
+            marginLeft: 20,
             alignSelf: 'center',
             flex: 1
           }}

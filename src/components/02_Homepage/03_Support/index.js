@@ -98,7 +98,7 @@ class Support extends Component {
 
         </View>
 
-        <RTLImage
+        <Image
           source={support_tile}
           style={{
             width: 160,
@@ -190,7 +190,7 @@ class Support extends Component {
           ListHeaderComponent={this.renderChatTile()}
           ListFooterComponent={null}
           showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => `${index}`}
         />
 
 

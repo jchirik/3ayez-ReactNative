@@ -8,7 +8,8 @@ import {
    SectionList,
    Platform,
    BackHandler,
-   AsyncStorage
+   AsyncStorage,
+   I18nManager
  } from 'react-native';
 
  import CountryPicker from 'react-native-country-picker-modal'
@@ -54,7 +55,7 @@ class PhoneEntry extends Component {
         borderRadius: 8,
         backgroundColor: 'white',
         margin: 20,
-        flexDirection: 'row',
+        flexDirection: (I18nManager.isRTL ? 'row-reverse' : 'row'),
         alignItems: 'stretch',
 
         shadowColor: '#000',
@@ -64,13 +65,14 @@ class PhoneEntry extends Component {
         elevation: 2,
       }}>
 
+        <View style={{ width: 8 }} />
         <TouchableOpacity
           style={{
-            paddingLeft: 16,
-            paddingRight: 18,
+            paddingLeft: 10,
+            paddingRight: 10,
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection: 'row'
+            flexDirection: (I18nManager.isRTL ? 'row-reverse' : 'row')
           }}
           onPress={() => this.countryPicker.openModal()}
         >
@@ -85,7 +87,8 @@ class PhoneEntry extends Component {
             style={{
               width: 11,
               height: 11,
-              marginLeft: 6
+              marginLeft: 6,
+              marginRight: 6
              }}
             resizeMode={'contain'}
           />
@@ -94,7 +97,9 @@ class PhoneEntry extends Component {
         <TextInput
           style={{
             flex: 1,
+            textAlign: 'left',
             paddingLeft: 6,
+            paddingRight: 6,
             fontSize: 14,
             fontFamily: FONT_REGULAR()
           }}

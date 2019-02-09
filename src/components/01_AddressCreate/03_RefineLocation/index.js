@@ -101,7 +101,6 @@ class RefineLocation extends Component {
         justifyContent: 'center'
       }}>
         <AyezText bold style={{
-          fontColor: 'black',
           fontSize: 24,
         }}>
           {this.props.title}

@@ -14,8 +14,7 @@ import {
   loadLocale,
   listenCustomerAuthStatus
 } from './actions';
-
-import { Scene, Tabs, Router, Lightbox, Stack } from 'react-native-router-flux';
+import { Scene, Tabs, Router, Lightbox, Stack, Actions } from 'react-native-router-flux';
 
 import LanguageSelect from './components/00_Tutorial/01_LanguageSelect';
 import TutorialSwipe from './components/00_Tutorial/02_TutorialSwipe';
@@ -48,7 +47,6 @@ import CustomProduct from './components/10_CustomProduct';
 
 import TimeslotSelect from './components/09_TimeslotSelect';
 import Checkout from './components/10_Checkout';
-import CheckoutNotesDetail from './components/10_Checkout/01_CheckoutNotesDetail';
 
 
 import OrderTracker from './components/10_OrderTracker';
@@ -289,11 +287,22 @@ class RouterComponent extends Component {
   //   component={UniversalSearch}
   // />
 
+  onBackPress = () => {
+    console.log('currentScene', Actions.currentScene)
+    if (Actions.currentScene === 'homepage') {
+      console.log('closing app')
+      return false
+    }
+    Actions.pop()
+    return true
+  }
+
 
   render() {
     return (
       <Router
         sceneStyle={{ paddingTop: 0 }}
+        backAndroidHandler={this.onBackPress}
       >
         <Lightbox>
 
@@ -328,7 +337,6 @@ class RouterComponent extends Component {
                   <Scene key="driverTracker" component={DriverTracker} />
                   <Scene key="addressManager" component={AddressManager} />
 
-                  <Scene key="additionalNotes" component={AdditionalNotes} />
               </Stack>
 
           {/* any modals */}
@@ -343,8 +351,9 @@ class RouterComponent extends Component {
             <Scene key="workingBasket" component={WorkingBasket} />
             <Scene key="timeslotSelect" component={TimeslotSelect} panHandlers={null} />
             <Scene key="checkout" component={Checkout} panHandlers={null} />
-            <Scene key="checkoutNotesDetail" component={CheckoutNotesDetail} panHandlers={null} />
           </Stack>
+
+          <Scene key="additionalNotes" component={AdditionalNotes} />
 
           <Stack key="auth" hideNavBar panHandlers={null}>
             <Scene key="phoneEntry" component={PhoneEntry} />

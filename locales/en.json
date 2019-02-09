@@ -24,6 +24,10 @@
     "english": "English",
     "arabic": "عربي"
   },
+  "Input": {
+    "required": "required",
+    "optional": "optional"
+  },
   "SystemPermissions": {
     "currentLocationTitle": "3ayez Location Permission",
     "currentLocationMessage": "3ayez needs your current location to find nearby stores"

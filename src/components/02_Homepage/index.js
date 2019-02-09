@@ -93,7 +93,8 @@ class Homepage extends Component {
           }}
           swipeEnabled={false}
           animationEnabled={false}
-          initialLayout={{ width: Dimensions.get('window').width }}
+          canJumpToTab={() => true}
+          initialLayout={{ width: Dimensions.get('window').width, height: 80 }}
           tabBarPosition={'bottom'}
           renderTabBar={props =>
             <TabBar

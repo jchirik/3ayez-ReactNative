@@ -4,10 +4,13 @@ import {
   PanResponder,
   Modal,
   Animated,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  I18nManager
 } from 'react-native';
 import { connect } from 'react-redux';
 import { addToBasket } from '../../../actions';
+
+import platform from '../../../utils/platform';
 
 import PropTypes from 'prop-types';
 
@@ -174,7 +177,11 @@ class DragContainer extends React.Component {
       this._listener = location.addListener(args =>
         this._addLocationOffset(args)
       );
-      this._offset = { x: args[4], y: args[5] };
+      this._offset = {
+    		// screenwidth - itemPosition - itemWidth
+    		x: I18nManager.isRTL ? platform.screenWidth - args[4] - args[2] : args[4],
+    		y: args[5]
+    	};
       location.setOffset(this._offset);
       this.setState(
         {

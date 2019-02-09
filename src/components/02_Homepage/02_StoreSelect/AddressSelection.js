@@ -116,14 +116,16 @@ class AddressSelection extends Component {
     }
 
     const addressComponents = addresses.slice(0, 5).map(address => (
-      <TouchableOpacity style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingTop: 8,
-        paddingBottom: 8,
-        borderBottomWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.25)'
-       }}
+      <TouchableOpacity
+        key={address.id}
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingTop: 8,
+          paddingBottom: 8,
+          borderBottomWidth: 1,
+          borderColor: 'rgba(255, 255, 255, 0.25)'
+         }}
        onPress={() => {
          this.props.selectAddress(address, this.onClose.bind(this));
        }}
@@ -138,7 +140,7 @@ class AddressSelection extends Component {
           }}
           resizeMode={'contain'}
         />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <AyezText bold style={{
             color: 'white'
           }}>{address.street}</AyezText>

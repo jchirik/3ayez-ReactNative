@@ -9,7 +9,8 @@ import {
    SectionList,
    Platform,
    BackHandler,
-   AsyncStorage
+   AsyncStorage,
+   I18nManager
  } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
@@ -40,13 +41,21 @@ class VerifyCode extends Component {
 
   authPhoneVerify() {
     console.log('verify');
-    const { verification, confirmation_function, onComplete } = this.props;
-    this.props.authPhoneVerify(verification, confirmation_function, onComplete);
+    const { verification, confirmation_function } = this.props;
+    this.props.authPhoneVerify(verification, confirmation_function);
   }
 
-  renderSquare(digit) {
+  renderSquare(digit, index) {
     return (
-      <View style={{
+      <TouchableOpacity
+      key={`${index}`}
+      onPress={() => {
+        if (this.verificationInput) {
+          this.verificationInput.focus();
+        }
+      }}
+      activeOpacity={1}
+      style={{
         height: 50,
         width: 38,
         margin: 6,
@@ -63,7 +72,7 @@ class VerifyCode extends Component {
         <AyezText semibold style={{
           fontSize: 24
         }}>{digit}</AyezText>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -71,14 +80,15 @@ class VerifyCode extends Component {
     const digits = this.props.verification.split('');
     const digitSquares = [];
     for (let i = 0; i < 6; i++) {
-      digitSquares.push(this.renderSquare((i < digits.length) ? digits[i] : ''))
+      digitSquares.push(this.renderSquare((i < digits.length) ? digits[i] : '', i))
     }
     return (
       <View style={{
-        flexDirection: 'row',
+        flexDirection: (I18nManager.isRTL ? 'row-reverse' : 'row'),
         justifyContent: 'center'
       }}>
         <TextInput
+          ref={(input) => { this.verificationInput = input; }}
           style={{
             position: 'absolute', color: 'transparent', opacity: 0,
             backgroundColor: 'transparent',fontSize: 1 }}
@@ -147,15 +157,13 @@ const mapStateToProps = ({ Auth }) => {
     verification,
     verification_loading,
     verification_error,
-    confirmation_function,
-    onComplete
+    confirmation_function
   } = Auth;
   return {
     verification,
     verification_loading,
     verification_error,
-    confirmation_function,
-    onComplete
+    confirmation_function
   };
 };
 

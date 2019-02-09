@@ -65,6 +65,8 @@ target 'ayezcustomer' do
   # the library and setting the Header Search Paths for you
   pod 'RCTRestart', :path => '../node_modules/react-native-restart/ios'
   pod 'RNLanguages', :path => '../node_modules/react-native-languages'
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
 end
 
 # all below required for RN Maps

@@ -9,7 +9,8 @@ import ReactNative, {
   Dimensions,
   TextInput,
   ViewPropTypes,
-  I18nManager
+  I18nManager,
+  Platform
 } from "react-native";
 
 import CreditCard from "./CardView";
@@ -113,7 +114,10 @@ export default class CreditCardInput extends Component {
       e => { throw e; },
       x => {
         // total width 750
-        const finalX = I18nManager.isRTL ? (520 - x) : x;
+        let finalX = x;
+        if (I18nManager.isRTL && (Platform.OS === 'ios')) {
+          finalX = (520 - x);
+        }
         scrollResponder.scrollTo({ x: Math.max(finalX - PREVIOUS_FIELD_OFFSET, 0), animated: true });
         this.refs[field].focus();
       });

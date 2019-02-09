@@ -12,6 +12,7 @@ import {
   BackHandler,
   InteractionManager,
   ActivityIndicator,
+  Platform,
   findNodeHandle
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -46,7 +47,7 @@ import {
   TAB_BAR_HEIGHT
 } from './CollapsibleHeaderScrollView';
 const window = Dimensions.get('window');
-const STICKY_HEADER_HEIGHT = 86;
+const STICKY_HEADER_HEIGHT = (Platform.OS === 'ios') ? 78 : 70; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 const CATEGORY_COL_NUM = 2;
 const CATEGORY_SCROLL_EVENT_THROTTLE = 16;
@@ -238,25 +239,6 @@ class StorePage extends Component {
     );
   }
 
-  renderHeaderBackground() {
-    return (
-      <View key="background">
-        <Image
-          source={require('./storeImage.jpg')}
-          style={{ width: window.width, height: PARALLAX_HEADER_HEIGHT }}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            width: window.width,
-            height: PARALLAX_HEADER_HEIGHT
-          }}
-        />
-      </View>
-    );
-  }
-
   renderBasket() {
     return (
       <TouchableOpacity
@@ -290,6 +272,7 @@ class StorePage extends Component {
           disableHeaderSnap={true}
           displayName={this.props.display_name}
           logo_url={this.props.logo_url}
+          cover_url={this.props.cover_url}
           delivery_time={this.props.delivery_time}
           delivery_fee={this.props.delivery_fee}
           Tabs={this.renderTabs()}
@@ -311,6 +294,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
   const {
     id,
     logo_url,
+    cover_url,
     promotions,
     featured,
     categories,
@@ -324,6 +308,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
   return {
     seller_id: id,
     logo_url,
+    cover_url,
     promotions,
     featured,
     categories,

@@ -33,7 +33,6 @@ class StoreAisle extends Component {
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
     InteractionManager.runAfterInteractions(() => {
       setTimeout(() => {
         this.setState({
@@ -47,16 +46,8 @@ class StoreAisle extends Component {
     if (this.props.onUnmount) {
       this.props.onUnmount();
     }
-    BackHandler.removeEventListener(
-      'hardwareBackPress',
-      this.onAndroidBackPress
-    );
   }
 
-  onAndroidBackPress = () => {
-    Actions.pop(); // Android back press
-    return true;
-  };
 
   didSelectSubcategory(subcategory, columnIndex) {
     this.props.selectSubcategory(subcategory, columnIndex);
@@ -126,7 +117,6 @@ class StoreAisle extends Component {
             horizontal
             style={styles.subcategoryContainer}
             removeClippedSubviews
-            initialNumToRender={5}
             windowSize={2}
             renderItem={this.renderTinyPhotoColumn.bind(this, subcategory)}
             data={subcategory.items}

@@ -57,25 +57,16 @@ class SupportChat extends Component {
   }
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
-
     console.log('componentDidMount')
     this.props.listenSupportMessages();
     this.props.setChatSeen();
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
-
     // this.props.endListeningSupportMessages();
     // might as well let it run. occasionally async triggers, which causes issues
     console.log('unmounting')
     this.props.setChatSeen();
-  }
-
-  onAndroidBackPress = () => {
-    Actions.pop(); // Android back press
-    return true;
   }
 
   renderBubble = props => {

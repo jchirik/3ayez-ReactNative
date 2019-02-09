@@ -19,6 +19,7 @@ export default class StoreHeader extends Component {
       interpolatedHeaderTranslation,
       children,
       logo_url,
+      cover_url,
       delivery_time,
       delivery_fee
     } = this.props;
@@ -37,13 +38,13 @@ export default class StoreHeader extends Component {
         />
         <Image
           style={{
-            backgroundColor: 'transparent',
+            backgroundColor: '#f7f7f7',
             position: 'absolute',
             height: PARALLAX_HEADER_HEIGHT,
             width: '100%',
             opacity: 0.8
           }}
-          source={require('./storeImage.jpg')}
+          source={{ uri: cover_url }}
           resizeMode="cover"
         />
 

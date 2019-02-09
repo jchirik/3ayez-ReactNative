@@ -12,7 +12,9 @@ import {
   TouchableOpacity,
   Image,
   BackHandler,
-  Dimensions
+  ViewPagerAndroid,
+  Dimensions,
+  I18nManager
 } from 'react-native';
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -175,9 +177,11 @@ renderImageScroll(item) {
   if (!banner_images || banner_images.length === 0) {
     imageComponents = [(
       <TouchableOpacity
+        key={'NONE'}
+        style={{ paddingHorizontal: 8 }}
         activeOpacity={0.8}
         onPress={this.onSelectSeller.bind(this, item)}
-        style={{ paddingHorizontal: 4 }}>
+        >
         <Image
           source={null}
           style={{
@@ -190,25 +194,34 @@ renderImageScroll(item) {
     )]
   } else {
     imageComponents = banner_images.map(url => (
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={this.onSelectSeller.bind(this, item)}
-        style={{ paddingHorizontal: 4 }}>
-        <FastImage
-          source={{ uri: url }}
-          resizeMode={'cover'}
-          style={{
-            flex: 1,
-            backgroundColor: '#cecece',
-            borderRadius: 4
-          }}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity
+          key={url}
+          style={{ paddingHorizontal: 8 }}
+          activeOpacity={0.8}
+          onPress={this.onSelectSeller.bind(this, item)}
+          style={{ paddingHorizontal: 8 }}>
+          <FastImage
+            source={{ uri: url }}
+            resizeMode={'cover'}
+            style={{
+              flex: 1,
+              backgroundColor: '#cecece',
+              borderRadius: 4
+            }}
+          />
+        </TouchableOpacity>
     ))
   }
 
+  const isAndroidRTL = (Platform.OS === 'android') && (I18nManager.isRTL);
+  if (isAndroidRTL) { imageComponents = imageComponents.reverse(); }
+
   return (
-    <ViewPager style={{ height: SCREEN_WIDTH*3/8 }}>
+    <ViewPager
+      style={{ height: SCREEN_WIDTH*3/8 }}
+      pageMargin={-4}
+      initialPage={isAndroidRTL ? imageComponents.length - 1 : 0}
+      >
       {imageComponents}
     </ViewPager>
   )
@@ -325,7 +338,7 @@ renderSellerList() {
       ListFooterComponent={null}
 
       showsVerticalScrollIndicator={false}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => `${index}`}
     />
   )
 }
