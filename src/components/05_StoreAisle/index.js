@@ -117,7 +117,7 @@ class StoreAisle extends Component {
         <View style={styles.subcategoryContainerShadow}>
           <FlatList
             horizontal
-            disableVirtualization={true}
+            disableVirtualization={I18nManager.isRTL}
             style={styles.subcategoryContainer}
             removeClippedSubviews
             windowSize={2}

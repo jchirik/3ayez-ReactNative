@@ -130,6 +130,7 @@ class StoreShelf extends Component {
     const { items, jumpIndex } = this.props;
     return (
       <FlatList
+        disableVirtualization={I18nManager.isRTL}
         ref={ref => (this.tableRef = ref)}
         style={styles.container}
         onLayout={this._onLayout.bind(this, jumpIndex)}
