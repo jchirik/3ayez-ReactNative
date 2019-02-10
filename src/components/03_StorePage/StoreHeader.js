@@ -66,8 +66,8 @@ export default class StoreHeader extends Component {
             paddingVertical: 4,
             borderRadius: 6
           }}>
-            <AyezText color={'white'} semibold size={13}>{translate(displayName)}</AyezText>
-            <AyezText light color={'white'} size={12}>
+            <AyezText color={'white'} semibold size={13} style={{ lineHeight: 20 }}>{translate(displayName)}</AyezText>
+            <AyezText light color={'white'} size={12}  style={{ lineHeight: 18 }}>
               {strings('StoreSelect.deliveryTime', { delivery_time })}
             </AyezText>
           </View>

@@ -12,6 +12,7 @@ import {
   BackHandler,
   InteractionManager,
   ActivityIndicator,
+  I18nManager,
   Platform,
   findNodeHandle
 } from 'react-native';
@@ -38,6 +39,11 @@ import {
   FONT_LIGHT
 } from '../../i18n.js';
 
+import {
+  STATUS_BAR_HEIGHT
+} from '../../Helpers';
+
+
 import styles from './styles';
 import colors from '../../theme/colors';
 
@@ -47,7 +53,7 @@ import {
   TAB_BAR_HEIGHT
 } from './CollapsibleHeaderScrollView';
 const window = Dimensions.get('window');
-const STICKY_HEADER_HEIGHT = (Platform.OS === 'ios') ? 78 : 70; // EDIT THIS 86
+const STICKY_HEADER_HEIGHT = 68 + STATUS_BAR_HEIGHT; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 const CATEGORY_COL_NUM = 2;
 const CATEGORY_SCROLL_EVENT_THROTTLE = 16;

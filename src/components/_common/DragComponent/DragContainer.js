@@ -10,8 +10,6 @@ import {
 import { connect } from 'react-redux';
 import { addToBasket } from '../../../actions';
 
-import platform from '../../../utils/platform';
-
 import PropTypes from 'prop-types';
 
 const allOrientations = [
@@ -37,19 +35,26 @@ class DragModal extends React.Component {
         transparent={true}
         supportedOrientations={allOrientations}
       >
-        <TouchableWithoutFeedback onPressIn={this.props.drop}>
-          <Animated.View
-            style={[
-              this.props.location.getLayout(),
-              {
-                width: width,
-                height: height
-              }
-            ]}
-          >
-            {this.props.content.children}
-          </Animated.View>
-        </TouchableWithoutFeedback>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: I18nManager.isRTL ? 'row-reverse' : undefined
+          }}
+        >
+          <TouchableWithoutFeedback onPressIn={this.props.drop}>
+            <Animated.View
+              style={[
+                this.props.location.getLayout(),
+                {
+                  width: width,
+                  height: height
+                }
+              ]}
+            >
+              {this.props.content.children}
+            </Animated.View>
+          </TouchableWithoutFeedback>
+        </View>
       </Modal>
     );
   }
@@ -118,14 +123,14 @@ class DragContainer extends React.Component {
             y: 0
           }
         }).start(() => {
-          this.state.draggingComponent.ref.setOpacityTo(1, 0);
+          this.state.draggingComponent.ref.setOpacityTo(1);
           this._locked = false;
           this.setState({
             draggingComponent: null
           });
         });
       }
-      this.state.draggingComponent.ref.setOpacityTo(1, 0);
+      this.state.draggingComponent.ref.setOpacityTo(1);
       this.setState({
         draggingComponent: null
       });
@@ -178,10 +183,9 @@ class DragContainer extends React.Component {
         this._addLocationOffset(args)
       );
       this._offset = {
-    		// screenwidth - itemPosition - itemWidth
-    		x: I18nManager.isRTL ? platform.screenWidth - args[4] - args[2] : args[4],
-    		y: args[5]
-    	};
+        x: args[4],
+        y: args[5]
+      };
       location.setOffset(this._offset);
       this.setState(
         {

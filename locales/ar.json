@@ -217,11 +217,12 @@
   },
   "OrderProblem": {
     "header": "مشكلة الطلب",
-    "contactSupport": "أتصل بالدعم",
+    "contactSupport": "أتصل بالدعم  💬",
     "cancelOrder": "إلغاء الطلب",
     "cancelOrderModal": "هل أنت متأكد من أنك تريد الإلغاء ؟",
     "cancelOrderConfirm": "نعم , بالتأكيد",
-    "cancelOrderCancel": "لا"
+    "cancelOrderCancel": "لا",
+    "callStore": "للإتصال بلمحل  📞"
   },
   "Settings": {
     "header": "الإعدادات",

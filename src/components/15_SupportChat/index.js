@@ -30,7 +30,8 @@ import {
 } from '../../actions';
 
 import {
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  isIPhoneX
 } from '../../Helpers.js';
 
 import {
@@ -151,7 +152,8 @@ class SupportChat extends Component {
         flexDirection: 'row',
         alignItems: 'flex-end',
         borderWidth: 0,
-        flex: 1
+        flex: 1,
+        marginBottom: isIPhoneX() ? 24 : 0
       }}>
 
         <TouchableOpacity
@@ -260,6 +262,7 @@ class SupportChat extends Component {
             textAlign: I18nManager.isRTL ? 'right' : 'left'
           }}
           bottomOffset={-12}
+          autoFocus
           dateFormat={'ll'}
           placeholder={strings('SupportChat.inputPlaceholder')}
         />

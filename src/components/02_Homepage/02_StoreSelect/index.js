@@ -138,13 +138,29 @@ renderAddressHeader() {
       <AyezText medium style={{
         color: '#2DD38F',
         fontSize: 12,
+        lineHeight: 16,
         textAlign: 'center'
       }}>{strings('StoreSelect.deliveringTo')}</AyezText>
-      <AyezText semibold style={{
-        color: 'black',
-        fontSize: 28,
-        textAlign: 'center'
-      }}>{this.props.street}</AyezText>
+      <View style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <AyezText semibold style={{
+          color: 'black',
+          fontSize: 28,
+          lineHeight: 40,
+          textAlign: 'center'
+        }}>{this.props.street || '-'}</AyezText>
+
+        <AyezText regular style={{
+          color: '#0094ff',
+          marginTop: 4,
+          fontSize: 13,
+          lineHeight: 16,
+          marginLeft: 8,
+        }}>({strings('Common.edit')})</AyezText>
+      </View>
     </TouchableOpacity>
   )
 }
@@ -166,6 +182,28 @@ renderNoInternetConnection() {
         color={'#666666'}
         style={{ width: 200 }}
         onPress={() => this.fetchNearbySellers()}
+        />
+    </View>
+  );
+}
+
+renderNoAddress() {
+  return (
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <AyezText regular style={{
+        color: '#8E8E93',
+        fontSize: 18,
+        margin: 10
+      }}>{strings('AddressCreate.addressSearchInstruction')}</AyezText>
+      <BlockButton
+        text={strings('Common.OK')}
+        color={'#0094ff'}
+        style={{ width: 200 }}
+        onPress={() => Actions.addressCreate()}
         />
     </View>
   );
@@ -317,6 +355,9 @@ renderSellerList() {
   }
   if (this.props.error) {
     return this.renderNoInternetConnection();
+  }
+  if (!this.props.address) {
+    return this.renderNoAddress();
   }
   return (
     <FlatList

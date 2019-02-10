@@ -42,7 +42,8 @@ import {
   AYEZ_GREEN,
   calculateTotal,
   calculateSuggestedTips,
-  paymentIcon
+  paymentIcon,
+  isIPhoneX
 } from '../../Helpers.js';
 
 import {
@@ -490,12 +491,11 @@ class Checkout extends Component {
         paddingRight: 16,
         paddingLeft: 16
       },
-
         submitButtonContainer: {
           paddingTop: 4,
           paddingLeft: 12,
           paddingRight: 12,
-          paddingBottom: 10,
+          paddingBottom: isIPhoneX() ? 26 : 10,
           borderTopWidth: 1,
           borderColor: '#f4f4f4',
           backgroundColor: 'white'

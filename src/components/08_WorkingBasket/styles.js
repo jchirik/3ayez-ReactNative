@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { statusBarMargin } from '../../Helpers.js';
+import { STATUS_BAR_HEIGHT, isIPhoneX } from '../../Helpers.js';
 import colors from '../../theme/colors';
 
 const styles = StyleSheet.create({
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   callButton: {
     position: 'absolute',
-    top: statusBarMargin + 60,
+    top: STATUS_BAR_HEIGHT + 60,
     left: 12,
     borderRadius: 30,
     height: 45,
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
 
   submitButtonContainer: {
     backgroundColor: '#FFFFFF',
-    paddingBottom: 14,
+    paddingBottom: isIPhoneX() ? 30 : 14,
     paddingTop: 10,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
 
   clearOrderTextStyle: {
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
   },
   basketContatiner: {
     width: '100%',
-    height: 60 + statusBarMargin,
+    height: 60 + STATUS_BAR_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center'
   },
   backbutton: {
     position: 'absolute',
     right: 15,
-    top: 5 + statusBarMargin,
+    top: 5 + STATUS_BAR_HEIGHT,
     bottom: null,
     left: null,
     width: null,

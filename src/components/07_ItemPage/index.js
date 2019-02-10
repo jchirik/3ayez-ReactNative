@@ -18,6 +18,9 @@ import {
   ItemIncrementer
 } from '../_common';
 
+
+import { isIPhoneX } from '../../Helpers.js';
+
 import {
   Divider,
   RipenessSlider,
@@ -226,6 +229,7 @@ class ItemPage extends Component {
 
         <View style={{
           height: 70,
+          marginBottom: isIPhoneX() ? 20 : 0,
           backgroundColor: 'white',
           flexDirection: 'row',
           justifyContent: 'center',

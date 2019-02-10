@@ -561,6 +561,7 @@ const styles = {
   sectionHeaderContainer: {
     paddingLeft: 15,
     paddingTop: 10,
+    alignItems: 'flex-start',
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderColor: '#F2F2F2'

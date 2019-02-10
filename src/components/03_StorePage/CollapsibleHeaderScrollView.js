@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import StoreHeader from './StoreHeader';
 import colors from '../../theme/colors';
-import { STATUS_BAR_HEIGHT } from '../../Helpers';
+import { STATUS_BAR_HEIGHT, isIPhoneX } from '../../Helpers';
 
 export const PARALLAX_HEADER_HEIGHT = 225 + STATUS_BAR_HEIGHT;
 export const TAB_BAR_HEIGHT = 52;

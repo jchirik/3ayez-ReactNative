@@ -23,7 +23,8 @@ import {
 
 import {
   AYEZ_GREEN,
-  AYEZ_BACKGROUND_COLOR
+  AYEZ_BACKGROUND_COLOR,
+  isIPhoneX
 } from '../../Helpers.js';
 
 import {
@@ -123,7 +124,8 @@ class Homepage extends Component {
               }}
               style={{ backgroundColor: 'white',
                 borderTopWidth: 1,
-                borderColor: '#e6e6e6'
+                borderColor: '#e6e6e6',
+                paddingBottom: isIPhoneX() ? 20 : 0
                }}
               renderIndicator={() => null}
               // indicatorStyle={{ backgroundColor: AYEZ_GREEN }}

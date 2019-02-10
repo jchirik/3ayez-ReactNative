@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import {
   View,
   FlatList,
+  Platform,
+  I18nManager,
   ActivityIndicator,
   TouchableOpacity,
   Image,
@@ -115,6 +117,7 @@ class StoreAisle extends Component {
         <View style={styles.subcategoryContainerShadow}>
           <FlatList
             horizontal
+            disableVirtualization={true}
             style={styles.subcategoryContainer}
             removeClippedSubviews
             windowSize={2}

@@ -23,9 +23,6 @@ import {
   BlockUnderButton
 } from '../../_common';
 import {
-} from '../../../actions';
-
-import {
   STATUS_BAR_HEIGHT,
   AYEZ_GREEN
 } from '../../../Helpers.js';
@@ -194,5 +191,4 @@ const mapStateToProps = ({ Seller }) => {
   };
 };
 
-export default connect(mapStateToProps, {
-})(FeaturedBrowse);
+export default connect(mapStateToProps, null)(FeaturedBrowse);

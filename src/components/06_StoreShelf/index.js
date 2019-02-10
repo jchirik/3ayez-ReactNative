@@ -10,7 +10,9 @@ import {
   Image,
   InteractionManager,
   findNodeHandle,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform,
+  I18nManager
 } from 'react-native';
 import { strings, translate } from '../../i18n.js';
 import {
@@ -111,6 +113,7 @@ class StoreShelf extends Component {
   _onLayout(jumpIndex, event) {
     const { height } = event.nativeEvent.layout;
     this.setState({ itemHeight: height / 2 }, () => {
+      console.log('jumpIndex', jumpIndex)
       this.tableRef.scrollToOffset({
         animated: true,
         offset: this.state.itemHeight * 0.58 * jumpIndex

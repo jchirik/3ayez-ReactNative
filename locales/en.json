@@ -44,7 +44,7 @@
     "street": "Street:",
     "building": "Building no.:",
     "apt": "Apt no.:",
-    "instructions": "Instructions:",
+    "instructions": "Instructions:"
   },
   "Items": {
     "savingsText": "Save {{savings}}",
@@ -77,7 +77,8 @@
     "cvc": "CVC",
     "name": "Name",
     "expiryText": "Exp. {{month}}/{{year}}",
-    "errorAddingCard": "Error adding card"
+    "errorAddingCard": "Error adding card",
+    "verifyingCard": "verifying card..."
   },
   "OrderStatusBar": {
     "trackOrder": "Track your order",
@@ -216,11 +217,12 @@
   },
   "OrderProblem": {
     "header": "Order Problem",
-    "contactSupport": "CONTACT SUPPORT",
+    "contactSupport": "CONTACT SUPPORT  💬",
     "cancelOrder": "CANCEL YOUR ORDER",
     "cancelOrderModal": "Ae you sure you want to cancel?",
     "cancelOrderConfirm": "Yes, sure",
-    "cancelOrderCancel": "No"
+    "cancelOrderCancel": "No",
+    "callStore": "CALL THE STORE  📞"
   },
   "Settings": {
     "header": "SETTINGS",

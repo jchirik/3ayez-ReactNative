@@ -14,6 +14,8 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import call from 'react-native-phone-call';
+
 import {
   markOrderCustomerReceived,
   markOrderCancelled
@@ -62,13 +64,27 @@ class OrderProblem extends Component {
             marginRight: 30
           }}
           />
+
+        { (this.props.seller.phone) ? (
+          <BlockButton
+            onPress={() => call({ number: this.props.seller.phone, prompt: false })}
+            text={strings('OrderProblem.callStore')}
+            color={'#0094ff'}
+            style={{
+              marginTop: 15,
+              marginLeft: 30,
+              marginRight: 30
+            }}
+            />
+        ) : null }
+
         { (this.props.status < 100) ? (
           <BlockButton
             onPress={() => this.setState({ cancelConfirm: true })}
             text={strings('OrderProblem.cancelOrder')}
             color={'#E64E47'}
             style={{
-              marginTop: 10,
+              marginTop: 30,
               marginLeft: 30,
               marginRight: 30
             }}

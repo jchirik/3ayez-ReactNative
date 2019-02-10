@@ -178,13 +178,16 @@ const listenToAddresses = (dispatch) => {
       .collection('addresses');
 
     const addressesListener = addressesRef.onSnapshot((addressesT) => {
-      let addresses = addressesT.docs.map(addressDoc => {
+      let addresses = [];
+      addressesT.docs.forEach(addressDoc => {
         const id = addressDoc.id;
         const data = addressDoc.data();
-        return ({
-          ...data,
-          id
-        });
+        if (data.location) {
+          addresses.push({
+            ...data,
+            id
+          });
+        }
       });
 
       // get the most recent address that was selected (greatest timestamp)
