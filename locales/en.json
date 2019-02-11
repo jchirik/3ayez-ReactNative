@@ -168,6 +168,7 @@
     "addressField": "Address:",
     "deliveryTimeField": "Delivery Time:",
     "paymentMethodField": "Payment Method:",
+    "noCreditCard": "This store does not accept credit card",
     "tipField": "Tip:",
     "additionalNotesField": "Additional Notes:",
     "additionalNotesHeader": "Additional Notes",

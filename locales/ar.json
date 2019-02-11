@@ -44,7 +44,7 @@
     "street": "الشارع / الحي:",
     "building": "رقم المبني:",
     "apt": "الشقة رقم:",
-    "instructions": "تعليمات:",
+    "instructions": "علامة مميزة:",
   },
   "Items": {
     "savingsText": "وفر {{savings}} جنيه",
@@ -126,7 +126,7 @@
     "settings": "الإعدادات"
   },
   "StoreHome": {
-    "featured": "متميز",
+    "featured": "عروض",
     "categories": "الأقسام"
   },
   "StoreSearch": {
@@ -161,13 +161,14 @@
     "minimumOrderModal": "دقيقة. {{min}} لـــ {{seller_name}}"
   },
   "TimeslotSelect": {
-    "header": "رتب طلبك"
+    "header": "ميعاد طلبك"
   },
   "Checkout": {
     "header": "خروج",
     "addressField": "العنوان:",
     "deliveryTimeField": "وقت التوصيل :",
     "paymentMethodField": "طريقة الدفع:",
+    "noCreditCard": "بطاقات الائتمان غير متاحة بهذا المتجر",
     "tipField": "الباقي:",
     "additionalNotesField": "ملاحظات إضافية:",
     "additionalNotesHeader": "ملاحظات إضافية",

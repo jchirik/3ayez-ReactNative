@@ -145,13 +145,6 @@ class FeaturedBrowse extends Component {
 
 
   renderEmptyFeatured() {
-
-    if (this.props.featured_loading) {
-      return (
-        <ActivityIndicator size="small" style={{ height: 200 }} />
-      )
-    }
-
     return (
         <AyezText medium style={{ marginTop: 100, marginBottom: 100, textAlign: 'center' }}>
           {strings('Common.noResults')}

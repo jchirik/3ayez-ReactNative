@@ -136,7 +136,7 @@ class Checkout extends Component {
 
   renderPayment() {
 
-    const { payment_method } = this.props;
+    const { payment_method, seller } = this.props;
 
     let payment_text = strings('PaymentMethod.cash');
     if (payment_method.type === 'CREDIT') {
@@ -190,9 +190,30 @@ class Checkout extends Component {
         {(payment_method.type === 'CASH') ? selectedCircle : unselectedCircle}
       </TouchableOpacity>
     );
+
+    const { accepts_card } = seller;
+
+    const noCardsAcceptedComponent = (
+      <View style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <AyezText regular style={{
+          fontSize: 12,
+          color: 'red'
+        }}>{strings('Checkout.noCreditCard')}</AyezText>
+      </View>
+    )
     const creditToggle = (
       <TouchableOpacity
         onPress={this.onCreditCardToggle.bind(this)}
+        disabled={!accepts_card}
         style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -219,8 +240,12 @@ class Checkout extends Component {
         }}>{strings('PaymentMethod.creditCard')}</AyezText>
         <View style={{ flex: 1 }} />
         {(payment_method.type === 'CREDIT') ? selectedCircle : unselectedCircle}
+        {accepts_card ? null : noCardsAcceptedComponent}
       </TouchableOpacity>
     );
+
+
+
     return (
       <View>
         <Row disabled title={strings('Checkout.paymentMethodField')}>

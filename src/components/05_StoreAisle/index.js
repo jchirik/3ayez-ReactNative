@@ -168,7 +168,7 @@ class StoreAisle extends Component {
     if (this.props.isLoadingCategoryData) {
       return (
         <View style={styles.container}>
-          <ActivityIndicator size="large" style={styles.activityIndecator} />
+          <ActivityIndicator size="large" style={styles.activityIndicator} />
         </View>
       );
     } else {

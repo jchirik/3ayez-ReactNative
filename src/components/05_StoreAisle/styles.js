@@ -58,12 +58,11 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   noItemAvailableText: {
-    marginTop: 20,
-    fontSize: 18,
+    marginTop: 50,
     textAlign: 'center'
   },
   subcategoryItemsFooter: { flex: 1, height: 100 },
-  activityIndecator: { height: 40, flex: 1, marginTop: 100 },
+  activityIndicator: { height: 40, flex: 1, marginTop: 100 },
   categoryItemText: {
     marginHorizontal: 5,
     flex: 1,

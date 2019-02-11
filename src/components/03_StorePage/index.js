@@ -40,7 +40,8 @@ import {
 } from '../../i18n.js';
 
 import {
-  STATUS_BAR_HEIGHT
+  STATUS_BAR_HEIGHT,
+  AYEZ_GREEN
 } from '../../Helpers';
 
 
@@ -61,6 +62,22 @@ const CATEGORY_SCROLL_EVENT_THROTTLE = 16;
 
 class StorePage extends Component {
 
+
+    constructor(props) {
+      super(props);
+      this.nScroll.addListener(
+        Animated.event([{ value: this.scroll }], { useNativeDriver: false })
+      );
+      this.state = {
+        tabs: [
+          strings('StoreHome.categories')
+        ],
+        selected_tab: 0,
+        itemHeight: 0
+      };
+    }
+
+
   componentDidMount() {
     //listens to hardwareBackPress
     BackHandler.addEventListener('hardwareBackPress', () => {
@@ -79,6 +96,17 @@ class StorePage extends Component {
         });
       }, 100);
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    // this listener is STILL RUNNING IN FUTURE COMPONENTS
+    if (!this.props.featured_loading && prevProps.featured_loading) {
+      if (this.props.featured.length) {
+        this.setState({
+          tabs: [ strings('StoreHome.featured'), ...this.state.tabs ]
+        })
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -104,16 +132,11 @@ class StorePage extends Component {
     }
   ];
 
-  constructor(props) {
-    super(props);
-    this.nScroll.addListener(
-      Animated.event([{ value: this.scroll }], { useNativeDriver: false })
-    );
-    this.state = {
-      selected_tab: 0,
-      itemHeight: 0
-    };
-  }
+
+
+
+
+
 
   onSelectCategory(category) {
     this.props.onSelectCategory(this.props.seller_id, category);
@@ -188,10 +211,9 @@ class StorePage extends Component {
   }
 
   renderTabs() {
-    const tabs = [
-      strings('StoreHome.featured'),
-      strings('StoreHome.categories')
-    ];
+    if (this.props.featured_loading || this.props.categories_loading) {
+      return null;
+    }
     return (
       <Animated.View
         style={{
@@ -206,15 +228,21 @@ class StorePage extends Component {
         }}
       >
         <SegmentedControlTab
-          values={tabs}
+          values={this.state.tabs}
           tabsContainerStyle={{
             height: '100%',
             backgroundColor: colors.paleGrey
           }}
-          activeTabStyle={{ backgroundColor: colors.paleGrey }}
-          tabStyle={{
+          activeTabStyle={{
             backgroundColor: colors.paleGrey,
+            borderBottomColor: AYEZ_GREEN
+          }}
+          tabStyle={{
+            marginTop: 5,
+            marginHorizontal: 20,
             borderWidth: 0,
+            borderBottomWidth: 4,
+            backgroundColor: colors.paleGrey,
             borderColor: 'transparent'
           }}
           selectedIndex={this.state.selected_tab}
@@ -231,15 +259,7 @@ class StorePage extends Component {
             color: '#2DD38F',
             fontFamily: FONT_LIGHT()
           }}
-        />
-        <View
-          style={{
-            height: 3,
-            backgroundColor: '#2DD38F',
-            width: this.tabsStylesAttributes[this.state.selected_tab].width,
-            marginLeft: this.tabsStylesAttributes[this.state.selected_tab].margin,
-            marginTop: -3.5
-          }}
+          borderRadius={0}
         />
       </Animated.View>
     );
@@ -270,6 +290,19 @@ class StorePage extends Component {
   }
 
   render() {
+    const { selected_tab, tabs } = this.state;
+
+    let mainScrollComponent = null;
+    if (this.props.featured_loading || this.props.categories_loading) {
+      mainScrollComponent = (
+        <ActivityIndicator size="small" style={{ flex: 1 }} />
+      );
+    } else if (tabs[selected_tab] === strings('StoreHome.featured')) {
+      mainScrollComponent = (<FeaturedBrowse />);
+    } else {
+      mainScrollComponent = (this.renderCategories());
+    }
+
     return (
       <View ref={'03_StorePage'} style={styles.container}>
         <CollapsibleHeaderScrollView
@@ -283,9 +316,7 @@ class StorePage extends Component {
           delivery_fee={this.props.delivery_fee}
           Tabs={this.renderTabs()}
         >
-          {this.state.selected_tab == 0
-              ? <FeaturedBrowse />
-              : this.renderCategories()}
+          {mainScrollComponent}
         </CollapsibleHeaderScrollView>
         {this.renderBasket()}
         <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
@@ -303,6 +334,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     cover_url,
     promotions,
     featured,
+    featured_loading,
     categories,
     categories_loading,
     delivery_fee,
@@ -317,6 +349,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     cover_url,
     promotions,
     featured,
+    featured_loading,
     categories,
     categories_loading,
     delivery_fee,
