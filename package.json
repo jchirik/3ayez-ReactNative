@@ -22,11 +22,13 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "adm-zip": "^0.4.13",
     "algoliasearch": "^3.32.0",
     "i18n-js": "^3.2.1",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
+    "plist": "^3.0.1",
     "qs": "^6.6.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
@@ -35,6 +37,7 @@
     "react-native-credit-card-input": "^0.4.1",
     "react-native-device-info": "^0.23.0",
     "react-native-fast-image": "^5.1.2",
+    "react-native-fbsdk": "^0.8.0",
     "react-native-firebase": "^5.1.1",
     "react-native-gifted-chat": "^0.6.0",
     "react-native-image-picker": "^0.28.0",
@@ -52,6 +55,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "rn-viewpager": "^1.2.9",
-    "tipsi-stripe": "^7.1.0"
+    "tipsi-stripe": "^7.1.0",
+    "xcode": "^2.0.0"
   }
 }

@@ -50,6 +50,10 @@ const completeVerification = (dispatch, user, prevUser) => {
         if (onComplete) {
           console.log('completeVerification onComplete execute');
           onComplete();
+
+
+
+
         } else {
           console.log('completeVerification onComplete no_execute');
         }
@@ -68,6 +72,11 @@ const completeVerification = (dispatch, user, prevUser) => {
     if (onComplete) {
       console.log('completeVerification onComplete execute');
       onComplete();
+
+
+
+
+
     } else {
       console.log('completeVerification onComplete no_execute');
     }
@@ -108,14 +117,6 @@ const listenCustomerData = (dispatch) => {
   const { currentUser } = firebase.auth();
   if (currentUser) {
     dispatch({ type: CUSTOMER_DATA_SET, payload: { phone: currentUser.phoneNumber } });
-
-    firebase.firestore()
-      .collection('customers')
-      .doc(currentUser.uid)
-      .set({ phone: currentUser.phoneNumber }, { merge: true })
-      .then(() => {
-        console.log('set phone number');
-      });
     // realtime listening
     const listener = firebase.firestore().collection('customers').doc(currentUser.uid)
         .onSnapshot((document) => {
@@ -124,7 +125,14 @@ const listenCustomerData = (dispatch) => {
             console.log('listenCustomerData', payload)
             dispatch({ type: CUSTOMER_DATA_SET, payload });
           }
-        });
+    });
+    firebase.firestore()
+      .collection('customers')
+      .doc(currentUser.uid)
+      .set({ phone: currentUser.phoneNumber }, { merge: true })
+      .then(() => {
+        console.log('set phone number');
+      });
     dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener } });
   }
 };
@@ -138,7 +146,7 @@ const listenToOngoingOrders = (dispatch) => {
     // realtime listening
     const ongoingOrdersRef = firebase.firestore().collection('orders')
       .where('customer.id', '==', currentUser.uid)
-      .where('is_timeslot_ongoing', '==', true);
+      .where('is_customer_active', '==', true);
 
     const ongoingOrdersListener = ongoingOrdersRef.onSnapshot((ongoingOrdersT) => {
       let orders = ongoingOrdersT.docs.map(order => {

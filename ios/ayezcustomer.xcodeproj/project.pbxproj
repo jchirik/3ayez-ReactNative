@@ -42,6 +42,10 @@
 		D2096BBC21F7873B0033390F /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2096BBA21F7871F0033390F /* libRNImagePicker.a */; };
 		D22030A722073105005D1B9D /* launch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D22030A622073105005D1B9D /* launch.jpg */; };
 		D23012C821F7E2F5006332ED /* libTPSStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D23012C621F7E2D7006332ED /* libTPSStripe.a */; };
+		D2615AAA221709AD00E38B88 /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2615AA9221709AD00E38B88 /* libFBSDKCoreKit.a */; };
+		D2615AAC221709AD00E38B88 /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2615AAB221709AD00E38B88 /* libFBSDKLoginKit.a */; };
+		D2615AAE221709AD00E38B88 /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2615AAD221709AD00E38B88 /* libFBSDKShareKit.a */; };
+		D2615AB0221709BE00E38B88 /* libreact-native-fbsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2615AAF221709BE00E38B88 /* libreact-native-fbsdk.a */; };
 		D27602BE21DD15810037DE81 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D27602BD21DD156A0037DE81 /* libRNSound.a */; };
 		D276032621DD2BBD0037DE81 /* bounce_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = D276032121DD2BBD0037DE81 /* bounce_low.wav */; };
 		D276032721DD2BBD0037DE81 /* bounce_mid.wav in Resources */ = {isa = PBXBuildFile; fileRef = D276032221DD2BBD0037DE81 /* bounce_mid.wav */; };
@@ -422,6 +426,10 @@
 		D2096B8F21F7871F0033390F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		D22030A622073105005D1B9D /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
 		D23012C121F7E2D7006332ED /* TPSStripe.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TPSStripe.xcodeproj; path = "../node_modules/tipsi-stripe/ios/TPSStripe.xcodeproj"; sourceTree = "<group>"; };
+		D2615AA9221709AD00E38B88 /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKCoreKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2615AAB221709AD00E38B88 /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKLoginKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2615AAD221709AD00E38B88 /* libFBSDKShareKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKShareKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2615AAF221709BE00E38B88 /* libreact-native-fbsdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-fbsdk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D276029221DD156A0037DE81 /* RNSound.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		D276032121DD2BBD0037DE81 /* bounce_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bounce_low.wav; path = ../android/app/src/main/res/raw/bounce_low.wav; sourceTree = "<group>"; };
 		D276032221DD2BBD0037DE81 /* bounce_mid.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bounce_mid.wav; path = ../android/app/src/main/res/raw/bounce_mid.wav; sourceTree = "<group>"; };
@@ -470,6 +478,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2615AB0221709BE00E38B88 /* libreact-native-fbsdk.a in Frameworks */,
+				D2615AAA221709AD00E38B88 /* libFBSDKCoreKit.a in Frameworks */,
+				D2615AAC221709AD00E38B88 /* libFBSDKLoginKit.a in Frameworks */,
+				D2615AAE221709AD00E38B88 /* libFBSDKShareKit.a in Frameworks */,
 				D2B136E9220465C200D3B109 /* libFastImage.a in Frameworks */,
 				D23012C821F7E2F5006332ED /* libTPSStripe.a in Frameworks */,
 				D2096BBC21F7873B0033390F /* libRNImagePicker.a in Frameworks */,
@@ -738,6 +750,10 @@
 		927E270FF1706B5003F5613D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2615AAF221709BE00E38B88 /* libreact-native-fbsdk.a */,
+				D2615AA9221709AD00E38B88 /* libFBSDKCoreKit.a */,
+				D2615AAB221709AD00E38B88 /* libFBSDKLoginKit.a */,
+				D2615AAD221709AD00E38B88 /* libFBSDKShareKit.a */,
 				333056BA5B7ADABE709DF4A1 /* libPods-ayezcustomer.a */,
 			);
 			name = Frameworks;
@@ -899,7 +915,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -1450,12 +1466,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Stripe/Stripe.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC/gRPCCertificates.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Stripe.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",
@@ -1535,6 +1553,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1564,6 +1583,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
@@ -1594,6 +1614,10 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5YSUQQZPV9;
 				DISPLAY_NAME = ayezcustomer;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
@@ -1623,6 +1647,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YSUQQZPV9;
 				DISPLAY_NAME = ayezcustomer;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
@@ -1654,6 +1682,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1688,6 +1717,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1721,6 +1751,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ayezcustomer-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1746,6 +1777,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ayezcustomer-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1793,6 +1825,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1811,6 +1844,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1847,6 +1881,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1857,6 +1892,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

@@ -11,6 +11,9 @@ import {
   Dimensions
 } from 'react-native';
 
+import FBSDK from 'react-native-fbsdk';
+
+
 // import Discovery from './components/02_Homepage/01_Discovery';
 import StoreSelect from './02_StoreSelect';
 import Support from './03_Support';
@@ -53,6 +56,8 @@ class Homepage extends Component {
 
   componentDidMount() {
     console.log('Homepage mounted')
+    console.log('FBSDK', FBSDK)
+    console.log('AppEventsLogger', FBSDK.AppEventsLogger)
   }
 
   componentDidUpdate(prevProps) {

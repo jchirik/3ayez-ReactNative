@@ -113,8 +113,8 @@ android {
     applicationId "com.ayez.ayezcustomer"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 54
-    versionName "5.1.0"
+    versionCode 56
+    versionName "5.2.1"
     ndk {
       abiFilters "armeabi-v7a", "x86"
     }
@@ -168,6 +168,7 @@ android {
 }
 
 dependencies {
+  implementation project(':react-native-fbsdk')
   implementation project(':react-native-code-push')
 
   //noinspection GradleDynamicVersion

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ayez.ayezcustomer"
-    android:versionCode="54"
-    android:versionName="5.1.0">
+    android:versionCode="56"
+    android:versionName="5.2.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -40,6 +40,7 @@
       <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyAGioxDWpQAHxVUvDkPiSltb6iGbTaEr-g" />
+      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
     </application>
 
 </manifest>

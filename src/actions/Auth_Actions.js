@@ -1,6 +1,7 @@
 
 import firebase from 'react-native-firebase';
 import { Actions } from 'react-native-router-flux';
+import { AppEventsLogger } from 'react-native-fbsdk';
 
 import {
   AUTH_PHONE_SET,
@@ -46,6 +47,11 @@ export const authGuestLogin = () => {
     .then(() => {
       console.log('authGuestLogin successful')
       dispatch({ type: GUEST_LOGIN_SUCCESS });
+      try {
+        AppEventsLogger.logEvent('GUEST_REGISTERED');
+      } catch (e) {
+        console.log('AppEventsLogger error', e)
+      }
     })
     .catch(error => {
       console.log('authGuestLogin', error);
@@ -65,6 +71,12 @@ export const authPhoneLogin = (phone, call_code) => {
     .then(confirmation_function => {
       dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
       Actions.verifyCode();
+
+      try {
+        AppEventsLogger.logEvent('ACCOUNT_REGISTERED');
+      } catch (e) {
+        console.log('AppEventsLogger error', e)
+      }
     }) // save confirm result to use with the manual verification code)
     .catch(error => {
       console.log(error);

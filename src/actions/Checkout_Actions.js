@@ -5,6 +5,8 @@ import { AsyncStorage, Platform } from 'react-native';
 import firebase from 'react-native-firebase';
 import { playSound, SOUND_SWOOSH, SOUND_SUCCESS } from './sounds'
 
+import { AppEventsLogger } from 'react-native-fbsdk';
+
 import {
   ORDER_SUBMIT_BEGIN,
   ORDER_SUBMIT_SUCCESS,
@@ -22,7 +24,7 @@ import {
   CHECKOUT_RESET
 } from './types';
 
-export const submitOrder = (order_t, items_array) => {
+export const submitOrder = (order_t, items_array, total) => {
   const {
     customer,
     seller
@@ -46,6 +48,7 @@ export const submitOrder = (order_t, items_array) => {
   console.log('submitOrder', order);
 
   return (dispatch) => {
+
     // dispatch({ type: ORDER_SUBMIT_BEGIN });
     //
     // playSound(SOUND_SUCCESS);
@@ -78,6 +81,12 @@ export const submitOrder = (order_t, items_array) => {
         setTimeout(() => {
           Actions.orderTracker({ order_id }); // you might have to refresh
         }, 1500);
+
+        try {
+          AppEventsLogger.logPurchase(total, 'EGP');
+        } catch (e) {
+          console.log('AppEventsLogger error', e)
+        }
       })
       .catch((error) => {
         const { code, message, details } = error;

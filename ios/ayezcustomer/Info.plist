@@ -17,11 +17,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>5.0.0</string>
+	<string>5.1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb304049227136803</string>
+			</array>
+		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -32,9 +38,20 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>2</string>
 	<key>CodePushDeploymentKey</key>
 	<string>koynC6tLRaPXaiG1Sb4b8SXAKoRg581d560a-0218-4243-a9eb-f46181c392d5</string>
+	<key>FacebookAppID</key>
+	<string>304049227136803</string>
+	<key>FacebookDisplayName</key>
+	<string>3ayez</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -53,7 +70,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>$(DISPLAY_NAME) would like to use your camera for chat</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>$(DISPLAY_NAME) needs your location to help find nearby stores</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(DISPLAY_NAME) would like access to your photo gallery for chat</string>
 	<key>UIAppFonts</key>

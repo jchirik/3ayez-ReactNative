@@ -1,4 +1,5 @@
 <resources>
     <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">zyq7XJX3WM0-zZIifxyXQT3Uj7Bl581d560a-0218-4243-a9eb-f46181c392d5</string>
     <string name="app_name">3ayez</string>
+    <string name="facebook_app_id">304049227136803</string>
 </resources>

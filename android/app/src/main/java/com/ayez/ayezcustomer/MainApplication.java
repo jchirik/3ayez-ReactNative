@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -40,7 +41,18 @@ import com.dylanvann.fastimage.FastImageViewPackage;
 import java.util.Arrays;
 import java.util.List;
 
+import com.facebook.FacebookSdk;
+import com.facebook.CallbackManager;
+import com.facebook.appevents.AppEventsLogger;
+
 public class MainApplication extends Application implements ReactApplication {
+
+  // facebook SDK
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
@@ -48,7 +60,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSBundleFile() {
         return CodePush.getJSBundleFile();
         }
-    
+
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -59,7 +71,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
-            new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
+        new FBSDKPackage(mCallbackManager),
+        new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
         new ImagePickerPackage(),
         new StripeReactPackage(),
         new RNFirebasePackage(),

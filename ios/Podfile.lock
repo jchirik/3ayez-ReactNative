@@ -1,5 +1,11 @@
 PODS:
   - Base64 (1.1.2)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - boost-for-react-native (1.63.0)
   - BoringSSL (10.0.6):
     - BoringSSL/Implementation (= 10.0.6)
@@ -16,6 +22,12 @@ PODS:
     - Fabric (~> 1.7.13)
   - DoubleConversion (1.1.6)
   - Fabric (1.7.13)
+  - FBSDKCoreKit (4.38.1):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.38.1):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.38.1):
+    - FBSDKCoreKit
   - Firebase/AdMob (5.11.0):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (~> 7.35)
@@ -232,6 +244,20 @@ PODS:
     - React
   - React (0.57.1):
     - React/Core (= 0.57.1)
+  - react-native-fbsdk (0.8.0):
+    - React
+    - react-native-fbsdk/Core (= 0.8.0)
+    - react-native-fbsdk/Login (= 0.8.0)
+    - react-native-fbsdk/Share (= 0.8.0)
+  - react-native-fbsdk/Core (0.8.0):
+    - FBSDKCoreKit
+    - React
+  - react-native-fbsdk/Login (0.8.0):
+    - FBSDKLoginKit
+    - React
+  - react-native-fbsdk/Share (0.8.0):
+    - FBSDKShareKit
+    - React
   - react-native-google-maps (0.22.1):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 2.5.0)
@@ -312,6 +338,7 @@ DEPENDENCIES:
   - Google-Maps-iOS-Utils
   - GoogleMaps
   - RCTRestart (from `../node_modules/react-native-restart/ios`)
+  - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/Core (from `../node_modules/react-native`)
@@ -335,10 +362,14 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Base64
+    - Bolts
     - boost-for-react-native
     - BoringSSL
     - Crashlytics
     - Fabric
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -387,6 +418,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-restart/ios"
   React:
     :path: "../node_modules/react-native"
+  react-native-fbsdk:
+    :path: "../node_modules/react-native-fbsdk"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
@@ -400,12 +433,16 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   CodePush: f6b348759cdc42c734d9c3a46ceb2997c270b12e
   Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
+  FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
+  FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
+  FBSDKShareKit: 6ffe22f0a0618eb7424d4104ab0ef3ce9643d42a
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
@@ -442,6 +479,7 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   RCTRestart: 2f9ddcfd9abb887f123b6580cec64d72fb6cccaa
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
@@ -450,6 +488,6 @@ SPEC CHECKSUMS:
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 6a3b069a48c4bf78b253bbfd151b9fb10758549e
+PODFILE CHECKSUM: a267f4cdb3f430e634277d18aae4ea3ddaf3bd50
 
 COCOAPODS: 1.5.3

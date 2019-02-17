@@ -128,7 +128,7 @@ class OrderTracker extends Component {
     } = this.props;
 
     if (this.state.timerTextLoading) {
-      return <ActivityIndicator size="small" style={{ margin: 20 }} />
+      return <ActivityIndicator size="small" style={{ margin: 14 }} />
     }
 
     if (driver_id && (status >= 100)) {
@@ -137,7 +137,7 @@ class OrderTracker extends Component {
           onPress={() => Actions.driverTracker({ driver_id })}
           text={strings('OrderTracker.trackDelivery')}
           style={{
-            marginTop: 20,
+            marginTop: 14,
             marginBottom: 20,
             marginLeft: 30,
             marginRight: 30
@@ -149,7 +149,7 @@ class OrderTracker extends Component {
     if (!this.state.timerText) { return null; }
     return (
       <View style={{
-        marginTop: 20,
+        marginTop: 14,
         marginBottom: 20,
         width: 200,
         height: 200,
@@ -200,6 +200,16 @@ class OrderTracker extends Component {
             }}
             />
           <ScrollView style={{ flex: 1 }}>
+            <View style={{
+              marginTop: 18,
+              marginBottom: 6,
+              marginHorizontal: 30,
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}>
+              <AyezText medium>{strings('Receipt.orderNumber', { order_number })}</AyezText>
+              <AyezText medium color={'#0094ff'}>{translate(seller.display_name)}</AyezText>
+            </View>
             {this.renderTimer()}
             <StatusLog status_log={status_log} seller={seller} />
             <BlockButton

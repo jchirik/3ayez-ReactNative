@@ -108,7 +108,9 @@ class Checkout extends Component {
       delivery_fee,
       tip,
       notes,
-      address
+      address,
+
+      total
     } = this.props;
 
     this.props.submitOrder({
@@ -121,7 +123,7 @@ class Checkout extends Component {
       tip,
       notes,
       address
-    }, items_array);
+    }, items_array, total);
   }
 
 
