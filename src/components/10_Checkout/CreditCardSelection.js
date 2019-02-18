@@ -145,7 +145,8 @@ class CreditCardSelection extends Component {
           top: 0,
           bottom: 0,
           right: 0,
-          left: 0
+          left: 0,
+          elevation: 1000
         }}
       >
         <AnimatedTouchableOpacity

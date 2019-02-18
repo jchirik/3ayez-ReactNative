@@ -61,9 +61,25 @@ class CurrentLocationSelect extends Component {
     super(props);
   }
 
+
+  /* BackHandler for Android */
   componentDidMount() {
     this.props.resetAddressCreate();
+    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
+  }
+  onAndroidBackPress = () => {
+    if (Actions.currentScene === 'currentLocationSelect') {
+      console.log('back disabled')
+      return true;
+    }
+  }
+  /* --------------------- */
+
+
+
 
   componentDidUpdate(prevProps) {
     // this listener is STILL RUNNING IN FUTURE COMPONENTS

@@ -37,44 +37,44 @@ const completeVerification = (dispatch, user, prevUser) => {
 
   console.log('completeVerification', user, prevUser);
 
-  dispatch({ type: VERIFICATION_BEGIN });
 
   // if previously logged in anonymously, run a CloudFX that migrates all data
   if (prevUser && prevUser.uid && (user.uid !== prevUser.uid)) {
     console.log('migrating guest account with phone account', prevUser.uid, user.uid);
+
     const migrateGuestAccount = firebase.functions().httpsCallable('migrateGuestAccount');
     migrateGuestAccount({ guest_uid: prevUser.uid, user_uid: user.uid }).then((result) => {
-      if (result.data && result.data.success) {
-        console.log('merged accounts succesfully')
-      } else {
-        console.log('failed to link guest account');
-      }
       // if (result.data && result.data.success) {
-      //   dispatch({ type: VERIFICATION_SUCCESS });
-      //   if (onComplete) {
-      //     console.log('completeVerification onComplete execute');
-      //     onComplete();
-      //   } else {
-      //     console.log('completeVerification onComplete no_execute');
-      //   }
-      // } else {
+      dispatch({ type: VERIFICATION_SUCCESS });
+      if (onComplete) {
+        console.log('completeVerification onComplete execute');
+        onComplete();
+
+      } else {
+        console.log('completeVerification onComplete no_execute');
+      }
+      // // } else {
       //   dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } })
       // }
     }).catch((error) => {
-      console.log('failed to link guest account', error);
+      dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to link guest account' } });
     });
-  }
 
-  // otherwise, its successful! continue.
-  console.log('completeVerification no merge');
-  dispatch({ type: VERIFICATION_SUCCESS });
-
-  if (onComplete) {
-    console.log('completeVerification onComplete execute');
-    onComplete();
   } else {
-    console.log('completeVerification onComplete no_execute');
+    // otherwise, its successful! continue.
+    console.log('completeVerification no merge');
+    dispatch({ type: VERIFICATION_SUCCESS });
+
+    if (onComplete) {
+      console.log('completeVerification onComplete execute');
+      onComplete();
+
+
+    } else {
+      console.log('completeVerification onComplete no_execute');
+    }
   }
+
 }
 
 export const listenCustomerAuthStatus = () => {

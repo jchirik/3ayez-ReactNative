@@ -36,7 +36,7 @@ const INITIAL_STATE = {
   guestlogin_error: '',
 
   confirmation_function: null,
-  
+
   onComplete: null
 };
 

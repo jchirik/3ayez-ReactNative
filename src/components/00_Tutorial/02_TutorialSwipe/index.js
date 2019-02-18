@@ -119,7 +119,7 @@ class TutorialSwipe extends Component {
     ].map((page) => (
       <View
         key={page.title}
-        style={{ flex: 1, alignItems: 'center' }}>
+        style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
           <RTLImage
             source={page.image}
             style={{
@@ -130,7 +130,8 @@ class TutorialSwipe extends Component {
             resizeMode={'contain'}
           />
           <AyezText semibold size={18} style={{
-            marginTop: 20
+            marginTop: 20,
+            marginBottom: 30
           }}>{page.title}</AyezText>
         </View>
     ))
@@ -146,7 +147,7 @@ class TutorialSwipe extends Component {
       }}>
         <ViewPager
             initialPage={isAndroidRTL ? 2 : 0}
-            style={{ flex: 1, marginTop: STATUS_BAR_HEIGHT + 20 }}
+            style={{ flex: 1 }}
             onPageSelected={({ position }) => this.setState({
               selected_index: (isAndroidRTL ? NUM_PAGES - position - 1 : position)
             })}

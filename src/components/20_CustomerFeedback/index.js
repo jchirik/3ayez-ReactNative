@@ -165,7 +165,7 @@ class CustomerFeedback extends Component {
               <AyezText medium
               size={14}
               color={'white'}
-              >{strings('Receipt.orderNumber', {orderNumber: order.order_number})}</AyezText>
+              >{strings('Receipt.orderNumber', {order_number: order.order_number})}</AyezText>
             </View>
           </View>
 

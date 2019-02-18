@@ -137,6 +137,7 @@ class VerifyCode extends Component {
           >{strings('Authentication.resend')}</AyezText>
           */}
           <BlockButton
+            deactivated={this.props.verification.length < 6}
             text={strings('Common.confirm')}
             style={{
               marginTop: 32,
@@ -145,8 +146,8 @@ class VerifyCode extends Component {
             }}
             onPress={this.authPhoneVerify.bind(this)}
           />
-          <LoadingOverlay isVisible={this.props.verification_loading} />
         </View>
+        <LoadingOverlay isVisible={this.props.verification_loading} />
       </View>
     );
   }

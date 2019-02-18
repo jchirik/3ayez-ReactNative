@@ -121,6 +121,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
       logo_url,
       delivery_time,
       delivery_fee,
+      cover_url,
       Tabs
     } = this.props;
     this.resetAnimations(headerHeight, statusBarHeight);
@@ -161,6 +162,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
             logo_url={logo_url}
             delivery_time={delivery_time}
             delivery_fee={delivery_fee}
+            cover_url={cover_url}
           >
             {Tabs}
           </StoreHeader>

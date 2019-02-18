@@ -49,6 +49,7 @@ import {
 const star_icon = require('../../../../assets/images_v2/Common/star.png');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 // findStoresForLocation,
 // setSelectedSeller,
 // setBaskets,
@@ -144,13 +145,20 @@ renderAddressHeader() {
       <View style={{
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        paddingTop: 3,
+        paddingBottom: 4
       }}>
-        <AyezText semibold style={{
-          color: 'black',
-          fontSize: 28,
-          lineHeight: 40,
-          textAlign: 'center'
+        <AyezText
+          adjustsFontSizeToFit
+          minimumFontScale={0.6}
+          numberOfLines={1}
+          semibold style={{
+            maxWidth: SCREEN_WIDTH - 100,
+            color: 'black',
+            fontSize: (Platform.OS === 'android') ? 22 : 28,
+            textAlign: 'center'
         }}>{this.props.street || '-'}</AyezText>
 
         <AyezText regular style={{
@@ -196,8 +204,9 @@ renderNoAddress() {
     }}>
       <AyezText regular style={{
         color: '#8E8E93',
-        fontSize: 18,
-        margin: 10
+        fontSize: 16,
+        width: 240,
+        margin: 20
       }}>{strings('AddressCreate.addressSearchInstruction')}</AyezText>
       <BlockButton
         text={strings('Common.OK')}
@@ -359,6 +368,87 @@ renderSellerList() {
   if (!this.props.address) {
     return this.renderNoAddress();
   }
+
+  if (this.props.sellers.length === 0) {
+    return (
+      <View>
+        <AyezText medium style={{ marginTop: 40, marginBottom: 100, textAlign: 'center' }}>
+          {strings('Common.comingSoon')}
+        </AyezText>
+      </View>
+    )
+  } else if (this.props.sellers.length === 1) {
+    const seller = this.props.sellers[0];
+    const banner_image = (seller.banner_images && seller.banner_images.length) ? seller.banner_images[0] : null;
+    let nextTimeslotText = '-';
+    if (seller.next_timeslot) {
+      const { start, end } = seller.next_timeslot;
+      nextTimeslotText = `${formatDay(start)}, ${formatTimestamp(start, "h:mmA")}-${formatTimestamp(end, "h:mmA")}`
+    }
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          paddingTop: 16,
+        }}
+        >
+
+        <AyezText medium>{'3ayez delivers to your area!'}</AyezText>
+
+
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={this.onSelectSeller.bind(this, seller)}
+          style={{
+            backgroundColor: 'white',
+            marginVertical: 10,
+            shadowColor: '#000',
+            shadowOffset: { width: -1, height: 3 },
+            shadowOpacity: 0.14,
+            shadowRadius: 8,
+            elevation: 2
+          }}
+          >
+            <Image
+              source={{ uri: seller.logo_url }}
+              resizeMode={'contain'}
+              style={{
+                width: SCREEN_WIDTH/3,
+                height: SCREEN_WIDTH/3,
+                borderRadius: 10
+              }}
+            />
+        </TouchableOpacity>
+
+        <AyezText regular style={{
+          fontSize: 16,
+        }}>{translate(seller.display_name).toUpperCase()}</AyezText>
+        <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
+
+
+        <BlockButton
+          text={'ENTER'}
+          style={{ width: 200, marginTop: 10 }}
+          onPress={this.onSelectSeller.bind(this, seller)}
+          />
+
+        { (SCREEN_HEIGHT > 700) ? (
+            <Image
+              source={{ uri: banner_image }}
+              resizeMode={'cover'}
+              style={{
+                alignSelf: 'stretch',
+                marginTop: 24,
+                height: SCREEN_WIDTH/2
+              }}
+            />
+          ) : null }
+      </View>
+    )
+  }
+
   return (
     <FlatList
       data={this.props.sellers}
@@ -367,15 +457,6 @@ renderSellerList() {
 
       removeClippedSubviews
       ListHeaderComponent={null}
-      ListEmptyComponent={
-        (
-          <View>
-            <AyezText medium style={{ marginTop: 40, marginBottom: 100, textAlign: 'center' }}>
-              {strings('Common.comingSoon')}
-            </AyezText>
-          </View>
-        )
-      }
       ListFooterComponent={null}
 
       showsVerticalScrollIndicator={false}
