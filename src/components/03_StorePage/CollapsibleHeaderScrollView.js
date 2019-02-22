@@ -4,7 +4,7 @@ import StoreHeader from './StoreHeader';
 import colors from '../../theme/colors';
 import { STATUS_BAR_HEIGHT, isIPhoneX } from '../../Helpers';
 
-export const PARALLAX_HEADER_HEIGHT = 225 + STATUS_BAR_HEIGHT;
+export const PARALLAX_HEADER_HEIGHT = 207 + STATUS_BAR_HEIGHT;
 export const TAB_BAR_HEIGHT = 52;
 const noop = () => {};
 // credits to https://github.com/iyegoroff/react-native-collapsible-header-views
@@ -119,8 +119,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
       onScroll,
       displayName,
       logo_url,
-      delivery_time,
-      delivery_fee,
+      location_text,
       cover_url,
       Tabs
     } = this.props;
@@ -160,8 +159,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
             interpolatedHeaderTranslation={this.interpolatedHeaderTranslation}
             displayName={displayName}
             logo_url={logo_url}
-            delivery_time={delivery_time}
-            delivery_fee={delivery_fee}
+            location_text={location_text}
             cover_url={cover_url}
           >
             {Tabs}

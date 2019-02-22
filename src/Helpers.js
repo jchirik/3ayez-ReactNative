@@ -4,7 +4,7 @@ import {
   Dimensions,
   AsyncStorage
 } from 'react-native';
-import Moment from 'moment';
+import Moment from 'moment-timezone';
 import { Actions } from 'react-native-router-flux';
 import store from './reducers';
 import { strings } from './i18n';
@@ -338,6 +338,7 @@ export const fetchRegionDisplayName = (regionCode) => {
       return '';
   }
 };
+
 
 
 export const checkIfOpen = (hours) => {

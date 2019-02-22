@@ -8,6 +8,7 @@ import {
   translate
 } from '../../i18n.js';
 
+const store_location_pin = require('../../../assets/images_v2/Home/store_location_pin.png');
 
 import { PARALLAX_HEADER_HEIGHT } from './CollapsibleHeaderScrollView';
 const AnimatedSearchBarButton = Animated.createAnimatedComponent(SearchBarButton);
@@ -20,8 +21,7 @@ export default class StoreHeader extends Component {
       children,
       logo_url,
       cover_url,
-      delivery_time,
-      delivery_fee
+      location_text
     } = this.props;
     const disappearingAnimation = {
       opacity: interpolatedHeaderTranslation(1, 0)
@@ -52,27 +52,49 @@ export default class StoreHeader extends Component {
           ...disappearingAnimation,
           alignItems: 'center'
         }}>
-          <Image
-            style={styles.store_logo}
-            resizeMode={'contain'}
-            source={{
-              uri: logo_url
-            }}
-          />
+          <View style={{
+            width: 170,
+            height: 60,
+            backgroundColor: 'white',
+            borderRadius: 6,
+            marginBottom: 10,
+            marginTop: 20,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <Image
+              style={{
+                width: 135,
+                height: 45
+              }}
+              resizeMode={'contain'}
+              source={{
+                uri: logo_url
+              }}
+            />
+          </View>
           <View style={{
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
             alignItems: 'center',
-            paddingHorizontal: 30,
+            paddingHorizontal: 20,
             paddingVertical: 4,
-            borderRadius: 6
+            borderRadius: 6,
+            height: 35,
+            flexDirection: 'row',
           }}>
-            <AyezText color={'white'} semibold size={13} style={{ lineHeight: 20 }}>{translate(displayName)}</AyezText>
-            <AyezText light color={'white'} size={12}  style={{ lineHeight: 18 }}>
-              {strings('StoreSelect.deliveryTime', { delivery_time })}
-            </AyezText>
+            <AyezText normal color={'white'} size={13}>{translate(location_text) || '-'}</AyezText>
+            <Image
+              source={store_location_pin}
+              style={{
+                tintColor: 'white',
+                width: 14,
+                height: 14,
+                marginLeft: 2
+              }}
+              resizeMode={'contain'}
+            />
           </View>
         </Animated.View>
-
 
         <AnimatedSearchBarButton
           style={{ marginTop: 15 }}

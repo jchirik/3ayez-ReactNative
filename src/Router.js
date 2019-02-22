@@ -45,6 +45,8 @@ import WorkingBasket from './components/08_WorkingBasket';
 import CustomProduct from './components/10_CustomProduct';
 
 
+
+import YallaTimeSelect from './components/09_YallaTimeSelect';
 import TimeslotSelect from './components/09_TimeslotSelect';
 import Checkout from './components/10_Checkout';
 
@@ -346,9 +348,9 @@ class RouterComponent extends Component {
             <Scene key="tutorialSwipe" component={TutorialSwipe} />
           </Stack>
 
-
           <Stack key="checkoutFlow" headerMode={'none'} animationEnabled={true}>
             <Scene key="workingBasket" component={WorkingBasket} />
+            <Scene key="yallaTimeSelect" component={YallaTimeSelect} />
             <Scene key="timeslotSelect" component={TimeslotSelect} panHandlers={null} />
             <Scene key="checkout" component={Checkout} panHandlers={null} />
           </Stack>

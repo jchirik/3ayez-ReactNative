@@ -55,7 +55,7 @@ class App extends Component {
 
   codePushDownloadDidProgress(progress) {
     const progress_percent = (progress.receivedBytes/progress.totalBytes);
-    if (progress_percent < 1) {
+    if (progress_percent <= 0.9) {
       this.setState({
         is_updating: true,
         progress_percent,

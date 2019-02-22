@@ -6,7 +6,7 @@ import store from './reducers';
 import en from '../locales/en.json';
 import ar from '../locales/ar.json';
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 import enMomentLocalization from 'moment/locale/en-gb'
 import arMomentLocalization from 'moment/locale/ar'
 
@@ -69,9 +69,9 @@ export const formatCurrency = (amount_t) => {
 export const formatTimestamp = (string, format) => {
   const locale = store.getState().Settings.locale;
   if (locale === 'en') {
-    return moment(string).locale('en-gb', enMomentLocalization).format(format);
+    return moment(string).locale('en-gb', enMomentLocalization).tz('Africa/Cairo').format(format);
   } else if (locale === 'ar') {
-    return moment(string).locale('ar', arMomentLocalization).format(format);
+    return moment(string).locale('ar', arMomentLocalization).tz('Africa/Cairo').format(format);
   }
   return '';
 }
@@ -80,14 +80,14 @@ export const formatDay = (string) => {
   // provide natural day text for a given date
   const locale = store.getState().Settings.locale;
   if (locale === 'en') {
-    return moment(string).locale('en-gb', enMomentLocalization).calendar(null, {
+    return moment(string).locale('en-gb', enMomentLocalization).tz('Africa/Cairo').calendar(null, {
       sameDay: '[Today]',
       nextDay: '[Tomorrow]',
       nextWeek: 'dddd',
       sameElse: 'L'
     });
   } else if (locale === 'ar') {
-    return moment(string).locale('ar', arMomentLocalization).calendar(null, {
+    return moment(string).locale('ar', arMomentLocalization).tz('Africa/Cairo').calendar(null, {
       sameDay: '[اليوم]',
       nextDay: '[غدًا]',
       nextWeek: 'dddd',

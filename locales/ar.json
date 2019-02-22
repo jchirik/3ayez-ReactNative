@@ -3,6 +3,7 @@
     "3ayez": "عايز",
     "myBasket": "السلة",
     "OK": "موافق",
+    "yalla": "Yalla",
     "submit": "موافقة",
     "next": "التالي",
     "confirm": "تأكيد",
@@ -21,6 +22,7 @@
     "comingSoon": "قريبا 🎉",
     "refresh": "تحديث",
     "viewMore": "أظهر أكثر",
+    "enter": "دخول",
     "english": "English",
     "arabic": "عربي"
   },
@@ -116,7 +118,12 @@
     "openHours": "مفتوح {{start}} - {{end}}",
     "numRatings": "{{num_reviews}} تقييم",
     "deliveryTime": "{{delivery_time}} دقيقة. توصيل",
-    "nextDelivery": "الوقت التالي للطلب"
+    "nextDelivery": "الوقت التالي للطلب",
+    "deliversToYourArea": "عايز بتوصل لمنطقتك 🥳🎉",
+    "orderNow": "Order Now",
+    "closed": "Closed",
+    "hypermarket": "Hypermarket",
+    "express": "Express"
   },
   "Support": {
     "header": "الدعم",
@@ -161,7 +168,8 @@
     "minimumOrderModal": "دقيقة. {{min}} لـــ {{seller_name}}"
   },
   "TimeslotSelect": {
-    "header": "ميعاد طلبك"
+    "header": "ميعاد طلبك",
+    "selectLaterTime": "في وقت لاحق"
   },
   "Checkout": {
     "header": "خروج",

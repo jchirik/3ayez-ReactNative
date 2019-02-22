@@ -223,8 +223,13 @@ class WorkingBasket extends Component {
       // below the minimum, so indicate in a popup
       this.setState({ belowMinimumModal: true });
     } else {
-      // continue onwards
-      Actions.timeslotSelect();
+      if (seller.type === 'HYPER') {
+        // continue onwards
+        Actions.timeslotSelect();
+      } else {
+        Actions.yallaTimeSelect();
+      }
+
     }
   }
 

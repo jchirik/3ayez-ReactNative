@@ -35,7 +35,8 @@ import {
 } from '../../_common';
 
 import {
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  checkIfOpen
 } from '../../../Helpers';
 
 import {
@@ -46,7 +47,9 @@ import {
   formatTimestamp
 } from '../../../i18n.js';
 
+
 const star_icon = require('../../../../assets/images_v2/Common/star.png');
+const store_location_pin = require('../../../../assets/images_v2/Home/store_location_pin.png');
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -274,12 +277,69 @@ renderImageScroll(item) {
   )
 }
 
-renderItem({ item, index }) {
-  let nextTimeslotText = '-';
-  if (item.next_timeslot) {
-    const { start, end } = item.next_timeslot;
-    nextTimeslotText = `${formatDay(start)}, ${formatTimestamp(start, "h:mmA")}-${formatTimestamp(end, "h:mmA")}`
+// <AyezText regular style={{
+//   fontSize: 16,
+// }}>{translate(item.display_name).toUpperCase()}</AyezText>
+
+
+renderSellerTypeBadge(type) {
+  let text = strings('StoreSelect.express').toUpperCase();
+  let color = '#0094ff'
+
+  if (type === 'HYPER') {
+    text = strings('StoreSelect.hypermarket').toUpperCase();
+    color = '#BA67FF'
   }
+
+  return (
+    <View style={{
+      borderWidth: 1,
+      borderColor: color,
+      paddingHorizontal: 10,
+      paddingTop: 1,
+      borderRadius: 20,
+      marginBottom: 5
+    }}>
+      <AyezText regular color={color} size={10}>{text}</AyezText>
+    </View>
+  )
+}
+
+renderSellerDeliveryTime(seller) {
+
+  if (seller.type === 'HYPER') {
+    let nextTimeslotText = '-';
+    if (seller.next_timeslot) {
+      const { start, end } = seller.next_timeslot;
+      nextTimeslotText = `${formatDay(start)}, ${formatTimestamp(start, "h:mmA")}-${formatTimestamp(end, "h:mmA")}`
+    }
+    return (
+      <View style={{ alignItems: 'flex-end'}}>
+        <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.nextDelivery')}</AyezText>
+        <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
+      </View>
+    );
+  }
+
+
+  let isOpen = checkIfOpen(seller.hours);
+
+  let hoursText = '-';
+  if (seller.hours && (seller.hours.start >= 0)) {
+    const { start, end } = seller.todays_hours;
+    hoursText = strings('StoreSelect.openHours', { start: formatTimestamp(start, "h:mmA"), end: formatTimestamp(end, "h:mmA") });
+  }
+
+  return (
+    <View style={{ alignItems: 'flex-end'}}>
+      <AyezText extralight style={styles.storeDetailText}>{hoursText}</AyezText>
+      <AyezText medium size={13} color={isOpen ? AYEZ_GREEN : 'red'}>{isOpen ? strings('StoreSelect.orderNow') : strings('StoreSelect.closed')}</AyezText>
+    </View>
+  );
+}
+
+renderItem({ item, index }) {
+
   return (
     <View
       style={{
@@ -293,25 +353,46 @@ renderItem({ item, index }) {
       {this.renderImageScroll(item)}
       <TouchableOpacity
         activeOpacity={0.7}
+        style={{ marginHorizontal: 8 }}
         onPress={this.onSelectSeller.bind(this, item)}>
+
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginTop: 5
+          marginTop: 10
         }}>
-          <AyezText regular style={{
-            fontSize: 16,
-          }}>{translate(item.display_name).toUpperCase()}</AyezText>
           <Image
             source={{ uri: item.logo_url }}
             resizeMode={'contain'}
             style={{
-              width: 40,
-              height: 40,
-              borderRadius: 4
+              width: 135,
+              height: 45
             }}
           />
+
+          <View style={{
+            flexDirection: 'column',
+            alignItems: 'flex-end'
+          }}>
+            { this.renderSellerTypeBadge(item.type) }
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
+              <AyezText normal size={13}>{translate(item.location_text) || '-'}</AyezText>
+              <Image
+                source={store_location_pin}
+                style={{
+                  width: 14,
+                  height: 14,
+                  marginLeft: 2
+                }}
+                resizeMode={'contain'}
+              />
+            </View>
+          </View>
+
+
+
+
         </View>
 
         <View style={{
@@ -345,10 +426,7 @@ renderItem({ item, index }) {
             <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.minTotal', {min: formatCurrency(item.minimum)})}</AyezText>
           </View>
 
-          <View style={{ alignItems: 'flex-end'}}>
-            <AyezText extralight style={styles.storeDetailText}>{strings('StoreSelect.nextDelivery')}</AyezText>
-            <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
-          </View>
+          { this.renderSellerDeliveryTime(item) }
         </View>
       </TouchableOpacity>
     </View>
@@ -390,12 +468,16 @@ renderSellerList() {
         style={{
           flex: 1,
           flexDirection: 'column',
+          justifyContent: 'center',
           alignItems: 'center',
           paddingTop: 16,
         }}
         >
 
-        <AyezText medium>{'3ayez delivers to your area!'}</AyezText>
+        <AyezText medium
+          size={18}
+          style={{ marginBottom: 16 }}
+        >{strings('StoreSelect.deliversToYourArea')}</AyezText>
 
 
         <TouchableOpacity
@@ -406,8 +488,10 @@ renderSellerList() {
             marginVertical: 10,
             shadowColor: '#000',
             shadowOffset: { width: -1, height: 3 },
-            shadowOpacity: 0.14,
+            shadowOpacity: 0.0,
             shadowRadius: 8,
+            borderWidth: 1,
+            borderColor: '#CECECE',
             elevation: 2
           }}
           >
@@ -415,36 +499,29 @@ renderSellerList() {
               source={{ uri: seller.logo_url }}
               resizeMode={'contain'}
               style={{
-                width: SCREEN_WIDTH/3,
-                height: SCREEN_WIDTH/3,
+                width: 180,
+                height: 60,
+                margin: 12,
                 borderRadius: 10
               }}
             />
         </TouchableOpacity>
 
+
         <AyezText regular style={{
           fontSize: 16,
+          marginBottom: 7
         }}>{translate(seller.display_name).toUpperCase()}</AyezText>
+
+        <AyezText extralight>{strings('StoreSelect.nextDelivery')}</AyezText>
         <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
 
 
         <BlockButton
-          text={'ENTER'}
-          style={{ width: 200, marginTop: 10 }}
+          text={strings('Common.enter').toUpperCase()}
+          style={{ width: 200, marginTop: 20 }}
           onPress={this.onSelectSeller.bind(this, seller)}
           />
-
-        { (SCREEN_HEIGHT > 700) ? (
-            <Image
-              source={{ uri: banner_image }}
-              resizeMode={'cover'}
-              style={{
-                alignSelf: 'stretch',
-                marginTop: 24,
-                height: SCREEN_WIDTH/2
-              }}
-            />
-          ) : null }
       </View>
     )
   }
@@ -453,7 +530,7 @@ renderSellerList() {
     <FlatList
       data={this.props.sellers}
       renderItem={this.renderItem.bind(this)}
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: 'white' }}
 
       removeClippedSubviews
       ListHeaderComponent={null}

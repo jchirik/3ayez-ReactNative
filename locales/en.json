@@ -3,6 +3,7 @@
     "3ayez": "3ayez",
     "myBasket": "My Basket",
     "OK": "OK",
+    "yalla": "Yalla",
     "submit": "Submit",
     "next": "Next",
     "confirm": "Confirm",
@@ -21,6 +22,7 @@
     "comingSoon": "Coming Soon 🎉",
     "refresh": "Refresh",
     "viewMore": "View more",
+    "enter": "Enter",
     "english": "English",
     "arabic": "عربي"
   },
@@ -116,7 +118,12 @@
     "openHours": "Open {{start}} - {{end}}",
     "numRatings": "{{num_reviews}} Ratings",
     "deliveryTime": "{{delivery_time}} min. delivery",
-    "nextDelivery": "Next Delivery"
+    "nextDelivery": "Next Delivery",
+    "deliversToYourArea": "3ayez delivers to your area! 🥳🎉",
+    "orderNow": "Order Now",
+    "closed": "Closed",
+    "hypermarket": "Hypermarket",
+    "express": "Express"
   },
   "Support": {
     "header": "Support",
@@ -161,7 +168,8 @@
     "minimumOrderModal": "min. {{min}} for {{seller_name}}"
   },
   "TimeslotSelect": {
-    "header": "Schedule Order"
+    "header": "Schedule Order",
+    "selectLaterTime": "Select a Later Time"
   },
   "Checkout": {
     "header": "Checkout",

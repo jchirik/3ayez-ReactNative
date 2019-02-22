@@ -41,7 +41,7 @@ export const submitOrder = (order_t, items_array, total) => {
   const order = {
     ...order_t,
     customer: { id: currentUser.uid, name: customer.name, phone: customer.phone },
-    seller: { id: seller.id, phone: seller.phone, display_name: seller.display_name },
+    seller: { id: seller.id, phone: seller.phone, display_name: seller.display_name, delivery_time: seller.delivery_time },
     device
   };
 

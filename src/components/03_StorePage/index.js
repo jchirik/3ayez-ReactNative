@@ -312,8 +312,7 @@ class StorePage extends Component {
           displayName={this.props.display_name}
           logo_url={this.props.logo_url}
           cover_url={this.props.cover_url}
-          delivery_time={this.props.delivery_time}
-          delivery_fee={this.props.delivery_fee}
+          location_text={this.props.location_text}
           Tabs={this.renderTabs()}
         >
           {mainScrollComponent}
@@ -337,8 +336,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     featured_loading,
     categories,
     categories_loading,
-    delivery_fee,
-    delivery_time,
+    location_text,
     display_name
   } = Seller;
 
@@ -352,8 +350,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     featured_loading,
     categories,
     categories_loading,
-    delivery_fee,
-    delivery_time,
+    location_text,
     display_name,
     basket_quantity
   };

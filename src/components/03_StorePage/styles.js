@@ -81,13 +81,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0
   },
-  store_logo: {
-    marginBottom: 10,
-    width: 85,
-    height: 85,
-    backgroundColor: 'white',
-    borderRadius: 5
-  },
   searchBarSectionStyle: {
     flexDirection: 'row',
     justifyContent: 'center',

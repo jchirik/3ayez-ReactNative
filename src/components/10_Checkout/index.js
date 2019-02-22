@@ -379,6 +379,36 @@ class Checkout extends Component {
     );
   }
 
+  renderDeliveryTime() {
+    const {
+      seller,
+      timeslot
+    } = this.props;
+
+    if (timeslot && (timeslot.type === 'INSTANT')) {
+      return (
+        <Row disabled title={strings('Checkout.deliveryTimeField')}>
+          <View style={{ alignItems: 'flex-end' }}>
+            <AyezText regular size={16}>{strings('Common.yalla')}</AyezText>
+            <AyezText regular size={13} color={'#8E8E93'}>{strings('StoreSelect.deliveryTime', { delivery_time: seller.delivery_time })}</AyezText>
+          </View>
+        </Row>
+      )
+    }
+
+    const timeslotDay = formatDay(timeslotStart);
+    const timeslotStart = formatTimestamp(timeslot.start, "h:mmA");
+    const timeslotEnd = formatTimestamp(timeslot.end, "h:mmA");
+    return (
+      <Row disabled title={strings('Checkout.deliveryTimeField')}>
+        <AyezText regular style={{
+          fontSize: 16,
+          color: 'black',
+        }}>{timeslotDay} {timeslotStart} - {timeslotEnd}</AyezText>
+      </Row>
+    )
+  }
+
 
   // <Text>{this.props.errorMessage}</Text>
   render() {
@@ -405,9 +435,7 @@ class Checkout extends Component {
     //     </View>
     //   );
     // }
-    const timeslotDay = formatDay(timeslotStart);
-    const timeslotStart = formatTimestamp(timeslot.start, "h:mmA");
-    const timeslotEnd = formatTimestamp(timeslot.end, "h:mmA");
+
 
     return (
       <View style={{
@@ -439,12 +467,7 @@ class Checkout extends Component {
 
         <View style={{ height: 18 }} />
 
-        <Row disabled title={strings('Checkout.deliveryTimeField')}>
-          <AyezText regular style={{
-            fontSize: 16,
-            color: 'black',
-          }}>{timeslotDay} {timeslotStart} - {timeslotEnd}</AyezText>
-        </Row>
+        {this.renderDeliveryTime()}
 
         <View style={{ height: 18 }} />
 
