@@ -1,5 +1,4 @@
 import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
 import { StyleSheet, Platform } from 'react-native';
 import { STATUS_BAR_HEIGHT } from '../../Helpers';
 import platform from '../../utils/platform';

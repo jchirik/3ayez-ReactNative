@@ -42,7 +42,6 @@ import {
 //   detectCurrentLocation,
 //   searchAreas
 // } from '../../actions';
-// import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 // const comingSoonImage = require('../../../assets/images/coming_soon.png');
 

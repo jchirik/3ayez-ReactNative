@@ -10,15 +10,6 @@ export default StyleSheet.create({
   addButton: {
     marginTop: 12
   },
-  titleText: {
-    marginBottom: 6,
-    fontSize: 15,
-    includeFontPadding: false,
-    marginLeft: 15,
-    marginTop: 20,
-    color: colors.black,
-    fontFamily: 'Poppins-SemiBold'
-  },
   container: { flex: 1, backgroundColor: colors.white },
   itemImageStyle: {
     width: 120,

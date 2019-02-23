@@ -33,7 +33,7 @@ import {
 } from '../../../i18n.js';
 
 const result_pin_icon = require('../../../../assets/images_v2/Search/result_pin.png');
-// import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
+
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 // const comingSoonImage = require('../../../assets/images/coming_soon.png');
 

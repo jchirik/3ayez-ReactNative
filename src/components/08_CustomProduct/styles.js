@@ -1,5 +1,4 @@
 import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
 import { StyleSheet, Platform } from 'react-native';
 import { statusBarMargin } from '../../Helpers';
 

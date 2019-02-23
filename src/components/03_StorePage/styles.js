@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
 import { STATUS_BAR_HEIGHT } from '../../Helpers';
 
 const window = Dimensions.get('window');

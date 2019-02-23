@@ -63,8 +63,6 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 // markOrderComplete,
 // getContacts
 
-// import { OrderStatusBar, Header, ModalPanel, InputField, BlockButton } from '../_reusable';
-//
 // import StoreSelectionHeader from './StoreSelectionHeader';
 //
 // const fullStarIcon = require('../../../assets/images/stars/full_star.png');

@@ -5,7 +5,6 @@ import { Actions } from 'react-native-router-flux';
 import { translate, strings, formatCurrency } from '../../i18n.js';
 import { addToBasket } from '../../actions';
 import colors from '../../theme/colors';
-import fonts from '../../theme/fonts';
 import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { Draggable } from './DragComponent';
 

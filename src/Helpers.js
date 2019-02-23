@@ -364,21 +364,3 @@ export const checkIfOpen = (hours) => {
 
   return isOpen;
 }
-
-
-// const cairoRegion = require('../assets/images/region_images/pyramid.png');
-// const alexandriaRegion = require('../assets/images/region_images/lighthouse.png');
-// const sahelRegion = require('../assets/images/region_images/palm.png');
-//
-// export const fetchRegionImage = (regionCode) => {
-//   switch (regionCode) {
-//     case 'ALEXANDRIA':
-//       return alexandriaRegion;
-//     case 'SAHEL':
-//       return sahelRegion;
-//     case 'CAIRO':
-//       return cairoRegion;
-//     default:
-//       return null;
-//   }
-// };

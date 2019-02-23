@@ -13,11 +13,9 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 // import call from 'react-native-phone-call';
 import { emptyBasket, onCompleteAuth } from '../../actions';
-import {
-  ModalPanel
-} from '../_reusable';
 
 import {
+  ModalPanel,
   BlockButton,
   CloseButton,
   ItemRow,
@@ -229,7 +227,6 @@ class WorkingBasket extends Component {
       } else {
         Actions.yallaTimeSelect();
       }
-
     }
   }
 

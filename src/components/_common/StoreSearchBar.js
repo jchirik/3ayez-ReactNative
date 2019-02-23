@@ -6,7 +6,7 @@ import { FONT_REGULAR } from '../../i18n.js';
 const exitIcon = require('../../../assets/images/exit.png');
 const searchIcon = require('../../../assets/images/magnifying_glass.png');
 
-const SearchBar = ({
+const StoreSearchBar = ({
   reference,
   containerStyle,
   icon = searchIcon,
@@ -113,4 +113,4 @@ const styles = {
   }
 };
 
-export { SearchBar };
+export { StoreSearchBar };

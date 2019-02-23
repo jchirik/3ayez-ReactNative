@@ -29,7 +29,6 @@ import {
   strings,
   translate
 } from '../../../i18n.js';
-// import { BlockButton, SearchBar, ModalPanel, Header } from '../_reusable';
 // import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
 const pinIcon = require('../../../../assets/images_v2/AddressCreate/pin.png');
 

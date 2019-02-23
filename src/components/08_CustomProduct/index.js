@@ -69,7 +69,6 @@ class CustomProduct extends Component {
     Actions.popTo('storePage');
   }
 
-
   onChangeText(key, value) {
     const update = {};
     update[key] = value;

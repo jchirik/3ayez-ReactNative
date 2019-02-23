@@ -4,12 +4,14 @@ export * from './BlockButton';
 export * from './BlockUnderButton';
 export * from './Header';
 export * from './SearchBar';
+export * from './StoreSearchBar';
 export * from './LoadingOverlay';
 export * from './InputField';
 export * from './SubtleButton';
 export * from './SearchBarButton';
 export * from './Row';
 export * from './CustomItemPrompt';
+export * from './ModalPanel';
 
 export ItemTile from './ItemTile';
 export ItemRow from './ItemRow';

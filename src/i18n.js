@@ -46,7 +46,6 @@ export const FONT_REGULAR = () => {
 export const FONT_MEDIUM  = () => {
   return (store.getState().Settings.locale === 'ar') ? 'Cairo-SemiBold' : 'Poppins-Medium';
 }
-
 export const FONT_LIGHT = () => {
   return (store.getState().Settings.locale === 'ar') ? 'Cairo-Light' : 'Poppins-Light';
 }
@@ -96,26 +95,3 @@ export const formatDay = (string) => {
   }
   return '';
 }
-
-
-
-
-
-// export const parseTimestamp = (timestamp) => {
-//
-//   let monthString = Moment(timestamp).locale('ar').format('MMMM');
-//   let dayString = Moment(timestamp).locale('en-gb').format('DD');
-//
-//   let dateString = `${monthString} ${dayString}`;
-//   let yearString = Moment(timestamp).locale('en-gb').format('YYYY');
-//   // use 'today' instead of date string if applicable
-//   const today = new Date();
-//   const time_t = new Date(timestamp);
-//   const isToday = (today.toDateString() === time_t.toDateString());
-//   if (isToday) { dateString = 'اليوم'; }
-//
-//   const timeString = Moment(timestamp).locale('en-gb').format('h:mm');
-//   const ampmString = Moment(timestamp).locale('en-gb').format('A');
-//
-//   return ({ dateString, yearString, timeString, ampmString });
-// };

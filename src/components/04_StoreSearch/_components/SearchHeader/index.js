@@ -1,9 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
-import { SearchBar, FilterButton } from '../../../_reusable';
-
-import { BackButton } from '../../../_common';
+import { StoreSearchBar, BackButton } from '../../../_common';
 import { STATUS_BAR_HEIGHT } from '../../../../Helpers';
 
 import {
@@ -37,7 +35,7 @@ const SearchHeader = ({
     }}
   >
       <BackButton />
-      <SearchBar
+      <StoreSearchBar
         reference={reference}
         color={'#8e8e9359'}
         containerStyle={{ flex: 1, marginRight: 16 }}
