@@ -32,9 +32,7 @@ import {
   translate
 } from '../../../i18n.js';
 
-const opening_video = require('../../../../assets/images_v2/Tutorial/opening_video.gif');
-
-const logo = require('../../../../assets/images_v2/Common/logo.png');
+import images from '../../../theme/images'
 
 // add language select + very short tutorial
 
@@ -103,7 +101,7 @@ class LanguageSelect extends Component {
       }}>
 
         <Image
-          source={logo}
+          source={images.logo}
           style={{
             width: 160,
             alignSelf: 'center',
@@ -115,7 +113,7 @@ class LanguageSelect extends Component {
         />
 
         <RTLImage
-          source={opening_video}
+          source={images.openingGIF}
           style={{
             width: 300,
             marginLeft: 20,

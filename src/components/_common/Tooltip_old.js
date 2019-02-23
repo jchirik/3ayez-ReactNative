@@ -11,8 +11,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-const tooltipTriangle = require('../../../assets/images/triangle_hard.png');
-
+import images from '../../theme/images'
 
 class Tooltip extends PureComponent {
 
@@ -105,7 +104,7 @@ class Tooltip extends PureComponent {
       >
 
         <Image
-          source={tooltipTriangle}
+          source={images.tooltipTriangle}
           style={[{
               position: 'absolute',
               width: 28,

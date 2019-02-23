@@ -54,12 +54,8 @@ import {
   formatCurrency
 } from '../../i18n.js';
 
-const cash_icon = require('../../../assets/images_v2/Payment/cash.png');
-const creditcard_icon = require('../../../assets/images_v2/Payment/credit-card.png');
 
-const toggle_selected = require('../../../assets/images_v2/Common/toggle_selected.png');
-const toggle_unselected = require('../../../assets/images_v2/Common/toggle_unselected.png');
-
+import images from '../../theme/images'
 
 const window = Dimensions.get('window');
 
@@ -149,7 +145,7 @@ class Checkout extends Component {
     const selectedCircle = (
       <Image
         style={{height: 24, width: 24 }}
-        source={toggle_selected}
+        source={images.toggleSelected}
         resizeMode={'contain'}
       />
     );
@@ -157,7 +153,7 @@ class Checkout extends Component {
     const unselectedCircle = (
       <Image
         style={{height: 24, width: 24 }}
-        source={toggle_unselected}
+        source={images.toggleUnselected}
         resizeMode={'contain'}
       />
     );
@@ -176,7 +172,7 @@ class Checkout extends Component {
           borderColor: '#f7f7f7',
         }}>
         <Image
-          source={cash_icon}
+          source={images.cashIcon}
           style={{
             width: 24,
             height: 24,
@@ -228,7 +224,7 @@ class Checkout extends Component {
          }}
         >
         <Image
-          source={creditcard_icon}
+          source={images.creditCardIcon}
           style={{
             width: 24,
             height: 24,

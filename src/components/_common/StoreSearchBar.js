@@ -3,13 +3,12 @@ import { Image, TextInput, TouchableOpacity, View, I18nManager } from 'react-nat
 
 import { FONT_REGULAR } from '../../i18n.js';
 
-const exitIcon = require('../../../assets/images/exit.png');
-const searchIcon = require('../../../assets/images/magnifying_glass.png');
+import images from '../../theme/images'
 
 const StoreSearchBar = ({
   reference,
   containerStyle,
-  icon = searchIcon,
+  icon = images.magnifying2Icon,
   color = 'black',
   placeholder,
   onFocus,
@@ -28,7 +27,7 @@ const StoreSearchBar = ({
       onPress={() => onQueryDidChange('')}
     >
       <Image
-        source={exitIcon}
+        source={images.exitIcon}
         style={{
           width: 16,
           height: 16,
@@ -70,8 +69,8 @@ const StoreSearchBar = ({
     <Image
       source={icon}
       style={{
-        width: 22,
-        height: 22,
+        width: 18,
+        height: 18,
         tintColor: color
       }}
     />

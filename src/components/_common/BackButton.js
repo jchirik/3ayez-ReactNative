@@ -5,10 +5,8 @@ import {
   STATUS_BAR_HEIGHT,
   AYEZ_GREEN
 } from '../../Helpers.js';
-
 import { RTLImage } from './RTLImage';
-
-const back_icon = require('../../../assets/images_v2/Common/back.png');
+import images from '../../theme/images'
 
 const BackButton = ({
   color = AYEZ_GREEN,
@@ -23,7 +21,7 @@ const BackButton = ({
         onPress={onPress}
       >
         <RTLImage
-          source={back_icon}
+          source={images.backIcon}
           style={{ width: 24, height: 24, tintColor: color }}
           resizeMode={'contain'}
         />

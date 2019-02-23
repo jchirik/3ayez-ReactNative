@@ -48,42 +48,11 @@ import {
 } from '../../../i18n.js';
 
 
-const star_icon = require('../../../../assets/images_v2/Common/star.png');
-const store_location_pin = require('../../../../assets/images_v2/Home/store_location_pin.png');
+import images from '../../../theme/images'
+
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-// findStoresForLocation,
-// setSelectedSeller,
-// setBaskets,
-// setArea,
-//
-// setLocale,
-// submitOrderSubstitutions,
-// markOrderComplete,
-// getContacts
-
-// import StoreSelectionHeader from './StoreSelectionHeader';
-//
-// const fullStarIcon = require('../../../assets/images/stars/full_star.png');
-// const halfStarIcon = require('../../../assets/images/stars/half_star.png');
-// const emptyStarIcon = require('../../../assets/images/stars/empty_star.png');
-//
-// const warningIcon = require('../../../assets/images/order_statuses/problem.png');
-// const arrowCircle = require('../../../assets/images/arrow_circle.png');
-// const deliveryTruckIcon = require('../../../assets/images/delivery_truck.png');
-//
-// const window = Dimensions.get('window');
-//
-// const ImgCacheLib = require('react-native-img-cache');
-// const CachedImage = ImgCacheLib.CachedImage;
-
-
-
-
-// CONSIDER: if detected location changes by X, soft confirm delivery address
-// recent UPCs in the store should be returned via cloud FX, not via client-side calculation
-
 
 class StoreSelect extends Component {
 
@@ -377,7 +346,7 @@ renderItem({ item, index }) {
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
               <AyezText normal size={13}>{translate(item.location_text) || '-'}</AyezText>
               <Image
-                source={store_location_pin}
+                source={images.storeLocationPin}
                 style={{
                   width: 14,
                   height: 14,
@@ -406,7 +375,7 @@ renderItem({ item, index }) {
                 color: '#2DD38F'
               }}>{item.num_stars.toFixed(1)}</AyezText>
               <Image
-                source={star_icon}
+                source={images.starIcon}
                 style={{
                   width: 14,
                   height: 14,

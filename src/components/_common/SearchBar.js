@@ -4,13 +4,9 @@ import { Actions } from 'react-native-router-flux';
 import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
-
 import { FONT_REGULAR } from '../../i18n.js';
-
-import { RTLImage } from './RTLImage';
-
-const search_icon = require('../../../assets/images_v2/Search/search.png');
-const clear_icon = require('../../../assets/images_v2/Search/clear.png');
+import { RTLImage } from '.';
+import images from '../../theme/images'
 
 const SearchBar = ({
   value,
@@ -32,7 +28,7 @@ const SearchBar = ({
         onPress={() => onChangeText('')}
       >
       <RTLImage
-        source={clear_icon}
+        source={images.searchClearIcon}
         style={{
           width: 20,
           height: 20
@@ -53,7 +49,7 @@ const SearchBar = ({
       alignItems: 'center'
     }}>
     <RTLImage
-      source={search_icon}
+      source={images.magnifyingIcon}
       style={{
         width: 20,
         height: 20,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, TouchableWithoutFeedback, View } from 'react-native';
 
-const starIcon = require('../../../assets/images_v2/Common/star.png');
+import images from '../../theme/images'
 
 const StarRating = ({
   value,
@@ -24,7 +24,7 @@ const StarRating = ({
               tintColor: (i < value) ? color : '#E5E5E5'
             }}
             resizeMode={'contain'}
-            source={starIcon}
+            source={images.starIcon}
           />
         </TouchableWithoutFeedback>
       );

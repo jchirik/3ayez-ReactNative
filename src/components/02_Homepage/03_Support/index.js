@@ -28,11 +28,7 @@ import {
   loadSupportManual
 } from '../../../actions';
 
-const support_tile = require('../../../../assets/images_v2/Support/support_tile.png');
-const start_side_arrow = require('../../../../assets/images_v2/Support/start_side_arrow.png');
-const silhouette_icon = require('../../../../assets/images_v2/Support/silhouette_icon.png');
-const issue_side_arrow = require('../../../../assets/images_v2/Support/issue_side_arrow.png');
-
+import images from '../../../theme/images'
 
 class Support extends Component {
 
@@ -85,7 +81,7 @@ class Support extends Component {
               fontSize: 10
             }}>{strings('Support.start')}</AyezText>
             <RTLImage
-              source={start_side_arrow}
+              source={images.supportStartSideArrow}
               style={{
                 width: 10,
                 height: 10,
@@ -99,7 +95,7 @@ class Support extends Component {
         </View>
 
         <Image
-          source={support_tile}
+          source={images.supportTile}
           style={{
             width: 160,
             height: 120
@@ -123,7 +119,7 @@ class Support extends Component {
       onPress={() => Actions.settings()}
     >
       <RTLImage
-        source={silhouette_icon}
+        source={images.supportSilhouetteIcon}
         style={{
           width: 30,
           height: 30,
@@ -155,7 +151,7 @@ class Support extends Component {
             }}>{translate(item.title)}</AyezText>
 
             <RTLImage
-              source={issue_side_arrow}
+              source={images.supportIssueSideArrow}
               style={{
                 width: 10,
                 height: 10,

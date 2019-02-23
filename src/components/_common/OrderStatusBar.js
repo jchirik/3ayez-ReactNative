@@ -15,8 +15,7 @@ import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
 
-
-const status_bar_truck = require('../../../assets/images_v2/OrderTracker/status_bar_truck.png');
+import images from '../../theme/images'
 
 import { AyezText, RTLImage } from '../_common';
 import { strings, translate } from '../../i18n.js';
@@ -26,9 +25,6 @@ class OrderStatusBar extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-    };
   }
 
   render() {
@@ -66,7 +62,7 @@ class OrderStatusBar extends PureComponent {
           >
               <AyezText semibold color={'white'} size={15}>{text}</AyezText>
               <RTLImage
-                source={status_bar_truck}
+                source={images.orderTrackerTruck}
                 style={{ width: 24, height: 24, marginLeft: 10 }}
                 resizeMode={'contain'}
               />

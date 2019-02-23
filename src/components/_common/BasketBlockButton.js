@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { isIPhoneX } from '../../Helpers.js';
 import { strings, formatCurrency } from '../../i18n.js';
+import images from '../../theme/images'
+
+
 import { AyezText } from '.';
 
 const window = Dimensions.get('window');
 
-const basketIcon = require('../../../assets/images/basket.png');
-
-const skeuomorphBasket = require('../../../assets/images/skeuomorph_basket.png');
 
 const buttonHeight = isIPhoneX() ? 60 : 48;
 
@@ -38,7 +38,7 @@ class BasketBlockButton extends PureComponent {
         activeOpacity={0.85}
       >
       <Image
-        source={skeuomorphBasket}
+        source={images.skeuomorphBasket}
         style={{
           width: 300,
           height: 50

@@ -8,7 +8,7 @@ import colors from '../../theme/colors';
 import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { Draggable } from './DragComponent';
 
-const scaleImage = require('../../../assets/images/scale.png');
+import images from '../../theme/images'
 
 const Image_HEIGHT_RATIO = '48%';
 const TEXT_HEIGHT_RATIO = '37%';
@@ -59,7 +59,7 @@ class ItemTile extends PureComponent {
 
   renderScale(unit) {
     if (unit && (unit == 'g' || unit == 'kg')) {
-      return <Image style={styles.scaleStyle} source={scaleImage} />;
+      return <Image style={styles.scaleStyle} source={images.scaleIcon} />;
     }
 
     return null;

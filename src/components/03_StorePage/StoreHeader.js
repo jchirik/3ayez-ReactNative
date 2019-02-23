@@ -8,7 +8,8 @@ import {
   translate
 } from '../../i18n.js';
 
-const store_location_pin = require('../../../assets/images_v2/Home/store_location_pin.png');
+
+import images from '../../theme/images'
 
 import { PARALLAX_HEADER_HEIGHT } from './CollapsibleHeaderScrollView';
 const AnimatedSearchBarButton = Animated.createAnimatedComponent(SearchBarButton);
@@ -84,7 +85,7 @@ export default class StoreHeader extends Component {
           }}>
             <AyezText normal color={'white'} size={13}>{translate(location_text) || '-'}</AyezText>
             <Image
-              source={store_location_pin}
+              source={images.storeLocationPin}
               style={{
                 tintColor: 'white',
                 width: 14,

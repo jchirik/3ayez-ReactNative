@@ -33,9 +33,6 @@ import styles, {
   additionalInstructionsTextInputPlaceholderColor
 } from './styles';
 
-const loadingCircleGreen = require('../../../assets/images/loading_circle_green.png');
-const shareIcon = require('../../../assets/images_v2/share_icon.png');
-
 import { addToBasket, saveItemSpecialRequests } from '../../actions';
 import { strings, translate } from '../../i18n.js';
 import { Actions } from 'react-native-router-flux';
@@ -119,7 +116,7 @@ class ItemPage extends Component {
     return false;
   }
 
-//<Image source={shareIcon} style={styles.shareIconStyle} />
+//<Image source={images.shareIcon} style={styles.shareIconStyle} />
   render() {
     const { item, seller, items_array } = this.props;
 
@@ -143,7 +140,7 @@ class ItemPage extends Component {
               <Image
                 style={styles.itemImageStyle}
                 resizeMode={'contain'}
-                defaultSource={loadingCircleGreen}
+                defaultSource={images.loadingCircleGreen}
                 source={{ uri: image_url }}
               />
             </TouchableOpacity>

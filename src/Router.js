@@ -24,7 +24,6 @@ import CurrentLocationSelect from './components/01_AddressCreate/01_CurrentLocat
 import AddressSearch from './components/01_AddressCreate/02_AddressSearch';
 import RefineLocation from './components/01_AddressCreate/03_RefineLocation';
 import AddressDetails from './components/01_AddressCreate/04_AddressDetails';
-import AddressDetailEdit from './components/01_AddressCreate/05_AddressDetailEdit';
 
 import Homepage from './components/02_Homepage';
 import StorePage from './components/03_StorePage';
@@ -256,7 +255,6 @@ class RouterComponent extends Component {
             <Scene key="addressSearch" component={AddressSearch} />
             <Scene key="refineLocation" component={RefineLocation} />
             <Scene key="addressDetails" component={AddressDetails} />
-            <Scene key="addressDetailEdit" component={AddressDetailEdit} />
           </Stack>
           <Scene key="customProduct" component={CustomProduct} />
           <Scene key="creditCardCreate" component={CreditCardCreate} />

@@ -33,8 +33,10 @@ import {
   AYEZ_GREEN
 } from '../../Helpers.js';
 
+import images from '../../theme/images'
+
+
 import { SearchHeader } from './_components/SearchHeader';
-const start_image = require('../../../assets/images_v2/Search/start_image.png');
 
 class StoreSearch extends Component {
 
@@ -128,7 +130,7 @@ class StoreSearch extends Component {
             marginRight: 20
           }}
           resizeMode="contain"
-          source={require('../../../assets/images/magnifying_glass.png')}
+          source={images.magnifying2Icon}
         />
         <AyezText medium size={12} color={cellColor}>{cellText}</AyezText>
       </TouchableOpacity>
@@ -169,7 +171,7 @@ class StoreSearch extends Component {
           <Image
             style={{ width: 240, height: 240 }}
             resizeMode="contain"
-            source={start_image}
+            source={images.searchStartImage}
           />
         </View>
       )

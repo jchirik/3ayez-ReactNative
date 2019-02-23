@@ -24,7 +24,9 @@ import {
   AyezText
 } from '../../_common';
 
-const dropdown_icon = require('../../../../assets/images_v2/Common/dropdown.png');
+import images from '../../../theme/images'
+
+
 
 import {
   authPhoneSet,
@@ -83,7 +85,7 @@ class PhoneEntry extends Component {
             }}
           >+{this.props.call_code}</AyezText>
           <Image
-            source={dropdown_icon}
+            source={images.dropdownIcon}
             style={{
               width: 11,
               height: 11,

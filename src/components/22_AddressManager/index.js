@@ -36,7 +36,8 @@ import {
   creditCardIcon
 } from '../../Helpers.js';
 
-const delete_icon = require('../../../assets/images_v2/Common/delete.png');
+
+import images from '../../theme/images'
 
 class AddressManager extends Component {
 
@@ -67,7 +68,7 @@ class AddressManager extends Component {
           style={{ padding: 10, marginRight: 5 }}
           >
           <Image
-           source={delete_icon}
+           source={images.deleteIcon}
            style={{ width: 20, height: 20 }}
            resizeMode={'contain'}
            />

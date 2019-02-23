@@ -23,8 +23,8 @@ import {
   AyezText
 } from '../_common';
 
-const coupon_shape = require('../../../assets/images_v2/CouponModal/coupon_shape.png');
-const invalid_coupon = require('../../../assets/images_v2/CouponModal/invalid_coupon.png');
+import images from '../../theme/images'
+
 
 import {
   applyCoupon,
@@ -77,7 +77,7 @@ class CouponModal extends Component {
         borderRadius: 14
       }}>
         <Image
-          source={invalid_coupon}
+          source={images.couponModalInvalid}
           style={{
             marginTop: 10,
             height: 180,
@@ -117,7 +117,7 @@ class CouponModal extends Component {
         height: 318
       }}>
         <Image
-          source={coupon_shape}
+          source={images.couponModalShape}
           style={{
             position: 'absolute',
             width: 335,

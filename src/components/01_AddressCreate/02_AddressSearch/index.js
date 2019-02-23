@@ -20,8 +20,6 @@ import {
   LoadingOverlay,
   AyezText
 } from '../../_common';
-// import { Circle } from 'react-native-progress';
-// import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
   searchAddresses,
   selectGooglePlaceResult
@@ -32,30 +30,8 @@ import {
   translate
 } from '../../../i18n.js';
 
-const result_pin_icon = require('../../../../assets/images_v2/Search/result_pin.png');
 
-// import { fetchRegionDisplayName, fetchRegionImage, strings, localizeDN } from '../../Helpers.js';
-// const comingSoonImage = require('../../../assets/images/coming_soon.png');
-
-
-// add language select + very short tutorial
-
-// steps:
-// 1. request for current location. show a popup first, asking if should use
-// current location. if available, skip to 4.
-// -
-// 2. IF NO LOCATION, pick city
-// 3. text search for location
-// -
-// 4. refine pin
-// 5. reverse fetch street, apt number (if not already provided)
-// 6. present form for finalizing delivery, with prefilled street/building info
-
-// each address should include notes from our driver console, so driver admins
-// can attach additional info that makes it easier to find
-
-// first time you open the app -> go to store tab to start
-// every other time -> go to discover page to start
+import images from '../../../theme/images'
 
 
 class AddressSearch extends Component {
@@ -84,7 +60,7 @@ class AddressSearch extends Component {
           onPress={this.setAddressLocation.bind(this, item)}
         >
           <Image
-            source={result_pin_icon}
+            source={images.searchResultPinIcon}
             style={{
               width: 24,
               height: 24,

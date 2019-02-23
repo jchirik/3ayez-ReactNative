@@ -5,14 +5,12 @@ import {
   Image,
   Animated
 } from 'react-native';
-
-const checkmarkIcon = require('../../../assets/images_v2/Basket/animated_checkmark.png');
+import images from '../../theme/images'
 
 class AnimatedCheckmarkOverlay extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       animatedCheck: new Animated.Value(0)
     };
@@ -57,7 +55,7 @@ class AnimatedCheckmarkOverlay extends Component {
         pointerEvents="none"
       >
         <Animated.Image
-          source={checkmarkIcon}
+          source={images.animatedCheckmark}
           style={{
             width: 80,
             height: 80,

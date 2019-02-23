@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
-const plusIcon = require('../../../assets/images/incr_plus.png');
-const minusIcon = require('../../../assets/images/incr_minus.png');
+
+import images from '../../theme/images'
+
 import { AyezText } from '.';
 
 export default class Incrementer extends PureComponent {
@@ -27,7 +28,7 @@ export default class Incrementer extends PureComponent {
       >
         <TouchableOpacity style={styles.iconContainer} onPress={onDecrement}>
           <Image
-            source={minusIcon}
+            source={images.minusIcon}
             style={{
               tintColor: color,
               width: buttonDimension,
@@ -52,7 +53,7 @@ export default class Incrementer extends PureComponent {
           disabled={maxReached}
         >
           <Image
-            source={plusIcon}
+            source={images.plusIcon}
             style={{
               tintColor: maxReached ? '#CECECE' : color,
               width: buttonDimension,

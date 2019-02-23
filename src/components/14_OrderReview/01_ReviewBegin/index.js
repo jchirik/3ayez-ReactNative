@@ -34,7 +34,7 @@ import {
   PlaceholderFastImage
 } from '../../_common';
 
-const reviewBackground = require('../../../../assets/images_v2/ReviewOrder/reviewBackground.png');
+import images from '../../../theme/images'
 
 class ReviewBegin extends Component {
 
@@ -85,7 +85,7 @@ class ReviewBegin extends Component {
           }}>{strings('OrderReview.reviewRequired')}</AyezText>
 
           <Image
-            source={reviewBackground}
+            source={images.reviewBackground}
             style={{
               alignSelf: 'center',
               height: 240,

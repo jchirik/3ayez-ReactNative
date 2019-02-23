@@ -35,8 +35,7 @@ import {
   translate
 } from '../../i18n.js';
 
-const stores_icon = require('../../../assets/images_v2/Home/stores.png');
-const support_icon = require('../../../assets/images_v2/Home/support.png');
+import images from '../../theme/images'
 
 class Homepage extends Component {
 
@@ -46,8 +45,8 @@ class Homepage extends Component {
       index: 0,
       current_key: 'first',
       routes: [
-        { key: 'first', title_key: 'HomeTabs.stores', icon: stores_icon },
-        { key: 'second', title_key: 'HomeTabs.support', icon: support_icon },
+        { key: 'first', title_key: 'HomeTabs.stores', icon: images.storesIcon },
+        { key: 'second', title_key: 'HomeTabs.support', icon: images.supportIcon },
       ],
     };
     // use title_key so strings fx can run during rendering

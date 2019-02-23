@@ -36,9 +36,6 @@ import {
 import styles from '../styles';
 import colors from '../../../theme/colors';
 
-const endOfScrollImage = require('../../../../assets/images_v2/store_add_new_item.png');
-
-
 class FeaturedBrowse extends Component {
 
   constructor(props) {
@@ -119,30 +116,6 @@ class FeaturedBrowse extends Component {
       </View>
     );
   }
-
-
-    // renderEndOfScroll() {
-    //   return (
-    //     <View style={{ alignItems: 'center' }}>
-    //       <Image source={endOfScrollImage} style={styles.endOfScrollImageStyle} />
-    //       <Text style={styles.typeNewProductTextStyle}>
-    //         {strings('StoreHome.writeYourProduct')}
-    //       </Text>
-    //       <Text style={styles.typeNewProductSubTextStyle}>
-    //         {strings('StoreHome.writeYourProductSubTitle')}
-    //       </Text>
-    //       <TouchableOpacity
-    //         style={[
-    //           styles.searchBarSectionStyle,
-    //           { marginBottom: 65, marginHorizontal: '14%', padding: 5 }
-    //         ]}
-    //         onPress={Actions.addProduct}
-    //       >
-    //       </TouchableOpacity>
-    //     </View>
-    //   );
-    // }
-
 
   renderEmptyFeatured() {
     return (

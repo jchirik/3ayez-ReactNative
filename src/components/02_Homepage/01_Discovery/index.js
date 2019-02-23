@@ -18,9 +18,6 @@ import {
   AyezText
 } from '../../_common';
 
-// import {
-// } from '../../../actions';
-
 import {
   strings,
   translate

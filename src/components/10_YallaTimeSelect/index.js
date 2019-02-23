@@ -34,8 +34,8 @@ import {
   checkIfOpen
 } from '../../Helpers.js';
 
-const fastIcon = require('../../../assets/images_v2/Timeslot/fast.png');
 
+import images from '../../theme/images'
 
 class YallaTimeSelect extends Component {
 
@@ -117,7 +117,7 @@ class YallaTimeSelect extends Component {
           disabled={!isOpen}
           onPress={() => this.onYallaProceed()}
         >
-          <Image source={fastIcon} style={{ width: 60, height: 60 }} />
+          <Image source={images.yallaFastIcon} style={{ width: 60, height: 60 }} />
           <AyezText regular size={18}>{strings('Common.yalla')}</AyezText>
           <AyezText regular color={'#8E8E93'}>{strings('StoreSelect.deliveryTime', { delivery_time: seller.delivery_time })}</AyezText>
           <AyezText regular color={'#8E8E93'}>{formatCurrency(seller.delivery_fee)}</AyezText>

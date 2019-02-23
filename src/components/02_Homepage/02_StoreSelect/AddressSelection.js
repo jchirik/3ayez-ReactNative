@@ -30,9 +30,7 @@ import {
 } from '../../../i18n.js';
 
 
-const address_icon = require('../../../../assets/images_v2/AddressSelect/address_icon.png');
-const toggle_selected = require('../../../../assets/images_v2/Common/toggle_selected.png');
-const toggle_unselected = require('../../../../assets/images_v2/Common/toggle_unselected.png');
+import images from '../../../theme/images'
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 // when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
@@ -131,7 +129,7 @@ class AddressSelection extends Component {
        }}
        >
         <Image
-          source={address_icon}
+          source={images.addressIcon}
           style={{
             width: 32,
             height: 32,
@@ -150,7 +148,7 @@ class AddressSelection extends Component {
         </View>
 
         <Image
-          source={(address.id === this.props.address.id) ? toggle_selected : toggle_unselected}
+          source={(address.id === this.props.address.id) ? images.toggleSelected : images.toggleUnselected}
           style={{
             width: 24,
             height: 24,

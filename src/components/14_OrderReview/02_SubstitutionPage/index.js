@@ -41,8 +41,8 @@ import {
   ItemIncrementer
 } from '../../_common';
 
-const supportIcon = require('../../../../assets/images_v2/Support/icon.png');
-const swapIcon = require('../../../../assets/images_v2/ReviewOrder/change.png');
+
+import images from '../../../theme/images'
 
 
 class SubstitutionPage extends Component {
@@ -78,7 +78,7 @@ class SubstitutionPage extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Image
-          source={swapIcon}
+          source={images.reviewSwapIcon}
           style={{
             alignSelf: 'center',
             height: 50,
@@ -227,7 +227,7 @@ class SubstitutionPage extends Component {
             }}
             rightButton={{
               text: strings('Support.header').toUpperCase(),
-              image_source: supportIcon,
+              image_source: images.supportIcon,
               onPress: () => Actions.supportChat()
             }}
             />

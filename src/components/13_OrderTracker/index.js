@@ -49,9 +49,7 @@ import {
 
 import { StatusLog } from './StatusLog'
 
-const order_summary_icon = require('../../../assets/images_v2/OrderTracker/order_summary.png');
-
-
+import images from '../../theme/images'
 
 class OrderTracker extends Component {
 
@@ -195,7 +193,7 @@ class OrderTracker extends Component {
             blackStyle
             rightButton={{
               text: strings('Receipt.summary'),
-              image_source: order_summary_icon,
+              image_source: images.orderSummaryIcon,
               onPress: () => Actions.orderSummary()
             }}
             />

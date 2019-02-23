@@ -3,12 +3,12 @@ import { Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { STATUS_BAR_HEIGHT } from '../../Helpers.js';
 
-const filter = require('../../../assets/images_v2/filter.png');
+import images from '../../theme/images'
 
 const FilterButton = ({ color = 'black', onPress = undefined, style }) => (
   <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
     <Image
-      source={filter}
+      source={images.searchFilterIcon}
       style={{ width: 22, height: 22, tintColor: color }}
       resizeMode={'contain'}
     />

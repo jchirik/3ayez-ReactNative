@@ -32,10 +32,9 @@ import {
   translate
 } from '../../../i18n.js';
 
-const clCover = require('../../../../assets/images_v2/AddressCreate/CL_cover.png');
+import images from '../../../theme/images'
 
 
-// add language select + very short tutorial
 
 // steps:
 // 1. request for current location. show a popup first, asking if should use
@@ -149,7 +148,7 @@ class CurrentLocationSelect extends Component {
       }}>
 
         <Image
-          source={clCover}
+          source={images.currentLocationCover}
           style={{
             height: 280,
             width: 280,

@@ -35,9 +35,8 @@ import {
   ItemRow
 } from '../../_common';
 
-const supportIcon = require('../../../../assets/images_v2/Support/icon.png');
 
-
+import images from '../../../theme/images'
 
 class ReviewSummary extends Component {
 
@@ -106,7 +105,7 @@ class ReviewSummary extends Component {
         onBackButtonPress={() => onBack()}
         rightButton={{
           text: strings('Support.header').toUpperCase(),
-          image_source: supportIcon,
+          image_source: images.supportIcon,
           onPress: () => Actions.supportChat()
         }}
         />

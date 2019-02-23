@@ -33,11 +33,10 @@ import {
 } from '../../i18n.js';
 
 const window = Dimensions.get('window');
-const skeuomorphBasket = require('../../../assets/images/skeuomorph_basket.png');
-const emptyBasketIcon = require('../../../assets/images_v2/empty_basket.png');
-const clearBasket = require('../../../assets/images_v2/clear_basket.png');
+
+import images from '../../theme/images'
+
 import colors from '../../theme/colors';
-import { destinations } from './destinations';
 import { DestinationItem } from './_components/DestinationItem';
 import styles from './styles';
 
@@ -104,7 +103,7 @@ class WorkingBasket extends Component {
       <View style={styles.headerContainer}>
         <View style={styles.basketContatiner}>
           <Image
-            source={skeuomorphBasket}
+            source={images.skeuomorphBasket}
             style={{
               width: 300,
               height: 50,
@@ -203,7 +202,7 @@ class WorkingBasket extends Component {
   renderEmptyTable() {
     return (
       <View style={styles.emptyBasketContainer}>
-        <Image source={emptyBasketIcon} style={{ width: 60, height: 60 }} />
+        <Image source={images.emptyBasketIcon} style={{ width: 60, height: 60 }} />
         <AyezText regular style={styles.emptyBasketTitle}>
           {strings('WorkingBasket.emptyCartTitle')}
         </AyezText>
@@ -233,7 +232,7 @@ class WorkingBasket extends Component {
   renderDestination() {
     return (
       <View style={{ backgroundColor: 'white' }}>
-        {destinations.map(
+        {[].map(
           ({
             id,
             destinationTypeLabel,
@@ -319,7 +318,7 @@ class WorkingBasket extends Component {
           >
             <View style={styles.clearBasketContainer}>
               <Image
-                source={clearBasket}
+                source={images.clearBasketImage}
                 style={styles.clearBasketImage}
                 resizeMode="contain"
               />

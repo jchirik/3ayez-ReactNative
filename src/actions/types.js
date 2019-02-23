@@ -148,3 +148,131 @@ export const SEARCH_SUBCATEGORY_DATA_BEGIN = 'SEARCH_SUBCATEGORY_DATA_BEGIN';
 export const SEARCH_SUBCATEGORY_DATA_END = 'SEARCH_SUBCATEGORY_DATA_END';
 
 export const SUPPORT_MANUAL_SET = 'SUPPORT_MANUAL_SET';
+
+
+export const SUPPORT_MESSAGES_SET = 'SUPPORT_MESSAGES_SET';
+export const SUPPORT_MESSAGES_LISTENER_SET = 'SUPPORT_MESSAGES_LISTENER_SET';
+export const CHAT_SET = 'CHAT_SET';
+export const CHAT_LISTENER_SET = 'CHAT_LISTENER_SET';
+export const MESSAGE_SEND_BEGIN = 'MESSAGE_SEND_BEGIN';
+export const MESSAGE_SEND_SUCCESS = 'MESSAGE_SEND_SUCCESS';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+
+// OLD TYPES from migration below
+// they will be deleted, so if you are using any, place them above
+
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+/* ************************************************************************* */
+
+
+/* Fetching all subcat data for a category */
+export const CATEGORY_DATA_BEGIN = 'CATEGORY_DATA_BEGIN';
+export const CATEGORY_DATA_SET = 'CATEGORY_DATA_SET';
+
+export const SUBCATEGORY_SET = 'SUBCATEGORY_SET';
+
+export const SET_BASKETS = 'SET_BASKETS';
+export const SET_SELLER_BASKET = 'SET_SELLER_BASKET';
+
+export const CHECK_IF_PROMO_SET = 'CHECK_IF_PROMO_SET';
+export const CHECK_IF_RECENT_SET = 'CHECK_IF_RECENT_SET';
+
+
+export const SET_CUSTOM_ITEM_MODAL = 'SET_CUSTOM_ITEM_MODAL';
+export const HIDE_CUSTOM_ITEM_MODAL = 'HIDE_CUSTOM_ITEM_MODAL';
+
+export const SHOW_STORE_MODAL = 'SHOW_STORE_MODAL';
+export const HIDE_STORE_MODAL = 'HIDE_STORE_MODAL';
+
+export const CREATE_CUSTOMER_DATA_ATTEMPT = 'CREATE_CUSTOMER_DATA_ATTEMPT';
+export const CREATE_CUSTOMER_DATA_SUCCESS = 'CREATE_CUSTOMER_DATA_SUCCESS';
+export const CREATE_CUSTOMER_DATA_FAIL = 'CREATE_CUSTOMER_DATA_FAIL';
+
+export const ITEM_SEARCH_QUERY_SET = 'ITEM_SEARCH_QUERY_SET';
+export const ITEM_SEARCH_CATEGORY_SET = 'ITEM_SEARCH_CATEGORY_SET';
+export const ITEM_SEARCH_DATA_SET = 'ITEM_SEARCH_DATA_SET';
+export const ITEM_SEARCH_DATA_RESET = 'ITEM_SEARCH_DATA_RESET';
+
+export const SET_LOGIN_STATE = 'SET_LOGIN_STATE';
+export const SET_PRIOR_STACK = 'SET_PRIOR_STACK';
+
+export const PAYMENT_METHOD_BEGIN = 'PAYMENT_METHOD_BEGIN';
+export const PAYMENT_METHOD_FAIL = 'PAYMENT_METHOD_FAIL';
+
+export const LOGIN_ATTEMPT = 'LOGIN_ATTEMPT';
+export const LOGIN_ATTEMPT_SUCCESS = 'LOGIN_ATTEMPT_SUCCESS';
+export const LOGIN_ATTEMPT_FAIL = 'LOGIN_ATTEMPT_FAIL';
+export const LOGIN_ATTEMPT_RESET = 'LOGIN_ATTEMPT_RESET';
+
+export const LOGOUT_ATTEMPT = 'LOGOUT_ATTEMPT';
+export const LOGOUT_ATTEMPT_SUCCESS = 'LOGOUT_ATTEMPT_SUCCESS';
+export const LOGOUT_ATTEMPT_FAIL = 'LOGOUT_ATTEMPT_FAIL';
+
+export const VERIFICATION_ENTERED = 'VERIFICATION_ENTERED';
+
+export const CUSTOMER_POINTS_SET = 'CUSTOMER_POINTS_SET';
+export const CUSTOMER_POINTS_LISTENER_SET = 'CUSTOMER_POINTS_LISTENER_SET';
+
+export const TOGGLE_COUPON_MODAL = 'TOGGLE_COUPON_MODAL';
+
+
+export const ACTIVE_ORDERS_SET = 'ACTIVE_ORDERS_SET';
+export const ACTIVE_ORDERS_LISTENER_SET = 'ACTIVE_ORDERS_LISTENER_SET';
+export const LAST_ORDER_SET = 'LAST_ORDER_SET';
+export const SUBSTITUTION_ORDER_SET = 'SUBSTITUTION_ORDER_SET';
+
+export const ORDER_HISTORY_SET = 'ORDER_HISTORY_SET';
+export const ORDER_HISTORY_LISTENER_SET = 'ORDER_HISTORY_LISTENER_SET';
+export const ORDER_HISTORY_LISTENER_RESET = 'ORDER_HISTORY_LISTENER_RESET';
+
+export const CURRENT_SELLER_BEGIN = 'CURRENT_SELLER_BEGIN';
+export const CURRENT_SELLER_SELECT = 'CURRENT_SELLER_SELECT';
+export const CURRENT_SELLER_RESET = 'CURRENT_SELLER_RESET';
+export const CURRENT_SELLER_DETAILS = 'CURRENT_SELLER_DETAILS';
+export const CURRENT_SELLER_LAYOUT = 'CURRENT_SELLER_LAYOUT';
+
+
+export const SUBSTITUTION_SUBMIT_BEGIN = 'SUBSTITUTION_SUBMIT_BEGIN';
+export const SUBSTITUTION_SUBMIT_END = 'SUBSTITUTION_SUBMIT_END';
+
+export const SUBSTITUTION_OPTIONS_BEGIN = 'SUBSTITUTION_OPTIONS_BEGIN';
+export const SUBSTITUTION_OPTIONS_SET = 'SUBSTITUTION_OPTIONS_SET';
+
+export const SELLER_SEARCH_BEGIN = 'SELLER_SEARCH_BEGIN';
+export const SELLER_SEARCH_SET = 'SELLER_SEARCH_SET';
+
+export const ORDER_ITEM_ADD = 'ORDER_ITEM_ADD';
+export const ORDER_ITEM_REMOVE = 'ORDER_ITEM_REMOVE';
+
+export const SELECT_SELLER_LOAD = 'SELECT_SELLER_LOAD';
+
+export const AUTH_SELLER_SELECT = 'AUTH_SELLER_SELECT';

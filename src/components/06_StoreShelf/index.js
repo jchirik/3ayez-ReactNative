@@ -24,6 +24,7 @@ import {
 } from '../_common';
 import { DragContainer } from '../_common/DragComponent';
 
+import images from '../../theme/images'
 
 class StoreShelf extends Component {
   constructor(props) {
@@ -105,7 +106,7 @@ class StoreShelf extends Component {
         <Image
           style={styles.magnifyingImage}
           resizeMode="contain"
-          source={require('../../../assets/images/magnifying_glass.png')}
+          source={images.magnifying2Icon}
         />
       </TouchableOpacity>
     );

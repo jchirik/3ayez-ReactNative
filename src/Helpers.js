@@ -33,7 +33,7 @@ export const padNumberZeros = (num, size) => {
 }
 
 export const paymentIcon = (brand, type) => {
-  const dir = '../assets/images_v2/Payment/creditcards';
+  const dir = '../assets/images/Payment/creditcards';
   if (type === 'CASH') { return require(`${dir}/money.png`); }
   switch (brand.toUpperCase()) {
     case 'VISA':

@@ -41,8 +41,8 @@ import {
   FONT_MEDIUM
 } from '../../i18n.js';
 
-const cameraIcon = require('../../../assets/images_v2/Support/camera.png');
-const chatSendIcon = require('../../../assets/images_v2/Support/chat_send.png');
+
+import images from '../../theme/images'
 
 import {
   Header,
@@ -169,7 +169,7 @@ class SupportChat extends Component {
               marginRight: 3,
               marginLeft: 10
             }}
-            source={cameraIcon}
+            source={images.cameraIcon}
             resizeMode={'contain'}
             />
         </TouchableOpacity>
@@ -192,7 +192,7 @@ class SupportChat extends Component {
                 marginRight: 3,
                 marginLeft: 6
               }}
-              source={chatSendIcon}
+              source={images.chatSendIcon}
               resizeMode={'contain'}
               />
           </Send>

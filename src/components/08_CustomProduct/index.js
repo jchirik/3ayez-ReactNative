@@ -30,7 +30,8 @@ import {
   InputRow,
   CloseButton
 } from '../_common';
-import header_image from '../../../assets/images_v2/CustomProduct/background_gradient.png';
+
+import images from '../../theme/images'
 
 class CustomProduct extends Component {
   constructor(props) {
@@ -68,7 +69,6 @@ class CustomProduct extends Component {
     this.props.addToBasket(item, seller.id);
     Actions.popTo('storePage');
   }
-
   onChangeText(key, value) {
     const update = {};
     update[key] = value;
@@ -87,7 +87,7 @@ class CustomProduct extends Component {
               alignItems: 'flex-start',
               justifyContent: 'flex-end'
             }}
-            source={header_image}
+            source={images.customProductHeader}
           >
             <AyezText semibold size={12}
               color={'white'} style={{ opacity: 0.9 }}>

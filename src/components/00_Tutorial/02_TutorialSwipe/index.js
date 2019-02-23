@@ -44,10 +44,7 @@ import {
 
 const NUM_PAGES = 3;
 
-const tutorial_1_en = require('../../../../assets/images_v2/Tutorial/tutorial_1_en.png');
-const tutorial_1_ar = require('../../../../assets/images_v2/Tutorial/tutorial_1_ar.png');
-const tutorial_2 = require('../../../../assets/images_v2/Tutorial/tutorial_2.png');
-const tutorial_3 = require('../../../../assets/images_v2/Tutorial/tutorial_3.png');
+import images from '../../../theme/images'
 
 const window = Dimensions.get('window');
 
@@ -107,15 +104,15 @@ class TutorialSwipe extends Component {
 
   render() {
 
-    let tutorial_1 = tutorial_1_en;
+    let tutorial1 = images.tutorial1en;
     if (this.props.locale === 'ar') {
-      tutorial_1 = tutorial_1_ar;
+      tutorial1 = images.tutorial1ar;
     }
 
     let pages = [
-        { title: strings('Tutorial.t1header'), image: tutorial_1 },
-        { title: strings('Tutorial.t2header'), image: tutorial_2 },
-        { title: strings('Tutorial.t3header'), image: tutorial_3 }
+        { title: strings('Tutorial.t1header'), image: tutorial1 },
+        { title: strings('Tutorial.t2header'), image: images.tutorial2 },
+        { title: strings('Tutorial.t3header'), image: images.tutorial3 }
     ].map((page) => (
       <View
         key={page.title}

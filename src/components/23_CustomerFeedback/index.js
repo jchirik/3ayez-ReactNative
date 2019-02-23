@@ -45,9 +45,7 @@ import {
   STATUS_BAR_HEIGHT
 } from '../../Helpers.js';
 
-const square_logo_icon = require('../../../assets/images_v2/Common/square_logo.png');
-const header_image = require('../../../assets/images_v2/CustomerFeedback/header_image.png');
-
+import images from '../../theme/images'
 
 class CustomerFeedback extends Component {
 
@@ -125,7 +123,7 @@ class CustomerFeedback extends Component {
             borderRadius: 10
           }}
           resizeMode={'contain'}
-          source={square_logo_icon}
+          source={images.squareLogo}
         />
         <StarRating
           value={this.props.ayez_rating}
@@ -148,7 +146,7 @@ class CustomerFeedback extends Component {
                 width: null
               }}
               resizeMode={'cover'}
-              source={header_image}
+              source={images.customerFeedbackHeader}
             />
             <View style={{
               position: 'absolute',

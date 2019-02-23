@@ -151,8 +151,9 @@ const listenToOngoingOrders = (dispatch) => {
           status_log: data.status_log ? data.status_log : []
         });
       });
-      // activeOrders = activeOrders.filter(order => (order.status !== 300));
-      dispatch({ type: ONGOING_ORDERS_SET, payload: { orders } });
+
+      const activeOrders = orders.filter(order => (order.timeslot.end + 18000000) > Date.now())
+      dispatch({ type: ONGOING_ORDERS_SET, payload: { orders: activeOrders } });
 
       console.log('ONGOING_ORDERS_SET', orders)
 

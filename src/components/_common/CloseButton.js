@@ -6,7 +6,7 @@ import {
   AYEZ_GREEN
 } from '../../Helpers.js';
 
-const close_icon = require('../../../assets/images_v2/Common/close.png');
+import images from '../../theme/images'
 
 const CloseButton = ({
   onPress = Actions.pop,
@@ -19,7 +19,7 @@ const CloseButton = ({
         onPress={onPress}
       >
         <Image
-          source={close_icon}
+          source={images.closeIcon}
           style={{ width: 32, height: 32 }}
           resizeMode={'contain'}
         />

@@ -13,7 +13,8 @@ import {
   translate
 } from '../../i18n.js';
 
-import customProductIcon from '../../../assets/images_v2/CustomProduct/icon.png';
+
+import images from '../../theme/images'
 
 const CustomItemPrompt = () => {
   return (
@@ -35,7 +36,7 @@ const CustomItemPrompt = () => {
           height: 70,
           marginRight: 10
         }}
-        source={customProductIcon}
+        source={images.customProductIcon}
         resizeMode={'contain'}
         />
       <View style={{ flex: 1, alignItems: 'flex-start' }}>

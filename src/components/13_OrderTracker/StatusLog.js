@@ -14,9 +14,7 @@ import {
   AyezText
 } from '../_common';
 
-
-const checked_icon = require('../../../assets/images_v2/OrderTracker/checked.png');
-const unchecked_icon = require('../../../assets/images_v2/OrderTracker/unchecked.png');
+import images from '../../theme/images'
 
 
 const StatusLog = ({
@@ -141,10 +139,10 @@ const StatusLog = ({
 
     let status_text = '';
     let timestamp_text = '';
-    let image_source = unchecked_icon;
+    let image_source = images.orderTrackerUnchecked;
 
     // if the bullet should be checked, switch to checked icon
-    if (checked) { image_source = checked_icon }
+    if (checked) { image_source = images.orderTrackerChecked }
 
     // if there exists a timestamp for this item, proceed
     if (timestamp) {

@@ -27,7 +27,8 @@ import {
   AyezText,
   BackButton
 } from '../../_common';
-const location_dot = require('../../../../assets/images_v2/OrderTracker/location_dot.png');
+
+import images from '../../../theme/images'
 
 class DriverTracker extends Component {
 
@@ -77,7 +78,7 @@ class DriverTracker extends Component {
             rotation={null}
           >
             <Image
-              source={location_dot}
+              source={images.orderTrackerDot}
               style={{ width: 40, height: 40 }}
               resizeMode={'contain'}
             />

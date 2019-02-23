@@ -16,21 +16,17 @@ import {
   Platform,
   findNodeHandle
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
-
-import { onSelectCategory } from '../../actions';
-
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import FeaturedBrowse from './01_FeaturedBrowse';
+import CategoriesBrowse from './02_CategoriesBrowse';
 
 import {
   AnimatedCheckmarkOverlay,
   ItemTile,
   BasketBlockButton,
   BackButton,
-  AyezText,
-  CustomItemPrompt
+  AyezText
 } from '../_common';
 
 import {
@@ -47,21 +43,17 @@ import {
 
 import styles from './styles';
 import colors from '../../theme/colors';
+import images from '../../theme/images'
 
 import {
   CollapsibleHeaderScrollView,
   PARALLAX_HEADER_HEIGHT,
   TAB_BAR_HEIGHT
 } from './CollapsibleHeaderScrollView';
-const window = Dimensions.get('window');
 const STICKY_HEADER_HEIGHT = 68 + STATUS_BAR_HEIGHT; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
-const CATEGORY_COL_NUM = 2;
-const CATEGORY_SCROLL_EVENT_THROTTLE = 16;
-
 
 class StorePage extends Component {
-
 
     constructor(props) {
       super(props);
@@ -132,84 +124,6 @@ class StorePage extends Component {
     }
   ];
 
-
-
-
-
-
-
-  onSelectCategory(category) {
-    this.props.onSelectCategory(this.props.seller_id, category);
-    Actions.storeAisle();
-  }
-
-
-  // Categories tab
-  renderItem({ item, index }) {
-    return (
-      <TouchableOpacity
-        style={{
-          marginBottom: 2,
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: window.width/2,
-          height: 140,
-          paddingLeft: index % 2 == 0 ? '5.3%' : '1.4%',
-          paddingRight: index % 2 == 0 ? '1.4%' : '5.3%'
-        }}
-        onPress={this.onSelectCategory.bind(this, item)}
-      >
-        <View style={styles.categoryCard}>
-          <FastImage
-            source={{ uri: item.image_url }}
-            style={styles.categoryImage}
-            resizeMode={'cover'}
-          />
-        </View>
-
-        <AyezText size={12}
-          regular style={{ marginTop: 6 }}>{translate(item.name)}</AyezText>
-      </TouchableOpacity>
-    );
-  }
-
-  renderFooter() {
-    if (this.props.categories_loading) { return null }
-    return (
-      <View style={{ marginBottom: 15, marginHorizontal: 8 }}>
-        <CustomItemPrompt />
-      </View>
-    )
-  }
-
-  renderEmptyCategories() {
-    if (this.props.categories_loading) {
-      return (
-        <ActivityIndicator size="small" style={{ margin: 30, alignSelf: 'center' }} />
-      )
-    }
-    return null;
-  }
-
-  renderCategories() {
-    console.log('CATEGORIES', this.props.categories);
-    return (
-      <FlatList
-        data={this.props.categories}
-        renderItem={this.renderItem.bind(this)}
-        style={styles.categoryList}
-        removeClippedSubviews
-        ListHeaderComponent={null}
-        numColumns={CATEGORY_COL_NUM}
-        ListEmptyComponent={this.renderEmptyCategories.bind(this)}
-        ListFooterComponent={this.renderFooter.bind(this)}
-        scrollEventThrottle={CATEGORY_SCROLL_EVENT_THROTTLE}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    );
-  }
-
   renderTabs() {
     if (this.props.featured_loading || this.props.categories_loading) {
       return null;
@@ -274,7 +188,7 @@ class StorePage extends Component {
         }
       >
         <Image
-          source={require('../../../assets/images_v2/basket_button.png')}
+          source={images.basket2Icon}
           style={{ width: 28, height: 28, tintColor: 'white' }}
           resizeMode={'contain'}
         />
@@ -300,7 +214,7 @@ class StorePage extends Component {
     } else if (tabs[selected_tab] === strings('StoreHome.featured')) {
       mainScrollComponent = (<FeaturedBrowse />);
     } else {
-      mainScrollComponent = (this.renderCategories());
+      mainScrollComponent = (<CategoriesBrowse />);
     }
 
     return (
@@ -332,9 +246,8 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     logo_url,
     cover_url,
     promotions,
-    featured,
     featured_loading,
-    categories,
+    featured,
     categories_loading,
     location_text,
     display_name
@@ -346,9 +259,8 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     logo_url,
     cover_url,
     promotions,
-    featured,
     featured_loading,
-    categories,
+    featured,
     categories_loading,
     location_text,
     display_name,
@@ -356,11 +268,7 @@ const mapStateToProps = ({ Seller, Baskets }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {};
-
 export default connect(
   mapStateToProps,
-  {
-    onSelectCategory
-  }
+  null
 )(StorePage);

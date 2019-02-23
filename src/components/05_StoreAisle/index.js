@@ -24,9 +24,8 @@ import {
   PlaceholderFastImage,
   SearchBarButton
  } from '../_common';
-import loadingCircleGray from '../../../assets/images/loading_circle_gray.png';
-import basketButton from '../../../assets/images_v2/basket_button.png';
 
+import images from '../../theme/images'
 
 class StoreAisle extends Component {
   state = {};
@@ -230,7 +229,7 @@ class StoreAisle extends Component {
         }
       >
         <Image
-          source={basketButton}
+          source={images.basket2Icon}
           style={styles.basketButtonImage}
           resizeMode={'contain'}
         />

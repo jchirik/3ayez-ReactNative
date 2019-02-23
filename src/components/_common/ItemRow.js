@@ -9,8 +9,7 @@ import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { strings, translate, formatCurrency } from '../../i18n.js';
 import colors from '../../theme/colors';
 
-const customItemPlaceholder = require('../../../assets/images_v2/CustomProduct/placeholder.png');
-const removeIcon = require('../../../assets/images_v2/Common/remove.png');
+import images from '../../theme/images'
 
 
 class ItemRow extends Component {
@@ -154,7 +153,7 @@ class ItemRow extends Component {
               margin: 9
             }}
             resizeMode={'contain'}
-            source={customItemPlaceholder}
+            source={images.customProductPlaceholder}
           />
 
           <View
@@ -181,7 +180,7 @@ class ItemRow extends Component {
           <TouchableOpacity
             onPress={() => this.props.removeFromBasket(item, seller.id)}>
             <Image
-              source={removeIcon}
+              source={images.removeIcon}
               style={{ width: 14, height: 14, margin: 14, tintColor: 'black'}}
               resizeMode={'contain'}
               />

@@ -4,7 +4,7 @@ import { strings, translate } from '../../i18n';
 import { AyezText } from '.'
 import { Actions } from 'react-native-router-flux';
 import colors from '../../theme/colors';
-import searchBarImage from '../../../assets/images_v2/search.png';
+import images from '../../theme/images'
 
 class SearchBarButton extends React.Component {
   render() {
@@ -28,7 +28,7 @@ class SearchBarButton extends React.Component {
         }}
       >
           <Image
-            source={searchBarImage}
+            source={images.magnifying2Icon}
             resizeMode={'contain'}
             style={styles.searchBarImage}
             />
@@ -54,10 +54,10 @@ const styles = {
     paddingRight: 40
   },
   searchBarImage: {
-    height: 28,
-    width: 28,
-    marginLeft: 5,
-    marginRight: 4,
+    height: 20,
+    width: 20,
+    marginLeft: 12,
+    marginRight: 8,
     tintColor: colors.borderGrey
   },
   searchBarText: {

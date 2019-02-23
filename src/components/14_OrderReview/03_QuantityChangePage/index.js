@@ -41,7 +41,7 @@ import {
   ItemIncrementer
 } from '../../_common';
 
-const supportIcon = require('../../../../assets/images_v2/Support/icon.png');
+import images from '../../../theme/images'
 
 class QuantityChangePage extends Component {
 
@@ -76,7 +76,7 @@ class QuantityChangePage extends Component {
             }}
             rightButton={{
               text: strings('Support.header').toUpperCase(),
-              image_source: supportIcon,
+              image_source: images.supportIcon,
               onPress: () => Actions.supportChat()
             }}
             />
@@ -104,7 +104,7 @@ class QuantityChangePage extends Component {
             <AyezText regular style={{
               marginVertical: 12
             }}>{strings('OrderReview.quantityChangeInstruction')}</AyezText>
-            
+
             <AyezText medium color={'#888888'}>{strings('OrderReview.requestedQuantity', { quantity: item.original_quantity })}</AyezText>
             <AyezText medium size={16} style={{ marginTop: 5}}>{strings('OrderReview.availableQuantity', { quantity: item.quantity })}</AyezText>
 
