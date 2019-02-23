@@ -30,6 +30,9 @@ import {
   formatTimestamp,
   formatCurrency
 } from '../../i18n.js';
+import {
+  checkIfOpen
+} from '../../Helpers.js';
 
 const fastIcon = require('../../../assets/images_v2/Timeslot/fast.png');
 
@@ -87,6 +90,7 @@ class YallaTimeSelect extends Component {
 
   render() {
     const { seller } = this.props;
+    const isOpen = checkIfOpen(seller.hours);
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
@@ -96,6 +100,7 @@ class YallaTimeSelect extends Component {
 
         <TouchableOpacity
           style={{
+            opacity: (isOpen ? 1.0 : 0.2),
             flex: 1,
             marginTop: 10,
             marginHorizontal: 10,
@@ -109,6 +114,7 @@ class YallaTimeSelect extends Component {
             justifyContent: 'center',
             alignItems: 'center'
           }}
+          disabled={!isOpen}
           onPress={() => this.onYallaProceed()}
         >
           <Image source={fastIcon} style={{ width: 60, height: 60 }} />
