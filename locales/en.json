@@ -296,7 +296,11 @@
   },
   "SupportChat": {
     "header": "Support Chat",
-    "inputPlaceholder": "Send a message..."
+    "inputPlaceholder": "Send a message...",
+    "takePhoto": "Take photo",
+    "selectPhoto": "Select photo from gallery",
+    "cancel": "Cancel",
+    "chatEnded": "Chat is ended"
   },
   "CustomerFeedback": {
     "orderArrived": "Your order has arrived!",

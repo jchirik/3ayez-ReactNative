@@ -1,74 +1,68 @@
-import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
+import React from 'react';
+import ImagePicker from 'react-native-image-picker';
+
 import { connect } from 'react-redux';
-import { GiftedChat, Bubble, Day, Composer, Send, InputToolbar } from 'react-native-gifted-chat'
-import firebase from 'react-native-firebase';
+import { GiftedChat, Bubble, Day, Send, Actions as GiftedActions } from 'react-native-gifted-chat'
 
 import {
   View,
-  Modal,
-  SectionList,
   Platform,
-  Animated,
-  ActivityIndicator,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  TextInput,
   Dimensions,
   Image,
-  BackHandler,
-  AsyncStorage,
-  I18nManager
+  StyleSheet 
 } from 'react-native';
 
 import {
-  onSendSupportMessage,
-  onSendSupportImage,
-  listenSupportMessages,
-  endListeningSupportMessages,
-  setChatSeen
-} from '../../actions';
-
-import {
   AYEZ_GREEN,
-  isIPhoneX
 } from '../../Helpers.js';
 
 import {
   strings,
-  translate,
   FONT_REGULAR,
   FONT_MEDIUM
 } from '../../i18n.js';
+
+const VISITOR_TYPE = 'visitor';
 
 
 import images from '../../theme/images'
 
 import {
   Header,
-  LoadingOverlay,
   RTLImage
 } from '../_common';
 
-// a big comoonent
-class SupportChat extends Component {
 
+const { height, width } = Dimensions.get('window');
+const totalSize = num =>
+  (Math.sqrt(height * height + width * width) * num) / 100;
+
+class Chat extends React.Component {
   constructor(props) {
     super(props);
+    
+  
+    this.handleInputTextChange = this.handleInputTextChange.bind(this);
+    this.handleSend = this.handleSend.bind(this);
   }
 
-  componentDidMount() {
-    console.log('componentDidMount')
-    this.props.listenSupportMessages();
-    this.props.setChatSeen();
-  }
+  getVisitor = () => {
+    const visitorId = Object.keys(this.props.users).find(
+      userId => this.props.users[userId].type === VISITOR_TYPE
+    );
+    return this.props.users[visitorId];
+  };
 
-  componentWillUnmount() {
-    // this.props.endListeningSupportMessages();
-    // might as well let it run. occasionally async triggers, which causes issues
-    console.log('unmounting')
-    this.props.setChatSeen();
-  }
+  handleInputTextChange = text => {
+    this.props.visitorSDK.setSneakPeek({ text });
+  };
+
+  handleSend = messages => {
+    this.props.visitorSDK.sendMessage({
+      customId: String(Math.random()),
+      text: messages[0].text
+    });
+  };
 
   renderBubble = props => {
     // let username = props.currentMessage.user.name
@@ -120,178 +114,143 @@ class SupportChat extends Component {
     )
   }
 
-
-  renderInputToolbar = props => {
+  renderSend(props) {
     return (
-      <InputToolbar
-        {...props}
-        containerStyle={{
-          backgroundColor: 'white',
-          borderTopWidth: 0,
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: -2},
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 2,
-        }} />
-    )
-  }
-
-  renderComposer = props => {
-
-    // if (props.text.trim().length > 0) {
-    //   return (
-    //     <View style={{flexDirection: 'row'}}>
-    //       <Composer {...props} />
-    //     </View>
-    //   );
-    // }
-
-    return (
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        borderWidth: 0,
-        flex: 1,
-        marginBottom: isIPhoneX() ? 24 : 0
-      }}>
-
-        <TouchableOpacity
-          onPress={() => this.props.onSendSupportImage()}
-        >
-          <RTLImage
-            style={{
-              backgroundColor: 'transparent',
-              width: 32,
-              height: 32,
-              marginBottom: 12,
-              marginTop: 8,
-              marginRight: 3,
-              marginLeft: 10
-            }}
-            source={images.cameraIcon}
-            resizeMode={'contain'}
-            />
-        </TouchableOpacity>
-        <View style={{
-          backgroundColor: '#F3F3F3',
-          flex: 1,
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-          margin: 6,
-          borderRadius: 10
-        }}>
-          <Composer {...props} />
-          <Send {...props} containerStyle={{ backgroundColor: 'transparent' }}>
-            <RTLImage
-              style={{
-                backgroundColor: 'transparent',
-                width: 38,
-                height: 38,
-                marginBottom: 3,
-                marginRight: 3,
-                marginLeft: 6
-              }}
-              source={images.chatSendIcon}
-              resizeMode={'contain'}
-              />
-          </Send>
+      <Send {...props}>
+        <View style={{ marginBottom: 10 }}>
+          <Image
+            style={{ height: 20, width: 50 }}
+            source={images.chatSendIcon}
+            resizeMode={'cover'}
+          />
         </View>
-      </View>
+      </Send>
     );
   }
 
+  uploadFile = file => {
+    this.props.visitorSDK
+      .sendFile(
+        {
+          file: {
+            uri: file.uri,
+            type: file.type,
+            name: file.fileName
+          }
+        }
+      )
+      .then(r => console.log(r))
+      .catch(r => console.log(r));
+  };
 
+  renderCustomActions = props => {
+    const options = {
+      [strings('SupportChat.takePhoto')]: props => {
+        ImagePicker.launchCamera(options, response => {
+          if (response === undefined || response.uri === undefined) return;
+          this.uploadFile(response);
+        });
+      },
+      [strings('SupportChat.selectPhoto')]: props => {
+        ImagePicker.launchImageLibrary(options, response => {
+          if (response === undefined || response.uri === undefined) return;
+          this.uploadFile(response);
+        });
+      },
+      [strings('SupportChat.cancel')]: () => {}
+    };
+    return <GiftedActions icon={props => <View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><RTLImage
+      style={{
+        backgroundColor: 'transparent',
+        width: 20,
+        height: 20,
+      }}
+      source={images.cameraIcon}
+      resizeMode={'contain'}
+      /></View>} {...props} options={options} />;
+  };
 
-
-    // <View style={{marginRight: 10, marginBottom: 5}}>
-    //     <Image source={require('../../assets/send.png')} resizeMode={'center'}/>
-    // </View>
-
-
-
-
-
-
-
-
-
+  
 
   render() {
-
-    // // no device ID retrieved, loading...
-    // if (!this.state.device_id) {
-    //   return (
-    //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //       <Circle
-    //         color={'#20C74B'}
-    //         indeterminate
-    //         borderWidth={2}
-    //         size={40}
-    //       />
-    //     </View>
-    //   )
-    // }
-
-    const { currentUser } = firebase.auth();
-
-    if (!currentUser.uid) {
-      return null;
-    }
-
-    return (
-      <View
+      return (
+        <View
         style={{ flex: 1, backgroundColor: '#FAFCFD'}}
       >
         <Header title={strings('SupportChat.header')} />
-        <GiftedChat
-          messages={this.props.messages}
-          onSend={messages => this.props.onSendSupportMessage(messages)}
-          user={{ _id: currentUser.uid }}
-          renderBubble={this.renderBubble}
-          renderDay={this.renderDay}
-          renderFooter={() => (<View style={{height:8}} />)}
-          renderComposer={this.renderComposer}
-          renderSend={() => null}
-          renderAvatar={null}
-          renderInputToolbar={this.renderInputToolbar}
-          textInputProps={{
-            lineHeight: 22,
-            fontSize: 14,
-            fontFamily: FONT_MEDIUM(),
-            textAlign: I18nManager.isRTL ? 'right' : 'left'
-          }}
-          bottomOffset={-12}
-          autoFocus
-          dateFormat={'ll'}
-          placeholder={strings('SupportChat.inputPlaceholder')}
-        />
-        <LoadingOverlay isVisible={this.props.send_loading} />
-      </View>
-    );
-  }
+          <GiftedChat
+            renderBubble={this.renderBubble}
+            renderDay={this.renderDay}
+            autoFocus
+            dateFormat={'ll'}
+            bottomOffset={-12}
+            placeholder={strings('SupportChat.inputPlaceholder')}
 
+            messages={this.props.messages}
+            onSend={this.handleSend}
+            onInputTextChanged={this.handleInputTextChange}
+            user={this.getVisitor()}
+            isAnimated
+            
+            renderSend={this.renderSend}
+            renderCustomView={this.renderCustomView}
+            renderActions={this.renderCustomActions}
+            renderFooter={() => (<View style={{height:8}} />)}
+            {...this.props}
+          />
+        </View>
+      );
+  }
 }
 
+Chat.propTypes = {
+};
 
+const styles = StyleSheet.create({
+  hide: {
+    width: 0,
+    height: 0,
+    position: 'absolute'
+  },
+  container: {
+    width,
+    height: Platform.OS === 'ios' ? height : height - height / 25,
+    position: 'absolute',
+    flexDirection: 'column',
+    backgroundColor: '#fff'
+  },
+  navigation: {
+    flex: 1
+  },
+  systemMessage: {
+    backgroundColor: '#fff',
+    alignSelf: 'center'
+  },
+  footerContainer: {
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10
+  },
+  footerText: {
+    fontSize: 14,
+    color: '#aaa'
+  },
+  status: {
+    textAlign: 'center',
+    fontSize: totalSize(2.1),
+    fontWeight: '500',
+    color: '#444',
+    padding: 5
+  }
+});
 
-
-const mapStateToProps = ({ SupportChat, CurrentSeller }) => {
-
-  const seller = CurrentSeller;
-  const { messages, send_loading } = SupportChat;
-
+const mapStateToProps = ({ SupportChat: { support_messages_for_group: messages, send_loading, users } }, props) => {
   return {
-    seller,
-    messages,
-    send_loading
+    messages: messages[props.group],
+    send_loading,
+    users
   };
 };
 
-export default connect(mapStateToProps, {
-  onSendSupportMessage,
-  onSendSupportImage,
-  listenSupportMessages,
-  endListeningSupportMessages,
-  setChatSeen
-})(SupportChat);
+export default connect(mapStateToProps, {})(Chat);
