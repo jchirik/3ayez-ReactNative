@@ -296,7 +296,11 @@
   },
   "SupportChat": {
     "header": "الدعم بالدردشة",
-    "inputPlaceholder": "إرسل رسالة ..."
+    "inputPlaceholder": "إرسل رسالة ...",
+    "takePhoto": "التقط صورة",
+    "selectPhoto": "اختار صورة من المعرض",
+    "cancel": "الغاء",
+    "chatEnded": "انتهت المحادثة"
   },
   "CustomerFeedback": {
     "orderArrived": "طلبك قد وصل !",
