@@ -38,6 +38,7 @@ import {
 
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 
 
@@ -114,7 +115,9 @@ class CreditCardManager extends Component {
         <BlockButton
           style={{ margin: 20 }}
           text={strings('CreditCard.addCard')}
-          onPress={() => Actions.creditCardCreate()}
+          onPress={() => {
+              navigateTo(sceneKeys.creditCardCreate);
+          }}
         />
 
         <BottomChoiceSelection

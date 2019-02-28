@@ -32,6 +32,7 @@ import {
   Header,
   AyezText
 } from '../../_common';
+import { sceneKeys, navigateTo } from '../../../router';
 
 
 class OrderHistory extends Component {
@@ -55,7 +56,7 @@ class OrderHistory extends Component {
 
 
   onSelectOrder(order) {
-    Actions.orderTracker({ order_id: order.id });
+      navigateTo(orderTracker, { order_id: order.id });
   }
 
 

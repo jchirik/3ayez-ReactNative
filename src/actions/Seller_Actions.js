@@ -12,6 +12,7 @@ import {
   SELLER_FEATURED_FETCH_END,
   SELLER_CATEGORIES_FETCH_END
 } from './types';
+import {sceneKeys, navigateTo} from '../router';
 //
 // const fetchRecents = (seller_id, page, dispatch) => {
 // //   const { currentUser } = firebase.auth();
@@ -125,7 +126,7 @@ export const selectSeller = (seller) => {
   return (dispatch) => {
     dispatch({ type: SELLER_SELECT, payload: { seller } });
     dispatch({ type: BASKET_INIT, payload: { seller_id: seller.id } });
-    Actions.storePage(); // navigate to store page
+    navigateTo(sceneKeys.storePage); // navigate to store page
     fetchStoreData(seller.id, dispatch) /* fetch featured & categories */
 
     // AFTER getting featured, get the data to fill each

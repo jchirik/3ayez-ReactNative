@@ -26,6 +26,7 @@ import {
  } from '../_common';
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 class StoreAisle extends Component {
   state = {};
@@ -52,7 +53,7 @@ class StoreAisle extends Component {
 
   didSelectSubcategory(subcategory, columnIndex) {
     this.props.selectSubcategory(subcategory, columnIndex);
-    Actions.storeShelf({
+    navigateTo(sceneKeys.storeShelf, {
       title: subcategory.name,
       parent_title: translate(this.props.category.name),
       items: subcategory.items,
@@ -181,7 +182,7 @@ class StoreAisle extends Component {
     }
   }
   storeSearch() {
-    Actions.storeSearch();
+    navigateTo(sceneKeys.storeSearch);
   }
   renderSubcategoryItems(categoryData) {
     return (
@@ -224,9 +225,9 @@ class StoreAisle extends Component {
     return (
       <TouchableOpacity
         style={styles.basketButton}
-        onPress={() =>
-          Actions.checkoutFlow({ bluredViewRef: this.state.bluredViewRef })
-        }
+        onPress={() => {
+          navigateTo(sceneKeys.checkoutFlow, { bluredViewRef: this.state.bluredViewRef })
+        }}
       >
         <Image
           source={images.basket2Icon}

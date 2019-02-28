@@ -15,7 +15,8 @@ import {
   addSupportUser
 } from '../../../actions';
 
-import images from '../../../theme/images';
+import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 const SUPPORT_CHAT_GENERAL_GROUP = 0
 const SUPPORT_CHAT_NOT_ACCEPTED_GROUP = 1
@@ -184,7 +185,7 @@ class Support extends Component {
         style={styles.tileStyle}
         onPress={() => {
           if (this.visitorSDK.length > SUPPORT_CHAT_GENERAL_GROUP) {
-            Actions.supportChat({
+            navigateTo(sceneKeys.supportChat, {
               visitorSDK: this.visitorSDK[SUPPORT_CHAT_GENERAL_GROUP],
               group: SUPPORT_CHAT_GENERAL_GROUP
             });
@@ -276,7 +277,7 @@ class Support extends Component {
           padding: 10,
           alignItems: 'center'
         }}
-        onPress={() => Actions.settings()}
+        onPress={() => navigateTo(sceneKeys.settings)}
       >
         <RTLImage
           source={images.supportSilhouetteIcon}
@@ -307,7 +308,7 @@ class Support extends Component {
         onPress={() => {
           let group = index + 1;
           if (this.visitorSDK.length > group) {
-            Actions.supportChat({ visitorSDK: this.visitorSDK[group], group });
+            navigateTo(sceneKeys.supportChat, { visitorSDK: this.visitorSDK[group], group });
           }
         }}
       >

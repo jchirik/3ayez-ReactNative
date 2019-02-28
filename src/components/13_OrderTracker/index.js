@@ -50,6 +50,7 @@ import {
 import { StatusLog } from './StatusLog'
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 class OrderTracker extends Component {
 
@@ -101,7 +102,7 @@ class OrderTracker extends Component {
   // fires way too late after
   onBackPress() {
     console.log('OrderTracker exiting')
-    Actions.pop(); // Android back press
+    navigateBack(); // Android back press
 
     this.props.endListeningToOrder();
     timer.clearTimeout(this);
@@ -132,7 +133,9 @@ class OrderTracker extends Component {
     if (driver_id && (status >= 100)) {
       return (
         <BlockButton
-          onPress={() => Actions.driverTracker({ driver_id })}
+          onPress={() => { 
+            navigateTo(sceneKeys.driverTracker, { driver_id })
+          }}
           text={strings('OrderTracker.trackDelivery')}
           style={{
             marginTop: 14,
@@ -194,7 +197,9 @@ class OrderTracker extends Component {
             rightButton={{
               text: strings('Receipt.summary'),
               image_source: images.orderSummaryIcon,
-              onPress: () => Actions.orderSummary()
+              onPress: () => {
+                navigateTo(sceneKeys.orderSummary)
+              }
             }}
             />
           <ScrollView style={{ flex: 1 }}>
@@ -211,7 +216,9 @@ class OrderTracker extends Component {
             {this.renderTimer()}
             <StatusLog status_log={status_log} seller={seller} />
             <BlockButton
-              onPress={() => Actions.orderProblem()}
+              onPress={() => { 
+                navigateTo(sceneKeys.orderProblem)
+              }}
               text={strings('OrderTracker.problem')}
               color={'black'}
               style={{

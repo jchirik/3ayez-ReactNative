@@ -33,6 +33,7 @@ import {
 } from '../../../i18n.js';
 
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 // add language select + very short tutorial
 
@@ -68,7 +69,7 @@ class LanguageSelect extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
   onAndroidBackPress = () => {
-    if (Actions.currentScene === 'languageSelect') {
+    if (Actions.currentScene === sceneKeys.languageSelect) {
       console.log('back disabled')
       return true;
     }
@@ -129,7 +130,9 @@ class LanguageSelect extends Component {
             marginLeft: 18,
             marginRight: 18
           }}
-          onPress={() => Actions.tutorialSwipe()}
+          onPress={() => { 
+            navigateTo(sceneKeys.tutorialSwipe)
+          }}
           />
         <BlockUnderButton
           text={switchText}

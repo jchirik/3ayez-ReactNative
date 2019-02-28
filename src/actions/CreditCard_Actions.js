@@ -17,6 +17,7 @@ import {
   CREDITCARD_CREATE_FAIL,
   CREDITCARD_CREATE_RESET
 } from './types';
+import { navigateBack } from '../router';
 
 
 export const deleteCreditCard = (card_id) => {
@@ -80,7 +81,7 @@ export const createStripeCard = (card_data) => {
             payload: { payment_method: card }
           });
           dispatch({ type: CREDITCARD_CREATE_SUCCESS });
-          Actions.pop();
+          navigateBack()
         } else {
           dispatch({ type: CREDITCARD_CREATE_FAIL, payload: { error: 'Invalid from server' } });
           console.log('credit card error');

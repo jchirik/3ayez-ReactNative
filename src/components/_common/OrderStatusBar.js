@@ -19,6 +19,7 @@ import images from '../../theme/images'
 
 import { AyezText, RTLImage } from '../_common';
 import { strings, translate } from '../../i18n.js';
+import { sceneKeys, navigateTo } from '../../router';
 
 
 class OrderStatusBar extends PureComponent {
@@ -35,10 +36,14 @@ class OrderStatusBar extends PureComponent {
     if (orders.length > 0) {
       // track your current order
 
-      let onPress = () => Actions.orderTracker({ order_id: orders[0].id });
+      let onPress = () => {
+        navigateTo(sceneKeys.orderTracker, { order_id: orders[0].id })
+      }
       let text = strings('OrderStatusBar.trackOrder');
       if (orders.length > 1) {
-        onPress = () => Actions.orderHistory();
+        onPress = () => { 
+          navigateTo(sceneKeys.orderHistory);
+        }
         text = strings('OrderStatusBar.multipleOrders');
       }
 

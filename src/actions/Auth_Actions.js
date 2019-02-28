@@ -25,6 +25,7 @@ import {
   GUEST_LOGIN_SUCCESS,
   GUEST_LOGIN_FAIL
 } from './types';
+import {sceneKeys, navigateTo, navigateBackTo} from '../router';
 
 export const authPhoneSet = (phone) => {
   return { type: AUTH_PHONE_SET, payload: { phone } };
@@ -70,7 +71,7 @@ export const authPhoneLogin = (phone, call_code) => {
     firebase.auth().signInWithPhoneNumber(formatted_phone)
     .then(confirmation_function => {
       dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
-      Actions.verifyCode();
+      navigateTo(sceneKeys.verifyCode)
 
       try {
         AppEventsLogger.logEvent('ACCOUNT_REGISTERED');
@@ -145,10 +146,10 @@ export const addressCreateProceedCheck = () => {
       });
       console.log('addressCreateProceedCheck addresses', addresses)
       if (addresses.length > 0) {
-        Actions.popTo('homepage');
+        navigateBackTo(sceneKeys.homepage);
       } else {
         console.log('GOING TO ADDRESS CREATE')
-        Actions.addressCreate();
+        navigateTo(sceneKeys.addressCreate)
       }
       dispatch({ type: VERIFICATION_SUCCESS });
     }).catch((error) => {

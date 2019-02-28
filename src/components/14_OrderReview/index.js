@@ -59,6 +59,7 @@ due to missing items or changes quantities */
   import SubstitutionPage from './02_SubstitutionPage';
   import QuantityChangePage from './03_QuantityChangePage';
   import ReviewSummary from './04_ReviewSummary';
+import { sceneKeys, navigateBack } from '../../router';
 
   class OrderReview extends Component {
 
@@ -76,7 +77,7 @@ due to missing items or changes quantities */
     // fires way too late after
     onPop() {
       console.log('OrderTracker exiting')
-      Actions.pop(); // Android back press
+      navigateBack(); // Android back press
 
       timer.clearTimeout(this);
     }
@@ -118,7 +119,7 @@ due to missing items or changes quantities */
     }
 
     onAndroidBackPress = () => {
-      if (Actions.currentScene === 'orderReview') {
+      if (Actions.currentScene === sceneKeys.orderReview) {
         this.onBack();
         console.log('back disabled')
         return true;

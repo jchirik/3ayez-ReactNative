@@ -37,6 +37,7 @@ import images from '../../theme/images'
 
 
 import { SearchHeader } from './_components/SearchHeader';
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 class StoreSearch extends Component {
 
@@ -72,7 +73,7 @@ class StoreSearch extends Component {
   }
 
   onAndroidBackPress = () => {
-    Actions.pop(); // Android back press
+    navigateBack() // Android back press
     return true;
   };
 
@@ -92,7 +93,9 @@ class StoreSearch extends Component {
     let cellColor = 'black';
 
     if (item.type === 'ITEM') {
-      onCellPress = () => Actions.itemPage({ item });
+      onCellPress = () => {
+        navigateTo(sceneKeys.itemPage, { item });
+      }
       cellText = translate(item);
     } else if (item.type === 'SUBCATEGORY') {
       onCellPress = () => {
@@ -103,7 +106,7 @@ class StoreSearch extends Component {
     } else if (item.type === 'CATEGORY') {
       onCellPress = () => {
         this.props.onSelectCategory(this.props.seller.id, item);
-        Actions.storeAisle();
+        navigateTo(sceneKeys.storeAisle);
       };
       cellText = translate(item.name);
       cellColor = '#0094ff';

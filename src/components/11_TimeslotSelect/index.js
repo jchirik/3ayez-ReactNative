@@ -31,6 +31,7 @@ import {
   formatTimestamp,
   formatCurrency
 } from '../../i18n.js';
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 
 
@@ -58,7 +59,7 @@ class TimeslotSelect extends Component {
 
   setTimeslot(timeslot) {
     this.props.setTimeslot(timeslot);
-    Actions.checkout();
+    navigateTo(sceneKeys.checkout);
   }
 
   renderSectionHeader({ section }) {
@@ -128,7 +129,7 @@ class TimeslotSelect extends Component {
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
           title={strings('TimeslotSelect.header')}
-          onBackButtonPress={() => Actions.pop()}
+          onBackButtonPress={() => navigateBack()}
           blackStyle
         />
         <SectionList

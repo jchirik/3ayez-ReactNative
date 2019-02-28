@@ -36,6 +36,7 @@ import {
 } from '../../i18n.js';
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 class Homepage extends Component {
 
@@ -67,11 +68,11 @@ class Homepage extends Component {
     // otherwise, open address selection
 
     if (this.props.review_order && !prevProps.review_order) {
-      Actions.orderReview({ order: this.props.review_order });
+      navigateTo(sceneKeys.orderReview, { order: this.props.review_order });
     }
 
     if (this.props.feedback_order && !prevProps.feedback_order) {
-      Actions.customerFeedback({ order: this.props.feedback_order });
+      navigateTo(sceneKeys.customerFeedback, { order: this.props.feedback_order });
     }
   }
 

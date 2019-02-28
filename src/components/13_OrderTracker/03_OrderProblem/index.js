@@ -38,6 +38,7 @@ import {
   AyezText,
   BottomChoiceSelection
 } from '../../_common';
+import { sceneKeys, navigateTo } from '../../../router';
 
 class OrderProblem extends Component {
 
@@ -56,7 +57,9 @@ class OrderProblem extends Component {
         <Header title={strings('OrderProblem.header')} blackStyle />
 
         <BlockButton
-          onPress={() => Actions.supportChat()}
+          onPress={() => {
+            navigateTo(sceneKeys.supportChat)
+          }}
           text={strings('OrderProblem.contactSupport')}
           style={{
             marginTop: 20,
