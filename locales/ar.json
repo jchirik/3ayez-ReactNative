@@ -157,7 +157,7 @@
   "WorkingBasket": {
     "couponDiscount": "تخفيض: {{amount}}",
     "addCoupon": "+ إضافة كوبون",
-    "clearOrder": "سلة فارغة",
+    "clearOrder": "افرغ السلة",
     "nothingInBasket": "لا شئ داخل السلة!",
     "emptyCartTitle": "عربة التسوق فارغة",
     "emptyCartSubtitle": "أجعل عربة التسوق سعيدة وأضف المنتجات إليها",
