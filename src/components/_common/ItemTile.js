@@ -12,7 +12,7 @@ import images from '../../theme/images'
 
 const Image_HEIGHT_RATIO = '48%';
 const TEXT_HEIGHT_RATIO = '37%';
-const BUTTON_HEIGHT_RATIO = '15%';
+const BUTTON_HEIGHT_RATIO = '10%';
 
 const PRICE_HEIGHT_RATIO = '30%';
 const NAME_HEIGHT_RATIO = '50%';
