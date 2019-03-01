@@ -68,6 +68,8 @@ target 'ayezcustomer' do
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
 
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
 end
 
 # all below required for RN Maps

@@ -14,6 +14,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -42,6 +43,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [RNSplashScreen show];
   return YES;
 }
 

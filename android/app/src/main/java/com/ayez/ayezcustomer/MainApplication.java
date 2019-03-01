@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.imagepicker.ImagePickerPackage;
@@ -71,6 +72,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new SplashScreenReactPackage(),
         new FBSDKPackage(mCallbackManager),
         new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
         new ImagePickerPackage(),
