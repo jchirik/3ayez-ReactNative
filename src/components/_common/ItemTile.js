@@ -96,6 +96,7 @@ class ItemTile extends PureComponent {
             minimumFontScale={0.5}
             numberOfLines={1}
             style={styles.mainPrice}
+            allowFontScaling={false}
           >
             {mainPriceText + ' '}
           </AyezText>
@@ -106,18 +107,19 @@ class ItemTile extends PureComponent {
               minimumFontScale={0.5}
               numberOfLines={1}
               style={styles.previousPrice}
+              allowFontScaling={false}
             >
               {previousPriceText}
             </AyezText>
           )}
         </View>
         <View style={styles.titleTextContianer}>
-          <AyezText extralight numberOfLines={2} style={styles.titleText}>
+          <AyezText extralight numberOfLines={2} style={styles.titleText} allowFontScaling={false}>
             {translate(item)}
           </AyezText>
         </View>
 
-        <AyezText regular style={styles.unitText}>{item.incr + item.unit}</AyezText>
+        <AyezText regular style={styles.unitText} allowFontScaling={false}>{item.incr + item.unit}</AyezText>
       </View>
     );
   }
@@ -215,6 +217,7 @@ const styles = {
     height: '20%'
   },
   textContainer: {
+    height: '100%',
     width: '100%',
     flexWrap: 'nowrap',
     height: TEXT_HEIGHT_RATIO

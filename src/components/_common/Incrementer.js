@@ -43,6 +43,7 @@ export default class Incrementer extends PureComponent {
           numberOfLines={1}
           minimumFontScale={0.5}
           style={styles.incrementText}
+          allowFontScaling={false}
         >
           {quantityText}
         </AyezText>
