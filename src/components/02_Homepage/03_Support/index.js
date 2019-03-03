@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-
 import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import firebase from 'react-native-firebase';
 import { init } from '@livechat/livechat-visitor-sdk';
-
 import { RTLImage, AyezText } from '../../_common';
-
 import { strings, translate } from '../../../i18n.js';
 import {
   loadSupportManual,
   addSupportMessage,
   addSupportUser
 } from '../../../actions';
-
-import images from '../../../theme/images'
+import images from '../../../theme/images';
 import { sceneKeys, navigateTo } from '../../../router';
+import { toast } from '../../../Helpers';
 
-const SUPPORT_CHAT_GENERAL_GROUP = 0
-const SUPPORT_CHAT_NOT_ACCEPTED_GROUP = 1
-const SUPPORT_CHAT_NOT_DELIVERED_GROUP = 2
+const SUPPORT_CHAT_GENERAL_GROUP = 0;
+const SUPPORT_CHAT_NOT_ACCEPTED_GROUP = 1;
+const SUPPORT_CHAT_NOT_DELIVERED_GROUP = 2;
 const GET_LIVE_CHAT_CUSTOMER_INFO = 'getLiveChatCustomerInfo';
 const NEW_MESSAGE_EVENT = 'new_message';
 const NEW_FILE_EVENT = 'new_file';
@@ -54,6 +51,12 @@ class Support extends Component {
   constructor(props) {
     super(props);
     this.visitorSDK = [];
+  }
+
+  static notifyForNewMessage() {
+    if (Actions.currentScene != sceneKeys.supportChat) {
+      toast(strings('Support.newMessageNotification'))
+    }
   }
 
   static retrieveComponentProps = property => {
@@ -90,13 +93,14 @@ class Support extends Component {
     currentVisitorSDK.setVisitorData({
       ...customer,
       customProperties: {
-        customerId: customer.id,
+        customerId: customer.id
       }
     });
   };
 
   listenForNewMessagesFor = (sdk, group) => {
     sdk.on(NEW_MESSAGE_EVENT, message => {
+      Support.notifyForNewMessage()
       this.props.addSupportMessage({
         group: group,
         message: {
@@ -111,6 +115,7 @@ class Support extends Component {
 
   listenForNewFilesFor = (sdk, group) => {
     sdk.on(NEW_FILE_EVENT, file => {
+      Support.notifyForNewMessage()
       this.props.addSupportMessage({
         group: group,
         message: {
@@ -151,6 +156,7 @@ class Support extends Component {
 
   listenForChatEndedFor = (sdk, group) => {
     sdk.on(CHAT_ENDED_EVENT, () => {
+      Support.notifyForNewMessage()
       this.props.addSupportMessage({
         group,
         message: {
@@ -308,7 +314,10 @@ class Support extends Component {
         onPress={() => {
           let group = index + 1;
           if (this.visitorSDK.length > group) {
-            navigateTo(sceneKeys.supportChat, { visitorSDK: this.visitorSDK[group], group });
+            navigateTo(sceneKeys.supportChat, {
+              visitorSDK: this.visitorSDK[group],
+              group
+            });
           }
         }}
       >
