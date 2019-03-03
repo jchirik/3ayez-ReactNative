@@ -49,6 +49,7 @@ import {
 
 
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -182,7 +183,9 @@ renderNoAddress() {
         text={strings('Common.OK')}
         color={'#0094ff'}
         style={{ width: 200 }}
-        onPress={() => Actions.addressCreate()}
+        onPress={() => {
+          navigateTo(sceneKeys.addressCreate)
+        }}
         />
     </View>
   );

@@ -50,6 +50,7 @@ import {
   PARALLAX_HEADER_HEIGHT,
   TAB_BAR_HEIGHT
 } from './CollapsibleHeaderScrollView';
+import { sceneKeys, navigateTo } from '../../router';
 const STICKY_HEADER_HEIGHT = 68 + STATUS_BAR_HEIGHT; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 
@@ -74,7 +75,7 @@ class StorePage extends Component {
     //listens to hardwareBackPress
     BackHandler.addEventListener('hardwareBackPress', () => {
       try {
-        Actions.pop();
+        navigateBack()
         return true;
       } catch (err) {
         console.debug("Can't pop. Exiting the app...");
@@ -183,9 +184,9 @@ class StorePage extends Component {
     return (
       <TouchableOpacity
         style={styles.basketIconStyle}
-        onPress={() =>
-          Actions.checkoutFlow({ bluredViewRef: this.state.bluredViewRef })
-        }
+        onPress={() => {
+          navigateTo(sceneKeys.checkoutFlow, { bluredViewRef: this.state.bluredViewRef })
+        }}
       >
         <Image
           source={images.basket2Icon}

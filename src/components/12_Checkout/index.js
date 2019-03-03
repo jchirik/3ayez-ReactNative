@@ -56,6 +56,7 @@ import {
 
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 const window = Dimensions.get('window');
 
@@ -126,7 +127,7 @@ class Checkout extends Component {
   onCreditCardToggle() {
     // if no credit cards exist, bring directly to credit card creator
     if (this.props.credit_cards.length === 0) {
-      Actions.creditCardCreate();
+      navigateTo(sceneKeys.creditCardCreate)
     } else {
       this.setState({ isCardSelectionVisible: true });
     }
@@ -329,7 +330,7 @@ class Checkout extends Component {
 
 
   editCheckoutNotes(){
-    Actions.additionalNotes({
+    navigateTo(sceneKeys.additionalNotes, {
       initText: this.props.notes,
       title: strings('Checkout.additionalNotesHeader'),
       onSubmit: (text) => this.props.setOrderNotes(text)

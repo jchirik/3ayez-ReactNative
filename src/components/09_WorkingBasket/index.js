@@ -39,6 +39,7 @@ import images from '../../theme/images'
 import colors from '../../theme/colors';
 import { DestinationItem } from './_components/DestinationItem';
 import styles from './styles';
+import { sceneKeys, navigateBackTo } from '../../router';
 
 class WorkingBasket extends Component {
   constructor(props) {
@@ -56,7 +57,11 @@ class WorkingBasket extends Component {
     if (coupon) {
       return (
         <TouchableOpacity
-          onPress={() => Actions.couponModal()}
+          onPress={() => { 
+            if(sceneKeys.couponModal != Actions.currentScene) {
+              Actions.couponModal()
+            }
+          }}
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -82,7 +87,11 @@ class WorkingBasket extends Component {
 
     return (
       <TouchableOpacity
-        onPress={() => Actions.couponModal()}
+        onPress={() => {
+          if(sceneKeys.couponModal != Actions.currentScene) {
+            Actions.couponModal()
+          }
+        }}
         style={{
           position: 'absolute',
           top: 34,
@@ -222,9 +231,13 @@ class WorkingBasket extends Component {
     } else {
       if (seller.type === 'HYPER') {
         // continue onwards
-        Actions.timeslotSelect();
+        if(sceneKeys.timeslotSelect != Actions.currentScene) {
+          Actions.timeslotSelect();
+        }
       } else {
-        Actions.yallaTimeSelect();
+        if(sceneKeys.yallaTimeSelect != Actions.currentScene) {
+          Actions.yallaTimeSelect();
+        }
       }
     }
   }
@@ -266,8 +279,10 @@ class WorkingBasket extends Component {
           <BlockButton
             color={'#0094ff'}
             onPress={() => {
-              this.props.onCompleteAuth(() => Actions.popTo('workingBasket'))
-              Actions.auth();
+              if(sceneKeys.auth != Actions.currentScene) {
+                this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.workingBasket))
+                Actions.auth();
+              }
             }}
             text={strings('WorkingBasket.loginToContinue')}
           />

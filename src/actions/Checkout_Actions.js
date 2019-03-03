@@ -23,6 +23,7 @@ import {
 
   CHECKOUT_RESET
 } from './types';
+import {sceneKeys, navigateTo} from '../router';
 
 export const submitOrder = (order_t, items_array, total) => {
   const {
@@ -77,9 +78,9 @@ export const submitOrder = (order_t, items_array, total) => {
         dispatch({ type: ORDER_SUBMIT_SUCCESS });
         dispatch({ type: BASKET_ITEMS_CLEAR, payload: { seller_id: seller.id } });
         dispatch({ type: COUPON_CODE_RESET });
-        Actions.popTo('homepage');
+        navigateBackTo(sceneKeys.homepage);
         setTimeout(() => {
-          Actions.orderTracker({ order_id }); // you might have to refresh
+          navigateTo(sceneKeys.orderTracker, { order_id }); // you might have to refresh
         }, 1500);
 
         try {

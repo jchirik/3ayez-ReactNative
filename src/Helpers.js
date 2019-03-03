@@ -5,9 +5,20 @@ import {
   AsyncStorage
 } from 'react-native';
 import Moment from 'moment-timezone';
-import { Actions } from 'react-native-router-flux';
 import store from './reducers';
 import { strings } from './i18n';
+import Toast from 'react-native-root-toast';
+import colors from './theme/colors';
+
+export const toast = str => {
+  Toast.show(str, {
+    shadow: true,
+    animation: true,
+    hideOnPress: true,
+    backgroundColor: colors.white,
+    textColor: colors.black
+  });
+}
 
 
 export const getScreenDimensions = () => Dimensions.get('window');

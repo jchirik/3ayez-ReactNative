@@ -38,6 +38,7 @@ import {
 
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 class AddressManager extends Component {
 
@@ -103,7 +104,9 @@ class AddressManager extends Component {
         <BlockButton
           style={{ margin: 20 }}
           text={strings('AddressSelection.addNewAddress')}
-          onPress={() => Actions.addressCreate()}
+          onPress={() => {
+            navigateTo(sceneKeys.addressCreate)
+          }}
         />
         <BottomChoiceSelection
           isVisible={this.state.addressToDelete}

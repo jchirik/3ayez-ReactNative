@@ -31,6 +31,7 @@ import {
 
 
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 // when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
@@ -221,8 +222,8 @@ class AddressSelection extends Component {
             padding: 10,
            }}
            onPress={() => {
-             this.onClose();
-             Actions.addressManager();
+              this.onClose();
+              navigateTo(sceneKeys.addressManager);
            }}
            >
             <AyezText medium style={{
@@ -237,7 +238,7 @@ class AddressSelection extends Component {
           <BlockButton
             onPress={() => {
               this.onClose()
-              Actions.addressCreate()
+              navigateTo(sceneKeys.addressCreate)
             }}
             text={strings('AddressSelection.addNewAddress')}
             color={'#3B7A60'}

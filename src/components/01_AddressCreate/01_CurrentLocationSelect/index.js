@@ -33,6 +33,7 @@ import {
 } from '../../../i18n.js';
 
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 
 
@@ -70,7 +71,7 @@ class CurrentLocationSelect extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
   onAndroidBackPress = () => {
-    if (Actions.currentScene === 'currentLocationSelect') {
+    if (Actions.currentScene === sceneKeys.currentLocationSelect) {
       console.log('back disabled')
       return true;
     }
@@ -83,7 +84,7 @@ class CurrentLocationSelect extends Component {
   componentDidUpdate(prevProps) {
     // this listener is STILL RUNNING IN FUTURE COMPONENTS
     if (this.props.location && !prevProps.location) {
-      Actions.refineLocation();
+      navigateTo(sceneKeys.refineLocation)
     }
   }
 
@@ -109,7 +110,7 @@ class CurrentLocationSelect extends Component {
               marginBottom: 38
             }}
             onPress={() => {
-              Actions.addressSearch();
+              navigateTo(sceneKeys.addressSearch);
             }}
             />
         </View>
@@ -133,7 +134,7 @@ class CurrentLocationSelect extends Component {
         <BlockUnderButton
           text={strings('AddressCreate.denyCL')}
           onPress={() => {
-            Actions.addressSearch();
+            navigateTo(sceneKeys.addressSearch);
           }}
         />
       </View>

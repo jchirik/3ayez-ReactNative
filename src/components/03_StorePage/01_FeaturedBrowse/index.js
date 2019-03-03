@@ -35,6 +35,7 @@ import {
 
 import styles from '../styles';
 import colors from '../../../theme/colors';
+import { sceneKeys, navigateTo } from '../../../router';
 
 class FeaturedBrowse extends Component {
 
@@ -61,7 +62,7 @@ class FeaturedBrowse extends Component {
   }
 
   goToShelf(row) {
-    Actions.storeShelf({
+    navigateTo(sceneKeys.storeShelf, {
       title: row.name,
       parent_title: strings('StoreHome.featured'),
       items: row.items,

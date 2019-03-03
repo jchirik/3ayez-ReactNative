@@ -8,6 +8,7 @@ import images from '../../theme/images'
 
 
 import { AyezText } from '.';
+import {sceneKeys, navigateTo} from '../../router';
 
 const window = Dimensions.get('window');
 
@@ -22,7 +23,7 @@ class BasketBlockButton extends PureComponent {
 
   onPress() {
     // faster performance this way
-    Actions.checkoutFlow({ bluredViewRef: this.props.bluredViewRef });
+    navigateTo(sceneKeys.checkoutFlow, { bluredViewRef: this.props.bluredViewRef });
   }
 
   render() {
