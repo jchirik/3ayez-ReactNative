@@ -7,9 +7,10 @@ import {
 } from '../../Helpers.js';
 
 import images from '../../theme/images'
+import { navigateBack } from '../../router/index.js';
 
 const CloseButton = ({
-  onPress = Actions.pop,
+  onPress = navigateBack,
   fixed = true,
   style
 }) => {

@@ -30,6 +30,7 @@ import {
   strings,
   translate
 } from '../../../i18n.js';
+import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
 
 // { text: 'Credit Cards', action: null, icon: '' },
 
@@ -54,8 +55,8 @@ class SettingsMenu extends Component {
   logoutUser() { this.props.logoutUser(); }
 
   loginUser() {
-    this.props.onCompleteAuth(() => Actions.popTo('homepage'))
-    Actions.auth();
+    this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.homepage))
+    navigateTo(sceneKeys.auth)
   }
 
   renderHeader() {
@@ -150,9 +151,15 @@ class SettingsMenu extends Component {
   render() {
 
     const accountSection = {title: strings('Settings.myAccount'), data: [
-      { text: strings('Settings.addressBook'), action: () => Actions.addressManager(), icon: '' },
-      { text: strings('Settings.creditCards'), action: () => Actions.creditCardManager(), icon: '' },
-      { text: strings('Settings.previousOrders'), action: () => Actions.orderHistory(), icon: '' },
+      { text: strings('Settings.addressBook'), action: () => { 
+          navigateTo(sceneKeys.addressManager)
+      }, icon: '' },
+      { text: strings('Settings.creditCards'), action: () => { 
+          navigateTo(sceneKeys.creditCardManager)
+      }, icon: '' },
+      { text: strings('Settings.previousOrders'), action: () => { 
+          navigateTo(sceneKeys.orderHistory)
+      }, icon: '' },
       { text: strings('Common.logout'), action: this.openLogoutConfirm.bind(this), icon: ''}
     ]};
 

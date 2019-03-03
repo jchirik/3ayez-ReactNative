@@ -9,6 +9,7 @@ import { AyezText, ItemIncrementer, PlaceholderFastImage } from '.';
 import { Draggable } from './DragComponent';
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 const Image_HEIGHT_RATIO = '48%';
 const TEXT_HEIGHT_RATIO = '37%';
@@ -147,7 +148,9 @@ class ItemTile extends PureComponent {
 
     const mainComponent = (
       <TouchableOpacity
-        onPress={() => Actions.itemPage({ item: this.props.item })}
+        onPress={() => {
+          navigateTo(sceneKeys.itemPage, { item: this.props.item })
+        }}
         style={{ alignSelf: 'stretch' }}
         activeOpacity={disabled ? 1 : 0.7}
         disabled={disabled}

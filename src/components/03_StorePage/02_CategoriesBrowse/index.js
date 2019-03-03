@@ -44,6 +44,7 @@ import {
 
 import styles from '../styles';
 import colors from '../../../theme/colors';
+import { sceneKeys, navigateTo } from '../../../router';
 
 const CATEGORY_COL_NUM = 2;
 const CATEGORY_SCROLL_EVENT_THROTTLE = 16;
@@ -57,7 +58,7 @@ class CategoriesBrowse extends Component {
 
     onSelectCategory(category) {
       this.props.onSelectCategory(this.props.seller_id, category);
-      Actions.storeAisle();
+      navigateTo(sceneKeys.storeAisle);
     }
 
 

@@ -31,6 +31,7 @@ import {
   strings,
   translate
 } from '../../i18n.js';
+import { sceneKeys, navigateTo } from '../../router';
 
 // a big comoonent
 class SupportDetail extends Component {
@@ -58,7 +59,9 @@ class SupportDetail extends Component {
             textAlign: 'left'
           }}>{translate(description)}</AyezText>
           <BlockButton
-            onPress={() => Actions.supportChat()}
+            onPress={() => {
+                navigateTo(sceneKeys.supportChat)
+            }}
             text={strings('OrderProblem.contactSupport')}
             style={{
               marginTop: 20,

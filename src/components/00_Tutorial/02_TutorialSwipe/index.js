@@ -45,6 +45,7 @@ import {
 const NUM_PAGES = 3;
 
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 const window = Dimensions.get('window');
 
@@ -164,7 +165,7 @@ class TutorialSwipe extends Component {
           }}
           onPress={() => {
             // proceed to address create after auth
-            Actions.auth();
+            navigateTo(sceneKeys.auth);
           }}
         />
 

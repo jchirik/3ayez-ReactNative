@@ -27,6 +27,7 @@ import {
   strings,
   translate
 } from '../../i18n.js';
+import { sceneKeys, navigateTo } from '../../router';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 // when isvisible set to true,  set the modal's visiblity, then initiate upward animation over the scene,
@@ -194,8 +195,8 @@ class CreditCardSelection extends Component {
 
           <BlockButton
             onPress={() => {
-              this.onClose()
-              Actions.creditCardCreate()
+                this.onClose()
+                navigateTo(sceneKeys.creditCardCreate)
             }}
             text={strings('CreditCardSelection.addNewCard')}
             color={'#3B7A60'}

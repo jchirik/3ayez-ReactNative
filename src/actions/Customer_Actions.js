@@ -3,6 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'react-native-firebase';
 import { setPushToken } from './PushToken_Helpers';
 import store from '../reducers';
+import { sceneKeys, navigateTo } from '../router';
 
 import {
   CUSTOMER_DATA_SET,
@@ -98,7 +99,7 @@ export const listenCustomerAuthStatus = () => {
         console.log('onAuthStateChanged logged out');
         dispatch({ type: CUSTOMER_DATA_RESET });
         dispatch({ type: ONGOING_ORDERS_RESET });
-        Actions.tutorial();
+        navigateTo(sceneKeys.tutorial);
       }
       prevUser = user;
     });

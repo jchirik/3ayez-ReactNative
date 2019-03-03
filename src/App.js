@@ -5,6 +5,7 @@ import store, { persistor } from './reducers';
 import Router from './Router';
 import { PersistGate } from 'redux-persist/integration/react'
 
+
 import {
   View,
   Text,

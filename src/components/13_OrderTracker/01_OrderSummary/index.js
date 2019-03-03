@@ -37,6 +37,7 @@ import {
 } from '../../_common';
 
 import { SummarySection } from './SummarySection';
+import { sceneKeys, navigateTo } from '../../../router';
 
 
 class OrderSummary extends Component {
@@ -206,7 +207,9 @@ class OrderSummary extends Component {
           { this.renderSummary() }
 
           <BlockButton
-            onPress={() => Actions.orderProblem()}
+            onPress={() => { 
+              navigateTo(sceneKeys.orderProblem)
+            }}
             text={strings('OrderTracker.problem')}
             color={'black'}
             style={{

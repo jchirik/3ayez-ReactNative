@@ -30,6 +30,7 @@ import {
   translate
 } from '../../../i18n.js';
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 
 class RefineLocation extends Component {
@@ -143,7 +144,9 @@ class RefineLocation extends Component {
               marginRight: 18,
               alignSelf: 'stretch'
             }}
-            onPress={() => Actions.addressDetails()}
+            onPress={() => {
+              navigateTo(sceneKeys.addressDetails)
+            }}
             />
         </View>
       </View>

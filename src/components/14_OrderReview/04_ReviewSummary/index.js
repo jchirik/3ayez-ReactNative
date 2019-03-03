@@ -37,6 +37,7 @@ import {
 
 
 import images from '../../../theme/images'
+import { sceneKeys, navigateTo } from '../../../router';
 
 class ReviewSummary extends Component {
 
@@ -106,7 +107,9 @@ class ReviewSummary extends Component {
         rightButton={{
           text: strings('Support.header').toUpperCase(),
           image_source: images.supportIcon,
-          onPress: () => Actions.supportChat()
+          onPress: () => {
+            navigateTo(sceneKeys.supportChat)
+          }
         }}
         />
 

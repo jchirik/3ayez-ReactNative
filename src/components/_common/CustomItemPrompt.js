@@ -15,6 +15,7 @@ import {
 
 
 import images from '../../theme/images'
+import {sceneKeys, navigateTo} from '../../router';
 
 const CustomItemPrompt = () => {
   return (
@@ -28,7 +29,9 @@ const CustomItemPrompt = () => {
       paddingHorizontal: 10,
       paddingVertical: 8
     }}
-    onPress={() => Actions.customProduct()}
+    onPress={() => {
+      navigateTo(sceneKeys.customProduct)
+    }}
     >
       <Image
         style={{

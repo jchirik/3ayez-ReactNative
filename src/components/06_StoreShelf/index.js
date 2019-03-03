@@ -25,6 +25,7 @@ import {
 import { DragContainer } from '../_common/DragComponent';
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 class StoreShelf extends Component {
   constructor(props) {
@@ -85,7 +86,7 @@ class StoreShelf extends Component {
           </AyezText>
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => Actions.pop()}
+            onPress={() => navigateBack()}
             style={{ flexDirection: 'row' }}
           >
             <AyezText regular size={13}>{strings('StoreShelf.backTo')}</AyezText>
@@ -100,7 +101,7 @@ class StoreShelf extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          Actions.storeSearch();
+          navigateTo(sceneKeys.storeSearch);
         }}
       >
         <Image

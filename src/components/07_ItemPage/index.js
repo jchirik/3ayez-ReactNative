@@ -37,6 +37,7 @@ import { addToBasket, saveItemSpecialRequests } from '../../actions';
 import { strings, translate } from '../../i18n.js';
 import { Actions } from 'react-native-router-flux';
 import images from '../../theme/images';
+import { sceneKeys, navigateTo } from '../../router';
 
 const SHOW_DELAY_DELIVERY_MODAL_QUANTITY = 6;
 const PRODUCE_CATEGORY = 'produce';
@@ -73,7 +74,7 @@ class ItemPage extends Component {
     this.props.saveItemSpecialRequests(item.upc, seller.id, {
       ripeness, requires_call, instructions
     });
-    Actions.pop();
+    navigateBack();
   }
 
   componentWillUnmount() {
@@ -134,7 +135,9 @@ class ItemPage extends Component {
       <View style={styles.container}>
         <ScrollView style={{ flex: 1, paddingTop: 48, marginLeft: 24, marginRight: 24 }}>
             <TouchableOpacity
-              onPress={() => Actions.itemImageView({ imageUrl: image_url })}
+              onPress={() => {
+                navigateTo(sceneKeys.itemImageView, { imageUrl: image_url })
+              }}
               style={{ alignSelf: 'center' }}
             >
               <Image
@@ -165,11 +168,13 @@ class ItemPage extends Component {
 
           <Row
             style={{ paddingLeft: 0, paddingRight: 0 }}
-            onPress={() => Actions.additionalNotes({
-              title: strings('ItemView.additionalInstructionsHeader'),
-              initText: this.state.instructions,
-              onSubmit: (text) => this.setState({ instructions: text })
-            })}
+            onPress={() => {
+                navigateTo(sceneKeys.additionalNotes, {
+                title: strings('ItemView.additionalInstructionsHeader'),
+                initText: this.state.instructions,
+                onSubmit: (text) => this.setState({ instructions: text })
+                })
+            }}
             title={strings('ItemView.additionalInstructionsField')}>
             {this.state.instructions ? (
               <AyezText regular style={{

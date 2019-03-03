@@ -11,6 +11,7 @@ import {
   ADDRESS_SELECT_SUCCESS,
   ADDRESS_SELECT_ERROR
 } from './types';
+import {sceneKeys, navigateBackTo} from '../router';
 
 
 
@@ -45,7 +46,7 @@ export const createNewAddress = (address) => {
     batch.commit().then(() => {
       console.log('createNewAddress success');
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
-      Actions.popTo('homepage');
+      navigateBackTo(sceneKeys.homepage);
     }).catch(() => {
       dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })

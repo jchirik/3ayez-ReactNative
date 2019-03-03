@@ -11,6 +11,7 @@ import {
   FEEDBACK_SUBMIT_SUCCESS,
   FEEDBACK_SUBMIT_ERROR
 } from './types';
+import { navigateBack } from '../router';
 
 
 export const setStoreRating = (store_rating) => {
@@ -42,7 +43,7 @@ export const submitCustomerFeedback = (order_id, customer_feedback) => {
     firebase.firestore().collection('orders').doc(order_id).update({ customer_feedback })
     .then(() => {
       dispatch({ type: FEEDBACK_SUBMIT_SUCCESS });
-      Actions.pop();
+      navigateBack()
     }).catch((error) => {
       console.log(error)
       dispatch({ type: FEEDBACK_SUBMIT_ERROR, payload: { error } });

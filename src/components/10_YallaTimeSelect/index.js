@@ -36,6 +36,7 @@ import {
 
 
 import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 class YallaTimeSelect extends Component {
 
@@ -54,7 +55,7 @@ class YallaTimeSelect extends Component {
       type: 'INSTANT',
       delivery_fee: seller.delivery_fee
     });
-    Actions.checkout();
+    navigateTo(sceneKeys.checkout);
   }
 
   //
@@ -138,7 +139,9 @@ class YallaTimeSelect extends Component {
             justifyContent: 'center',
             alignItems: 'center'
           }}
-          onPress={() => Actions.timeslotSelect()}
+          onPress={() => {
+            navigateTo(sceneKeys.timeslotSelect)
+          }}
         >
           <AyezText regular style={{
           }}>{strings('TimeslotSelect.selectLaterTime')}</AyezText>

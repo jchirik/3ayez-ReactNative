@@ -130,7 +130,8 @@
     "contact3ayez": "CONTACT 3AYEZ",
     "chatWithUs": "Chat with us",
     "start": "START",
-    "settings": "SETTINGS"
+    "settings": "SETTINGS",
+    "newMessageNotification": "You have new message in the support chat"
   },
   "StoreHome": {
     "featured": "Featured",
@@ -300,7 +301,9 @@
     "takePhoto": "Take photo",
     "selectPhoto": "Select photo from gallery",
     "cancel": "Cancel",
-    "chatEnded": "Chat is ended"
+    "chatEnded": "Chat is ended",
+    "uploadingYourFile": "Uploading your file",
+    "closeChat": "End"
   },
   "CustomerFeedback": {
     "orderArrived": "Your order has arrived!",

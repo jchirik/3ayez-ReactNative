@@ -36,6 +36,7 @@ import {
   translate,
   formatCurrency
 } from '../../i18n.js';
+import { navigateBack } from '../../router';
 
 class CouponModal extends Component {
 
@@ -104,7 +105,7 @@ class CouponModal extends Component {
           />
         <SubtleButton
           text={strings('Common.close')}
-          onPress={()=> Actions.pop()}
+          onPress={()=> navigateBack()}
         />
       </View>
     )
@@ -188,7 +189,7 @@ class CouponModal extends Component {
         <BlockButton
           text={strings('Common.OK')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
-          onPress={()=> Actions.pop()}
+          onPress={()=> navigateBack()}
           />
         <SubtleButton
           text={strings('CouponModal.removeCoupon')}
@@ -219,7 +220,7 @@ class CouponModal extends Component {
         alignItems: 'center'
       }}>
         <TouchableOpacity
-          onPress={() => Actions.pop()}
+          onPress={() => navigateBack()}
           style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
           />
         { couponComponent }

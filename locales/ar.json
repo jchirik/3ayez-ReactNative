@@ -130,7 +130,8 @@
     "contact3ayez": "أتصل بعايز",
     "chatWithUs": "تحدث معنا",
     "start": "أبدأ",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "newMessageNotification": "لديك رسالة جديدة من الدعم"
   },
   "StoreHome": {
     "featured": "عروض",
@@ -300,7 +301,9 @@
     "takePhoto": "التقط صورة",
     "selectPhoto": "اختار صورة من المعرض",
     "cancel": "الغاء",
-    "chatEnded": "انتهت المحادثة"
+    "chatEnded": "انتهت المحادثة",
+    "uploadingYourFile": "يتم رفع الملف",
+    "closeChat": "انهاء"
   },
   "CustomerFeedback": {
     "orderArrived": "طلبك قد وصل !",

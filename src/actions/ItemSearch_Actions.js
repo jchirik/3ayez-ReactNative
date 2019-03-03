@@ -31,6 +31,7 @@ import {
   SEARCH_SUBCATEGORY_DATA_BEGIN,
   SEARCH_SUBCATEGORY_DATA_END
 } from './types';
+import {sceneKeys, navigateTo} from '../router';
 
 
 const algoliaClient = algoliasearch('BN0VV4WPRI', 'a85a04afca53d5baf47c659ce03d897f');
@@ -73,12 +74,12 @@ export const onSelectSearchSubcategory = (seller_id, subcategory) => {
       // console.log(`${page} of ${res.nbPages}`);
       const itemResults = cleanAlgoliaItems(res.hits)
       console.log('itemResults', itemResults)
-        Actions.storeShelf({
-          title: subcategory.name,
-          parent_title: strings('Common.search'),
-          items: itemResults,
-          jumpIndex: 0
-        });
+      navigateTo(sceneKeys.storeShelf, {
+        title: subcategory.name,
+        parent_title: strings('Common.search'),
+        items: itemResults,
+        jumpIndex: 0
+      });
       dispatch({ type: SEARCH_SUBCATEGORY_DATA_END });
     }).catch((error) => {
       dispatch({ type: SEARCH_SUBCATEGORY_DATA_END });

@@ -7,10 +7,11 @@ import {
 } from '../../Helpers.js';
 import { RTLImage } from './RTLImage';
 import images from '../../theme/images'
+import { navigateBack } from '../../router/index.js';
 
 const BackButton = ({
   color = AYEZ_GREEN,
-  onPress = Actions.pop,
+  onPress = navigateBack,
   fixed = false,
   style
 }) => {

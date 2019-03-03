@@ -5,6 +5,7 @@ import { AyezText } from '.'
 import { Actions } from 'react-native-router-flux';
 import colors from '../../theme/colors';
 import images from '../../theme/images'
+import { sceneKeys } from '../../router';
 
 class SearchBarButton extends React.Component {
   render() {
@@ -24,7 +25,7 @@ class SearchBarButton extends React.Component {
       <TouchableOpacity
         style={[styles.searchBar, { width }, style]}
         onPress={() => {
-          Actions.storeSearch();
+          navigateTo(sceneKeys.storeSearch);
         }}
       >
           <Image

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import {
-  AYEZ_GREEN,
+  AYEZ_GREEN, toast,
 } from '../../Helpers.js';
 
 import {
@@ -128,7 +128,12 @@ class Chat extends React.Component {
     );
   }
 
+  static notifyForUploadingFile() {
+    toast(strings('SupportChat.uploadingYourFile'))
+  }
+
   uploadFile = file => {
+    Chat.notifyForUploadingFile()
     this.props.visitorSDK
       .sendFile(
         {
@@ -177,7 +182,8 @@ class Chat extends React.Component {
         <View
         style={{ flex: 1, backgroundColor: '#FAFCFD'}}
       >
-        <Header title={strings('SupportChat.header')} />
+        <Header title={strings('SupportChat.header')} rightButton={{onPress: () => (this.props.visitorSDK.closeChat()), 
+          text: strings('SupportChat.closeChat') }} />
           <GiftedChat
             renderBubble={this.renderBubble}
             renderDay={this.renderDay}

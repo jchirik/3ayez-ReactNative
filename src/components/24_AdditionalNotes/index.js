@@ -41,7 +41,7 @@ class AdditionalNotes extends Component {
 
   onSubmitPress() {
     this.props.onSubmit(this.state.text);
-    Actions.pop();
+    navigateBack();
   }
 
   render() {
