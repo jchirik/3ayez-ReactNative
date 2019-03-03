@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import SplashScreen from 'react-native-splash-screen'
 
 import {
   View,
@@ -27,7 +28,8 @@ import {
 import {
   AYEZ_GREEN,
   AYEZ_BACKGROUND_COLOR,
-  isIPhoneX
+  isIPhoneX,
+  SPLASH_SCREEN_TIME_OUT
 } from '../../Helpers.js';
 
 import {
@@ -43,6 +45,7 @@ class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isSplashShown: true,
       index: 0,
       current_key: 'first',
       routes: [
@@ -58,6 +61,9 @@ class Homepage extends Component {
     console.log('Homepage mounted')
     console.log('FBSDK', FBSDK)
     console.log('AppEventsLogger', FBSDK.AppEventsLogger)
+
+    let that = this;
+    setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
   }
 
   componentDidUpdate(prevProps) {
@@ -77,6 +83,10 @@ class Homepage extends Component {
   }
 
   render() {
+
+    if(!this.state.isSplashShown) {
+      SplashScreen.hide();
+    }
 
     if (this.props.is_loading || !this.props.locale) {
       return (
