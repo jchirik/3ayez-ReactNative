@@ -302,7 +302,8 @@
     "selectPhoto": "Select photo from gallery",
     "cancel": "Cancel",
     "chatEnded": "Chat is ended",
-    "uploadingYourFile": "Uploading your file"
+    "uploadingYourFile": "Uploading your file",
+    "closeChat": "End"
   },
   "CustomerFeedback": {
     "orderArrived": "Your order has arrived!",

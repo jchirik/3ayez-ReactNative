@@ -302,7 +302,8 @@
     "selectPhoto": "اختار صورة من المعرض",
     "cancel": "الغاء",
     "chatEnded": "انتهت المحادثة",
-    "uploadingYourFile": "يتم رفع الملف"
+    "uploadingYourFile": "يتم رفع الملف",
+    "closeChat": "انهاء"
   },
   "CustomerFeedback": {
     "orderArrived": "طلبك قد وصل !",

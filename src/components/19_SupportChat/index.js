@@ -182,7 +182,8 @@ class Chat extends React.Component {
         <View
         style={{ flex: 1, backgroundColor: '#FAFCFD'}}
       >
-        <Header title={strings('SupportChat.header')} />
+        <Header title={strings('SupportChat.header')} rightButton={{onPress: () => (this.props.visitorSDK.closeChat()), 
+          text: strings('SupportChat.closeChat') }} />
           <GiftedChat
             renderBubble={this.renderBubble}
             renderDay={this.renderDay}
