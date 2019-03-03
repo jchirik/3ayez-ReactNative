@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import codePush from "react-native-code-push";
-import store from './reducers';
+import store, { persistor } from './reducers';
 import Router from './Router';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import {
   View,
@@ -100,7 +101,9 @@ class App extends Component {
 
     return (
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <Router />
+        </PersistGate>
       </Provider>
     );
   }
