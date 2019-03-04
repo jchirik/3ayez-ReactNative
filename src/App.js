@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import codePush from "react-native-code-push";
 import store, { persistor } from './reducers';
-import Router from './Router';
+import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react'
 
 
