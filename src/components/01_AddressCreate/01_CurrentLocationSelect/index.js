@@ -167,23 +167,20 @@ class CurrentLocationSelect extends Component {
 
         { this.renderLocationPermissionButtons() }
 
-        { this.props.addresses.length ? (<BackButton fixed />) : null }
+        <BackButton fixed />
       </View>
     );
   }
 }
 
-const mapStateToProps = ({ AddressCreate, CurrentLocation, Addresses }) => {
+const mapStateToProps = ({ AddressCreate, CurrentLocation }) => {
   const { location } = AddressCreate;
   const { is_loading, error } = CurrentLocation;
 
-  const { addresses } = Addresses;
   return {
     location,
     is_loading,
-    error,
-
-    addresses
+    error
   };
 };
 
