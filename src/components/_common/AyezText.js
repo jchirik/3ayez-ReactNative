@@ -60,6 +60,7 @@ class AyezText extends Component {
 
     return (
       <Text
+        allowFontScaling={false}
         {...this.props}
         style={{
           color,
