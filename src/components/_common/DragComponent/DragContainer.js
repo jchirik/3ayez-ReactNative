@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { addToBasket } from '../../../actions';
 
 import PropTypes from 'prop-types';
+import { hasValue } from '../../../Helpers';
 
 const allOrientations = [
   'portrait',
@@ -144,11 +145,14 @@ class DragContainer extends React.Component {
         toValue: { x: dx, y: dy + 500 },
         duration: 300
       }).start(() => {
-        this.props.addToBasket(
-          this.state.draggingComponent.data,
-          this.props.seller.id
-        );
-        this._endDragging(true);
+        const dragComponent = this.state.draggingComponent
+        if(dragComponent) {
+          this.props.addToBasket(
+            dragComponent.data,
+            this.props.seller.id
+          );
+        }
+        this._endDragging(hasValue(dragComponent));
       });
     }
   }
