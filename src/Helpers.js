@@ -10,6 +10,11 @@ import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
+export const hasValue = val => {
+  if(val) return true;
+  return false;
+}
+
 export const toast = str => {
   Toast.show(str, {
     shadow: true,
