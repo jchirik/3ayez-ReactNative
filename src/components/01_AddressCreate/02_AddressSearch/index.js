@@ -54,8 +54,7 @@ class AddressSearch extends Component {
             flexDirection: 'row',
             borderColor: '#EAEAEA',
             borderBottomWidth: 1,
-            alignItems: 'center',
-            height: 60
+            alignItems: 'center'
           }}
           onPress={this.setAddressLocation.bind(this, item)}
         >
