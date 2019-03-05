@@ -48,6 +48,7 @@ export const authGuestLogin = () => {
     .then(() => {
       console.log('authGuestLogin successful')
       dispatch({ type: GUEST_LOGIN_SUCCESS });
+      navigateTo(sceneKeys.addressCreate)
       try {
         AppEventsLogger.logEvent('GUEST_REGISTERED');
       } catch (e) {
@@ -149,7 +150,6 @@ export const addressCreateProceedCheck = () => {
         navigateBackTo(sceneKeys.homepage);
       } else {
         console.log('GOING TO ADDRESS CREATE')
-        navigateTo(sceneKeys.addressCreate)
       }
       dispatch({ type: VERIFICATION_SUCCESS });
     }).catch((error) => {
