@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = ({ SupportChat: { support_messages_for_group: messages, send_loading, users } }, props) => {
   return {
-    messages: messages[props.group],
+    messages: messages,
     send_loading,
     users
   };

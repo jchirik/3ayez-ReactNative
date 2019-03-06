@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, FlatList, TouchableOpacity, Image, AppState } from 'react-native';
 import firebase from 'react-native-firebase';
 import { init } from '@livechat/livechat-visitor-sdk';
 import { RTLImage, AyezText } from '../../_common';
@@ -16,8 +16,6 @@ import { sceneKeys, navigateTo } from '../../../router';
 import { toast } from '../../../Helpers';
 
 const SUPPORT_CHAT_GENERAL_GROUP = 0;
-const SUPPORT_CHAT_NOT_ACCEPTED_GROUP = 1;
-const SUPPORT_CHAT_NOT_DELIVERED_GROUP = 2;
 const GET_LIVE_CHAT_CUSTOMER_INFO = 'getLiveChatCustomerInfo';
 const NEW_MESSAGE_EVENT = 'new_message';
 const NEW_FILE_EVENT = 'new_file';
@@ -77,16 +75,16 @@ class Support extends Component {
     });
   };
 
-  setUpVisitorSDKWithGroup = (customer, license, group) => {
+  setUpVisitorSDKWithGroup = (customer, license) => {
     let currentVisitorSDK = init({
       license: license,
-      group: group
+      group: 0
     });
 
-    this.visitorSDK.push(currentVisitorSDK);
-    this.listenForNewMessagesFor(currentVisitorSDK, group);
-    this.listenForNewFilesFor(currentVisitorSDK, group);
-    this.listenForChatEndedFor(currentVisitorSDK, group);
+    this.visitorSDK = currentVisitorSDK;
+    this.listenForNewMessagesFor(currentVisitorSDK);
+    this.listenForNewFilesFor(currentVisitorSDK);
+    this.listenForChatEndedFor(currentVisitorSDK);
     this.listenForNewAgentFor(currentVisitorSDK);
     this.listenForNewVisitorFor(currentVisitorSDK);
 
@@ -101,14 +99,12 @@ class Support extends Component {
   listenForNewMessagesFor = (sdk, group) => {
     sdk.on(NEW_MESSAGE_EVENT, message => {
       Support.notifyForNewMessage()
+
       this.props.addSupportMessage({
-        group: group,
-        message: {
           [GIFTED_CHAT_MODEL.text]: message.text,
-          [GIFTED_CHAT_MODEL.id]: message.id,
+          [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),
           [GIFTED_CHAT_MODEL.at]: message.timestamp,
           [GIFTED_CHAT_MODEL.user]: this.props.users[message.authorId]
-        }
       });
     });
   };
@@ -117,13 +113,10 @@ class Support extends Component {
     sdk.on(NEW_FILE_EVENT, file => {
       Support.notifyForNewMessage()
       this.props.addSupportMessage({
-        group: group,
-        message: {
-          [GIFTED_CHAT_MODEL.id]: file.id,
+          [GIFTED_CHAT_MODEL.id]: file.id + String(Math.random()),
           [GIFTED_CHAT_MODEL.at]: file.timestamp,
           [GIFTED_CHAT_MODEL.user]: this.props.users[file.authorId],
           [GIFTED_CHAT_MODEL.image]: file.url
-        }
       });
     });
   };
@@ -136,9 +129,6 @@ class Support extends Component {
 
   listenForNewVisitorFor = sdk => {
     sdk.on(VISITOR_DATA_EVENT, visitor => {
-      console.log('listenForNewVisitorFor = sdk => {');
-      console.log(VISITOR_TYPE);
-      console.log(visitor);
       this.addSupportUserWithType(visitor, VISITOR_TYPE);
     });
   };
@@ -158,13 +148,10 @@ class Support extends Component {
     sdk.on(CHAT_ENDED_EVENT, () => {
       Support.notifyForNewMessage()
       this.props.addSupportMessage({
-        group,
-        message: {
           [GIFTED_CHAT_MODEL.text]: strings('SupportChat.chatEnded'),
           [GIFTED_CHAT_MODEL.id]: String(Math.random()),
           [GIFTED_CHAT_MODEL.at]: Date.now(),
           [GIFTED_CHAT_MODEL.system]: true
-        }
       });
     });
   };
@@ -180,9 +167,7 @@ class Support extends Component {
       phone: this.props.customer ? this.props.customer.phone : ''
     });
 
-    for (i = 0; i < 3; ++i) {
-      this.setUpVisitorSDKWithGroup(customerInfo, license, i);
-    }
+    this.setUpVisitorSDKWithGroup(customerInfo, license);
   }
 
   renderChatTile() {
@@ -190,10 +175,9 @@ class Support extends Component {
       <TouchableOpacity
         style={styles.tileStyle}
         onPress={() => {
-          if (this.visitorSDK.length > SUPPORT_CHAT_GENERAL_GROUP) {
+          if (this.visitorSDK) {
             navigateTo(sceneKeys.supportChat, {
-              visitorSDK: this.visitorSDK[SUPPORT_CHAT_GENERAL_GROUP],
-              group: SUPPORT_CHAT_GENERAL_GROUP
+              visitorSDK: this.visitorSDK
             });
           }
         }}
@@ -368,8 +352,6 @@ class Support extends Component {
         </AyezText>
 
         <FlatList
-          data={this.props.manual}
-          renderItem={this.renderItem.bind(this)}
           style={{ flex: 1 }}
           removeClippedSubviews
           ListHeaderComponent={this.renderChatTile()}

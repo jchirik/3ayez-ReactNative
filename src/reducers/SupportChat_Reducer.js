@@ -11,7 +11,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  support_messages_for_group: [[], [], []],
+  support_messages_for_group: [],
   users: { system: {
     name: 'system',
     _id: 'system'
@@ -42,15 +42,14 @@ export default (state = INITIAL_STATE, action) => {
     case MESSAGE_SEND_SUCCESS:
       return { ...state, send_loading: false };
     case ADD_GENERAL_SUPPORT_MESSAGE:
-      let {group, message} = p
-      var support_messages_for_group = state.support_messages_for_group
-      support_messages_for_group[group] = [message].concat(support_messages_for_group[group])
+      let { support_messages_for_group } = state
+      support_messages_for_group = [p].concat(support_messages_for_group)
       return { ...state, support_messages_for_group }
     case ADD_SUPPORT_USER:
       users = state.users
-      users[p._id] = p
-      console.log('case ADD_SUPPORT_USER:')
-      console.log(users)
+      Object.keys(users).forEach(currentUser => {
+      })
+      users[p._id] = p   
       return { ...state, users }
     default:
       return state;
