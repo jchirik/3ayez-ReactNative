@@ -303,7 +303,8 @@
     "cancel": "الغاء",
     "chatEnded": "انتهت المحادثة",
     "uploadingYourFile": "يتم رفع الملف",
-    "closeChat": "انهاء"
+    "closeChat": "انهاء",
+    "agentIsTyping": "العميل يكتب الآن"
   },
   "CustomerFeedback": {
     "orderArrived": "طلبك قد وصل !",

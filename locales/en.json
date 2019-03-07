@@ -303,7 +303,8 @@
     "cancel": "Cancel",
     "chatEnded": "Chat is ended",
     "uploadingYourFile": "Uploading your file",
-    "closeChat": "End"
+    "closeChat": "End",
+    "agentIsTyping": "Agent is typing..."
   },
   "CustomerFeedback": {
     "orderArrived": "Your order has arrived!",

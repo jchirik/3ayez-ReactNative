@@ -13,7 +13,7 @@ import {
 } from '../../../actions';
 import images from '../../../theme/images';
 import { sceneKeys, navigateTo } from '../../../router';
-import { toast } from '../../../Helpers';
+import { toast, GIFTED_CHAT_MODEL, isIOS } from '../../../Helpers';
 
 const SUPPORT_CHAT_GENERAL_GROUP = 0;
 const GET_LIVE_CHAT_CUSTOMER_INFO = 'getLiveChatCustomerInfo';
@@ -26,17 +26,6 @@ const AGENT_TYPE = 'agent';
 const VISITOR_TYPE = 'visitor';
 const LIVE_CHAT_REMOTE_CONFIG_LICENSE = 'live_chat_license';
 const BACKGROUND_APP_STATE = 'background';
-const GIFTED_CHAT_MODEL = {
-  id: '_id',
-  text: 'text',
-  at: 'createdAt',
-  user: 'user',
-  image: 'image',
-  avatar: 'avatar',
-  name: 'name',
-  system: 'system',
-  type: 'type'
-};
 
 const getLiveChatCustomerInfo = firebase
   .functions()
@@ -163,10 +152,12 @@ class Support extends Component {
   };
 
   handleAppClosing = nextState => {
-    if(nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
+    if(isIOS() && nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
+      console.log('hello')
       this.state.visitorSDK.closeChat();
     }
   }
+
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppClosing);

@@ -15,9 +15,9 @@ import {
 } from 'react-native';
 
 import {
-  AYEZ_GREEN, toast, isIPhoneX,
+  AYEZ_GREEN, toast, isIPhoneX, GIFTED_CHAT_MODEL
 } from '../../Helpers.js';
-import { onSendSupportImage } from '../../actions'
+import { addSupportMessage } from '../../actions'
 
 import {
   strings,
@@ -26,6 +26,7 @@ import {
 } from '../../i18n.js';
 
 const VISITOR_TYPE = 'visitor';
+const TYPING_INDICATOR_EVENT = 'typing_indicator';
 
 
 import images from '../../theme/images'
@@ -44,10 +45,31 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     
-  
+    this.state = {
+      typingText: null
+    }
     this.handleInputTextChange = this.handleInputTextChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
   }
+
+  componentDidMount() {
+    console.log('componentDidMount')
+    console.log(this.props.visitorSDK)
+    console.log(this.listenForTypingIndicator)
+    this.listenForTypingIndicator(this.props.visitorSDK);
+  }
+
+  listenForTypingIndicator = sdk => {
+    console.log('listenForTypingIndicator')
+    console.log(sdk)
+
+    sdk.on(TYPING_INDICATOR_EVENT, typingData => {
+      console.log(typingData)
+      this.setState({
+        typingText: typingData.isTyping ? strings('SupportChat.agentIsTyping') : null,
+      }) 
+    })
+  };
 
   getVisitor = () => {
     const visitorId = Object.keys(this.props.users).find(
@@ -164,6 +186,43 @@ class Chat extends React.Component {
       /></View>} {...props} options={options} />;
   };
 
+  onSendSupportImage = () => {
+      // 1. select image
+      const options = {
+        title: 'Select image to send',
+        quality: 0.3,
+        maxWidth: 1500,
+        maxHeight: 1500,
+        storageOptions: {
+          skipBackup: true,
+          path: 'images'
+        }
+      };
+
+      ImagePicker.showImagePicker(options, response => {
+        console.log('Response = ', response);
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+          return;
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+          return;
+        } else if (response.uri) {
+          console.log('got image', response);
+          this.uploadFile(response)
+        }
+      })
+
+  }
+
+  listenForTypingIndicator = sdk => {
+    sdk.on(TYPING_INDICATOR_EVENT, typingData => {
+      this.setState({
+        typingText: typingData.isTyping ? strings('SupportChat.agentIsTyping') : null,
+      }) 
+    })
+  };
+
   renderComposer = props => {
 
     // if (props.text.trim().length > 0) {
@@ -184,7 +243,7 @@ class Chat extends React.Component {
       }}>
 
         <TouchableOpacity
-          onPress={() => this.props.onSendSupportImage()}
+          onPress={this.onSendSupportImage}
         >
           <RTLImage
             style={{
@@ -228,7 +287,19 @@ class Chat extends React.Component {
     );
   }
 
-  
+  renderFooter = props => {
+    console.log('renderFooter')
+    if (this.state.typingText) {
+      return (
+        <View style={styles.footerContainer}>
+          <Text style={styles.footerText}>
+            {this.state.typingText}
+          </Text>
+        </View>
+      );
+    }
+    return <View style={{height:8}} />;
+  }
 
   render() {
       return (
@@ -243,8 +314,6 @@ class Chat extends React.Component {
             autoFocus
             dateFormat={'ll'}
             placeholder={strings('SupportChat.inputPlaceholder')}
-            renderFooter={() => (<View style={{height:8}} />)}
-
             messages={this.props.messages}
             onSend={this.handleSend}
             onInputTextChanged={this.handleInputTextChange}
@@ -262,7 +331,7 @@ class Chat extends React.Component {
             autoFocus
             
             renderComposer={this.renderComposer}
-            renderFooter={() => (<View style={{height:8}} />)}
+            renderFooter={this.renderFooter}
             renderSend={ () => {} }
             {...this.props}
           />
@@ -321,4 +390,4 @@ const mapStateToProps = ({ SupportChat: { support_messages_for_group: messages, 
   };
 };
 
-export default connect(mapStateToProps, { onSendSupportImage })(Chat);
+export default connect(mapStateToProps, { })(Chat);
