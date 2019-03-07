@@ -304,7 +304,9 @@
     "chatEnded": "انتهت المحادثة",
     "uploadingYourFile": "يتم رفع الملف",
     "closeChat": "انهاء",
-    "agentIsTyping": "العميل يكتب الآن"
+    "agentIsTyping": "العميل يكتب الآن",
+    "defaultGreetingMessage": "مرحبا بك فى الدعم الفنى",
+    "pleaseWaitForAgent": "برجاء الانتظار بضع ثوانى ريثما يقوم احد ممثلينا بالرد عليك"
   },
   "CustomerFeedback": {
     "orderArrived": "طلبك قد وصل !",

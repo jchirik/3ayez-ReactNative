@@ -2,7 +2,14 @@ import React from 'react';
 import ImagePicker from 'react-native-image-picker';
 
 import { connect } from 'react-redux';
-import { GiftedChat, Bubble, Day, Send, Actions as GiftedActions, Composer } from 'react-native-gifted-chat'
+import {
+  GiftedChat,
+  Bubble,
+  Day,
+  Send,
+  Actions as GiftedActions,
+  Composer
+} from 'react-native-gifted-chat';
 
 import {
   View,
@@ -15,27 +22,22 @@ import {
 } from 'react-native';
 
 import {
-  AYEZ_GREEN, toast, isIPhoneX, GIFTED_CHAT_MODEL
+  AYEZ_GREEN,
+  toast,
+  isIPhoneX,
+  GIFTED_CHAT_MODEL
 } from '../../Helpers.js';
-import { addSupportMessage } from '../../actions'
+import { addSupportMessage } from '../../actions';
 
-import {
-  strings,
-  FONT_REGULAR,
-  FONT_MEDIUM
-} from '../../i18n.js';
+import { strings, FONT_REGULAR, FONT_MEDIUM } from '../../i18n.js';
 
 const VISITOR_TYPE = 'visitor';
 const TYPING_INDICATOR_EVENT = 'typing_indicator';
 
+import images from '../../theme/images';
 
-import images from '../../theme/images'
-
-import {
-  Header,
-  RTLImage
-} from '../_common';
-
+import { Header, RTLImage } from '../_common';
+import { navigateBack } from '../../router/index.js';
 
 const { height, width } = Dimensions.get('window');
 const totalSize = num =>
@@ -44,31 +46,27 @@ const totalSize = num =>
 class Chat extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       typingText: null
-    }
+    };
     this.handleInputTextChange = this.handleInputTextChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
-    console.log(this.props.visitorSDK)
-    console.log(this.listenForTypingIndicator)
     this.listenForTypingIndicator(this.props.visitorSDK);
   }
 
   listenForTypingIndicator = sdk => {
-    console.log('listenForTypingIndicator')
-    console.log(sdk)
-
     sdk.on(TYPING_INDICATOR_EVENT, typingData => {
-      console.log(typingData)
+      console.log(typingData);
       this.setState({
-        typingText: typingData.isTyping ? strings('SupportChat.agentIsTyping') : null,
-      }) 
-    })
+        typingText: typingData.isTyping
+          ? strings('SupportChat.agentIsTyping')
+          : null
+      });
+    });
   };
 
   getVisitor = () => {
@@ -117,8 +115,8 @@ class Chat extends React.Component {
           }
         }}
       />
-    )
-  }
+    );
+  };
 
   renderDay = props => {
     return (
@@ -127,7 +125,7 @@ class Chat extends React.Component {
         textStyle={{
           color: AYEZ_GREEN,
           fontFamily: FONT_MEDIUM(),
-          fontSize: 12,
+          fontSize: 12
         }}
         wrapperStyle={{
           borderWidth: 2,
@@ -136,25 +134,23 @@ class Chat extends React.Component {
           padding: 5
         }}
       />
-    )
-  }
+    );
+  };
 
   static notifyForUploadingFile() {
-    toast(strings('SupportChat.uploadingYourFile'))
+    toast(strings('SupportChat.uploadingYourFile'));
   }
 
   uploadFile = file => {
-    Chat.notifyForUploadingFile()
+    Chat.notifyForUploadingFile();
     this.props.visitorSDK
-      .sendFile(
-        {
-          file: {
-            uri: file.uri,
-            type: file.type,
-            name: file.fileName
-          }
+      .sendFile({
+        file: {
+          uri: file.uri,
+          type: file.type,
+          name: file.fileName
         }
-      )
+      })
       .then(r => console.log(r))
       .catch(r => console.log(r));
   };
@@ -175,56 +171,58 @@ class Chat extends React.Component {
       },
       [strings('SupportChat.cancel')]: () => {}
     };
-    return <GiftedActions icon={props => <View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><RTLImage
-      style={{
-        backgroundColor: 'transparent',
-        width: 30,
-        height: 30,
-      }}
-      source={images.cameraIcon}
-      resizeMode={'contain'}
-      /></View>} {...props} options={options} />;
+    return (
+      <GiftedActions
+        icon={props => (
+          <View
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+          >
+            <RTLImage
+              style={{
+                backgroundColor: 'transparent',
+                width: 30,
+                height: 30
+              }}
+              source={images.cameraIcon}
+              resizeMode={'contain'}
+            />
+          </View>
+        )}
+        {...props}
+        options={options}
+      />
+    );
   };
 
   onSendSupportImage = () => {
-      // 1. select image
-      const options = {
-        title: 'Select image to send',
-        quality: 0.3,
-        maxWidth: 1500,
-        maxHeight: 1500,
-        storageOptions: {
-          skipBackup: true,
-          path: 'images'
-        }
-      };
+    // 1. select image
+    const options = {
+      title: 'Select image to send',
+      quality: 0.3,
+      maxWidth: 1500,
+      maxHeight: 1500,
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
 
-      ImagePicker.showImagePicker(options, response => {
-        console.log('Response = ', response);
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-          return;
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-          return;
-        } else if (response.uri) {
-          console.log('got image', response);
-          this.uploadFile(response)
-        }
-      })
-
-  }
-
-  listenForTypingIndicator = sdk => {
-    sdk.on(TYPING_INDICATOR_EVENT, typingData => {
-      this.setState({
-        typingText: typingData.isTyping ? strings('SupportChat.agentIsTyping') : null,
-      }) 
-    })
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+        return;
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+        return;
+      } else if (response.uri) {
+        console.log('got image', response);
+        this.uploadFile(response);
+      }
+    });
   };
 
   renderComposer = props => {
-
     // if (props.text.trim().length > 0) {
     //   return (
     //     <View style={{flexDirection: 'row'}}>
@@ -234,17 +232,16 @@ class Chat extends React.Component {
     // }
 
     return (
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        borderWidth: 0,
-        flex: 1,
-        marginBottom: isIPhoneX() ? 24 : 0
-      }}>
-
-        <TouchableOpacity
-          onPress={this.onSendSupportImage}
-        >
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+          borderWidth: 0,
+          flex: 1,
+          marginBottom: isIPhoneX() ? 24 : 0
+        }}
+      >
+        <TouchableOpacity onPress={this.onSendSupportImage}>
           <RTLImage
             style={{
               backgroundColor: 'transparent',
@@ -257,16 +254,18 @@ class Chat extends React.Component {
             }}
             source={images.cameraIcon}
             resizeMode={'contain'}
-            />
+          />
         </TouchableOpacity>
-        <View style={{
-          backgroundColor: '#F3F3F3',
-          flex: 1,
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-          margin: 6,
-          borderRadius: 10
-        }}>
+        <View
+          style={{
+            backgroundColor: '#F3F3F3',
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            margin: 6,
+            borderRadius: 10
+          }}
+        >
           <Composer {...props} />
           <Send {...props} containerStyle={{ backgroundColor: 'transparent' }}>
             <RTLImage
@@ -280,68 +279,63 @@ class Chat extends React.Component {
               }}
               source={images.chatSendIcon}
               resizeMode={'contain'}
-              />
+            />
           </Send>
         </View>
       </View>
     );
-  }
-
-  renderFooter = props => {
-    console.log('renderFooter')
-    if (this.state.typingText) {
-      return (
-        <View style={styles.footerContainer}>
-          <Text style={styles.footerText}>
-            {this.state.typingText}
-          </Text>
-        </View>
-      );
-    }
-    return <View style={{height:8}} />;
-  }
+  };
 
   render() {
-      return (
-        <View
-        style={{ flex: 1, backgroundColor: '#FAFCFD'}}
-      >
-        <Header title={strings('SupportChat.header')} rightButton={{onPress: () => (this.props.visitorSDK.closeChat()), 
-          text: strings('SupportChat.closeChat'), image_source: images.exitIcon }} />
-          <GiftedChat
-            renderBubble={this.renderBubble}
-            renderDay={this.renderDay}
-            autoFocus
-            dateFormat={'ll'}
-            placeholder={strings('SupportChat.inputPlaceholder')}
-            messages={this.props.messages}
-            onSend={this.handleSend}
-            onInputTextChanged={this.handleInputTextChange}
-            user={this.getVisitor()}
-            isAnimated
+    if (this.state.typingText) {
+      toast('hello');
+    }
 
-            textInputProps={{
-              lineHeight: 22,
-              fontSize: 14,
-              fontFamily: FONT_MEDIUM(),
-              textAlign: I18nManager.isRTL ? 'right' : 'left'
-            }}
-            renderChatFooter={() => <View style={{height: isIPhoneX() ? 20 : 0}}></View>}
-            bottomOffset={-12}
-            autoFocus
-            
-            renderComposer={this.renderComposer}
-            renderFooter={this.renderFooter}
-            renderSend={ () => {} }
-            {...this.props}
-          />
-        </View>
-      );
+    return (
+      <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
+        <Header
+          title={strings('SupportChat.header')}
+          rightButton={{
+            onPress: () => {
+              this.props.visitorSDK.closeChat();
+              navigateBack();
+            },
+            text: strings('SupportChat.closeChat'),
+            image_source: images.exitIcon
+          }}
+        />
+        <GiftedChat
+          renderBubble={this.renderBubble}
+          renderDay={this.renderDay}
+          autoFocus
+          dateFormat={'ll'}
+          placeholder={strings('SupportChat.inputPlaceholder')}
+          onSend={this.handleSend}
+          onInputTextChanged={this.handleInputTextChange}
+          user={this.getVisitor()}
+          isAnimated
+          textInputProps={{
+            lineHeight: 22,
+            fontSize: 14,
+            fontFamily: FONT_MEDIUM(),
+            textAlign: I18nManager.isRTL ? 'right' : 'left'
+          }}
+          renderChatFooter={() => (
+            <View style={{ height: isIPhoneX() ? 20 : 0 }} />
+          )}
+          bottomOffset={-12}
+          autoFocus
+          renderComposer={this.renderComposer}
+          renderFooter={_ => <View style={{ height: 8 }} />}
+          renderSend={() => {}}
+          {...this.props}
+        />
+      </View>
+    );
   }
 }
 
-Chat.propTypes = {
-};
+Chat.propTypes = {};
 
 const styles = StyleSheet.create({
   hide: {
@@ -382,7 +376,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = ({ SupportChat: { support_messages_for_group: messages, send_loading, users } }, props) => {
+const mapStateToProps = (
+  {
+    SupportChat: { support_messages_for_group: messages, send_loading, users }
+  },
+  props
+) => {
   return {
     messages: messages,
     send_loading,
@@ -390,4 +389,7 @@ const mapStateToProps = ({ SupportChat: { support_messages_for_group: messages, 
   };
 };
 
-export default connect(mapStateToProps, { })(Chat);
+export default connect(
+  mapStateToProps,
+  {}
+)(Chat);

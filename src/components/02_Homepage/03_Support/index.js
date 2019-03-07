@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { View, FlatList, TouchableOpacity, Image, AppState, ActivityIndicator } from 'react-native';
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  AppState,
+  ActivityIndicator
+} from 'react-native';
 import firebase from 'react-native-firebase';
 import { init } from '@livechat/livechat-visitor-sdk';
 import { RTLImage, AyezText } from '../../_common';
@@ -22,10 +29,12 @@ const NEW_FILE_EVENT = 'new_file';
 const AGENT_CHANGED_EVENT = 'agent_changed';
 const VISITOR_DATA_EVENT = 'visitor_data';
 const CHAT_ENDED_EVENT = 'chat_ended';
+const QUEUED_EVENT = 'visitor_queued';
 const AGENT_TYPE = 'agent';
 const VISITOR_TYPE = 'visitor';
 const LIVE_CHAT_REMOTE_CONFIG_LICENSE = 'live_chat_license';
 const BACKGROUND_APP_STATE = 'background';
+const GREETING_MESSAGE = 'greeting_message'
 
 const getLiveChatCustomerInfo = firebase
   .functions()
@@ -39,13 +48,14 @@ class Support extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visitorSDK: undefined
-    }
+      visitorSDK: undefined,
+      greetingMessage: undefined
+    };
   }
 
   static notifyForNewMessage() {
     if (Actions.currentScene != sceneKeys.supportChat) {
-      toast(strings('Support.newMessageNotification'))
+      toast(strings('Support.newMessageNotification'));
     }
   }
 
@@ -78,6 +88,8 @@ class Support extends Component {
     this.listenForChatEndedFor(currentVisitorSDK);
     this.listenForNewAgentFor(currentVisitorSDK);
     this.listenForNewVisitorFor(currentVisitorSDK);
+    this.listenForQueuedFor(currentVisitorSDK);
+    this.handleEmptyView()
 
     currentVisitorSDK.setVisitorData({
       ...customer,
@@ -91,27 +103,49 @@ class Support extends Component {
     });
   };
 
+  listenForQueuedFor = sdk => {
+    sdk.on(QUEUED_EVENT, _ => {
+      this.props.addSupportMessage({
+        [GIFTED_CHAT_MODEL.text]: strings('SupportChat.pleaseWaitForAgent'),
+        [GIFTED_CHAT_MODEL.id]: String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: Date.now(),
+        [GIFTED_CHAT_MODEL.system]: true
+      });
+    })
+  }
+
+  handleEmptyView = () => {
+    if(this.props.messages.length == 0) {
+      this.props.addSupportMessage({
+        [GIFTED_CHAT_MODEL.text]: this.state.greetingMessage,
+        [GIFTED_CHAT_MODEL.id]: String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: Date.now(),
+        [GIFTED_CHAT_MODEL.system]: true
+      });
+    }
+  }
+
   listenForNewMessagesFor = (sdk, group) => {
     sdk.on(NEW_MESSAGE_EVENT, message => {
-      Support.notifyForNewMessage()
+      Support.notifyForNewMessage();
 
       this.props.addSupportMessage({
-          [GIFTED_CHAT_MODEL.text]: message.text,
-          [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),
-          [GIFTED_CHAT_MODEL.at]: message.timestamp,
-          [GIFTED_CHAT_MODEL.user]: this.props.users[message.authorId]
+        [GIFTED_CHAT_MODEL.text]: message.text,
+        [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: message.timestamp,
+        [GIFTED_CHAT_MODEL.user]: this.props.users[message.authorId]
       });
     });
   };
 
   listenForNewFilesFor = (sdk, group) => {
     sdk.on(NEW_FILE_EVENT, file => {
-      Support.notifyForNewMessage()
+      Support.notifyForNewMessage();
       this.props.addSupportMessage({
-          [GIFTED_CHAT_MODEL.id]: file.id + String(Math.random()),
-          [GIFTED_CHAT_MODEL.at]: file.timestamp,
-          [GIFTED_CHAT_MODEL.user]: this.props.users[file.authorId],
-          [GIFTED_CHAT_MODEL.image]: file.url
+        [GIFTED_CHAT_MODEL.id]: file.id + String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: file.timestamp,
+        [GIFTED_CHAT_MODEL.user]: this.props.users[file.authorId],
+        [GIFTED_CHAT_MODEL.image]: file.url
       });
     });
   };
@@ -141,23 +175,22 @@ class Support extends Component {
 
   listenForChatEndedFor = (sdk, group) => {
     sdk.on(CHAT_ENDED_EVENT, () => {
-      Support.notifyForNewMessage()
-      this.props.addSupportMessage({
-          [GIFTED_CHAT_MODEL.text]: strings('SupportChat.chatEnded'),
-          [GIFTED_CHAT_MODEL.id]: String(Math.random()),
-          [GIFTED_CHAT_MODEL.at]: Date.now(),
-          [GIFTED_CHAT_MODEL.system]: true
-      });
+      // Support.notifyForNewMessage();
+      // this.props.addSupportMessage({
+      //   [GIFTED_CHAT_MODEL.text]: strings('SupportChat.chatEnded'),
+      //   [GIFTED_CHAT_MODEL.id]: String(Math.random()),
+      //   [GIFTED_CHAT_MODEL.at]: Date.now(),
+      //   [GIFTED_CHAT_MODEL.system]: true
+      // });
     });
   };
 
   handleAppClosing = nextState => {
-    if(isIOS() && nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
-      console.log('hello')
+    if (isIOS() && nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
+      console.log('hello');
       this.state.visitorSDK.closeChat();
     }
-  }
-
+  };
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppClosing);
@@ -172,11 +205,29 @@ class Support extends Component {
       LIVE_CHAT_REMOTE_CONFIG_LICENSE
     );
 
-    const { data: customerInfo } = await getLiveChatCustomerInfo({
-      phone: this.props.customer ? this.props.customer.phone : ''
-    });
+    try {
+      let greetingMessage = await Support.retrieveComponentProps(
+        GREETING_MESSAGE
+      );
 
-    this.setUpVisitorSDKWithGroup(customerInfo, license);
+      if(!greetingMessage) greetingMessage = strings('SupportChat.defaultGreetingMessage')
+
+      this.setState({ greetingMessage });
+      const license = await Support.retrieveComponentProps(
+        LIVE_CHAT_REMOTE_CONFIG_LICENSE
+      );
+
+      const { data: customerInfo } = await getLiveChatCustomerInfo({
+        phone: this.props.customer ? this.props.customer.phone : ''
+      });
+
+      this.setUpVisitorSDKWithGroup(customerInfo, license);
+      console.log('license')
+      console.log(greetingMessage)
+      console.log(license)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   renderChatTile() {
@@ -318,17 +369,18 @@ class Support extends Component {
         >
           {strings('Support.header')}
         </AyezText>
-        {
-          this.state.visitorSDK ? <FlatList
-          style={{ flex: 1 }}
-          removeClippedSubviews
-          ListHeaderComponent={this.renderChatTile()}
-          ListFooterComponent={null}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => `${index}`}
-        /> : <ActivityIndicator></ActivityIndicator>
-        }
-        
+        {this.state.visitorSDK ? (
+          <FlatList
+            style={{ flex: 1 }}
+            removeClippedSubviews
+            ListHeaderComponent={this.renderChatTile()}
+            ListFooterComponent={null}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item, index) => `${index}`}
+          />
+        ) : (
+          <ActivityIndicator />
+        )}
 
         {this.renderSettingsButton()}
       </View>
@@ -359,13 +411,14 @@ const styles = {
 const mapStateToProps = ({
   SupportManual,
   Customer,
-  SupportChat: { users }
+ SupportChat: { support_messages_for_group: messages, send_loading, users }
 }) => {
   const { manual } = SupportManual;
   return {
     manual,
     users,
-    customer: Customer
+    customer: Customer,
+    messages
   };
 };
 
