@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { View, FlatList, TouchableOpacity, Image, AppState, ActivityIndicator } from 'react-native';
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  AppState,
+  ActivityIndicator
+} from 'react-native';
 import firebase from 'react-native-firebase';
 import { init } from '@livechat/livechat-visitor-sdk';
 import { RTLImage, AyezText } from '../../_common';
@@ -37,6 +44,7 @@ const GIFTED_CHAT_MODEL = {
   system: 'system',
   type: 'type'
 };
+const GREETING_MESSAGE = 'greeting_message';
 
 const getLiveChatCustomerInfo = firebase
   .functions()
@@ -50,13 +58,14 @@ class Support extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visitorSDK: undefined
-    }
+      visitorSDK: undefined,
+      greetingMessage: ''
+    };
   }
 
   static notifyForNewMessage() {
     if (Actions.currentScene != sceneKeys.supportChat) {
-      toast(strings('Support.newMessageNotification'))
+      toast(strings('Support.newMessageNotification'));
     }
   }
 
@@ -74,7 +83,7 @@ class Support extends Component {
               resolve(data.val());
             });
         })
-        .catch(error => console.log(`Error processing config: ${error}`));
+        .catch(error => reject(error));
     });
   };
 
@@ -104,25 +113,24 @@ class Support extends Component {
 
   listenForNewMessagesFor = (sdk, group) => {
     sdk.on(NEW_MESSAGE_EVENT, message => {
-      Support.notifyForNewMessage()
-
+      Support.notifyForNewMessage();
       this.props.addSupportMessage({
-          [GIFTED_CHAT_MODEL.text]: message.text,
-          [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),
-          [GIFTED_CHAT_MODEL.at]: message.timestamp,
-          [GIFTED_CHAT_MODEL.user]: this.props.users[message.authorId]
+        [GIFTED_CHAT_MODEL.text]: message.text,
+        [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: message.timestamp,
+        [GIFTED_CHAT_MODEL.user]: this.props.users[message.authorId]
       });
     });
   };
 
   listenForNewFilesFor = (sdk, group) => {
     sdk.on(NEW_FILE_EVENT, file => {
-      Support.notifyForNewMessage()
+      Support.notifyForNewMessage();
       this.props.addSupportMessage({
-          [GIFTED_CHAT_MODEL.id]: file.id + String(Math.random()),
-          [GIFTED_CHAT_MODEL.at]: file.timestamp,
-          [GIFTED_CHAT_MODEL.user]: this.props.users[file.authorId],
-          [GIFTED_CHAT_MODEL.image]: file.url
+        [GIFTED_CHAT_MODEL.id]: file.id + String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: file.timestamp,
+        [GIFTED_CHAT_MODEL.user]: this.props.users[file.authorId],
+        [GIFTED_CHAT_MODEL.image]: file.url
       });
     });
   };
@@ -152,21 +160,21 @@ class Support extends Component {
 
   listenForChatEndedFor = (sdk, group) => {
     sdk.on(CHAT_ENDED_EVENT, () => {
-      Support.notifyForNewMessage()
+      Support.notifyForNewMessage();
       this.props.addSupportMessage({
-          [GIFTED_CHAT_MODEL.text]: strings('SupportChat.chatEnded'),
-          [GIFTED_CHAT_MODEL.id]: String(Math.random()),
-          [GIFTED_CHAT_MODEL.at]: Date.now(),
-          [GIFTED_CHAT_MODEL.system]: true
+        [GIFTED_CHAT_MODEL.text]: strings('SupportChat.chatEnded'),
+        [GIFTED_CHAT_MODEL.id]: String(Math.random()),
+        [GIFTED_CHAT_MODEL.at]: Date.now(),
+        [GIFTED_CHAT_MODEL.system]: true
       });
     });
   };
 
   handleAppClosing = nextState => {
-    if(nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
+    if (nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
       this.state.visitorSDK.closeChat();
     }
-  }
+  };
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppClosing);
@@ -176,16 +184,23 @@ class Support extends Component {
     AppState.addEventListener('change', this.handleAppClosing);
 
     this.props.loadSupportManual();
+    try {
+      const greetingMessage = await Support.retrieveComponentProps(
+        GREETING_MESSAGE
+      );
+      this.setState({ greetingMessage });
+      const license = await Support.retrieveComponentProps(
+        LIVE_CHAT_REMOTE_CONFIG_LICENSE
+      );
 
-    const license = await Support.retrieveComponentProps(
-      LIVE_CHAT_REMOTE_CONFIG_LICENSE
-    );
+      const { data: customerInfo } = await getLiveChatCustomerInfo({
+        phone: this.props.customer ? this.props.customer.phone : ''
+      });
 
-    const { data: customerInfo } = await getLiveChatCustomerInfo({
-      phone: this.props.customer ? this.props.customer.phone : ''
-    });
-
-    this.setUpVisitorSDKWithGroup(customerInfo, license);
+      this.setUpVisitorSDKWithGroup(customerInfo, license);
+    } catch (error) {
+      alert('error');
+    }
   }
 
   renderChatTile() {
@@ -195,7 +210,8 @@ class Support extends Component {
         onPress={() => {
           if (this.state.visitorSDK) {
             navigateTo(sceneKeys.supportChat, {
-              visitorSDK: this.state.visitorSDK
+              visitorSDK: this.state.visitorSDK,
+              greetingMessage: this.state.greetingMessage
             });
           }
         }}
@@ -327,17 +343,18 @@ class Support extends Component {
         >
           {strings('Support.header')}
         </AyezText>
-        {
-          this.state.visitorSDK ? <FlatList
-          style={{ flex: 1 }}
-          removeClippedSubviews
-          ListHeaderComponent={this.renderChatTile()}
-          ListFooterComponent={null}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => `${index}`}
-        /> : <ActivityIndicator></ActivityIndicator>
-        }
-        
+        {this.state.visitorSDK ? (
+          <FlatList
+            style={{ flex: 1 }}
+            removeClippedSubviews
+            ListHeaderComponent={this.renderChatTile()}
+            ListFooterComponent={null}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item, index) => `${index}`}
+          />
+        ) : (
+          <ActivityIndicator />
+        )}
 
         {this.renderSettingsButton()}
       </View>
