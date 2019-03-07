@@ -8,7 +8,8 @@ import {
   Day,
   Send,
   Actions as GiftedActions,
-  Composer
+  Composer,
+  SystemMessage
 } from 'react-native-gifted-chat';
 
 import {
@@ -312,6 +313,12 @@ class Chat extends React.Component {
           placeholder={strings('SupportChat.inputPlaceholder')}
           onSend={this.handleSend}
           onInputTextChanged={this.handleInputTextChange}
+          renderSystemMessage={props => <SystemMessage {...props} textStyle={{
+            lineHeight: 22,
+            fontSize: 14,
+            fontFamily: FONT_MEDIUM(),
+            textAlign: 'center'
+          }} wrapperStyle={{ width: '90%' }}></SystemMessage>}
           user={this.getVisitor()}
           isAnimated
           textInputProps={{
