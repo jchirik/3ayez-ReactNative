@@ -25,6 +25,7 @@ const CHAT_ENDED_EVENT = 'chat_ended';
 const AGENT_TYPE = 'agent';
 const VISITOR_TYPE = 'visitor';
 const LIVE_CHAT_REMOTE_CONFIG_LICENSE = 'live_chat_license';
+const BACKGROUND_APP_STATE = 'background';
 const GIFTED_CHAT_MODEL = {
   id: '_id',
   text: 'text',
@@ -161,7 +162,19 @@ class Support extends Component {
     });
   };
 
-  async componentDidMount() {
+  handleAppClosing = nextState => {
+    if(nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
+      this.state.visitorSDK.closeChat();
+    }
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppClosing);
+  }
+
+  async componentWillMount() {
+    AppState.addEventListener('change', this.handleAppClosing);
+
     this.props.loadSupportManual();
 
     const license = await Support.retrieveComponentProps(
