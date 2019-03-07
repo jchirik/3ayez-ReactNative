@@ -138,6 +138,8 @@ class Support extends Component {
     sdk.on(NEW_MESSAGE_EVENT, message => {
       Support.notifyForNewMessage();
 
+      if(this.props.users[message.authorId] && this.props.users[message.authorId].type == VISITOR_TYPE) return;
+
       this.props.addSupportMessage({
         [GIFTED_CHAT_MODEL.text]: message.text,
         [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),

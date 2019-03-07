@@ -28,7 +28,7 @@ import {
   isIPhoneX,
   GIFTED_CHAT_MODEL
 } from '../../Helpers.js';
-import { addSupportMessage } from '../../actions';
+import { addSupportMessage, validateMessage } from '../../actions';
 
 import { strings, FONT_REGULAR, FONT_MEDIUM } from '../../i18n.js';
 
@@ -49,10 +49,13 @@ class Chat extends React.Component {
 
     this.state = {
       typingText: null,
-      messages: []
     };
     this.handleInputTextChange = this.handleInputTextChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    return { messages: nextProps.messages }
   }
 
   getVisitor = () => {
@@ -67,10 +70,19 @@ class Chat extends React.Component {
   };
 
   handleSend = messages => {
-    this.props.visitorSDK.sendMessage({
-      customId: String(Math.random()),
-      text: messages[0].text
+    const customId = String(Math.random())
+
+    this.props.addSupportMessage({
+      [GIFTED_CHAT_MODEL.text]: messages[0].text,
+      [GIFTED_CHAT_MODEL.id]: customId,
+      [GIFTED_CHAT_MODEL.at]: new Date(),
+      [GIFTED_CHAT_MODEL.user]: this.getVisitor()
     });
+
+    this.props.visitorSDK.sendMessage({
+      customId,
+      text: messages[0].text
+    }).then(response => { console.log(response); this.props.validateMessage(customId) }).catch(_ => {});
   };
 
   renderBubble = props => {
@@ -317,6 +329,7 @@ class Chat extends React.Component {
           renderComposer={this.renderComposer}
           renderFooter={_ => <View style={{ height: 30 }} ></View>}
           renderSend={() => {}}
+          messages={this.state.messages}
         />
       </View>
     );
@@ -379,5 +392,5 @@ const mapStateToProps = (
 
 export default connect(
   mapStateToProps,
-  {}
+  { addSupportMessage, validateMessage }
 )(Chat);
