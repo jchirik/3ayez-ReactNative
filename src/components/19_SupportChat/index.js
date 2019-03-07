@@ -2,19 +2,21 @@ import React from 'react';
 import ImagePicker from 'react-native-image-picker';
 
 import { connect } from 'react-redux';
-import { GiftedChat, Bubble, Day, Send, Actions as GiftedActions } from 'react-native-gifted-chat'
+import { GiftedChat, Bubble, Day, Send, Actions as GiftedActions, Composer } from 'react-native-gifted-chat'
 
 import {
   View,
   Platform,
   Dimensions,
   Image,
-  StyleSheet 
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 import {
-  AYEZ_GREEN, toast,
+  AYEZ_GREEN, toast, isIPhoneX,
 } from '../../Helpers.js';
+import { onSendSupportImage } from '../../actions'
 
 import {
   strings,
@@ -114,20 +116,6 @@ class Chat extends React.Component {
     )
   }
 
-  renderSend(props) {
-    return (
-      <Send {...props}>
-        <View style={{ marginBottom: 10 }}>
-          <Image
-            style={{ height: 20, width: 50 }}
-            source={images.chatSendIcon}
-            resizeMode={'cover'}
-          />
-        </View>
-      </Send>
-    );
-  }
-
   static notifyForUploadingFile() {
     toast(strings('SupportChat.uploadingYourFile'))
   }
@@ -167,13 +155,77 @@ class Chat extends React.Component {
     return <GiftedActions icon={props => <View style = {{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><RTLImage
       style={{
         backgroundColor: 'transparent',
-        width: 20,
-        height: 20,
+        width: 30,
+        height: 30,
       }}
       source={images.cameraIcon}
       resizeMode={'contain'}
       /></View>} {...props} options={options} />;
   };
+
+  renderComposer = props => {
+
+    // if (props.text.trim().length > 0) {
+    //   return (
+    //     <View style={{flexDirection: 'row'}}>
+    //       <Composer {...props} />
+    //     </View>
+    //   );
+    // }
+
+    return (
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        borderWidth: 0,
+        flex: 1,
+        marginBottom: isIPhoneX() ? 24 : 0
+      }}>
+
+        <TouchableOpacity
+          onPress={() => this.props.onSendSupportImage()}
+        >
+          <RTLImage
+            style={{
+              backgroundColor: 'transparent',
+              width: 32,
+              height: 32,
+              marginBottom: 12,
+              marginTop: 8,
+              marginRight: 3,
+              marginLeft: 10
+            }}
+            source={images.cameraIcon}
+            resizeMode={'contain'}
+            />
+        </TouchableOpacity>
+        <View style={{
+          backgroundColor: '#F3F3F3',
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+          margin: 6,
+          borderRadius: 10
+        }}>
+          <Composer {...props} />
+          <Send {...props} containerStyle={{ backgroundColor: 'transparent' }}>
+            <RTLImage
+              style={{
+                backgroundColor: 'transparent',
+                width: 38,
+                height: 38,
+                marginBottom: 3,
+                marginRight: 3,
+                marginLeft: 6
+              }}
+              source={images.chatSendIcon}
+              resizeMode={'contain'}
+              />
+          </Send>
+        </View>
+      </View>
+    );
+  }
 
   
 
@@ -198,10 +250,9 @@ class Chat extends React.Component {
             user={this.getVisitor()}
             isAnimated
             
-            renderSend={this.renderSend}
-            renderCustomView={this.renderCustomView}
-            renderActions={this.renderCustomActions}
+            renderComposer={this.renderComposer}
             renderFooter={() => (<View style={{height:8}} />)}
+            renderSend={ () => {} }
             {...this.props}
           />
         </View>
@@ -259,4 +310,4 @@ const mapStateToProps = ({ SupportChat: { support_messages_for_group: messages, 
   };
 };
 
-export default connect(mapStateToProps, {})(Chat);
+export default connect(mapStateToProps, { onSendSupportImage })(Chat);
