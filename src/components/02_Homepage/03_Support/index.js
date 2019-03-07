@@ -34,7 +34,8 @@ const AGENT_TYPE = 'agent';
 const VISITOR_TYPE = 'visitor';
 const LIVE_CHAT_REMOTE_CONFIG_LICENSE = 'live_chat_license';
 const BACKGROUND_APP_STATE = 'background';
-const GREETING_MESSAGE = 'greeting_message'
+const GREETING_MESSAGE = 'greeting_message';
+const TYPING_INDICATOR_EVENT = 'typing_indicator';
 
 const getLiveChatCustomerInfo = firebase
   .functions()
@@ -89,6 +90,7 @@ class Support extends Component {
     this.listenForNewAgentFor(currentVisitorSDK);
     this.listenForNewVisitorFor(currentVisitorSDK);
     this.listenForQueuedFor(currentVisitorSDK);
+    this.listenForTypingIndicator(currentVisitorSDK);
     this.handleEmptyView()
 
     currentVisitorSDK.setVisitorData({
@@ -100,6 +102,13 @@ class Support extends Component {
 
     this.setState({
       visitorSDK: currentVisitorSDK
+    });
+  };
+
+  listenForTypingIndicator = sdk => {
+    sdk.on(TYPING_INDICATOR_EVENT, typingData => {
+      if(typingData.isTyping)
+        toast(strings('SupportChat.agentIsTyping'))
     });
   };
 

@@ -16,7 +16,7 @@ import {
   View,
   Platform,
   Dimensions,
-  Image,
+  Text,
   StyleSheet,
   TouchableOpacity,
   I18nManager
@@ -33,7 +33,6 @@ import { addSupportMessage } from '../../actions';
 import { strings, FONT_REGULAR, FONT_MEDIUM } from '../../i18n.js';
 
 const VISITOR_TYPE = 'visitor';
-const TYPING_INDICATOR_EVENT = 'typing_indicator';
 
 import images from '../../theme/images';
 
@@ -49,26 +48,12 @@ class Chat extends React.Component {
     super(props);
 
     this.state = {
-      typingText: null
+      typingText: null,
+      messages: []
     };
     this.handleInputTextChange = this.handleInputTextChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
   }
-
-  componentDidMount() {
-    this.listenForTypingIndicator(this.props.visitorSDK);
-  }
-
-  listenForTypingIndicator = sdk => {
-    sdk.on(TYPING_INDICATOR_EVENT, typingData => {
-      console.log(typingData);
-      this.setState({
-        typingText: typingData.isTyping
-          ? strings('SupportChat.agentIsTyping')
-          : null
-      });
-    });
-  };
 
   getVisitor = () => {
     const visitorId = Object.keys(this.props.users).find(
@@ -288,10 +273,6 @@ class Chat extends React.Component {
   };
 
   render() {
-    if (this.state.typingText) {
-      toast('hello');
-    }
-
     return (
       <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
         <Header
@@ -306,6 +287,7 @@ class Chat extends React.Component {
           }}
         />
         <GiftedChat
+          {...this.props}
           renderBubble={this.renderBubble}
           renderDay={this.renderDay}
           autoFocus
@@ -333,9 +315,8 @@ class Chat extends React.Component {
           bottomOffset={-12}
           autoFocus
           renderComposer={this.renderComposer}
-          renderFooter={_ => <View style={{ height: 8 }} />}
+          renderFooter={_ => <View style={{ height: 30 }} ></View>}
           renderSend={() => {}}
-          {...this.props}
         />
       </View>
     );
