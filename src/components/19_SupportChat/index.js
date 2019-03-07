@@ -10,7 +10,8 @@ import {
   Dimensions,
   Image,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  I18nManager
 } from 'react-native';
 
 import {
@@ -235,20 +236,30 @@ class Chat extends React.Component {
         style={{ flex: 1, backgroundColor: '#FAFCFD'}}
       >
         <Header title={strings('SupportChat.header')} rightButton={{onPress: () => (this.props.visitorSDK.closeChat()), 
-          text: strings('SupportChat.closeChat') }} />
+          text: strings('SupportChat.closeChat'), image_source: images.exitIcon }} />
           <GiftedChat
             renderBubble={this.renderBubble}
             renderDay={this.renderDay}
             autoFocus
             dateFormat={'ll'}
-            bottomOffset={-12}
             placeholder={strings('SupportChat.inputPlaceholder')}
+            renderFooter={() => (<View style={{height:8}} />)}
 
             messages={this.props.messages}
             onSend={this.handleSend}
             onInputTextChanged={this.handleInputTextChange}
             user={this.getVisitor()}
             isAnimated
+
+            textInputProps={{
+              lineHeight: 22,
+              fontSize: 14,
+              fontFamily: FONT_MEDIUM(),
+              textAlign: I18nManager.isRTL ? 'right' : 'left'
+            }}
+            renderChatFooter={() => <View style={{height: isIPhoneX() ? 20 : 0}}></View>}
+            bottomOffset={-12}
+            autoFocus
             
             renderComposer={this.renderComposer}
             renderFooter={() => (<View style={{height:8}} />)}
