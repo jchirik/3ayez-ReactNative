@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { View, FlatList, TouchableOpacity, Image, AppState } from 'react-native';
+import { View, FlatList, TouchableOpacity, Image, AppState, ActivityIndicator } from 'react-native';
 import firebase from 'react-native-firebase';
 import { init } from '@livechat/livechat-visitor-sdk';
 import { RTLImage, AyezText } from '../../_common';
@@ -48,7 +48,9 @@ if (__DEV__) {
 class Support extends Component {
   constructor(props) {
     super(props);
-    this.visitorSDK = [];
+    this.state = {
+      visitorSDK: undefined
+    }
   }
 
   static notifyForNewMessage() {
@@ -81,7 +83,6 @@ class Support extends Component {
       group: 0
     });
 
-    this.visitorSDK = currentVisitorSDK;
     this.listenForNewMessagesFor(currentVisitorSDK);
     this.listenForNewFilesFor(currentVisitorSDK);
     this.listenForChatEndedFor(currentVisitorSDK);
@@ -93,6 +94,10 @@ class Support extends Component {
       customProperties: {
         customerId: customer.id
       }
+    });
+
+    this.setState({
+      visitorSDK: currentVisitorSDK
     });
   };
 
@@ -175,9 +180,9 @@ class Support extends Component {
       <TouchableOpacity
         style={styles.tileStyle}
         onPress={() => {
-          if (this.visitorSDK) {
+          if (this.state.visitorSDK) {
             navigateTo(sceneKeys.supportChat, {
-              visitorSDK: this.visitorSDK
+              visitorSDK: this.state.visitorSDK
             });
           }
         }}
@@ -291,47 +296,6 @@ class Support extends Component {
     );
   }
 
-  renderItem({ item, index }) {
-    return (
-      <TouchableOpacity
-        style={styles.tileStyle}
-        onPress={() => {
-          let group = index + 1;
-          if (this.visitorSDK.length > group) {
-            navigateTo(sceneKeys.supportChat, {
-              visitorSDK: this.visitorSDK[group],
-              group
-            });
-          }
-        }}
-      >
-        <AyezText
-          semibold
-          style={{
-            color: '#696A6C',
-            marginLeft: 20,
-            marginTop: 16,
-            marginBottom: 16,
-            marginRight: 20
-          }}
-        >
-          {translate(item.title)}
-        </AyezText>
-
-        <RTLImage
-          source={images.supportIssueSideArrow}
-          style={{
-            width: 10,
-            height: 10,
-            marginRight: 20,
-            tintColor: '#696A6C'
-          }}
-          resizeMode={'contain'}
-        />
-      </TouchableOpacity>
-    );
-  }
-
   render() {
     return (
       <View
@@ -350,15 +314,17 @@ class Support extends Component {
         >
           {strings('Support.header')}
         </AyezText>
-
-        <FlatList
+        {
+          this.state.visitorSDK ? <FlatList
           style={{ flex: 1 }}
           removeClippedSubviews
           ListHeaderComponent={this.renderChatTile()}
           ListFooterComponent={null}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => `${index}`}
-        />
+        /> : <ActivityIndicator></ActivityIndicator>
+        }
+        
 
         {this.renderSettingsButton()}
       </View>
