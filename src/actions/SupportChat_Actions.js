@@ -13,7 +13,8 @@ import {
   MESSAGE_SEND_BEGIN,
   MESSAGE_SEND_SUCCESS,
   ADD_GENERAL_SUPPORT_MESSAGE,
-  ADD_SUPPORT_USER
+  ADD_SUPPORT_USER,
+  VALIDATE_SUPPORT_MESSAGE
 } from './types';
 
 import ImagePicker from 'react-native-image-picker';
@@ -227,3 +228,12 @@ export const addSupportUser = (user) => {
     });
   };
 };
+
+export const validateMessage = customId => {
+  return dispatch => {
+    dispatch({
+      type: VALIDATE_SUPPORT_MESSAGE,
+      payload: customId
+    })
+  }
+}

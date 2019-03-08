@@ -99,13 +99,9 @@ const reducers = combineReducers({
 const SupportChatTransform = createTransform(
   // transform state on its way to being serialized and persisted.
   (inboundState, _) => {
-    supportMessages = []
     const SUPPORT_MESSAGES_FOR_GROUP = 'support_messages_for_group'
     const NUMBER_OF_MESSAGES_TO_PERSIST = 25
-    for(let i = 0; inboundState[SUPPORT_MESSAGES_FOR_GROUP] && i < inboundState[SUPPORT_MESSAGES_FOR_GROUP].length; ++i) {
-      supportMessages.push(inboundState[SUPPORT_MESSAGES_FOR_GROUP][i].slice(0, NUMBER_OF_MESSAGES_TO_PERSIST))
-    }
-    return { ...inboundState, [SUPPORT_MESSAGES_FOR_GROUP]: supportMessages };
+    return { ...inboundState, [SUPPORT_MESSAGES_FOR_GROUP]: inboundState[SUPPORT_MESSAGES_FOR_GROUP].slice(0, NUMBER_OF_MESSAGES_TO_PERSIST) };
   },
   (outboundState, _) => {
     return { ...outboundState };

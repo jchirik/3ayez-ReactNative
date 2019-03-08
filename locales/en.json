@@ -303,7 +303,10 @@
     "cancel": "Cancel",
     "chatEnded": "Chat is ended",
     "uploadingYourFile": "Uploading your file",
-    "closeChat": "End"
+    "closeChat": "End",
+    "agentIsTyping": "Agent is typing...",
+    "defaultGreetingMessage": "Welcome to customer support",
+    "pleaseWaitForAgent": "Please wait few seconds until one of our agents reach you"
   },
   "CustomerFeedback": {
     "orderArrived": "Your order has arrived!",

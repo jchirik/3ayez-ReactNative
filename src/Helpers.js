@@ -10,6 +10,20 @@ import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
+export const isIOS = () => Platform.OS === 'ios'
+
+export const GIFTED_CHAT_MODEL = {
+  id: '_id',
+  text: 'text',
+  at: 'createdAt',
+  user: 'user',
+  image: 'image',
+  avatar: 'avatar',
+  name: 'name',
+  system: 'system',
+  type: 'type'
+};
+
 export const hasValue = val => {
   if(val) return true;
   return false;

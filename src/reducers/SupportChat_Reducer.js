@@ -7,11 +7,12 @@ import {
   MESSAGE_SEND_BEGIN,
   MESSAGE_SEND_SUCCESS,
   ADD_GENERAL_SUPPORT_MESSAGE,
-  ADD_SUPPORT_USER
+  ADD_SUPPORT_USER,
+  VALIDATE_SUPPORT_MESSAGE
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  support_messages_for_group: [[], [], []],
+  support_messages_for_group: [],
   users: { system: {
     name: 'system',
     _id: 'system'
@@ -42,15 +43,23 @@ export default (state = INITIAL_STATE, action) => {
     case MESSAGE_SEND_SUCCESS:
       return { ...state, send_loading: false };
     case ADD_GENERAL_SUPPORT_MESSAGE:
-      let {group, message} = p
-      var support_messages_for_group = state.support_messages_for_group
-      support_messages_for_group[group] = [message].concat(support_messages_for_group[group])
+      let { support_messages_for_group } = state
+      support_messages_for_group = [p].concat(support_messages_for_group)
       return { ...state, support_messages_for_group }
+    case VALIDATE_SUPPORT_MESSAGE:
+      const customId = p
+      let { support_messages_for_group: to_be_validated } = state
+      const to_be_validated_index = to_be_validated.findIndex(message => {
+        return (message._id + "") == (customId + "");
+      });
+      to_be_validated[to_be_validated_index].received = true;
+      to_be_validated[to_be_validated_index].sent = true;
+      return {...state, support_messages_for_group: [].concat(to_be_validated)};
     case ADD_SUPPORT_USER:
       users = state.users
-      users[p._id] = p
-      console.log('case ADD_SUPPORT_USER:')
-      console.log(users)
+      Object.keys(users).forEach(currentUser => {
+      })
+      users[p._id] = p   
       return { ...state, users }
     default:
       return state;
