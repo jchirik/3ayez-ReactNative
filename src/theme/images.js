@@ -27,6 +27,8 @@ export default {
   currentLocationCover: require(`${IMAGE_PATH}/AddressCreate/CL_cover.png`),
   pinIcon: require(`${IMAGE_PATH}/AddressCreate/pin.png`),
 
+  storeLoadingGIF: require(`${IMAGE_PATH}/SellerSearch/store_loading.gif`),
+
   addressIcon: require(`${IMAGE_PATH}/AddressSelect/address_icon.png`),
 
   supportTile: require(`${IMAGE_PATH}/Support/support_tile.png`),

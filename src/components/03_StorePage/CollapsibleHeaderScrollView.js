@@ -5,7 +5,6 @@ import colors from '../../theme/colors';
 import { STATUS_BAR_HEIGHT, isIPhoneX } from '../../Helpers';
 
 export const PARALLAX_HEADER_HEIGHT = 207 + STATUS_BAR_HEIGHT;
-export const TAB_BAR_HEIGHT = 52;
 const noop = () => {};
 // credits to https://github.com/iyegoroff/react-native-collapsible-header-views
 export class CollapsibleHeaderScrollView extends React.Component {
@@ -114,6 +113,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
   render() {
     const {
       statusBarHeight,
+      tabBarHeight,
       contentContainerStyle,
       headerHeight,
       onScroll,
@@ -132,7 +132,9 @@ export class CollapsibleHeaderScrollView extends React.Component {
           overScrollMode={'never'}
           scrollEventThrottle={1}
           {...this.props}
-          contentContainerStyle={[contentContainerStyle, styles.container]}
+          contentContainerStyle={[contentContainerStyle, {
+            paddingTop: PARALLAX_HEADER_HEIGHT + tabBarHeight
+          }]}
           onMomentumScrollBegin={this.onMomentumScrollBegin}
           onMomentumScrollEnd={this.onMomentumScrollEnd}
           onScrollEndDrag={this.onScrollEndDrag}
@@ -152,7 +154,10 @@ export class CollapsibleHeaderScrollView extends React.Component {
         <Animated.View
           style={[
             styles.header,
-            [{ transform: [{ translateY: this.headerTranslation }] }]
+            {
+              transform: [{ translateY: this.headerTranslation }],
+              height: PARALLAX_HEADER_HEIGHT + tabBarHeight
+            }
           ]}
         >
           <StoreHeader
@@ -201,11 +206,6 @@ const style = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    right: 0,
-    height: PARALLAX_HEADER_HEIGHT + TAB_BAR_HEIGHT
-  },
-  container: {
-    paddingTop: PARALLAX_HEADER_HEIGHT + TAB_BAR_HEIGHT
-    // backgroundColor: colors.paleGrey
+    right: 0
   }
 });

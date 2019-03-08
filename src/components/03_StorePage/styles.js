@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   categoryCard: {
     backgroundColor: colors.whiteGrey,
     width: '100%',
-    height: 95,
+    height: '100%',
     borderRadius: 5,
     ...Platform.select({
       ios: {

@@ -9,13 +9,25 @@ import firebase from 'react-native-firebase';
 import {
   SELLERS_FETCH_BEGIN,
   SELLERS_FETCH_END,
-  SELLERS_FETCH_ERROR
+  SELLERS_FETCH_ERROR,
+
+  SELLERS_FETCH_BESTSTORE_END,
+  SELLERS_FETCH_BESTPRICES_END,
 } from './types';
 
 
 export const fetchNearbySellers = (address) => {
   return (dispatch) => {
     dispatch({ type: SELLERS_FETCH_BEGIN });
+
+    setTimeout(() => {
+      dispatch({ type: SELLERS_FETCH_BESTSTORE_END });
+    }, 2400);
+
+    setTimeout(() => {
+      dispatch({ type: SELLERS_FETCH_BESTPRICES_END });
+    }, 4500);
+
     // fetch the location pin's REGION if none exists
     // then get all nearby stores for the region
     const fetchSellersForCoordinate = firebase.functions().httpsCallable('fetchSellersForCoordinate');
@@ -40,7 +52,6 @@ export const fetchNearbySellers = (address) => {
           todays_hours
         }
       });
-
       console.log(sellers)
       dispatch({ type: SELLERS_FETCH_END, payload: { area, sellers } });
     }).catch((error) => {

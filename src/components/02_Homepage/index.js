@@ -97,60 +97,63 @@ class Homepage extends Component {
     return (
       <View style={{ backgroundColor: AYEZ_BACKGROUND_COLOR, flex: 1 }}>
         <OrderStatusBar />
-        <TabView
-          navigationState={this.state}
-          renderScene={SceneMap({
-            first: StoreSelect,
-            second: Support,
-          })}
-          onIndexChange={index => {
-            const current_key = this.state.routes[index].key;
-            this.setState({ index, current_key })
-          }}
-          swipeEnabled={false}
-          animationEnabled={false}
-          canJumpToTab={() => true}
-          initialLayout={{ width: Dimensions.get('window').width, height: 80 }}
-          tabBarPosition={'bottom'}
-          renderTabBar={props =>
-            <TabBar
-              {...props}
-              useNativeDriver
-              renderLabel={({ route }) => {
-                const { title_key, key, icon } = route;
-                return (
-                  <View style={{ alignItems: 'center' }}>
-                  <Image
-                    source={icon}
-                    style={{
-                      width: 24,
-                      height: 24,
-                      tintColor: (key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'
-                     }}
-                    resizeMode={'contain'}
-                    />
-                  <AyezText
-                    regular
-                    size={12}
-                    color={(key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'}
-                    >{strings(title_key)}</AyezText>
-                  </View>
-                )
-              }}
-              style={{ backgroundColor: 'white',
-                borderTopWidth: 1,
-                borderColor: '#e6e6e6',
-                paddingBottom: isIPhoneX() ? 20 : 0
-               }}
-              renderIndicator={() => null}
-              // indicatorStyle={{ backgroundColor: AYEZ_GREEN }}
-            />
-          }
-        />
+        <StoreSelect />
       </View>
     )
   }
 }
+
+
+// <TabView
+//   navigationState={this.state}
+//   renderScene={SceneMap({
+//     first: StoreSelect,
+//     second: Support,
+//   })}
+//   onIndexChange={index => {
+//     const current_key = this.state.routes[index].key;
+//     this.setState({ index, current_key })
+//   }}
+//   swipeEnabled={false}
+//   animationEnabled={false}
+//   canJumpToTab={() => true}
+//   initialLayout={{ width: Dimensions.get('window').width, height: 80 }}
+//   tabBarPosition={'bottom'}
+//   renderTabBar={props =>
+//     <TabBar
+//       {...props}
+//       useNativeDriver
+//       renderLabel={({ route }) => {
+//         const { title_key, key, icon } = route;
+//         return (
+//           <View style={{ alignItems: 'center' }}>
+//           <Image
+//             source={icon}
+//             style={{
+//               width: 24,
+//               height: 24,
+//               tintColor: (key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'
+//              }}
+//             resizeMode={'contain'}
+//             />
+//           <AyezText
+//             regular
+//             size={12}
+//             color={(key === this.state.current_key) ? AYEZ_GREEN : '#8E8E93'}
+//             >{strings(title_key)}</AyezText>
+//           </View>
+//         )
+//       }}
+//       style={{ backgroundColor: 'white',
+//         borderTopWidth: 1,
+//         borderColor: '#e6e6e6',
+//         paddingBottom: isIPhoneX() ? 20 : 0
+//        }}
+//       renderIndicator={() => null}
+//       // indicatorStyle={{ backgroundColor: AYEZ_GREEN }}
+//     />
+//   }
+// />
 
 const mapStateToProps = ({ Addresses, Settings, OngoingOrders }) => {
   const { address, is_loading } = Addresses;

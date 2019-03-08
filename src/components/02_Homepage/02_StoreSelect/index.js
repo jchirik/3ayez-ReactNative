@@ -81,6 +81,10 @@ class StoreSelect extends Component {
     if (this.props.address !== prevProps.address) {
       this.fetchNearbySellers(); // load nearby stores upon change
     }
+
+    if (!this.props.is_loading_bestprices && prevProps.is_loading_bestprices && (this.props.sellers.length === 1)) {
+      this.onSelectSeller(this.props.sellers[0]);
+    }
   }
 
   onSelectSeller(seller) {
@@ -403,13 +407,66 @@ renderItem({ item, index }) {
   );
 }
 
+
+renderLoadingStore() {
+  return (
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <Image
+        source={images.storeLoadingGIF}
+        resizeMode={'contain'}
+        style={{
+          width: 140,
+          height: 140,
+          marginBottom: 20
+        }}
+      />
+      <AyezText medium>Finding best store for your area</AyezText>
+    </View>
+  )
+}
+
+renderLoadingBestPrices(seller) {
+  return (
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <View style={{
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#cecece',
+        marginBottom: 20
+      }}>
+        <Image
+          source={{ uri: seller.logo_url }}
+          resizeMode={'contain'}
+          style={{
+            width: 180,
+            height: 60,
+            marginVertical: 12,
+            marginHorizontal: 20
+          }}
+        />
+      </View>
+      <AyezText medium>Getting up to date prices</AyezText>
+      <ActivityIndicator size="small" style={{ marginTop: 20 }} />
+    </View>
+  )
+}
+
+
+
 renderSellerList() {
 
   if (this.props.is_loading) {
-    return (
-      <ActivityIndicator size="small" style={{ flex: 1 }} />
-    )
+    return this.renderLoadingStore();
   }
+
   if (this.props.error) {
     return this.renderNoInternetConnection();
   }
@@ -427,6 +484,13 @@ renderSellerList() {
     )
   } else if (this.props.sellers.length === 1) {
     const seller = this.props.sellers[0];
+
+    if (this.props.is_loading_beststore) {
+      return this.renderLoadingStore();
+    } else if (this.props.is_loading_bestprices) {
+      return this.renderLoadingBestPrices(seller);
+    }
+
     const banner_image = (seller.banner_images && seller.banner_images.length) ? seller.banner_images[0] : null;
     let nextTimeslotText = '-';
     if (seller.next_timeslot) {
@@ -443,12 +507,6 @@ renderSellerList() {
           paddingTop: 16,
         }}
         >
-
-        <AyezText medium
-          size={18}
-          style={{ marginBottom: 16 }}
-        >{strings('StoreSelect.deliversToYourArea')}</AyezText>
-
 
         <TouchableOpacity
           activeOpacity={0.7}
@@ -513,19 +571,6 @@ renderSellerList() {
 }
 
   render() {
-
-    // return (
-    //   <View style={{ flex: 1, backgroundColor:'red'}}>
-    //     <MapView
-    //        ref={map => { this.map = map }}
-    //        style={{ flex: 1 }}
-    //        provider={PROVIDER_GOOGLE}
-    //        showsUserLocation
-    //      >
-    //      </MapView>
-    //   </View>
-    // )
-
     return (
       <View style={{ flex: 1 }}>
         {this.renderAddressHeader()}
@@ -560,13 +605,22 @@ const mapStateToProps = ({ Addresses, SellerSearch }) => {
 
   const street = address ? address.street : null;
 
-  const { sellers, is_loading, error } = SellerSearch;
+  const {
+    sellers,
+    is_loading,
+    is_loading_beststore,
+    is_loading_bestprices,
+    error
+  } = SellerSearch;
+
   return {
     address,
     street,
 
     sellers,
     is_loading,
+    is_loading_beststore,
+    is_loading_bestprices,
     error
   };
 };

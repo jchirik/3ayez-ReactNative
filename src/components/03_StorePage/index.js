@@ -47,12 +47,12 @@ import images from '../../theme/images'
 
 import {
   CollapsibleHeaderScrollView,
-  PARALLAX_HEADER_HEIGHT,
-  TAB_BAR_HEIGHT
+  PARALLAX_HEADER_HEIGHT
 } from './CollapsibleHeaderScrollView';
 import { sceneKeys, navigateTo } from '../../router';
 const STICKY_HEADER_HEIGHT = 68 + STATUS_BAR_HEIGHT; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
+const TAB_BAR_HEIGHT = 52;
 
 class StorePage extends Component {
 
@@ -65,6 +65,7 @@ class StorePage extends Component {
         tabs: [
           strings('StoreHome.categories')
         ],
+        tabBarHeight: 0,
         selected_tab: 0,
         itemHeight: 0
       };
@@ -91,7 +92,7 @@ class StorePage extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     // this listener is STILL RUNNING IN FUTURE COMPONENTS
     if (!this.props.featured_loading && prevProps.featured_loading) {
       if (this.props.featured.length) {
@@ -99,6 +100,12 @@ class StorePage extends Component {
           tabs: [ strings('StoreHome.featured'), ...this.state.tabs ]
         })
       }
+    }
+
+    // if the tab bar exists (more than one tab) -> set the height
+    // otherwise this height is 0
+    if (this.state.tabs.length >= 2 && prevState.tabs.length < 2) {
+      this.setState({ tabBarHeight: TAB_BAR_HEIGHT })
     }
   }
 
@@ -126,7 +133,7 @@ class StorePage extends Component {
   ];
 
   renderTabs() {
-    if (this.props.featured_loading || this.props.categories_loading) {
+    if (this.props.featured_loading || this.props.categories_loading || this.state.tabs.length < 2) {
       return null;
     }
     return (
@@ -135,7 +142,7 @@ class StorePage extends Component {
           transform: [{ translateY: this.tabY }],
           zIndex: 1,
           width: '100%',
-          height: TAB_BAR_HEIGHT,
+          height: this.state.tabBarHeight,
           position: 'absolute',
           borderBottomWidth: 0.5,
           borderColor: 'rgba(0, 0, 0, 0.15)',
@@ -205,12 +212,12 @@ class StorePage extends Component {
   }
 
   render() {
-    const { selected_tab, tabs } = this.state;
+    const { selected_tab, tabs, tabBarHeight } = this.state;
 
     let mainScrollComponent = null;
     if (this.props.featured_loading || this.props.categories_loading) {
       mainScrollComponent = (
-        <ActivityIndicator size="small" style={{ flex: 1 }} />
+        <ActivityIndicator size="small" style={{ flex: 1, marginTop: 50 }} />
       );
     } else if (tabs[selected_tab] === strings('StoreHome.featured')) {
       mainScrollComponent = (<FeaturedBrowse />);
@@ -221,8 +228,9 @@ class StorePage extends Component {
     return (
       <View ref={'03_StorePage'} style={styles.container}>
         <CollapsibleHeaderScrollView
-          headerHeight={PARALLAX_HEADER_HEIGHT + TAB_BAR_HEIGHT}
-          statusBarHeight={STICKY_HEADER_HEIGHT + TAB_BAR_HEIGHT}
+          tabBarHeight={tabBarHeight}
+          headerHeight={PARALLAX_HEADER_HEIGHT + tabBarHeight}
+          statusBarHeight={STICKY_HEADER_HEIGHT + tabBarHeight}
           disableHeaderSnap={true}
           displayName={this.props.display_name}
           logo_url={this.props.logo_url}
