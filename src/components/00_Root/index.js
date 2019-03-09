@@ -107,7 +107,7 @@ class Root extends Component {
       );
     }
 
-    if (!this.props.seller_id) {
+    if (!this.props.seller_id || !this.props.address) {
       const addressComponents = this.props.addresses.slice(0, 3).map(address => (
         <TouchableOpacity
           key={address.id}
