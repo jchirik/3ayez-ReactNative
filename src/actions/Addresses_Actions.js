@@ -23,6 +23,25 @@ import {sceneKeys, navigateBackTo} from '../router';
 
 // if when we load addresses, we have none -> launch tutorial!
 
+
+
+
+
+// address must include 'id' param in the obj
+// export const setAddress = (address) => {
+//   const { currentUser } = firebase.auth();
+//   return (dispatch) => {
+//     if (currentUser) {
+//       const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+//         .collection('addresses').doc(address.id);
+//       addressRef.update({ timestamp: Date.now() });
+//       dispatch({ type: ADDRESS_SET, payload: { address } });
+//     }
+//   }
+// };
+
+
+
 export const createNewAddress = (address) => {
   return (dispatch) => {
     // const batch = firebase.firestore().batch();
@@ -38,6 +57,7 @@ export const createNewAddress = (address) => {
     const batch = firebase.firestore().batch();
 
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc();
+    const address_id = addressRef.id;
     batch.set(addressRef, { ...address, timestamp: Date.now() })
 
     const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
@@ -46,7 +66,9 @@ export const createNewAddress = (address) => {
     batch.commit().then(() => {
       console.log('createNewAddress success');
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
-      navigateBackTo(sceneKeys.homepage);
+
+      dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address: { ...address, id: address_id } } });
+      // navigateBackTo(sceneKeys.homepage);
     }).catch(() => {
       dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })
@@ -65,7 +87,7 @@ export const selectAddress = (address, onClose=null) => {
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc(address.id);
     addressRef.update({ timestamp: Date.now() }).then(() => {
       console.log('selectAddress success');
-      dispatch({ type: ADDRESS_SELECT_SUCCESS });
+      dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
       onClose();
     }).catch(() => {
       dispatch({ type: ADDRESS_SELECT_ERROR, payload: { error: 'BAD_CONNECTION' } });

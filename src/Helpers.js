@@ -53,7 +53,7 @@ export const isIPhoneX = () => {
 };
 
 export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
-export const AYEZ_GREEN = '#2DD38F';
+export const AYEZ_GREEN = '#0cd870';
 export const AYEZ_BACKGROUND_COLOR = '#FAFCFD';
 export const SPLASH_SCREEN_TIME_OUT = 1000
 

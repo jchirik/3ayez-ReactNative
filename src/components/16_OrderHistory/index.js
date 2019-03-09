@@ -17,22 +17,22 @@ import {
   translate,
   formatTimestamp,
   formatDay
-} from '../../../i18n.js';
+} from '../../i18n.js';
 
 import {
   formatStatusText
-} from '../../../Helpers.js';
+} from '../../Helpers.js';
 
 
 import {
   fetchOrderHistory
-} from '../../../actions';
+} from '../../actions';
 
 import {
   Header,
   AyezText
-} from '../../_common';
-import { sceneKeys, navigateTo } from '../../../router';
+} from '../_common';
+import { sceneKeys, navigateTo } from '../../router';
 
 
 class OrderHistory extends Component {

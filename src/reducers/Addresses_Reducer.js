@@ -1,5 +1,6 @@
 
 import {
+  ADDRESS_SELECT_SUCCESS,
   ADDRESSES_SET,
   ADDRESSES_LISTENER_SET,
   CUSTOMER_DATA_RESET
@@ -7,19 +8,21 @@ import {
 
 const INITIAL_STATE = {
   address: null, // the working address
-  addresses: {},
+  addresses: [],
   addressesListener: null,
-  is_loading: true
+  is_loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
   switch (action.type) {
+    case ADDRESS_SELECT_SUCCESS:
+      return { ...state, address: p.address };
     case ADDRESSES_SET:
-      return { ...state, addresses: p.addresses, address: p.address, is_loading: false };
+      return { ...state, addresses: p.addresses, is_loading: false };
     case ADDRESSES_LISTENER_SET:
       if (state.addressesListener !== null) { state.addressesListener(); }
-      return { ...INITIAL_STATE, addressesListener: p.addressesListener };
+      return { ...INITIAL_STATE, is_loading: true, addressesListener: p.addressesListener };
     case CUSTOMER_DATA_RESET:
         if (state.addressesListener !== null) { state.addressesListener(); }
         return INITIAL_STATE;

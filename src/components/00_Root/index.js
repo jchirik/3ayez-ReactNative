@@ -19,6 +19,7 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
+  TouchableOpacity,
   Dimensions
 } from 'react-native';
 
@@ -44,6 +45,10 @@ import {
 
 import images from '../../theme/images'
 import { sceneKeys, navigateTo } from '../../router';
+
+import {
+  selectAddress
+} from '../../actions';
 
 
 class Root extends Component {
@@ -79,10 +84,12 @@ class Root extends Component {
       navigateTo(sceneKeys.customerFeedback, { order: this.props.feedback_order });
     }
 
-    if (!this.props.address && (!this.props.is_loading_addresses && prevProps.is_loading_addresses)) {
+    if (!this.props.addresses.length && !this.props.is_loading_addresses && prevProps.is_loading_addresses) {
       console.log('FINISHED LOADING ADDRESSES, no address so create')
-      navigateTo(sceneKeys.addressCreate);
-    } else if (this.props.address && (this.props.address !== prevProps.address)) {
+      setTimeout(() => {
+        navigateTo(sceneKeys.addressCreate);
+      }, 1000);
+    } else if (this.props.address && (!prevProps.address || (this.props.address.id !== prevProps.address.id))) {
       console.log('FINISHED LOADING ADDRESSES, select store');
       navigateTo(sceneKeys.storeSelect)
     }
@@ -94,24 +101,62 @@ class Root extends Component {
       SplashScreen.hide();
     }
 
-    if (this.props.is_loading_addresses || !this.props.locale || !this.props.seller_id) {
+    if (!this.props.locale || this.props.is_loading_addresses || !this.props.addresses.length) {
       return (
         <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
       );
     }
+
+    if (!this.props.seller_id) {
+      const addressComponents = this.props.addresses.slice(0, 3).map(address => (
+        <TouchableOpacity
+          key={address.id}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingTop: 8,
+            paddingBottom: 8,
+            borderBottomWidth: 1,
+            borderColor: 'rgba(255, 255, 255, 0.25)',
+            paddingHorizontal: 20
+           }}
+         onPress={() => {
+           this.props.selectAddress(address);
+         }}
+         >
+          <View style={{ flex: 1, alignItems: 'flex-start' }}>
+            <AyezText bold style={{
+              color: 'white'
+            }}>{address.street}</AyezText>
+            <AyezText medium style={{
+              color: 'white'
+            }}>{strings('Address.detail', { building: address.building, apt: address.apt })}</AyezText>
+          </View>
+        </TouchableOpacity>
+      ));
+
+      return (
+        <View>
+        <AyezText>Please select one of your addresses</AyezText>
+        {addressComponents}
+        </View>
+      )
+    }
+
     return <StorePage />;
   }
 }
 
 const mapStateToProps = ({ Seller, Addresses, Settings, OngoingOrders }) => {
   const { id } = Seller;
-  const { address, is_loading } = Addresses;
+  const { address, addresses, is_loading } = Addresses;
   const { review_order, feedback_order } = OngoingOrders;
   const { locale } = Settings;
   return {
     seller_id: id,
     locale,
     address,
+    addresses,
     is_loading_addresses: is_loading,
 
     review_order,
@@ -119,4 +164,6 @@ const mapStateToProps = ({ Seller, Addresses, Settings, OngoingOrders }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Root);
+export default connect(mapStateToProps, {
+  selectAddress
+})(Root);

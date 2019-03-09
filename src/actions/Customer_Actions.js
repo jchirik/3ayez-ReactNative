@@ -197,12 +197,8 @@ const listenToAddresses = (dispatch) => {
 
       addresses = addresses.sort((a, b) => { return b.timestamp - a.timestamp })
       console.log('ADDRESSES', addresses);
-      let address = null;
-      if (addresses.length) {
-        address = addresses[0];
-      }
 
-      dispatch({ type: ADDRESSES_SET, payload: { addresses, address } });
+      dispatch({ type: ADDRESSES_SET, payload: { addresses } });
     });
 
     dispatch({ type: ADDRESSES_LISTENER_SET, payload: { addressesListener } });

@@ -48,7 +48,7 @@ export const authGuestLogin = () => {
     .then(() => {
       console.log('authGuestLogin successful')
       dispatch({ type: GUEST_LOGIN_SUCCESS });
-      navigateTo(sceneKeys.addressCreate)
+      // navigateTo(sceneKeys.addressCreate)
       try {
         AppEventsLogger.logEvent('GUEST_REGISTERED');
       } catch (e) {

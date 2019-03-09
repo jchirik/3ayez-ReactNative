@@ -189,7 +189,8 @@
     "addNewCard": "إضافة كارت جديد"
   },
   "AddressSelection": {
-    "header": "أخر العناوين",
+    "header": "SELECT A LOCATION",
+    "anotherLocation": "Find Another Location",
     "addNewAddress": "إضافة عنوان جديد"
   },
   "OrderStatus": {

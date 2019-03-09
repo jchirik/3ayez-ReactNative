@@ -19,20 +19,25 @@ import {
   Header,
   BlockButton,
   AyezText
-} from '../../_common';
+} from '../../../_common';
 
 import {
   setLocale,
   logoutUser,
   onCompleteAuth
-} from '../../../actions';
+} from '../../../../actions';
+
+import {
+  STATUS_BAR_HEIGHT
+} from '../../../../Helpers.js';
 
 import {
   strings,
   translate
-} from '../../../i18n.js';
-import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
+} from '../../../../i18n.js';
+import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
 
+import ChatButton from './ChatButton';
 // { text: 'Credit Cards', action: null, icon: '' },
 
 const window = Dimensions.get('window');
@@ -63,32 +68,31 @@ class SettingsMenu extends Component {
   }
 
   renderHeader() {
+    let accountContent = (
+      <AyezText semibold style={{
+        fontSize: 22,
+        alignSelf: 'flex-start'
+      }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
+    )
     if (!this.props.phone) {
-      return (
+      accountContent = (
         <BlockButton
           onPress={this.loginUser.bind(this)}
           text={strings('Common.login')}
           color={'#0094ff'}
-          style={{
-            marginLeft: 20,
-            marginRight: 20,
-            marginTop: 30,
-            marginBottom: 10
-          }}
-          />
+        />
       )
     }
+
     return (
       <View style={{
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 30,
+        marginTop: STATUS_BAR_HEIGHT + 30,
         marginBottom: 10
       }}>
-        <AyezText semibold style={{
-          fontSize: 22,
-          alignSelf: 'flex-start'
-        }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
+        <ChatButton />
+        {accountContent}
       </View>
     );
   }
@@ -123,7 +127,6 @@ class SettingsMenu extends Component {
         height: 60,
         paddingLeft: 20,
         paddingBottom: 10,
-        backgroundColor: '#FAFCFD',
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
         borderColor: '#f7f7f7',
@@ -168,7 +171,7 @@ class SettingsMenu extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: '#FAFCFD'
+        backgroundColor: 'white'
       }}>
         <SectionList
           ListHeaderComponent={this.renderHeader.bind(this)}

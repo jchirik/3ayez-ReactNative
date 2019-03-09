@@ -21,7 +21,7 @@ import SideMenu from 'react-native-side-menu';
 
 import FeaturedBrowse from './01_FeaturedBrowse';
 import CategoriesBrowse from './02_CategoriesBrowse';
-import SettingsMenu from '../../16_Settings/01_SettingsMenu';
+import SettingsMenu from './SettingSideMenu';
 
 import {
   AnimatedCheckmarkOverlay,
@@ -232,7 +232,7 @@ class StorePage extends Component {
         alignItems: 'center',
         paddingTop: STATUS_BAR_HEIGHT + 9,
         paddingBottom: 8,
-        backgroundColor: 'white',
+        backgroundColor: '#222222',
         paddingHorizontal: 20,
         zIndex: 2
       }}
@@ -240,8 +240,15 @@ class StorePage extends Component {
         onPress={() => this.setState({ isAddressSelectionVisible: true })}
       >
         <View>
-          <AyezText medium>{'Delivering to'}</AyezText>
-          <AyezText regular>{address.building || 'Near'} {address.street} ({translate(area.display_name)})</AyezText>
+          <AyezText medium color={'white'}>{'Delivering to'}</AyezText>
+          <View style={{ flexDirection: 'row' }}>
+            <AyezText regular color={'white'}>{address.building || 'Near'} {address.street}</AyezText>
+            <AyezText
+              regular
+              color={'#bababa'}
+              style={{ marginLeft: 5 }}
+              >{translate(area.display_name)}</AyezText>
+          </View>
         </View>
         <View style={{ flex: 1 }} />
         <AyezText

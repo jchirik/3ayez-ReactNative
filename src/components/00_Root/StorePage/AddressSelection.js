@@ -29,7 +29,7 @@ import {
   translate
 } from '../../../i18n.js';
 
-
+import colors from '../../../theme/colors'
 import images from '../../../theme/images'
 import { sceneKeys, navigateTo } from '../../../router';
 
@@ -231,8 +231,8 @@ class AddressSelection extends Component {
               this.onClose()
               navigateTo(sceneKeys.addressCreate)
             }}
-            text={strings('AddressSelection.addNewAddress')}
-            color={'#3B7A60'}
+            text={strings('AddressSelection.anotherLocation')}
+            color={colors.ayezSubGreen}
             style={{ marginTop: 14, marginBottom: 0 }}
             />
         </Animated.View>

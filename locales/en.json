@@ -189,7 +189,8 @@
     "addNewCard": "ADD NEW CARD"
   },
   "AddressSelection": {
-    "header": "RECENT ADDRESSES",
+    "header": "SELECT A LOCATION",
+    "anotherLocation": "Find Another Location",
     "addNewAddress": "ADD NEW ADDRESS"
   },
   "OrderStatus": {

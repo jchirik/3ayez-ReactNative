@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   categoryList: {
-    flex: 1,
-    backgroundColor: colors.paleGrey,
+    flex: 1
   },
   segmented_control_view_style: {
     flex: 1,

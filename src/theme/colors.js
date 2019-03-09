@@ -1,5 +1,6 @@
 export default {
-  ayezGreen: '#2DD38F',
+  ayezGreen: '#0cd870',
+  ayezSubGreen: '#09bc61',
   ayezBackgroundGray: '#FAFCFD',
 
   warmGrey: '#979797',

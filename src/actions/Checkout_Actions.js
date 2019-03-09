@@ -78,7 +78,7 @@ export const submitOrder = (order_t, items_array, total) => {
         dispatch({ type: ORDER_SUBMIT_SUCCESS });
         dispatch({ type: BASKET_ITEMS_CLEAR, payload: { seller_id: seller.id } });
         dispatch({ type: COUPON_CODE_RESET });
-        navigateBackTo(sceneKeys.homepage);
+        navigateBackTo(sceneKeys.root);
         setTimeout(() => {
           navigateTo(sceneKeys.orderTracker, { order_id }); // you might have to refresh
         }, 1500);

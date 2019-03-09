@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { TouchableOpacity, View, Image, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { isIPhoneX } from '../../Helpers.js';
+import { isIPhoneX, AYEZ_GREEN } from '../../Helpers.js';
 import { strings, formatCurrency } from '../../i18n.js';
 import images from '../../theme/images'
 
@@ -68,7 +68,7 @@ class BasketBlockButton extends PureComponent {
         <TouchableOpacity
           onPress={this.onPress}
           style={{
-            backgroundColor: '#2dd38f',
+            backgroundColor: AYEZ_GREEN,
             flex: 1,
             height: buttonHeight,
             justifyContent: 'center',
@@ -95,7 +95,7 @@ class BasketBlockButton extends PureComponent {
           <View
             style={{
               position: 'absolute',
-              backgroundColor: '#43c590',
+              backgroundColor: '#09bc61',
               top: 6,
               left: 10,
               height: 25,

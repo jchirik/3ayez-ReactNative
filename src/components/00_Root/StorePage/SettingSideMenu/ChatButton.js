@@ -11,16 +11,16 @@ import {
 } from 'react-native';
 import firebase from 'react-native-firebase';
 import { init } from '@livechat/livechat-visitor-sdk';
-import { RTLImage, AyezText } from '../../_common';
-import { strings, translate } from '../../../i18n.js';
+import { RTLImage, AyezText } from '../../../_common';
+import { strings, translate } from '../../../../i18n.js';
 import {
   loadSupportManual,
   addSupportMessage,
   addSupportUser
-} from '../../../actions';
-import images from '../../../theme/images';
-import { sceneKeys, navigateTo } from '../../../router';
-import { toast, GIFTED_CHAT_MODEL, isIOS } from '../../../Helpers';
+} from '../../../../actions';
+import images from '../../../../theme/images';
+import { sceneKeys, navigateTo } from '../../../../router';
+import { toast, GIFTED_CHAT_MODEL, isIOS, AYEZ_GREEN } from '../../../../Helpers';
 
 const SUPPORT_CHAT_GENERAL_GROUP = 0;
 const GET_LIVE_CHAT_CUSTOMER_INFO = 'getLiveChatCustomerInfo';
@@ -45,7 +45,9 @@ if (__DEV__) {
   firebase.config().enableDeveloperMode();
 }
 
-class Support extends Component {
+
+class ChatButton extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -241,7 +243,8 @@ class Support extends Component {
     }
   }
 
-  renderChatTile() {
+
+  render() {
     return (
       <TouchableOpacity
         style={styles.tileStyle}
@@ -266,7 +269,7 @@ class Support extends Component {
           <AyezText
             semibold
             style={{
-              color: '#2DD38F',
+              color: AYEZ_GREEN,
               fontSize: 11
             }}
           >
@@ -275,18 +278,18 @@ class Support extends Component {
           <AyezText
             medium
             style={{
-              fontSize: 22
+              fontSize: 22,
+              marginBottom: 10
             }}
           >
             {strings('Support.chatWithUs')}
           </AyezText>
-          <View style={{ flex: 1 }} />
 
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              backgroundColor: '#2DD38F',
+              backgroundColor: AYEZ_GREEN,
               paddingTop: 4,
               paddingBottom: 4,
               paddingLeft: 20,
@@ -315,89 +318,11 @@ class Support extends Component {
             />
           </View>
         </View>
-
-        <Image
-          source={images.supportTile}
-          style={{
-            width: 160,
-            height: 120
-          }}
-          resizeMode={'contain'}
-        />
       </TouchableOpacity>
-    );
-  }
-
-  renderSettingsButton() {
-    return (
-      <TouchableOpacity
-        style={{
-          position: 'absolute',
-          top: 7,
-          right: 10,
-          padding: 10,
-          alignItems: 'center'
-        }}
-        onPress={() => navigateTo(sceneKeys.settings)}
-      >
-        <RTLImage
-          source={images.supportSilhouetteIcon}
-          style={{
-            width: 30,
-            height: 30,
-            tintColor: '#0094ff'
-          }}
-          resizeMode={'contain'}
-        />
-        <AyezText
-          semibold
-          style={{
-            color: '#0094ff',
-            fontSize: 10
-          }}
-        >
-          {strings('Support.settings')}
-        </AyezText>
-      </TouchableOpacity>
-    );
-  }
-
-  render() {
-    return (
-      <View
-        style={{
-          flex: 1
-        }}
-      >
-        <AyezText
-          bold
-          style={{
-            marginLeft: 4,
-            fontSize: 32,
-            padding: 16,
-            alignSelf: 'flex-start'
-          }}
-        >
-          {strings('Support.header')}
-        </AyezText>
-        {this.state.visitorSDK ? (
-          <FlatList
-            style={{ flex: 1 }}
-            removeClippedSubviews
-            ListHeaderComponent={this.renderChatTile()}
-            ListFooterComponent={null}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item, index) => `${index}`}
-          />
-        ) : (
-          <ActivityIndicator />
-        )}
-
-        {this.renderSettingsButton()}
-      </View>
     );
   }
 }
+
 
 const styles = {
   tileStyle: {
@@ -406,16 +331,12 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 8,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 16,
-    marginRight: 16,
-
     shadowColor: '#000',
     shadowOffset: { width: -1, height: 3 },
     shadowOpacity: 0.08,
     shadowRadius: 4,
-    elevation: 2
+    elevation: 2,
+    marginBottom: 20
   }
 };
 
@@ -440,4 +361,4 @@ export default connect(
     addSupportMessage,
     addSupportUser
   }
-)(Support);
+)(ChatButton);

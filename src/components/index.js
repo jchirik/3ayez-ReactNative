@@ -23,8 +23,7 @@ import OrderProblem from './13_OrderTracker/03_OrderProblem';
 import OrderReview from './14_OrderReview';
 import PhoneEntry from './15_Authentication/01_PhoneEntry';
 import VerifyCode from './15_Authentication/02_VerifyCode';
-import SettingsMenu from './16_Settings/01_SettingsMenu';
-import OrderHistory from './16_Settings/02_OrderHistory';
+import OrderHistory from './16_OrderHistory';
 import SupportDetail from './17_SupportDetail';
 import CouponModal from './18_CouponModal';
 import SupportChat from './19_SupportChat';
@@ -60,7 +59,6 @@ export {
     OrderReview,
     PhoneEntry,
     VerifyCode,
-    SettingsMenu,
     OrderHistory,
     SupportDetail,
     CouponModal,
@@ -82,7 +80,6 @@ export const sceneKeys = {
     storeShelf : "storeShelf",
     itemPage : "itemPage",
     itemImageView : "itemImageView",
-    settings : "settings",
     orderHistory : "orderHistory",
     supportDetail : "supportDetail",
     creditCardManager : "creditCardManager",

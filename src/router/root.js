@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Scene,
-  Drawer,
   Router,
   Lightbox,
   Stack,
@@ -64,7 +63,6 @@ class RouterComponent extends Component {
               <Scene key={sceneKeys.itemPage} component={components.ItemPage} />
               <Scene key={sceneKeys.itemImageView} component={components.ItemImageView} />
 
-              <Drawer key={sceneKeys.settings} component={components.SettingsMenu} />
               <Scene key={sceneKeys.orderHistory} component={components.OrderHistory} />
 
               <Scene key={sceneKeys.supportDetail} component={components.SupportDetail} />
