@@ -8,6 +8,7 @@ import {
    SectionList,
    Platform,
    BackHandler,
+   Dimensions,
    AsyncStorage
  } from 'react-native';
 
@@ -34,6 +35,8 @@ import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
 
 // { text: 'Credit Cards', action: null, icon: '' },
 
+const window = Dimensions.get('window');
+
 class SettingsMenu extends Component {
 
   constructor(props) {
@@ -55,7 +58,7 @@ class SettingsMenu extends Component {
   logoutUser() { this.props.logoutUser(); }
 
   loginUser() {
-    this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.homepage))
+    this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.root))
     navigateTo(sceneKeys.auth)
   }
 
@@ -88,20 +91,6 @@ class SettingsMenu extends Component {
         }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
       </View>
     );
-  }
-
-  renderFooter() {
-    return (
-      <View>
-        <AyezText regular style={{
-          fontSize: 10,
-          color: 'black',
-          textAlign: 'center',
-          marginTop: 30,
-          marginBottom: 30
-        }}>{strings('Settings.madeinEG')}</AyezText>
-      </View>
-    )
   }
 
 
@@ -151,13 +140,13 @@ class SettingsMenu extends Component {
   render() {
 
     const accountSection = {title: strings('Settings.myAccount'), data: [
-      { text: strings('Settings.addressBook'), action: () => { 
+      { text: strings('Settings.addressBook'), action: () => {
           navigateTo(sceneKeys.addressManager)
       }, icon: '' },
-      { text: strings('Settings.creditCards'), action: () => { 
+      { text: strings('Settings.creditCards'), action: () => {
           navigateTo(sceneKeys.creditCardManager)
       }, icon: '' },
-      { text: strings('Settings.previousOrders'), action: () => { 
+      { text: strings('Settings.previousOrders'), action: () => {
           navigateTo(sceneKeys.orderHistory)
       }, icon: '' },
       { text: strings('Common.logout'), action: this.openLogoutConfirm.bind(this), icon: ''}
@@ -181,17 +170,13 @@ class SettingsMenu extends Component {
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={strings('Settings.header')}/>
         <SectionList
           ListHeaderComponent={this.renderHeader.bind(this)}
-          ListFooterComponent={this.renderFooter.bind(this)}
           renderItem={this.renderItem.bind(this)}
           renderSectionHeader={this.renderSectionHeader.bind(this)}
           sections={sections}
           keyExtractor={(item, index) => item + index}
         />
-
-
 
 
         <BottomChoiceSelection

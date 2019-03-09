@@ -22,22 +22,21 @@ import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import { ViewPager } from 'rn-viewpager';
 import FastImage from 'react-native-fast-image'
 
-import AddressSelection from './AddressSelection';
 
 import {
   fetchNearbySellers,
   selectSeller
-} from '../../../actions';
+} from '../../actions';
 import {
   BackButton,
   BlockButton,
   AyezText
-} from '../../_common';
+} from '../_common';
 
 import {
   AYEZ_GREEN,
   checkIfOpen
-} from '../../../Helpers';
+} from '../../Helpers';
 
 import {
   strings,
@@ -45,11 +44,11 @@ import {
   formatCurrency,
   formatDay,
   formatTimestamp
-} from '../../../i18n.js';
+} from '../../i18n.js';
 
 
-import images from '../../../theme/images'
-import { sceneKeys, navigateTo } from '../../../router';
+import images from '../../theme/images'
+import { sceneKeys, navigateTo } from '../../router';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -59,9 +58,6 @@ class StoreSelect extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isAddressSelectionVisible: false
-    };
   }
 
   fetchNearbySellers() {
@@ -575,11 +571,6 @@ renderSellerList() {
       <View style={{ flex: 1 }}>
         {this.renderAddressHeader()}
         {this.renderSellerList()}
-
-        <AddressSelection
-          onClose={() => this.setState({ isAddressSelectionVisible: false })}
-          isVisible={this.state.isAddressSelectionVisible}
-          />
       </View>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Scene,
+  Drawer,
   Router,
   Lightbox,
   Stack,
@@ -53,18 +54,17 @@ class RouterComponent extends Component {
             >
               <Scene
                 hideNavBar
-                key={sceneKeys.homepage}
-                component={components.Homepage}
+                key={sceneKeys.root}
+                component={components.Root}
                 initial
               />
-              <Scene key={sceneKeys.storePage} component={components.StorePage} />
               <Scene key={sceneKeys.storeSearch} component={components.StoreSearch} />
               <Scene key={sceneKeys.storeAisle} component={components.StoreAisle} />
               <Scene key={sceneKeys.storeShelf} component={components.StoreShelf} />
               <Scene key={sceneKeys.itemPage} component={components.ItemPage} />
               <Scene key={sceneKeys.itemImageView} component={components.ItemImageView} />
 
-              <Scene key={sceneKeys.settings} component={components.SettingsMenu} />
+              <Drawer key={sceneKeys.settings} component={components.SettingsMenu} />
               <Scene key={sceneKeys.orderHistory} component={components.OrderHistory} />
 
               <Scene key={sceneKeys.supportDetail} component={components.SupportDetail} />
@@ -85,6 +85,7 @@ class RouterComponent extends Component {
             </Stack>
 
             {/* any modals */}
+            <Scene key={sceneKeys.storeSelect} component={components.StoreSelect} panHandlers={null} />
 
             <Stack key={sceneKeys.tutorial} hideNavBar panHandlers={null}>
               <Scene

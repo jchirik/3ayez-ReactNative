@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import firebase from 'react-native-firebase';
 import { setPushToken } from './PushToken_Helpers';
 import store from '../reducers';
-import { sceneKeys, navigateTo } from '../router';
+import { sceneKeys, navigateTo, navigateBackTo } from '../router';
 
 import {
   CUSTOMER_DATA_SET,
@@ -194,15 +194,14 @@ const listenToAddresses = (dispatch) => {
       });
 
       // get the most recent address that was selected (greatest timestamp)
+
+      addresses = addresses.sort((a, b) => { return b.timestamp - a.timestamp })
+      console.log('ADDRESSES', addresses);
       let address = null;
       if (addresses.length) {
         address = addresses[0];
-        for (var i = 1; i < addresses.length; i++) {
-            if (addresses[i].timestamp > address.timestamp) {
-                address = addresses[i];
-            }
-        }
       }
+
       dispatch({ type: ADDRESSES_SET, payload: { addresses, address } });
     });
 

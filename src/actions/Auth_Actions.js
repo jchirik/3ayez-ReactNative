@@ -129,32 +129,32 @@ export const logoutUser = () => {
 // checks if addresses exist for the account
 // if so, pop to Homepage
 // otherwise create an address
-export const addressCreateProceedCheck = () => {
-  return (dispatch) => {
-    const user = firebase.auth().currentUser;
-
-    dispatch({ type: VERIFICATION_BEGIN });
-    const addressesRef = firebase.firestore().collection('customers').doc(user.uid)
-      .collection('addresses');
-    addressesRef.get().then((addressesT) => {
-      let addresses = addressesT.docs.map(addressDoc => {
-        const id = addressDoc.id;
-        const data = addressDoc.data();
-        return ({
-          ...data,
-          id
-        });
-      });
-      console.log('addressCreateProceedCheck addresses', addresses)
-      if (addresses.length > 0) {
-        navigateBackTo(sceneKeys.homepage);
-      } else {
-        console.log('GOING TO ADDRESS CREATE')
-      }
-      dispatch({ type: VERIFICATION_SUCCESS });
-    }).catch((error) => {
-      console.log('addressCreateProceedCheck error', error)
-      dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to check addresses' } });
-    })
-  }
-}
+// export const addressCreateProceedCheck = () => {
+//   return (dispatch) => {
+//     const user = firebase.auth().currentUser;
+//
+//     dispatch({ type: VERIFICATION_BEGIN });
+//     const addressesRef = firebase.firestore().collection('customers').doc(user.uid)
+//       .collection('addresses');
+//     addressesRef.get().then((addressesT) => {
+//       let addresses = addressesT.docs.map(addressDoc => {
+//         const id = addressDoc.id;
+//         const data = addressDoc.data();
+//         return ({
+//           ...data,
+//           id
+//         });
+//       });
+//       console.log('addressCreateProceedCheck addresses', addresses)
+//       if (addresses.length > 0) {
+//         navigateBackTo(sceneKeys.root);
+//       } else {
+//         console.log('GOING TO ADDRESS CREATE')
+//       }
+//       dispatch({ type: VERIFICATION_SUCCESS });
+//     }).catch((error) => {
+//       console.log('addressCreateProceedCheck error', error)
+//       dispatch({ type: VERIFICATION_FAIL, payload: { error: 'Failed to check addresses' } });
+//     })
+//   }
+// }

@@ -28,7 +28,6 @@ import {
 
 import {
   onCompleteAuth,
-  addressCreateProceedCheck,
   authGuestLogin
 } from '../../../actions';
 
@@ -45,7 +44,7 @@ import {
 const NUM_PAGES = 3;
 
 import images from '../../../theme/images'
-import { sceneKeys, navigateTo } from '../../../router';
+import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
 
 const window = Dimensions.get('window');
 
@@ -59,7 +58,7 @@ class TutorialSwipe extends Component {
   }
 
   componentDidMount() {
-    this.props.onCompleteAuth(this.props.addressCreateProceedCheck)
+    this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.root))
   }
 
   renderDotIndicator() {
@@ -198,6 +197,5 @@ const mapStateToProps = ({ Auth, Settings }) => {
 
 export default connect(mapStateToProps, {
   onCompleteAuth,
-  addressCreateProceedCheck,
   authGuestLogin
 })(TutorialSwipe);

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
 import StoreHeader from './StoreHeader';
-import colors from '../../theme/colors';
-import { STATUS_BAR_HEIGHT, isIPhoneX } from '../../Helpers';
+import colors from '../../../theme/colors';
 
-export const PARALLAX_HEADER_HEIGHT = 207 + STATUS_BAR_HEIGHT;
+export const PARALLAX_HEADER_HEIGHT = 207;
 const noop = () => {};
 // credits to https://github.com/iyegoroff/react-native-collapsible-header-views
 export class CollapsibleHeaderScrollView extends React.Component {

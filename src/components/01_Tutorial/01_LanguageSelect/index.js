@@ -130,7 +130,7 @@ class LanguageSelect extends Component {
             marginLeft: 18,
             marginRight: 18
           }}
-          onPress={() => { 
+          onPress={() => {
             navigateTo(sceneKeys.tutorialSwipe)
           }}
           />

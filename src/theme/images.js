@@ -6,6 +6,7 @@ export default {
   backIcon: require(`${IMAGE_PATH}/Common/back.png`),
   closeIcon: require(`${IMAGE_PATH}/Common/close.png`),
   exitIcon: require(`${IMAGE_PATH}/Common/exit.png`),
+  menuIcon: require(`${IMAGE_PATH}/Common/menu.png`),
   deleteIcon: require(`${IMAGE_PATH}/Common/delete.png`),
   removeIcon: require(`${IMAGE_PATH}/Common/remove.png`),
   starIcon: require(`${IMAGE_PATH}/Common/star.png`),

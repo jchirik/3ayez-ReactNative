@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
-import colors from '../../theme/colors';
-import { STATUS_BAR_HEIGHT } from '../../Helpers';
+import colors from '../../../theme/colors';
 
 const window = Dimensions.get('window');
 const PARALLAX_HEADER_HEIGHT = 250;
@@ -31,19 +30,15 @@ const styles = StyleSheet.create({
   },
   categoryList: {
     flex: 1,
-    marginTop: 20
+    backgroundColor: colors.paleGrey,
   },
   segmented_control_view_style: {
     flex: 1,
     backgroundColor: '#FAFCFD'
   },
   container: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    resizeMode: 'cover'
+    flex: 1,
+    backgroundColor: '#FAFCFD'
   },
   background: {
     position: 'absolute',
@@ -72,7 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   parallaxHeader: {
-    paddingTop: STATUS_BAR_HEIGHT + 12,
+    paddingTop: 12,
     alignItems: 'center',
     position: 'absolute',
     left: 0,
@@ -168,8 +163,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 22,
     height: 22,
-    top: STATUS_BAR_HEIGHT+19,
+    top: 19,
     right: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  settingsIconStyle: {
+    position: 'absolute',
+    width: 22,
+    height: 22,
+    top: 19,
+    left: 15,
     justifyContent: 'center',
     alignItems: 'center'
   }

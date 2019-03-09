@@ -23,28 +23,28 @@ import {
   AnimatedCheckmarkOverlay,
   BlockUnderButton,
   CustomItemPrompt
-} from '../../_common';
+} from '../../../_common';
 import {
   STATUS_BAR_HEIGHT,
   AYEZ_GREEN
-} from '../../../Helpers.js';
+} from '../../../../Helpers.js';
 
 
 import FastImage from 'react-native-fast-image';
 
 const window = Dimensions.get('window');
-import { onSelectCategory } from '../../../actions';
+import { onSelectCategory } from '../../../../actions';
 
 
 
 import {
   strings,
   translate
-} from '../../../i18n.js';
+} from '../../../../i18n.js';
 
 import styles from '../styles';
-import colors from '../../../theme/colors';
-import { sceneKeys, navigateTo } from '../../../router';
+import colors from '../../../../theme/colors';
+import { sceneKeys, navigateTo } from '../../../../router';
 
 const CATEGORY_COL_NUM = 2;
 const CATEGORY_SCROLL_EVENT_THROTTLE = 16;
@@ -72,9 +72,10 @@ class CategoriesBrowse extends Component {
             alignItems: 'center',
             width: window.width/2,
             height: window.width/2,
-            paddingLeft: index % 2 == 0 ? '5.3%' : '1.4%',
-            paddingRight: index % 2 == 0 ? '1.4%' : '5.3%',
-            paddingBottom: 40
+            paddingLeft: index % 2 == 0 ? 20 : 5,
+            paddingRight: index % 2 == 0 ? 5 : 20,
+            paddingTop: 20,
+            paddingBottom: 20
           }}
           onPress={this.onSelectCategory.bind(this, item)}
         >
@@ -85,7 +86,6 @@ class CategoriesBrowse extends Component {
               resizeMode={'cover'}
             />
           </View>
-
           <AyezText size={12}
             regular style={{ marginTop: 6 }}>{translate(item.name)}</AyezText>
         </TouchableOpacity>
@@ -118,7 +118,7 @@ class CategoriesBrowse extends Component {
         renderItem={this.renderItem.bind(this)}
         style={styles.categoryList}
         removeClippedSubviews
-        ListHeaderComponent={null}
+        ListHeaderComponent={<View style={{ height: 20 }} />} 
         numColumns={CATEGORY_COL_NUM}
         ListEmptyComponent={this.renderEmptyCategories.bind(this)}
         ListFooterComponent={this.renderFooter.bind(this)}

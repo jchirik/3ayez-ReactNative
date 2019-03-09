@@ -17,9 +17,11 @@ import {
   findNodeHandle
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
+import SideMenu from 'react-native-side-menu';
 
 import FeaturedBrowse from './01_FeaturedBrowse';
 import CategoriesBrowse from './02_CategoriesBrowse';
+import SettingsMenu from '../../16_Settings/01_SettingsMenu';
 
 import {
   AnimatedCheckmarkOverlay,
@@ -27,30 +29,32 @@ import {
   BasketBlockButton,
   BackButton,
   AyezText
-} from '../_common';
+} from '../../_common';
 
 import {
   strings,
   translate,
   FONT_LIGHT
-} from '../../i18n.js';
+} from '../../../i18n.js';
 
 import {
   STATUS_BAR_HEIGHT,
   AYEZ_GREEN
-} from '../../Helpers';
+} from '../../../Helpers';
 
 
 import styles from './styles';
-import colors from '../../theme/colors';
-import images from '../../theme/images'
+import colors from '../../../theme/colors';
+import images from '../../../theme/images'
+
+import AddressSelection from './AddressSelection';
 
 import {
   CollapsibleHeaderScrollView,
   PARALLAX_HEADER_HEIGHT
 } from './CollapsibleHeaderScrollView';
-import { sceneKeys, navigateTo } from '../../router';
-const STICKY_HEADER_HEIGHT = 68 + STATUS_BAR_HEIGHT; // EDIT THIS 86
+import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
+const STICKY_HEADER_HEIGHT = 68; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 const TAB_BAR_HEIGHT = 52;
 
@@ -67,7 +71,10 @@ class StorePage extends Component {
         ],
         tabBarHeight: 0,
         selected_tab: 0,
-        itemHeight: 0
+        itemHeight: 0,
+
+        isSideMenuOpen: false,
+        isAddressSelectionVisible: false
       };
     }
 
@@ -75,20 +82,8 @@ class StorePage extends Component {
   componentDidMount() {
     //listens to hardwareBackPress
     BackHandler.addEventListener('hardwareBackPress', () => {
-      try {
-        navigateBack()
-        return true;
-      } catch (err) {
-        console.debug("Can't pop. Exiting the app...");
-        return false;
-      }
-    });
-    InteractionManager.runAfterInteractions(() => {
-      setTimeout(() => {
-        this.setState({
-          bluredViewRef: findNodeHandle(this.refs['03_StorePage'])
-        });
-      }, 100);
+      console.log("Can't pop. Exiting the app...");
+      return false;
     });
   }
 
@@ -211,7 +206,56 @@ class StorePage extends Component {
     );
   }
 
+  renderSettings() {
+    return (
+      <TouchableOpacity
+        style={styles.settingsIconStyle}
+        onPress={() => this.setState({ isSideMenuOpen: true })}
+      >
+        <Image
+          source={images.menuIcon}
+          style={{ width: 28, height: 28, tintColor: 'white' }}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    );
+  }
+
+  renderAddressBar() {
+    const { address, area } = this.props;
+
+    if (!area) { return null; }
+
+    return (
+      <TouchableOpacity style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: STATUS_BAR_HEIGHT + 9,
+        paddingBottom: 8,
+        backgroundColor: 'white',
+        paddingHorizontal: 20,
+        zIndex: 2
+      }}
+        activeOpacity={1}
+        onPress={() => this.setState({ isAddressSelectionVisible: true })}
+      >
+        <View>
+          <AyezText medium>{'Delivering to'}</AyezText>
+          <AyezText regular>{address.building || 'Near'} {address.street} ({translate(area.display_name)})</AyezText>
+        </View>
+        <View style={{ flex: 1 }} />
+        <AyezText
+          regular
+          color={AYEZ_GREEN}
+          >{'change'}</AyezText>
+      </TouchableOpacity>
+    )
+  }
+
   render() {
+
+    if (!this.props.seller_id) { return null; }
+
     const { selected_tab, tabs, tabBarHeight } = this.state;
 
     let mainScrollComponent = null;
@@ -226,30 +270,45 @@ class StorePage extends Component {
     }
 
     return (
-      <View ref={'03_StorePage'} style={styles.container}>
-        <CollapsibleHeaderScrollView
-          tabBarHeight={tabBarHeight}
-          headerHeight={PARALLAX_HEADER_HEIGHT + tabBarHeight}
-          statusBarHeight={STICKY_HEADER_HEIGHT + tabBarHeight}
-          disableHeaderSnap={true}
-          displayName={this.props.display_name}
-          logo_url={this.props.logo_url}
-          cover_url={this.props.cover_url}
-          location_text={this.props.location_text}
-          Tabs={this.renderTabs()}
-        >
-          {mainScrollComponent}
-        </CollapsibleHeaderScrollView>
-        {this.renderBasket()}
-        <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
+      <SideMenu
+        menu={<SettingsMenu />}
+        isOpen={this.state.isSideMenuOpen}
+        onChange={(isOpen) => this.setState({ isSideMenuOpen: isOpen })}
+        menuPosition={(this.props.locale === 'ar') ? 'right' : 'left'}
+        style={{ flex: 1, backgroundColor: 'white' }}
+      >
+        {this.renderAddressBar()}
+        <View style={styles.container}>
+          <CollapsibleHeaderScrollView
+            tabBarHeight={tabBarHeight}
+            headerHeight={PARALLAX_HEADER_HEIGHT + tabBarHeight}
+            statusBarHeight={STICKY_HEADER_HEIGHT + tabBarHeight}
+            disableHeaderSnap={true}
+            displayName={this.props.display_name}
+            logo_url={this.props.logo_url}
+            cover_url={this.props.cover_url}
+            location_text={this.props.location_text}
+            Tabs={this.renderTabs()}
+          >
+            {mainScrollComponent}
+          </CollapsibleHeaderScrollView>
+          {this.renderSettings()}
+          {this.renderBasket()}
+          <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
+
+        </View>
+
         <AnimatedCheckmarkOverlay />
-        <BackButton fixed color={'white'} />
-      </View>
+        <AddressSelection
+          onClose={() => this.setState({ isAddressSelectionVisible: false })}
+          isVisible={this.state.isAddressSelectionVisible}
+          />
+      </SideMenu>
     );
   }
 }
 
-const mapStateToProps = ({ Seller, Baskets }) => {
+const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch }) => {
   const {
     id,
     logo_url,
@@ -262,8 +321,16 @@ const mapStateToProps = ({ Seller, Baskets }) => {
     display_name
   } = Seller;
 
+  const { locale } = Settings;
+
+  const { address } = Addresses;
+  const { area } = SellerSearch;
+
   const { basket_quantity } = Baskets.baskets[Seller.id];
   return {
+    locale,
+    address,
+    area,
     seller_id: id,
     logo_url,
     cover_url,

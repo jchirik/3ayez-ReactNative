@@ -21,21 +21,21 @@ import {
   BasketBlockButton,
   AnimatedCheckmarkOverlay,
   BlockUnderButton
-} from '../../_common';
+} from '../../../_common';
 import {
   STATUS_BAR_HEIGHT,
   AYEZ_GREEN
-} from '../../../Helpers.js';
+} from '../../../../Helpers.js';
 
 
 import {
   strings,
   translate
-} from '../../../i18n.js';
+} from '../../../../i18n.js';
 
 import styles from '../styles';
-import colors from '../../../theme/colors';
-import { sceneKeys, navigateTo } from '../../../router';
+import colors from '../../../../theme/colors';
+import { sceneKeys, navigateTo } from '../../../../router';
 
 class FeaturedBrowse extends Component {
 

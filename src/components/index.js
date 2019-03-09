@@ -1,11 +1,11 @@
-import LanguageSelect from './00_Tutorial/01_LanguageSelect';
-import TutorialSwipe from './00_Tutorial/02_TutorialSwipe';
-import CurrentLocationSelect from './01_AddressCreate/01_CurrentLocationSelect';
-import AddressSearch from './01_AddressCreate/02_AddressSearch';
-import RefineLocation from './01_AddressCreate/03_RefineLocation';
-import AddressDetails from './01_AddressCreate/04_AddressDetails';
-import Homepage from './02_Homepage';
-import StorePage from './03_StorePage';
+import Root from './00_Root';
+import LanguageSelect from './01_Tutorial/01_LanguageSelect';
+import TutorialSwipe from './01_Tutorial/02_TutorialSwipe';
+import CurrentLocationSelect from './02_AddressCreate/01_CurrentLocationSelect';
+import AddressSearch from './02_AddressCreate/02_AddressSearch';
+import RefineLocation from './02_AddressCreate/03_RefineLocation';
+import AddressDetails from './02_AddressCreate/04_AddressDetails';
+import StoreSelect from './03_StoreSelect';
 import StoreSearch from './04_StoreSearch';
 import StoreAisle from './05_StoreAisle';
 import StoreShelf from './06_StoreShelf';
@@ -35,52 +35,48 @@ import CustomerFeedback from './23_CustomerFeedback';
 import AdditionalNotes from './24_AdditionalNotes';
 
 export {
-    LanguageSelect, 
-    TutorialSwipe, 
-    CurrentLocationSelect, 
-    AddressSearch, 
-    RefineLocation, 
-    AddressDetails, 
-    Homepage, 
-    StorePage, 
-    StoreSearch, 
-    StoreAisle, 
-    StoreShelf, 
-    ItemPage, 
-    ItemImageView, 
-    CustomProduct, 
-    WorkingBasket, 
-    YallaTimeSelect, 
-    TimeslotSelect, 
-    Checkout, 
-    OrderTracker, 
-    OrderSummary, 
-    DriverTracker, 
-    OrderProblem, 
-    OrderReview, 
-    PhoneEntry, 
-    VerifyCode, 
-    SettingsMenu, 
-    OrderHistory, 
-    SupportDetail, 
-    CouponModal, 
-    SupportChat, 
-    CreditCardManager, 
-    CreditCardCreate, 
-    AddressManager, 
-    CustomerFeedback, 
-    AdditionalNotes   
+    Root,
+    LanguageSelect,
+    TutorialSwipe,
+    CurrentLocationSelect,
+    AddressSearch,
+    RefineLocation,
+    AddressDetails,
+    StoreSelect,
+    StoreSearch,
+    StoreAisle,
+    StoreShelf,
+    ItemPage,
+    ItemImageView,
+    CustomProduct,
+    WorkingBasket,
+    YallaTimeSelect,
+    TimeslotSelect,
+    Checkout,
+    OrderTracker,
+    OrderSummary,
+    DriverTracker,
+    OrderProblem,
+    OrderReview,
+    PhoneEntry,
+    VerifyCode,
+    SettingsMenu,
+    OrderHistory,
+    SupportDetail,
+    CouponModal,
+    SupportChat,
+    CreditCardManager,
+    CreditCardCreate,
+    AddressManager,
+    CustomerFeedback,
+    AdditionalNotes
 }
 
 export const sceneKeys = {
-    locationDetails : "locationDetails",
-    myTab : "myTab",
-    myTab_1 : "myTab_1",
-    storeSelect : "storeSelect",
-    support : "support",
     main : "main",
-    homepage : "homepage",
-    storePage : "storePage",
+    root : "root",
+    storeSelect : "storeSelect",
+    locationDetails : "locationDetails",
     storeSearch : "storeSearch",
     storeAisle : "storeAisle",
     storeShelf : "storeShelf",

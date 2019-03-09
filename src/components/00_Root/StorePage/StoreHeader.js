@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, Image, Animated } from 'react-native';
-import { AyezText, SearchBarButton } from '../_common';
+import { View, Image, Animated, TouchableOpacity } from 'react-native';
+import { AyezText, SearchBarButton } from '../../_common';
 import styles from './styles';
 
 import {
   strings,
   translate
-} from '../../i18n.js';
+} from '../../../i18n.js';
 
 
-import images from '../../theme/images'
+import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
+
+import images from '../../../theme/images'
 
 import { PARALLAX_HEADER_HEIGHT } from './CollapsibleHeaderScrollView';
 const AnimatedSearchBarButton = Animated.createAnimatedComponent(SearchBarButton);

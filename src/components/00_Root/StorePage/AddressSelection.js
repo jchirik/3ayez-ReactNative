@@ -114,7 +114,7 @@ class AddressSelection extends Component {
       return null;
     }
 
-    const addressComponents = addresses.slice(0, 5).map(address => (
+    const addressComponents = addresses.slice(0, 3).map(address => (
       <TouchableOpacity
         key={address.id}
         style={{
@@ -123,22 +123,13 @@ class AddressSelection extends Component {
           paddingTop: 8,
           paddingBottom: 8,
           borderBottomWidth: 1,
-          borderColor: 'rgba(255, 255, 255, 0.25)'
+          borderColor: 'rgba(255, 255, 255, 0.25)',
+          paddingHorizontal: 20
          }}
        onPress={() => {
          this.props.selectAddress(address, this.onClose.bind(this));
        }}
        >
-        <Image
-          source={images.addressIcon}
-          style={{
-            width: 32,
-            height: 32,
-            marginLeft: 20,
-            marginRight: 30
-          }}
-          resizeMode={'contain'}
-        />
         <View style={{ flex: 1, alignItems: 'flex-start' }}>
           <AyezText bold style={{
             color: 'white'
@@ -154,7 +145,6 @@ class AddressSelection extends Component {
             width: 24,
             height: 24,
             marginLeft: 20,
-            marginRight: 20,
             tintColor: 'white'
           }}
           resizeMode={'contain'}
@@ -170,7 +160,8 @@ class AddressSelection extends Component {
           bottom: 0,
           right: 0,
           left: 0,
-          elevation: 1000
+          elevation: 1000,
+          zIndex: 10
         }}
       >
         <AnimatedTouchableOpacity
