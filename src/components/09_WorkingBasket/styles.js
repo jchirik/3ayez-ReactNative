@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 80
   },
-  basketContatiner: {
+  basketContainer: {
+    backgroundColor: '#cecece',
     width: '100%',
     height: 60 + STATUS_BAR_HEIGHT,
     justifyContent: 'center',

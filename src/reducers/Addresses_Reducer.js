@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, addresses: p.addresses, is_loading: false };
     case ADDRESSES_LISTENER_SET:
       if (state.addressesListener !== null) { state.addressesListener(); }
-      return { ...INITIAL_STATE, is_loading: true, addressesListener: p.addressesListener };
+      return { ...state, is_loading: true, addressesListener: p.addressesListener, addresses: [] };
     case CUSTOMER_DATA_RESET:
         if (state.addressesListener !== null) { state.addressesListener(); }
         return INITIAL_STATE;

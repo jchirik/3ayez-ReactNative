@@ -35,6 +35,7 @@ import {
 
 import {
   AYEZ_GREEN,
+  STATUS_BAR_HEIGHT,
   checkIfOpen
 } from '../../Helpers';
 
@@ -94,55 +95,6 @@ class StoreSelect extends Component {
   // }
 
 
-renderAddressHeader() {
-  return (
-    <TouchableOpacity
-      onPress={() => this.setState({ isAddressSelectionVisible: true })}
-      style={{
-        marginTop: 6,
-        paddingBottom: 3,
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        borderBottomWidth: 1,
-        borderColor: '#EAEAEA'
-      }}
-    >
-      <AyezText medium style={{
-        color: '#2DD38F',
-        fontSize: 12,
-        lineHeight: 16,
-        textAlign: 'center'
-      }}>{strings('StoreSelect.deliveringTo')}</AyezText>
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'stretch',
-        paddingTop: 3,
-        paddingBottom: 4
-      }}>
-        <AyezText
-          adjustsFontSizeToFit
-          minimumFontScale={0.6}
-          numberOfLines={1}
-          semibold style={{
-            maxWidth: SCREEN_WIDTH - 100,
-            color: 'black',
-            fontSize: (Platform.OS === 'android') ? 22 : 28,
-            textAlign: 'center'
-        }}>{this.props.street || '-'}</AyezText>
-
-        <AyezText regular style={{
-          color: '#0094ff',
-          marginTop: 4,
-          fontSize: 13,
-          lineHeight: 16,
-          marginLeft: 8,
-        }}>({strings('Common.edit')})</AyezText>
-      </View>
-    </TouchableOpacity>
-  )
-}
 
 renderNoInternetConnection() {
   return (
@@ -557,7 +509,15 @@ renderSellerList() {
       style={{ flex: 1, backgroundColor: 'white' }}
 
       removeClippedSubviews
-      ListHeaderComponent={null}
+      ListHeaderComponent={
+        <View style={{
+          marginTop: STATUS_BAR_HEIGHT + 16,
+          marginBottom: 6,
+          alignItems: 'center'
+        }}>
+          <AyezText medium size={18}>Please select your store</AyezText>
+        </View>
+      }
       ListFooterComponent={null}
 
       showsVerticalScrollIndicator={false}
@@ -569,7 +529,7 @@ renderSellerList() {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {this.renderAddressHeader()}
+
         {this.renderSellerList()}
       </View>
     );

@@ -34,6 +34,7 @@ import {
 import {
   AYEZ_GREEN,
   AYEZ_BACKGROUND_COLOR,
+  STATUS_BAR_HEIGHT,
   isIPhoneX,
   SPLASH_SCREEN_TIME_OUT
 } from '../../Helpers.js';
@@ -43,6 +44,7 @@ import {
   translate
 } from '../../i18n.js';
 
+import colors from '../../theme/colors'
 import images from '../../theme/images'
 import { sceneKeys, navigateTo } from '../../router';
 
@@ -88,7 +90,7 @@ class Root extends Component {
       console.log('FINISHED LOADING ADDRESSES, no address so create')
       setTimeout(() => {
         navigateTo(sceneKeys.addressCreate);
-      }, 1000);
+      }, 500);
     } else if (this.props.address && (!prevProps.address || (this.props.address.id !== prevProps.address.id))) {
       console.log('FINISHED LOADING ADDRESSES, select store');
       navigateTo(sceneKeys.storeSelect)
@@ -112,13 +114,14 @@ class Root extends Component {
         <TouchableOpacity
           key={address.id}
           style={{
+            marginHorizontal: 10,
+            marginTop: 10,
+            borderRadius: 6,
             flexDirection: 'row',
             alignItems: 'center',
-            paddingTop: 8,
-            paddingBottom: 8,
-            borderBottomWidth: 1,
-            borderColor: 'rgba(255, 255, 255, 0.25)',
-            paddingHorizontal: 20
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            backgroundColor: AYEZ_GREEN
            }}
          onPress={() => {
            this.props.selectAddress(address);
@@ -136,9 +139,28 @@ class Root extends Component {
       ));
 
       return (
-        <View>
-        <AyezText>Please select one of your addresses</AyezText>
-        {addressComponents}
+        <View style={{
+          backgroundColor: colors.paleGrey,
+          paddingTop: STATUS_BAR_HEIGHT + 20,
+          alignItems: 'center',
+          flex: 1
+         }}>
+         <AyezText medium size={16}>Welcome back {this.props.name}!</AyezText>
+         <AyezText regular size={16} style={{ marginTop: 5, marginBottom: 6 }}>Please select your location</AyezText>
+          {addressComponents}
+          <TouchableOpacity
+            style={{
+              marginTop: 20,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+             }}
+           onPress={() => navigateTo(sceneKeys.addressCreate)}
+           >
+            <AyezText medium>+ New Address</AyezText>
+          </TouchableOpacity>
+
+          <View style={{ flex: 1 }} />
+          <AyezText medium color={'red'} style={{ marginBottom: 14 }}>Logout</AyezText>
         </View>
       )
     }
@@ -147,12 +169,18 @@ class Root extends Component {
   }
 }
 
-const mapStateToProps = ({ Seller, Addresses, Settings, OngoingOrders }) => {
+const mapStateToProps = ({ Customer, Seller, Addresses, Settings, OngoingOrders }) => {
+
+  const {
+    name
+  } = Customer;
+
   const { id } = Seller;
   const { address, addresses, is_loading } = Addresses;
   const { review_order, feedback_order } = OngoingOrders;
   const { locale } = Settings;
   return {
+    name,
     seller_id: id,
     locale,
     address,

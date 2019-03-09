@@ -37,7 +37,7 @@ import { addToBasket, saveItemSpecialRequests } from '../../actions';
 import { strings, translate } from '../../i18n.js';
 import { Actions } from 'react-native-router-flux';
 import images from '../../theme/images';
-import { sceneKeys, navigateTo } from '../../router';
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 const SHOW_DELAY_DELIVERY_MODAL_QUANTITY = 6;
 const PRODUCE_CATEGORY = 'produce';

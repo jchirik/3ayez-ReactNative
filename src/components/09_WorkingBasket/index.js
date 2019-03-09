@@ -57,7 +57,7 @@ class WorkingBasket extends Component {
     if (coupon) {
       return (
         <TouchableOpacity
-          onPress={() => { 
+          onPress={() => {
             if(sceneKeys.couponModal != Actions.currentScene) {
               Actions.couponModal()
             }
@@ -110,7 +110,16 @@ class WorkingBasket extends Component {
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <View style={styles.basketContatiner}>
+        <View style={styles.basketContainer}>
+          <Image
+            source={{ uri: this.props.seller.cover_url }}
+            style={{
+              opacity: 0.5,
+              width: '100%',
+              height: '100%'
+            }}
+            resizeMode={'cover'}
+          />
           <Image
             source={images.skeuomorphBasket}
             style={{

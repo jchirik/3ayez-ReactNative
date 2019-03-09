@@ -70,7 +70,8 @@ class SettingsMenu extends Component {
   renderHeader() {
     let accountContent = (
       <AyezText semibold style={{
-        fontSize: 22,
+        marginTop: 5,
+        fontSize: 20,
         alignSelf: 'flex-start'
       }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
     )

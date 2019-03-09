@@ -239,8 +239,8 @@ class StorePage extends Component {
         activeOpacity={1}
         onPress={() => this.setState({ isAddressSelectionVisible: true })}
       >
-        <View>
-          <AyezText medium color={'white'}>{'Delivering to'}</AyezText>
+        <View style={{ alignItems: 'flex-start' }}>
+          <AyezText medium color={'white'}>{strings('StoreSelect.deliveringTo')}</AyezText>
           <View style={{ flexDirection: 'row' }}>
             <AyezText regular color={'white'}>{address.building || 'Near'} {address.street}</AyezText>
             <AyezText
