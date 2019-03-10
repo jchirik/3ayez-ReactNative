@@ -38,6 +38,7 @@ import images from '../../theme/images';
 
 import { Header, RTLImage } from '../_common';
 import { navigateBack } from '../../router/index.js';
+import LiveChat from '../../utils/livechat.js';
 
 const { height, width } = Dimensions.get('window');
 const totalSize = num =>
@@ -48,14 +49,14 @@ class Chat extends React.Component {
     super(props);
 
     this.state = {
-      typingText: null,
+      typingText: null
     };
     this.handleInputTextChange = this.handleInputTextChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps) {
-    return { messages: nextProps.messages }
+    return { messages: nextProps.messages };
   }
 
   getVisitor = () => {
@@ -70,19 +71,26 @@ class Chat extends React.Component {
   };
 
   handleSend = messages => {
-    const customId = String(Math.random())
+    const customId = String(Math.random());
 
-    this.props.addSupportMessage({
-      [GIFTED_CHAT_MODEL.text]: messages[0].text,
-      [GIFTED_CHAT_MODEL.id]: customId,
-      [GIFTED_CHAT_MODEL.at]: new Date(),
-      [GIFTED_CHAT_MODEL.user]: this.getVisitor()
-    });
+    this.props.addSupportMessage(
+      LiveChat.getFormattedMessage({
+        text: messages[0].text,
+        id: customId,
+        user: this.getVisitor()
+      })
+    );
 
-    this.props.visitorSDK.sendMessage({
-      customId,
-      text: messages[0].text
-    }).then(response => { console.log(response); this.props.validateMessage(customId) }).catch(_ => {});
+    this.props.visitorSDK
+      .sendMessage({
+        customId,
+        text: messages[0].text
+      })
+      .then(response => {
+        console.log(response);
+        // this.props.validateMessage(customId);
+      })
+      .catch(_ => {});
   };
 
   renderBubble = props => {
@@ -307,12 +315,18 @@ class Chat extends React.Component {
           placeholder={strings('SupportChat.inputPlaceholder')}
           onSend={this.handleSend}
           onInputTextChanged={this.handleInputTextChange}
-          renderSystemMessage={props => <SystemMessage {...props} textStyle={{
-            lineHeight: 22,
-            fontSize: 14,
-            fontFamily: FONT_MEDIUM(),
-            textAlign: 'center'
-          }} wrapperStyle={{ width: '90%' }}></SystemMessage>}
+          renderSystemMessage={props => (
+            <SystemMessage
+              {...props}
+              textStyle={{
+                lineHeight: 22,
+                fontSize: 14,
+                fontFamily: FONT_MEDIUM(),
+                textAlign: 'center'
+              }}
+              wrapperStyle={{ width: '90%' }}
+            />
+          )}
           user={this.getVisitor()}
           isAnimated
           textInputProps={{
@@ -327,7 +341,7 @@ class Chat extends React.Component {
           bottomOffset={-12}
           autoFocus
           renderComposer={this.renderComposer}
-          renderFooter={_ => <View style={{ height: 30 }} ></View>}
+          renderFooter={_ => <View style={{ height: 30 }} />}
           renderSend={() => {}}
           messages={this.state.messages}
         />

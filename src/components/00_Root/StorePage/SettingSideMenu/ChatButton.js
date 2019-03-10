@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  AppState,
-  ActivityIndicator
-} from 'react-native';
-import firebase from 'react-native-firebase';
-import { init } from '@livechat/livechat-visitor-sdk';
+import { View, TouchableOpacity } from 'react-native';
 import { RTLImage, AyezText } from '../../../_common';
-import { strings, translate } from '../../../../i18n.js';
+import { strings } from '../../../../i18n.js';
 import {
   loadSupportManual,
   addSupportMessage,
@@ -20,229 +11,20 @@ import {
 } from '../../../../actions';
 import images from '../../../../theme/images';
 import { sceneKeys, navigateTo } from '../../../../router';
-import { toast, GIFTED_CHAT_MODEL, isIOS, AYEZ_GREEN } from '../../../../Helpers';
-
-const SUPPORT_CHAT_GENERAL_GROUP = 0;
-const GET_LIVE_CHAT_CUSTOMER_INFO = 'getLiveChatCustomerInfo';
-const NEW_MESSAGE_EVENT = 'new_message';
-const NEW_FILE_EVENT = 'new_file';
-const AGENT_CHANGED_EVENT = 'agent_changed';
-const VISITOR_DATA_EVENT = 'visitor_data';
-const CHAT_ENDED_EVENT = 'chat_ended';
-const QUEUED_EVENT = 'visitor_queued';
-const AGENT_TYPE = 'agent';
-const VISITOR_TYPE = 'visitor';
-const LIVE_CHAT_REMOTE_CONFIG_LICENSE = 'live_chat_license';
-const BACKGROUND_APP_STATE = 'background';
-const GREETING_MESSAGE = 'greeting_message';
-const TYPING_INDICATOR_EVENT = 'typing_indicator';
-
-const getLiveChatCustomerInfo = firebase
-  .functions()
-  .httpsCallable(GET_LIVE_CHAT_CUSTOMER_INFO);
-
-if (__DEV__) {
-  firebase.config().enableDeveloperMode();
-}
-
+import { AYEZ_GREEN } from '../../../../Helpers';
+import Firebase from '../../../../utils/firebase';
+import LiveChat from '../../../../utils/livechat';
 
 class ChatButton extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      visitorSDK: undefined,
-      greetingMessage: undefined
-    };
   }
 
-  static notifyForNewMessage() {
-    if (Actions.currentScene != sceneKeys.supportChat) {
-      toast(strings('Support.newMessageNotification'));
-    }
-  }
-
-  static retrieveComponentProps = property => {
-    return new Promise(resolve => {
-      firebase
-        .config()
-        .fetch()
-        .then(() => firebase.config().activateFetched())
-        .then(() => {
-          firebase
-            .config()
-            .getValue(property)
-            .then(data => {
-              resolve(data.val());
-            });
-        })
-        .catch(error => console.log(`Error processing config: ${error}`));
-    });
-  };
-
-  setUpVisitorSDKWithGroup = (customer, license) => {
-    let currentVisitorSDK = init({
-      license: license,
-      group: 0
-    });
-
-    this.listenForNewMessagesFor(currentVisitorSDK);
-    this.listenForNewFilesFor(currentVisitorSDK);
-    this.listenForChatEndedFor(currentVisitorSDK);
-    this.listenForNewAgentFor(currentVisitorSDK);
-    this.listenForNewVisitorFor(currentVisitorSDK);
-    this.listenForQueuedFor(currentVisitorSDK);
-    this.listenForTypingIndicator(currentVisitorSDK);
-    this.handleEmptyView()
-
-    currentVisitorSDK.setVisitorData({
-      ...customer,
-      customProperties: {
-        customerId: customer.id
-      }
-    });
-
+  componentWillMount() {
     this.setState({
-      visitorSDK: currentVisitorSDK
+      visitorSDK: LiveChat.getInstance()
     });
-  };
-
-  listenForTypingIndicator = sdk => {
-    sdk.on(TYPING_INDICATOR_EVENT, typingData => {
-      if(typingData.isTyping)
-        toast(strings('SupportChat.agentIsTyping'))
-    });
-  };
-
-  listenForQueuedFor = sdk => {
-    sdk.on(QUEUED_EVENT, _ => {
-      this.props.addSupportMessage({
-        [GIFTED_CHAT_MODEL.text]: strings('SupportChat.pleaseWaitForAgent'),
-        [GIFTED_CHAT_MODEL.id]: String(Math.random()),
-        [GIFTED_CHAT_MODEL.at]: Date.now(),
-        [GIFTED_CHAT_MODEL.system]: true
-      });
-    })
   }
-
-  handleEmptyView = () => {
-    if(this.props.messages.length == 0) {
-      this.props.addSupportMessage({
-        [GIFTED_CHAT_MODEL.text]: this.state.greetingMessage,
-        [GIFTED_CHAT_MODEL.id]: String(Math.random()),
-        [GIFTED_CHAT_MODEL.at]: Date.now(),
-        [GIFTED_CHAT_MODEL.system]: true
-      });
-    }
-  }
-
-  listenForNewMessagesFor = (sdk, group) => {
-    sdk.on(NEW_MESSAGE_EVENT, message => {
-      Support.notifyForNewMessage();
-
-      if(this.props.users[message.authorId] && this.props.users[message.authorId].type == VISITOR_TYPE) return;
-
-      this.props.addSupportMessage({
-        [GIFTED_CHAT_MODEL.text]: message.text,
-        [GIFTED_CHAT_MODEL.id]: message.id + String(Math.random()),
-        [GIFTED_CHAT_MODEL.at]: message.timestamp,
-        [GIFTED_CHAT_MODEL.user]: this.props.users[message.authorId]
-      });
-    });
-  };
-
-  listenForNewFilesFor = (sdk, group) => {
-    sdk.on(NEW_FILE_EVENT, file => {
-      Support.notifyForNewMessage();
-      this.props.addSupportMessage({
-        [GIFTED_CHAT_MODEL.id]: file.id + String(Math.random()),
-        [GIFTED_CHAT_MODEL.at]: file.timestamp,
-        [GIFTED_CHAT_MODEL.user]: this.props.users[file.authorId],
-        [GIFTED_CHAT_MODEL.image]: file.url
-      });
-    });
-  };
-
-  listenForNewAgentFor = sdk => {
-    sdk.on(AGENT_CHANGED_EVENT, agent => {
-      this.addSupportUserWithType(agent, AGENT_TYPE);
-    });
-  };
-
-  listenForNewVisitorFor = sdk => {
-    sdk.on(VISITOR_DATA_EVENT, visitor => {
-      this.addSupportUserWithType(visitor, VISITOR_TYPE);
-    });
-  };
-
-  addSupportUserWithType = (user, type) => {
-    this.props.addSupportUser({
-      [GIFTED_CHAT_MODEL.id]: user.id,
-      [GIFTED_CHAT_MODEL.type]: type,
-      [GIFTED_CHAT_MODEL.name]: user.name || user.type,
-      [GIFTED_CHAT_MODEL.avatar]: user.avatarUrl
-        ? 'https://' + user.avatarUrl
-        : null
-    });
-  };
-
-  listenForChatEndedFor = (sdk, group) => {
-    sdk.on(CHAT_ENDED_EVENT, () => {
-      // Support.notifyForNewMessage();
-      // this.props.addSupportMessage({
-      //   [GIFTED_CHAT_MODEL.text]: strings('SupportChat.chatEnded'),
-      //   [GIFTED_CHAT_MODEL.id]: String(Math.random()),
-      //   [GIFTED_CHAT_MODEL.at]: Date.now(),
-      //   [GIFTED_CHAT_MODEL.system]: true
-      // });
-    });
-  };
-
-  handleAppClosing = nextState => {
-    if (isIOS() && nextState == BACKGROUND_APP_STATE && this.state.visitorSDK) {
-      console.log('hello');
-      this.state.visitorSDK.closeChat();
-    }
-  };
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleAppClosing);
-  }
-
-  async componentWillMount() {
-    AppState.addEventListener('change', this.handleAppClosing);
-
-    this.props.loadSupportManual();
-
-    const license = await Support.retrieveComponentProps(
-      LIVE_CHAT_REMOTE_CONFIG_LICENSE
-    );
-
-    try {
-      let greetingMessage = await Support.retrieveComponentProps(
-        GREETING_MESSAGE
-      );
-
-      if(!greetingMessage) greetingMessage = strings('SupportChat.defaultGreetingMessage')
-
-      this.setState({ greetingMessage });
-      const license = await Support.retrieveComponentProps(
-        LIVE_CHAT_REMOTE_CONFIG_LICENSE
-      );
-
-      const { data: customerInfo } = await getLiveChatCustomerInfo({
-        phone: this.props.customer ? this.props.customer.phone : ''
-      });
-
-      this.setUpVisitorSDKWithGroup(customerInfo, license);
-      console.log('license')
-      console.log(greetingMessage)
-      console.log(license)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
 
   render() {
     return (
@@ -323,7 +105,6 @@ class ChatButton extends Component {
   }
 }
 
-
 const styles = {
   tileStyle: {
     flexDirection: 'row',
@@ -343,7 +124,7 @@ const styles = {
 const mapStateToProps = ({
   SupportManual,
   Customer,
- SupportChat: { support_messages_for_group: messages, send_loading, users }
+  SupportChat: { support_messages_for_group: messages, send_loading, users }
 }) => {
   const { manual } = SupportManual;
   return {

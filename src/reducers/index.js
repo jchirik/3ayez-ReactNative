@@ -34,7 +34,7 @@ import CustomerFeedback from './CustomerFeedback_Reducer';
 import Timeslots from './Timeslots_Reducer';
 import SupportChat from './SupportChat_Reducer';
 
-const REDUCERS_NAMES = {
+export const REDUCERS_NAMES = {
   Auth: 'Auth',
   Addresses: 'Addresses',
   AddressArea: 'AddressArea',

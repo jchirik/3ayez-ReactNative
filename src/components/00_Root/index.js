@@ -11,7 +11,6 @@ Run initial app functions here
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import SplashScreen from 'react-native-splash-screen'
 
 import {
   View,
@@ -35,8 +34,7 @@ import {
   AYEZ_GREEN,
   AYEZ_BACKGROUND_COLOR,
   STATUS_BAR_HEIGHT,
-  isIPhoneX,
-  SPLASH_SCREEN_TIME_OUT
+  isIPhoneX
 } from '../../Helpers.js';
 
 import {
@@ -57,9 +55,6 @@ class Root extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isSplashShown: true
-    }
   }
 
   componentDidMount() {
@@ -68,7 +63,6 @@ class Root extends Component {
     console.log('FBSDK', FBSDK)
     console.log('AppEventsLogger', FBSDK.AppEventsLogger)
     let that = this;
-    setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
   }
 
   componentDidUpdate(prevProps) {
@@ -98,10 +92,6 @@ class Root extends Component {
   }
 
   render() {
-
-    if(!this.state.isSplashShown) {
-      SplashScreen.hide();
-    }
 
     if (!this.props.locale || this.props.is_loading_addresses || !this.props.addresses.length) {
       return (
