@@ -48,7 +48,8 @@ class App extends Component {
         messages: store.getState()[REDUCERS_NAMES.SupportChat].support_messages_for_group,
         users: store.getState()[REDUCERS_NAMES.SupportChat].users,
         addSupportMessage: message => store.dispatch(addSupportMessage(message)),
-        addSupportUser: user => store.dispatch(addSupportUser(user))
+        addSupportUser: user => store.dispatch(addSupportUser(user)),
+        greetingMessage: greeting
       });
 
       currentVisitorSDK.setVisitorData({
