@@ -53,7 +53,7 @@ import {
   CollapsibleHeaderScrollView,
   PARALLAX_HEADER_HEIGHT
 } from './CollapsibleHeaderScrollView';
-import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
+import { sceneKeys, navigateTo } from '../../../router';
 const STICKY_HEADER_HEIGHT = 68; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 const TAB_BAR_HEIGHT = 52;

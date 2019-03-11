@@ -126,7 +126,7 @@ export const selectSeller = (seller) => {
   return (dispatch) => {
     dispatch({ type: SELLER_SELECT, payload: { seller } });
     dispatch({ type: BASKET_INIT, payload: { seller_id: seller.id } });
-    navigateBackTo(sceneKeys.root); // navigate to store page
+    navigateTo(sceneKeys.main); // navigate to store page
     fetchStoreData(seller.id, dispatch) /* fetch featured & categories */
 
     // AFTER getting featured, get the data to fill each
