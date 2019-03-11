@@ -36,7 +36,7 @@ class App extends Component {
       );
       let greeting = await Firebase.getRemoteConfig(Firebase.GREETING_MESSAGE);
       if (!greeting) greeting = strings('SupportChat.defaultGreetingMessage');
-      
+
       const { data: customerInfo } = await Firebase.getLiveChatCustomerInfo({
         phone: this.props.customer ? this.props.customer.phone : ''
       });
@@ -93,34 +93,33 @@ class App extends Component {
       case codePush.SyncStatus.INSTALLING_UPDATE:
         console.log('Installing update.');
         this.setState({
-          is_updating: true,
           update_text_ar: 'تثبيت تحديث البرنامج',
           update_text_en: 'Installing update'
         });
         break;
       case codePush.SyncStatus.UP_TO_DATE:
         console.log('Up to Date.');
-        if (this.state.is_updating) {
-          this.setState({
-            is_updating: false,
-            progress_percent: 0.0,
-            update_text_ar: '',
-            update_text_en: ''
-          });
-        }
+        this.setState({
+          is_updating: false,
+          progress_percent: 0.0,
+          update_text_ar: '',
+          update_text_en: ''
+        });
         break;
     }
   }
 
   codePushDownloadDidProgress(progress) {
     const progress_percent = progress.receivedBytes / progress.totalBytes;
-    if (progress_percent <= 0.9) {
+    this.setState({
+      progress_percent,
+      update_text_ar: 'تحميل تحديث البرنامج',
+      update_text_en: 'Preparing update'
+    });
+    if (progress_percent < 0.5) {
       this.setState({
-        is_updating: true,
-        progress_percent,
-        update_text_ar: 'تحميل تحديث البرنامج',
-        update_text_en: 'Preparing update'
-      });
+        is_updating: true
+      })
     }
   }
 
