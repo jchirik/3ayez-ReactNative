@@ -25,6 +25,8 @@ import {
 import FBSDK from 'react-native-fbsdk';
 
 import StorePage from './StorePage';
+import LocationSelect from '../03B_LocationSelect';
+
 import {
   AyezText,
   OrderStatusBar
@@ -100,59 +102,7 @@ class Root extends Component {
     }
 
     if (!this.props.seller_id || !this.props.address) {
-      const addressComponents = this.props.addresses.slice(0, 3).map(address => (
-        <TouchableOpacity
-          key={address.id}
-          style={{
-            marginHorizontal: 10,
-            marginTop: 10,
-            borderRadius: 6,
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            backgroundColor: AYEZ_GREEN
-           }}
-         onPress={() => {
-           this.props.selectAddress(address);
-         }}
-         >
-          <View style={{ flex: 1, alignItems: 'flex-start' }}>
-            <AyezText bold style={{
-              color: 'white'
-            }}>{address.street}</AyezText>
-            <AyezText medium style={{
-              color: 'white'
-            }}>{strings('Address.detail', { building: address.building, apt: address.apt })}</AyezText>
-          </View>
-        </TouchableOpacity>
-      ));
-
-      return (
-        <View style={{
-          backgroundColor: colors.paleGrey,
-          paddingTop: STATUS_BAR_HEIGHT + 20,
-          alignItems: 'center',
-          flex: 1
-         }}>
-         <AyezText medium size={16}>Welcome back {this.props.name}!</AyezText>
-         <AyezText regular size={16} style={{ marginTop: 5, marginBottom: 6 }}>Please select your location</AyezText>
-          {addressComponents}
-          <TouchableOpacity
-            style={{
-              marginTop: 20,
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-             }}
-           onPress={() => navigateTo(sceneKeys.addressCreate)}
-           >
-            <AyezText medium>+ New Address</AyezText>
-          </TouchableOpacity>
-
-          <View style={{ flex: 1 }} />
-          <AyezText medium color={'red'} style={{ marginBottom: 14 }}>Logout</AyezText>
-        </View>
-      )
+      return <LocationSelect />;
     }
 
     return <StorePage />;

@@ -108,7 +108,7 @@
     "addressRefineHeader": "تحديد الموقع",
     "addressRefineInstruction": "حدد موقعك عن طريق سحب الدبوس",
     "addressRefineConfirm": "أختار الموقع",
-    "confirmHeader": "أدخل العنوان",
+    "confirmHeader": "Enter Address Details",
     "confirmDeliveringTo": "إرسال إلى :",
     "confirmMissingInformation": "من فضلك أملأ كامل البيانات"
   },

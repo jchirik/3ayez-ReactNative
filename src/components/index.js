@@ -4,8 +4,8 @@ import TutorialSwipe from './01_Tutorial/02_TutorialSwipe';
 import CurrentLocationSelect from './02_AddressCreate/01_CurrentLocationSelect';
 import AddressSearch from './02_AddressCreate/02_AddressSearch';
 import RefineLocation from './02_AddressCreate/03_RefineLocation';
-import AddressDetails from './02_AddressCreate/04_AddressDetails';
 import StoreSelect from './03_StoreSelect';
+import LocationSelect from './03B_LocationSelect';
 import StoreSearch from './04_StoreSearch';
 import StoreAisle from './05_StoreAisle';
 import StoreShelf from './06_StoreShelf';
@@ -15,6 +15,7 @@ import CustomProduct from './08_CustomProduct';
 import WorkingBasket from './09_WorkingBasket';
 import YallaTimeSelect from './10_YallaTimeSelect';
 import TimeslotSelect from './11_TimeslotSelect';
+import AddressDetails from './12_AddressDetails';
 import Checkout from './12_Checkout';
 import OrderTracker from './13_OrderTracker';
 import OrderSummary from './13_OrderTracker/01_OrderSummary';
@@ -40,8 +41,8 @@ export {
     CurrentLocationSelect,
     AddressSearch,
     RefineLocation,
-    AddressDetails,
     StoreSelect,
+    LocationSelect,
     StoreSearch,
     StoreAisle,
     StoreShelf,
@@ -51,6 +52,7 @@ export {
     WorkingBasket,
     YallaTimeSelect,
     TimeslotSelect,
+    AddressDetails,
     Checkout,
     OrderTracker,
     OrderSummary,
@@ -74,6 +76,7 @@ export const sceneKeys = {
     main : "main",
     root : "root",
     storeSelect : "storeSelect",
+    locationSelect: "locationSelect",
     locationDetails : "locationDetails",
     storeSearch : "storeSearch",
     storeAisle : "storeAisle",
@@ -95,6 +98,7 @@ export const sceneKeys = {
     workingBasket : "workingBasket",
     yallaTimeSelect : "yallaTimeSelect",
     timeslotSelect : "timeslotSelect",
+    addressDetails : "addressDetails",
     checkout : "checkout",
     additionalNotes : "additionalNotes",
     auth : "auth",
@@ -104,7 +108,6 @@ export const sceneKeys = {
     currentLocationSelect : "currentLocationSelect",
     addressSearch : "addressSearch",
     refineLocation : "refineLocation",
-    addressDetails : "addressDetails",
     customProduct : "customProduct",
     creditCardCreate : "creditCardCreate",
     orderReview : "orderReview",

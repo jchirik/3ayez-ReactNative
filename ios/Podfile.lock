@@ -264,6 +264,8 @@ PODS:
     - React
   - react-native-maps (0.22.1):
     - React
+  - React/ART (0.57.1):
+    - React/Core
   - React/Core (0.57.1):
     - yoga (= 0.57.1.React)
   - React/CxxBridge (0.57.1):
@@ -341,6 +343,7 @@ DEPENDENCIES:
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - React/ART (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -488,6 +491,6 @@ SPEC CHECKSUMS:
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: caf05b04591259e6fdb9cea448a1ebe9132f43fa
+PODFILE CHECKSUM: 853e928c843c0cdd9667d08d0ad539b32fe2864f
 
 COCOAPODS: 1.5.3

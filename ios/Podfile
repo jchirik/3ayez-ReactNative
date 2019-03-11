@@ -33,6 +33,7 @@ target 'ayezcustomer' do
   pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
   pod 'React', path: rn_path, subspecs: [
     'Core',
+    'ART',
     'CxxBridge',
     'DevSupport',
     'RCTActionSheet',

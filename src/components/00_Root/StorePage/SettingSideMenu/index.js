@@ -70,7 +70,7 @@ class SettingsMenu extends Component {
   renderHeader() {
     let accountContent = (
       <AyezText semibold style={{
-        marginTop: 5,
+        marginTop: 20,
         fontSize: 20,
         alignSelf: 'flex-start'
       }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
@@ -85,6 +85,7 @@ class SettingsMenu extends Component {
       )
     }
 
+
     return (
       <View style={{
         marginLeft: 20,
@@ -93,6 +94,14 @@ class SettingsMenu extends Component {
         marginBottom: 10
       }}>
         <ChatButton />
+        <BlockButton
+          onPress={() => {
+            this.props.onClose();
+            navigateTo(sceneKeys.storeSelect);
+          }}
+          text={'Change Store'}
+          style={{ marginBottom: 14 }}
+        />
         {accountContent}
       </View>
     );

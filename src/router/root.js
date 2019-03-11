@@ -97,6 +97,7 @@ class RouterComponent extends Component {
               key={sceneKeys.checkoutFlow}
               headerMode={'none'}
               animationEnabled={true}
+              panHandlers={null}
             >
               <Scene key={sceneKeys.workingBasket} component={components.WorkingBasket} />
               <Scene
@@ -109,11 +110,24 @@ class RouterComponent extends Component {
                 panHandlers={null}
               />
               <Scene
+                key={sceneKeys.addressDetails}
+                component={components.AddressDetails}
+                panHandlers={null}
+              />
+              <Scene
                 key={sceneKeys.checkout}
                 component={components.Checkout}
                 panHandlers={null}
               />
             </Stack>
+
+
+            <Scene
+              key={sceneKeys.locationSelect}
+              component={components.LocationSelect}
+            />
+
+
 
             <Scene
               key={sceneKeys.additionalNotes}
@@ -134,10 +148,6 @@ class RouterComponent extends Component {
               <Scene
                 key={sceneKeys.refineLocation}
                 component={components.RefineLocation}
-              />
-              <Scene
-                key={sceneKeys.addressDetails}
-                component={components.AddressDetails}
               />
             </Stack>
             <Scene key={sceneKeys.customProduct} component={components.CustomProduct} />

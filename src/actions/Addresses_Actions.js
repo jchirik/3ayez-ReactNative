@@ -7,11 +7,15 @@ import {
   ADDRESS_SUBMIT_SUCCESS,
   ADDRESS_SUBMIT_ERROR,
 
+  ADDRESS_UPDATE_BEGIN,
+  ADDRESS_UPDATE_ERROR,
+  ADDRESS_UPDATE_SUCCESS,
+
   ADDRESS_SELECT_BEGIN,
   ADDRESS_SELECT_SUCCESS,
   ADDRESS_SELECT_ERROR
 } from './types';
-import {sceneKeys, navigateBackTo} from '../router';
+import {sceneKeys, navigateTo, navigateBackTo, navigateBack} from '../router';
 
 
 
@@ -49,32 +53,45 @@ export const createNewAddress = (address) => {
 
     dispatch({ type: ADDRESS_SUBMIT_BEGIN });
 
-    if (!address.street || !address.building || !address.apt || !address.name) {
-      dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
-      return;
-    }
-
     const batch = firebase.firestore().batch();
 
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc();
     const address_id = addressRef.id;
-    batch.set(addressRef, { ...address, timestamp: Date.now() })
-
-    const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
-    batch.update(customerRef, { name: address.name })
-
-    batch.commit().then(() => {
-      console.log('createNewAddress success');
+    addressRef.set({ ...address, timestamp: Date.now() }).then(() => {
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
-
       dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address: { ...address, id: address_id } } });
-      // navigateBackTo(sceneKeys.homepage);
     }).catch(() => {
       dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })
   };
 };
 
+
+export const updateAddress = (addressT) => {
+  return (dispatch) => {
+    const { currentUser } = firebase.auth();
+    dispatch({ type: ADDRESS_UPDATE_BEGIN });
+
+    const address = { ...addressT, is_completed: true, timestamp: Date.now() }
+    console.log(address)
+    if (!address.street || !address.building || !address.apt || !address.name) {
+      dispatch({ type: ADDRESS_UPDATE_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
+      return;
+    }
+    const batch = firebase.firestore().batch();
+    const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc(address.id);
+    batch.update(addressRef, address)
+    const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+    batch.update(customerRef, { name: address.name })
+
+    batch.commit().then(() => {
+      console.log('createNewAddress success');
+      dispatch({ type: ADDRESS_UPDATE_SUCCESS });
+      dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
+      navigateTo(sceneKeys.checkout)
+    })
+  };
+};
 
 
 export const selectAddress = (address, onClose=null) => {

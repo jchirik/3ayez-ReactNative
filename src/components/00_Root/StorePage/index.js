@@ -242,7 +242,7 @@ class StorePage extends Component {
         <View style={{ alignItems: 'flex-start' }}>
           <AyezText medium color={'white'}>{strings('StoreSelect.deliveringTo')}</AyezText>
           <View style={{ flexDirection: 'row' }}>
-            <AyezText regular color={'white'}>{address.building || 'Near'} {address.street}</AyezText>
+            <AyezText regular color={'white'}>{address.building ? `${address.building} ` : ''}{address.street || address.title}</AyezText>
             <AyezText
               regular
               color={'#bababa'}
@@ -278,7 +278,7 @@ class StorePage extends Component {
 
     return (
       <SideMenu
-        menu={<SettingsMenu />}
+        menu={<SettingsMenu onClose={() => this.setState({ isSideMenuOpen: false })} />}
         isOpen={this.state.isSideMenuOpen}
         onChange={(isOpen) => this.setState({ isSideMenuOpen: isOpen })}
         menuPosition={(this.props.locale === 'ar') ? 'right' : 'left'}

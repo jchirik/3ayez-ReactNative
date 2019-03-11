@@ -59,9 +59,9 @@ class AddressManager extends Component {
           }}
       >
         <View style={{ flex: 1, marginLeft: 26, alignItems: 'flex-start' }}>
-          <AyezText medium>{item.street} {(item.area) ? translate(item.area.display_name) : null}</AyezText>
-          <AyezText regular>{strings('Address.detail', {building: item.building, apt: item.apt})}</AyezText>
-          <AyezText regular>{item.name}</AyezText>
+          <AyezText medium>{item.street || item.title}</AyezText>
+          <AyezText regular>{item.building ? strings('Address.detail', {building: item.building, apt: item.apt}) : ''}</AyezText>
+          <AyezText regular>{item.name || ''}</AyezText>
         </View>
 
         <TouchableOpacity

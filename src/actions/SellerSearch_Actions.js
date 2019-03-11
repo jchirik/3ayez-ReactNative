@@ -9,24 +9,14 @@ import firebase from 'react-native-firebase';
 import {
   SELLERS_FETCH_BEGIN,
   SELLERS_FETCH_END,
-  SELLERS_FETCH_ERROR,
-
-  SELLERS_FETCH_BESTSTORE_END,
-  SELLERS_FETCH_BESTPRICES_END,
+  SELLERS_FETCH_ERROR
 } from './types';
 
 
 export const fetchNearbySellers = (address) => {
   return (dispatch) => {
+    const ogTime = Date.now();
     dispatch({ type: SELLERS_FETCH_BEGIN });
-
-    setTimeout(() => {
-      dispatch({ type: SELLERS_FETCH_BESTSTORE_END });
-    }, 2400);
-
-    setTimeout(() => {
-      dispatch({ type: SELLERS_FETCH_BESTPRICES_END });
-    }, 4500);
 
     // fetch the location pin's REGION if none exists
     // then get all nearby stores for the region
@@ -34,7 +24,6 @@ export const fetchNearbySellers = (address) => {
     fetchSellersForCoordinate(address.location).then((result) => {
 
       let { area, sellers } = result.data;
-
 
       sellers = sellers.map(seller => {
         // get the open hour, for today in Cairo
@@ -53,7 +42,15 @@ export const fetchNearbySellers = (address) => {
         }
       });
       console.log(sellers)
-      dispatch({ type: SELLERS_FETCH_END, payload: { area, sellers } });
+
+      let additionalTimeout = 0;
+      if (sellers.length === 1) {
+        additionalTimeout = Math.max((2400 - (Date.now() - ogTime)), 0);
+      }
+      setTimeout(() => {
+        dispatch({ type: SELLERS_FETCH_END, payload: { area, sellers } });
+      }, additionalTimeout);
+
     }).catch((error) => {
       dispatch({ type: SELLERS_FETCH_ERROR });
     });

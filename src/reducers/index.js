@@ -9,6 +9,7 @@ import Auth from './Auth_Reducer';
 import Addresses from './Addresses_Reducer';
 import AddressArea from './AddressArea_Reducer';
 import AddressCreate from './AddressCreate_Reducer';
+import AddressUpdate from './AddressUpdate_Reducer';
 import AddressSearch from './AddressSearch_Reducer';
 import AddressSelect from './AddressSelect_Reducer';
 import AddressPlaceDetails from './AddressPlaceDetails_Reducer';
@@ -40,6 +41,7 @@ export const REDUCERS_NAMES = {
   AddressArea: 'AddressArea',
   AddressCreate: 'AddressCreate',
   AddressSearch: 'AddressSearch',
+  AddressUpdate: 'AddressUpdate',
   AddressSelect: 'AddressSelect',
   AddressPlaceDetails: 'AddressPlaceDetails',
   AddressReverseSearch: 'AddressReverseSearch',
@@ -73,6 +75,7 @@ const reducers = combineReducers({
   [REDUCERS_NAMES.AddressArea]: AddressArea,
   [REDUCERS_NAMES.AddressSelect]: AddressSelect,
   [REDUCERS_NAMES.AddressCreate]: AddressCreate,
+  [REDUCERS_NAMES.AddressUpdate]: AddressUpdate,
   [REDUCERS_NAMES.AddressSearch]: AddressSearch,
   [REDUCERS_NAMES.AddressPlaceDetails]: AddressPlaceDetails,
   [REDUCERS_NAMES.AddressReverseSearch]: AddressReverseSearch,

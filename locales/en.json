@@ -108,7 +108,7 @@
     "addressRefineHeader": "REFINE LOCATION",
     "addressRefineInstruction": "Refine your location by dragging the pin",
     "addressRefineConfirm": "SELECT LOCATION",
-    "confirmHeader": "ENTER ADDRESS",
+    "confirmHeader": "Enter Address Details",
     "confirmDeliveringTo": "Delivering to:",
     "confirmMissingInformation": "Please fill all information"
   },
