@@ -88,7 +88,7 @@ class Chat extends React.Component {
       })
       .then(response => {
         console.log(response);
-        // this.props.validateMessage(customId);
+        this.props.validateMessage(customId);
       })
       .catch(_ => {});
   };
@@ -148,17 +148,29 @@ class Chat extends React.Component {
   }
 
   uploadFile = file => {
+    const customId = String(Math.random());
     Chat.notifyForUploadingFile();
+    this.props.addSupportMessage(
+      LiveChat.getFormattedMessage({
+        id: customId,
+        user: this.getVisitor(),
+        image: file.uri
+      })
+    );
     this.props.visitorSDK
       .sendFile({
+        customId,
         file: {
           uri: file.uri,
           type: file.type,
           name: file.fileName
         }
       })
-      .then(r => console.log(r))
-      .catch(r => console.log(r));
+      .then(response => {
+        console.log(response);
+        this.props.validateMessage(customId, response.url);
+      })
+      .catch(_ => {});
   };
 
   renderCustomActions = props => {

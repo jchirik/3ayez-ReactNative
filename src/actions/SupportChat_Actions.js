@@ -220,7 +220,7 @@ export const addSupportMessage = message => {
   };
 };
 
-export const addSupportUser = (user) => {
+export const addSupportUser = user => {
   return dispatch => {
     dispatch({
       type: ADD_SUPPORT_USER,
@@ -229,11 +229,11 @@ export const addSupportUser = (user) => {
   };
 };
 
-export const validateMessage = customId => {
+export const validateMessage = (customId, uri = undefined) => {
   return dispatch => {
     dispatch({
       type: VALIDATE_SUPPORT_MESSAGE,
-      payload: customId
-    })
-  }
-}
+      payload: { customId, uri }
+    });
+  };
+};

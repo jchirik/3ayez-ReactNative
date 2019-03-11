@@ -93,7 +93,8 @@ export default class LiveChat {
     messages,
     users,
     addSupportUser,
-    addSupportMessage
+    addSupportMessage,
+    greetingMessage
   }) {
     sdk.on(LiveChat.TYPING_INDICATOR_EVENT, typingData => {
       if (typingData.isTyping) toast(strings('SupportChat.agentIsTyping'));
@@ -128,7 +129,11 @@ export default class LiveChat {
 
     sdk.on(LiveChat.NEW_FILE_EVENT, file => {
       LiveChat.notifyForNewMessage();
-
+      if (
+        users[file.authorId] &&
+        users[file.authorId].type == LiveChat.VISITOR_TYPE
+      )
+        return;
       addSupportMessage(
         LiveChat.getFormattedMessage({
           image: file.url,
@@ -139,7 +144,11 @@ export default class LiveChat {
     });
 
     sdk.on(LiveChat.AGENT_CHANGED_EVENT, agent => {
-      LiveChat.addSupportUserWithType(addSupportUser, agent, LiveChat.AGENT_TYPE);
+      LiveChat.addSupportUserWithType(
+        addSupportUser,
+        agent,
+        LiveChat.AGENT_TYPE
+      );
     });
 
     sdk.on(LiveChat.VISITOR_DATA_EVENT, visitor => {
