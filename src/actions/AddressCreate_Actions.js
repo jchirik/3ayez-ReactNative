@@ -77,7 +77,7 @@ export const setCurrentLocation = () => {
           console.log(error.message)
           dispatch({ type: CURRENT_LOCATION_ERROR, payload: { error: error.message } });
         },
-        (Platform.OS === "android") ? {} : { enableHighAccuracy: true, timeout: 0 }
+        { enableHighAccuracy: true, timeout: 3000 }
       );
 		});
   };
