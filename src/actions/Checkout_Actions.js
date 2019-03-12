@@ -23,7 +23,7 @@ import {
 
   CHECKOUT_RESET
 } from './types';
-import {sceneKeys, navigateTo} from '../router';
+import {sceneKeys, navigateTo, navigateBackTo} from '../router';
 
 export const submitOrder = (order_t, items_array, total) => {
   const {

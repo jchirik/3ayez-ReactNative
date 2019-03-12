@@ -350,10 +350,6 @@ renderItem({ item, index }) {
               />
             </View>
           </View>
-
-
-
-
         </View>
 
         <View style={{
@@ -399,6 +395,7 @@ renderLoadingStore() {
   return (
     <View style={{
       flex: 1,
+      backgroundColor: AYEZ_BACKGROUND_COLOR,
       justifyContent: 'center',
       alignItems: 'center'
     }}>

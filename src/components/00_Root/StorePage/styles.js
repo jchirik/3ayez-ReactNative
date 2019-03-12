@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.whiteGrey,
     width: '100%',
     height: '100%',
-    borderRadius: 5,
+    borderRadius: 10,
     ...Platform.select({
       ios: {
         shadowColor: colors.warmGrey,
@@ -24,9 +24,12 @@ const styles = StyleSheet.create({
     })
   },
   categoryImage: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 5
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    borderRadius: 10
   },
   categoryList: {
     flex: 1

@@ -158,7 +158,14 @@ class ItemTile extends PureComponent {
         disabled={disabled}
       >
         <PlaceholderFastImage
-          style={{ width: '100%', height: '98%' }}
+          style={{
+            width: '100%',
+            height: '98%',
+            shadowColor: colors.warmGrey,
+            shadowOpacity: 0.3,
+            shadowRadius: 2,
+            elevation: 2
+          }}
           source={{ uri: url }}
         />
         {this.renderScale(unit)}

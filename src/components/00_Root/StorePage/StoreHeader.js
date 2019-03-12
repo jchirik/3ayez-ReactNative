@@ -24,7 +24,8 @@ export default class StoreHeader extends Component {
       children,
       logo_url,
       cover_url,
-      location_text
+      location_text,
+      color
     } = this.props;
     const disappearingAnimation = {
       opacity: interpolatedHeaderTranslation(1, 0)
@@ -36,18 +37,16 @@ export default class StoreHeader extends Component {
             position: 'absolute',
             height: PARALLAX_HEADER_HEIGHT,
             width: '100%',
-            backgroundColor: 'black'
+            backgroundColor: color
           }}
         />
         <Image
           style={{
-            backgroundColor: '#f7f7f7',
             position: 'absolute',
             height: PARALLAX_HEADER_HEIGHT,
             width: '100%',
-            opacity: 0.8
+            opacity: 0
           }}
-          source={{ uri: cover_url }}
           resizeMode="cover"
         />
 
@@ -61,7 +60,7 @@ export default class StoreHeader extends Component {
             backgroundColor: 'white',
             borderRadius: 6,
             marginBottom: 10,
-            marginTop: 20,
+            marginTop: 5,
             justifyContent: 'center',
             alignItems: 'center'
           }}>

@@ -5,7 +5,7 @@ import {
    Image,
    ActivityIndicator,
    TouchableOpacity,
-   SectionList,
+   FlatList,
    Platform,
    BackHandler,
    Dimensions,
@@ -18,7 +18,8 @@ import {
   BottomChoiceSelection,
   Header,
   BlockButton,
-  AyezText
+  AyezText,
+  RTLImage
 } from '../../../_common';
 
 import {
@@ -28,16 +29,20 @@ import {
 } from '../../../../actions';
 
 import {
+  AYEZ_GREEN,
+  AYEZ_BACKGROUND_COLOR,
   STATUS_BAR_HEIGHT
 } from '../../../../Helpers.js';
+
+import images from '../../../../theme/images'
 
 import {
   strings,
   translate
 } from '../../../../i18n.js';
+import LiveChat from '../../../../utils/livechat';
 import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
 
-import ChatButton from './ChatButton';
 // { text: 'Credit Cards', action: null, icon: '' },
 
 const window = Dimensions.get('window');
@@ -50,6 +55,12 @@ class SettingsMenu extends Component {
       logoutConfirm: false,
       languageSelect: false
     };
+  }
+
+  componentWillMount() {
+    this.setState({
+      visitorSDK: LiveChat.getInstance()
+    });
   }
 
   openLanguageSelect() { this.setState({ languageSelect: true }); }
@@ -67,64 +78,160 @@ class SettingsMenu extends Component {
     navigateTo(sceneKeys.auth)
   }
 
+
+  renderLocationButton() {
+    const {
+      address,
+      area
+    } = this.props;
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.props.onClose();
+          navigateTo(sceneKeys.locationSelect);
+        }}
+        style={{
+          paddingTop: 11,
+          paddingBottom: 11,
+          borderBottomWidth: 1,
+          borderColor: '#f7f7f7',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end'
+        }}
+      >
+        <View>
+          <AyezText regular color={'#4E4E4E'}>{address.building ? `${address.building} ` : ''}{address.street || address.title}</AyezText>
+          <AyezText regular color={'#4E4E4E'}>{area ? translate(area.display_name) : null}</AyezText>
+        </View>
+        <AyezText regular color={AYEZ_GREEN}>{strings('Common.edit')}</AyezText>
+      </TouchableOpacity>
+    )
+  }
+
+  renderStoreButton() {
+    const {
+      seller,
+      sellers
+    } = this.props;
+
+    console.log('sellers', sellers)
+    if (sellers.length <= 1) {
+      return null;
+    }
+
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.props.onClose();
+          navigateTo(sceneKeys.storeSelect);
+        }}
+        style={{
+          paddingTop: 11,
+          paddingBottom: 11,
+          borderBottomWidth: 1,
+          borderColor: '#f7f7f7',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <View>
+          <AyezText medium color={'#4E4E4E'}>Change Store</AyezText>
+          <AyezText regular color={'#4E4E4E'}>{translate(seller.display_name)}</AyezText>
+          <AyezText regular color={'#4E4E4E'}>{translate(seller.location_text)}</AyezText>
+        </View>
+        <RTLImage
+          source={images.nextArrowIcon}
+          style={{
+            width: 16,
+            height: 16,
+            tintColor: '#4E4E4E'
+          }}
+          resizeMode={'contain'}
+        />
+      </TouchableOpacity>
+    )
+  }
+
   renderHeader() {
-    let accountContent = (
-      <AyezText semibold style={{
-        marginTop: 20,
-        fontSize: 20,
+    let topAccountHeader = (
+      <AyezText semibold size={16} color={'#4E4E4E'} style={{
         alignSelf: 'flex-start'
       }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
     )
     if (!this.props.phone) {
-      accountContent = (
-        <BlockButton
+      topAccountHeader = (
+        <TouchableOpacity
           onPress={this.loginUser.bind(this)}
-          text={strings('Common.login')}
-          color={'#0094ff'}
-        />
+          style={{
+            height: 55,
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderColor: '#f7f7f7',
+            borderBottomWidth: 1
+          }}
+        >
+          <RTLImage
+            source={images.settingsLoginArrow}
+            style={{
+              width: 16,
+              height: 16,
+              tintColor: AYEZ_GREEN,
+              marginRight: 10
+            }}
+            resizeMode={'contain'}
+          />
+          <AyezText semibold color={AYEZ_GREEN}>Sign in/Sign up</AyezText>
+        </TouchableOpacity>
       )
     }
 
-
     return (
       <View style={{
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: STATUS_BAR_HEIGHT + 30,
-        marginBottom: 10
+        paddingTop: STATUS_BAR_HEIGHT + 14,
+        paddingLeft: 20,
+        paddingRight: 20,
+        alignItems: 'stretch',
+        backgroundColor: 'white',
+        marginBottom: 8
       }}>
-        <ChatButton />
-        <BlockButton
-          onPress={() => {
-            this.props.onClose();
-            navigateTo(sceneKeys.storeSelect);
-          }}
-          text={'Change Store'}
-          style={{ marginBottom: 14 }}
-        />
-        {accountContent}
+        {topAccountHeader}
+        {this.renderLocationButton()}
+        {this.renderStoreButton()}
+
       </View>
     );
   }
 
 
-  renderItem({item: {text, action, icon}, index, section}) {
+  renderItem({item: {text, action, icon, color}, index, section}) {
     return (
       <TouchableOpacity
         key={index}
         onPress={action}
         style={{
-          height: 60,
+          height: 55,
           flexDirection: 'row',
           alignItems: 'center',
           paddingLeft: 20,
-          backgroundColor: 'white',
           borderColor: '#f7f7f7',
           borderBottomWidth: 1
         }}
       >
-        <AyezText light style={{
-          fontSize: 12,
+        {icon ? (
+          <RTLImage
+            source={icon}
+            style={{
+              width: 16,
+              height: 16,
+              tintColor: color || '#4E4E4E',
+              marginRight: 10
+            }}
+            resizeMode={'contain'}
+          />
+        ) : null }
+        <AyezText regular style={{
           color: '#4E4E4E',
         }}>{text}</AyezText>
       </TouchableOpacity>
@@ -152,46 +259,91 @@ class SettingsMenu extends Component {
 
   render() {
 
-    const accountSection = {title: strings('Settings.myAccount'), data: [
-      { text: strings('Settings.addressBook'), action: () => {
-          navigateTo(sceneKeys.addressManager)
-      }, icon: '' },
-      { text: strings('Settings.creditCards'), action: () => {
-          navigateTo(sceneKeys.creditCardManager)
-      }, icon: '' },
-      { text: strings('Settings.previousOrders'), action: () => {
-          navigateTo(sceneKeys.orderHistory)
-      }, icon: '' },
-      { text: strings('Common.logout'), action: this.openLogoutConfirm.bind(this), icon: ''}
-    ]};
 
-    const infoSection = {title: strings('Settings.information'), data: [
-      { text: strings('Settings.language'), action: this.openLanguageSelect.bind(this), icon: '' },
-      { text: strings('Settings.termsConditions'), action: null },
-      { text: strings('Settings.privacyPolicy'), action: null },
-    ]};
+    const chatTab = {
+      text: strings('Support.contact3ayez'),
+      action: () => {
+        if (this.state.visitorSDK) {
+          navigateTo(sceneKeys.supportChat, {
+            visitorSDK: this.state.visitorSDK
+          });
+        }
+      },
+      icon: images.settingsChat,
+      color: AYEZ_GREEN
+    };
 
+    const creditCardTab = {
+      text: strings('Settings.creditCards'),
+      action: () => navigateTo(sceneKeys.creditCardManager),
+      icon: images.settingsCreditCard
+    };
+    const addressBookTab = {
+      text: strings('Settings.addressBook'),
+      action: () => navigateTo(sceneKeys.addressManager),
+      icon: images.settingsAddressBook
+    };
+    const previousOrdersTab = {
+      text: strings('Settings.previousOrders'),
+      action: () => navigateTo(sceneKeys.orderHistory),
+      icon: images.settingsOrderHistory
+    };
+
+    const languageTab = {
+      text: strings('Settings.language'),
+      action: this.openLanguageSelect.bind(this),
+      icon: images.settingsLanguage
+    };
+    const termsConditionsTab = {
+      text: strings('Settings.termsConditions'),
+      action: null,
+      icon: ''
+    };
+    const privacyPolicyTab = {
+      text: strings('Settings.privacyPolicy'),
+      action: null,
+      icon: ''
+    };
+    const logoutTab = {
+      text: strings('Common.logout'),
+      action: this.openLogoutConfirm.bind(this),
+      icon: ''
+    };
 
     // different sections based on logged in/out
-    let sections = [infoSection];
+    let settingsTabs = [
+      chatTab,
+      languageTab,
+      termsConditionsTab,
+      privacyPolicyTab,
+      logoutTab
+    ];
     if (this.props.phone) {
-      sections = [accountSection, infoSection];
+      settingsTabs = [
+        chatTab,
+        creditCardTab,
+        addressBookTab,
+        previousOrdersTab,
+        languageTab,
+        termsConditionsTab,
+        privacyPolicyTab,
+        logoutTab
+      ];
     }
 
     return (
       <View style={{
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: AYEZ_BACKGROUND_COLOR
       }}>
-        <SectionList
+        <FlatList
+          data={settingsTabs}
+          style={{ flex: 1 }}
           ListHeaderComponent={this.renderHeader.bind(this)}
           renderItem={this.renderItem.bind(this)}
-          renderSectionHeader={this.renderSectionHeader.bind(this)}
-          sections={sections}
-          keyExtractor={(item, index) => item + index}
-        />
-
-
+          ListFooterComponent={null}
+          keyExtractor={(item, index) => `${index}`}
+          />
         <BottomChoiceSelection
           isVisible={this.state.languageSelect}
           onClose={this.closeLanguageSelect.bind(this)}
@@ -217,7 +369,9 @@ class SettingsMenu extends Component {
   }
 }
 
-const mapStateToProps = ({ Customer, Settings }) => {
+const mapStateToProps = ({ Seller, SellerSearch, Addresses, Customer, Settings }) => {
+  const seller = Seller;
+  const { address } = Addresses;
   const {
     locale
   } = Settings;
@@ -225,7 +379,17 @@ const mapStateToProps = ({ Customer, Settings }) => {
     name,
     phone
   } = Customer;
+  const {
+    sellers,
+    area
+  } = SellerSearch;
   return {
+    seller,
+
+    address,
+
+    sellers,
+    area,
     locale,
 
     name,

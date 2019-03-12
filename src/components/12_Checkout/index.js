@@ -72,11 +72,6 @@ class Checkout extends Component {
 
   componentDidMount() {
     console.log('mounting')
-    if (!this.props.address.is_completed) {
-      // setTimeout(() => {
-      //   navigateTo(sceneKeys.addressDetails)
-      // }, 500);
-    }
     // if (this.props.default_payment) {
     //   this.props.setPaymentMethod(this.props.default_payment, this.props.seller.id);
     // } else {

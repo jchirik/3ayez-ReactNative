@@ -28,7 +28,8 @@ import {
   ItemTile,
   BasketBlockButton,
   BackButton,
-  AyezText
+  AyezText,
+  OrderStatusBar
 } from '../../_common';
 
 import {
@@ -46,6 +47,8 @@ import {
 import styles from './styles';
 import colors from '../../../theme/colors';
 import images from '../../../theme/images'
+
+const window = Dimensions.get('window');
 
 import AddressSelection from './AddressSelection';
 
@@ -230,7 +233,7 @@ class StorePage extends Component {
       <TouchableOpacity style={{
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: STATUS_BAR_HEIGHT + 9,
+        paddingTop: 9,
         paddingBottom: 8,
         backgroundColor: '#222222',
         paddingHorizontal: 20,
@@ -276,15 +279,19 @@ class StorePage extends Component {
       mainScrollComponent = (<CategoriesBrowse />);
     }
 
+// {this.renderAddressBar()}
     return (
       <SideMenu
+        openMenuOffset={window.width * 4/5}
         menu={<SettingsMenu onClose={() => this.setState({ isSideMenuOpen: false })} />}
         isOpen={this.state.isSideMenuOpen}
         onChange={(isOpen) => this.setState({ isSideMenuOpen: isOpen })}
         menuPosition={(this.props.locale === 'ar') ? 'right' : 'left'}
         style={{ flex: 1, backgroundColor: 'white' }}
+        bounceBackOnOverdraw={false}
       >
-        {this.renderAddressBar()}
+        <OrderStatusBar color={this.props.seller_color}/>
+
         <View style={styles.container}>
           <CollapsibleHeaderScrollView
             tabBarHeight={tabBarHeight}
@@ -294,6 +301,7 @@ class StorePage extends Component {
             displayName={this.props.display_name}
             logo_url={this.props.logo_url}
             cover_url={this.props.cover_url}
+            color={this.props.seller_color}
             location_text={this.props.location_text}
             Tabs={this.renderTabs()}
           >
@@ -310,6 +318,19 @@ class StorePage extends Component {
           onClose={() => this.setState({ isAddressSelectionVisible: false })}
           isVisible={this.state.isAddressSelectionVisible}
           />
+
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: 'black',
+            opacity: (this.state.isSideMenuOpen ? 0.4 : 0)
+          }}
+          pointerEvents="none"
+        />
       </SideMenu>
     );
   }
@@ -318,6 +339,7 @@ class StorePage extends Component {
 const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch }) => {
   const {
     id,
+    color,
     logo_url,
     cover_url,
     promotions,
@@ -333,12 +355,17 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
   const { address } = Addresses;
   const { area } = SellerSearch;
 
-  const { basket_quantity } = Baskets.baskets[Seller.id];
+  let basket_quantity = 0;
+  if (Seller.id && Baskets.baskets && Baskets.baskets[Seller.id]) {
+    basket_quantity = Baskets.baskets[Seller.id].basket_quantity;
+  }
+
   return {
     locale,
     address,
     area,
     seller_id: id,
+    seller_color: color,
     logo_url,
     cover_url,
     promotions,

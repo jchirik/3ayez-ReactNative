@@ -3,7 +3,7 @@ import { View, StyleSheet, Animated } from 'react-native';
 import StoreHeader from './StoreHeader';
 import colors from '../../../theme/colors';
 
-export const PARALLAX_HEADER_HEIGHT = 207;
+export const PARALLAX_HEADER_HEIGHT = 193;
 const noop = () => {};
 // credits to https://github.com/iyegoroff/react-native-collapsible-header-views
 export class CollapsibleHeaderScrollView extends React.Component {
@@ -120,6 +120,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
       logo_url,
       location_text,
       cover_url,
+      color,
       Tabs
     } = this.props;
     this.resetAnimations(headerHeight, statusBarHeight);
@@ -165,6 +166,7 @@ export class CollapsibleHeaderScrollView extends React.Component {
             logo_url={logo_url}
             location_text={location_text}
             cover_url={cover_url}
+            color={color}
           >
             {Tabs}
           </StoreHeader>

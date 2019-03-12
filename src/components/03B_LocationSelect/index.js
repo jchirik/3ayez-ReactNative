@@ -18,13 +18,15 @@ import {
 // import { Circle } from 'react-native-progress';
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
-  selectAddress
+  selectAddress,
+  logoutUser
 } from '../../actions';
 
 import {
   BackButton,
   BlockButton,
-  AyezText
+  AyezText,
+  RTLImage
 } from '../_common';
 
 import {
@@ -54,7 +56,7 @@ class LocationSelect extends Component {
     // otherwise it is the Welcome Back screen
     const isWelcomeBackMode = !(this.props.address);
 
-    const addressComponents = this.props.addresses.slice(0, 3).map(address => {
+    const addressComponents = this.props.addresses.slice(0, 5).map(address => {
       let addressHeader = address.street;
       let addressDetails = strings('Address.detail', { building: address.building, apt: address.apt });
 
@@ -66,14 +68,11 @@ class LocationSelect extends Component {
         <TouchableOpacity
           key={address.id}
           style={{
-            marginHorizontal: 10,
-            marginTop: 10,
-            borderRadius: 6,
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: 10,
-            paddingHorizontal: 20,
-            backgroundColor: AYEZ_GREEN
+            paddingVertical: 16,
+            borderBottomWidth: 1,
+            borderColor: '#f7f7f7'
            }}
          onPress={() => {
            if (this.props.address && (address.id === this.props.address.id)) {
@@ -85,13 +84,23 @@ class LocationSelect extends Component {
          }}
          >
           <View style={{ flex: 1, alignItems: 'flex-start' }}>
-            <AyezText bold style={{
-              color: 'white'
+            <AyezText semibold style={{
+              color: '#4E4E4E'
             }}>{addressHeader}</AyezText>
-            <AyezText medium style={{
-              color: 'white'
+            <AyezText regular style={{
+              color: '#4E4E4E'
             }}>{addressDetails}</AyezText>
           </View>
+
+          <RTLImage
+            source={images.nextArrowIcon}
+            style={{
+              width: 16,
+              height: 16,
+              tintColor: '#4E4E4E'
+            }}
+            resizeMode={'contain'}
+          />
         </TouchableOpacity>
       )
     });
@@ -100,25 +109,38 @@ class LocationSelect extends Component {
       <View style={{
         backgroundColor: colors.paleGrey,
         paddingTop: STATUS_BAR_HEIGHT + 20,
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        paddingHorizontal: 20,
         flex: 1
        }}>
-       <AyezText medium size={16}>Welcome back {this.props.name}!</AyezText>
-       <AyezText regular size={16} style={{ marginTop: 5, marginBottom: 6 }}>Please select your location</AyezText>
+       <AyezText medium size={15}>Welcome back {this.props.name}</AyezText>
+       <AyezText regular size={15} style={{ marginTop: 5, marginBottom: 10 }}>Please confirm your location</AyezText>
         {addressComponents}
+
         <TouchableOpacity
           style={{
             marginTop: 20,
             paddingVertical: 10,
             paddingHorizontal: 20,
+            alignSelf: 'center'
            }}
          onPress={() => navigateTo(sceneKeys.addressCreate)}
          >
-          <AyezText medium>+ New Address</AyezText>
+          <AyezText regular color={AYEZ_GREEN}>+ New Address</AyezText>
         </TouchableOpacity>
 
         <View style={{ flex: 1 }} />
-        <AyezText medium color={'red'} style={{ marginBottom: 14 }}>Logout</AyezText>
+
+        <TouchableOpacity
+          style={{
+            paddingVertical: 20,
+            paddingHorizontal: 10,
+           }}
+         onPress={() => this.props.logoutUser()}
+         >
+          <AyezText medium color={'red'}>Logout</AyezText>
+        </TouchableOpacity>
+
       </View>
     )
   }
@@ -140,5 +162,6 @@ const mapStateToProps = ({ Customer, Seller, Addresses, Settings, OngoingOrders 
 };
 
 export default connect(mapStateToProps, {
-  selectAddress
+  selectAddress,
+  logoutUser
 })(LocationSelect);
