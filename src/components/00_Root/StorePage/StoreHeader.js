@@ -101,7 +101,7 @@ export default class StoreHeader extends Component {
 
         <AnimatedSearchBarButton
           style={{ marginTop: 15 }}
-          width={interpolatedHeaderTranslation('90%', '70%')}
+          width={interpolatedHeaderTranslation('90%', '60%')}
           displayName={displayName}
         />
         {children}

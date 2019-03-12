@@ -301,6 +301,7 @@ class StorePage extends Component {
           </CollapsibleHeaderScrollView>
           {this.renderSettings()}
           {this.renderBasket()}
+          <BackButton color= 'white' style={ styles.backButtonStyle } />
           <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
 
         </View>

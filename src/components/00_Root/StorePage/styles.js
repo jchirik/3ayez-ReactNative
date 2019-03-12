@@ -175,6 +175,16 @@ const styles = StyleSheet.create({
     left: 15,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  backButtonStyle: {
+    position: 'absolute',
+    width: 22,
+    height: 22,
+    top: 19,
+    left: 50,
+    tintColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
