@@ -135,7 +135,8 @@
   },
   "StoreHome": {
     "featured": "Featured",
-    "categories": "Categories"
+    "categories": "Categories",
+    "requestFailed": "Request Failed. Click Here to Try Again!"
   },
   "StoreSearch": {
     "placeholder": "find products within {{seller_name}}",

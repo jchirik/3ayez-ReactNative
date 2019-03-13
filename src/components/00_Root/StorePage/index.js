@@ -42,6 +42,9 @@ import {
   AYEZ_GREEN
 } from '../../../Helpers';
 
+import {
+  fetchStore
+} from '../../../actions';
 
 import styles from './styles';
 import colors from '../../../theme/colors';
@@ -266,7 +269,17 @@ class StorePage extends Component {
     const { selected_tab, tabs, tabBarHeight } = this.state;
 
     let mainScrollComponent = null;
-    if (this.props.featured_loading || this.props.categories_loading) {
+    if (this.props.requestFailed === true) {
+      mainScrollComponent = (
+        <TouchableOpacity
+          style={ styles.failedTextStyle }
+          onPress={() => this.props.fetchStore(this.props.seller_id) } 
+        >
+          <AyezText>{strings('StoreHome.requestFailed')}</AyezText>
+        </TouchableOpacity>
+      );
+    }
+    else if (this.props.featured_loading || this.props.categories_loading) {
       mainScrollComponent = (
         <ActivityIndicator size="small" style={{ flex: 1, marginTop: 50 }} />
       );
@@ -325,7 +338,8 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     featured,
     categories_loading,
     location_text,
-    display_name
+    display_name, 
+    requestFailed
   } = Seller;
 
   const { locale } = Settings;
@@ -347,11 +361,12 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     categories_loading,
     location_text,
     display_name,
-    basket_quantity
+    basket_quantity,
+    requestFailed
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  {fetchStore}
 )(StorePage);

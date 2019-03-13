@@ -135,7 +135,8 @@
   },
   "StoreHome": {
     "featured": "عروض",
-    "categories": "الأقسام"
+    "categories": "الأقسام",
+    "requestFailed": "تعذر الإتصال. إضغط هنا للمحاولة مرة أخرى"
   },
   "StoreSearch": {
     "placeholder": "العثور على المنتجات داخل {{seller_name}}",

@@ -175,6 +175,12 @@ const styles = StyleSheet.create({
     left: 15,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  failedTextStyle: {
+    flex: 1, 
+    marginTop: 50, 
+    alignItems: 'center',
+    justifyContent: 'center' 
   }
 });
 
