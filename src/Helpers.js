@@ -10,6 +10,8 @@ import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
+export const ZOPIM_ACCOUNT_KEY = "iHN4GwAkKeViLO73ihbDbFL0VycoQnwP"
+
 export const isIOS = () => Platform.OS === 'ios'
 
 export const hasValue = val => {
