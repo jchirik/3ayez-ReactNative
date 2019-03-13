@@ -10,7 +10,7 @@ buildscript {
   ext {
     buildToolsVersion = "28.0.2"
     minSdkVersion = 18
-    compileSdkVersion = 27
+    compileSdkVersion = 28
     targetSdkVersion = 26
     supportLibVersion = "27.1.1"
   }
@@ -20,6 +20,7 @@ buildscript {
     maven {
       url 'https://maven.fabric.io/public'
     }
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.2.0'
@@ -41,6 +42,7 @@ allprojects {
       url "$rootDir/../node_modules/react-native/android"
     }
     maven { url "https://jitpack.io" }
+    maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
   }
 }
 

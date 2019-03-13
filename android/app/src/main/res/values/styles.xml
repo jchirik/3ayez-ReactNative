@@ -1,13 +1,44 @@
 <resources>
 
+  <style name="SplashScreenTheme" parent="AppTheme">
+    <item name="colorPrimaryDark">@color/status_bar_color</item>
+  </style>
+
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="android:windowIsTranslucent">true</item>
   </style>
 
-  <style name="SplashScreenTheme" parent="AppTheme">
-    <item name="colorPrimaryDark">@color/status_bar_color</item>
+  <!-- Base chat sdk theme. -->
+  <style name="ZopimChatTheme" parent="ZopimChatTheme.Light">
+    <!--Chat UI uses the toolbar so no need to show ActionBar-->
+    <item name="windowActionBar">false</item>
+    <!-- Customize chat theme here. -->
+    <item name="colorAccent">@color/greenBlue</item>
+    <item name="colorPrimary">@color/greenBlue</item>
+    <item name="colorPrimaryDark">@color/darkGreenBlue</item>
   </style>
 
+  <style name="no_agents_button">
+    <item name="android:background">@color/greenBlue</item>
+    <item name="android:padding">8dp</item>
+    <item name="android:textColor">@color/offWhite</item>
+  </style>
+
+  <!--Customize toolbar that replaces action bar-->
+  <style name="zopim_toolbar">
+    <item name="android:background">?attr/colorPrimary</item>
+    <item name="android:minHeight">?attr/actionBarSize</item>
+    <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+  </style>
+
+  <!--Customize where chat widget appears-->
+  <style name="chat_widget" parent="_chat_widget">
+    <item name="anchor">bottom_left</item>
+  </style>
+
+  <!--Customize chat colors-->
+  <color name="chat_bubble_visitor">@color/greenBlue</color>
 </resources>

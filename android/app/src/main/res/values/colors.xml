@@ -8,4 +8,8 @@ ahmedfathyghazy@gmail.com-->
 <resources>
   <color name="primary_dark">#2DD38F</color>
   <color name="status_bar_color">#2DD38F</color>
+  <color name="greenBlue">#2DD38F</color>
+  <color name="offWhite">#FDFDFD</color>
+  <color name="black">#0F0F0F</color>
+  <color name="darkGreenBlue">#09bc61</color>
 </resources>
