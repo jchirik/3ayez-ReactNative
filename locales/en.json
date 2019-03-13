@@ -24,7 +24,9 @@
     "viewMore": "View more",
     "enter": "Enter",
     "english": "English",
-    "arabic": "عربي"
+    "arabic": "عربي",
+    "requestFailed": "Request Failed. Check your internet connection!",
+    "tryAgain": "Try Again"
   },
   "Input": {
     "required": "required",
@@ -135,8 +137,7 @@
   },
   "StoreHome": {
     "featured": "Featured",
-    "categories": "Categories",
-    "requestFailed": "Request Failed. Click Here to Try Again!"
+    "categories": "Categories"
   },
   "StoreSearch": {
     "placeholder": "find products within {{seller_name}}",

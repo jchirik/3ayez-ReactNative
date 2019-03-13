@@ -22,7 +22,6 @@ import SideMenu from 'react-native-side-menu';
 import FeaturedBrowse from './01_FeaturedBrowse';
 import CategoriesBrowse from './02_CategoriesBrowse';
 import SettingsMenu from './SettingSideMenu';
-
 import {
   AnimatedCheckmarkOverlay,
   ItemTile,
@@ -57,6 +56,7 @@ import {
   PARALLAX_HEADER_HEIGHT
 } from './CollapsibleHeaderScrollView';
 import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
+import NetworkErrorMessage from '../../_common/NetworkErrorMessage';
 const STICKY_HEADER_HEIGHT = 68; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 const TAB_BAR_HEIGHT = 52;
@@ -271,12 +271,9 @@ class StorePage extends Component {
     let mainScrollComponent = null;
     if (this.props.requestFailed === true) {
       mainScrollComponent = (
-        <TouchableOpacity
-          style={ styles.failedTextStyle }
-          onPress={() => this.props.fetchStore(this.props.seller_id) } 
-        >
-          <AyezText>{strings('StoreHome.requestFailed')}</AyezText>
-        </TouchableOpacity>
+        <NetworkErrorMessage 
+          onPress={ () => {this.props.fetchStore(this.props.seller_id)} }
+        />
       );
     }
     else if (this.props.featured_loading || this.props.categories_loading) {

@@ -24,7 +24,9 @@
     "viewMore": "أظهر أكثر",
     "enter": "دخول",
     "english": "English",
-    "arabic": "عربي"
+    "arabic": "عربي",
+    "requestFailed": "تعذر الإتصال. تأكد من إتصالك بالشبكة !",
+    "tryAgain": "حاول مرة أخرى"
   },
   "Input": {
     "required": "مطلوب",
@@ -135,8 +137,7 @@
   },
   "StoreHome": {
     "featured": "عروض",
-    "categories": "الأقسام",
-    "requestFailed": "تعذر الإتصال. إضغط هنا للمحاولة مرة أخرى"
+    "categories": "الأقسام"
   },
   "StoreSearch": {
     "placeholder": "العثور على المنتجات داخل {{seller_name}}",
