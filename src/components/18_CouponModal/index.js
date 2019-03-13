@@ -42,6 +42,7 @@ class CouponModal extends Component {
 
   constructor(props) {
     super(props);
+    this.resetCoupon = this.resetCoupon.bind(this);
     this.state = {
       code: ''
     };
@@ -101,11 +102,14 @@ class CouponModal extends Component {
         <BlockButton
           text={strings('CouponModal.reenterCoupon')}
           style={{ marginLeft: 24, marginRight: 24, marginTop: 20 }}
-          onPress={this.resetCoupon.bind(this)}
+          onPress={this.resetCoupon}
           />
         <SubtleButton
           text={strings('Common.close')}
-          onPress={()=> navigateBack()}
+          onPress={()=> {
+            this.resetCoupon();
+            navigateBack();
+          }}
         />
       </View>
     )
@@ -193,7 +197,7 @@ class CouponModal extends Component {
           />
         <SubtleButton
           text={strings('CouponModal.removeCoupon')}
-          onPress={this.resetCoupon.bind(this)}
+          onPress={this.resetCoupon}
         />
       </View>
     )
