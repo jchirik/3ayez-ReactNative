@@ -12,12 +12,9 @@ import images from '../../theme/images'
 import { sceneKeys, navigateTo } from '../../router';
 
 const Image_HEIGHT_RATIO = '48%';
-const TEXT_HEIGHT_RATIO = '37%';
-const BUTTON_HEIGHT_RATIO = '10%';
 
 const PRICE_HEIGHT_RATIO = '30%';
 const NAME_HEIGHT_RATIO = '50%';
-const UNIT_HEIGHT_RATIO = '20%';
 
 
 class ItemTile extends PureComponent {
@@ -120,7 +117,9 @@ class ItemTile extends PureComponent {
           </AyezText>
         </View>
 
-        <AyezText regular style={styles.unitText} allowFontScaling={false}>{item.incr + item.unit}</AyezText>
+        {/*
+          <AyezText regular style={styles.unitText} allowFontScaling={false}>{item.incr + item.unit}</AyezText>
+          */}
       </View>
     );
   }
@@ -140,7 +139,7 @@ class ItemTile extends PureComponent {
     }
 
     return (
-      <View style={{ height: BUTTON_HEIGHT_RATIO }}>
+      <View style={{ height: 35 }}>
         {incrementer}
       </View>
     );
@@ -227,10 +226,9 @@ const styles = {
     height: '20%'
   },
   textContainer: {
-    height: '100%',
     width: '100%',
     flexWrap: 'nowrap',
-    height: TEXT_HEIGHT_RATIO
+    flex: 1
   },
   titleTextContianer: {
     height: NAME_HEIGHT_RATIO,
@@ -241,7 +239,6 @@ const styles = {
   unitText: {
     opacity: 1,
     alignSelf: 'stretch',
-    height: UNIT_HEIGHT_RATIO,
     textAlign: 'left',
     fontSize: 12,
     color: colors.steel
@@ -286,7 +283,7 @@ const styles = {
     backgroundColor: 'transparent'
   },
   priceContainer: {
-    height: PRICE_HEIGHT_RATIO,
+    // height: PRICE_HEIGHT_RATIO,
     flexDirection: 'column',
     width: '100%',
     justifyContent: 'center'

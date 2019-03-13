@@ -95,15 +95,15 @@ class StorePage extends Component {
     if (!this.props.featured_loading && prevProps.featured_loading) {
       if (this.props.featured.length) {
         this.setState({
-          tabs: [ strings('StoreHome.featured'), ...this.state.tabs ]
+          tabs: [ strings('StoreHome.featured'), strings('StoreHome.categories') ],
+          tabBarHeight: TAB_BAR_HEIGHT
+        })
+      } else {
+        this.setState({
+          tabs: [ strings('StoreHome.categories') ],
+          tabBarHeight: 0
         })
       }
-    }
-
-    // if the tab bar exists (more than one tab) -> set the height
-    // otherwise this height is 0
-    if (this.state.tabs.length >= 2 && prevState.tabs.length < 2) {
-      this.setState({ tabBarHeight: TAB_BAR_HEIGHT })
     }
   }
 

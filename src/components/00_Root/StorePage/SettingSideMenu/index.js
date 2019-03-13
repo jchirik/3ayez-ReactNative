@@ -264,6 +264,7 @@ class SettingsMenu extends Component {
       text: strings('Support.contact3ayez'),
       action: () => {
         if (this.state.visitorSDK) {
+          this.props.onClose();
           navigateTo(sceneKeys.supportChat, {
             visitorSDK: this.state.visitorSDK
           });
@@ -275,17 +276,26 @@ class SettingsMenu extends Component {
 
     const creditCardTab = {
       text: strings('Settings.creditCards'),
-      action: () => navigateTo(sceneKeys.creditCardManager),
+      action: () => {
+        this.props.onClose();
+        navigateTo(sceneKeys.creditCardManager)
+      },
       icon: images.settingsCreditCard
     };
     const addressBookTab = {
       text: strings('Settings.addressBook'),
-      action: () => navigateTo(sceneKeys.addressManager),
+      action: () => {
+        this.props.onClose();
+        navigateTo(sceneKeys.addressManager)
+      },
       icon: images.settingsAddressBook
     };
     const previousOrdersTab = {
       text: strings('Settings.previousOrders'),
-      action: () => navigateTo(sceneKeys.orderHistory),
+      action: () => {
+        this.props.onClose();
+        navigateTo(sceneKeys.orderHistory)
+      },
       icon: images.settingsOrderHistory
     };
 
