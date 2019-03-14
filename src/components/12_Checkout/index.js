@@ -206,7 +206,8 @@ class Checkout extends Component {
       }}>
         <AyezText regular style={{
           fontSize: 12,
-          color: 'red'
+          color: 'red',
+          top: 15
         }}>{strings('Checkout.noCreditCard')}</AyezText>
       </View>
     )
