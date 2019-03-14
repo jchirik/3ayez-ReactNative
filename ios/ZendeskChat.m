@@ -30,11 +30,7 @@ RCT_EXPORT_MODULE();
 
 - (NSDictionary *)constantsToExport
 {
-  return @{ @"REACT_CLASS" : @"ZendeskChat",
-            @"ZENDESK_URL" :@"zendeskUrl",
-            @"APPLICATION_ID" : @"applicationId",
-            @"OAUTH_CLIENT_ID" : @"oauthClientId",
-            @"ZOPIM_ACCOUNT_KEY" : @"zopimAccountKey"};
+  return Zendesk.constants;
 }
 
 RCT_EXPORT_METHOD(start: (NSDictionary*) params) {

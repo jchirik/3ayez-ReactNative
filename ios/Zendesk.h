@@ -8,4 +8,6 @@
 
 @interface Zendesk : NSObject
   - (void) start: (NSDictionary*) params ;
+  + (NSDictionary *)constants;
+
   @end

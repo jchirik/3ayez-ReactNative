@@ -19,4 +19,5 @@
 #endif
 
 @interface ZendeskChat : NSObject <RCTBridgeModule>
+
 @end
