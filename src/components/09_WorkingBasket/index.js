@@ -110,8 +110,11 @@ class WorkingBasket extends Component {
   renderHeader() {
     return (
       <View style={styles.headerContainer}>
-        <View style={styles.basketContainer}>
-          <Image
+        <View style={{
+          ...styles.basketContainer,
+          backgroundColor: this.props.seller.color
+          }}>
+          {/*<Image
             source={{ uri: this.props.seller.cover_url }}
             style={{
               opacity: 0.5,
@@ -119,7 +122,7 @@ class WorkingBasket extends Component {
               height: '100%'
             }}
             resizeMode={'cover'}
-          />
+          />*/}
           <Image
             source={images.skeuomorphBasket}
             style={{

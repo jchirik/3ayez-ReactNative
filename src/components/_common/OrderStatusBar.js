@@ -41,7 +41,7 @@ class OrderStatusBar extends PureComponent {
       }
       let text = strings('OrderStatusBar.trackOrder');
       if (orders.length > 1) {
-        onPress = () => { 
+        onPress = () => {
           navigateTo(sceneKeys.orderHistory);
         }
         text = strings('OrderStatusBar.multipleOrders');
@@ -55,14 +55,15 @@ class OrderStatusBar extends PureComponent {
               alignItems: 'center',
               backgroundColor: AYEZ_GREEN,
               paddingTop: STATUS_BAR_HEIGHT + 6,
-              marginBottom: 4,
               paddingBottom: 11,
               shadowColor: '#000',
               shadowOffset: { width: -1, height: 2 },
               shadowOpacity: 0.2,
               shadowRadius: 2,
               elevation: 2,
+              zIndex: 10
             }}
+            activeOpacity={1}
             onPress={() => onPress()}
           >
               <AyezText semibold color={'white'} size={15}>{text}</AyezText>
@@ -76,7 +77,10 @@ class OrderStatusBar extends PureComponent {
     }
 
     return (
-      <View style={{ height: STATUS_BAR_HEIGHT }} />
+      <View style={{
+        backgroundColor: this.props.color || '#444444',
+        height: STATUS_BAR_HEIGHT
+      }} />
     );
 
   }

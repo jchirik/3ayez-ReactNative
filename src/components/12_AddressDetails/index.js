@@ -14,6 +14,8 @@ import {
  } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+
+import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
 import {
   Header,
@@ -21,111 +23,68 @@ import {
   LoadingOverlay,
   AyezText,
   InputRow
-} from '../../_common';
+} from '../_common';
 import {
-  createNewAddress,
-  calculateAreaForLocation,
-  setAddressDetail
-} from '../../../actions';
+  updateAddress
+} from '../../actions';
 
 import {
   strings,
   translate,
   FONT_MEDIUM
-} from '../../../i18n.js';
+} from '../../i18n.js';
+
+import images from '../../theme/images'
 
 
 class AddressDetails extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      name: '',
+      street: '',
+      building: '',
+      apt: '',
+      notes: ''
+    };
   }
 
-  createNewAddress() {
+  updateAddress() {
+    const { address } = this.props;
     const {
-      location,
-      title,
+      name,
       street,
       building,
       apt,
+      notes
+    } = this.state;
+    this.props.updateAddress({
+      ...address,
       name,
-      notes,
-      type,
-      area
-    } = this.props;
-
-    this.props.createNewAddress({
-      location,
-      title,
       street,
       building,
       apt,
-      name,
-      notes,
-      type,
-      area
-    });
+      notes
+    })
   }
 
   componentDidMount() {
-    if (this.props.google_type === 'route') {
-      this.props.setAddressDetail({ street: this.props.google_title });
-    }
-    this.props.calculateAreaForLocation(this.props.location);
+    this.setState({
+      street: this.props.address.street || this.props.address.title,
+      apt: this.props.address.apt,
+      building: this.props.address.building,
+      name: this.props.address.name,
+      notes: this.props.address.notes
+    })
   }
 
   onChangeText(key, value) {
     const update = {};
     update[key] = value;
-    this.props.setAddressDetail(update);
+    this.setState(update);
   }
 
-  renderTitle() {
-
-    let loadingComponent = null;
-    if (this.props.area_loading) {
-      loadingComponent = (
-        <ActivityIndicator size="small" style={{ marginLeft: 24 }} />
-      )
-    }
-
-    return (
-      <View style={{
-        paddingLeft: 16,
-        paddingTop: 16,
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-      }}>
-        <AyezText bold size={32}>{strings('AddressCreate.confirmDeliveringTo')}</AyezText>
-        { loadingComponent }
-      </View>
-    )
-  }
-
-  renderArea() {
-    if (this.props.area) {
-      return (
-        <View style={{
-          paddingLeft: 16,
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-          <AyezText semibold size={13}>
-            {strings('Address.region')}
-          </AyezText>
-          <AyezText semibold size={13} style={{
-            alignItems: 'stretch',
-            paddingLeft: 6,
-            color: '#0094ff'
-          }}>
-            {translate(this.props.area.display_name)}
-          </AyezText>
-        </View>
-      )
-    }
-    return null
-  }
 
   renderError() {
     const { error } = this.props;
@@ -147,47 +106,102 @@ class AddressDetails extends Component {
     return null;
   }
 
+  renderPinOverlay() {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+        pointerEvents="none"
+      >
+        <Image
+          source={images.pinIcon}
+          style={{
+              width: 36,
+              height: 36,
+              marginBottom: 36
+            }}
+          resizeMode={'contain'}
+        />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={{
         flex: 1,
         backgroundColor: '#FAFCFD'
       }}>
-        <Header title={strings('AddressCreate.confirmHeader')}/>
+        <Header
+          title={strings('AddressCreate.confirmHeader')}
+          blackStyle
+        />
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : null}
         >
           <ScrollView style={{ flex: 1 }}>
-            { this.renderTitle() }
-            { this.renderArea() }
 
+            <View
+              style={{
+                height: 160,
+                marginHorizontal: 15,
+                marginTop: 10,
+              }}
+              pointerEvents="none"
+            >
+              <MapView
+                style={{
+                  flex: 1,
+                  borderRadius: 10
+                }}
+                provider={ PROVIDER_GOOGLE }
+                initialRegion={{
+                  latitude: this.props.address.location.lat,
+                  longitude: this.props.address.location.lng,
+                  latitudeDelta: 0.01,
+                  longitudeDelta: 0.01,
+                }}
+              />
+              {this.renderPinOverlay()}
+            </View>
 
-            <View style={{ height: 20 }} />
+            <AyezText semibold size={16} style={{
+              paddingLeft: 16,
+              paddingTop: 20,
+              paddingBottom: 6
+            }}>{'Please provide additional details'}</AyezText>
 
             <InputRow
               title={strings('Address.street')}
-              value={this.props.street}
+              value={this.state.street}
               onChangeText={this.onChangeText.bind(this, 'street')}
             />
             <InputRow
               title={strings('Address.building')}
-              value={this.props.building}
+              value={this.state.building}
               onChangeText={this.onChangeText.bind(this, 'building')}
             />
             <InputRow
               title={strings('Address.apt')}
-              value={this.props.apt}
+              value={this.state.apt}
               onChangeText={this.onChangeText.bind(this, 'apt')}
             />
             <InputRow
               title={strings('Address.name')}
-              value={this.props.name}
+              value={this.state.name}
               onChangeText={this.onChangeText.bind(this, 'name')}
             />
             <InputRow
               title={strings('Address.instructions')}
-              value={this.props.notes}
+              value={this.state.notes}
               onChangeText={this.onChangeText.bind(this, 'notes')}
               required={false}
               multiline={true}
@@ -205,7 +219,7 @@ class AddressDetails extends Component {
                 marginRight: 18,
                 alignSelf: 'stretch'
               }}
-              onPress={this.createNewAddress.bind(this)}
+              onPress={this.updateAddress.bind(this)}
               />
             </ScrollView>
           </KeyboardAvoidingView>
@@ -216,46 +230,23 @@ class AddressDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ AddressReverseSearch, AddressCreate, AddressArea }) => {
+const mapStateToProps = ({ Addresses, AddressUpdate }) => {
   const {
-    location,
-    title,
-    street,
-    building,
-    apt,
-    name,
-    notes,
-    type,
-    area,
+    address
+  } = Addresses;
 
+  const {
     is_loading,
     error
-  } = AddressCreate;
-
-  const area_loading = AddressArea.is_loading;
+  } = AddressUpdate;
 
   return {
-    location,
-    title,
-    street,
-    building,
-    apt,
-    name,
-    notes,
-    type,
-    area,
-    area_loading,
-
-    google_title: AddressReverseSearch.title,
-    google_type: AddressReverseSearch.type,
-
+    address,
     is_loading,
     error
   };
 };
 
 export default connect(mapStateToProps, {
-  createNewAddress,
-  calculateAreaForLocation,
-  setAddressDetail
+  updateAddress
 })(AddressDetails);

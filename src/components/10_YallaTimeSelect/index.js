@@ -55,7 +55,12 @@ class YallaTimeSelect extends Component {
       type: 'INSTANT',
       delivery_fee: seller.delivery_fee
     });
-    navigateTo(sceneKeys.checkout);
+
+    if (this.props.address.is_completed) {
+      navigateTo(sceneKeys.checkout);
+    } else {
+      navigateTo(sceneKeys.addressDetails);
+    }
   }
 
   //
@@ -152,9 +157,11 @@ class YallaTimeSelect extends Component {
     }
   }
 
-  const mapStateToProps = ({ Seller }) => {
+  const mapStateToProps = ({ Seller, Addresses }) => {
+    const { address } = Addresses;
     const seller = Seller;
     return {
+      address,
       seller
     };
   };

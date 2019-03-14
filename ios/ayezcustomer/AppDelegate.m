@@ -12,6 +12,7 @@
 #import <React/RCTRootView.h>
 #import <Firebase.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import "ChatStyle.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "RNSplashScreen.h"
@@ -40,10 +41,15 @@
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
-  rootViewController.view = rootView;
-  self.window.rootViewController = rootViewController;
+
+  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+  self.rootViewController  = navController;
+  self.rootViewController.view = rootView;
+  self.window.rootViewController =  self.rootViewController;
   [self.window makeKeyAndVisible];
-  [RNSplashScreen show];
+//  [RNSplashScreen show];
+  [ChatStyle applyStyle];
+
   return YES;
 }
 

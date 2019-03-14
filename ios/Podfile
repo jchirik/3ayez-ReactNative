@@ -25,6 +25,7 @@ target 'ayezcustomer' do
   pod 'Firebase/Performance', '~> 5.11.0'
   pod 'Fabric', '~> 1.7.13'
   pod 'Crashlytics', '~> 3.10.9'
+  pod 'ZDCChat'
 
   # all below required for RN Maps
   rn_path = '../node_modules/react-native'
@@ -33,6 +34,7 @@ target 'ayezcustomer' do
   pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
   pod 'React', path: rn_path, subspecs: [
     'Core',
+    'ART',
     'CxxBridge',
     'DevSupport',
     'RCTActionSheet',

@@ -99,7 +99,7 @@ class CurrentLocationSelect extends Component {
       return (
         <View>
           <AyezText
-          regular style={{ textAlign: 'center' }}>{strings('AddressCreate.issueDeterminingCL')}</AyezText>
+          regular style={{ textAlign: 'center' }}>{strings('AddressCreate.noLocationPermission')}</AyezText>
           <BlockButton
             text={strings('Common.OK')}
             color={'black'}
@@ -118,21 +118,26 @@ class CurrentLocationSelect extends Component {
     }
 
     return (
-      <View>
+      <View style={{
+        flexDirection: 'row',
+        marginBottom: 20,
+        marginHorizontal: 15
+      }}>
         <BlockButton
-          text={strings('AddressCreate.allowCL')}
+          text={strings('Common.yes')}
           style={{
-            marginTop: 10,
-            marginLeft: 18,
-            marginRight: 18,
+            flex: 1,
+            marginRight: 5,
           }}
           onPress={() => {
             this.props.setCurrentLocation()
           }}
           />
 
-        <BlockUnderButton
-          text={strings('AddressCreate.denyCL')}
+        <BlockButton
+          outline
+          style={{ flex: 1, marginLeft: 5 }}
+          text={strings('Common.no')}
           onPress={() => {
             navigateTo(sceneKeys.addressSearch);
           }}
@@ -148,21 +153,27 @@ class CurrentLocationSelect extends Component {
         backgroundColor: '#FAFCFD'
       }}>
 
+      <AyezText
+        semibold
+        size={20}
+        style={{
+          textAlign: 'center',
+          marginTop: STATUS_BAR_HEIGHT + 100,
+          marginLeft: 100,
+          marginRight: 100
+         }}
+        >{strings('AddressCreate.queryCL')}</AyezText>
+
         <Image
           source={images.currentLocationCover}
           style={{
-            height: 280,
+            height: 240,
             width: 280,
-            marginTop: STATUS_BAR_HEIGHT + 20,
             alignSelf: 'center'
            }}
           resizeMode={'contain'}
         />
-        <AyezText
-          semibold
-          size={16}
-          style={{ textAlign: 'center', marginTop: 20, marginLeft: 20, marginRight: 20 }}
-          >{strings('AddressCreate.queryCL')}</AyezText>
+
         <View style={{ flex: 1 }} />
 
         { this.renderLocationPermissionButtons() }

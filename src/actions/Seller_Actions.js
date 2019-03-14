@@ -116,8 +116,10 @@ const fetchStoreData = (seller_id, dispatch) => {
       const sellerRef = firebase.firestore().collection('sellers').doc(seller_id);
       sellerRef.collection('data').doc('app').get().then((document) => {
         if (document.data()) {
-          const categories = document.data().categories || [];
+          let categories = document.data().categories || [];
           const featured = document.data().featured || [];
+          
+          categories = categories.filter(category => !(category.is_online === false))
           dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { categories, requestFailed: false } });
           fetchFeaturedItems(seller_id, featured, dispatch);
         } else { 

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
+import { Bar } from 'react-native-progress';
+
 import {
   View,
   FlatList,
@@ -35,6 +37,7 @@ import {
 
 import {
   AYEZ_GREEN,
+  AYEZ_BACKGROUND_COLOR,
   STATUS_BAR_HEIGHT,
   checkIfOpen
 } from '../../Helpers';
@@ -59,12 +62,21 @@ class StoreSelect extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      loadingPriceAnimation: false,
+      animationProgress: 0,
+      animationBackgroundFade: new Animated.Value(0)
+    };
   }
 
   fetchNearbySellers() {
     const { address } = this.props;
-
     if (address) {
+      this.setState({
+        loadingPriceAnimation: false,
+        animationProgress: 0,
+        animationBackgroundFade: new Animated.Value(0)
+      });
       this.props.fetchNearbySellers(address); // load nearby stores upon open
     }
   }
@@ -74,14 +86,41 @@ class StoreSelect extends Component {
     this.fetchNearbySellers();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.address !== prevProps.address) {
       this.fetchNearbySellers(); // load nearby stores upon change
     }
 
-    if (!this.props.is_loading_bestprices && prevProps.is_loading_bestprices && (this.props.sellers.length === 1)) {
-      this.onSelectSeller(this.props.sellers[0]);
+    // animations if only store option
+    if (this.props.sellers.length === 1) {
+      if (!this.props.is_loading && prevProps.is_loading) {
+        console.log('begin price loading animation')
+        this.setState({ loadingPriceAnimation: true });
+        Animated.timing(
+          this.state.animationBackgroundFade,
+          {
+            toValue: 1,
+            duration: 250,
+          }
+        ).start();
+        setTimeout(() => {
+          this.setState({ animationProgress: 0.3 })
+        }, 500);
+        setTimeout(() => {
+          this.setState({ animationProgress: 0.5 })
+        }, 1000);
+        setTimeout(() => {
+          this.setState({ animationProgress: 0.8 })
+        }, 1800);
+        setTimeout(() => {
+          this.setState({ animationProgress: 1 })
+        }, 2300);
+        setTimeout(() => {
+          this.onSelectSeller(this.props.sellers[0])
+        }, 2400);
+      }
     }
+
   }
 
   onSelectSeller(seller) {
@@ -311,10 +350,6 @@ renderItem({ item, index }) {
               />
             </View>
           </View>
-
-
-
-
         </View>
 
         <View style={{
@@ -360,19 +395,12 @@ renderLoadingStore() {
   return (
     <View style={{
       flex: 1,
+      backgroundColor: AYEZ_BACKGROUND_COLOR,
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <Image
-        source={images.storeLoadingGIF}
-        resizeMode={'contain'}
-        style={{
-          width: 140,
-          height: 140,
-          marginBottom: 20
-        }}
-      />
-      <AyezText medium>Finding best store for your area</AyezText>
+      <AyezText medium>Finding the provider for your address</AyezText>
+      <ActivityIndicator size="small" style={{ marginTop: 10 }} />
     </View>
   )
 }
@@ -384,11 +412,21 @@ renderLoadingBestPrices(seller) {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
+      <Animated.View style={{
+        position: 'absolute',
+        opacity: this.state.animationBackgroundFade,
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: seller.color || AYEZ_GREEN,
+      }} />
       <View style={{
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#cecece',
-        marginBottom: 20
+        marginBottom: 20,
+        backgroundColor: 'white'
       }}>
         <Image
           source={{ uri: seller.logo_url }}
@@ -401,8 +439,15 @@ renderLoadingBestPrices(seller) {
           }}
         />
       </View>
-      <AyezText medium>Getting up to date prices</AyezText>
-      <ActivityIndicator size="small" style={{ marginTop: 20 }} />
+      <AyezText medium color={'white'}>Getting up to date prices</AyezText>
+
+      <Bar
+        style={{ marginTop: 10 }}
+        color={'white'}
+        useNativeDriver
+        progress={this.state.animationProgress}
+        width={200}
+      />
     </View>
   )
 }
@@ -424,90 +469,35 @@ renderSellerList() {
 
   if (this.props.sellers.length === 0) {
     return (
-      <View>
-        <AyezText medium style={{ marginTop: 40, marginBottom: 100, textAlign: 'center' }}>
-          {strings('Common.comingSoon')}
+      <View style={{
+        flex: 1,
+        backgroundColor: AYEZ_BACKGROUND_COLOR,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <AyezText medium style={{ marginTop: 40, textAlign: 'center' }}>
+          We're not in this area yet 😥
         </AyezText>
+        <BlockButton
+          text={'Find another location'}
+          color={'#0094ff'}
+          style={{ width: 250, marginTop: 20 }}
+          onPress={() => {
+            navigateTo(sceneKeys.locationSelect)
+          }}
+        />
       </View>
     )
   } else if (this.props.sellers.length === 1) {
     const seller = this.props.sellers[0];
-
-    if (this.props.is_loading_beststore) {
-      return this.renderLoadingStore();
-    } else if (this.props.is_loading_bestprices) {
-      return this.renderLoadingBestPrices(seller);
-    }
-
-    const banner_image = (seller.banner_images && seller.banner_images.length) ? seller.banner_images[0] : null;
-    let nextTimeslotText = '-';
-    if (seller.next_timeslot) {
-      const { start, end } = seller.next_timeslot;
-      nextTimeslotText = `${formatDay(start)}, ${formatTimestamp(start, "h:mmA")}-${formatTimestamp(end, "h:mmA")}`
-    }
-    return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingTop: 16,
-        }}
-        >
-
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={this.onSelectSeller.bind(this, seller)}
-          style={{
-            backgroundColor: 'white',
-            marginVertical: 10,
-            shadowColor: '#000',
-            shadowOffset: { width: -1, height: 3 },
-            shadowOpacity: 0.0,
-            shadowRadius: 8,
-            borderWidth: 1,
-            borderColor: '#CECECE',
-            elevation: 2
-          }}
-          >
-            <Image
-              source={{ uri: seller.logo_url }}
-              resizeMode={'contain'}
-              style={{
-                width: 180,
-                height: 60,
-                margin: 12,
-                borderRadius: 10
-              }}
-            />
-        </TouchableOpacity>
-
-
-        <AyezText regular style={{
-          fontSize: 16,
-          marginBottom: 7
-        }}>{translate(seller.display_name).toUpperCase()}</AyezText>
-
-        <AyezText extralight>{strings('StoreSelect.nextDelivery')}</AyezText>
-        <AyezText medium size={13} color={AYEZ_GREEN}>{nextTimeslotText}</AyezText>
-
-
-        <BlockButton
-          text={strings('Common.enter').toUpperCase()}
-          style={{ width: 200, marginTop: 20 }}
-          onPress={this.onSelectSeller.bind(this, seller)}
-          />
-      </View>
-    )
+    return this.renderLoadingBestPrices(seller);
   }
 
   return (
     <FlatList
       data={this.props.sellers}
       renderItem={this.renderItem.bind(this)}
-      style={{ flex: 1, backgroundColor: 'white' }}
-
+      style={{ flex: 1, backgroundColor: AYEZ_BACKGROUND_COLOR }}
       removeClippedSubviews
       ListHeaderComponent={
         <View style={{
@@ -519,7 +509,6 @@ renderSellerList() {
         </View>
       }
       ListFooterComponent={null}
-
       showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => `${index}`}
     />
@@ -529,7 +518,6 @@ renderSellerList() {
   render() {
     return (
       <View style={{ flex: 1 }}>
-
         {this.renderSellerList()}
       </View>
     );
@@ -559,8 +547,6 @@ const mapStateToProps = ({ Addresses, SellerSearch }) => {
   const {
     sellers,
     is_loading,
-    is_loading_beststore,
-    is_loading_bestprices,
     error
   } = SellerSearch;
 
@@ -570,8 +556,6 @@ const mapStateToProps = ({ Addresses, SellerSearch }) => {
 
     sellers,
     is_loading,
-    is_loading_beststore,
-    is_loading_bestprices,
     error
   };
 };

@@ -114,43 +114,52 @@ class AddressSelection extends Component {
       return null;
     }
 
-    const addressComponents = addresses.slice(0, 3).map(address => (
-      <TouchableOpacity
-        key={address.id}
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          paddingTop: 8,
-          paddingBottom: 8,
-          borderBottomWidth: 1,
-          borderColor: 'rgba(255, 255, 255, 0.25)',
-          paddingHorizontal: 20
-         }}
-       onPress={() => {
-         this.props.selectAddress(address, this.onClose.bind(this));
-       }}
-       >
-        <View style={{ flex: 1, alignItems: 'flex-start' }}>
-          <AyezText bold style={{
-            color: 'white'
-          }}>{address.street}</AyezText>
-          <AyezText medium style={{
-            color: 'white'
-          }}>{strings('Address.detail', { building: address.building, apt: address.apt })}</AyezText>
-        </View>
+    const addressComponents = addresses.slice(0, 3).map(address => {
+      let addressHeader = address.street;
+      let addressDetails = strings('Address.detail', { building: address.building, apt: address.apt });
 
-        <Image
-          source={(address.id === this.props.address.id) ? images.toggleSelected : images.toggleUnselected}
+      if (!address.street) {
+        addressHeader = address.title;
+        addressDetails = '';
+      }
+      return (
+        <TouchableOpacity
+          key={address.id}
           style={{
-            width: 24,
-            height: 24,
-            marginLeft: 20,
-            tintColor: 'white'
-          }}
-          resizeMode={'contain'}
-        />
-      </TouchableOpacity>
-    ));
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingTop: 8,
+            paddingBottom: 8,
+            borderBottomWidth: 1,
+            borderColor: 'rgba(255, 255, 255, 0.25)',
+            paddingHorizontal: 20
+           }}
+         onPress={() => {
+           this.props.selectAddress(address, this.onClose.bind(this));
+         }}
+         >
+          <View style={{ flex: 1, alignItems: 'flex-start' }}>
+            <AyezText bold style={{
+              color: 'white'
+            }}>{addressHeader}</AyezText>
+            <AyezText medium style={{
+              color: 'white'
+            }}>{addressDetails}</AyezText>
+          </View>
+
+          <Image
+            source={(address.id === this.props.address.id) ? images.toggleSelected : images.toggleUnselected}
+            style={{
+              width: 24,
+              height: 24,
+              marginLeft: 20,
+              tintColor: 'white'
+            }}
+            resizeMode={'contain'}
+          />
+        </TouchableOpacity>
+      )
+    });
 
     return (
       <View

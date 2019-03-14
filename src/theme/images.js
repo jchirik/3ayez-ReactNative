@@ -4,6 +4,7 @@ export default {
   logo: require(`${IMAGE_PATH}/Common/logo.png`),
   squareLogo: require(`${IMAGE_PATH}/Common/square_logo.png`),
   backIcon: require(`${IMAGE_PATH}/Common/back.png`),
+  nextArrowIcon: require(`${IMAGE_PATH}/Common/next_arrow.png`),
   closeIcon: require(`${IMAGE_PATH}/Common/close.png`),
   exitIcon: require(`${IMAGE_PATH}/Common/exit.png`),
   menuIcon: require(`${IMAGE_PATH}/Common/menu.png`),
@@ -24,6 +25,14 @@ export default {
   tutorial1ar: require(`${IMAGE_PATH}/Tutorial/tutorial_1_ar.png`),
   tutorial2: require(`${IMAGE_PATH}/Tutorial/tutorial_2.png`),
   tutorial3: require(`${IMAGE_PATH}/Tutorial/tutorial_3.png`),
+
+
+  settingsAddressBook: require(`${IMAGE_PATH}/Settings/addressBook.png`),
+  settingsChat: require(`${IMAGE_PATH}/Settings/chat.png`),
+  settingsCreditCard: require(`${IMAGE_PATH}/Settings/creditCard.png`),
+  settingsLanguage: require(`${IMAGE_PATH}/Settings/language.png`),
+  settingsLoginArrow: require(`${IMAGE_PATH}/Settings/loginArrow.png`),
+  settingsOrderHistory: require(`${IMAGE_PATH}/Settings/orderHistory.png`),
 
   currentLocationCover: require(`${IMAGE_PATH}/AddressCreate/CL_cover.png`),
   pinIcon: require(`${IMAGE_PATH}/AddressCreate/pin.png`),

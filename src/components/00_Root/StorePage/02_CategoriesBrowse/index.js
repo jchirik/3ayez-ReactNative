@@ -22,7 +22,8 @@ import {
   BasketBlockButton,
   AnimatedCheckmarkOverlay,
   BlockUnderButton,
-  CustomItemPrompt
+  CustomItemPrompt,
+  RTLImage
 } from '../../../_common';
 import {
   STATUS_BAR_HEIGHT,
@@ -67,27 +68,32 @@ class CategoriesBrowse extends Component {
       return (
         <TouchableOpacity
           style={{
-            marginBottom: 2,
             justifyContent: 'center',
             alignItems: 'center',
-            width: window.width/2,
-            height: window.width/2,
-            paddingLeft: index % 2 == 0 ? 20 : 5,
-            paddingRight: index % 2 == 0 ? 5 : 20,
-            paddingTop: 20,
-            paddingBottom: 20
+            width: (window.width/2) - 25,
+            height: (window.width/2) - 25,
+            marginLeft: index % 2 == 0 ? 20 : 5,
+            marginRight: index % 2 == 0 ? 5 : 20,
+            marginTop: 10
           }}
           onPress={this.onSelectCategory.bind(this, item)}
         >
           <View style={styles.categoryCard}>
-            <FastImage
+            <RTLImage
               source={{ uri: item.image_url || '' }}
               style={styles.categoryImage}
               resizeMode={'cover'}
             />
+            <AyezText medium size={16}
+              style={{
+                position: 'absolute',
+                bottom: 12,
+                left: 10,
+                width: (window.width/2) - 45
+              }}>
+              {translate(item.name)}
+            </AyezText>
           </View>
-          <AyezText size={12}
-            regular style={{ marginTop: 6 }}>{translate(item.name)}</AyezText>
         </TouchableOpacity>
       );
     }
@@ -118,7 +124,7 @@ class CategoriesBrowse extends Component {
         renderItem={this.renderItem.bind(this)}
         style={styles.categoryList}
         removeClippedSubviews
-        ListHeaderComponent={<View style={{ height: 20 }} />} 
+        ListHeaderComponent={<View style={{ height: 10 }} />}
         numColumns={CATEGORY_COL_NUM}
         ListEmptyComponent={this.renderEmptyCategories.bind(this)}
         ListFooterComponent={this.renderFooter.bind(this)}
@@ -131,6 +137,7 @@ class CategoriesBrowse extends Component {
 }
 
 const mapStateToProps = ({ Seller }) => {
+
   const {
     id,
     categories,

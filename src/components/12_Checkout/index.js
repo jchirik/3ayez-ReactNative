@@ -56,7 +56,7 @@ import {
 
 
 import images from '../../theme/images'
-import { sceneKeys, navigateTo } from '../../router';
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 const window = Dimensions.get('window');
 
@@ -70,15 +70,16 @@ class Checkout extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   // if (this.props.default_payment) {
-  //   //   this.props.setPaymentMethod(this.props.default_payment, this.props.seller.id);
-  //   // } else {
-  //   //   this.props.setPaymentMethod({ type: 'CASH' }, this.props.seller.id);
-  //   // }
-  //
-  //   // BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
-  // }
+  componentDidMount() {
+    console.log('mounting')
+    // if (this.props.default_payment) {
+    //   this.props.setPaymentMethod(this.props.default_payment, this.props.seller.id);
+    // } else {
+    //   this.props.setPaymentMethod({ type: 'CASH' }, this.props.seller.id);
+    // }
+
+    // BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+  }
 
 
     // componentWillUnmount() {
@@ -205,7 +206,8 @@ class Checkout extends Component {
       }}>
         <AyezText regular style={{
           fontSize: 12,
-          color: 'red'
+          color: 'red',
+          top: 15
         }}>{strings('Checkout.noCreditCard')}</AyezText>
       </View>
     )
@@ -459,7 +461,7 @@ class Checkout extends Component {
           <AyezText regular
           style={{
             fontSize: 16
-          }}>{strings('Address.singleLine', {street: address.street, building: address.building, apt: address.apt })}</AyezText>
+          }}>{strings('Address.singleLine', {street: address.street, building: address.building || '-', apt: address.apt || '-' })}</AyezText>
         </Row>
 
         <View style={{ height: 18 }} />

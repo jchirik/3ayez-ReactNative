@@ -56,7 +56,7 @@ class OrderHistory extends Component {
 
 
   onSelectOrder(order) {
-      navigateTo(orderTracker, { order_id: order.id });
+      navigateTo(sceneKeys.orderTracker, { order_id: order.id });
   }
 
 
