@@ -11,7 +11,6 @@ import {
   Dimensions,
   AsyncStorage
 } from 'react-native';
-import ZendeskChatNativeModule from '../../../../../ZendeskChatNativeModule';
 
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -28,13 +27,14 @@ import { setLocale, logoutUser, onCompleteAuth } from '../../../../actions';
 import {
   AYEZ_GREEN,
   AYEZ_BACKGROUND_COLOR,
-  STATUS_BAR_HEIGHT
+  STATUS_BAR_HEIGHT,
+  ZOPIM_ACCOUNT_KEY
 } from '../../../../Helpers.js';
 
 import images from '../../../../theme/images';
 
 import { strings, translate } from '../../../../i18n.js';
-import LiveChat from '../../../../utils/livechat';
+import zendesk from '../../../../ZendeskChat/ZendeskChatNativeModule';
 import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
 
 // { text: 'Credit Cards', action: null, icon: '' },
@@ -48,12 +48,6 @@ class SettingsMenu extends Component {
       logoutConfirm: false,
       languageSelect: false
     };
-  }
-
-  componentWillMount() {
-    // this.setState({
-    //   visitorSDK: LiveChat.getInstance()
-    // });
   }
 
   openLanguageSelect() {
@@ -295,15 +289,12 @@ class SettingsMenu extends Component {
     const chatTab = {
       text: strings('Support.contact3ayez'),
       action: () => {
-        if (this.state.visitorSDK) {
-          this.props.onClose();
-          ZendeskChatNativeModule.start({
-            zopimAccountKey: '6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q'
-          });
-          // navigateTo(sceneKeys.supportChat, {
-          //   visitorSDK: this.state.visitorSDK
-          // });
-        }
+        this.props.onClose();
+        zendesk.start({
+          [zendesk.ZOPIM_ACCOUNT_KEY]: ZOPIM_ACCOUNT_KEY,
+          [zendesk.VISITOR_NAME]: this.props.name || 'Client',
+          [zendesk.VISITOR_PHONE_NUMBER]: this.props.phone || ''
+        });
       },
       icon: images.settingsChat,
       color: AYEZ_GREEN

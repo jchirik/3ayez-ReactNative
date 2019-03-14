@@ -15,9 +15,8 @@
 
   -(void) start: (NSDictionary*) params {
     
-    NSString *accountKey =  [params objectForKey:(@"zopimAccountKey")];
+    NSString *accountKey =  [params objectForKey:(Zendesk.constants[@"ZOPIM_ACCOUNT_KEY"])];
     [ZDCChat initializeWithAccountKey:accountKey];
-
     [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
       user.phone = [params objectForKey:(Zendesk.constants[@"VISITOR_PHONE_NUMBER"])];
       user.name = [params objectForKey:(Zendesk.constants[@"VISITOR_NAME"])];
