@@ -48,7 +48,14 @@
   [[UINavigationBar appearance] setTintColor: WhiteColor];
 
   [[ZDCChatUI appearance] setEndChatButtonImage: ExitIcon];
-  [[ZDCChatUI appearance] setBackChatButtonImage: BackIcon];
+
+  UIUserInterfaceLayoutDirection direction = [UIApplication sharedApplication].userInterfaceLayoutDirection;
+
+  if (direction == UIUserInterfaceLayoutDirectionRightToLeft) {
+    [[ZDCChatUI appearance] setBackChatButtonImage: BackRightIcon];
+  } else {
+    [[ZDCChatUI appearance] setBackChatButtonImage: BackLeftIcon];
+  }
 
   [[ZDCChatView appearance] setChatBackgroundColor:OffWhiteColor];
   [[ZDCTextEntryView appearance] setSendButtonImage:SendIcon];

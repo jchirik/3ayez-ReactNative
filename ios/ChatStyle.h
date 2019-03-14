@@ -10,7 +10,8 @@
 #define WhiteColor [UIColor whiteColor]
 #define OffWhiteColor [UIColor colorWithRed:0.95f green:0.95f blue:0.95f alpha:1.0f]
 #define ExitIcon @"exit.jpg"
-#define BackIcon @"back.jpg"
+#define BackRightIcon @"backRight.jpg"
+#define BackLeftIcon @"backLeft.jpg"
 #define SendIcon @"send.jpg"
 
 
