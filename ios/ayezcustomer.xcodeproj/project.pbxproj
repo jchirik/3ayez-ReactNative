@@ -83,7 +83,7 @@
 		D61B810B223A527D00F162E5 /* ZendeskChat.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B80DE223A527C00F162E5 /* ZendeskChat.m */; };
 		D61B8110223A52B800F162E5 /* ChatStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810C223A52B800F162E5 /* ChatStyle.m */; };
 		D61B8111223A52B800F162E5 /* Zendesk.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810F223A52B800F162E5 /* Zendesk.m */; };
-		D61B8113223A564600F162E5 /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D61B8112223A564600F162E5 /* ZDCChatStrings.bundle */; };
+		D6C3662A223ABD7400B00B9B /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -482,7 +482,7 @@
 		D61B810D223A52B800F162E5 /* Zendesk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zendesk.h; sourceTree = "<group>"; };
 		D61B810E223A52B800F162E5 /* ChatStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatStyle.h; sourceTree = "<group>"; };
 		D61B810F223A52B800F162E5 /* Zendesk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zendesk.m; sourceTree = "<group>"; };
-		D61B8112223A564600F162E5 /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
+		D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -631,6 +631,7 @@
 		13B07FAE1A68108700A75B9A /* ayezcustomer */ = {
 			isa = PBXGroup;
 			children = (
+				D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */,
 				D61B810E223A52B800F162E5 /* ChatStyle.h */,
 				D61B810C223A52B800F162E5 /* ChatStyle.m */,
 				D61B810D223A52B800F162E5 /* Zendesk.h */,
@@ -651,7 +652,6 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				D61B8112223A564600F162E5 /* ZDCChatStrings.bundle */,
 			);
 			name = ayezcustomer;
 			sourceTree = "<group>";
@@ -1422,7 +1422,7 @@
 				D276038A21DEA2650037DE81 /* Poppins-Black.otf in Resources */,
 				D27603A021DEA2650037DE81 /* Poppins-BoldItalic.otf in Resources */,
 				D276039621DEA2650037DE81 /* Poppins-Light.otf in Resources */,
-				D61B8113223A564600F162E5 /* ZDCChatStrings.bundle in Resources */,
+				D6C3662A223ABD7400B00B9B /* ZDCChatStrings.bundle in Resources */,
 				D276038B21DEA2650037DE81 /* Poppins-ThinItalic.otf in Resources */,
 				D276039C21DEA2650037DE81 /* Poppins-Italic.otf in Resources */,
 				D276038F21DEA2650037DE81 /* Poppins-Medium.otf in Resources */,
