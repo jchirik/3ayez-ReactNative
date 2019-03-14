@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import {
   View,
   TextInput,
-   Image,
-   ActivityIndicator,
-   TouchableOpacity,
-   FlatList,
-   Platform,
-   BackHandler,
-   Dimensions,
-   AsyncStorage
- } from 'react-native';
+  Image,
+  ActivityIndicator,
+  TouchableOpacity,
+  FlatList,
+  Platform,
+  BackHandler,
+  Dimensions,
+  AsyncStorage
+} from 'react-native';
+import ZendeskChatNativeModule from '../../../../../ZendeskChatNativeModule';
 
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -22,11 +23,7 @@ import {
   RTLImage
 } from '../../../_common';
 
-import {
-  setLocale,
-  logoutUser,
-  onCompleteAuth
-} from '../../../../actions';
+import { setLocale, logoutUser, onCompleteAuth } from '../../../../actions';
 
 import {
   AYEZ_GREEN,
@@ -34,13 +31,10 @@ import {
   STATUS_BAR_HEIGHT
 } from '../../../../Helpers.js';
 
-import images from '../../../../theme/images'
+import images from '../../../../theme/images';
 
-import {
-  strings,
-  translate
-} from '../../../../i18n.js';
-// import LiveChat from '../../../../utils/livechat';
+import { strings, translate } from '../../../../i18n.js';
+import LiveChat from '../../../../utils/livechat';
 import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
 
 // { text: 'Credit Cards', action: null, icon: '' },
@@ -48,7 +42,6 @@ import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
 const window = Dimensions.get('window');
 
 class SettingsMenu extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -63,27 +56,37 @@ class SettingsMenu extends Component {
     // });
   }
 
-  openLanguageSelect() { this.setState({ languageSelect: true }); }
-  closeLanguageSelect() { this.setState({ languageSelect: false }); }
-  setLocaleEnglish() { this.props.setLocale('en'); }
-  setLocaleArabic() { this.props.setLocale('ar'); }
-
-  openLogoutConfirm() { this.setState({ logoutConfirm: true }); }
-  closeLogoutConfirm() { this.setState({ logoutConfirm: false }); }
-
-  logoutUser() { this.props.logoutUser(); }
-
-  loginUser() {
-    this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.root))
-    navigateTo(sceneKeys.auth)
+  openLanguageSelect() {
+    this.setState({ languageSelect: true });
+  }
+  closeLanguageSelect() {
+    this.setState({ languageSelect: false });
+  }
+  setLocaleEnglish() {
+    this.props.setLocale('en');
+  }
+  setLocaleArabic() {
+    this.props.setLocale('ar');
   }
 
+  openLogoutConfirm() {
+    this.setState({ logoutConfirm: true });
+  }
+  closeLogoutConfirm() {
+    this.setState({ logoutConfirm: false });
+  }
+
+  logoutUser() {
+    this.props.logoutUser();
+  }
+
+  loginUser() {
+    this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.root));
+    navigateTo(sceneKeys.auth);
+  }
 
   renderLocationButton() {
-    const {
-      address,
-      area
-    } = this.props;
+    const { address, area } = this.props;
     return (
       <TouchableOpacity
         onPress={() => {
@@ -101,21 +104,25 @@ class SettingsMenu extends Component {
         }}
       >
         <View>
-          <AyezText regular color={'#4E4E4E'}>{address.building ? `${address.building} ` : ''}{address.street || address.title}</AyezText>
-          <AyezText regular color={'#4E4E4E'}>{area ? translate(area.display_name) : null}</AyezText>
+          <AyezText regular color={'#4E4E4E'}>
+            {address.building ? `${address.building} ` : ''}
+            {address.street || address.title}
+          </AyezText>
+          <AyezText regular color={'#4E4E4E'}>
+            {area ? translate(area.display_name) : null}
+          </AyezText>
         </View>
-        <AyezText regular color={AYEZ_GREEN}>{strings('Common.edit')}</AyezText>
+        <AyezText regular color={AYEZ_GREEN}>
+          {strings('Common.edit')}
+        </AyezText>
       </TouchableOpacity>
-    )
+    );
   }
 
   renderStoreButton() {
-    const {
-      seller,
-      sellers
-    } = this.props;
+    const { seller, sellers } = this.props;
 
-    console.log('sellers', sellers)
+    console.log('sellers', sellers);
     if (sellers.length <= 1) {
       return null;
     }
@@ -137,9 +144,15 @@ class SettingsMenu extends Component {
         }}
       >
         <View>
-          <AyezText medium color={'#4E4E4E'}>Change Store</AyezText>
-          <AyezText regular color={'#4E4E4E'}>{translate(seller.display_name)}</AyezText>
-          <AyezText regular color={'#4E4E4E'}>{translate(seller.location_text)}</AyezText>
+          <AyezText medium color={'#4E4E4E'}>
+            Change Store
+          </AyezText>
+          <AyezText regular color={'#4E4E4E'}>
+            {translate(seller.display_name)}
+          </AyezText>
+          <AyezText regular color={'#4E4E4E'}>
+            {translate(seller.location_text)}
+          </AyezText>
         </View>
         <RTLImage
           source={images.nextArrowIcon}
@@ -151,15 +164,22 @@ class SettingsMenu extends Component {
           resizeMode={'contain'}
         />
       </TouchableOpacity>
-    )
+    );
   }
 
   renderHeader() {
     let topAccountHeader = (
-      <AyezText semibold size={16} color={'#4E4E4E'} style={{
-        alignSelf: 'flex-start'
-      }}>{strings('Settings.welcome', {name: this.props.name})}</AyezText>
-    )
+      <AyezText
+        semibold
+        size={16}
+        color={'#4E4E4E'}
+        style={{
+          alignSelf: 'flex-start'
+        }}
+      >
+        {strings('Settings.welcome', { name: this.props.name })}
+      </AyezText>
+    );
     if (!this.props.phone) {
       topAccountHeader = (
         <TouchableOpacity
@@ -182,30 +202,32 @@ class SettingsMenu extends Component {
             }}
             resizeMode={'contain'}
           />
-          <AyezText semibold color={AYEZ_GREEN}>Sign in/Sign up</AyezText>
+          <AyezText semibold color={AYEZ_GREEN}>
+            Sign in/Sign up
+          </AyezText>
         </TouchableOpacity>
-      )
+      );
     }
 
     return (
-      <View style={{
-        paddingTop: STATUS_BAR_HEIGHT + 14,
-        paddingLeft: 20,
-        paddingRight: 20,
-        alignItems: 'stretch',
-        backgroundColor: 'white',
-        marginBottom: 8
-      }}>
+      <View
+        style={{
+          paddingTop: STATUS_BAR_HEIGHT + 14,
+          paddingLeft: 20,
+          paddingRight: 20,
+          alignItems: 'stretch',
+          backgroundColor: 'white',
+          marginBottom: 8
+        }}
+      >
         {topAccountHeader}
         {this.renderLocationButton()}
         {this.renderStoreButton()}
-
       </View>
     );
   }
 
-
-  renderItem({item: {text, action, icon, color}, index, section}) {
+  renderItem({ item: { text, action, icon, color }, index, section }) {
     return (
       <TouchableOpacity
         key={index}
@@ -230,44 +252,57 @@ class SettingsMenu extends Component {
             }}
             resizeMode={'contain'}
           />
-        ) : null }
-        <AyezText regular style={{
-          color: '#4E4E4E',
-        }}>{text}</AyezText>
+        ) : null}
+        <AyezText
+          regular
+          style={{
+            color: '#4E4E4E'
+          }}
+        >
+          {text}
+        </AyezText>
       </TouchableOpacity>
     );
   }
 
-  renderSectionHeader({section: { title }}) {
+  renderSectionHeader({ section: { title } }) {
     return (
-      <View style={{
-        height: 60,
-        paddingLeft: 20,
-        paddingBottom: 10,
-        alignItems: 'flex-start',
-        justifyContent: 'flex-end',
-        borderColor: '#f7f7f7',
-        borderBottomWidth: 1
-      }}>
-        <AyezText medium style={{
-          fontSize: 12,
-          color: 'black',
-        }}>{title.toUpperCase()}</AyezText>
+      <View
+        style={{
+          height: 60,
+          paddingLeft: 20,
+          paddingBottom: 10,
+          alignItems: 'flex-start',
+          justifyContent: 'flex-end',
+          borderColor: '#f7f7f7',
+          borderBottomWidth: 1
+        }}
+      >
+        <AyezText
+          medium
+          style={{
+            fontSize: 12,
+            color: 'black'
+          }}
+        >
+          {title.toUpperCase()}
+        </AyezText>
       </View>
     );
   }
 
   render() {
-
-
     const chatTab = {
       text: strings('Support.contact3ayez'),
       action: () => {
         if (this.state.visitorSDK) {
           this.props.onClose();
-          navigateTo(sceneKeys.supportChat, {
-            visitorSDK: this.state.visitorSDK
+          ZendeskChatNativeModule.start({
+            zopimAccountKey: '6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q'
           });
+          // navigateTo(sceneKeys.supportChat, {
+          //   visitorSDK: this.state.visitorSDK
+          // });
         }
       },
       icon: images.settingsChat,
@@ -278,7 +313,7 @@ class SettingsMenu extends Component {
       text: strings('Settings.creditCards'),
       action: () => {
         this.props.onClose();
-        navigateTo(sceneKeys.creditCardManager)
+        navigateTo(sceneKeys.creditCardManager);
       },
       icon: images.settingsCreditCard
     };
@@ -286,7 +321,7 @@ class SettingsMenu extends Component {
       text: strings('Settings.addressBook'),
       action: () => {
         this.props.onClose();
-        navigateTo(sceneKeys.addressManager)
+        navigateTo(sceneKeys.addressManager);
       },
       icon: images.settingsAddressBook
     };
@@ -294,7 +329,7 @@ class SettingsMenu extends Component {
       text: strings('Settings.previousOrders'),
       action: () => {
         this.props.onClose();
-        navigateTo(sceneKeys.orderHistory)
+        navigateTo(sceneKeys.orderHistory);
       },
       icon: images.settingsOrderHistory
     };
@@ -342,10 +377,12 @@ class SettingsMenu extends Component {
     }
 
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: AYEZ_BACKGROUND_COLOR
-      }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: AYEZ_BACKGROUND_COLOR
+        }}
+      >
         <FlatList
           data={settingsTabs}
           style={{ flex: 1 }}
@@ -353,14 +390,20 @@ class SettingsMenu extends Component {
           renderItem={this.renderItem.bind(this)}
           ListFooterComponent={null}
           keyExtractor={(item, index) => `${index}`}
-          />
+        />
         <BottomChoiceSelection
           isVisible={this.state.languageSelect}
           onClose={this.closeLanguageSelect.bind(this)}
           title={strings('Settings.selectLanguage')}
           buttons={[
-            { text: strings('Common.arabic'), action: this.setLocaleArabic.bind(this) },
-            { text: strings('Common.english'), action: this.setLocaleEnglish.bind(this) }
+            {
+              text: strings('Common.arabic'),
+              action: this.setLocaleArabic.bind(this)
+            },
+            {
+              text: strings('Common.english'),
+              action: this.setLocaleEnglish.bind(this)
+            }
           ]}
         />
 
@@ -368,10 +411,16 @@ class SettingsMenu extends Component {
           isVisible={this.state.logoutConfirm}
           onClose={this.closeLogoutConfirm.bind(this)}
           title={strings('Settings.logoutModal')}
-          backgroundColor='#E64E47'
+          backgroundColor="#E64E47"
           buttons={[
-            { text: strings('Settings.logoutConfirm'), action: this.logoutUser.bind(this) },
-            { text: strings('Settings.logoutCancel'), action: () => console.log('closing') }
+            {
+              text: strings('Settings.logoutConfirm'),
+              action: this.logoutUser.bind(this)
+            },
+            {
+              text: strings('Settings.logoutCancel'),
+              action: () => console.log('closing')
+            }
           ]}
         />
       </View>
@@ -379,20 +428,18 @@ class SettingsMenu extends Component {
   }
 }
 
-const mapStateToProps = ({ Seller, SellerSearch, Addresses, Customer, Settings }) => {
+const mapStateToProps = ({
+  Seller,
+  SellerSearch,
+  Addresses,
+  Customer,
+  Settings
+}) => {
   const seller = Seller;
   const { address } = Addresses;
-  const {
-    locale
-  } = Settings;
-  const {
-    name,
-    phone
-  } = Customer;
-  const {
-    sellers,
-    area
-  } = SellerSearch;
+  const { locale } = Settings;
+  const { name, phone } = Customer;
+  const { sellers, area } = SellerSearch;
   return {
     seller,
 
@@ -407,8 +454,11 @@ const mapStateToProps = ({ Seller, SellerSearch, Addresses, Customer, Settings }
   };
 };
 
-export default connect(mapStateToProps, {
-  setLocale,
-  logoutUser,
-  onCompleteAuth
-})(SettingsMenu);
+export default connect(
+  mapStateToProps,
+  {
+    setLocale,
+    logoutUser,
+    onCompleteAuth
+  }
+)(SettingsMenu);
