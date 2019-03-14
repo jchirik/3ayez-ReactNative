@@ -26,7 +26,9 @@
     "viewMore": "View more",
     "enter": "Enter",
     "english": "English",
-    "arabic": "عربي"
+    "arabic": "عربي",
+    "requestFailed": "Request Failed. Check your internet connection!",
+    "tryAgain": "Try Again"
   },
   "Input": {
     "required": "required",

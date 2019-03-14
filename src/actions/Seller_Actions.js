@@ -4,7 +4,7 @@ import algoliasearch from 'algoliasearch/reactnative';
 const algoliaClient = algoliasearch('BN0VV4WPRI', 'a85a04afca53d5baf47c659ce03d897f');
 import { Actions } from 'react-native-router-flux';
 import { cleanAlgoliaItems } from '../Helpers';
-
+import { NetInfo } from 'react-native'
 import {
   SELLER_SELECT,
   BASKET_INIT,
@@ -109,17 +109,25 @@ const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
 
 
 const fetchStoreData = (seller_id, dispatch) => {
-  const sellerRef = firebase.firestore().collection('sellers').doc(seller_id)
-  sellerRef.collection('data').doc('app').get().then((document) => {
-    if (document.data()) {
-      let categories = document.data().categories || [];
-      const featured = document.data().featured || [];
-      console.log('fetchStoreData CATEGORIES', categories);
-
-      categories = categories.filter(category => !(category.is_online === false))
-
-      dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { categories } });
-      fetchFeaturedItems(seller_id, featured, dispatch);
+  NetInfo.isConnected.fetch().done((isConnected) => {
+    if (!isConnected) {
+      dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { requestFailed: true } });
+    } else {
+      const sellerRef = firebase.firestore().collection('sellers').doc(seller_id);
+      sellerRef.collection('data').doc('app').get().then((document) => {
+        if (document.data()) {
+          let categories = document.data().categories || [];
+          const featured = document.data().featured || [];
+          
+          categories = categories.filter(category => !(category.is_online === false))
+          dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { categories, requestFailed: false } });
+          fetchFeaturedItems(seller_id, featured, dispatch);
+        } else { 
+          dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { requestFailed: true } });
+        }
+      }).catch((error) => {
+        dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { requestFailed: true } });
+      });
     }
   });
 };
@@ -132,5 +140,11 @@ export const selectSeller = (seller) => {
     fetchStoreData(seller.id, dispatch) /* fetch featured & categories */
 
     // AFTER getting featured, get the data to fill each
+  };
+};
+
+export const fetchStore = (seller_id) => {
+  return (dispatch) => {
+    fetchStoreData(seller_id, dispatch);
   };
 };

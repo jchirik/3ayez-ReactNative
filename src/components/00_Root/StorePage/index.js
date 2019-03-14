@@ -22,7 +22,6 @@ import SideMenu from 'react-native-side-menu';
 import FeaturedBrowse from './01_FeaturedBrowse';
 import CategoriesBrowse from './02_CategoriesBrowse';
 import SettingsMenu from './SettingSideMenu';
-
 import {
   AnimatedCheckmarkOverlay,
   ItemTile,
@@ -43,6 +42,9 @@ import {
   AYEZ_GREEN
 } from '../../../Helpers';
 
+import {
+  fetchStore
+} from '../../../actions';
 
 import styles from './styles';
 import colors from '../../../theme/colors';
@@ -57,6 +59,7 @@ import {
   PARALLAX_HEADER_HEIGHT
 } from './CollapsibleHeaderScrollView';
 import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
+import NetworkErrorMessage from '../../_common/NetworkErrorMessage';
 const STICKY_HEADER_HEIGHT = 68; // EDIT THIS 86
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 const TAB_BAR_HEIGHT = 52;
@@ -269,7 +272,14 @@ class StorePage extends Component {
     const { selected_tab, tabs, tabBarHeight } = this.state;
 
     let mainScrollComponent = null;
-    if (this.props.featured_loading || this.props.categories_loading) {
+    if (this.props.requestFailed === true) {
+      mainScrollComponent = (
+        <NetworkErrorMessage 
+          onPress={ () => {this.props.fetchStore(this.props.seller_id)} }
+        />
+      );
+    }
+    else if (this.props.featured_loading || this.props.categories_loading) {
       mainScrollComponent = (
         <ActivityIndicator size="small" style={{ flex: 1, marginTop: 50 }} />
       );
@@ -347,7 +357,8 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     featured,
     categories_loading,
     location_text,
-    display_name
+    display_name, 
+    requestFailed
   } = Seller;
 
   const { locale } = Settings;
@@ -374,11 +385,12 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     categories_loading,
     location_text,
     display_name,
-    basket_quantity
+    basket_quantity,
+    requestFailed
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  {fetchStore}
 )(StorePage);
