@@ -26,7 +26,8 @@ import {
   BackButton,
   BlockButton,
   AyezText,
-  RTLImage
+  RTLImage,
+  LoadingOverlay
 } from '../_common';
 
 import {
@@ -141,6 +142,7 @@ class LocationSelect extends Component {
           <AyezText medium color={'red'}>Logout</AyezText>
         </TouchableOpacity>
 
+        <LoadingOverlay isVisible={this.props.is_loading_address_select} />
       </View>
     )
   }
@@ -151,11 +153,17 @@ const mapStateToProps = ({ Customer, Seller, Addresses, Settings, OngoingOrders 
     name
   } = Customer;
   const { id } = Seller;
-  const { address, addresses, is_loading } = Addresses;
+  const {
+    address,
+    is_loading_address_select,
+    addresses,
+    is_loading
+  } = Addresses;
   return {
     name,
     seller_id: id,
     address,
+    is_loading_address_select,
     addresses,
     is_loading_addresses: is_loading,
   };

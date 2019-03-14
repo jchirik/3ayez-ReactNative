@@ -1,6 +1,8 @@
 {
   "Common": {
     "3ayez": "عايز",
+    "yes": "Yes",
+    "no": "No",
     "myBasket": "السلة",
     "OK": "موافق",
     "yalla": "يلا",
@@ -97,9 +99,8 @@
     "continueGuest": "الدخول كزائر"
   },
   "AddressCreate": {
-    "queryCL": "هل تريد إستخدام موقعك الحالي للتعرف علي أقرب محل تجاري بالمنطقة ؟",
-    "allowCL": "نعم , أقبل",
-    "denyCL": "البحث عن موقعي يدوياً",
+    "queryCL": "Deliver to your current location?",
+    "noLocationPermission": "No location permission",
     "issueDeterminingCL": "مشكلة بتحديد الموقع",
     "addressSearchHeader": "عنوان التوصيل",
     "addressSearchInstruction": "دعنا نتعرف علي مكانك لإرسال طلبك",

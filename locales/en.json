@@ -1,6 +1,8 @@
 {
   "Common": {
     "3ayez": "3ayez",
+    "yes": "Yes",
+    "no": "No",
     "myBasket": "My Basket",
     "OK": "OK",
     "yalla": "Yalla",
@@ -97,9 +99,8 @@
     "continueGuest": "Continue as a Guest"
   },
   "AddressCreate": {
-    "queryCL": "Would you like to use your location to find stores in your area?",
-    "allowCL": "YES, ALLOW",
-    "denyCL": "Search for my location manually",
+    "queryCL": "Deliver to your current location?",
+    "noLocationPermission": "No location permission",
     "issueDeterminingCL": "Issue determining location",
     "addressSearchHeader": "DELIVERY ADDRESS",
     "addressSearchInstruction": "Let us know where you are to send your orders",
