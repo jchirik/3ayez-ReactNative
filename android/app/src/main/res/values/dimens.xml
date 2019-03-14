@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Created by Ahmed Ghazy.
+https://github.com/afghazy
+ahmedfathyghazy@gmail.com-->
+<resources>
+  <dimen name="chat_bubble_radius">20dp</dimen>
+</resources>

@@ -1,21 +1,19 @@
 import _ from 'lodash';
-import {
-  Platform,
-  Dimensions,
-  AsyncStorage
-} from 'react-native';
+import { Platform, Dimensions, AsyncStorage } from 'react-native';
 import Moment from 'moment-timezone';
 import store from './reducers';
 import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
-export const isIOS = () => Platform.OS === 'ios'
+export const ZOPIM_ACCOUNT_KEY = 'pRVfyd50YAOsuwoV7WHrDXi5UBLmKE78';
+
+export const isIOS = () => Platform.OS === 'ios';
 
 export const hasValue = val => {
-  if(val) return true;
+  if (val) return true;
   return false;
-}
+};
 
 export const toast = str => {
   Toast.show(str, {
@@ -25,8 +23,7 @@ export const toast = str => {
     backgroundColor: colors.white,
     textColor: colors.black
   });
-}
-
+};
 
 export const getScreenDimensions = () => Dimensions.get('window');
 
@@ -40,20 +37,23 @@ export const isIPhoneX = () => {
   );
 };
 
-export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
+export const STATUS_BAR_HEIGHT =
+  Platform.OS === 'ios' ? (isIPhoneX() ? 35 : 20) : 5;
 export const AYEZ_GREEN = '#0cd870';
 export const AYEZ_BACKGROUND_COLOR = '#FAFCFD';
-export const SPLASH_SCREEN_TIME_OUT = 1000
+export const SPLASH_SCREEN_TIME_OUT = 1000;
 
 export const padNumberZeros = (num, size) => {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
-}
+  var s = num + '';
+  while (s.length < size) s = '0' + s;
+  return s;
+};
 
 export const paymentIcon = (brand, type) => {
   const dir = '../assets/images/Payment/creditcards';
-  if (type === 'CASH') { return require(`${dir}/money.png`); }
+  if (type === 'CASH') {
+    return require(`${dir}/money.png`);
+  }
   switch (brand.toUpperCase()) {
     case 'VISA':
       return require(`${dir}/visa.png`);
@@ -74,13 +74,13 @@ export const paymentIcon = (brand, type) => {
   }
 };
 
-export const getTitleFromGooglePlace = (result) => {
+export const getTitleFromGooglePlace = result => {
   let title = '';
   let type = '';
   const relevant_components = result.address_components.filter(cmp => {
     // get rid of street_address from the components (never accurate)
     const not_street_number = !cmp.types.includes('street_number');
-    const not_unnamed_en = (cmp.short_name !== 'Unnamed Road');
+    const not_unnamed_en = cmp.short_name !== 'Unnamed Road';
     return not_street_number && not_unnamed_en;
   });
   // get the most precise component after that
@@ -92,10 +92,10 @@ export const getTitleFromGooglePlace = (result) => {
   return { title, type };
 };
 
-export const cleanAlgoliaItems = (allItems) => {
+export const cleanAlgoliaItems = allItems => {
   // ONLY use items that have images
   const safeItems = [];
-  allItems.forEach((item) => {
+  allItems.forEach(item => {
     if (item.image_url && item.thumbnail_url) {
       const safeItem = item;
       safeItem.price = parseFloat(item.price) || null;
@@ -103,7 +103,7 @@ export const cleanAlgoliaItems = (allItems) => {
       safeItem.max_per_basket = parseFloat(item.max_per_basket) || null;
       // safeItem.increment = parseFloat(item.increment) || 1;
       safeItem.incr = parseFloat(item.incr) || 1;
-      safeItem.unit = (item.unit ? item.unit : '');
+      safeItem.unit = item.unit ? item.unit : '';
       safeItems.push(safeItem);
     }
   });
@@ -111,10 +111,13 @@ export const cleanAlgoliaItems = (allItems) => {
 };
 
 export const formatStatusText = (status, is_timeslot_ongoing, timeslot) => {
-  let statusText = '-'
+  let statusText = '-';
   if (status === 0) {
-    if (is_timeslot_ongoing) { statusText = strings('OrderStatus.awaitingStore') }
-    else if (timeslot && (Date.now() < timeslot.start)) { statusText = strings('OrderStatus.scheduled') }
+    if (is_timeslot_ongoing) {
+      statusText = strings('OrderStatus.awaitingStore');
+    } else if (timeslot && Date.now() < timeslot.start) {
+      statusText = strings('OrderStatus.scheduled');
+    }
   } else if (status <= 50) {
     statusText = strings('OrderStatus.preparingInStore');
   } else if (status < 100) {
@@ -129,37 +132,7 @@ export const formatStatusText = (status, is_timeslot_ongoing, timeslot) => {
     statusText = strings('OrderStatus.rejectedByStore');
   }
   return statusText;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 
 // calculated dynamically in page
 export const calculateTotal = (basket, checkout, coupon) => {
@@ -187,16 +160,15 @@ export const calculateTotal = (basket, checkout, coupon) => {
   total = total + (tip || 0);
   total = Math.round(total * 1000) / 1000;
   return total;
-}
+};
 
-
-export const calculateSuggestedTips = (preTipTotal) => {
+export const calculateSuggestedTips = preTipTotal => {
   let lowerBound = preTipTotal;
-  let upperBound = preTipTotal * 1.20;
-  lowerBound = Math.ceil(lowerBound/5)*5;
+  let upperBound = preTipTotal * 1.2;
+  lowerBound = Math.ceil(lowerBound / 5) * 5;
 
   let finalTotals = [];
-  for (let i = lowerBound; i < upperBound; i+=5) {
+  for (let i = lowerBound; i < upperBound; i += 5) {
     if (i !== preTipTotal) {
       finalTotals.push(i);
     }
@@ -204,65 +176,40 @@ export const calculateSuggestedTips = (preTipTotal) => {
 
   // if more than 4 suggestions, filter to only those divisible by 10, 20 or 50
   if (finalTotals.length > 4) {
-    finalTotals = finalTotals.filter(total => !(total%10) || !(total%20) || !(total%50))
+    finalTotals = finalTotals.filter(
+      total => !(total % 10) || !(total % 20) || !(total % 50)
+    );
   }
 
   // if more than 4 suggestions, filter to only those divisible by 10, 20 or 50
   if (finalTotals.length > 4) {
-    finalTotals = finalTotals.filter(total => !(total%20) || !(total%50))
+    finalTotals = finalTotals.filter(total => !(total % 20) || !(total % 50));
   }
 
-  const finalTips = finalTotals.map(total => total-preTipTotal);
-  return [ 0.00, ...finalTips ];
-}
+  const finalTips = finalTotals.map(total => total - preTipTotal);
+  return [0.0, ...finalTips];
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export const localizeDN = (display_name) => {
+export const localizeDN = display_name => {
   const locale = store.getState().Settings.locale;
   if (display_name[locale]) {
     return display_name[locale];
   }
   return display_name.ar;
-}
+};
 
-export const localizeItem = (item) => {
+export const localizeItem = item => {
   const locale = store.getState().Settings.locale;
   if (locale === 'en') {
     return item.title_engl;
   }
   return item.title_arab;
-}
+};
 
+export const statusBarMargin =
+  Platform.OS === 'ios' ? (isIPhoneX() ? 35 : 20) : 5;
 
-export const statusBarMargin = (Platform.OS === 'ios') ? (isIPhoneX() ? 35 : 20) : 5;
-
-
-export const isAndroid = (Platform.OS === 'android');
-
-
-
-
-
-
-
-
+export const isAndroid = Platform.OS === 'android';
 
 //
 //
@@ -296,15 +243,10 @@ export const isAndroid = (Platform.OS === 'android');
 //   }
 // };
 
-
-
-
-
 // const ORDER_SENT = require('../assets/images/order_statuses/sent.png');
 // const ORDER_PACKING = require('../assets/images/order_statuses/packing.png');
 // const ORDER_DELIVERY = require('../assets/images/order_statuses/delivery.png');
 // const ORDER_PROBLEM = require('../assets/images/order_statuses/problem.png');
-
 
 // export const statusDictionary = {
 //   0: { text: strings('OrderStatuses.0'), icon: ORDER_SENT, color: '#28BC7A' },
@@ -316,14 +258,7 @@ export const isAndroid = (Platform.OS === 'android');
 //   400: { text: strings('OrderStatuses.400'), icon: ORDER_PROBLEM, color: '#D91212' }
 // };
 
-
-
-
-
-
-
-
-export const parseCouponError = (error) => {
+export const parseCouponError = error => {
   switch (error) {
     case 'BADCONNECTION':
       return strings('CouponModal.BADCONNECTION');
@@ -344,8 +279,7 @@ export const parseCouponError = (error) => {
   }
 };
 
-
-export const fetchRegionDisplayName = (regionCode) => {
+export const fetchRegionDisplayName = regionCode => {
   switch (regionCode) {
     case 'ALEXANDRIA':
       return strings('Regions.alexandria');
@@ -358,28 +292,32 @@ export const fetchRegionDisplayName = (regionCode) => {
   }
 };
 
-
-
-export const checkIfOpen = (hours) => {
-
+export const checkIfOpen = hours => {
   // get the milliseconds into the day
   const currentTime = Date.now();
   // FIX THE MOMENT BELOW (rely on timezone?)
   const currentLocaleTime = Moment(currentTime).tz('Africa/Cairo');
-	const midnightLocaleTime = Moment(currentTime).tz('Africa/Cairo');
-	midnightLocaleTime.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
-	const millisPassed = currentLocaleTime.valueOf() - midnightLocaleTime.valueOf();
+  const midnightLocaleTime = Moment(currentTime).tz('Africa/Cairo');
+  midnightLocaleTime.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+  const millisPassed =
+    currentLocaleTime.valueOf() - midnightLocaleTime.valueOf();
 
   // if 24/7, return true
-  if (hours.start === hours.end) { return true; }
+  if (hours.start === hours.end) {
+    return true;
+  }
 
   let isOpen = false;
   // check all the valid time ranges (X to midnight, midnight to Y)
-  if (hours.start < millisPassed && hours.end > millisPassed) { isOpen = true; }
+  if (hours.start < millisPassed && hours.end > millisPassed) {
+    isOpen = true;
+  }
   if (hours.end > 86400000) {
     let hoursEndNextDay = hours.end - 86400000;
-    if (hoursEndNextDay > millisPassed) { isOpen = true; }
+    if (hoursEndNextDay > millisPassed) {
+      isOpen = true;
+    }
   }
 
   return isOpen;
-}
+};

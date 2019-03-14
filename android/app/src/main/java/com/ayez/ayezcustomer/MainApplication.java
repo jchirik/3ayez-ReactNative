@@ -3,6 +3,7 @@ package com.ayez.ayezcustomer;
 import android.annotation.SuppressLint;
 import android.app.Application;
 
+import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -99,7 +100,8 @@ public class MainApplication extends Application implements ReactApplication {
         new MapsPackage(),
         new RNDeviceInfo(),
         new RNLanguagesPackage(),
-        new FastImageViewPackage()
+        new FastImageViewPackage(),
+        new ZendeskChatPackage()
       );
     }
 
