@@ -40,7 +40,7 @@ import {
   strings,
   translate
 } from '../../../../i18n.js';
-import LiveChat from '../../../../utils/livechat';
+// import LiveChat from '../../../../utils/livechat';
 import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
 
 // { text: 'Credit Cards', action: null, icon: '' },
@@ -58,9 +58,9 @@ class SettingsMenu extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      visitorSDK: LiveChat.getInstance()
-    });
+    // this.setState({
+    //   visitorSDK: LiveChat.getInstance()
+    // });
   }
 
   openLanguageSelect() { this.setState({ languageSelect: true }); }

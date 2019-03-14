@@ -214,9 +214,9 @@ const listenToCreditCards = (dispatch) => {
       .collection('cards');
     const creditCardsListener = creditCardsRef.onSnapshot((creditCardsT) => {
       const credit_cards = creditCardsT.docs.map(card => {
-        const id = card.id;
+        const card_id = card.id;
         const data = card.data();
-        return ({ ...data, id, type: 'CREDIT' });
+        return ({ ...data, card_id, type: 'CREDIT' });
       });
       dispatch({ type: CREDITCARDS_SET, payload: { credit_cards } });
     });

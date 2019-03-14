@@ -63,6 +63,7 @@ class OrderStatusBar extends PureComponent {
               elevation: 2,
               zIndex: 10
             }}
+            activeOpacity={1}
             onPress={() => onPress()}
           >
               <AyezText semibold color={'white'} size={15}>{text}</AyezText>

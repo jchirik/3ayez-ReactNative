@@ -7,7 +7,7 @@ import stripe from 'tipsi-stripe';
 import firebase from 'react-native-firebase';
 
 stripe.setOptions({
-  publishableKey: 'pk_test_xJDG7ffhtbS0L6LYFsnGZ9cd'
+  publishableKey: 'pk_live_LkuSJPxIG1dUzv4pTKU14P66'
 });
 
 import {
@@ -18,7 +18,6 @@ import {
   CREDITCARD_CREATE_RESET
 } from './types';
 import { navigateBack } from '../router';
-
 
 export const deleteCreditCard = (card_id) => {
   return (dispatch) => {
