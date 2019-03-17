@@ -94,17 +94,14 @@ class Root extends Component {
   }
 
   render() {
-
     if (!this.props.locale || this.props.is_loading_addresses || !this.props.addresses.length) {
       return (
         <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
       );
     }
-
     if (!this.props.seller_id || !this.props.address) {
       return <LocationSelect />;
     }
-
     return <StorePage />;
   }
 }

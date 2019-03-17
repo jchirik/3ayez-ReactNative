@@ -126,7 +126,8 @@ class BasketBlockButton extends PureComponent {
 }
 
 const mapStateToProps = ({ Seller, Baskets }) => {
-  const { subtotal, basket_quantity } = Baskets.baskets[Seller.id];
+  const basket = Baskets.baskets[Seller.id] || {};
+  const { subtotal, basket_quantity } = basket;
   return {
     subtotal,
     basket_quantity

@@ -274,7 +274,7 @@ class StorePage extends Component {
     let mainScrollComponent = null;
     if (this.props.requestFailed === true) {
       mainScrollComponent = (
-        <NetworkErrorMessage 
+        <NetworkErrorMessage
           onPress={ () => {this.props.fetchStore(this.props.seller_id)} }
         />
       );
@@ -357,7 +357,7 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     featured,
     categories_loading,
     location_text,
-    display_name, 
+    display_name,
     requestFailed
   } = Seller;
 

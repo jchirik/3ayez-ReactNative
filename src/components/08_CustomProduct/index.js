@@ -32,7 +32,7 @@ import {
 } from '../_common';
 
 import images from '../../theme/images'
-import { sceneKeys, navigateBackTo } from '../../router';
+import { sceneKeys, navigateBack } from '../../router';
 
 class CustomProduct extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class CustomProduct extends Component {
       quantity: 1
     }
     this.props.addToBasket(item, seller.id);
-    navigateBackTo(sceneKeys.storePage);
+    navigateBack();
   }
   onChangeText(key, value) {
     const update = {};

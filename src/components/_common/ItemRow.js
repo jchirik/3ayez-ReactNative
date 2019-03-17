@@ -161,7 +161,8 @@ class ItemRow extends Component {
               backgroundColor: 'transparent',
               flex: 1,
               paddingLeft: 10,
-              paddingRight: 10
+              paddingRight: 10,
+              alignItems: 'flex-start'
             }}
           >
             <AyezText medium size={13}>
@@ -225,7 +226,8 @@ class ItemRow extends Component {
             backgroundColor: 'transparent',
             flex: 1,
             paddingLeft: 10,
-            paddingRight: 10
+            paddingRight: 10,
+            alignItems: 'flex-start'
           }}
         >
           <View>

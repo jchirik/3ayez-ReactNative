@@ -11,7 +11,7 @@
     "confirm": "تأكيد",
     "continue": "إستكمال",
     "change": "تغيير",
-    "login": "دخول",
+    "login": "ادخل/اشترك",
     "logout": "خروج",
     "add": "إضافة",
     "edit": "تعديل",
@@ -101,8 +101,8 @@
     "continueGuest": "الدخول كزائر"
   },
   "AddressCreate": {
-    "queryCL": "Deliver to your current location?",
-    "noLocationPermission": "No location permission",
+    "queryCL": "نوصل لحد عندك؟",
+    "noLocationPermission": "مخدناش اذن اننا نوصل لمكانك 😕",
     "issueDeterminingCL": "مشكلة بتحديد الموقع",
     "addressSearchHeader": "عنوان التوصيل",
     "addressSearchInstruction": "دعنا نتعرف علي مكانك لإرسال طلبك",
@@ -111,7 +111,8 @@
     "addressRefineHeader": "تحديد الموقع",
     "addressRefineInstruction": "حدد موقعك عن طريق سحب الدبوس",
     "addressRefineConfirm": "أختار الموقع",
-    "confirmHeader": "Enter Address Details",
+    "confirmHeader": "دخل تفاصيل عنوانك",
+    "provideAdditionalDetails": "من فضلك دخل تفاصيل كمان عشان التوصيل يبقي اسهل",
     "confirmDeliveringTo": "إرسال إلى :",
     "confirmMissingInformation": "من فضلك أملأ كامل البيانات"
   },
@@ -125,8 +126,13 @@
     "deliversToYourArea": "عايز بتوصل لمنطقتك 🥳🎉",
     "orderNow": "اطلب الآن",
     "closed": "مغلق",
-    "hypermarket": "Hypermarket",
-    "express": "Express"
+    "hypermarket": "هايبر",
+    "express": "سريع ",
+    "selectStore": "من فضلك اختار الماركت اللي تحبه",
+    "findingProvider": "بندورلك علي اقرب طيار لعنوانك",
+    "fetchingPrices": "تحميل الاسعار...",
+    "notInYourArea": "احنا بنتوسع و قريبين اوي من مكانك",
+    "checkAnotherLocation": "جرب اماكن تانيه"
   },
   "Support": {
     "header": "الدعم",
@@ -192,8 +198,9 @@
     "addNewCard": "إضافة كارت جديد"
   },
   "AddressSelection": {
-    "header": "SELECT A LOCATION",
-    "anotherLocation": "Find Another Location",
+    "header": "اختار مكان التوصيل",
+    "anotherLocation": "شوف اماكن تانيه",
+    "welcomeBack": "اهلا بيك مصطفي {{name}}",
     "addNewAddress": "إضافة عنوان جديد"
   },
   "OrderStatus": {
@@ -241,6 +248,7 @@
   "Settings": {
     "header": "الإعدادات",
     "welcome": "مرحباً {{name}}",
+    "changeStore": "غير الماركت",
     "madeinEG": "صنع في مصر",
     "myAccount": "حسابي",
     "information": "معلومات",

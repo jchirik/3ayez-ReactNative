@@ -327,11 +327,8 @@ const styles = {
 
 const mapStateToProps = ({ Baskets, Seller }) => {
   const seller = Seller;
-  let items_array = [];
-  if (Seller.id) {
-    items_array = Baskets.baskets[Seller.id].items_array
-  }
-
+  const basket = Baskets.baskets[Seller.id] || {};
+  const items_array = basket.items_array || [];
 
   return {
     seller,

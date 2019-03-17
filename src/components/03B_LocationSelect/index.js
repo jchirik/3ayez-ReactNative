@@ -114,8 +114,8 @@ class LocationSelect extends Component {
         paddingHorizontal: 20,
         flex: 1
        }}>
-       <AyezText medium size={15}>Welcome back {this.props.name}</AyezText>
-       <AyezText regular size={15} style={{ marginTop: 5, marginBottom: 10 }}>Please confirm your location</AyezText>
+       {isWelcomeBackMode ? (<AyezText medium size={15}>{strings('AddressSelection.welcomeBack', {name: this.props.name})}</AyezText>) : null }
+       <AyezText regular size={15} style={{ marginTop: 5, marginBottom: 10 }}>{strings('AddressSelection.header')}</AyezText>
         {addressComponents}
 
         <TouchableOpacity
@@ -127,7 +127,7 @@ class LocationSelect extends Component {
            }}
          onPress={() => navigateTo(sceneKeys.addressCreate)}
          >
-          <AyezText regular color={AYEZ_GREEN}>+ New Address</AyezText>
+          <AyezText regular color={AYEZ_GREEN}>{strings('AddressSelection.addNewAddress')}</AyezText>
         </TouchableOpacity>
 
         <View style={{ flex: 1 }} />
@@ -139,7 +139,7 @@ class LocationSelect extends Component {
            }}
          onPress={() => this.props.logoutUser()}
          >
-          <AyezText medium color={'red'}>Logout</AyezText>
+          <AyezText medium color={'red'}>{strings('Common.logout')}</AyezText>
         </TouchableOpacity>
 
         <LoadingOverlay isVisible={this.props.is_loading_address_select} />

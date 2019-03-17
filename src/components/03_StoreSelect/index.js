@@ -399,7 +399,7 @@ renderLoadingStore() {
       justifyContent: 'center',
       alignItems: 'center'
     }}>
-      <AyezText medium>Finding the provider for your address</AyezText>
+      <AyezText medium>{strings('StoreSelect.findingProvider')}</AyezText>
       <ActivityIndicator size="small" style={{ marginTop: 10 }} />
     </View>
   )
@@ -439,7 +439,7 @@ renderLoadingBestPrices(seller) {
           }}
         />
       </View>
-      <AyezText medium color={'white'}>Getting up to date prices</AyezText>
+      <AyezText medium color={'white'}>{strings('StoreSelect.fetchingPrices')}</AyezText>
 
       <Bar
         style={{ marginTop: 10 }}
@@ -476,10 +476,10 @@ renderSellerList() {
         alignItems: 'center'
       }}>
         <AyezText medium style={{ marginTop: 40, textAlign: 'center' }}>
-          We're not in this area yet 😥
+          {strings('StoreSelect.notInYourArea')}
         </AyezText>
         <BlockButton
-          text={'Find another location'}
+          text={strings('StoreSelect.checkAnotherLocation')}
           color={'#0094ff'}
           style={{ width: 250, marginTop: 20 }}
           onPress={() => {
@@ -505,7 +505,7 @@ renderSellerList() {
           marginBottom: 6,
           alignItems: 'center'
         }}>
-          <AyezText medium size={18}>Please select your store</AyezText>
+          <AyezText medium size={18}>{strings('StoreSelect.selectStore')}</AyezText>
         </View>
       }
       ListFooterComponent={null}

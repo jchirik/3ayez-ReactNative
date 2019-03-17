@@ -174,10 +174,12 @@ class AddressDetails extends Component {
             </View>
 
             <AyezText semibold size={16} style={{
+              alignSelf: 'flex-start',
               paddingLeft: 16,
+              paddingRight: 16,
               paddingTop: 20,
               paddingBottom: 6
-            }}>{'Please provide additional details'}</AyezText>
+            }}>{strings('AddressCreate.provideAdditionalDetails')}</AyezText>
 
             <InputRow
               title={strings('Address.street')}

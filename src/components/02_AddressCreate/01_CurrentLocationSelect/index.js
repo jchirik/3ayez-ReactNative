@@ -24,6 +24,7 @@ import {
 } from '../../../actions';
 
 import {
+  AYEZ_GREEN,
   STATUS_BAR_HEIGHT
 } from '../../../Helpers.js';
 
@@ -153,12 +154,23 @@ class CurrentLocationSelect extends Component {
         backgroundColor: '#FAFCFD'
       }}>
 
+      <Image
+        source={images.squareLogo}
+        style={{
+          width: 160,
+          alignSelf: 'center',
+          height: 100,
+          tintColor: AYEZ_GREEN,
+          marginTop: STATUS_BAR_HEIGHT
+        }}
+        resizeMode={'contain'}
+      />
       <AyezText
         semibold
         size={20}
         style={{
           textAlign: 'center',
-          marginTop: STATUS_BAR_HEIGHT + 100,
+          marginTop: 20,
           marginLeft: 100,
           marginRight: 100
          }}

@@ -70,7 +70,8 @@ class AnimatedCheckmarkOverlay extends Component {
 }
 
 const mapStateToProps = ({ Seller, Baskets }) => {
-  const { basket_quantity } = Baskets.baskets[Seller.id];
+  const basket = Baskets.baskets[Seller.id] || {};
+  const { basket_quantity } = basket;
   return {
     basket_quantity
   };

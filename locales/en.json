@@ -11,7 +11,7 @@
     "confirm": "Confirm",
     "continue": "Continue",
     "change": "Change",
-    "login": "Login",
+    "login": "Login / Sign up",
     "logout": "Logout",
     "add": "Add",
     "edit": "Edit",
@@ -112,6 +112,7 @@
     "addressRefineInstruction": "Refine your location by dragging the pin",
     "addressRefineConfirm": "SELECT LOCATION",
     "confirmHeader": "Enter Address Details",
+    "provideAdditionalDetails": "Please provide additional details",
     "confirmDeliveringTo": "Delivering to:",
     "confirmMissingInformation": "Please fill all information"
   },
@@ -126,7 +127,12 @@
     "orderNow": "Order Now",
     "closed": "Closed",
     "hypermarket": "Hypermarket",
-    "express": "Express"
+    "express": "Express",
+    "selectStore": "Please select your store",
+    "findingProvider": "Finding the provider for your address",
+    "fetchingPrices": "Fetching prices...",
+    "notInYourArea": "We're not in this area yet 😥",
+    "checkAnotherLocation": "Check another location"
   },
   "Support": {
     "header": "Support",
@@ -192,9 +198,10 @@
     "addNewCard": "ADD NEW CARD"
   },
   "AddressSelection": {
-    "header": "SELECT A LOCATION",
+    "header": "Please Select a Delivery Location",
     "anotherLocation": "Find Another Location",
-    "addNewAddress": "ADD NEW ADDRESS"
+    "welcomeBack": "Welcome back {{name}}",
+    "addNewAddress": "+ NEW ADDRESS"
   },
   "OrderStatus": {
     "awaitingStore": "Awaiting Store",
@@ -241,6 +248,7 @@
   "Settings": {
     "header": "SETTINGS",
     "welcome": "Welcome {{name}}",
+    "changeStore": "Change Store",
     "madeinEG": "Made in 🇪🇬",
     "myAccount": "My Account",
     "information": "Information",

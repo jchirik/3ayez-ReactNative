@@ -97,7 +97,7 @@ class SettingsMenu extends Component {
           alignItems: 'flex-end'
         }}
       >
-        <View>
+        <View style={{ alignItems: 'flex-start' }}>
           <AyezText regular color={'#4E4E4E'}>
             {address.building ? `${address.building} ` : ''}
             {address.street || address.title}
@@ -137,9 +137,9 @@ class SettingsMenu extends Component {
           alignItems: 'center'
         }}
       >
-        <View>
+        <View style={{ alignItems: 'flex-start'}} >
           <AyezText medium color={'#4E4E4E'}>
-            Change Store
+            {strings('Settings.changeStore')}
           </AyezText>
           <AyezText regular color={'#4E4E4E'}>
             {translate(seller.display_name)}
@@ -197,7 +197,7 @@ class SettingsMenu extends Component {
             resizeMode={'contain'}
           />
           <AyezText semibold color={AYEZ_GREEN}>
-            Sign in/Sign up
+            {strings('Common.login')}
           </AyezText>
         </TouchableOpacity>
       );
