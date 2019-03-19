@@ -38,73 +38,95 @@ import {
   AyezText,
   BottomChoiceSelection
 } from '../../_common';
-import { sceneKeys, navigateTo } from '../../../router';
+import { sceneKeys, navigateTo, navigateBack } from '../../../router';
 
 class OrderProblem extends Component {
-
   constructor(props) {
     super(props);
-
     this.state = {
       cancelConfirm: false
     };
+    BackHandler.addEventListener("hardwareBackPress", this.onAndroidBackPress);
   }
 
+  onBackPress() {
+    navigateBack();
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onAndroidBackPress);
+  }
+
+  onAndroidBackPress = () => {
+    this.onBackPress();
+    return true;
+  };
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#FAFCFD' }}>
-        <Header title={strings('OrderProblem.header')} blackStyle />
+      <View style={{ flex: 1, backgroundColor: "#FAFCFD" }}>
+        <Header
+          title={strings("OrderProblem.header")}
+          blackStyle
+          onBackButtonPress={this.onBackPress.bind(this)}
+        />
 
         <BlockButton
           onPress={() => {
-            navigateTo(sceneKeys.supportChat)
+            navigateTo(sceneKeys.supportChat);
           }}
-          text={strings('OrderProblem.contactSupport')}
+          text={strings("OrderProblem.contactSupport")}
           style={{
             marginTop: 20,
             marginLeft: 30,
             marginRight: 30
           }}
-          />
+        />
 
-        { (this.props.seller.phone) ? (
+        {this.props.seller.phone ? (
           <BlockButton
-            onPress={() => call({ number: this.props.seller.phone, prompt: false })}
-            text={strings('OrderProblem.callStore')}
-            color={'#0094ff'}
+            onPress={() =>
+              call({ number: this.props.seller.phone, prompt: false })
+            }
+            text={strings("OrderProblem.callStore")}
+            color={"#0094ff"}
             style={{
               marginTop: 15,
               marginLeft: 30,
               marginRight: 30
             }}
-            />
-        ) : null }
+          />
+        ) : null}
 
-        { (this.props.status < 100) ? (
+        {this.props.status < 100 ? (
           <BlockButton
             onPress={() => this.setState({ cancelConfirm: true })}
-            text={strings('OrderProblem.cancelOrder')}
-            color={'#E64E47'}
+            text={strings("OrderProblem.cancelOrder")}
+            color={"#E64E47"}
             style={{
               marginTop: 30,
               marginLeft: 30,
               marginRight: 30
             }}
-            />
-          ) : null }
-
-
-          <BottomChoiceSelection
-            isVisible={this.state.cancelConfirm}
-            onClose={() => this.setState({ cancelConfirm: false })}
-            title={strings('OrderProblem.cancelOrderModal')}
-            backgroundColor='#E64E47'
-            buttons={[
-              { text: strings('OrderProblem.cancelOrderConfirm'), action: () => this.props.markOrderCancelled(this.props.id) },
-              { text: strings('OrderProblem.cancelOrderCancel'), action: () => console.log('closing') }
-            ]}
           />
+        ) : null}
+
+        <BottomChoiceSelection
+          isVisible={this.state.cancelConfirm}
+          onClose={() => this.setState({ cancelConfirm: false })}
+          title={strings("OrderProblem.cancelOrderModal")}
+          backgroundColor="#E64E47"
+          buttons={[
+            {
+              text: strings("OrderProblem.cancelOrderConfirm"),
+              action: () => this.props.markOrderCancelled(this.props.id)
+            },
+            {
+              text: strings("OrderProblem.cancelOrderCancel"),
+              action: () => console.log("closing")
+            }
+          ]}
+        />
       </View>
     );
   }
