@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
+import zendesk from '../../../../ZendeskChat/ZendeskChatNativeModule';
 
 import {
   View,
@@ -32,6 +33,7 @@ import {
   translate
 } from '../../i18n.js';
 import { sceneKeys, navigateTo } from '../../router';
+import { ZOPIM_ACCOUNT_KEY } from '../../Helpers';
 
 // a big comoonent
 class SupportDetail extends Component {
@@ -60,7 +62,11 @@ class SupportDetail extends Component {
           }}>{translate(description)}</AyezText>
           <BlockButton
             onPress={() => {
-                navigateTo(sceneKeys.supportChat)
+              zendesk.start({
+                [zendesk.ZOPIM_ACCOUNT_KEY]: ZOPIM_ACCOUNT_KEY,
+                [zendesk.VISITOR_NAME]: this.props.name || 'Client',
+                [zendesk.VISITOR_PHONE_NUMBER]: this.props.phone || ''
+              });
             }}
             text={strings('OrderProblem.contactSupport')}
             style={{
