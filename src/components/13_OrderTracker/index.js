@@ -104,7 +104,7 @@ class OrderTracker extends Component {
     console.log('OrderTracker exiting')
     navigateBack(); // Android back press
 
-    this.props.endListeningToOrder();
+    // this.props.endListeningToOrder();
     timer.clearTimeout(this);
     BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
