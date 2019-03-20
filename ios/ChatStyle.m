@@ -23,7 +23,7 @@
   NSDictionary *navbarAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                     WhiteColor ,NSForegroundColorAttributeName, titleFont, NSFontAttributeName,nil];
 
-  [[ZDCChat instance].overlay setEnabled:NO];
+  [[ZDCChat instance].overlay setEnabled:YES];
 
   [[ZDCLoadingView appearance] setLoadingLabelTextColor:BlueGreenColor ];
 
