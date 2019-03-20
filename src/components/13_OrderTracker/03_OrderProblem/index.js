@@ -23,7 +23,8 @@ import {
 
 import {
   paymentIcon,
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  ZOPIM_ACCOUNT_KEY
 } from '../../../Helpers.js';
 
 import {
@@ -38,7 +39,9 @@ import {
   AyezText,
   BottomChoiceSelection
 } from '../../_common';
+
 import { sceneKeys, navigateTo, navigateBack } from '../../../router';
+import zendesk from '../../../ZendeskChat/ZendeskChatNativeModule';
 
 class OrderProblem extends Component {
   constructor(props) {
@@ -73,7 +76,11 @@ class OrderProblem extends Component {
 
         <BlockButton
           onPress={() => {
-            navigateTo(sceneKeys.supportChat);
+            zendesk.start({
+              [zendesk.ZOPIM_ACCOUNT_KEY]: ZOPIM_ACCOUNT_KEY,
+              [zendesk.VISITOR_NAME]: this.props.name || 'Client',
+              [zendesk.VISITOR_PHONE_NUMBER]: this.props.phone || ''
+            });
           }}
           text={strings("OrderProblem.contactSupport")}
           style={{
