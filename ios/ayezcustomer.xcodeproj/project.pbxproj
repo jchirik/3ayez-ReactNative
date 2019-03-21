@@ -35,6 +35,10 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* ayezcustomerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ayezcustomerTests.m */; };
+		353004242244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 353004202244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf */; };
+		353004252244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 353004212244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf */; };
+		353004262244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 353004222244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf */; };
+		353004272244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 353004232244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf */; };
 		354EB352222994D700740DB3 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354EB3502229949800740DB3 /* libSplashScreen.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8E7D4B171F8AFD9C00699FE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */; };
@@ -426,7 +430,12 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ayezcustomer-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ayezcustomer-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ayezcustomer-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ayezcustomer-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F6D4533005F445584157788 /* Frutiger LT Arabic 55 Roman.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Frutiger LT Arabic 55 Roman.ttf"; path = "../assets/fonts/Frutiger LT Arabic 55 Roman.ttf"; sourceTree = "<group>"; };
 		333056BA5B7ADABE709DF4A1 /* libPods-ayezcustomer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ayezcustomer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		353004202244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frutiger LT Arabic 75 Black.ttf"; path = "../assets/fonts/Frutiger LT Arabic 75 Black.ttf"; sourceTree = "<group>"; };
+		353004212244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frutiger LT Arabic 55 Roman.ttf"; path = "../assets/fonts/Frutiger LT Arabic 55 Roman.ttf"; sourceTree = "<group>"; };
+		353004222244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frutiger LT Arabic 65 Bold.ttf"; path = "../assets/fonts/Frutiger LT Arabic 65 Bold.ttf"; sourceTree = "<group>"; };
+		353004232244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Frutiger LT Arabic 45 Light.ttf"; path = "../assets/fonts/Frutiger LT Arabic 45 Light.ttf"; sourceTree = "<group>"; };
 		354EB3222229949800740DB3 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		4031C5D3468A6410BB4016B9 /* Pods-ayezcustomer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ayezcustomer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -435,7 +444,10 @@
 		8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		ADF4CB3C3BF44D3EBA8B78C4 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
+		B62E659323FA49FFACBE38C0 /* Frutiger LT Arabic 45 Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Frutiger LT Arabic 45 Light.ttf"; path = "../assets/fonts/Frutiger LT Arabic 45 Light.ttf"; sourceTree = "<group>"; };
 		B7AFA8AA9A1CFD17320E9074 /* Pods-ayezcustomer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ayezcustomer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer.release.xcconfig"; sourceTree = "<group>"; };
+		BBF99EF8EDB04D7BA69DBCBE /* Frutiger LT Arabic 75 Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Frutiger LT Arabic 75 Black.ttf"; path = "../assets/fonts/Frutiger LT Arabic 75 Black.ttf"; sourceTree = "<group>"; };
+		C623D544C07F48A086992C01 /* Frutiger LT Arabic 65 Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Frutiger LT Arabic 65 Bold.ttf"; path = "../assets/fonts/Frutiger LT Arabic 65 Bold.ttf"; sourceTree = "<group>"; };
 		D2096B8F21F7871F0033390F /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		D22030A622073105005D1B9D /* launch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch.jpg; sourceTree = "<group>"; };
 		D23012C121F7E2D7006332ED /* TPSStripe.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TPSStripe.xcodeproj; path = "../node_modules/tipsi-stripe/ios/TPSStripe.xcodeproj"; sourceTree = "<group>"; };
@@ -751,6 +763,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				353004232244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf */,
+				353004212244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf */,
+				353004222244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf */,
+				353004202244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf */,
 				8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* ayezcustomer */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -856,6 +872,10 @@
 				D276037F21DEA2650037DE81 /* Poppins-SemiBoldItalic.otf */,
 				D276037821DEA2650037DE81 /* Poppins-Thin.otf */,
 				D276037321DEA2650037DE81 /* Poppins-ThinItalic.otf */,
+				B62E659323FA49FFACBE38C0 /* Frutiger LT Arabic 45 Light.ttf */,
+				2F6D4533005F445584157788 /* Frutiger LT Arabic 55 Roman.ttf */,
+				C623D544C07F48A086992C01 /* Frutiger LT Arabic 65 Bold.ttf */,
+				BBF99EF8EDB04D7BA69DBCBE /* Frutiger LT Arabic 75 Black.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -900,6 +920,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */,
 				83B761F71FE42BDD00F21A7A /* Crashlytics */,
+				4229025460ECB03A35A669B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1392,6 +1413,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353004242244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf in Resources */,
+				353004252244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf in Resources */,
+				353004262244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf in Resources */,
+				353004272244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf in Resources */,
 				D276039421DEA2650037DE81 /* Poppins-SemiBold.otf in Resources */,
 				D276039921DEA2650037DE81 /* Cairo-Bold.ttf in Resources */,
 				D276039021DEA2650037DE81 /* Poppins-Thin.otf in Resources */,
@@ -1475,6 +1500,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		4229025460ECB03A35A669B5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		7EEED693062F803EA2B9E72F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

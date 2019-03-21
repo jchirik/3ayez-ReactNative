@@ -103,7 +103,8 @@ class PhoneEntry extends Component {
             paddingLeft: 6,
             paddingRight: 6,
             fontSize: 14,
-            fontFamily: FONT_REGULAR()
+            fontFamily: FONT_REGULAR(),
+            fontWeight: "300",
           }}
           placeholder={strings('Authentication.numberEntryPlaceholder')}
           placeholderTextColor={'#8E8E93'}

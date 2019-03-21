@@ -14,6 +14,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS } from './Helpers';
 import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
+import fonts from './theme/fonts';
 
 class App extends Component {
   constructor() {
@@ -139,7 +140,8 @@ class App extends Component {
         >
           <Text
             style={{
-              fontFamily: 'Cairo-Regular',
+              fontFamily: fonts.Frutiger,
+              fontWeight: "300",
               fontSize: 16,
               color: 'black',
               marginBottom: 4
@@ -160,7 +162,8 @@ class App extends Component {
           {this.state.progress_percent ? (
             <Text
               style={{
-                fontFamily: 'Cairo-Regular',
+                fontFamily: fonts.Frutiger,
+                fontWeight: "300",
                 fontSize: 16,
                 color: 'black',
                 marginBottom: 12

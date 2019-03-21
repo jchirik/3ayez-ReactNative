@@ -99,6 +99,10 @@
 		<string>Poppins-SemiBoldItalic.otf</string>
 		<string>Poppins-Thin.otf</string>
 		<string>Poppins-ThinItalic.otf</string>
+		<string>Frutiger LT Arabic 45 Light.ttf</string>
+		<string>Frutiger LT Arabic 55 Roman.ttf</string>
+		<string>Frutiger LT Arabic 65 Bold.ttf</string>
+		<string>Frutiger LT Arabic 75 Black.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

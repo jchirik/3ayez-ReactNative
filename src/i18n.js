@@ -9,6 +9,7 @@ import ar from '../locales/ar.json';
 import moment from 'moment-timezone';
 import enMomentLocalization from 'moment/locale/en-gb'
 import arMomentLocalization from 'moment/locale/ar'
+import fonts from './theme/fonts';
 
 I18n.defaultLocale = 'en';
 I18n.fallbacks = true;
@@ -41,13 +42,13 @@ export const translate = (data) => {
 
 export const FONT_REGULAR = () => {
   // this HAS to be a function so it executes while rendering
-  return (store.getState().Settings.locale === 'ar') ? 'Cairo-Regular' : 'Poppins-Regular';
+  return (store.getState().Settings.locale === 'ar') ? fonts.Frutiger : 'Poppins-Regular';
 }
 export const FONT_MEDIUM  = () => {
-  return (store.getState().Settings.locale === 'ar') ? 'Cairo-SemiBold' : 'Poppins-Medium';
+  return (store.getState().Settings.locale === 'ar') ? fonts.Frutiger : 'Poppins-Medium';
 }
 export const FONT_LIGHT = () => {
-  return (store.getState().Settings.locale === 'ar') ? 'Cairo-Light' : 'Poppins-Light';
+  return (store.getState().Settings.locale === 'ar') ? fonts.Frutiger : 'Poppins-Light';
 }
 
 

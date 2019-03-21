@@ -3,6 +3,7 @@ import {
   Text
 } from 'react-native';
 import { connect } from 'react-redux';
+import fonts from '../../theme/fonts';
 
 // do this for TextInput too
 class AyezText extends Component {
@@ -28,33 +29,47 @@ class AyezText extends Component {
     } = this.props;
 
     let fontFamily = null;
+    let fontWeight = "normal";
+
     if ((locale === 'en') || forcePoppinsFont) {
       if (regular) {
         fontFamily = 'Poppins-Regular';
+        fontWeight = "300"
       } else if (medium) {
         fontFamily = 'Poppins-Medium';
+        fontWeight = "500"
       } else if (semibold) {
         fontFamily = 'Poppins-SemiBold';
+        fontWeight = "700"
       } else if (bold) {
         fontFamily = 'Poppins-Bold';
+        fontWeight = "bold"
       } else if (light) {
         fontFamily = 'Poppins-Light';
+        fontWeight = "200"
       } else if (extralight) {
         fontFamily = 'Poppins-ExtraLight';
+        fontWeight = "100"
       }
     } else if ((locale === 'ar') || forceCairoFont) {
       if (regular) {
-        fontFamily = 'Cairo-Regular';
+        fontFamily = fonts.Frutiger
+        fontWeight = "300"
       } else if (medium) {
-        fontFamily = 'Cairo-SemiBold';
+        fontFamily = fonts.Frutiger;
+        fontWeight = "500"
       } else if (semibold) {
-        fontFamily = 'Cairo-Bold';
+        fontFamily = fonts.Frutiger;
+        fontWeight = "700"
       } else if (bold) {
-        fontFamily = 'Cairo-Black';
+        fontFamily = fonts.Frutiger;
+        fontWeight = "bold"
       } else if (light) {
-        fontFamily = 'Cairo-Light';
+        fontFamily = fonts.Frutiger;
+        fontWeight = "200"
       } else if (extralight) {
-        fontFamily = 'Cairo-ExtraLight';
+        fontFamily = fonts.Frutiger;
+        fontWeight = "100"
       }
     }
 
@@ -66,7 +81,8 @@ class AyezText extends Component {
           color,
           fontSize: size,
           ...style,
-          fontFamily
+          fontFamily,
+          fontWeight
         }}>{children}</Text>
     )
   }

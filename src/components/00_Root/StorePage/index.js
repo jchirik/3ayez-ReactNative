@@ -175,12 +175,14 @@ class StorePage extends Component {
           tabTextStyle={{
             fontSize: 14,
             color: '#8E8E93',
-            fontFamily: FONT_LIGHT()
+            fontFamily: FONT_LIGHT(),
+            fontWeight: "200"
           }}
           activeTabTextStyle={{
             fontSize: 14,
             color: '#2DD38F',
-            fontFamily: FONT_LIGHT()
+            fontFamily: FONT_LIGHT(),
+            fontWeight: "200"
           }}
           borderRadius={0}
         />

@@ -62,6 +62,7 @@ class AdditionalNotes extends Component {
             borderTopWidth: 1,
             borderBottomWidth: 1,
             fontFamily: FONT_REGULAR(),
+            fontWeight: "300",
             textAlign: (I18nManager.isRTL ? 'right' : 'left'),
             textAlignVertical: 'top',
             fontSize: 14

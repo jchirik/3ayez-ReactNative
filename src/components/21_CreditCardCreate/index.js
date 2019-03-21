@@ -106,8 +106,8 @@ class CreditCardCreate extends Component {
             cvc: strings('CreditCard.cvc'),
             name: strings('CreditCard.name')
           }}
-          labelStyle={{ fontSize: 13, padding: 0, fontFamily: FONT_MEDIUM(), color: 'black' }}
-          inputStyle={{ fontSize: 15, padding: 0, fontFamily: FONT_REGULAR(), color: 'black' }}
+          labelStyle={{ fontSize: 13, padding: 0, fontFamily: FONT_MEDIUM(), color: 'black', fontWeight: "500" }}
+          inputStyle={{ fontSize: 15, padding: 0, fontFamily: FONT_REGULAR(), fontWeight: "300", color: 'black' }}
           onChange={this.onChange.bind(this)}
           requiresName
           allowScroll
