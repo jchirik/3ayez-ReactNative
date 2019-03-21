@@ -129,9 +129,15 @@ class FeaturedBrowse extends Component {
 
   // go to shelf ->>
   render() {
+    const {
+      featured,
+      recent,
+      recent_loading
+    } = this.props;
+    console.log('RECENT', recent_loading, recent)
     return (
       <FlatList
-        data={this.props.featured}
+        data={featured}
         renderItem={this.renderFeaturedRows.bind(this)}
         style={{ flex: 1 }}
         removeClippedSubviews
@@ -149,12 +155,16 @@ const mapStateToProps = ({ Seller }) => {
   const {
     id,
     featured,
-    featured_loading
+    featured_loading,
+    recent,
+    recent_loading
   } = Seller;
   return {
     id,
     featured,
-    featured_loading
+    featured_loading,
+    recent,
+    recent_loading
   };
 };
 
