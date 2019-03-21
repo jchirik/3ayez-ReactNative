@@ -2,6 +2,9 @@ package com.ayez.ayezcustomer;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
@@ -47,7 +50,14 @@ import com.facebook.FacebookSdk;
 import com.facebook.CallbackManager;
 import com.facebook.appevents.AppEventsLogger;
 
-public class MainApplication extends Application implements ReactApplication {
+
+public class MainApplication extends MultiDexApplication implements ReactApplication {
+
+  @Override
+  protected void attachBaseContext(Context context) {
+    super.attachBaseContext(context);
+    MultiDex.install(this);
+  }
 
   // facebook SDK
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
