@@ -42,7 +42,7 @@ class RouterComponent extends Component {
         backAndroidHandler={this.onBackPress}
       >
         <Lightbox>
-          <Stack animationEnabled={true} modal headerMode={'none'}>
+          <Stack animationEnabled={true} modal headerMode={"none"}>
             <Stack
               key={sceneKeys.main}
               hideNavBar
@@ -57,25 +57,58 @@ class RouterComponent extends Component {
                 component={components.Root}
                 initial
               />
-              <Scene key={sceneKeys.storeSearch} component={components.StoreSearch} />
-              <Scene key={sceneKeys.storeAisle} component={components.StoreAisle} />
-              <Scene key={sceneKeys.storeShelf} component={components.StoreShelf} />
-              <Scene key={sceneKeys.itemPage} component={components.ItemPage} />
-              <Scene key={sceneKeys.itemImageView} component={components.ItemImageView} />
+              <Scene
+                key={sceneKeys.storeSearch}
+                component={components.StoreSearch}
+              />
+              <Scene
+                key={sceneKeys.storeAisle}
+                component={components.StoreAisle}
+              />
+              <Scene
+                key={sceneKeys.storeShelf}
+                component={components.StoreShelf}
+              />
+              <Scene
+                key={sceneKeys.itemPage}
+                component={components.ItemPage}
+              />
+              <Scene
+                key={sceneKeys.itemImageView}
+                component={components.ItemImageView}
+              />
 
-              <Scene key={sceneKeys.orderHistory} component={components.OrderHistory} />
+              <Scene
+                key={sceneKeys.orderHistory}
+                component={components.OrderHistory}
+              />
 
-              <Scene key={sceneKeys.supportDetail} component={components.SupportDetail} />
+              <Scene
+                key={sceneKeys.supportDetail}
+                component={components.SupportDetail}
+              />
 
               <Scene
                 key={sceneKeys.creditCardManager}
                 component={components.CreditCardManager}
               />
 
-              <Scene key={sceneKeys.orderTracker} component={components.OrderTracker} />
-              <Scene key={sceneKeys.orderSummary} component={components.OrderSummary} />
-              <Scene key={sceneKeys.orderProblem} component={components.OrderProblem} />
-              <Scene key={sceneKeys.driverTracker} component={components.DriverTracker} />
+              <Scene
+                key={sceneKeys.orderTracker}
+                component={components.OrderTracker}
+              />
+              <Scene
+                key={sceneKeys.orderSummary}
+                component={components.OrderSummary}
+              />
+              <Scene
+                key={sceneKeys.orderProblem}
+                component={components.OrderProblem}
+              />
+              <Scene
+                key={sceneKeys.driverTracker}
+                component={components.DriverTracker}
+              />
               <Scene
                 key={sceneKeys.addressManager}
                 component={components.AddressManager}
@@ -83,23 +116,33 @@ class RouterComponent extends Component {
             </Stack>
 
             {/* any modals */}
-            <Scene key={sceneKeys.storeSelect} component={components.StoreSelect} panHandlers={null} />
+            <Scene
+              key={sceneKeys.storeSelect}
+              component={components.StoreSelect}
+              panHandlers={null}
+            />
 
             <Stack key={sceneKeys.tutorial} hideNavBar panHandlers={null}>
               <Scene
                 key={sceneKeys.languageSelect}
                 component={components.LanguageSelect}
               />
-              <Scene key={sceneKeys.tutorialSwipe} component={components.TutorialSwipe} />
+              <Scene
+                key={sceneKeys.tutorialSwipe}
+                component={components.TutorialSwipe}
+              />
             </Stack>
 
             <Stack
               key={sceneKeys.checkoutFlow}
-              headerMode={'none'}
+              headerMode={"none"}
               animationEnabled={true}
               panHandlers={null}
             >
-              <Scene key={sceneKeys.workingBasket} component={components.WorkingBasket} />
+              <Scene
+                key={sceneKeys.workingBasket}
+                component={components.WorkingBasket}
+              />
               <Scene
                 key={sceneKeys.yallaTimeSelect}
                 component={components.YallaTimeSelect}
@@ -121,13 +164,20 @@ class RouterComponent extends Component {
               />
             </Stack>
 
-
             <Scene
               key={sceneKeys.locationSelect}
               component={components.LocationSelect}
             />
 
+            <Scene
+              key={sceneKeys.privacyPolicy}
+              component={components.PrivacyPolicy}
+            />
 
+            <Scene
+              key={sceneKeys.termsConditions}
+              component={components.TermsAndConditions}
+            />
 
             <Scene
               key={sceneKeys.additionalNotes}
@@ -135,22 +185,38 @@ class RouterComponent extends Component {
             />
 
             <Stack key={sceneKeys.auth} hideNavBar panHandlers={null}>
-              <Scene key={sceneKeys.phoneEntry} component={components.PhoneEntry} />
-              <Scene key={sceneKeys.verifyCode} component={components.VerifyCode} />
+              <Scene
+                key={sceneKeys.phoneEntry}
+                component={components.PhoneEntry}
+              />
+              <Scene
+                key={sceneKeys.verifyCode}
+                component={components.VerifyCode}
+              />
             </Stack>
 
-            <Stack key={sceneKeys.addressCreate} hideNavBar panHandlers={null}>
+            <Stack
+              key={sceneKeys.addressCreate}
+              hideNavBar
+              panHandlers={null}
+            >
               <Scene
                 key={sceneKeys.currentLocationSelect}
                 component={components.CurrentLocationSelect}
               />
-              <Scene key={sceneKeys.addressSearch} component={components.AddressSearch} />
+              <Scene
+                key={sceneKeys.addressSearch}
+                component={components.AddressSearch}
+              />
               <Scene
                 key={sceneKeys.refineLocation}
                 component={components.RefineLocation}
               />
             </Stack>
-            <Scene key={sceneKeys.customProduct} component={components.CustomProduct} />
+            <Scene
+              key={sceneKeys.customProduct}
+              component={components.CustomProduct}
+            />
             <Scene
               key={sceneKeys.creditCardCreate}
               component={components.CreditCardCreate}
@@ -160,7 +226,10 @@ class RouterComponent extends Component {
               component={components.OrderReview}
               panHandlers={null}
             />
-            <Scene key={sceneKeys.supportChat} component={components.SupportChat} />
+            <Scene
+              key={sceneKeys.supportChat}
+              component={components.SupportChat}
+            />
             <Scene
               key={sceneKeys.customerFeedback}
               component={components.CustomerFeedback}
@@ -169,7 +238,10 @@ class RouterComponent extends Component {
           </Stack>
 
           {/* Any global modals (in Lightbox) */}
-          <Scene key={sceneKeys.couponModal} component={components.CouponModal} />
+          <Scene
+            key={sceneKeys.couponModal}
+            component={components.CouponModal}
+          />
         </Lightbox>
       </Router>
     );

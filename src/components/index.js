@@ -33,44 +33,48 @@ import CreditCardCreate from './21_CreditCardCreate';
 import AddressManager from './22_AddressManager';
 import CustomerFeedback from './23_CustomerFeedback';
 import AdditionalNotes from './24_AdditionalNotes';
+import PrivacyPolicy from './25_PrivacyPolicy';
+import TermsAndConditions from "./26_TermsAndConditions";
 
 export {
-    Root,
-    LanguageSelect,
-    TutorialSwipe,
-    CurrentLocationSelect,
-    AddressSearch,
-    RefineLocation,
-    StoreSelect,
-    LocationSelect,
-    StoreSearch,
-    StoreAisle,
-    StoreShelf,
-    ItemPage,
-    ItemImageView,
-    CustomProduct,
-    WorkingBasket,
-    YallaTimeSelect,
-    TimeslotSelect,
-    AddressDetails,
-    Checkout,
-    OrderTracker,
-    OrderSummary,
-    DriverTracker,
-    OrderProblem,
-    OrderReview,
-    PhoneEntry,
-    VerifyCode,
-    OrderHistory,
-    SupportDetail,
-    CouponModal,
-    SupportChat,
-    CreditCardManager,
-    CreditCardCreate,
-    AddressManager,
-    CustomerFeedback,
-    AdditionalNotes
-}
+  Root,
+  LanguageSelect,
+  TutorialSwipe,
+  CurrentLocationSelect,
+  AddressSearch,
+  RefineLocation,
+  StoreSelect,
+  LocationSelect,
+  StoreSearch,
+  StoreAisle,
+  StoreShelf,
+  ItemPage,
+  ItemImageView,
+  CustomProduct,
+  WorkingBasket,
+  YallaTimeSelect,
+  TimeslotSelect,
+  AddressDetails,
+  Checkout,
+  OrderTracker,
+  OrderSummary,
+  DriverTracker,
+  OrderProblem,
+  OrderReview,
+  PhoneEntry,
+  VerifyCode,
+  OrderHistory,
+  SupportDetail,
+  CouponModal,
+  SupportChat,
+  CreditCardManager,
+  CreditCardCreate,
+  AddressManager,
+  CustomerFeedback,
+  AdditionalNotes,
+  PrivacyPolicy,
+  TermsAndConditions
+};
 
 export const sceneKeys = {
     main : "main",
@@ -113,5 +117,7 @@ export const sceneKeys = {
     orderReview : "orderReview",
     supportChat : "supportChat",
     customerFeedback : "customerFeedback",
-    couponModal : "couponModal"
+    couponModal : "couponModal",
+    privacyPolicy : "privacyPolicy" ,
+    termsConditions: "termsConditions"
   }
