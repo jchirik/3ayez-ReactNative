@@ -19,12 +19,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      is_updating: false,
       update_text_ar: '',
       update_text_en: '',
       progress_percent: 0.0,
       visitorSDK: undefined,
       greetingMessage: undefined,
+      is_updating: false,
       isSplashShown: true
     };
   }
@@ -85,6 +85,11 @@ class App extends Component {
   codePushStatusDidChange(status) {
     switch (status) {
       case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+        this.setState({
+          is_updating: true,
+          update_text_ar: 'جاري تجهيز البرنامج',
+          update_text_en: 'Getting Ready ..'
+        });
         console.log('Checking for updates.');
         break;
       case codePush.SyncStatus.DOWNLOADING_PACKAGE:
@@ -185,7 +190,7 @@ class App extends Component {
 }
 
 const cpApp = codePush({
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
   installMode: codePush.InstallMode.IMMEDIATE
 })(App);
 export default cpApp;
