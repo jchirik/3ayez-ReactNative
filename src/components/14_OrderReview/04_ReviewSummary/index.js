@@ -18,7 +18,8 @@ import {
 
   paymentIcon,
   AYEZ_GREEN,
-  AYEZ_BACKGROUND_COLOR
+  AYEZ_BACKGROUND_COLOR,
+  ZOPIM_ACCOUNT_KEY
 } from '../../../Helpers.js';
 
 import {
@@ -38,6 +39,7 @@ import {
 
 import images from '../../../theme/images'
 import { sceneKeys, navigateTo } from '../../../router';
+import ZendeskChatNativeModule from '../../../ZendeskChat/ZendeskChatNativeModule.js';
 
 class ReviewSummary extends Component {
 
@@ -109,7 +111,11 @@ class ReviewSummary extends Component {
           text: strings('Support.header').toUpperCase(),
           image_source: images.supportIcon,
           onPress: () => {
-            navigateTo(sceneKeys.supportChat)
+            ZendeskChatNativeModule.start({
+                  [ZendeskChatNativeModule.ZOPIM_ACCOUNT_KEY]: ZOPIM_ACCOUNT_KEY,
+                  [ZendeskChatNativeModule.VISITOR_NAME]: this.props.name || 'Client',
+                  [ZendeskChatNativeModule.VISITOR_PHONE_NUMBER]: this.props.phone || ''
+                })
           }
         }}
         />
@@ -133,4 +139,9 @@ class ReviewSummary extends Component {
   }
 }
 
-export default ReviewSummary;
+export default connect(({ Customer: {name, phone} }) => {
+  return {
+    name, 
+    phone
+  };
+}, {})(ReviewSummary);
