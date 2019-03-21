@@ -117,10 +117,16 @@ class CategoriesBrowse extends Component {
     }
 
   render() {
-    console.log('CATEGORIES', this.props.categories);
+    const {
+      categories,
+      recent,
+      recent_loading
+    } = this.props;
+    console.log('RECENT', recent_loading, recent)
+    console.log('CATEGORIES', categories);
     return (
       <FlatList
-        data={this.props.categories}
+        data={categories}
         renderItem={this.renderItem.bind(this)}
         style={styles.categoryList}
         removeClippedSubviews
@@ -141,12 +147,16 @@ const mapStateToProps = ({ Seller }) => {
   const {
     id,
     categories,
-    categories_loading
+    categories_loading,
+    recent,
+    recent_loading
   } = Seller;
   return {
     seller_id: id,
     categories,
-    categories_loading
+    categories_loading,
+    recent,
+    recent_loading
   };
 };
 

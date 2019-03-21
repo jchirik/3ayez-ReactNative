@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import firebase from 'react-native-firebase';
-import zendesk from '../../../../ZendeskChat/ZendeskChatNativeModule';
+import zendesk from '../../ZendeskChat/ZendeskChatNativeModule';
 
 import {
   View,
@@ -33,6 +33,7 @@ import {
   translate
 } from '../../i18n.js';
 import { sceneKeys, navigateTo } from '../../router';
+import { ZOPIM_ACCOUNT_KEY } from '../../Helpers';
 
 // a big comoonent
 class SupportDetail extends Component {

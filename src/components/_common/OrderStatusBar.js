@@ -33,9 +33,8 @@ class OrderStatusBar extends PureComponent {
       orders
     } = this.props;
 
-    if (orders.length > 0) {
+    if ( orders.length > 0 &&  orders.some( order => order.status != 300)) {
       // track your current order
-
       let onPress = () => {
         navigateTo(sceneKeys.orderTracker, { order_id: orders[0].id })
       }
@@ -46,7 +45,6 @@ class OrderStatusBar extends PureComponent {
         }
         text = strings('OrderStatusBar.multipleOrders');
       }
-
       return (
           <TouchableOpacity
             style={{

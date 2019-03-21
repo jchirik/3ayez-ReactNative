@@ -118,6 +118,7 @@ class StoreAisle extends Component {
           <FlatList
             horizontal
             disableVirtualization={I18nManager.isRTL}
+            contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-start' }}
             style={styles.subcategoryContainer}
             removeClippedSubviews
             windowSize={2}

@@ -10,29 +10,24 @@ import {
   BASKET_INIT,
 
   SELLER_FEATURED_FETCH_END,
-  SELLER_CATEGORIES_FETCH_END
+  SELLER_CATEGORIES_FETCH_END,
+  SELLER_RECENT_FETCH_END
 } from './types';
 import {sceneKeys, navigateTo, navigateBackTo} from '../router';
 //
-// const fetchRecents = (seller_id, page, dispatch) => {
-// //   const { currentUser } = firebase.auth();
-// //   if (currentUser) {
-// //     const customerID = currentUser.uid;
-// //
-// //     algoliaIndex.getObjects(recentUPCs, (err, content) => {
-// //       if (err) throw err;
-// //       let results = content.results.filter(result => result !== null).map(result => result.thumbnail_url)
-// //       results = results.splice(0, 4);
-// //       console.log('got recent back', results);
-// //       dispatch({
-// //         type: CHECK_IF_RECENT_SET,
-// //         payload: {
-// //           recentUPCImages: results
-// //         }
-// //       });
-// //     });
-// //   }
-// };
+const fetchRecentItems = (seller_id, dispatch) => {
+  const { currentUser } = firebase.auth();
+  if (currentUser) {
+    const customer_id = currentUser.uid;
+    const fetchRecentItemsFx = firebase.functions().httpsCallable('fetchRecentItems');
+    fetchRecentItemsFx({ seller_id, customer_id }).then((result) => {
+      const { results } = result.data;
+      dispatch({ type: SELLER_RECENT_FETCH_END, payload: { recent: results } });
+    });
+  } else {
+    dispatch({ type: SELLER_RECENT_FETCH_END, payload: { recent: [] } });
+  }
+};
 
 const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
 
@@ -113,16 +108,18 @@ const fetchStoreData = (seller_id, dispatch) => {
     if (!isConnected) {
       dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { requestFailed: true } });
     } else {
+      fetchRecentItems(seller_id, dispatch);
+
       const sellerRef = firebase.firestore().collection('sellers').doc(seller_id);
       sellerRef.collection('data').doc('app').get().then((document) => {
         if (document.data()) {
           let categories = document.data().categories || [];
           const featured = document.data().featured || [];
-          
+
           categories = categories.filter(category => !(category.is_online === false))
           dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { categories, requestFailed: false } });
           fetchFeaturedItems(seller_id, featured, dispatch);
-        } else { 
+        } else {
           dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { requestFailed: true } });
         }
       }).catch((error) => {
