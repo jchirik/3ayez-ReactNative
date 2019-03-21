@@ -64,10 +64,5 @@
     "rn-viewpager": "^1.2.9",
     "tipsi-stripe": "^7.1.0",
     "xcode": "^2.0.0"
-  },
-  "rnpm": {
-    "assets": [
-      "assets/fonts/"
-    ]
   }
 }
