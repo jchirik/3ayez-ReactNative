@@ -3,7 +3,9 @@ package com.ayezcustomer.zendeskchat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,7 +13,12 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.api.ZopimChatApi;
 import com.zopim.android.sdk.model.VisitorInfo;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
@@ -85,20 +92,7 @@ public class ZendeskChatModule extends ReactContextBaseJavaModule {
 
         if (context == null) return;
 
-
-//        String zendeskUrl = map.getString(ZENDESK_URL);
-//        String applicationId = map.getString(APPLICATION_ID);
-//        if(zendeskUrl == null || applicationId == null) return;
-//        Zendesk.INSTANCE.init(context,
-//                zendeskUrl,
-//                applicationId,
-//                map.getString(OAUTH_CLIENT_ID));
-
-
-//        Zendesk.INSTANCE.setIdentity(new AnonymousIdentity());
-//        Support.INSTANCE.init(Zendesk.INSTANCE);
-
-        ZopimChat.init(map.get(ZOPIM_ACCOUNT_KEY));
+      ZopimChatApi.init(map.get(ZOPIM_ACCOUNT_KEY));
 
         VisitorInfo visitorInfo = new VisitorInfo.Builder().name(map.get(VISITOR_NAME))
                 .phoneNumber(map.get(VISITOR_PHONE_NUMBER))
@@ -106,9 +100,24 @@ public class ZendeskChatModule extends ReactContextBaseJavaModule {
                 .note(map.get(VISITOR_NOTE))
                 .build();
 
-        ZopimChat.setVisitorInfo(visitorInfo);
+      ZopimChatApi.setVisitorInfo(visitorInfo);
 
-        context.startActivity(new Intent(context, ZopimChatActivity.class));
+      FirebaseInstanceId.getInstance().getInstanceId()
+        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+          @Override
+          public void onComplete(@NonNull Task<InstanceIdResult> task) {
+            if (!task.isSuccessful()) {
+                return;
+            }
+
+            if(task.getResult() != null) {
+              ZopimChat.setPushToken(task.getResult().getToken());
+            }
+          }
+        });
+
+      getCurrentActivity().startActivity(new Intent(getCurrentActivity(), ZopimChatActivity.class));
+
     }
 
     private static void emitDeviceEvent(String eventName, @Nullable WritableMap eventData) {

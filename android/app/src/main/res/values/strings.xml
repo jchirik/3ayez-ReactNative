@@ -6,4 +6,7 @@
   <string name="chat_menu_end_button">End chat</string>
   <string name="chat_loading_message">Customer support...</string>
   <string name="chat_activity_title">Customer support</string>
+  <string name="chat_customer_support_3ayez">3ayez Customer Support</string>
+  <string name="chat_customer_support_3ayez_desc">3ayez Customer Support Channel that list support messages</string>
+  <string name="chat_customer_support_3ayez_new_message">New Message from 3ayez Customer Support</string>
 </resources>
