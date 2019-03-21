@@ -200,7 +200,7 @@
   "AddressSelection": {
     "header": "اختار مكان التوصيل",
     "anotherLocation": "شوف اماكن تانيه",
-    "welcomeBack": "اهلا بيك مصطفي {{name}}",
+    "welcomeBack": "مرحباً {{name}}",
     "addNewAddress": "إضافة عنوان جديد"
   },
   "OrderStatus": {

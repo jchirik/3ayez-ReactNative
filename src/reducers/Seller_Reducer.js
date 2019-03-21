@@ -3,8 +3,7 @@ import {
   SELLER_SELECT,
 
   SELLER_FEATURED_FETCH_END,
-  SELLER_CATEGORIES_FETCH_END,
-  SELLER_RECENT_FETCH_END
+  SELLER_CATEGORIES_FETCH_END
 } from '../actions/types';
 
 
@@ -24,8 +23,6 @@ const INITIAL_STATE = {
   featured_loading: true,
   categories: [], // contains an array OF categories (query, name, page, item array)
   categories_loading: true,
-  recent: [],
-  recent_loading: true,
   requestFailed: false
 };
 
@@ -38,8 +35,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, featured: p.featured, featured_loading: false };
     case SELLER_CATEGORIES_FETCH_END:
       return { ...state, categories: p.categories, categories_loading: false, requestFailed: p.requestFailed};
-    case SELLER_RECENT_FETCH_END:
-      return { ...state, recent: p.recent, recent_loading: false };
     default:
       return state;
   }

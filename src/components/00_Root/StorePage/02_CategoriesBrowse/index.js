@@ -118,11 +118,8 @@ class CategoriesBrowse extends Component {
 
   render() {
     const {
-      categories,
-      recent,
-      recent_loading
+      categories
     } = this.props;
-    console.log('RECENT', recent_loading, recent)
     console.log('CATEGORIES', categories);
     return (
       <FlatList
@@ -147,16 +144,12 @@ const mapStateToProps = ({ Seller }) => {
   const {
     id,
     categories,
-    categories_loading,
-    recent,
-    recent_loading
+    categories_loading
   } = Seller;
   return {
     seller_id: id,
     categories,
-    categories_loading,
-    recent,
-    recent_loading
+    categories_loading
   };
 };
 

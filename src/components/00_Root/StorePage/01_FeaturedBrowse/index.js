@@ -131,10 +131,7 @@ class FeaturedBrowse extends Component {
   render() {
     const {
       featured,
-      recent,
-      recent_loading
     } = this.props;
-    console.log('RECENT', recent_loading, recent)
     return (
       <FlatList
         data={featured}
@@ -156,15 +153,11 @@ const mapStateToProps = ({ Seller }) => {
     id,
     featured,
     featured_loading,
-    recent,
-    recent_loading
   } = Seller;
   return {
     id,
     featured,
-    featured_loading,
-    recent,
-    recent_loading
+    featured_loading
   };
 };
 

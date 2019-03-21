@@ -10,31 +10,25 @@ import {
   BASKET_INIT,
 
   SELLER_FEATURED_FETCH_END,
-  SELLER_CATEGORIES_FETCH_END,
-  SELLER_RECENT_FETCH_END
+  SELLER_CATEGORIES_FETCH_END
 } from './types';
 import {sceneKeys, navigateTo, navigateBackTo} from '../router';
-//
-const fetchRecentItems = (seller_id, dispatch) => {
-  const { currentUser } = firebase.auth();
-  if (currentUser) {
-    const customer_id = currentUser.uid;
-    const fetchRecentItemsFx = firebase.functions().httpsCallable('fetchRecentItems');
-    fetchRecentItemsFx({ seller_id, customer_id }).then((result) => {
-      const { results } = result.data;
-      dispatch({ type: SELLER_RECENT_FETCH_END, payload: { recent: results } });
-    });
-  } else {
-    dispatch({ type: SELLER_RECENT_FETCH_END, payload: { recent: [] } });
-  }
-};
 
 const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
 
-    // iterate over subcategories & search all in their facets (ONLY icons? use cloudinary for this?)
+    const promises = [];
+
+    // 1. RECENT ITEMS
+    const { currentUser } = firebase.auth();
+    if (currentUser) {
+      const customer_id = currentUser.uid;
+      const fetchRecentItemsFx = firebase.functions().httpsCallable('fetchRecentItems');
+      promises.push(fetchRecentItemsFx({ seller_id, customer_id }));
+    }
+
+    // 2. CUSTOM FEATURED
     const queries = [];
     featuredT.forEach((row) => {
-
       if (row.type === 'promotions') {
         queries.push({
           indexName: seller_id,
@@ -80,17 +74,26 @@ const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
         });
       }
     });
-
     const searchRequestTime = Date.now();
+    promises.push(new Promise((resolve, reject) => {
+      algoliaClient.search(queries, (err, content) => resolve(content))
+    }));
 
-    algoliaClient.search(queries, (err, content) => {
-      if (err) {
-        // console.log('err');
-        return;
-      }
+    // fetch promise Data
+    Promise.all(promises).then(featuredData => {
+      const recentItemsResults = featuredData[0].data.results;
+      const customFeaturedResults = featuredData[1].results;
+
       const featured = [];
+      if (recentItemsResults && recentItemsResults.length) {
+        featured.push({
+          name: { ar: 'آخر الأصناف', en: 'Recent Items' },
+          items: cleanAlgoliaItems(recentItemsResults)
+        });
+      }
+
       featuredT.forEach((row, index) => {
-        const allItems = content.results[index].hits;
+        const allItems = customFeaturedResults[index].hits;
         featured.push({
           name: row.name,
           items: cleanAlgoliaItems(allItems)
@@ -98,7 +101,7 @@ const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
       });
       console.log('fetchStoreData FEATURED', featured);
       dispatch({ type: SELLER_FEATURED_FETCH_END, payload: { featured } });
-  });
+    });
 }
 
 
@@ -108,8 +111,6 @@ const fetchStoreData = (seller_id, dispatch) => {
     if (!isConnected) {
       dispatch({ type: SELLER_CATEGORIES_FETCH_END, payload: { requestFailed: true } });
     } else {
-      fetchRecentItems(seller_id, dispatch);
-
       const sellerRef = firebase.firestore().collection('sellers').doc(seller_id);
       sellerRef.collection('data').doc('app').get().then((document) => {
         if (document.data()) {
