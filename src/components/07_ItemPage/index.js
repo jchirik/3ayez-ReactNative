@@ -188,8 +188,6 @@ class ItemPage extends Component {
             )}
           </Row>
 
-          <View style={{ height: 10 }} />
-
           <Row
             disabled
             style={{ paddingLeft: 0, paddingRight: 0 }}
