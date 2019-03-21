@@ -163,16 +163,24 @@ class SettingsMenu extends Component {
 
   renderHeader() {
     let topAccountHeader = (
-      <AyezText
-        semibold
-        size={16}
-        color={'#4E4E4E'}
-        style={{
-          alignSelf: 'flex-start'
-        }}
-      >
-        {strings('Settings.welcome', { name: this.props.name })}
-      </AyezText>
+      <View style={{ alignItems: 'flex-start' }}>
+        <AyezText
+          semibold
+          size={16}
+          color={'#4E4E4E'}
+          style={{
+            alignSelf: 'flex-start'
+          }}
+        >
+          {strings('Settings.welcome', { name: this.props.name })}
+        </AyezText>
+        <AyezText
+          regular
+          color={'#4E4E4E'}
+        >
+          Balance: 0.00 EGP
+        </AyezText>
+      </View>
     );
     if (!this.props.phone) {
       topAccountHeader = (
@@ -286,6 +294,7 @@ class SettingsMenu extends Component {
   }
 
   render() {
+
     const chatTab = {
       text: strings('Support.contact3ayez'),
       action: () => {
@@ -297,6 +306,16 @@ class SettingsMenu extends Component {
         });
       },
       icon: images.settingsChat,
+      color: AYEZ_GREEN
+    };
+
+    const referralTab = {
+      text: strings('Settings.freeDiscounts'),
+      action: () => {
+        this.props.onClose();
+        navigateTo(sceneKeys.addressManager);
+      },
+      icon: images.settingsGift,
       color: AYEZ_GREEN
     };
 
@@ -349,6 +368,7 @@ class SettingsMenu extends Component {
     // different sections based on logged in/out
     let settingsTabs = [
       chatTab,
+      referralTab,
       languageTab,
       termsConditionsTab,
       privacyPolicyTab,
@@ -357,6 +377,7 @@ class SettingsMenu extends Component {
     if (this.props.phone) {
       settingsTabs = [
         chatTab,
+        referralTab,
         creditCardTab,
         addressBookTab,
         previousOrdersTab,

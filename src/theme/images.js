@@ -29,6 +29,7 @@ export default {
 
   settingsAddressBook: require(`${IMAGE_PATH}/Settings/addressBook.png`),
   settingsChat: require(`${IMAGE_PATH}/Settings/chat.png`),
+  settingsGift: require(`${IMAGE_PATH}/Settings/gift.png`),
   settingsCreditCard: require(`${IMAGE_PATH}/Settings/creditCard.png`),
   settingsLanguage: require(`${IMAGE_PATH}/Settings/language.png`),
   settingsLoginArrow: require(`${IMAGE_PATH}/Settings/loginArrow.png`),
