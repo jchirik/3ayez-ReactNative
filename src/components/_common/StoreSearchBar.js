@@ -49,7 +49,8 @@ const StoreSearchBar = ({
         {
           color: 'black',
           textAlign: (I18nManager.isRTL ? 'right' : 'left'),
-          fontFamily: FONT_REGULAR()
+          fontFamily: FONT_REGULAR(),
+          fontWeight: "300",
          }]}
       placeholder={placeholder}
       onFocus={onFocus}

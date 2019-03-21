@@ -103,11 +103,13 @@ class Chat extends React.Component {
         textStyle={{
           right: {
             color: 'white',
-            fontFamily: FONT_REGULAR()
+            fontFamily: FONT_REGULAR(),
+            fontWeight: "300",
           },
           left: {
             color: '#464646',
-            fontFamily: FONT_REGULAR()
+            fontFamily: FONT_REGULAR(),
+            fontWeight: "300",
           }
         }}
         wrapperStyle={{
@@ -131,6 +133,7 @@ class Chat extends React.Component {
         textStyle={{
           color: AYEZ_GREEN,
           fontFamily: FONT_MEDIUM(),
+          fontWeight: "500",
           fontSize: 12
         }}
         wrapperStyle={{
@@ -334,6 +337,7 @@ class Chat extends React.Component {
                 lineHeight: 22,
                 fontSize: 14,
                 fontFamily: FONT_MEDIUM(),
+                fontWeight: "500",
                 textAlign: 'center'
               }}
               wrapperStyle={{ width: '90%' }}
@@ -345,6 +349,7 @@ class Chat extends React.Component {
             lineHeight: 22,
             fontSize: 14,
             fontFamily: FONT_MEDIUM(),
+            fontWeight: "500",
             textAlign: I18nManager.isRTL ? 'right' : 'left'
           }}
           renderChatFooter={() => (
