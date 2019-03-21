@@ -75,10 +75,6 @@
 	<string>3ayez would like access to your photo gallery for chat</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Frutiger-Regular.ttf</string>
-		<string>Frutiger-Light.ttf</string>
-		<string>Frutiger-Bold.ttf</string>
-		<string>Frutiger-Black.ttf</string>
 		<string>Cairo-Black.ttf</string>
 		<string>Cairo-Bold.ttf</string>
 		<string>Cairo-ExtraLight.ttf</string>
