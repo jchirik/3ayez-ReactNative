@@ -106,13 +106,11 @@ class OrderTracker extends Component {
 
     this.props.endListeningToOrder();
     timer.clearTimeout(this);
-    BackHandler.removeEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
 
-
-
-
-
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onAndroidBackPress);
+  }
 
   onAndroidBackPress = () => {
     this.onBackPress();
