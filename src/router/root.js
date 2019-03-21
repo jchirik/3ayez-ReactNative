@@ -127,7 +127,10 @@ class RouterComponent extends Component {
               component={components.LocationSelect}
             />
 
-
+            <Scene
+              key = {sceneKeys.privacyPolicy}
+              component = {components.PrivacyPolicy}
+            />
 
             <Scene
               key={sceneKeys.additionalNotes}

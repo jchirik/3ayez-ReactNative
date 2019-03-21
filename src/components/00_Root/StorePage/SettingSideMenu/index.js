@@ -337,7 +337,10 @@ class SettingsMenu extends Component {
     };
     const privacyPolicyTab = {
       text: strings('Settings.privacyPolicy'),
-      action: null,
+      action: () => {
+        this.props.onClose();
+        navigateTo(sceneKeys.privacyPolicy);
+      },
       icon: ''
     };
     const logoutTab = {

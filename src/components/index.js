@@ -33,6 +33,7 @@ import CreditCardCreate from './21_CreditCardCreate';
 import AddressManager from './22_AddressManager';
 import CustomerFeedback from './23_CustomerFeedback';
 import AdditionalNotes from './24_AdditionalNotes';
+import PrivacyPolicy from './25_PrivacyPolicy';
 
 export {
     Root,
@@ -69,7 +70,8 @@ export {
     CreditCardCreate,
     AddressManager,
     CustomerFeedback,
-    AdditionalNotes
+    AdditionalNotes,
+    PrivacyPolicy
 }
 
 export const sceneKeys = {
@@ -113,5 +115,6 @@ export const sceneKeys = {
     orderReview : "orderReview",
     supportChat : "supportChat",
     customerFeedback : "customerFeedback",
-    couponModal : "couponModal"
+    couponModal : "couponModal",
+    privacyPolicy : "privacyPolicy" 
   }
