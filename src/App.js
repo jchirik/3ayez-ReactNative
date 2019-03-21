@@ -61,10 +61,10 @@ class App extends Component {
     } catch (e) { console.log(e) }
   }
 
-  componentDidMount() {
-    let that = this;
-    setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
-  }
+  // componentDidMount() {
+  //   let that = this;
+  //   setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
+  // }
 
   async componentWillUnmount() {
     AppState.removeEventListener(APP_STATE_CHANGE, this.onAppState);
@@ -85,11 +85,6 @@ class App extends Component {
   codePushStatusDidChange(status) {
     switch (status) {
       case codePush.SyncStatus.CHECKING_FOR_UPDATE:
-        this.setState({
-          is_updating: true,
-          update_text_ar: 'جاري تجهيز البرنامج',
-          update_text_en: 'Getting Ready ..'
-        });
         console.log('Checking for updates.');
         break;
       case codePush.SyncStatus.DOWNLOADING_PACKAGE:
@@ -98,6 +93,7 @@ class App extends Component {
       case codePush.SyncStatus.INSTALLING_UPDATE:
         console.log('Installing update.');
         this.setState({
+          isSplashShown: false,
           update_text_ar: 'تثبيت تحديث البرنامج',
           update_text_en: 'Installing update'
         });
@@ -106,17 +102,28 @@ class App extends Component {
         console.log('Up to Date.');
         this.setState({
           is_updating: false,
+          isSplashShown: false,
           progress_percent: 0.0,
           update_text_ar: '',
           update_text_en: ''
         });
         break;
-    }
+      default:
+        this.setState({
+          is_updating: false,
+          isSplashShown: false,
+          progress_percent: 0.0,
+          update_text_ar: '',
+          update_text_en: ''
+        });
+        break;    
+      }
   }
 
   codePushDownloadDidProgress(progress) {
     const progress_percent = progress.receivedBytes / progress.totalBytes;
     this.setState({
+      isSplashShown: false,
       progress_percent,
       update_text_ar: 'تحميل تحديث البرنامج',
       update_text_en: 'Preparing update'
@@ -129,6 +136,7 @@ class App extends Component {
   }
 
   render() {
+    console.disableYellowBox = true;
     if (!this.state.isSplashShown) {
       SplashScreen.hide();
     }
