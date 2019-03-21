@@ -331,9 +331,12 @@ class SettingsMenu extends Component {
       icon: images.settingsLanguage
     };
     const termsConditionsTab = {
-      text: strings('Settings.termsConditions'),
-      action: null,
-      icon: ''
+      text: strings("Settings.termsConditions"),
+      action: () => {
+        this.props.onClose();
+        navigateTo(sceneKeys.termsConditions);
+      },
+      icon: ""
     };
     const privacyPolicyTab = {
       text: strings('Settings.privacyPolicy'),
