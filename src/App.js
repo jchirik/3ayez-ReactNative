@@ -133,15 +133,15 @@ class App extends Component {
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center'
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
           <Text
             style={{
-              fontFamily: 'Cairo-Regular',
+              fontFamily: "Frutiger-Regular",
               fontSize: 16,
-              color: 'black',
+              color: "black",
               marginBottom: 4
             }}
           >
@@ -149,9 +149,9 @@ class App extends Component {
           </Text>
           <Text
             style={{
-              fontFamily: 'Poppins-Regular',
+              fontFamily: "Poppins-Regular",
               fontSize: 16,
-              color: 'black',
+              color: "black",
               marginBottom: 6
             }}
           >
@@ -160,9 +160,9 @@ class App extends Component {
           {this.state.progress_percent ? (
             <Text
               style={{
-                fontFamily: 'Cairo-Regular',
+                fontFamily: "Frutiger-Regular",
                 fontSize: 16,
-                color: 'black',
+                color: "black",
                 marginBottom: 12
               }}
             >

@@ -44,17 +44,17 @@ class AyezText extends Component {
       }
     } else if ((locale === 'ar') || forceCairoFont) {
       if (regular) {
-        fontFamily = 'Cairo-Regular';
+        fontFamily = "Frutiger-Regular";
       } else if (medium) {
-        fontFamily = 'Cairo-SemiBold';
+        fontFamily = "Frutiger-Black";
       } else if (semibold) {
-        fontFamily = 'Cairo-Bold';
+        fontFamily = "Frutiger-Black";
       } else if (bold) {
-        fontFamily = 'Cairo-Black';
+        fontFamily = "Frutiger-Bold";
       } else if (light) {
-        fontFamily = 'Cairo-Light';
+        fontFamily = "Frutiger-Light";
       } else if (extralight) {
-        fontFamily = 'Cairo-ExtraLight';
+        fontFamily = "Frutiger-Light";
       }
     }
 
