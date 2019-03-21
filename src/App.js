@@ -14,6 +14,8 @@ import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS } from './Helpers';
 import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
+import firebase from 'react-native-firebase';
+import ZendeskChatNativeModule from './ZendeskChat/ZendeskChatNativeModule';
 
 class App extends Component {
   constructor() {
@@ -27,6 +29,8 @@ class App extends Component {
       greetingMessage: undefined,
       isSplashShown: true
     };
+
+
   }
 
   setupLiveChat = async () => {
@@ -61,9 +65,18 @@ class App extends Component {
     } catch (e) { console.log(e) }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let that = this;
     setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
+    const enabled = await firebase.messaging().hasPermission();
+    console.log('enabled')
+    console.log(enabled)
+    if(enabled) {
+      const token = await firebase.messaging().getToken();
+      console.log('token');
+      console.log(token);
+      ZendeskChatNativeModule.setPushToken(token);
+    }
   }
 
   async componentWillUnmount() {

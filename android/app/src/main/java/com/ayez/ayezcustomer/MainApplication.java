@@ -46,8 +46,20 @@ import java.util.List;
 import com.facebook.FacebookSdk;
 import com.facebook.CallbackManager;
 import com.facebook.appevents.AppEventsLogger;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
+import android.support.v7.app.AppCompatDelegate;
 
-public class MainApplication extends Application implements ReactApplication {
+public class MainApplication extends MultiDexApplication implements ReactApplication {
+
+  @Override
+  protected void attachBaseContext(Context context) {
+    super.attachBaseContext(context);
+    MultiDex.install(this);
+  }
+
+
 
   // facebook SDK
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
