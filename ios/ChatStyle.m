@@ -19,10 +19,13 @@
 
 
   UIFont *ayezFont = [UIFont fontWithName:@"Helvetica-Bold" size: 15];
+  UIFont *buttonFont = [UIFont fontWithName:@"Helvetica" size: 18];
   UIFont *titleFont = [UIFont fontWithName:@"Helvetica-Bold" size: 18];
-  NSDictionary *navbarAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+  
+  NSDictionary *navbarTitleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                     WhiteColor ,NSForegroundColorAttributeName, titleFont, NSFontAttributeName,nil];
-
+  NSDictionary *navbarButtonAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         WhiteColor ,NSForegroundColorAttributeName, buttonFont, NSFontAttributeName,nil];
   [[ZDCChat instance].overlay setEnabled:NO];
 
   [[ZDCLoadingView appearance] setLoadingLabelTextColor:BlueGreenColor ];
@@ -43,12 +46,11 @@
 
   [[ZDCAgentAttachmentCell appearance] setBubbleCornerRadius:BubbleCornerRadius];
 
-  [[UINavigationBar appearance] setTitleTextAttributes:navbarAttributes];
+  [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleAttributes];
   [[UINavigationBar appearance] setBarTintColor:BlueGreenColor];
   [[UINavigationBar appearance] setTintColor: WhiteColor];
-
-  [[ZDCChatUI appearance] setEndChatButtonImage: ExitIcon];
-
+  [[UIBarButtonItem appearance] setTitleTextAttributes: navbarButtonAttributes forState:0];
+  
   UIUserInterfaceLayoutDirection direction = [UIApplication sharedApplication].userInterfaceLayoutDirection;
 
   if (direction == UIUserInterfaceLayoutDirectionRightToLeft) {
