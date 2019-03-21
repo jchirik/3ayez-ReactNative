@@ -41,4 +41,11 @@
 
   <!--Customize chat colors-->
   <color name="chat_bubble_visitor">@color/greenBlue</color>
+
+  <style name="chat_reply_icon">
+    <item name="android:adjustViewBounds">true</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:layout_marginRight">0dp</item>
+  </style>
 </resources>
