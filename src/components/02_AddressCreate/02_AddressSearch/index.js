@@ -54,7 +54,8 @@ class AddressSearch extends Component {
             flexDirection: 'row',
             borderColor: '#EAEAEA',
             borderBottomWidth: 1,
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingVertical: 2
           }}
           onPress={this.setAddressLocation.bind(this, item)}
         >
@@ -79,6 +80,8 @@ class AddressSearch extends Component {
             }}>{item.structured_formatting.main_text}</AyezText>
             <AyezText regular style={{
               fontSize: 14,
+              lineHeight: 20,
+              marginBottom: 3,
               color: '#8E8E93',
             }}>{item.structured_formatting.secondary_text}</AyezText>
           </View>

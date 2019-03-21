@@ -84,7 +84,7 @@ export default class StoreHeader extends Component {
             height: 35,
             flexDirection: 'row',
           }}>
-            <AyezText normal color={'white'} size={13}>{translate(location_text) || '-'}</AyezText>
+            <AyezText regular color={'white'} size={13}>{translate(location_text) || '-'}</AyezText>
             <Image
               source={images.storeLocationPin}
               style={{

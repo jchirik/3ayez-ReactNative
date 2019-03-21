@@ -238,6 +238,7 @@ class ItemRow extends Component {
             size={12}
             color={'black'}
             style={{
+                textAlign: 'left',
                 marginBottom: 6,
                 backgroundColor: 'transparent'
             }}

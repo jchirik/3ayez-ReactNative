@@ -285,7 +285,8 @@ class Checkout extends Component {
 
           <AyezText regular style={{
             fontSize: 12,
-            color: '#ffa30f'
+            color: '#ffa30f',
+            textAlign: 'left'
           }}>{strings('Checkout.smartTipSuggestions')}</AyezText>
           <FlatList
             data={tipData}

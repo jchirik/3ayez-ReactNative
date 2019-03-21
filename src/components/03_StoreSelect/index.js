@@ -338,7 +338,7 @@ renderItem({ item, index }) {
           }}>
             { this.renderSellerTypeBadge(item.type) }
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 2 }}>
-              <AyezText normal size={13}>{translate(item.location_text) || '-'}</AyezText>
+              <AyezText regular size={13}>{translate(item.location_text) || '-'}</AyezText>
               <Image
                 source={images.storeLocationPin}
                 style={{
@@ -519,6 +519,7 @@ renderSellerList() {
     return (
       <View style={{ flex: 1 }}>
         {this.renderSellerList()}
+        {this.props.seller_id ? (<BackButton fixed />) : null}
       </View>
     );
   }
@@ -539,10 +540,12 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ Addresses, SellerSearch }) => {
+const mapStateToProps = ({ Addresses, Seller, SellerSearch }) => {
   const { addresses, address } = Addresses;
 
   const street = address ? address.street : null;
+
+  const { id } = Seller;
 
   const {
     sellers,
@@ -551,6 +554,7 @@ const mapStateToProps = ({ Addresses, SellerSearch }) => {
   } = SellerSearch;
 
   return {
+    seller_id: id,
     address,
     street,
 

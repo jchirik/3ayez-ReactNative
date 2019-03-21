@@ -87,11 +87,7 @@ export default StyleSheet.create({
   },
   tinyPhoto: {
     height: 70,
-    width: 70,
-    shadowColor: colors.warmGrey,
-    shadowOpacity: 0.3,
-    shadowRadius: 1,
-    elevation: 2
+    width: 70
   },
   subcategoryContainer: {
     height: 200,

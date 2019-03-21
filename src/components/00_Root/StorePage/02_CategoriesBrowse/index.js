@@ -79,7 +79,7 @@ class CategoriesBrowse extends Component {
           onPress={this.onSelectCategory.bind(this, item)}
         >
           <View style={styles.categoryCard}>
-            <RTLImage
+            <Image
               source={{ uri: item.image_url || '' }}
               style={styles.categoryImage}
               resizeMode={'cover'}

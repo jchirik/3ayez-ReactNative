@@ -174,12 +174,12 @@ class SettingsMenu extends Component {
         >
           {strings('Settings.welcome', { name: this.props.name })}
         </AyezText>
-        <AyezText
+        { /*<AyezText
           regular
           color={'#4E4E4E'}
         >
           Balance: 0.00 EGP
-        </AyezText>
+        </AyezText> */ }
       </View>
     );
     if (!this.props.phone) {
@@ -313,7 +313,7 @@ class SettingsMenu extends Component {
       text: strings('Settings.freeDiscounts'),
       action: () => {
         this.props.onClose();
-        navigateTo(sceneKeys.addressManager);
+        navigateTo(sceneKeys.referralPage);
       },
       icon: images.settingsGift,
       color: AYEZ_GREEN
@@ -374,7 +374,6 @@ class SettingsMenu extends Component {
     // different sections based on logged in/out
     let settingsTabs = [
       chatTab,
-      referralTab,
       languageTab,
       termsConditionsTab,
       privacyPolicyTab,
@@ -383,7 +382,6 @@ class SettingsMenu extends Component {
     if (this.props.phone) {
       settingsTabs = [
         chatTab,
-        referralTab,
         creditCardTab,
         addressBookTab,
         previousOrdersTab,

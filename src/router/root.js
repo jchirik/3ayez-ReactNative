@@ -113,6 +113,20 @@ class RouterComponent extends Component {
                 key={sceneKeys.addressManager}
                 component={components.AddressManager}
               />
+              <Scene
+                key={sceneKeys.privacyPolicy}
+                component={components.PrivacyPolicy}
+              />
+
+              <Scene
+                key={sceneKeys.termsConditions}
+                component={components.TermsAndConditions}
+              />
+              <Scene
+                key={sceneKeys.referralPage}
+                component={components.ReferralPage}
+                panHandlers={null}
+              />
             </Stack>
 
             {/* any modals */}
@@ -169,15 +183,6 @@ class RouterComponent extends Component {
               component={components.LocationSelect}
             />
 
-            <Scene
-              key={sceneKeys.privacyPolicy}
-              component={components.PrivacyPolicy}
-            />
-
-            <Scene
-              key={sceneKeys.termsConditions}
-              component={components.TermsAndConditions}
-            />
 
             <Scene
               key={sceneKeys.additionalNotes}

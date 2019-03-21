@@ -35,6 +35,8 @@ import CustomerFeedback from './23_CustomerFeedback';
 import AdditionalNotes from './24_AdditionalNotes';
 import PrivacyPolicy from './25_PrivacyPolicy';
 import TermsAndConditions from "./26_TermsAndConditions";
+import ReferralPage from "./27_ReferralPage";
+
 
 export {
   Root,
@@ -73,7 +75,8 @@ export {
   CustomerFeedback,
   AdditionalNotes,
   PrivacyPolicy,
-  TermsAndConditions
+  TermsAndConditions,
+  ReferralPage
 };
 
 export const sceneKeys = {
@@ -119,5 +122,6 @@ export const sceneKeys = {
     customerFeedback : "customerFeedback",
     couponModal : "couponModal",
     privacyPolicy : "privacyPolicy" ,
-    termsConditions: "termsConditions"
+    termsConditions: "termsConditions",
+    referralPage: "referralPage",
   }

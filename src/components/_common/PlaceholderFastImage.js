@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, View, StyleSheet, Dimensions } from 'react-native'
 import FastImage from 'react-native-fast-image'
+import colors from '../../theme/colors';
 
 const window = Dimensions.get('window');
 
@@ -34,7 +35,16 @@ class PlaceholderFastImage extends Component {
         {...this.props}
         resizeMode={this.props.resizeMode || 'contain'}
         source={this.props.source}
-        style={[this.props.style, this.state.loaded ? { opacity: 1 } : { opacity: 0}]}
+        style={[
+          {
+            shadowColor: colors.warmGrey,
+            shadowOpacity: 0.3,
+            shadowRadius: 1,
+            elevation: 2
+          },
+          this.props.style,
+          this.state.loaded ? { opacity: 1 } : { opacity: 0}
+        ]}
         onLoadEnd={this.onLoadEnd.bind(this)}
       />
     </View>

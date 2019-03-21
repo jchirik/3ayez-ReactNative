@@ -175,6 +175,7 @@ class AddressDetails extends Component {
 
             <AyezText semibold size={16} style={{
               alignSelf: 'flex-start',
+              textAlign: 'left',
               paddingLeft: 16,
               paddingRight: 16,
               paddingTop: 20,

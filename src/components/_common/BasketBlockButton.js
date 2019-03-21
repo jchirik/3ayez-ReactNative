@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, View, Image, Dimensions } from 'react-native';
+import { TouchableOpacity, View, Image, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { isIPhoneX, AYEZ_GREEN } from '../../Helpers.js';
@@ -106,17 +106,27 @@ class BasketBlockButton extends PureComponent {
               justifyContent: 'center'
             }}
           >
-            <AyezText medium color={'white'}>{this.props.basket_quantity}</AyezText>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                fontSize: 14,
+                color: 'white'
+              }}
+            >{this.props.basket_quantity}</Text>
           </View>
 
           <View
             style={{
               position: 'absolute',
               top: 8,
-              right: 12
+              right: 13,
             }}
           >
-            <AyezText medium color={'white'}>{formatCurrency(subtotal)}</AyezText>
+            <Text style={{
+              fontFamily: 'Poppins-Medium',
+              fontSize: 14,
+              color: 'white'
+            }}>{formatCurrency(subtotal)}</Text>
 
           </View>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { translate, strings, formatCurrency } from '../../i18n.js';
@@ -88,8 +88,7 @@ class ItemTile extends PureComponent {
     return (
       <View style={styles.textContainer}>
         <View style={styles.priceContainer}>
-          <AyezText
-            medium
+          <Text
             adjustsFontSizeToFit
             minimumFontScale={0.5}
             numberOfLines={1}
@@ -97,10 +96,9 @@ class ItemTile extends PureComponent {
             allowFontScaling={false}
           >
             {mainPriceText + ' '}
-          </AyezText>
+          </Text>
           {previousPriceText !== '' && (
-            <AyezText
-              medium
+            <Text
               adjustsFontSizeToFit
               minimumFontScale={0.5}
               numberOfLines={1}
@@ -108,7 +106,7 @@ class ItemTile extends PureComponent {
               allowFontScaling={false}
             >
               {previousPriceText}
-            </AyezText>
+            </Text>
           )}
         </View>
         <View style={styles.titleTextContianer}>
@@ -159,11 +157,7 @@ class ItemTile extends PureComponent {
         <PlaceholderFastImage
           style={{
             width: '100%',
-            height: '98%',
-            shadowColor: colors.warmGrey,
-            shadowOpacity: 0.3,
-            shadowRadius: 2,
-            elevation: 2
+            height: '98%'
           }}
           source={{ uri: url }}
         />
@@ -255,6 +249,7 @@ const styles = {
     alignSelf: 'stretch',
     opacity: 1,
     textAlign: 'left',
+    lineHeight: 18,
     fontSize: 12,
     color: 'black'
   },
@@ -264,6 +259,7 @@ const styles = {
     letterSpacing: 0,
     textAlign: 'left',
     fontSize: 14,
+    fontFamily: 'Poppins-Medium',
     color: 'black'
   },
   previousPrice: {
@@ -273,6 +269,8 @@ const styles = {
     color: 'red',
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
+    fontFamily: 'Poppins-Medium',
+    lineHeight: 16,
     textAlign: 'left'
   },
   savings: {

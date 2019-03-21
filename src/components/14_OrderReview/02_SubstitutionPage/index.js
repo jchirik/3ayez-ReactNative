@@ -165,7 +165,8 @@ class SubstitutionPage extends Component {
       <View style={{ flex: 1 }}>
         <AyezText regular style={{
           marginVertical: 12,
-          marginLeft: 22
+          marginLeft: 22,
+          alignSelf: 'flex-start'
         }}>{strings('OrderReview.replaceInstruction')}</AyezText>
         <FlatList
           ref={ref => (this.tableRef = ref)}

@@ -59,7 +59,8 @@ class ReviewSummary extends Component {
         paddingBottom: 4,
         borderBottomWidth: 1,
         borderColor: '#F2F2F2',
-        backgroundColor: AYEZ_BACKGROUND_COLOR
+        backgroundColor: AYEZ_BACKGROUND_COLOR,
+        alignItems: 'flex-start'
       }}>
         <AyezText semibold size={16}>{section.title}</AyezText>
       </View>
