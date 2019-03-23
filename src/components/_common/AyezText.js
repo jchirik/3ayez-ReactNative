@@ -29,47 +29,34 @@ class AyezText extends Component {
     } = this.props;
 
     let fontFamily = null;
-    let fontWeight = "normal";
 
     if ((locale === 'en') || forcePoppinsFont) {
       if (regular) {
         fontFamily = 'Poppins-Regular';
-        fontWeight = "300"
       } else if (medium) {
         fontFamily = 'Poppins-Medium';
-        fontWeight = "500"
       } else if (semibold) {
         fontFamily = 'Poppins-SemiBold';
-        fontWeight = "700"
       } else if (bold) {
         fontFamily = 'Poppins-Bold';
-        fontWeight = "bold"
       } else if (light) {
         fontFamily = 'Poppins-Light';
-        fontWeight = "200"
       } else if (extralight) {
         fontFamily = 'Poppins-ExtraLight';
-        fontWeight = "100"
       }
     } else if ((locale === 'ar') || forceCairoFont) {
       if (regular) {
-        fontFamily = fonts.Frutiger
-        fontWeight = "300"
+        fontFamily = 'FrutigerLTArabic-55Roman';
       } else if (medium) {
-        fontFamily = fonts.Frutiger;
-        fontWeight = "500"
+        fontFamily = 'FrutigerLTArabic-55Roman';
       } else if (semibold) {
-        fontFamily = fonts.Frutiger;
-        fontWeight = "700"
+        fontFamily = 'FrutigerLTArabic-65Bold';
       } else if (bold) {
-        fontFamily = fonts.Frutiger;
-        fontWeight = "bold"
+        fontFamily = 'FrutigerLTArabic-75Black';
       } else if (light) {
-        fontFamily = fonts.Frutiger;
-        fontWeight = "200"
+        fontFamily = 'FrutigerLTArabic-45Light';
       } else if (extralight) {
-        fontFamily = fonts.Frutiger;
-        fontWeight = "100"
+        fontFamily = 'FrutigerLTArabic-45Light';
       }
     }
 
@@ -81,8 +68,7 @@ class AyezText extends Component {
           color,
           fontSize: size,
           ...style,
-          fontFamily,
-          fontWeight
+          fontFamily
         }}>{children}</Text>
     )
   }

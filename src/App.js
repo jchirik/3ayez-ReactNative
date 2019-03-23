@@ -140,8 +140,7 @@ class App extends Component {
         >
           <Text
             style={{
-              fontFamily: fonts.Frutiger,
-              fontWeight: "300",
+              fontFamily: 'FrutigerLTArabic-55Roman',
               fontSize: 16,
               color: 'black',
               marginBottom: 4
@@ -162,8 +161,7 @@ class App extends Component {
           {this.state.progress_percent ? (
             <Text
               style={{
-                fontFamily: fonts.Frutiger,
-                fontWeight: "300",
+                fontFamily: 'FrutigerLTArabic-55Roman',
                 fontSize: 16,
                 color: 'black',
                 marginBottom: 12

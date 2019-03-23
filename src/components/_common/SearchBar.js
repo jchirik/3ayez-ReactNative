@@ -66,8 +66,7 @@ const SearchBar = ({
           padding: 0,
           paddingLeft: 12,
           fontSize: 14,
-          fontFamily: FONT_REGULAR(),
-          fontWeight: "300",
+          fontFamily: FONT_REGULAR()
         }}
         placeholder={placeholder}
         placeholderTextColor={'#8E8E93'}

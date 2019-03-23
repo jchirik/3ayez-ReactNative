@@ -26,7 +26,6 @@ const styles = {
     height: 40,
     fontSize: 13,
     fontFamily: FONT_REGULAR(),
-    fontWeight: "300",
     textAlign: (I18nManager.isRTL ? 'right' : 'left'),
     backgroundColor: 'white',
     borderRadius: 8,

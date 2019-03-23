@@ -42,13 +42,13 @@ export const translate = (data) => {
 
 export const FONT_REGULAR = () => {
   // this HAS to be a function so it executes while rendering
-  return (store.getState().Settings.locale === 'ar') ? fonts.Frutiger : 'Poppins-Regular';
+  return (store.getState().Settings.locale === 'ar') ? 'FrutigerLTArabic-55Roman' : 'Poppins-Regular';
 }
 export const FONT_MEDIUM  = () => {
-  return (store.getState().Settings.locale === 'ar') ? fonts.Frutiger : 'Poppins-Medium';
+  return (store.getState().Settings.locale === 'ar') ? 'FrutigerLTArabic-55Roman' : 'Poppins-Medium';
 }
 export const FONT_LIGHT = () => {
-  return (store.getState().Settings.locale === 'ar') ? fonts.Frutiger : 'Poppins-Light';
+  return (store.getState().Settings.locale === 'ar') ? 'FrutigerLTArabic-45Light' : 'Poppins-Light';
 }
 
 
