@@ -19,9 +19,9 @@ export const toast = str => {
   Toast.show(str, {
     shadow: true,
     animation: true,
-    hideOnPress: true,
-    backgroundColor: colors.white,
-    textColor: colors.black
+    hideOnPress: true
+    // backgroundColor: colors.white,
+    // textColor: colors.black
   });
 };
 

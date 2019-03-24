@@ -50,13 +50,13 @@
     "street": "الشارع / الحي:",
     "building": "رقم المبني:",
     "apt": "الشقة رقم:",
-    "instructions": "علامة مميزة:",
+    "instructions": "علامة مميزة:"
   },
   "Items": {
     "savingsText": "وفر {{savings}} جنيه",
     "weightsVary": "قد يختلف الوزن قليلاً",
     "limit": "الحد {{max_limit}} للطلب الواحد ",
-    "outOfStock": "لا توجد اصناف متاحه",
+    "outOfStock": "لا توجد اصناف متاحه"
   },
   "Receipt": {
     "summary": "ملخص",
@@ -322,7 +322,8 @@
     "closeChat": "انهاء",
     "agentIsTyping": "الدعم الفنى يكتب الآن",
     "defaultGreetingMessage": "مرحبا بك فى الدعم الفنى",
-    "pleaseWaitForAgent": "برجاء الانتظار بضع ثوانى ريثما يقوم احد ممثلينا بالرد عليك"
+    "pleaseWaitForAgent": "برجاء الانتظار بضع ثوانى ريثما يقوم احد ممثلينا بالرد عليك",
+    "receivedCustomerSupportMessage": "رسالة من خدمة العملاء"
   },
   "CustomerFeedback": {
     "orderArrived": "طلبك قد وصل !",

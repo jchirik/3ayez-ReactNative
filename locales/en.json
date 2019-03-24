@@ -56,7 +56,7 @@
     "savingsText": "Save {{savings}}",
     "weightsVary": "Exact weight may vary",
     "limit": "limit {{max_limit}} per order",
-    "outOfStock": "Out of Stock",
+    "outOfStock": "Out of Stock"
   },
   "Receipt": {
     "summary": "Summary",
@@ -322,7 +322,8 @@
     "closeChat": "End",
     "agentIsTyping": "Customer support is typing...",
     "defaultGreetingMessage": "Welcome to customer support",
-    "pleaseWaitForAgent": "Please wait few seconds until one of our agents reach you"
+    "pleaseWaitForAgent": "Please wait few seconds until one of our agents reach you",
+    "receivedCustomerSupportMessage": "Message from customer support"
   },
   "CustomerFeedback": {
     "orderArrived": "Your order has arrived!",

@@ -12,10 +12,11 @@
 #import <React/RCTRootView.h>
 #import <Firebase.h>
 #import <GoogleMaps/GoogleMaps.h>
-#import "ChatStyle.h"
-
+#import "ChatManger.h"
+#import "ZendeskChat.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "RNSplashScreen.h"
+#import <ZDCChat/ZDCChat.h>
 
 @implementation AppDelegate
 
@@ -23,6 +24,7 @@
 {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+  [ChatManger initZendeskChat: @"6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q"];
   [GMSServices provideAPIKey:@"AIzaSyAGioxDWpQAHxVUvDkPiSltb6iGbTaEr-g"];
   [FIRApp configure];
   NSURL *jsCodeLocation;
@@ -42,16 +44,17 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
 
-  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-  self.rootViewController  = navController;
-  self.rootViewController.view = rootView;
-  self.window.rootViewController =  self.rootViewController;
+  UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController: rootViewController];
+  [navController setNavigationBarHidden:YES animated:YES];
+  self.rootViewController = navController;
+  rootViewController.view = rootView;
+  self.window.rootViewController = self.rootViewController;
   [self.window makeKeyAndVisible];
-//  [RNSplashScreen show];
-  [ChatStyle applyStyle];
-
+  [ChatManger applyStyle];
   return YES;
 }
+
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];

@@ -9,24 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <ZDCChat/ZDCChat.h>
 #import "ChatManger.h"
-
+#import "AppDelegate.h"
 
 
 @implementation ChatManger : NSObject
 
++(void) initZendeskChat: (NSString *) accountKey {
+  [ZDCChat initializeWithAccountKey: accountKey];
+}
 
 + (void) applyStyle {
 
 
   UIFont *ayezFont = [UIFont fontWithName:@"Helvetica-Bold" size: 15];
-  UIFont *buttonFont = [UIFont fontWithName:@"Helvetica" size: 18];
   UIFont *titleFont = [UIFont fontWithName:@"Helvetica-Bold" size: 18];
-  
-  NSDictionary *navbarTitleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+  NSDictionary *navbarAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                     WhiteColor ,NSForegroundColorAttributeName, titleFont, NSFontAttributeName,nil];
-  NSDictionary *navbarButtonAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         WhiteColor ,NSForegroundColorAttributeName, buttonFont, NSFontAttributeName,nil];
-  [[ZDCChat instance].overlay setEnabled:NO];
 
   [[ZDCChat instance].overlay setEnabled:YES];
 
@@ -48,11 +46,12 @@
 
   [[ZDCAgentAttachmentCell appearance] setBubbleCornerRadius:BubbleCornerRadius];
 
-  [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleAttributes];
+  [[UINavigationBar appearance] setTitleTextAttributes:navbarAttributes];
   [[UINavigationBar appearance] setBarTintColor:BlueGreenColor];
   [[UINavigationBar appearance] setTintColor: WhiteColor];
-  [[UIBarButtonItem appearance] setTitleTextAttributes: navbarButtonAttributes forState:0];
-  
+
+  [[ZDCChatUI appearance] setEndChatButtonImage: ExitIcon];
+
   UIUserInterfaceLayoutDirection direction = [UIApplication sharedApplication].userInterfaceLayoutDirection;
 
   if (direction == UIUserInterfaceLayoutDirectionRightToLeft) {
@@ -73,17 +72,56 @@
     UIViewController *controller  = [ChatManger topViewController];
     if (![controller isKindOfClass:[ZDUViewController class]]) {
       [[NSNotificationCenter defaultCenter]
-       postNotificationName:@"TestNotification"
+       postNotificationName:ReceiveMessageNotification
        object:self];
     }
   }
+}
+
++(void) start: (NSDictionary*) params {
+
+  [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
+    user.phone = [params objectForKey:(VisitorPhoneNumber)];
+    user.name = [params objectForKey:(VisitorName)];
+    user.email = [params objectForKey:(VisitorEmail)];
+    [user addNote:[params objectForKey:(VisitorNote)]];
+  }];
+
+  AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+  [ZDCChat startChatIn:appDelegate.rootViewController.navigationController withConfig:^(ZDCConfig *config) {
+    config.preChatDataRequirements.name = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.email = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.phone = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.department = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.message = ZDCPreChatDataNotRequired;
+    config.emailTranscriptAction = ZDCEmailTranscriptActionNeverSend;
+  }];
+}
+
++ (NSDictionary *)constants {
+  static NSDictionary *constatnsDict = nil;
+  if (constatnsDict == nil) {
+    constatnsDict = @{
+                       ZendeskUrl : ZendeskUrl,
+                       ApplicationId  : ApplicationId,
+                       OauthClientId : OauthClientId,
+                       ZopimAccountKey : ZopimAccountKey,
+                       VisitorName  : VisitorName,
+                       VisitorPhoneNumber: VisitorPhoneNumber,
+                       VisitorEmail : VisitorEmail,
+                       VisitorNote : VisitorNote,
+                       ReceiveMessageEvent: ReceiveMessageEvent
+                       };
+  }
+  return constatnsDict;
 }
 
 + (UIViewController *)topViewController{
   return [self topViewController: [UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
-+ (UIViewController *)topViewController:(UIViewController *)rootViewController
+
++(UIViewController *)topViewController:(UIViewController *)rootViewController
 {
   if ([rootViewController isKindOfClass:[UINavigationController class]]) {
     UINavigationController *navigationController = (UINavigationController *)rootViewController;

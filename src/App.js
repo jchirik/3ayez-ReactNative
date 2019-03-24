@@ -4,15 +4,20 @@ import codePush from 'react-native-code-push';
 import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
+<<<<<<< master
 
+=======
+import LiveChat from '../src/utils/livechat';
+>>>>>>> Add toast to chat ios.
 import { View, Text, Modal, ActivityIndicator, AppState } from 'react-native';
 import { APP_STATE_CHANGE, BACKGROUND_APP_STATE } from './utils/appstate';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
-import { SPLASH_SCREEN_TIME_OUT, isIOS } from './Helpers';
+import { SPLASH_SCREEN_TIME_OUT, isIOS, toast } from './Helpers';
 import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
+import zendesk from './ZendeskChat/ZendeskChatNativeModule';
 
 class App extends Component {
   constructor() {
@@ -30,8 +35,28 @@ class App extends Component {
 
   componentDidMount() {
     let that = this;
-    setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
+
+    setTimeout(function() {
+      that.setState({ isSplashShown: false });
+    }, SPLASH_SCREEN_TIME_OUT);
   }
+
+   componentWillUnmount() {
+    zendesk.zendeskEmitter.removeAllListeners();
+  }
+
+   componentWillMount() {
+    if (isIOS()) {
+      const chatSubscription = zendesk.zendeskEmitter.addListener(
+        zendesk.RECEIVE_MESSAGE,
+        this.onReceiveMsg
+      );
+    }
+  }
+
+  onReceiveMsg = () => {
+    toast(strings('SupportChat.receivedCustomerSupportMessage'));
+  };
 
   codePushStatusDidChange(status) {
     switch (status) {
@@ -70,7 +95,7 @@ class App extends Component {
     if (progress_percent < 0.5) {
       this.setState({
         is_updating: true
-      })
+      });
     }
   }
 
@@ -90,7 +115,12 @@ class App extends Component {
         >
           <Text
             style={{
+<<<<<<< master
               fontFamily: 'FrutigerLTArabic-55Roman',
+=======
+              fontFamily: fonts.Frutiger,
+              fontWeight: '300',
+>>>>>>> Add toast to chat ios.
               fontSize: 16,
               color: 'black',
               marginBottom: 4
@@ -111,7 +141,12 @@ class App extends Component {
           {this.state.progress_percent ? (
             <Text
               style={{
+<<<<<<< master
                 fontFamily: 'FrutigerLTArabic-55Roman',
+=======
+                fontFamily: fonts.Frutiger,
+                fontWeight: '300',
+>>>>>>> Add toast to chat ios.
                 fontSize: 16,
                 color: 'black',
                 marginBottom: 12
