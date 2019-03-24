@@ -27,6 +27,14 @@
                                     WhiteColor ,NSForegroundColorAttributeName, titleFont, NSFontAttributeName,nil];
 
   [[ZDCChat instance].overlay setEnabled:YES];
+  [[ZDCChatOverlay appearance] setOverlayBackgroundImage:  [UIImage imageNamed:@"customerService"]];
+  [[ZDCChatOverlay appearance] setInsets: [NSValue valueWithUIEdgeInsets: UIEdgeInsetsMake(0, 10, 60, 0)] ];
+  [[ZDCChatOverlay appearance] setMessageCountColor: WhiteColor];
+  [[ZDCChatOverlay appearance] setTypingIndicatorDiameter: @(3)];
+  [[ZDCChatOverlay appearance] setTypingIndicatorColor: WhiteColor];
+  [[ZDCChatOverlay appearance] setMessageCountFont:[UIFont fontWithName:@"Helvetica-Bold" size: 15]];
+
+
 
   [[ZDCLoadingView appearance] setLoadingLabelTextColor:BlueGreenColor ];
 

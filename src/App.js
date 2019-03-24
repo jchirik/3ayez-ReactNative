@@ -4,13 +4,7 @@ import codePush from 'react-native-code-push';
 import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
-<<<<<<< master
-
-=======
-import LiveChat from '../src/utils/livechat';
->>>>>>> Add toast to chat ios.
 import { View, Text, Modal, ActivityIndicator, AppState } from 'react-native';
-import { APP_STATE_CHANGE, BACKGROUND_APP_STATE } from './utils/appstate';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS, toast } from './Helpers';
@@ -41,19 +35,17 @@ class App extends Component {
     }, SPLASH_SCREEN_TIME_OUT);
   }
 
-
-   componentWillUnmount() {
+  componentWillUnmount() {
     zendesk.zendeskEmitter.removeAllListeners();
   }
 
-   componentWillMount() {
+  componentWillMount() {
     if (isIOS()) {
       const chatSubscription = zendesk.zendeskEmitter.addListener(
         zendesk.RECEIVE_MESSAGE,
         this.onReceiveMsg
       );
     }
-    await this.setupLiveChat();
   }
 
   onReceiveMsg = () => {
@@ -117,12 +109,7 @@ class App extends Component {
         >
           <Text
             style={{
-<<<<<<< master
               fontFamily: 'FrutigerLTArabic-55Roman',
-=======
-              fontFamily: fonts.Frutiger,
-              fontWeight: '300',
->>>>>>> Add toast to chat ios.
               fontSize: 16,
               color: 'black',
               marginBottom: 4
@@ -143,12 +130,7 @@ class App extends Component {
           {this.state.progress_percent ? (
             <Text
               style={{
-<<<<<<< master
                 fontFamily: 'FrutigerLTArabic-55Roman',
-=======
-                fontFamily: fonts.Frutiger,
-                fontWeight: '300',
->>>>>>> Add toast to chat ios.
                 fontSize: 16,
                 color: 'black',
                 marginBottom: 12
