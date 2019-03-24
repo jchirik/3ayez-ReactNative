@@ -92,8 +92,6 @@ public class ZendeskChatModule extends ReactContextBaseJavaModule {
 
         if (context == null) return;
 
-      ZopimChatApi.init(map.get(ZOPIM_ACCOUNT_KEY));
-
         VisitorInfo visitorInfo = new VisitorInfo.Builder().name(map.get(VISITOR_NAME))
                 .phoneNumber(map.get(VISITOR_PHONE_NUMBER))
                 .email(map.get(VISITOR_EMAIL))
@@ -102,21 +100,7 @@ public class ZendeskChatModule extends ReactContextBaseJavaModule {
 
       ZopimChatApi.setVisitorInfo(visitorInfo);
 
-      FirebaseInstanceId.getInstance().getInstanceId()
-        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-          @Override
-          public void onComplete(@NonNull Task<InstanceIdResult> task) {
-            if (!task.isSuccessful()) {
-                return;
-            }
-
-            if(task.getResult() != null) {
-              ZopimChat.setPushToken(task.getResult().getToken());
-            }
-          }
-        });
-
-      getCurrentActivity().startActivity(new Intent(getCurrentActivity(), ZopimChatActivity.class));
+      context.startActivity(new Intent(getCurrentActivity(), ZopimChatActivity.class));
 
     }
 
