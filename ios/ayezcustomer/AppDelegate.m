@@ -25,7 +25,7 @@
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
   NSString *zendeskAccountKey = [ReactNativeConfig envFor:@"ZENDESK_ACCOUNT_KEY"];
-
+  [ChatManger initZendeskChat:zendeskAccountKey];
   [GMSServices provideAPIKey:@"AIzaSyAGioxDWpQAHxVUvDkPiSltb6iGbTaEr-g"];
   [FIRApp configure];
   NSURL *jsCodeLocation;
