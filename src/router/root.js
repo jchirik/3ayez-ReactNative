@@ -232,10 +232,6 @@ class RouterComponent extends Component {
               panHandlers={null}
             />
             <Scene
-              key={sceneKeys.supportChat}
-              component={components.SupportChat}
-            />
-            <Scene
               key={sceneKeys.customerFeedback}
               component={components.CustomerFeedback}
               panHandlers={null}
