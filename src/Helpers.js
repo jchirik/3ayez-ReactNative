@@ -6,7 +6,7 @@ import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
-export const ZOPIM_ACCOUNT_KEY = 'pRVfyd50YAOsuwoV7WHrDXi5UBLmKE78';
+export const ZOPIM_ACCOUNT_KEY = '6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q';
 
 export const isIOS = () => Platform.OS === 'ios';
 
@@ -19,9 +19,9 @@ export const toast = str => {
   Toast.show(str, {
     shadow: true,
     animation: true,
-    hideOnPress: true,
-    backgroundColor: colors.white,
-    textColor: colors.black
+    hideOnPress: true
+    // backgroundColor: colors.white,
+    // textColor: colors.black
   });
 };
 

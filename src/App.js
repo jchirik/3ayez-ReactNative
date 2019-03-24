@@ -5,16 +5,16 @@ import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
 import LiveChat from '../src/utils/livechat';
-
 import { View, Text, Modal, ActivityIndicator, AppState } from 'react-native';
 import { APP_STATE_CHANGE, BACKGROUND_APP_STATE } from './utils/appstate';
 import Firebase from './utils/firebase';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
-import { SPLASH_SCREEN_TIME_OUT, isIOS } from './Helpers';
+import { SPLASH_SCREEN_TIME_OUT, isIOS, toast } from './Helpers';
 import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
+import zendesk from './ZendeskChat/ZendeskChatNativeModule';
 
 class App extends Component {
   constructor() {
@@ -43,12 +43,13 @@ class App extends Component {
       });
 
       const currentVisitorSDK = await LiveChat.getInstance(license);
-
       LiveChat.addLiveChatListeners({
         sdk: currentVisitorSDK,
-        messages: store.getState()[REDUCERS_NAMES.SupportChat].support_messages_for_group,
+        messages: store.getState()[REDUCERS_NAMES.SupportChat]
+          .support_messages_for_group,
         users: store.getState()[REDUCERS_NAMES.SupportChat].users,
-        addSupportMessage: message => store.dispatch(addSupportMessage(message)),
+        addSupportMessage: message =>
+          store.dispatch(addSupportMessage(message)),
         addSupportUser: user => store.dispatch(addSupportUser(user)),
         greetingMessage: greeting
       });
@@ -59,26 +60,45 @@ class App extends Component {
           customerId: customer.id
         }
       });
-    } catch (e) { console.log(e) }
-  }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   componentDidMount() {
     let that = this;
-    setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
+
+    setTimeout(function() {
+      that.setState({ isSplashShown: false });
+    }, SPLASH_SCREEN_TIME_OUT);
   }
 
   async componentWillUnmount() {
     AppState.removeEventListener(APP_STATE_CHANGE, this.onAppState);
+    zendesk.zendeskEmitter.removeAllListeners();
   }
 
   async componentWillMount() {
     AppState.addEventListener(APP_STATE_CHANGE, this.onAppState);
-
+    if (isIOS()) {
+      const chatSubscription = zendesk.zendeskEmitter.addListener(
+        zendesk.RECEIVE_MESSAGE,
+        this.onReceiveMsg
+      );
+    }
     await this.setupLiveChat();
   }
 
+  onReceiveMsg = () => {
+    toast(strings('SupportChat.receivedCustomerSupportMessage'));
+  };
+
   onAppState = nextState => {
-    if (isIOS() && nextState == BACKGROUND_APP_STATE && LiveChat.getInstance()) {
+    if (
+      isIOS() &&
+      nextState == BACKGROUND_APP_STATE &&
+      LiveChat.getInstance()
+    ) {
       LiveChat.getInstance().closeChat();
     }
   };
@@ -120,7 +140,7 @@ class App extends Component {
     if (progress_percent < 0.5) {
       this.setState({
         is_updating: true
-      })
+      });
     }
   }
 
@@ -141,7 +161,7 @@ class App extends Component {
           <Text
             style={{
               fontFamily: fonts.Frutiger,
-              fontWeight: "300",
+              fontWeight: '300',
               fontSize: 16,
               color: 'black',
               marginBottom: 4
@@ -163,7 +183,7 @@ class App extends Component {
             <Text
               style={{
                 fontFamily: fonts.Frutiger,
-                fontWeight: "300",
+                fontWeight: '300',
                 fontSize: 16,
                 color: 'black',
                 marginBottom: 12
