@@ -262,7 +262,8 @@
     "selectLanguage": "أختار لغتك",
     "logoutModal": "هل أنت متأكد من أتك تريد الخروج ؟",
     "logoutConfirm": "نعم , أريد الخروج",
-    "logoutCancel": "لا"
+    "logoutCancel": "لا",
+    "balance": "Balance: {{balance}} EGP"
   },
   "OrderHistory": {
     "header": "جميع الطلبات",

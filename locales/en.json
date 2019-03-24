@@ -262,7 +262,8 @@
     "selectLanguage": "Select your language",
     "logoutModal": "Ae you sure you want to log out?",
     "logoutConfirm": "Yes, logout",
-    "logoutCancel": "No"
+    "logoutCancel": "No",
+    "balance": "Balance: {{balance}} EGP"
   },
   "OrderHistory": {
     "header": "Order History",

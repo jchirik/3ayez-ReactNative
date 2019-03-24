@@ -84,6 +84,9 @@
 		D27603A121DEA2650037DE81 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D276038921DEA2650037DE81 /* Poppins-ExtraLight.otf */; };
 		D27603B121DEA3EA0037DE81 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7D4B151F8AFD6F00699FE4 /* libRNFirebase.a */; };
 		D2B136E9220465C200D3B109 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2B136AA2204651700D3B109 /* libFastImage.a */; };
+		D2CD30762247C50D00D1741C /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CD30722247C4FA00D1741C /* libRNShare.a */; };
+		D2CD30782247C52800D1741C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CD30772247C52700D1741C /* Social.framework */; };
+		D2CD307A2247C53200D1741C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CD30792247C53200D1741C /* MessageUI.framework */; };
 		D61B810B223A527D00F162E5 /* ZendeskChat.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B80DE223A527C00F162E5 /* ZendeskChat.m */; };
 		D61B8110223A52B800F162E5 /* ChatStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810C223A52B800F162E5 /* ChatStyle.m */; };
 		D61B8111223A52B800F162E5 /* Zendesk.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810F223A52B800F162E5 /* Zendesk.m */; };
@@ -406,6 +409,13 @@
 			remoteGlobalIDString = A287971D1DE0C0A60081BDFA;
 			remoteInfo = FastImage;
 		};
+		D2CD30712247C4FA00D1741C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2CD30452247C4FA00D1741C /* RNShare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNShare;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -487,6 +497,9 @@
 		D276038921DEA2650037DE81 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-ExtraLight.otf"; path = "../../assets/fonts/Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
 		D2B136A42204651600D3B109 /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		D2BB1C4F21FB5A3A003F70C9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D2CD30452247C4FA00D1741C /* RNShare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
+		D2CD30772247C52700D1741C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D2CD30792247C53200D1741C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D2CE0EA621E0F66F00D6EF99 /* ayezcustomer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ayezcustomer.entitlements; path = ayezcustomer/ayezcustomer.entitlements; sourceTree = "<group>"; };
 		D61B80DE223A527C00F162E5 /* ZendeskChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZendeskChat.m; sourceTree = "<group>"; };
 		D61B810A223A527C00F162E5 /* ZendeskChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZendeskChat.h; sourceTree = "<group>"; };
@@ -510,6 +523,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2CD307A2247C53200D1741C /* MessageUI.framework in Frameworks */,
+				D2CD30782247C52800D1741C /* Social.framework in Frameworks */,
+				D2CD30762247C50D00D1741C /* libRNShare.a in Frameworks */,
 				354EB352222994D700740DB3 /* libSplashScreen.a in Frameworks */,
 				D2615AB0221709BE00E38B88 /* libreact-native-fbsdk.a in Frameworks */,
 				D2615AAA221709AD00E38B88 /* libFBSDKCoreKit.a in Frameworks */,
@@ -729,6 +745,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D2CD30452247C4FA00D1741C /* RNShare.xcodeproj */,
 				354EB3222229949800740DB3 /* SplashScreen.xcodeproj */,
 				D2B136A42204651600D3B109 /* FastImage.xcodeproj */,
 				D23012C121F7E2D7006332ED /* TPSStripe.xcodeproj */,
@@ -803,6 +820,8 @@
 		927E270FF1706B5003F5613D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2CD30792247C53200D1741C /* MessageUI.framework */,
+				D2CD30772247C52700D1741C /* Social.framework */,
 				D2615AAF221709BE00E38B88 /* libreact-native-fbsdk.a */,
 				D2615AA9221709AD00E38B88 /* libFBSDKCoreKit.a */,
 				D2615AAB221709AD00E38B88 /* libFBSDKLoginKit.a */,
@@ -884,6 +903,14 @@
 			isa = PBXGroup;
 			children = (
 				D2B136AA2204651700D3B109 /* libFastImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2CD30462247C4FA00D1741C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2CD30722247C4FA00D1741C /* libRNShare.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1072,6 +1099,10 @@
 				{
 					ProductGroup = D2096B9021F7871F0033390F /* Products */;
 					ProjectRef = D2096B8F21F7871F0033390F /* RNImagePicker.xcodeproj */;
+				},
+				{
+					ProductGroup = D2CD30462247C4FA00D1741C /* Products */;
+					ProjectRef = D2CD30452247C4FA00D1741C /* RNShare.xcodeproj */;
 				},
 				{
 					ProductGroup = D276029321DD156A0037DE81 /* Products */;
@@ -1396,6 +1427,13 @@
 			fileType = archive.ar;
 			path = libFastImage.a;
 			remoteRef = D2B136A92204651700D3B109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2CD30722247C4FA00D1741C /* libRNShare.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNShare.a;
+			remoteRef = D2CD30712247C4FA00D1741C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

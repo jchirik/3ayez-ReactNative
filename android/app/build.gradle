@@ -113,8 +113,8 @@ android {
     applicationId "com.ayez.ayezcustomer"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 58
-    versionName "5.4.0"
+    versionCode 59
+    versionName "5.5.0"
     ndk {
       abiFilters "armeabi-v7a", "x86"
     }
@@ -238,6 +238,8 @@ dependencies {
 
   implementation project(':react-native-image-picker')
   implementation project(':tipsi-stripe')
+  implementation project(':react-native-share')
+
 
   implementation project(':react-native-fast-image')
 

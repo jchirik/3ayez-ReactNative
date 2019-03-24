@@ -28,7 +28,8 @@ import {
   AYEZ_GREEN,
   AYEZ_BACKGROUND_COLOR,
   STATUS_BAR_HEIGHT,
-  ZOPIM_ACCOUNT_KEY
+  ZOPIM_ACCOUNT_KEY,
+  padNumberZeros
 } from '../../../../Helpers.js';
 
 import images from '../../../../theme/images';
@@ -174,12 +175,12 @@ class SettingsMenu extends Component {
         >
           {strings('Settings.welcome', { name: this.props.name })}
         </AyezText>
-        { /*<AyezText
+        <AyezText
           regular
           color={'#4E4E4E'}
         >
-          Balance: 0.00 EGP
-        </AyezText> */ }
+          {strings('Settings.balance', { balance: (this.props.balance || 0).toFixed(2) })}
+        </AyezText>
       </View>
     );
     if (!this.props.phone) {
@@ -374,6 +375,7 @@ class SettingsMenu extends Component {
     // different sections based on logged in/out
     let settingsTabs = [
       chatTab,
+      referralTab,
       languageTab,
       termsConditionsTab,
       privacyPolicyTab,
@@ -382,6 +384,7 @@ class SettingsMenu extends Component {
     if (this.props.phone) {
       settingsTabs = [
         chatTab,
+        referralTab,
         creditCardTab,
         addressBookTab,
         previousOrdersTab,
@@ -454,7 +457,7 @@ const mapStateToProps = ({
   const seller = Seller;
   const { address } = Addresses;
   const { locale } = Settings;
-  const { name, phone } = Customer;
+  const { name, phone, balance } = Customer;
   const { sellers, area } = SellerSearch;
   return {
     seller,
@@ -466,7 +469,8 @@ const mapStateToProps = ({
     locale,
 
     name,
-    phone
+    phone,
+    balance
   };
 };
 

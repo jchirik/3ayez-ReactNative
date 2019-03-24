@@ -10,7 +10,8 @@ const INITIAL_STATE = {
   name: '',
   phone: '',
 
-  listener: null
+  listener: null,
+  balanceListener: null
 };
 
 // reducer must return a new object!!!
@@ -24,11 +25,13 @@ export default (state = INITIAL_STATE, action) => {
     case CUSTOMER_DATA_SET:
       return { ...state, ...p, logged_in: true };
     case CUSTOMER_DATA_LISTENER_SET:
-      if (state.listener !== null) { state.listener(); }
-      return { ...state, listener: p.listener };
+      if (state.listener !== null) { state.listener() }
+      if (state.balanceListener !== null) { state.balanceListener() }
+      return { ...state, listener: p.listener, balanceListener: p.balanceListener };
     case CUSTOMER_DATA_RESET:
-        if (state.listener !== null) { state.listener(); }
-        return INITIAL_STATE;
+      if (state.listener !== null) { state.listener() }
+      if (state.balanceListener !== null) { state.balanceListener() }
+      return INITIAL_STATE;
     default:
       return state;
   }

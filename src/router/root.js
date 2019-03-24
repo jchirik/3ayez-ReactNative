@@ -122,11 +122,6 @@ class RouterComponent extends Component {
                 key={sceneKeys.termsConditions}
                 component={components.TermsAndConditions}
               />
-              <Scene
-                key={sceneKeys.referralPage}
-                component={components.ReferralPage}
-                panHandlers={null}
-              />
             </Stack>
 
             {/* any modals */}
@@ -187,6 +182,13 @@ class RouterComponent extends Component {
             <Scene
               key={sceneKeys.additionalNotes}
               component={components.AdditionalNotes}
+            />
+
+
+            <Scene
+              key={sceneKeys.referralPage}
+              component={components.ReferralPage}
+              panHandlers={null}
             />
 
             <Stack key={sceneKeys.auth} hideNavBar panHandlers={null}>
