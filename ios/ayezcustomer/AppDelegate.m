@@ -7,7 +7,7 @@
 
 #import "AppDelegate.h"
 #import <CodePush/CodePush.h>
-
+#import <ReactNativeConfig/ReactNativeConfig.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <Firebase.h>
@@ -24,7 +24,8 @@
 {
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
-  [ChatManger initZendeskChat: @"6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q"];
+  NSString *zendeskAccountKey = [ReactNativeConfig envFor:@"ZENDESK_ACCOUNT_KEY"];
+
   [GMSServices provideAPIKey:@"AIzaSyAGioxDWpQAHxVUvDkPiSltb6iGbTaEr-g"];
   [FIRApp configure];
   NSURL *jsCodeLocation;
