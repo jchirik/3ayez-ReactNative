@@ -20,6 +20,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.api.ZopimChatApi;
 import com.zopim.android.sdk.model.VisitorInfo;
+import com.zopim.android.sdk.prechat.PreChatForm;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import java.util.HashMap;
@@ -98,9 +99,18 @@ public class ZendeskChatModule extends ReactContextBaseJavaModule {
                 .note(map.get(VISITOR_NOTE))
                 .build();
 
+      // set pre chat fields as optional
+      PreChatForm preChatConfig = new PreChatForm.Builder()
+        .name(PreChatForm.Field.OPTIONAL_EDITABLE)
+        .phoneNumber(PreChatForm.Field.OPTIONAL_EDITABLE)
+        .build();
+
+      // build chat config
+      ZopimChat.SessionConfig config = new ZopimChat.SessionConfig().preChatForm(preChatConfig);
+
       ZopimChatApi.setVisitorInfo(visitorInfo);
 
-      context.startActivity(new Intent(getCurrentActivity(), ZopimChatActivity.class));
+      ZopimChatActivity.startActivity(context, config);
 
     }
 

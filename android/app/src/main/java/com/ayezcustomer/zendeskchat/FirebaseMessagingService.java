@@ -40,8 +40,6 @@ public class FirebaseMessagingService extends RNFirebaseMessagingService {
 
   @Override
   public void onMessageReceived(RemoteMessage message) {
-    Log.e("HELLO666", message.toString());
-
     final PushData pushData = PushData.getChatNotification(message.getData());
 
     switch (pushData.getType()) {
@@ -71,6 +69,8 @@ public class FirebaseMessagingService extends RNFirebaseMessagingService {
         }
         break;
     }
+
+    ZopimChatApi.onMessageReceived(pushData);
 
     super.onMessageReceived(message);
   }

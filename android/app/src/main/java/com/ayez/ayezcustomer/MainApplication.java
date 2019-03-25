@@ -57,14 +57,10 @@ import com.dylanvann.fastimage.FastImageViewPackage;
 import java.util.Arrays;
 import java.util.List;
 
-import com.facebook.FacebookSdk;
 import com.facebook.CallbackManager;
-import com.facebook.appevents.AppEventsLogger;
-import com.zopim.android.sdk.api.Chat;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.api.ZopimChatApi;
-import com.zopim.android.sdk.widget.ChatWidgetService;
-import com.zopim.android.sdk.widget.view.WidgetView;
+import com.zopim.android.sdk.prechat.PreChatForm;
 
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
@@ -147,9 +143,13 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   @Override
   public void onCreate() {
     super.onCreate();
+
     SoLoader.init(this, /* native exopackage */ false);
     ZopimChat.init(getString(R.string.zopim_api_key));
 //    ZopimChat.init(getString(R.string.zopim_api_key_debug));
+
+
+
     FirebaseInstanceId.getInstance().getInstanceId()
       .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
         @Override

@@ -32,18 +32,11 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     SplashScreen.show(this, R.style.SplashScreenTheme);
-
-    Boolean canDraw = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(this);
-
-    if(canDraw) {
-      ChatWidgetService.startService(this);
-    }
     super.onCreate(savedInstanceState);
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    ChatWidgetService.stopService(this);
   }
 }
