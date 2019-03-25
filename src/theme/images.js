@@ -52,6 +52,7 @@ export default {
 
   magnifyingIcon: require(`${IMAGE_PATH}/Search/search.png`),
   magnifying2Icon: require(`${IMAGE_PATH}/Search/search2.png`),
+  searchByScannedCodeIcon: require(`${IMAGE_PATH}/Search/barcode.png`),
   searchFilterIcon: require(`${IMAGE_PATH}/Search/filter.png`),
   searchClearIcon: require(`${IMAGE_PATH}/Search/clear.png`),
   searchResultPinIcon: require(`${IMAGE_PATH}/Search/result_pin.png`),

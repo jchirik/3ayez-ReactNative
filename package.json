@@ -32,7 +32,7 @@
     "plist": "^3.0.1",
     "qs": "^6.6.0",
     "react": "16.5.0",
-    "react-native": "0.57.1",
+    "react-native": "^0.57.1",
     "react-native-code-push": "^5.5.2",
     "react-native-country-picker-modal": "^0.6.2",
     "react-native-create-bridge": "^2.0.1",
