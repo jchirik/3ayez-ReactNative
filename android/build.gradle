@@ -21,6 +21,7 @@ buildscript {
       url 'https://maven.fabric.io/public'
     }
     maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+    maven { url "https://dl.bintray.com/paymobsolutions/paymob_accept_sdk" }
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.2.0'
@@ -43,6 +44,7 @@ allprojects {
     }
     maven { url "https://jitpack.io" }
     maven { url 'https://zendesk.jfrog.io/zendesk/repo' }
+    maven { url "https://dl.bintray.com/paymobsolutions/paymob_accept_sdk" }
   }
 }
 
