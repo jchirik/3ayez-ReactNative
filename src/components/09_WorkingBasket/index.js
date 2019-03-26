@@ -394,6 +394,8 @@ class WorkingBasket extends Component {
   }
 }
 
+// Your balance of 23.44 can be used on this order at checkout
+
 const mapStateToProps = ({ Baskets, Seller, Coupon, Customer }) => {
   const seller = Seller;
   const basket = Baskets.baskets[Seller.id];

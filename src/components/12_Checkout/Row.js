@@ -33,7 +33,7 @@ const Row = ({
         activeOpacity={0.8}
       >
         <AyezText regular size={15} style={{
-          color: '#8E8E93',
+          color: 'black',
           marginRight: 20
         }}>{title}</AyezText>
         <View style={{ flex: 1, justifyContent: 'flex-end', flexDirection: 'row' }}>
