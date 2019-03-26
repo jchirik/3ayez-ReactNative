@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.ayezcustomer.weaccept.WeAcceptPackage;
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -116,7 +117,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         new RNDeviceInfo(),
         new RNLanguagesPackage(),
         new FastImageViewPackage(),
-        new ZendeskChatPackage()
+        new ZendeskChatPackage(),
+        new WeAcceptPackage()
       );
     }
 

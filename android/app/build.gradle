@@ -251,10 +251,20 @@ dependencies {
   // For Firebase Ads
   implementation "com.android.support:customtabs:27.1.1"
 
+  implementation "com.android.support:appcompat-v7:27.1.1"
+
   // For React Native Firebase Notifications
   implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
 
   implementation (group: 'com.zopim.android', name: 'sdk', version: '1.4.3')
+
+  implementation 'com.paymob:acceptsdk:1.0.6'
+
+  implementation 'morxander.editcard:EditCard:1.0.1'
+
+  implementation 'io.card:android-sdk:5.5.1'
+
+  implementation 'com.android.volley:volley:1.1.1'
 }
 
 // Run this once to be able to run the application with BUCK
