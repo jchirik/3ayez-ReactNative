@@ -91,11 +91,11 @@ class FeaturedBrowse extends Component {
     return (
       <View style={styles.featuredRowStyle}>
         <View style={styles.sectionHeaderStyle}>
-          <AyezText regular size={15} color={'#8E8E93'} style={{ marginLeft: 20 }}>
+          <AyezText medium size={15} color={'#8E8E93'} style={{ marginLeft: 20 }}>
             {translate(item.name)}
           </AyezText>
           <TouchableOpacity onPress={() => this.goToShelf(item)}>
-            <AyezText light color={'#62DEAB'} style={{ marginRight: 20 }}>
+            <AyezText medium color={'#62DEAB'} style={{ marginRight: 20 }}>
               {strings('Common.viewMore')} >
             </AyezText>
           </TouchableOpacity>

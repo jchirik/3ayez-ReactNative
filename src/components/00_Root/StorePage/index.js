@@ -34,7 +34,7 @@ import {
 import {
   strings,
   translate,
-  FONT_LIGHT
+  FONT_MEDIUM
 } from '../../../i18n.js';
 
 import {
@@ -175,14 +175,12 @@ class StorePage extends Component {
           tabTextStyle={{
             fontSize: 14,
             color: '#8E8E93',
-            fontFamily: FONT_LIGHT(),
-            fontWeight: "200"
+            fontFamily: FONT_MEDIUM(),
           }}
           activeTabTextStyle={{
             fontSize: 14,
             color: '#2DD38F',
-            fontFamily: FONT_LIGHT(),
-            fontWeight: "200"
+            fontFamily: FONT_MEDIUM()
           }}
           borderRadius={0}
         />

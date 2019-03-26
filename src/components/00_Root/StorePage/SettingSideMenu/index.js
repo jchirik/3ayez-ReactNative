@@ -176,7 +176,7 @@ class SettingsMenu extends Component {
           {strings('Settings.welcome', { name: this.props.name })}
         </AyezText>
         <AyezText
-          regular
+          medium
           color={'#4E4E4E'}
         >
           {strings('Settings.balance', { balance: (this.props.balance || 0).toFixed(2) })}
