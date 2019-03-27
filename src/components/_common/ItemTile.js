@@ -161,21 +161,26 @@ class ItemTile extends PureComponent {
           }}
           source={{ uri: url }}
         />
-        {this.renderScale(unit)}
       </TouchableOpacity>
     );
 
     if (draggable) {
       return (
-        <Draggable data={this.props.item} style={[styles.itemImageContainer]}>
-          {mainComponent}
-        </Draggable>
+        <View style={styles.itemImageContainer}>
+          <Draggable data={this.props.item} style={{...styles.itemImageContainer, height: '100%'}}>
+            {mainComponent}
+          </Draggable>
+          {this.renderScale(unit)}
+        </View>
       );
     }
 
     return (
-      <View style={[styles.itemImageContainer]}>
-        {mainComponent}
+      <View style={styles.itemImageContainer}>
+        <View style={{...styles.itemImageContainer, height: '100%'}}>
+          {mainComponent}
+        </View>
+        {this.renderScale(unit)}
       </View>
     )
 
