@@ -19,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
     case COUPON_CODE_SUCCESS:
       return { ...state, is_loading: false, coupon: p.coupon };
     case COUPON_CODE_FAILURE:
-      return { ...state, is_loading: false, error: p.error };
+      return { ...state, is_loading: false, coupon: null, error: p.error };
     case COUPON_CODE_RESET:
       return { ...INITIAL_STATE };
     default:

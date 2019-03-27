@@ -105,7 +105,7 @@ class TimeslotSelect extends Component {
           textDecorationStyle: 'solid'
         }} key={index}>{startTime} - {endTime}</AyezText>
 
-        <AyezText light style={{
+        <AyezText medium style={{
           marginRight: 30,
           color: (item.invalid ? '#cecece' : '#8E8E93')
         }}>{formatCurrency(item.delivery_fee)}</AyezText>

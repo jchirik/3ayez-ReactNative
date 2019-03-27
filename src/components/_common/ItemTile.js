@@ -110,7 +110,7 @@ class ItemTile extends PureComponent {
           )}
         </View>
         <View style={styles.titleTextContianer}>
-          <AyezText extralight numberOfLines={2} style={styles.titleText} allowFontScaling={false}>
+          <AyezText regular numberOfLines={2} style={styles.titleText} allowFontScaling={false}>
             {translate(item)}
           </AyezText>
         </View>

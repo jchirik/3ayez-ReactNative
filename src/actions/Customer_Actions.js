@@ -106,6 +106,20 @@ export const listenCustomerAuthStatus = () => {
   };
 };
 
+
+
+const generateReferralCode = (uid, phone, referral_code) => {
+  if (uid && phone && !referral_code) {
+    const generateReferralCode = firebase.functions().httpsCallable('generateReferralCode');
+    generateReferralCode({ customer_id: uid }).then((result) => {
+      console.log('Successful generation', result);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+};
+
+
 // detected a login & begin fetching customer account information
 const listenCustomerData = (dispatch) => {
   const { currentUser } = firebase.auth();
@@ -120,6 +134,18 @@ const listenCustomerData = (dispatch) => {
             dispatch({ type: CUSTOMER_DATA_SET, payload });
           }
     });
+    const balanceListener = firebase.firestore().collection('balances').doc(currentUser.uid)
+        .onSnapshot((document) => {
+          if (document.exists) {
+            const payload = document.data();
+            console.log('balanceListenCustomerData', payload)
+            dispatch({ type: CUSTOMER_DATA_SET, payload });
+            generateReferralCode(currentUser.uid, currentUser.phoneNumber, payload.referral_code)
+          } else {
+            generateReferralCode(currentUser.uid, currentUser.phoneNumber, null)
+          }
+    });
+
     firebase.firestore()
       .collection('customers')
       .doc(currentUser.uid)
@@ -127,7 +153,7 @@ const listenCustomerData = (dispatch) => {
       .then(() => {
         console.log('set phone number');
       });
-    dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener } });
+    dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener, balanceListener } });
   }
 };
 

@@ -67,7 +67,7 @@ class CouponModal extends Component {
     let error_description = strings('CouponModal.invalid')
 
     if (error === 'FIRSTTIMEONLY') {
-      error_description = strings('CouponModal.firstTimeModal');
+      error_description = strings('CouponModal.firstTimeOnly');
     } else if (error === 'ALREADYUSED') {
       error_description = strings('CouponModal.alreadyUsed');
     }

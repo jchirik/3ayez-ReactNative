@@ -12,7 +12,7 @@ import {
     Header
 } from "../_common";
 import colors from "../../theme/colors.js";
-import { navigateBack } from "../../router/index.js";
+import { navigateBack } from "../../router";
 
 export default class TermsAndConditions extends Component {
     constructor(props) {

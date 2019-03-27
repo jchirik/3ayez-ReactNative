@@ -5,6 +5,7 @@ export default {
   squareLogo: require(`${IMAGE_PATH}/Common/square_logo.png`),
   backIcon: require(`${IMAGE_PATH}/Common/back.png`),
   nextArrowIcon: require(`${IMAGE_PATH}/Common/next_arrow.png`),
+  copyIcon: require(`${IMAGE_PATH}/Common/copy.png`),
   closeIcon: require(`${IMAGE_PATH}/Common/close.png`),
   exitIcon: require(`${IMAGE_PATH}/Common/exit.png`),
   menuIcon: require(`${IMAGE_PATH}/Common/menu.png`),
@@ -75,6 +76,10 @@ export default {
 
   plusIcon: require(`${IMAGE_PATH}/Incrementer/incr_plus.png`),
   minusIcon: require(`${IMAGE_PATH}/Incrementer/incr_minus.png`),
+
+
+  rewardsIcon: require(`${IMAGE_PATH}/Referral/rewards.png`),
+  whatsIcon: require(`${IMAGE_PATH}/Referral/whats_logo.png`),
 
   scaleIcon: require(`${IMAGE_PATH}/Item/scale.png`),
 

@@ -44,6 +44,11 @@ export const selectSubcategory = (subcategory, columnIndex) => {
 };
 
 
+
+// setItemSearchQuery
+// fetchQueryResults
+
+
 // fetch ALL items/images for its subcategories here (only upc, title_arab, price, image_url)
 // paginate subcategory loading?
 export const onSelectSearchSubcategory = (seller_id, subcategory) => {
@@ -164,7 +169,7 @@ export const fetchQueryResults = ({ seller, query }) => {
   return (dispatch) => {
 
     console.log('query', query)
-    dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: { query } });
+    // dispatch({ type: ITEM_SEARCH_QUERY_SET, payload: { query } });
     const algoliaIndex = algoliaClient.initIndex(seller.id);
 
     // return;
@@ -177,6 +182,7 @@ export const fetchQueryResults = ({ seller, query }) => {
       dispatch({
         type: ITEM_SEARCH_DATA_SET,
         payload: {
+          query,
           subcategoryResults: [],
           categoryResults: [],
           itemResults: []
@@ -185,8 +191,6 @@ export const fetchQueryResults = ({ seller, query }) => {
     } else {
 
       // replace this logic later with one from Algolia (including brands)
-
-      console.log(seller.categories)
 
       const categoryResults = [];
       const subcategoryResults = [];

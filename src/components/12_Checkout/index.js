@@ -66,7 +66,9 @@ class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCardSelectionVisible: false
+      isCardSelectionVisible: false,
+
+      balance_applied: 0
     };
   }
 
@@ -77,6 +79,12 @@ class Checkout extends Component {
     // } else {
     //   this.props.setPaymentMethod({ type: 'CASH' }, this.props.seller.id);
     // }
+
+    let balance_applied = 0;
+    if (this.props.balance) {
+      balance_applied = Math.min(this.props.total, this.props.balance);
+    }
+    this.setState({ balance_applied });
 
     // BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
   }
@@ -107,9 +115,12 @@ class Checkout extends Component {
       tip,
       notes,
       address,
-
       total
     } = this.props;
+
+    const {
+      balance_applied
+    } = this.state;
 
     this.props.submitOrder({
       customer,
@@ -120,7 +131,8 @@ class Checkout extends Component {
       delivery_fee,
       tip,
       notes,
-      address
+      address,
+      balance_applied
     }, items_array, total);
   }
 
@@ -136,13 +148,14 @@ class Checkout extends Component {
 
   renderPayment() {
 
-    const { payment_method, seller } = this.props;
+    const { payment_method, seller, total } = this.props;
+    const { balance_applied } = this.state;
 
     let payment_text = strings('PaymentMethod.cash');
     if (payment_method.type === 'CREDIT') {
       payment_text = `**** ${payment_method.last4}`;
     }
-    const payment_image = paymentIcon(payment_method.brand, payment_method.type);
+    let payment_image = paymentIcon(payment_method.brand, payment_method.type);
 
     const selectedCircle = (
       <Image
@@ -160,7 +173,7 @@ class Checkout extends Component {
       />
     );
 
-    const cashToggle = (
+    let cashToggle = (
       <TouchableOpacity
         onPress={() => this.props.setPaymentMethod({ type: 'CASH' })}
         style={{
@@ -211,7 +224,7 @@ class Checkout extends Component {
         }}>{strings('Checkout.noCreditCard')}</AyezText>
       </View>
     )
-    const creditToggle = (
+    let creditToggle = (
       <TouchableOpacity
         onPress={this.onCreditCardToggle.bind(this)}
         disabled={!accepts_card}
@@ -245,7 +258,27 @@ class Checkout extends Component {
       </TouchableOpacity>
     );
 
+    let balanceAppliedBanner = null;
+    if (balance_applied) {
+      balanceAppliedBanner = (
+        <View style={{
+          backgroundColor: AYEZ_GREEN
+        }}>
+          <AyezText medium color='white' style={{
+            textAlign: 'center',
+            fontSize: 14,
+            padding: 5
+          }}>{strings('Checkout.appliedBalance', { applied: balance_applied.toFixed(2) })}</AyezText>
+        </View>
+      )
+    }
 
+    if ((total - balance_applied) === 0) {
+      payment_text = '-';
+      payment_image = null;
+      cashToggle = null
+      creditToggle = null;
+    }
 
     return (
       <View>
@@ -264,6 +297,7 @@ class Checkout extends Component {
             color: 'black'
           }}>{payment_text}</AyezText>
         </Row>
+        { balanceAppliedBanner }
         { cashToggle }
         { creditToggle }
       </View>
@@ -308,7 +342,7 @@ class Checkout extends Component {
                   borderWidth: 1,
                   borderColor: color
                 }}>
-                  <AyezText light style={{
+                  <AyezText regular style={{
                     fontSize: 15,
                     color: color
                   }}>{formatCurrency(item)}</AyezText>
@@ -328,6 +362,14 @@ class Checkout extends Component {
     if (!coupon) { return null; }
     return (
       <ReceiptRow title={strings('Receipt.coupon', { code: coupon.code })} cost={coupon.amount} color={'#D33B2D'} />
+    )
+  }
+
+  renderBalanceSubtractionRow() {
+    const { balance_applied } = this.state;
+    if (!balance_applied) { return null; }
+    return (
+      <ReceiptRow title={strings('Receipt.balanceApplied')} cost={balance_applied} color={'#D33B2D'} />
     )
   }
 
@@ -499,9 +541,10 @@ class Checkout extends Component {
         <ReceiptRow title={strings('Receipt.deliveryFee')} cost={delivery_fee} />
         <ReceiptRow title={strings('Receipt.tip')} cost={tip} />
         { this.renderCouponReceiptRow() }
+        { this.renderBalanceSubtractionRow() }
 
         <View style={{ marginTop: 6, marginBottom: 6, height: 1, backgroundColor: '#eeeeee' }} />
-        <ReceiptRow title={strings('Receipt.total')} cost={total} />
+        <ReceiptRow title={strings('Receipt.total')} cost={total-this.state.balance_applied} />
 
 
 
@@ -592,6 +635,7 @@ class Checkout extends Component {
   const mapStateToProps = ({ Baskets, Customer, Seller, Checkout, Coupon, CreditCards, Addresses }) => {
 
     const customer = Customer;
+    const { balance } = customer;
     const seller = Seller;
     const basket = Baskets.baskets[Seller.id];
     const { subtotal, items_array } = basket;
@@ -624,6 +668,7 @@ class Checkout extends Component {
 
       items_array,
 
+      balance,
       payment_method,
       timeslot,
       delivery_fee,

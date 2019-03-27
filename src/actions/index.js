@@ -19,4 +19,6 @@ export * from './Timeslots_Actions';
 export * from './CustomerFeedback_Actions';
 export * from './CreditCard_Actions';
 export * from './ReviewOrder_Actions';
+export * from './Referral_Actions';
+export * from './SupportChat_Actions';
 export * from './SupportManual_Actions';

@@ -29,7 +29,7 @@ const ReceiptRow = ({
         }}
       >
         <AyezText regular style={{
-          fontSize: 15, color: '#8E8E93'
+          fontSize: 15, color: 'black'
         }}>{title}</AyezText>
 
         <AyezText bold color={color} size={15}>{formatCurrency(cost)}</AyezText>

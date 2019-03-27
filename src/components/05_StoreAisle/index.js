@@ -104,12 +104,12 @@ class StoreAisle extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.subcategoryHeader}>
-          <AyezText light style={styles.subcategoryHeaderText}>{subcategoryTitle}</AyezText>
+          <AyezText medium style={styles.subcategoryHeaderText}>{subcategoryTitle}</AyezText>
           <TouchableOpacity
             style={styles.viewCorridorContainer}
             onPress={() => this.didSelectSubcategory(subcategory, 0)}
           >
-            <AyezText light style={styles.viewCorridorText}>
+            <AyezText medium style={styles.viewCorridorText}>
               {strings('Common.viewMore')} >
             </AyezText>
           </TouchableOpacity>
@@ -160,7 +160,7 @@ class StoreAisle extends Component {
         }}
         style={styles.categoryItemContainer}
       >
-        <AyezText light style={styles.categoryItemText}>{translate(item.name)}</AyezText>
+        <AyezText regular style={styles.categoryItemText}>{translate(item.name)}</AyezText>
       </TouchableOpacity>
     );
   }
