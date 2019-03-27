@@ -57,6 +57,7 @@ export default (state = INITIAL_STATE, action) => {
           isLoadingSearchData: false
         };
       }
+      return state;
     case ITEM_SEARCH_DATA_RESET:
       return {
         ...state,
