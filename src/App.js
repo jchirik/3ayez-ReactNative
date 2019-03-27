@@ -4,11 +4,9 @@ import codePush from 'react-native-code-push';
 import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
-import LiveChat from '../src/utils/livechat';
 
 import { View, Text, Modal, ActivityIndicator, AppState } from 'react-native';
 import { APP_STATE_CHANGE, BACKGROUND_APP_STATE } from './utils/appstate';
-import Firebase from './utils/firebase';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS } from './Helpers';
@@ -30,58 +28,10 @@ class App extends Component {
     };
   }
 
-  setupLiveChat = async () => {
-    try {
-      const license = await Firebase.getRemoteConfig(
-        Firebase.LIVE_CHAT_LICENSE
-      );
-      let greeting = await Firebase.getRemoteConfig(Firebase.GREETING_MESSAGE);
-      if (!greeting) greeting = strings('SupportChat.defaultGreetingMessage');
-
-      const { data: customerInfo } = await Firebase.getLiveChatCustomerInfo({
-        phone: this.props.customer ? this.props.customer.phone : ''
-      });
-
-      const currentVisitorSDK = await LiveChat.getInstance(license);
-
-      LiveChat.addLiveChatListeners({
-        sdk: currentVisitorSDK,
-        messages: store.getState()[REDUCERS_NAMES.SupportChat].support_messages_for_group,
-        users: store.getState()[REDUCERS_NAMES.SupportChat].users,
-        addSupportMessage: message => store.dispatch(addSupportMessage(message)),
-        addSupportUser: user => store.dispatch(addSupportUser(user)),
-        greetingMessage: greeting
-      });
-
-      currentVisitorSDK.setVisitorData({
-        ...customerInfo,
-        customProperties: {
-          customerId: customer.id
-        }
-      });
-    } catch (e) { console.log(e) }
-  }
-
   componentDidMount() {
     let that = this;
     setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
   }
-
-  async componentWillUnmount() {
-    AppState.removeEventListener(APP_STATE_CHANGE, this.onAppState);
-  }
-
-  async componentWillMount() {
-    AppState.addEventListener(APP_STATE_CHANGE, this.onAppState);
-
-    await this.setupLiveChat();
-  }
-
-  onAppState = nextState => {
-    if (isIOS() && nextState == BACKGROUND_APP_STATE && LiveChat.getInstance()) {
-      LiveChat.getInstance().closeChat();
-    }
-  };
 
   codePushStatusDidChange(status) {
     switch (status) {

@@ -33,7 +33,6 @@ import ReviewOrder from './ReviewOrder_Reducer';
 import SupportManual from './SupportManual_Reducer';
 import CustomerFeedback from './CustomerFeedback_Reducer';
 import Timeslots from './Timeslots_Reducer';
-import SupportChat from './SupportChat_Reducer';
 
 export const REDUCERS_NAMES = {
   Auth: 'Auth',
@@ -63,8 +62,7 @@ export const REDUCERS_NAMES = {
   ReviewOrder: 'ReviewOrder',
   SupportManual: 'SupportManual',
   CustomerFeedback: 'CustomerFeedback',
-  Timeslots: 'Timeslots',
-  SupportChat: 'SupportChat'
+  Timeslots: 'Timeslots'
 };
 
 const reducers = combineReducers({
@@ -95,28 +93,14 @@ const reducers = combineReducers({
   [REDUCERS_NAMES.OrderTracker]: OrderTracker,
   [REDUCERS_NAMES.DriverTracker]: DriverTracker,
   [REDUCERS_NAMES.OngoingOrders]: OngoingOrders,
-  [REDUCERS_NAMES.SupportChat]: SupportChat,
   [REDUCERS_NAMES.SupportManual]: SupportManual
 });
 
-const SupportChatTransform = createTransform(
-  // transform state on its way to being serialized and persisted.
-  (inboundState, _) => {
-    const SUPPORT_MESSAGES_FOR_GROUP = 'support_messages_for_group'
-    const NUMBER_OF_MESSAGES_TO_PERSIST = 25
-    return { ...inboundState, [SUPPORT_MESSAGES_FOR_GROUP]: inboundState[SUPPORT_MESSAGES_FOR_GROUP].slice(0, NUMBER_OF_MESSAGES_TO_PERSIST) };
-  },
-  (outboundState, _) => {
-    return { ...outboundState };
-  },
-  { whitelist: [REDUCERS_NAMES.SupportChat] }
-);
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [REDUCERS_NAMES.SupportChat],
-  transforms: [SupportChatTransform]
+  whitelist: [],
 };
 
 const store = createStore(persistReducer(persistConfig, reducers), {}, applyMiddleware(ReduxThunk));
