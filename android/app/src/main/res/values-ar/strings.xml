@@ -6,11 +6,13 @@ https://github.com/afghazy
 ahmedfathyghazy@gmail.com-->
 
 <resources>
-  <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">zyq7XJX3WM0-zZIifxyXQT3Uj7Bl581d560a-0218-4243-a9eb-f46181c392d5</string>
   <string name="app_name">3ayez</string>
   <string name="facebook_app_id">304049227136803</string>
   <string name="input_field_hint">ارسل رسالة</string>
   <string name="chat_menu_end_button">انهى المحادثة</string>
   <string name="chat_loading_message">الدعم الفنى</string>
   <string name="chat_activity_title">الدعم الفنى</string>
+  <string name="chat_customer_support_3ayez">عايز الدعم الفنى</string>
+  <string name="chat_customer_support_3ayez_desc">رسائل عايز للدعم الفنى</string>
+  <string name="chat_customer_support_3ayez_new_message">رسالة جديدة من الدعم الفنى</string>
 </resources>
