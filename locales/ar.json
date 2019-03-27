@@ -65,7 +65,8 @@
     "subtotal": "الجمع",
     "deliveryFee": "رسوم التوصيل",
     "tip": "الباقي",
-    "coupon": "الكوبون ({{code}})"
+    "coupon": "الكوبون ({{code}})",
+    "balanceApplied": "الرصيد المضاف"
   },
   "DeleteConfirmation": {
     "query": "هل أنت متأكد من الحذف ؟",
@@ -191,7 +192,8 @@
     "additionalNotesField": "ملاحظات إضافية:",
     "additionalNotesHeader": "ملاحظات إضافية",
     "smartTipSuggestions": "إقتراح لتقريب المجموع الخاص بطلبك",
-    "sendOrder": "إرسال الطلب"
+    "sendOrder": "إرسال الطلب",
+    "appliedBalance": "إضافة {{applied}} جنيه من رصيد عايز"
   },
   "CreditCardSelection": {
     "header": "الكروت المحفوظة",
@@ -252,7 +254,7 @@
     "madeinEG": "صنع في مصر",
     "myAccount": "حسابي",
     "information": "معلومات",
-    "freeDiscounts": "Free Discounts",
+    "freeDiscounts": "خصومات مجانية",
     "addressBook": "دليل العناوين",
     "creditCards": "بطاقات الإئتمان",
     "previousOrders": "الطلبات السابقة",
@@ -263,7 +265,7 @@
     "logoutModal": "هل أنت متأكد من أتك تريد الخروج ؟",
     "logoutConfirm": "نعم , أريد الخروج",
     "logoutCancel": "لا",
-    "balance": "Balance: {{balance}} EGP"
+    "balance": "الرصيد : {{balance}} جنيه"
   },
   "OrderHistory": {
     "header": "جميع الطلبات",
@@ -335,5 +337,16 @@
     "productQuantity": "كم الثمن ؟",
     "productQuantityPlaceholder": "مثلا 8 قطع ، 250 غرام ، صندوق واحد",
     "addToBasket": "+ إضافة إلى السلة",
+  },
+  "Referral": {
+    "referAndWin": "شير وأربح",
+    "title": "أربح ٥٠ جنيه",
+    "subtitle": " ٥٠ جنيه مجانا ليك و لصديقك",
+    "description": "عندما يدخل صديقك الكوبون الخاص بك لأول طلب ، يتلقي خصم بقيمة ٥٠ جنيه ويضاف لمحفظتك ٥٠ جنيه",
+    "tapToCopy": "إضغط للنسخ",
+    "copied": "تم النسخ",
+    "shareWhatsApp": "Share with Whatsapp",
+    "whatsAppTitle": "٥٠ جنيه من {{name}}",
+    "whatsAppMessage": "استخدم هذا الكوبون لخصم ٥٠ جنيه لأول طلب : {{referral_code}}"
   }
 }

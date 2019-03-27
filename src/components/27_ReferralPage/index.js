@@ -63,11 +63,10 @@ class ReferralPage extends Component {
 
   shareWhatsAppCode() {
     const { name, referral_code } = this.props;
-
     let social = Share.Social.WHATSAPP;
     const shareOptions = {
-      title: `50EGP from ${name}`,
-      message: `Use this coupon for 50EGP off your first order: ${referral_code}`,
+      title: strings('Referral.whatsAppTitle', { name }),
+      message: strings('Referral.whatsAppMessage', { referral_code }),
       url: 'http://onelink.to/9avxev',
       social
     };
@@ -88,7 +87,7 @@ class ReferralPage extends Component {
           alignItems: 'center'
         }}
       >
-        <AyezText medium color={'white'}>Share with Whatsapp</AyezText>
+        <AyezText medium color={'white'}>{strings('Referral.shareWhatsApp')}</AyezText>
         <Image
           source={images.whatsIcon}
           style={{
@@ -143,11 +142,10 @@ class ReferralPage extends Component {
       )
     }
 
-    let copiedText = 'Tap to copy';
+    let copiedText = strings('Referral.tapToCopy');
     if (this.state.copied) {
-      copiedText = 'Copied!';
+      copiedText = strings('Referral.copied');
     }
-
     return (
       <View style={{
         flex: 1,
@@ -163,12 +161,12 @@ class ReferralPage extends Component {
           backgroundColor: '#EEF2F3',
           alignSelf: 'stretch',
         }}>
-          <AyezText medium size={12} color={colors.ayezGreen}>REFER AND WIN</AyezText>
-          <AyezText semibold size={24}>Earn 50 EGP</AyezText>
+          <AyezText medium size={12} color={colors.ayezGreen}>{strings('Referral.referAndWin')}</AyezText>
+          <AyezText semibold size={24}>{strings('Referral.title')}</AyezText>
           <AyezText regular color={'#353333'} style={{
             maxWidth: 150,
             marginTop: 6
-          }}>50 EGP Free for you and a friend</AyezText>
+          }}>{strings('Referral.subtitle')}</AyezText>
           <Image
             source={images.rewardsIcon}
             style={{
@@ -184,7 +182,7 @@ class ReferralPage extends Component {
         <AyezText regular color={'#232323'} style={{
           marginVertical: 20,
           marginHorizontal: 24
-        }}>When a friend applies your coupon code on their first order, they receive a 50EGP discount and you receive 50EGP to your wallet.</AyezText>
+        }}>{strings('Referral.description')}</AyezText>
         <TouchableOpacity
           onPress={this.copyReferralCodeToClipboard.bind(this)}
           style={{

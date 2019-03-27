@@ -268,7 +268,7 @@ class Checkout extends Component {
             textAlign: 'center',
             fontSize: 14,
             padding: 5
-          }}>Applied {balance_applied.toFixed(2)} EGP from your 3ayez balance</AyezText>
+          }}>{strings('Checkout.appliedBalance', { applied: balance_applied.toFixed(2) })}</AyezText>
         </View>
       )
     }
@@ -369,7 +369,7 @@ class Checkout extends Component {
     const { balance_applied } = this.state;
     if (!balance_applied) { return null; }
     return (
-      <ReceiptRow title={'Balance Applied'} cost={balance_applied} color={'#D33B2D'} />
+      <ReceiptRow title={strings('Receipt.balanceApplied')} cost={balance_applied} color={'#D33B2D'} />
     )
   }
 

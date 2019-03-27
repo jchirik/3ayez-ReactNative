@@ -65,7 +65,8 @@
     "subtotal": "Subtotal",
     "deliveryFee": "Delivery Fee",
     "tip": "Tip",
-    "coupon": "Coupon ({{code}})"
+    "coupon": "Coupon ({{code}})",
+    "balanceApplied": "Balance Applied"
   },
   "DeleteConfirmation": {
     "query": "Are you sure you want to delete?",
@@ -191,7 +192,8 @@
     "additionalNotesField": "Additional Notes:",
     "additionalNotesHeader": "Additional Notes",
     "smartTipSuggestions": "Smart tip suggestions help you round your total",
-    "sendOrder": "SEND ORDER"
+    "sendOrder": "SEND ORDER",
+    "appliedBalance": "Applied {{applied}} EGP from your 3ayez balance"
   },
   "CreditCardSelection": {
     "header": "SAVED CARDS",
@@ -335,5 +337,16 @@
     "productQuantity": "How much?",
     "productQuantityPlaceholder": "e.g. 8 pieces, 250g, 1 box",
     "addToBasket": "+ Add to Basket",
+  },
+  "Referral": {
+    "referAndWin": "REFER AND WIN",
+    "title": "Earn 50 EGP",
+    "subtitle": "50 EGP Free for you and a friend",
+    "description": "When a friend applies your coupon code on their first order, they receive a 50EGP discount and you receive 50EGP to your wallet.",
+    "tapToCopy": "Tap to copy",
+    "copied": "Copied!",
+    "shareWhatsApp": "Share with Whatsapp",
+    "whatsAppTitle": "50EGP from {{name}}",
+    "whatsAppMessage": "Use this coupon for 50EGP off your first order: {{referral_code}}"
   }
 }
