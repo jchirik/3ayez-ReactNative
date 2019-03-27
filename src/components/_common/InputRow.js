@@ -54,7 +54,6 @@ class InputRow extends Component {
             paddingLeft: 12,
             fontSize: 14,
             fontFamily: FONT_MEDIUM(),
-            fontWeight: "500",
             color: 'black'
           }}
           placeholder={placeholderText}
