@@ -27,7 +27,6 @@ import VerifyCode from './15_Authentication/02_VerifyCode';
 import OrderHistory from './16_OrderHistory';
 import SupportDetail from './17_SupportDetail';
 import CouponModal from './18_CouponModal';
-import SupportChat from './19_SupportChat';
 import CreditCardManager from './20_CreditCardManager';
 import CreditCardCreate from './21_CreditCardCreate';
 import AddressManager from './22_AddressManager';
@@ -68,7 +67,6 @@ export {
   OrderHistory,
   SupportDetail,
   CouponModal,
-  SupportChat,
   CreditCardManager,
   CreditCardCreate,
   AddressManager,
@@ -118,7 +116,6 @@ export const sceneKeys = {
     customProduct : "customProduct",
     creditCardCreate : "creditCardCreate",
     orderReview : "orderReview",
-    supportChat : "supportChat",
     customerFeedback : "customerFeedback",
     couponModal : "couponModal",
     privacyPolicy : "privacyPolicy" ,

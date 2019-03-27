@@ -20,7 +20,8 @@ import {
 
 import {
   paymentIcon,
-  AYEZ_GREEN
+  AYEZ_GREEN,
+  ZOPIM_ACCOUNT_KEY
 } from '../../../Helpers.js';
 
 import {
@@ -43,6 +44,7 @@ import {
 
 import images from '../../../theme/images'
 import { sceneKeys, navigateTo } from '../../../router';
+import ZendeskChatNativeModule from '../../../ZendeskChat/ZendeskChatNativeModule';
 
 class QuantityChangePage extends Component {
 
@@ -79,7 +81,11 @@ class QuantityChangePage extends Component {
               text: strings('Support.header').toUpperCase(),
               image_source: images.supportIcon,
               onPress: () => {
-                navigateTo(sceneKeys.supportChat)
+                ZendeskChatNativeModule.start({
+                  [ZendeskChatNativeModule.ZOPIM_ACCOUNT_KEY]: ZOPIM_ACCOUNT_KEY,
+                  [ZendeskChatNativeModule.VISITOR_NAME]: this.props.name || 'Client',
+                  [ZendeskChatNativeModule.VISITOR_PHONE_NUMBER]: this.props.phone || ''
+                })
               }
             }}
             />
@@ -130,7 +136,7 @@ class QuantityChangePage extends Component {
 
 
 
-  const mapStateToProps = ({ ReviewOrder }) => {
+  const mapStateToProps = ({ ReviewOrder, Customer: {name, phone} }) => {
 
     const {
       substitution_items,
@@ -139,7 +145,9 @@ class QuantityChangePage extends Component {
 
     return {
       substitution_items,
-      substitution_items_loading
+      substitution_items_loading,
+      name, 
+      phone
     };
   };
 

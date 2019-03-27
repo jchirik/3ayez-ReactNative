@@ -22,7 +22,6 @@
     "preset": "react-native"
   },
   "dependencies": {
-    "@livechat/livechat-visitor-sdk": "0.34.0",
     "adm-zip": "^0.4.13",
     "algoliasearch": "^3.32.0",
     "i18n-js": "^3.2.1",
