@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { strings, translate } from '../../i18n';
-import { AyezText } from '.'
+import { AyezText } from '.';
 import { Actions } from 'react-native-router-flux';
 import colors from '../../theme/colors';
-import images from '../../theme/images'
+import images from '../../theme/images';
+import Camera from 'react-native-camera';
 
 import { sceneKeys, navigateTo } from '../../router';
 
@@ -20,7 +21,9 @@ class SearchBarButton extends React.Component {
     if (fullName !== '') {
       placeHolder = translate(fullName);
     } else if (displayName !== '') {
-      placeHolder = strings('StoreSearch.placeholder', { seller_name: translate(displayName) });
+      placeHolder = strings('StoreSearch.placeholder', {
+        seller_name: translate(displayName)
+      });
     }
     return (
       <TouchableOpacity
@@ -29,14 +32,32 @@ class SearchBarButton extends React.Component {
           navigateTo(sceneKeys.storeSearch);
         }}
       >
+        <TouchableOpacity />
+        <Image
+          source={images.magnifying2Icon}
+          resizeMode={'contain'}
+          style={styles.searchBarImage}
+        />
+        <AyezText regular numberOfLines={1} style={styles.searchBarText}>
+          {placeHolder}
+        </AyezText>
+        <TouchableOpacity
+          onPress={() => {
+            navigateTo(sceneKeys.BarcodeScanner);
+          }}
+        >
           <Image
             source={images.magnifying2Icon}
             resizeMode={'contain'}
-            style={styles.searchBarImage}
-            />
-          <AyezText regular numberOfLines={1} style={styles.searchBarText}>
-            {placeHolder}
-          </AyezText>
+            style={{
+              height: 30,
+              width: 30,
+              marginRight: 20,
+              tintColor: colors.borderGrey
+              // backgroundColor: 'red'
+            }}
+          />
+        </TouchableOpacity>
       </TouchableOpacity>
     );
   }
@@ -59,10 +80,11 @@ const styles = {
     height: 20,
     width: 20,
     marginLeft: 12,
-    marginRight: 8,
+    marginRight: 5,
     tintColor: colors.borderGrey
   },
   searchBarText: {
+    width: '90%',
     fontSize: 12,
     color: colors.steel
   }
