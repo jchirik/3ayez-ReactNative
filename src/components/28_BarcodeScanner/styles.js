@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   barcodeImage: {
     height: 25,
     width: 25,
-    tintColor: colors.borderGrey,
+    tintColor: colors.black,
     marginHorizontal: 10
   },
   barcodeText: {

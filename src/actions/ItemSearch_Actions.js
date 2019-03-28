@@ -57,7 +57,7 @@ export const onSelectSearchBarcode = (seller_id, barcode) => {
       })
       .then(res => {
         const { hits: items } = res;
-          dispatch({ type: ITEM_BARCODE_SEARCH_SUCCESS, payload: items });        
+        dispatch({ type: ITEM_BARCODE_SEARCH_SUCCESS, payload: items });
       })
       .catch(err => {
         dispatch({ type: ITEM_BARCODE_SEARCH_ERROR });

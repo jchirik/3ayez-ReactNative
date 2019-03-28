@@ -118,7 +118,7 @@ class BarcodeScanner extends Component {
       <View style={[styles.overlay, styles.bottomOverlay]}>
         <View style={styles.barcodeView}>
           <Image
-            source={images.magnifying2Icon}
+            source={images.barcodeImage}
             resizeMode={'contain'}
             style={styles.barcodeImage}
           />
