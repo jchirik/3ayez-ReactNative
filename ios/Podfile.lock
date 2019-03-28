@@ -244,13 +244,13 @@ PODS:
     - React
   - React (0.57.1):
     - React/Core (= 0.57.1)
-  - react-native-camera (2.1.1):
+  - react-native-camera (2.2.1):
     - React
-    - react-native-camera/RCT (= 2.1.1)
-    - react-native-camera/RN (= 2.1.1)
-  - react-native-camera/RCT (2.1.1):
+    - react-native-camera/RCT (= 2.2.1)
+    - react-native-camera/RN (= 2.2.1)
+  - react-native-camera/RCT (2.2.1):
     - React
-  - react-native-camera/RN (2.1.1):
+  - react-native-camera/RN (2.2.1):
     - React
   - react-native-fbsdk (0.8.0):
     - React
@@ -440,6 +440,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-restart/ios"
   React:
     :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   react-native-google-maps:
@@ -458,7 +460,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  CodePush: 338a023972c64636503e8886cf4cb6ec27dd1c01
+  CodePush: f6b348759cdc42c734d9c3a46ceb2997c270b12e
   Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
@@ -499,19 +501,19 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  RCTRestart: 550203a210a1df35f587856a79d35f5813c6909d
-  React: b4e0982b0ed6a7de90e96cf6fe5cf036aeadd1ec
-  react-native-camera: 9cd8cf5d5f75917a978d3781f315b8191eaee1ff
-  react-native-fbsdk: 5c3ff4dda057e17d3b4b5491033fc653d423e71d
-  react-native-google-maps: 06d7adbb45aafbad5fd151f9e6f6856f546d7f58
-  react-native-maps: 5a3de82c153db99e5ac939cb2ed576f245514016
-  RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
-  RNLanguages: 962e562af0d34ab1958d89bcfdb64fafc37c513e
+  RCTRestart: 2f9ddcfd9abb887f123b6580cec64d72fb6cccaa
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-camera: 25e0f493dde6e15c814e734685934d55f46e45b2
+  react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
+  react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
+  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
+  RNLanguages: e3ae05ef105937645218272429dac0c3f7633451
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
-  yoga: 5e2e4bcf11188977f799b64625dc5913c2aea8fd
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
   ZDCChat: 1def9764647bb81cf71aebd9df38aa4024c52d12
 
-PODFILE CHECKSUM: 1266bbc5053844f70b81fcd4cd7475f82c4e6d75
+PODFILE CHECKSUM: c07dc15202a6913d207f3a8e472354a3f6899b90
 
 COCOAPODS: 1.5.3
