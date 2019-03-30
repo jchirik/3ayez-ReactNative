@@ -18,6 +18,6 @@
 #import “React/RCTEventEmitter.h” // Required when used as a Pod in a Swift project
 #endif
 
-@interface ZendeskChat : NSObject <RCTBridgeModule>
-
+@interface ZendeskChat : RCTEventEmitter <RCTBridgeModule>
 @end
+

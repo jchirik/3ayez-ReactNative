@@ -1,7 +1,6 @@
 //  Created by react-native-create-bridge
 
 #import "ZendeskChat.h"
-#import "Zendesk.h"
 
 // import RCTBridge
 #if __has_include(<React/RCTBridge.h>)
@@ -21,8 +20,26 @@
 #import “React/RCTEventDispatcher.h” // Required when used as a Pod in a Swift project
 #endif
 
+#import "ChatManger.h"
+
 @implementation ZendeskChat
 @synthesize bridge = _bridge;
+
+-(id) init {
+  self = [super init];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(receiveTestNotification:)
+                                               name:ReceiveMessageNotification
+                                             object:nil];
+
+  return self;
+}
+
+- (void) receiveTestNotification:(NSNotification *) notification
+{
+  if ([[notification name] isEqualToString:ReceiveMessageNotification])
+    [self sendEventWithName: ReceiveMessageEvent body: nil];
+}
 
 // Export a native module
 // https://facebook.github.io/react-native/docs/native-modules-ios.html
@@ -30,16 +47,19 @@ RCT_EXPORT_MODULE();
 
 - (NSDictionary *)constantsToExport
 {
-  return Zendesk.constants;
+  return ChatManger.constants;
 }
 
 RCT_EXPORT_METHOD(start: (NSDictionary*) params) {
-  NSLog(@"RN binding - Native View - Loading MyViewController.swift");
   dispatch_async(dispatch_get_main_queue(), ^{
-    Zendesk *zenDisk = [[Zendesk alloc] init];
-    [zenDisk start: params];
+    [ChatManger start: params];
   });
 
+}
+
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[ReceiveMessageEvent];
 }
 
 

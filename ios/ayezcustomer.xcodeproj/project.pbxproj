@@ -88,8 +88,8 @@
 		D2CD30782247C52800D1741C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CD30772247C52700D1741C /* Social.framework */; };
 		D2CD307A2247C53200D1741C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CD30792247C53200D1741C /* MessageUI.framework */; };
 		D61B810B223A527D00F162E5 /* ZendeskChat.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B80DE223A527C00F162E5 /* ZendeskChat.m */; };
-		D61B8110223A52B800F162E5 /* ChatStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810C223A52B800F162E5 /* ChatStyle.m */; };
-		D61B8111223A52B800F162E5 /* Zendesk.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810F223A52B800F162E5 /* Zendesk.m */; };
+		D61B8110223A52B800F162E5 /* ChatManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D61B810C223A52B800F162E5 /* ChatManger.m */; };
+		D61EBD912247CCC100162998 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D61EBD8D2247CBD200162998 /* libReactNativeConfig.a */; };
 		D6C3662A223ABD7400B00B9B /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -416,6 +416,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNShare;
 		};
+		D61EBD8C2247CBD200162998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D61EBD872247CBD100162998 /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
+			remoteInfo = ReactNativeConfig;
+		};
+		D61EBD8E2247CBD200162998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D61EBD872247CBD100162998 /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DF7F6AC203AA09B00D0EAB7;
+			remoteInfo = "ReactNativeConfig-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -501,12 +515,12 @@
 		D2CD30772247C52700D1741C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D2CD30792247C53200D1741C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D2CE0EA621E0F66F00D6EF99 /* ayezcustomer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ayezcustomer.entitlements; path = ayezcustomer/ayezcustomer.entitlements; sourceTree = "<group>"; };
+		D60B250D2247941500018BD3 /* ZDCChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChat.bundle; sourceTree = "<group>"; };
 		D61B80DE223A527C00F162E5 /* ZendeskChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZendeskChat.m; sourceTree = "<group>"; };
 		D61B810A223A527C00F162E5 /* ZendeskChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZendeskChat.h; sourceTree = "<group>"; };
-		D61B810C223A52B800F162E5 /* ChatStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatStyle.m; sourceTree = "<group>"; };
-		D61B810D223A52B800F162E5 /* Zendesk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zendesk.h; sourceTree = "<group>"; };
-		D61B810E223A52B800F162E5 /* ChatStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatStyle.h; sourceTree = "<group>"; };
-		D61B810F223A52B800F162E5 /* Zendesk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zendesk.m; sourceTree = "<group>"; };
+		D61B810C223A52B800F162E5 /* ChatManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatManger.m; sourceTree = "<group>"; };
+		D61B810E223A52B800F162E5 /* ChatManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatManger.h; sourceTree = "<group>"; };
+		D61EBD872247CBD100162998 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -529,6 +543,7 @@
 				354EB352222994D700740DB3 /* libSplashScreen.a in Frameworks */,
 				D2615AB0221709BE00E38B88 /* libreact-native-fbsdk.a in Frameworks */,
 				D2615AAA221709AD00E38B88 /* libFBSDKCoreKit.a in Frameworks */,
+				D61EBD912247CCC100162998 /* libReactNativeConfig.a in Frameworks */,
 				D2615AAC221709AD00E38B88 /* libFBSDKLoginKit.a in Frameworks */,
 				D2615AAE221709AD00E38B88 /* libFBSDKShareKit.a in Frameworks */,
 				D2B136E9220465C200D3B109 /* libFastImage.a in Frameworks */,
@@ -659,13 +674,6 @@
 		13B07FAE1A68108700A75B9A /* ayezcustomer */ = {
 			isa = PBXGroup;
 			children = (
-				D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */,
-				D61B810E223A52B800F162E5 /* ChatStyle.h */,
-				D61B810C223A52B800F162E5 /* ChatStyle.m */,
-				D61B810D223A52B800F162E5 /* Zendesk.h */,
-				D61B810F223A52B800F162E5 /* Zendesk.m */,
-				D61B810A223A527C00F162E5 /* ZendeskChat.h */,
-				D61B80DE223A527C00F162E5 /* ZendeskChat.m */,
 				D2CE0EA621E0F66F00D6EF99 /* ayezcustomer.entitlements */,
 				D22030A622073105005D1B9D /* launch.jpg */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -746,6 +754,7 @@
 			isa = PBXGroup;
 			children = (
 				D2CD30452247C4FA00D1741C /* RNShare.xcodeproj */,
+				D61EBD872247CBD100162998 /* ReactNativeConfig.xcodeproj */,
 				354EB3222229949800740DB3 /* SplashScreen.xcodeproj */,
 				D2B136A42204651600D3B109 /* FastImage.xcodeproj */,
 				D23012C121F7E2D7006332ED /* TPSStripe.xcodeproj */,
@@ -782,6 +791,7 @@
 			children = (
 				8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* ayezcustomer */,
+				D661339122479BB700E88992 /* zendeskChat */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* ayezcustomerTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -911,8 +921,31 @@
 			isa = PBXGroup;
 			children = (
 				D2CD30722247C4FA00D1741C /* libRNShare.a */,
+		
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+			D61EBD882247CBD100162998 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D61EBD8D2247CBD200162998 /* libReactNativeConfig.a */,
+				D61EBD8F2247CBD200162998 /* libReactNativeConfig-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D661339122479BB700E88992 /* zendeskChat */ = {
+			isa = PBXGroup;
+			children = (
+				D60B250D2247941500018BD3 /* ZDCChat.bundle */,
+				D6C36629223ABD7400B00B9B /* ZDCChatStrings.bundle */,
+				D61B810E223A52B800F162E5 /* ChatManger.h */,
+				D61B810C223A52B800F162E5 /* ChatManger.m */,
+				D61B810A223A527C00F162E5 /* ZendeskChat.h */,
+				D61B80DE223A527C00F162E5 /* ZendeskChat.m */,
+			);
+			name = zendeskChat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1091,6 +1124,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = D61EBD882247CBD100162998 /* Products */;
+					ProjectRef = D61EBD872247CBD100162998 /* ReactNativeConfig.xcodeproj */;
 				},
 				{
 					ProductGroup = 8E7D4B111F8AFD6F00699FE4 /* Products */;
@@ -1436,6 +1473,20 @@
 			remoteRef = D2CD30712247C4FA00D1741C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D61EBD8D2247CBD200162998 /* libReactNativeConfig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeConfig.a;
+			remoteRef = D61EBD8C2247CBD200162998 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D61EBD8F2247CBD200162998 /* libReactNativeConfig-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReactNativeConfig-tvOS.a";
+			remoteRef = D61EBD8E2247CBD200162998 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1576,7 +1627,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Stripe/Stripe.bundle",
@@ -1595,7 +1646,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1615,9 +1666,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				D61B810B223A527D00F162E5 /* ZendeskChat.m in Sources */,
-				D61B8111223A52B800F162E5 /* Zendesk.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				D61B8110223A52B800F162E5 /* ChatStyle.m in Sources */,
+				D61B8110223A52B800F162E5 /* ChatManger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1745,6 +1795,9 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = ayezcustomer/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1779,6 +1832,9 @@
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = ayezcustomer/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
+				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
+				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
