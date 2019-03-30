@@ -34,10 +34,10 @@
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
   </style>
 
-  <!--Customize where chat widget appears-->
-  <style name="chat_widget" parent="_chat_widget">
-    <item name="anchor">bottom_left</item>
-  </style>
+
+
+
+
 
   <!--Customize chat colors-->
   <color name="chat_bubble_visitor">@color/greenBlue</color>
@@ -47,5 +47,33 @@
     <item name="android:gravity">center</item>
     <item name="android:layout_gravity">center</item>
     <item name="android:layout_marginRight">0dp</item>
+  </style>
+
+  <!-- styles -->
+  <!--Customize where chat widget appears-->
+  <style name="chat_widget">
+    <item name="anchor">bottom_left</item>
+  </style>
+
+  <style name="chat_widget_background">
+    <item name="android:background">@drawable/icon_customer_service_widget</item>
+  </style>
+
+  <!-- dimensions -->
+  <dimen name="widget_vertical_margin">16dp</dimen>
+  <dimen name="widget_horizontal_margin">16dp</dimen>
+  <dimen name="widget_width">50dp</dimen>
+  <dimen name="widget_height">50dp</dimen>
+
+  <!-- colors -->
+  <color name="typing_indicator_primary">@color/offWhite</color>
+  <color name="typing_indicator_secondary">@color/offWhite</color>
+
+  <dimen name="typing_indicator_diameter">3dp</dimen>
+  <dimen name="typing_indicator_spacing">1dp</dimen>
+
+  <style name="_chat_widget_unread_notification">
+    <item name="android:textSize">15sp</item>
+    <item name="android:textColor">@color/offWhite</item>
   </style>
 </resources>

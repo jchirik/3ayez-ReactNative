@@ -3,13 +3,21 @@ package com.ayez.ayezcustomer;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.widget.Toast;
 
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.microsoft.codepush.react.CodePush;
 import com.imagepicker.ImagePickerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -49,9 +57,10 @@ import com.dylanvann.fastimage.FastImageViewPackage;
 import java.util.Arrays;
 import java.util.List;
 
-import com.facebook.FacebookSdk;
 import com.facebook.CallbackManager;
-import com.facebook.appevents.AppEventsLogger;
+import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.api.ZopimChatApi;
+import com.zopim.android.sdk.prechat.PreChatForm;
 
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
@@ -134,6 +143,25 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   @Override
   public void onCreate() {
     super.onCreate();
+
     SoLoader.init(this, /* native exopackage */ false);
+    ZopimChat.init(getString(R.string.zopim_api_key));
+//    ZopimChat.init(getString(R.string.zopim_api_key_debug));
+
+
+
+    FirebaseInstanceId.getInstance().getInstanceId()
+      .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+        @Override
+        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+          if (!task.isSuccessful()) {
+            return;
+          }
+
+          if(task.getResult() != null) {
+            ZopimChatApi.setPushToken(task.getResult().getToken());
+          }
+        }
+      });
   }
 }

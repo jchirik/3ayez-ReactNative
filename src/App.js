@@ -26,7 +26,6 @@ class App extends Component {
       isSplashShown: true
     };
   }
-
   componentDidMount() {
     let that = this;
 
@@ -92,7 +91,7 @@ class App extends Component {
       });
     }
   }
-
+  
   render() {
     if (!this.state.isSplashShown) {
       SplashScreen.hide();
