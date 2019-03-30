@@ -21,6 +21,7 @@ import com.facebook.react.HeadlessJsTaskService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.zopim.android.sdk.api.ZopimChatApi;
 import com.zopim.android.sdk.model.PushData;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import java.util.Random;
 
@@ -39,8 +40,6 @@ public class FirebaseMessagingService extends RNFirebaseMessagingService {
 
   @Override
   public void onMessageReceived(RemoteMessage message) {
-    Log.e("HELLO666", message.toString());
-
     final PushData pushData = PushData.getChatNotification(message.getData());
 
     switch (pushData.getType()) {
@@ -57,7 +56,7 @@ public class FirebaseMessagingService extends RNFirebaseMessagingService {
           });
         } else {
           createNotificationChannel();
-          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+          Intent intent = new Intent(getApplicationContext(), ZopimChatActivity.class);
           intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
           NotificationCompat.Builder builder = new NotificationCompat.Builder(this, SUPPORT_CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -70,6 +69,8 @@ public class FirebaseMessagingService extends RNFirebaseMessagingService {
         }
         break;
     }
+
+    ZopimChatApi.onMessageReceived(pushData);
 
     super.onMessageReceived(message);
   }

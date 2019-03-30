@@ -26,7 +26,6 @@ class App extends Component {
       isSplashShown: true
     };
   }
-
   componentDidMount() {
     let that = this;
 
@@ -34,7 +33,7 @@ class App extends Component {
       that.setState({ isSplashShown: false });
     }, SPLASH_SCREEN_TIME_OUT);
   }
-
+  
   componentWillUnmount() {
     zendesk.zendeskEmitter.removeAllListeners();
   }
@@ -92,7 +91,7 @@ class App extends Component {
       });
     }
   }
-
+  
   render() {
     if (!this.state.isSplashShown) {
       SplashScreen.hide();

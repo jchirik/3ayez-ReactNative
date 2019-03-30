@@ -169,10 +169,10 @@ class CurrentLocationSelect extends Component {
         semibold
         size={20}
         style={{
+          alignSelf: 'center',
           textAlign: 'center',
           marginTop: 20,
-          marginLeft: 100,
-          marginRight: 100
+          width: 280
          }}
         >{strings('AddressCreate.queryCL')}</AyezText>
 
