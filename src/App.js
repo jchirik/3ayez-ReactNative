@@ -27,12 +27,10 @@ class App extends Component {
       isSplashShown: true
     };
   }
-
   componentDidMount() {
     let that = this;
     setTimeout(function(){that.setState({ isSplashShown: false })}, SPLASH_SCREEN_TIME_OUT);
   }
-
   codePushStatusDidChange(status) {
     switch (status) {
       case codePush.SyncStatus.CHECKING_FOR_UPDATE:
@@ -73,7 +71,7 @@ class App extends Component {
       })
     }
   }
-
+  
   render() {
     if (!this.state.isSplashShown) {
       SplashScreen.hide();
