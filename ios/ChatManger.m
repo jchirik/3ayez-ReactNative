@@ -9,26 +9,32 @@
 #import <Foundation/Foundation.h>
 #import <ZDCChat/ZDCChat.h>
 #import "ChatManger.h"
-
+#import "AppDelegate.h"
 
 
 @implementation ChatManger : NSObject
 
++(void) initZendeskChat: (NSString *) accountKey {
+  [ZDCChat initializeWithAccountKey: accountKey];
+}
 
 + (void) applyStyle {
 
 
   UIFont *ayezFont = [UIFont fontWithName:@"Helvetica-Bold" size: 15];
-  UIFont *buttonFont = [UIFont fontWithName:@"Helvetica" size: 18];
   UIFont *titleFont = [UIFont fontWithName:@"Helvetica-Bold" size: 18];
-  
-  NSDictionary *navbarTitleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+  NSDictionary *navbarAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                     WhiteColor ,NSForegroundColorAttributeName, titleFont, NSFontAttributeName,nil];
-  NSDictionary *navbarButtonAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         WhiteColor ,NSForegroundColorAttributeName, buttonFont, NSFontAttributeName,nil];
-  [[ZDCChat instance].overlay setEnabled:NO];
 
   [[ZDCChat instance].overlay setEnabled:YES];
+  [[ZDCChatOverlay appearance] setOverlayBackgroundImage:  [UIImage imageNamed:@"customerService"]];
+  [[ZDCChatOverlay appearance] setInsets: [NSValue valueWithUIEdgeInsets: UIEdgeInsetsMake(0, 10, 60, 0)] ];
+  [[ZDCChatOverlay appearance] setMessageCountColor: WhiteColor];
+  [[ZDCChatOverlay appearance] setTypingIndicatorDiameter: @(3)];
+  [[ZDCChatOverlay appearance] setTypingIndicatorColor: WhiteColor];
+  [[ZDCChatOverlay appearance] setMessageCountFont:[UIFont fontWithName:@"Helvetica-Bold" size: 15]];
+
+
 
   [[ZDCLoadingView appearance] setLoadingLabelTextColor:BlueGreenColor ];
 
@@ -48,11 +54,12 @@
 
   [[ZDCAgentAttachmentCell appearance] setBubbleCornerRadius:BubbleCornerRadius];
 
-  [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleAttributes];
+  [[UINavigationBar appearance] setTitleTextAttributes:navbarAttributes];
   [[UINavigationBar appearance] setBarTintColor:BlueGreenColor];
   [[UINavigationBar appearance] setTintColor: WhiteColor];
-  [[UIBarButtonItem appearance] setTitleTextAttributes: navbarButtonAttributes forState:0];
-  
+
+  [[ZDCChatUI appearance] setEndChatButtonImage: ExitIcon];
+
   UIUserInterfaceLayoutDirection direction = [UIApplication sharedApplication].userInterfaceLayoutDirection;
 
   if (direction == UIUserInterfaceLayoutDirectionRightToLeft) {
@@ -73,17 +80,62 @@
     UIViewController *controller  = [ChatManger topViewController];
     if (![controller isKindOfClass:[ZDUViewController class]]) {
       [[NSNotificationCenter defaultCenter]
-       postNotificationName:@"TestNotification"
+       postNotificationName:ReceiveMessageNotification
        object:self];
     }
   }
+}
+
++(void) start: (NSDictionary*) params {
+  NSString *phoneNumber = [params objectForKey:(VisitorPhoneNumber)];
+  NSString *visitorName = [params objectForKey:(VisitorName)];
+  if ([phoneNumber isEqualToString:@""]) {
+    [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
+      user.shouldPersist = false;
+    }];
+  } else {
+    [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
+      user.phone = phoneNumber;
+      user.name = visitorName;
+      user.shouldPersist = false;
+      [user addNote:[params objectForKey:(VisitorNote)]];
+    }];
+  }
+
+  AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+  [ZDCChat startChatIn:appDelegate.rootViewController.navigationController withConfig:^(ZDCConfig *config) {
+    config.preChatDataRequirements.name = ZDCPreChatDataRequired;
+    config.preChatDataRequirements.email = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.phone = ZDCPreChatDataRequired;
+    config.preChatDataRequirements.department = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.message = ZDCPreChatDataNotRequired;
+    config.emailTranscriptAction = ZDCEmailTranscriptActionNeverSend;  }];
+}
+
++ (NSDictionary *)constants {
+  static NSDictionary *constatnsDict = nil;
+  if (constatnsDict == nil) {
+    constatnsDict = @{
+                       ZendeskUrl : ZendeskUrl,
+                       ApplicationId  : ApplicationId,
+                       OauthClientId : OauthClientId,
+                       ZopimAccountKey : ZopimAccountKey,
+                       VisitorName  : VisitorName,
+                       VisitorPhoneNumber: VisitorPhoneNumber,
+                       VisitorEmail : VisitorEmail,
+                       VisitorNote : VisitorNote,
+                       ReceiveMessageEvent: ReceiveMessageEvent
+                       };
+  }
+  return constatnsDict;
 }
 
 + (UIViewController *)topViewController{
   return [self topViewController: [UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
-+ (UIViewController *)topViewController:(UIViewController *)rootViewController
+
++(UIViewController *)topViewController:(UIViewController *)rootViewController
 {
   if ([rootViewController isKindOfClass:[UINavigationController class]]) {
     UINavigationController *navigationController = (UINavigationController *)rootViewController;
