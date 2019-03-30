@@ -87,23 +87,29 @@
 }
 
 +(void) start: (NSDictionary*) params {
-
-  [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
-    user.phone = [params objectForKey:(VisitorPhoneNumber)];
-    user.name = [params objectForKey:(VisitorName)];
-    user.email = [params objectForKey:(VisitorEmail)];
-    [user addNote:[params objectForKey:(VisitorNote)]];
-  }];
+  NSString *phoneNumber = [params objectForKey:(VisitorPhoneNumber)];
+  NSString *visitorName = [params objectForKey:(VisitorName)];
+  if ([phoneNumber isEqualToString:@""]) {
+    [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
+      user.shouldPersist = false;
+    }];
+  } else {
+    [ZDCChat updateVisitor:^(ZDCVisitorInfo *user) {
+      user.phone = phoneNumber;
+      user.name = visitorName;
+      user.shouldPersist = false;
+      [user addNote:[params objectForKey:(VisitorNote)]];
+    }];
+  }
 
   AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
   [ZDCChat startChatIn:appDelegate.rootViewController.navigationController withConfig:^(ZDCConfig *config) {
-    config.preChatDataRequirements.name = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.name = ZDCPreChatDataRequired;
     config.preChatDataRequirements.email = ZDCPreChatDataNotRequired;
-    config.preChatDataRequirements.phone = ZDCPreChatDataNotRequired;
+    config.preChatDataRequirements.phone = ZDCPreChatDataRequired;
     config.preChatDataRequirements.department = ZDCPreChatDataNotRequired;
     config.preChatDataRequirements.message = ZDCPreChatDataNotRequired;
-    config.emailTranscriptAction = ZDCEmailTranscriptActionNeverSend;
-  }];
+    config.emailTranscriptAction = ZDCEmailTranscriptActionNeverSend;  }];
 }
 
 + (NSDictionary *)constants {

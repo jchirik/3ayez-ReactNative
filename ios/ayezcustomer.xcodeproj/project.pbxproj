@@ -921,12 +921,11 @@
 			isa = PBXGroup;
 			children = (
 				D2CD30722247C4FA00D1741C /* libRNShare.a */,
-		
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-			D61EBD882247CBD100162998 /* Products */ = {
+		D61EBD882247CBD100162998 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				D61EBD8D2247CBD200162998 /* libReactNativeConfig.a */,

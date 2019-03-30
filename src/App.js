@@ -33,7 +33,7 @@ class App extends Component {
       that.setState({ isSplashShown: false });
     }, SPLASH_SCREEN_TIME_OUT);
   }
-  
+
   componentWillUnmount() {
     zendesk.zendeskEmitter.removeAllListeners();
   }
