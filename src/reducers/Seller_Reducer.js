@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   display_name: {},
   minimum: 100,
   phone: '',
+  popup: null,
 
   delivery_fee: 3,
 

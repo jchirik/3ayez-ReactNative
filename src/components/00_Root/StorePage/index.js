@@ -19,6 +19,7 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import SideMenu from 'react-native-side-menu';
 
+import { StorePopup } from './StorePopup';
 import FeaturedBrowse from './01_FeaturedBrowse';
 import CategoriesBrowse from './02_CategoriesBrowse';
 import SettingsMenu from './SettingSideMenu';
@@ -79,6 +80,7 @@ class StorePage extends Component {
         selected_tab: 0,
         itemHeight: 0,
 
+        popupVisible: false,
         isSideMenuOpen: false,
         isAddressSelectionVisible: false
       };
@@ -107,7 +109,18 @@ class StorePage extends Component {
           tabBarHeight: 0
         })
       }
+
+      if (this.props.popup) {
+        setTimeout(() => {
+          this.setState({ popupVisible: true })
+        }, 300)
+      }
     }
+
+    // console.log('SELLERID', this.props.seller_id, prevProps.seller_id)
+    // if (this.props.popup && (this.props.seller_id !== prevProps.seller_id)) {
+
+    // }
   }
 
   componentWillUnmount() {
@@ -341,6 +354,11 @@ class StorePage extends Component {
           }}
           pointerEvents="none"
         />
+        <StorePopup
+          visible={this.state.popupVisible}
+          onClose={() => this.setState({ popupVisible: false })}
+          popup={this.props.popup}
+        />
       </SideMenu>
     );
   }
@@ -358,6 +376,7 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     categories_loading,
     location_text,
     display_name,
+    popup,
     requestFailed
   } = Seller;
 
@@ -377,6 +396,7 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     area,
     seller_id: id,
     seller_color: color,
+    popup,
     logo_url,
     cover_url,
     promotions,
