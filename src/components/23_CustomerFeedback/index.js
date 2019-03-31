@@ -77,7 +77,7 @@ class CustomerFeedback extends Component {
       seller_image = (
         <Image
           style={{
-            width: 60, height: 60,
+            width: 140, height: 60,
             margin: 6,
             borderRadius: 10
           }}
