@@ -789,10 +789,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				353004232244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf */,
-				353004212244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf */,
-				353004222244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf */,
-				353004202244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf */,
 				8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* ayezcustomer */,
 				D661339122479BB700E88992 /* zendeskChat */,
@@ -983,7 +979,6 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */,
 				83B761F71FE42BDD00F21A7A /* Crashlytics */,
-				C981C83490DB7F9E592332A7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1070,8 +1065,10 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -1505,10 +1502,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				353004242244147400F8CE31 /* Frutiger LT Arabic 75 Black.ttf in Resources */,
-				353004252244147400F8CE31 /* Frutiger LT Arabic 55 Roman.ttf in Resources */,
-				353004262244147400F8CE31 /* Frutiger LT Arabic 65 Bold.ttf in Resources */,
-				353004272244147400F8CE31 /* Frutiger LT Arabic 45 Light.ttf in Resources */,
 				D276039421DEA2650037DE81 /* Poppins-SemiBold.otf in Resources */,
 				D276039921DEA2650037DE81 /* Cairo-Bold.ttf in Resources */,
 				D276039021DEA2650037DE81 /* Poppins-Thin.otf in Resources */,
@@ -1629,32 +1622,13 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
-		C981C83490DB7F9E592332A7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E3571EA012ECF1F3BF17F035 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Stripe/Stripe.bundle",
@@ -1673,7 +1647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -179,7 +179,7 @@ const listenToOngoingOrders = (dispatch) => {
         });
       });
 
-      const activeOrders = orders.filter(order => (order.timeslot.end + 18000000) > Date.now())
+      const activeOrders = orders.filter(order => ((order.timeslot.end + 18000000) > Date.now()) && !order.customer_feedback)
       dispatch({ type: ONGOING_ORDERS_SET, payload: { orders: activeOrders } });
 
       console.log('ONGOING_ORDERS_SET', orders)
