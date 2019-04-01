@@ -341,13 +341,13 @@
   },
   "Referral": {
     "referAndWin": "REFER AND WIN",
-    "title": "Earn 50 EGP",
-    "subtitle": "50 EGP Free for you and a friend",
-    "description": "When a friend applies your coupon code on their first order, they receive a 50EGP discount and you receive 50EGP to your wallet.",
+    "title": "Earn 10 EGP",
+    "subtitle": "10 EGP Free for you and a friend",
+    "description": "When a friend applies your coupon code on their first order, they receive a 10EGP discount and you receive 10EGP to your wallet.",
     "tapToCopy": "Tap to copy",
     "copied": "Copied!",
     "shareWhatsApp": "Share with Whatsapp",
-    "whatsAppTitle": "50EGP from {{name}}",
-    "whatsAppMessage": "Use this coupon for 50EGP off your first order: {{referral_code}}"
+    "whatsAppTitle": "10EGP from {{name}}",
+    "whatsAppMessage": "Download 3ayez and get 10EGP off your first order with this code: {{referral_code}}"
   }
 }
