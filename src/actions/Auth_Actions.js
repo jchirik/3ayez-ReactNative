@@ -1,5 +1,6 @@
 
 import firebase from 'react-native-firebase';
+import { Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { AppEventsLogger } from 'react-native-fbsdk';
 
@@ -71,8 +72,22 @@ export const authPhoneLogin = (phone, call_code) => {
     dispatch({ type: PHONE_ENTRY_BEGIN });
     firebase.auth().signInWithPhoneNumber(formatted_phone)
     .then(confirmation_function => {
-      dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
-      navigateTo(sceneKeys.verifyCode)
+
+      if (Platform.OS === "ios") {
+        dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
+        navigateTo(sceneKeys.verifyCode)
+      } else {
+        // IF ANDROID - wait half a second. if not logged in, then go to verify code
+        // this is bc many phone skip confirmation, automatically detect
+        setTimeout(() => {
+          dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
+
+          const { currentUser } = firebase.auth();
+          if (!currentUser) {
+            navigateTo(sceneKeys.verifyCode)
+          }
+        }, 500);
+      }
 
       try {
         AppEventsLogger.logEvent('ACCOUNT_REGISTERED');
