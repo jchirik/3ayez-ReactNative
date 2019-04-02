@@ -24,6 +24,7 @@ import {
   translate,
   FONT_REGULAR
 } from '../../i18n.js';
+import { navigateBack } from '../../router';
 
 
 class AdditionalNotes extends Component {
