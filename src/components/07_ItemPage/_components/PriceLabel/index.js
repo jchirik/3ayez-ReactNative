@@ -35,12 +35,12 @@ export default ({ price, promotion_price, item }) => {
         <AyezText regular size={14} color={colors.fadedRed}>{savingsText}</AyezText>
       ) : null }
       <View style={styles.priceContainer}>
-        <AyezText medium size={16} style={{
+        <AyezText medium size={12} style={{
           textDecorationLine: 'line-through',
           textDecorationStyle: 'solid',
           marginRight: 7
         }}>{previousPriceText}</AyezText>
-        <AyezText medium size={16}>{mainPriceText}</AyezText>
+        <AyezText medium size={10}>{mainPriceText}</AyezText>
       </View>
     </View>
   );
