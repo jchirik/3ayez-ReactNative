@@ -348,7 +348,6 @@
     "copied": "تم النسخ",
     "shareWhatsApp": "Share with Whatsapp",
     "whatsAppTitle": "١٠ جنيه من {{name}}",
-    "whatsAppMessage": " حمل ابليكيشن عايز واحصل على ١٠ جنيه خصم لأول طلب عن طريق استخدام الكوبون :
-{{referral_code}}"
+    "whatsAppMessage": " حمل ابليكيشن عايز واحصل على ١٠ جنيه خصم لأول طلب عن طريق استخدام الكوبون : {{referral_code}}"
   }
 }
