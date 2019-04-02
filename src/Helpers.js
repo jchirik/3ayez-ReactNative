@@ -6,6 +6,16 @@ import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
+export const ORDER_STATUS = Object.freeze({
+    CANCELED_BY_USER: 300,
+    CANCELED_BY_STORE: 400,
+    DELIVERY_FAILED: 500
+  });
+
+export const REJECTION_STATUS = [
+  ORDER_STATUS.CANCELED_BY_STORE, ORDER_STATUS.CANCELED_BY_USER, ORDER_STATUS.DELIVERY_FAILED
+];
+
 export const ZOPIM_ACCOUNT_KEY = __DEV__
   ? '6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q'
   : 'pRVfyd50YAOsuwoV7WHrDXi5UBLmKE78';

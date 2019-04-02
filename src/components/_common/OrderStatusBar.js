@@ -12,7 +12,8 @@ import { Actions } from 'react-native-router-flux';
 
 import {
   AYEZ_GREEN,
-  STATUS_BAR_HEIGHT
+  STATUS_BAR_HEIGHT,
+  REJECTION_STATUS
 } from '../../Helpers.js';
 
 import images from '../../theme/images'
@@ -33,7 +34,9 @@ class OrderStatusBar extends PureComponent {
       orders
     } = this.props;
 
-    if ( orders.length > 0 &&  orders.some( order => order.status != 300)) {
+    if ( orders.length > 0 &&  orders.some( order => 
+      !REJECTION_STATUS.includes(order.status)  
+    )) {
       // track your current order
       let onPress = () => {
         navigateTo(sceneKeys.orderTracker, { order_id: orders[0].id })
