@@ -133,7 +133,10 @@ class ItemPage extends Component {
       //   this._showDeliveryDelayModal()}
     return (
       <View style={styles.container}>
-        <ScrollView style={{ flex: 1, paddingTop: 48, marginLeft: 24, marginRight: 24 }}>
+        <ScrollView style={{ flex: 1, paddingTop: 48, marginLeft: 24, marginRight: 24 }}
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+        >
             <TouchableOpacity
               onPress={() => {
                 navigateTo(sceneKeys.itemImageView, { imageUrl: image_url })
@@ -224,6 +227,7 @@ class ItemPage extends Component {
               />
             )}
           </View> */}
+          <View style={{ height: 90 }} />
         </ScrollView>
 
 
