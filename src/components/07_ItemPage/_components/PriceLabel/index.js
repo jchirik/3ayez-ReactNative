@@ -40,7 +40,7 @@ export default ({ price, promotion_price, item }) => {
           textDecorationStyle: 'solid',
           marginRight: 7
         }}>{previousPriceText}</AyezText>
-        <AyezText medium size={10}>{mainPriceText}</AyezText>
+        <AyezText medium size={12}>{mainPriceText}</AyezText>
       </View>
     </View>
   );
