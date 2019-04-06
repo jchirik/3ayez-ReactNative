@@ -183,7 +183,7 @@
     "selectLaterTime": "في وقت لاحق"
   },
   "Checkout": {
-    "header": "خروج",
+    "header": "مراجعة الطلب",
     "addressField": "العنوان:",
     "deliveryTimeField": "وقت التوصيل :",
     "paymentMethodField": "طريقة الدفع:",
