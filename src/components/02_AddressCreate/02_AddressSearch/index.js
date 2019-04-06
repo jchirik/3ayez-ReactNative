@@ -64,15 +64,16 @@ class AddressSearch extends Component {
             style={{
               width: 24,
               height: 24,
-              marginLeft: 10,
-              marginRight: 8
+              marginLeft: 10
              }}
             resizeMode={'contain'}
           />
           <View style={{
             flex: 1,
             alignItems: 'flex-start',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            marginLeft: 10,
+            marginRight: 10
           }}>
             <AyezText semibold style={{
               fontSize: 15,
