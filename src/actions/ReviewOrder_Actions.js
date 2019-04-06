@@ -101,6 +101,7 @@ export const fetchSubstitutionOptions = (sellerID, item, order_items) => {
       attributesToRetrieve: [
         'title_arab',
         'title_engl',
+        'description',
         'price',
         'promotion_price',
         'thumbnail_url',

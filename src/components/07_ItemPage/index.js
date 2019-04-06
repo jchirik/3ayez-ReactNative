@@ -121,6 +121,8 @@ class ItemPage extends Component {
   render() {
     const { item, seller, items_array } = this.props;
 
+    console.log(item)
+
     const { image_url, price, promotion_price } = item;
     const foundItem = items_array.find(w_item => w_item.upc === item.upc);
     const quantity = foundItem ? foundItem.quantity : 0;
@@ -154,7 +156,18 @@ class ItemPage extends Component {
 
           <View style={{ height: 4 }} />
 
-          <AyezText semibold size={18} >{translate(item)}</AyezText>
+          <AyezText semibold size={18}
+            style={{ alignSelf: 'flex-start', textAlign: 'left' }}
+          >{translate(item)}</AyezText>
+
+          {translate(item.description) ? (
+            <AyezText
+              regular
+              size={14}
+              color={'#333333'}
+              style={{ marginTop: 10, alignSelf: 'flex-start', textAlign: 'left' }}
+              >{translate(item.description).replace(new RegExp('<br>', 'g'), '\n')}</AyezText>
+          ) : null}
 
           <View style={{ height: 22 }} />
 

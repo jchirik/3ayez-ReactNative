@@ -37,6 +37,7 @@ const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
             attributesToRetrieve: [
               'title_arab',
               'title_engl',
+              'description',
               'price',
               'promotion_price',
               'thumbnail_url',
@@ -59,6 +60,7 @@ const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
             attributesToRetrieve: [
               'title_arab',
               'title_engl',
+              'description',
               'price',
               'promotion_price',
               'thumbnail_url',

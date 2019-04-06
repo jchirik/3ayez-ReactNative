@@ -82,6 +82,7 @@ export const onSelectSearchSubcategory = (seller_id, subcategory) => {
         attributesToRetrieve: [
           'title_arab',
           'title_engl',
+          'description',
           'price',
           'promotion_price',
           'thumbnail_url',
@@ -133,6 +134,7 @@ export const onSelectCategory = (sellerID, category) => {
           attributesToRetrieve: [
             'title_arab',
             'title_engl',
+            'description',
             'price',
             'promotion_price',
             'thumbnail_url',
