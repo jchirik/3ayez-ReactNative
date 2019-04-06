@@ -32,7 +32,6 @@ class SearchBarButton extends React.Component {
           navigateTo(sceneKeys.storeSearch);
         }}
       >
-        <TouchableOpacity />
         <Image
           source={images.magnifying2Icon}
           resizeMode={'contain'}
@@ -67,13 +66,14 @@ const styles = {
     borderColor: colors.borderGrey,
     height: 40,
     width: '70%',
-    borderRadius: 5,
-    paddingRight: 40
+    borderRadius: 5
   },
   barcodeImage: {
-    height: 25,
-    width: 25,
-    marginRight: 10,
+    height: 22,
+    width: 22,
+    marginVertical: 6,
+    marginRight: 12,
+    marginLeft: 20,
     tintColor: colors.black
   },
   searchBarImage: {
@@ -84,7 +84,7 @@ const styles = {
     tintColor: colors.borderGrey
   },
   searchBarText: {
-    width: '89%',
+    flex: 1,
     fontSize: 12,
     color: colors.steel
   }
