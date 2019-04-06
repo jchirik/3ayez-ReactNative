@@ -176,7 +176,7 @@
     "clearBasketModalHeader": "هل أنت متأكد من إزالة كل المنتجات من عربة التسوق",
     "clearBasketModalCancel": "لا , هذا خطأ",
     "clearBasketModalConfirm": "نعم , بالتأكيد",
-    "minimumOrderModal": "دقيقة. {{min}} لـــ {{seller_name}}"
+    "minimumOrderModal": "اقل قيمة شراء {{min}} لـ {{seller_name}}"
   },
   "TimeslotSelect": {
     "header": "ميعاد طلبك",
