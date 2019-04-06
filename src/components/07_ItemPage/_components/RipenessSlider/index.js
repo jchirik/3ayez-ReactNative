@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Slider } from 'react-native';
+import { View, Slider, I18nManager } from 'react-native';
 import styles, { tintColor, trackColor, getItemStyle } from './styles';
 import { strings } from '../../../../i18n.js';
 import {
   AyezText
 } from '../../../_common';
+import { isAndroid } from '../../../../Helpers';
 
 const MINIMUM_VALUE = -1;
 const MAXIMUM_VALUE = 1;
@@ -29,6 +30,7 @@ export default class RipenessSlider extends Component {
           minimumTrackTintColor={trackColor}
           maximumTrackTintColor={trackColor}
           thumbStyle={styles.thumpStyle}
+          style={isAndroid && I18nManager.isRTL ? {transform: [{ rotate: '180deg'}]}  : {}}
         />
         <View style={styles.itemsStyle}>
           <AyezText
