@@ -8,7 +8,6 @@ import {
 
 const MINIMUM_VALUE = -1;
 const MAXIMUM_VALUE = 1;
-const STEP = 0.01;
 const DEFAULT_VALUE = 0;
 
 export default class RipenessSlider extends Component {
@@ -26,7 +25,6 @@ export default class RipenessSlider extends Component {
           onValueChange={(value) => this.props.onValueChange(value)}
           minimumValue={MINIMUM_VALUE}
           maximumValue={MAXIMUM_VALUE}
-          step={STEP}
           thumbTintColor={tintColor}
           minimumTrackTintColor={trackColor}
           maximumTrackTintColor={trackColor}
