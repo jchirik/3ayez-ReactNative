@@ -1,6 +1,6 @@
 
 import firebase from 'react-native-firebase';
-import { Platform } from 'react-native';
+import { Platform, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { AppEventsLogger } from 'react-native-fbsdk';
 
@@ -27,6 +27,7 @@ import {
   GUEST_LOGIN_FAIL
 } from './types';
 import {sceneKeys, navigateTo, navigateBackTo} from '../router';
+import {strings} from '../i18n';
 
 export const authPhoneSet = (phone) => {
   return { type: AUTH_PHONE_SET, payload: { phone } };
@@ -117,6 +118,10 @@ export const authPhoneVerify = (code, confirmation_function) => {
       }) // User is logged in){
       .catch(error => {
         console.log('authPhoneVerify', error)
+        Alert.alert(
+          strings("Authentication.verificationCodeError"), 
+          strings("Authentication.wrongVerificationCode")
+        )
         dispatch({ type: VERIFICATION_FAIL, payload: { error } })
       });
   };

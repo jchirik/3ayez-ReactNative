@@ -309,7 +309,9 @@
     "tapNextForSMS": "Press {{next}} to get an SMS confirmation",
     "verificationHeader": "VERIFICATION CODE",
     "verificationInstruction": "Enter the code sent to you below",
-    "resend": "Didn't receive code? Resend"
+    "resend": "Didn't receive code? Resend",
+    "verificationCodeError": "Verification Code Error",
+    "wrongVerificationCode": "Wrong verification code, please try again."
   },
   "SupportChat": {
     "header": "Support Chat",

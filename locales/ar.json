@@ -309,7 +309,9 @@
     "tapNextForSMS": "أضغط {{next}} لتلقي رسالة نصية تأكيدية",
     "verificationHeader": "كود الـتأكيد",
     "verificationInstruction": "أدخل الكود الذي تم إرساله أدناه",
-    "resend": "لم تتلقي الكود ؟ إعادة الإرسال"
+    "resend": "لم تتلقي الكود ؟ إعادة الإرسال",
+    "verificationCodeError": "خطأ فى الرقم التأكيدى",
+    "wrongVerificationCode": "رقم تأكيدى خاطىء من فضلك اعد الحاولة"
   },
   "SupportChat": {
     "header": "الدعم بالدردشة",
