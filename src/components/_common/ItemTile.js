@@ -13,9 +13,6 @@ import { sceneKeys, navigateTo } from '../../router';
 
 const Image_HEIGHT_RATIO = '48%';
 
-const PRICE_HEIGHT_RATIO = '30%';
-const NAME_HEIGHT_RATIO = '50%';
-
 
 class ItemTile extends PureComponent {
   constructor(props) {
@@ -110,7 +107,7 @@ class ItemTile extends PureComponent {
           )}
         </View>
         <View style={styles.titleTextContianer}>
-          <AyezText regular numberOfLines={2} style={styles.titleText} allowFontScaling={false}>
+          <AyezText regular numberOfLines={previousPriceText ? 1 : 2} style={styles.titleText} allowFontScaling={false}>
             {translate(item)}
           </AyezText>
         </View>
@@ -230,7 +227,7 @@ const styles = {
     flex: 1
   },
   titleTextContianer: {
-    height: NAME_HEIGHT_RATIO,
+    height: '100%',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center'
