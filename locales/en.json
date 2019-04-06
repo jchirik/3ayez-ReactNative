@@ -349,5 +349,12 @@
     "shareWhatsApp": "Share with Whatsapp",
     "whatsAppTitle": "10EGP from {{name}}",
     "whatsAppMessage": "Download 3ayez and get 10EGP off your first order with this code: {{referral_code}}"
+  },
+  "BarcodeScanner": {
+    "search": "Search",
+    "cameraPermission": "Permission to use camera",
+    "cameraPermissionMsg": "We need your permission to use your camera phone",
+    "wrongBarcode": "Wrong Barcode",
+    "itemBarcode": "Item Barcode"
   }
 }

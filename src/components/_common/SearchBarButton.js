@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { strings, translate } from '../../i18n';
-import { AyezText } from '.'
+import { AyezText } from '.';
 import { Actions } from 'react-native-router-flux';
 import colors from '../../theme/colors';
-import images from '../../theme/images'
+import images from '../../theme/images';
+import Camera from 'react-native-camera';
 
 import { sceneKeys, navigateTo } from '../../router';
 
@@ -20,7 +21,9 @@ class SearchBarButton extends React.Component {
     if (fullName !== '') {
       placeHolder = translate(fullName);
     } else if (displayName !== '') {
-      placeHolder = strings('StoreSearch.placeholder', { seller_name: translate(displayName) });
+      placeHolder = strings('StoreSearch.placeholder', {
+        seller_name: translate(displayName)
+      });
     }
     return (
       <TouchableOpacity
@@ -29,14 +32,26 @@ class SearchBarButton extends React.Component {
           navigateTo(sceneKeys.storeSearch);
         }}
       >
+        <TouchableOpacity />
+        <Image
+          source={images.magnifying2Icon}
+          resizeMode={'contain'}
+          style={styles.searchBarImage}
+        />
+        <AyezText regular numberOfLines={1} style={styles.searchBarText}>
+          {placeHolder}
+        </AyezText>
+        <TouchableOpacity
+          onPress={() => {
+            navigateTo(sceneKeys.BarcodeScanner);
+          }}
+        >
           <Image
-            source={images.magnifying2Icon}
+            source={images.barcodeImage}
             resizeMode={'contain'}
-            style={styles.searchBarImage}
-            />
-          <AyezText regular numberOfLines={1} style={styles.searchBarText}>
-            {placeHolder}
-          </AyezText>
+            style={styles.barcodeImage}
+          />
+        </TouchableOpacity>
       </TouchableOpacity>
     );
   }
@@ -55,14 +70,21 @@ const styles = {
     borderRadius: 5,
     paddingRight: 40
   },
+  barcodeImage: {
+    height: 25,
+    width: 25,
+    marginRight: 10,
+    tintColor: colors.black
+  },
   searchBarImage: {
     height: 20,
     width: 20,
     marginLeft: 12,
-    marginRight: 8,
+    marginRight: 5,
     tintColor: colors.borderGrey
   },
   searchBarText: {
+    width: '89%',
     fontSize: 12,
     color: colors.steel
   }

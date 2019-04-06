@@ -24,7 +24,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import org.reactnative.camera.RNCameraPackage;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
 
@@ -101,7 +101,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         new ImagePickerPackage(),
         new StripeReactPackage(),
         new RNFirebasePackage(),
-
+        new RNCameraPackage(),
         new RNSharePackage(),
         // add/remove these packages as appropriate
         new RNFirebaseAdMobPackage(),

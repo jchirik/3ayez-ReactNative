@@ -68,7 +68,7 @@ target 'ayezcustomer' do
   pod 'RCTRestart', :path => '../node_modules/react-native-restart/ios'
   pod 'RNLanguages', :path => '../node_modules/react-native-languages'
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
-
+  pod 'react-native-camera', path: '../node_modules/react-native-camera'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
 end

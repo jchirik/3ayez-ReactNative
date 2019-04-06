@@ -8,11 +8,11 @@ import {
   Actions
 } from 'react-native-router-flux';
 
-import * as components from '../components'
-import { navigateTo, navigateBack, navigateBackTo } from './index'
+import * as components from '../components';
+import { navigateTo, navigateBack, navigateBackTo } from './index';
 
 import { loadBaskets, loadLocale, listenCustomerAuthStatus } from '../actions';
-const sceneKeys = components.sceneKeys
+const sceneKeys = components.sceneKeys;
 
 class RouterComponent extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class RouterComponent extends Component {
         backAndroidHandler={this.onBackPress}
       >
         <Lightbox>
-          <Stack animationEnabled={true} modal headerMode={"none"}>
+          <Stack animationEnabled={true} modal headerMode={'none'}>
             <Stack
               key={sceneKeys.main}
               hideNavBar
@@ -69,10 +69,7 @@ class RouterComponent extends Component {
                 key={sceneKeys.storeShelf}
                 component={components.StoreShelf}
               />
-              <Scene
-                key={sceneKeys.itemPage}
-                component={components.ItemPage}
-              />
+              <Scene key={sceneKeys.itemPage} component={components.ItemPage} />
               <Scene
                 key={sceneKeys.itemImageView}
                 component={components.ItemImageView}
@@ -122,6 +119,10 @@ class RouterComponent extends Component {
                 key={sceneKeys.termsConditions}
                 component={components.TermsAndConditions}
               />
+              <Scene
+                key={sceneKeys.BarcodeScanner}
+                component={components.BarcodeScanner}
+              />
             </Stack>
 
             {/* any modals */}
@@ -144,7 +145,7 @@ class RouterComponent extends Component {
 
             <Stack
               key={sceneKeys.checkoutFlow}
-              headerMode={"none"}
+              headerMode={'none'}
               animationEnabled={true}
               panHandlers={null}
             >
@@ -178,12 +179,10 @@ class RouterComponent extends Component {
               component={components.LocationSelect}
             />
 
-
             <Scene
               key={sceneKeys.additionalNotes}
               component={components.AdditionalNotes}
             />
-
 
             <Scene
               key={sceneKeys.referralPage}
@@ -202,11 +201,7 @@ class RouterComponent extends Component {
               />
             </Stack>
 
-            <Stack
-              key={sceneKeys.addressCreate}
-              hideNavBar
-              panHandlers={null}
-            >
+            <Stack key={sceneKeys.addressCreate} hideNavBar panHandlers={null}>
               <Scene
                 key={sceneKeys.currentLocationSelect}
                 component={components.CurrentLocationSelect}

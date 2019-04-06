@@ -27,7 +27,6 @@ export default {
   tutorial2: require(`${IMAGE_PATH}/Tutorial/tutorial_2.png`),
   tutorial3: require(`${IMAGE_PATH}/Tutorial/tutorial_3.png`),
 
-
   settingsAddressBook: require(`${IMAGE_PATH}/Settings/addressBook.png`),
   settingsChat: require(`${IMAGE_PATH}/Settings/chat.png`),
   settingsGift: require(`${IMAGE_PATH}/Settings/gift.png`),
@@ -56,6 +55,7 @@ export default {
   searchClearIcon: require(`${IMAGE_PATH}/Search/clear.png`),
   searchResultPinIcon: require(`${IMAGE_PATH}/Search/result_pin.png`),
   searchStartImage: require(`${IMAGE_PATH}/Search/start_image.png`),
+  barcodeImage: require(`${IMAGE_PATH}/Search/barcode.png`),
 
   basketIcon: require(`${IMAGE_PATH}/Basket/basket_icon.png`),
   basket2Icon: require(`${IMAGE_PATH}/Basket/basket2_icon.png`),
@@ -77,7 +77,6 @@ export default {
   plusIcon: require(`${IMAGE_PATH}/Incrementer/incr_plus.png`),
   minusIcon: require(`${IMAGE_PATH}/Incrementer/incr_minus.png`),
 
-
   rewardsIcon: require(`${IMAGE_PATH}/Referral/rewards.png`),
   whatsIcon: require(`${IMAGE_PATH}/Referral/whats_logo.png`),
 
@@ -98,6 +97,5 @@ export default {
   reviewSwapIcon: require(`${IMAGE_PATH}/ReviewOrder/change.png`),
 
   couponModalShape: require(`${IMAGE_PATH}/CouponModal/coupon_shape.png`),
-  couponModalInvalid: require(`${IMAGE_PATH}/CouponModal/invalid_coupon.png`),
-
+  couponModalInvalid: require(`${IMAGE_PATH}/CouponModal/invalid_coupon.png`)
 };
