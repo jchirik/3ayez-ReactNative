@@ -64,40 +64,17 @@ class BarcodeScanner extends Component {
   onBarCodeRead(scanResult) {
     if (scanResult.data != null) {
       if (this.state.barcode !== scanResult.data) {
-        this.setState({ barcode: scanResult.data, barcodeAvailable: true });
+        this.setState({ barcode: scanResult.data, barcodeAvailable: true }, 
+          () => {
+            if(!this.props.isSearchingItemBarcode) {
+              this.props.onSelectSearchBarcode(this.props.sellerId, scanResult.data)
+            }
+          }  
+        );
       }
     }
     return;
   }
-
-  _isSearching = () => {
-    let { barcode, barcodeAvailable } = this.state;
-    let buttonColor = barcodeAvailable ? colors.ayezGreen : colors.fadedRed;
-    let { isSearchingItemBarcode, sellerId } = this.props;
-    if (isSearchingItemBarcode) {
-      return (
-        <ActivityIndicator
-          size="small"
-          color={colors.ayezGreen}
-          style={{ margin: 20 }}
-        />
-      );
-    } else {
-      return (
-        <BlockButton
-          style={styles.blockButton}
-          text={strings('BarcodeScanner.search')}
-          color={buttonColor}
-          textStyle={styles.blockButtonText}
-          onPress={() => {
-            if (barcodeAvailable) {
-              this.props.onSelectSearchBarcode(sellerId, barcode);
-            }
-          }}
-        />
-      );
-    }
-  };
 
   _renderTopOverlay = () => {
     return (
@@ -115,6 +92,11 @@ class BarcodeScanner extends Component {
     } = this.props;
 
     return (
+      this.props.isSearchingItemBarcode ? <ActivityIndicator
+      size="small"
+      color={colors.ayezGreen}
+      style={{ margin: 20 }}
+    />:
       <View style={[styles.overlay, styles.bottomOverlay]}>
         <View style={styles.barcodeView}>
           <Image
@@ -126,9 +108,6 @@ class BarcodeScanner extends Component {
             {barcode}
           </AyezText>
         </View>
-
-        <View style={styles.separator} />
-        {this._isSearching()}
       </View>
     );
   };

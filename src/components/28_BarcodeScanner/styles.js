@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   },
   barcodeView: {
     margin: 10,
-    marginVertical: 20,
     flexDirection: 'row',
     alignSelf: 'flex-start',
     alignItems: 'center'
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     position: 'absolute',
-    padding: 16,
+    padding: 10,
     right: 0,
     left: 0,
     alignItems: 'center'
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
   },
   bottomOverlay: {
     bottom: 0,
-    height: 160,
+    height: 80,
     backgroundColor: colors.whiteGrey,
     flexDirection: 'row',
     borderTopLeftRadius: 10,
