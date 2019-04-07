@@ -48,6 +48,7 @@
     "react-native-gifted-chat": "^0.7.2",
     "react-native-image-picker": "^0.28.0",
     "react-native-languages": "^3.0.2",
+    "react-native-linear-gradient": "^2.5.4",
     "react-native-maps": "git+https://github.com/Titozzz/react-native-maps.git#cf5c310fa8655f04b4389fa48190b110d498f1c4",
     "react-native-phone-call": "^1.0.9",
     "react-native-progress": "^3.5.0",
@@ -69,6 +70,7 @@
     "redux-thunk": "^2.3.0",
     "rn-viewpager": "^1.2.9",
     "tipsi-stripe": "^7.1.0",
+    "underscore": "^1.9.1",
     "xcode": "^2.0.0"
   },
   "rnpm": {

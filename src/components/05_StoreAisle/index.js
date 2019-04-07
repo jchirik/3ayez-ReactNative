@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import {
   View,
   FlatList,
@@ -23,9 +24,9 @@ import {
   AyezText,
   PlaceholderFastImage,
   SearchBarButton
- } from '../_common';
+} from '../_common';
 
-import images from '../../theme/images'
+import images from '../../theme/images';
 import { sceneKeys, navigateTo } from '../../router';
 
 class StoreAisle extends Component {
@@ -50,20 +51,20 @@ class StoreAisle extends Component {
     }
   }
 
-
   didSelectSubcategory(subcategory, columnIndex) {
     this.props.selectSubcategory(subcategory, columnIndex);
     navigateTo(sceneKeys.storeShelf, {
       title: subcategory.name,
       parent_title: translate(this.props.category.name),
-      items: subcategory.items,
+      items: subcategory.groupedItems,
+      groups: subcategory.groups,
       jumpIndex: columnIndex
     });
   }
 
   renderTinyPhoto(subcategory, index) {
-    if (index >= subcategory.items.length) return null;
-    const { image_url, thumbnail_url } = subcategory.items[index];
+    if (index >= subcategory.groupedItems.length) return null;
+    const { image_url, thumbnail_url } = subcategory.groupedItems[index];
     return (
       <TouchableOpacity
         onPress={() => {
@@ -104,7 +105,9 @@ class StoreAisle extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.subcategoryHeader}>
-          <AyezText medium style={styles.subcategoryHeaderText}>{subcategoryTitle}</AyezText>
+          <AyezText medium style={styles.subcategoryHeaderText}>
+            {subcategoryTitle}
+          </AyezText>
           <TouchableOpacity
             style={styles.viewCorridorContainer}
             onPress={() => this.didSelectSubcategory(subcategory, 0)}
@@ -118,12 +121,15 @@ class StoreAisle extends Component {
           <FlatList
             horizontal
             disableVirtualization={I18nManager.isRTL}
-            contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-start' }}
+            contentContainerStyle={{
+              flexGrow: 1,
+              justifyContent: 'flex-start'
+            }}
             style={styles.subcategoryContainer}
             removeClippedSubviews
             windowSize={2}
             renderItem={this.renderTinyPhotoColumn.bind(this, subcategory)}
-            data={subcategory.items}
+            data={subcategory.groupedItems}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item1, index1) => index1.toString()}
           />
@@ -160,7 +166,9 @@ class StoreAisle extends Component {
         }}
         style={styles.categoryItemContainer}
       >
-        <AyezText regular style={styles.categoryItemText}>{translate(item.name)}</AyezText>
+        <AyezText regular style={styles.categoryItemText}>
+          {translate(item.name)}
+        </AyezText>
       </TouchableOpacity>
     );
   }
@@ -227,7 +235,9 @@ class StoreAisle extends Component {
       <TouchableOpacity
         style={styles.basketButton}
         onPress={() => {
-          navigateTo(sceneKeys.checkoutFlow, { bluredViewRef: this.state.bluredViewRef })
+          navigateTo(sceneKeys.checkoutFlow, {
+            bluredViewRef: this.state.bluredViewRef
+          });
         }}
       >
         <Image
@@ -244,9 +254,9 @@ const mapStateToProps = state => {
   const { category, categoryData, isLoadingCategoryData } = state.ItemSearch;
   const { display_name } = state.Seller;
   let categoryDataWithItems = [];
-  if (categoryData) {
+  if (categoryData.length !== 0) {
     categoryDataWithItems = categoryData.filter(
-      subcategory => subcategory.items.length > 0
+      subcategory => subcategory.groupedItems.length > 0
     );
   }
   return {

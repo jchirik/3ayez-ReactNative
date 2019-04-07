@@ -72,6 +72,7 @@ target 'ayezcustomer' do
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
   pod 'react-native-camera', path: '../node_modules/react-native-camera'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
   pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
 

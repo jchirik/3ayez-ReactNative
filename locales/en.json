@@ -60,6 +60,10 @@
     "instructions": "Instructions:"
   },
   "Items": {
+    "numberOfItems": "{{itemsCount}} types of {{name}}",
+    "selectItem": "Select you preferred item",
+    "cheapest": "Cheapest",
+    "priceRange": "{{itemsCount}} diffrent types starting from {{minPrice}} to {{maxPrice}}",
     "savingsText": "Save {{savings}}",
     "weightsVary": "Exact weight may vary",
     "limit": "limit {{max_limit}} per order",

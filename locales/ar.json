@@ -60,6 +60,10 @@
     "instructions": "علامة مميزة:"
   },
   "Items": {
+    "numberOfItems": "{{itemsCount}} انواع من {{name}} ",
+    "selectItem": "أختر المنتج المفضل لديك",
+    "cheapest": "الأرخص",
+    "priceRange": "{{itemsCount}} أنواع مختلفة تبدا من {{minPrice}} الى {{maxPrice}}",
     "savingsText": "وفر {{savings}} جنيه",
     "weightsVary": "قد يختلف الوزن قليلاً",
     "limit": "الحد {{max_limit}} للطلب الواحد ",

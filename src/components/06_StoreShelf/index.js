@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { isLvl1Item } from '../../Helpers.js';
 import colors from '../../theme/colors';
 import styles from './styles';
 import { Actions } from 'react-native-router-flux';
@@ -20,11 +20,12 @@ import {
   ItemTile,
   BackButton,
   AnimatedCheckmarkOverlay,
-  BasketBlockButton
+  BasketBlockButton,
+  GroupedItemTile
 } from '../_common';
 import { DragContainer } from '../_common/DragComponent';
 
-import images from '../../theme/images'
+import images from '../../theme/images';
 import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 class StoreShelf extends Component {
@@ -57,15 +58,43 @@ class StoreShelf extends Component {
   }
 
   _renderItem(items, { _, index }) {
+    const { groups } = this.props;
     const itemHeight = this.state.itemHeight;
     const itemWidth = itemHeight * 0.58;
     const numRows = 2;
-
     if (index % numRows !== 0) return null;
-    const topCell = <ItemTile item={items[index]} height={itemHeight} width={itemWidth} draggable />;
+    const topCell = isLvl1Item(items[index]) ? (
+      <ItemTile
+        item={items[index]}
+        height={itemHeight}
+        width={itemWidth}
+        draggable
+      />
+    ) : (
+      <GroupedItemTile
+        subCategory={items[index]}
+        height={itemHeight}
+        width={itemWidth}
+        groups={groups}
+      />
+    );
     let bottomCell = null;
     if (index + 1 < items.length) {
-      bottomCell = <ItemTile item={items[index + 1]} height={itemHeight} width={itemWidth} draggable />;
+      bottomCell = isLvl1Item(items[index + 1]) ? (
+        <ItemTile
+          item={items[index + 1]}
+          height={itemHeight}
+          width={itemWidth}
+          draggable
+        />
+      ) : (
+        <GroupedItemTile
+          subCategory={items[index + 1]}
+          height={itemHeight}
+          width={itemWidth}
+          groups={groups}
+        />
+      );
     }
 
     return (
@@ -89,8 +118,17 @@ class StoreShelf extends Component {
             onPress={() => navigateBack()}
             style={{ flexDirection: 'row' }}
           >
-            <AyezText regular size={13}>{strings('StoreShelf.backTo')}</AyezText>
-            <AyezText regular size={13} color={'#0094ff'} style={{ marginLeft: 4 }}>{parent_title}</AyezText>
+            <AyezText regular size={13}>
+              {strings('StoreShelf.backTo')}
+            </AyezText>
+            <AyezText
+              regular
+              size={13}
+              color={'#0094ff'}
+              style={{ marginLeft: 4 }}
+            >
+              {parent_title}
+            </AyezText>
           </TouchableOpacity>
         </View>
         {this._renderMagnifyingImage()}
@@ -115,7 +153,6 @@ class StoreShelf extends Component {
   _onLayout(jumpIndex, event) {
     const { height } = event.nativeEvent.layout;
     this.setState({ itemHeight: height / 2 }, () => {
-      console.log('jumpIndex', jumpIndex)
       this.tableRef.scrollToOffset({
         animated: true,
         offset: this.state.itemHeight * 0.58 * jumpIndex
