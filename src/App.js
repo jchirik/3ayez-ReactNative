@@ -12,6 +12,7 @@ import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
+import Sentry from 'react-native-sentry';
 
 class App extends Component {
   constructor() {
@@ -28,6 +29,12 @@ class App extends Component {
   }
   componentDidMount() {
     let that = this;
+
+    codePush.getUpdateMetadata().then((update) => {
+      if (update) {
+        Sentry.setVersion(update.appVersion + '-codepush:' + update.label);
+      }
+    });
 
     setTimeout(function() {
       that.setState({ isSplashShown: false });

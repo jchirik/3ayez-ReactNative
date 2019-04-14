@@ -7,10 +7,13 @@ const screenHeight = height;
 
 const iPhoneXHomeIndicatorMargin = isIPhoneX() ? 20 : 0;
 
+const IS_DEV = __DEV__
+
 const platform = {
   iPhoneXHomeIndicatorMargin,
   screenWidth,
   screenHeight,
+  IS_DEV
 };
 
 export default platform;

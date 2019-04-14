@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
+import { setupSentry, ravenMiddleware } from '../utils/sentryutils';
+import platform from '../utils/platform';
 
 
 import Auth from './Auth_Reducer';
@@ -103,7 +105,15 @@ const persistConfig = {
   whitelist: [],
 };
 
-const store = createStore(persistReducer(persistConfig, reducers), {}, applyMiddleware(ReduxThunk));
+let middleware = [ReduxThunk]
+
+if(!platform.IS_DEV) {
+  setupSentry()
+  middleware.push(ravenMiddleware)
+}
+
+
+const store = createStore(persistReducer(persistConfig, reducers), {}, applyMiddleware(...middleware));
 export const persistor = persistStore(store);
 
 export default store
