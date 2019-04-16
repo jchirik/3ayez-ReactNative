@@ -12,6 +12,7 @@ import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
+import PayFortPaymentNativeModule from './PayFortPayment/PayFortPaymentNativeModule';
 
 class App extends Component {
   constructor() {
@@ -27,6 +28,12 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    PayFortPaymentNativeModule.pay({
+      [PayFortPaymentNativeModule.AMOUNT_KEY]: '100',
+      [PayFortPaymentNativeModule.CUSTOMER_EMAIL_KEY]: 'readyandroid@gmail.com',
+      [PayFortPaymentNativeModule.LANGUAGE_KEY]: 'ar'
+    })
+
     let that = this;
 
     setTimeout(function() {
