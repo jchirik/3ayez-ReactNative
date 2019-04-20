@@ -260,9 +260,9 @@ class ItemPage extends Component {
             quantity={quantity}
             seller={seller}
             style={{
-              width: 160,
+              width: '45%',
               height: 48,
-              marginRight: 24
+              marginRight: 22
             }}
           />
           <PriceLabel

@@ -6,8 +6,12 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UINavigationController *rootViewController;
