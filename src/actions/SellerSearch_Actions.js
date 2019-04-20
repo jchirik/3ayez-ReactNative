@@ -14,17 +14,17 @@ import {
 
 
 
-export const fetchNearbySellers = (address) => {
+export const fetchNearbySellers = (area) => {
   return (dispatch) => {
     const ogTime = Date.now();
     dispatch({ type: SELLERS_FETCH_BEGIN });
 
     // fetch the location pin's REGION if none exists
     // then get all nearby stores for the region
-    const fetchSellersForCoordinate = firebase.functions().httpsCallable('fetchSellersForCoordinate');
-    fetchSellersForCoordinate(address.location).then((result) => {
+    const fetchSellersForArea = firebase.functions().httpsCallable('fetchSellersForArea');
+    fetchSellersForArea({ area_id: area.id }).then((result) => {
 
-      let { area, sellers } = result.data;
+      let { sellers } = result.data;
 
       sellers = sellers.map(seller => {
         // get the open hour, for today in Cairo
@@ -49,7 +49,7 @@ export const fetchNearbySellers = (address) => {
         additionalTimeout = Math.max((2400 - (Date.now() - ogTime)), 0);
       }
       setTimeout(() => {
-        dispatch({ type: SELLERS_FETCH_END, payload: { area, sellers } });
+        dispatch({ type: SELLERS_FETCH_END, payload: { sellers } });
       }, additionalTimeout);
 
     }).catch((error) => {

@@ -59,11 +59,7 @@ class TimeslotSelect extends Component {
 
   setTimeslot(timeslot) {
     this.props.setTimeslot(timeslot);
-    if (this.props.address.is_completed) {
-      navigateTo(sceneKeys.checkout);
-    } else {
-      navigateTo(sceneKeys.addressDetails);
-    }
+    navigateTo(sceneKeys.addressSelect);
   }
 
   renderSectionHeader({ section }) {
@@ -149,13 +145,11 @@ class TimeslotSelect extends Component {
   }
 
 
-  const mapStateToProps = ({ Seller, Addresses, Timeslots }) => {
+  const mapStateToProps = ({ Seller, Timeslots }) => {
     const { id } = Seller;
-    const { address } = Addresses;
     const { timeslots, loading, error } = Timeslots;
 
     return {
-      address,
       seller_id: id,
       timeslots,
       loading,

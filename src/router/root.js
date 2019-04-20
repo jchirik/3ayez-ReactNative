@@ -125,6 +125,18 @@ class RouterComponent extends Component {
               />
             </Stack>
 
+          <Scene
+            key={sceneKeys.areaSelect}
+            component={components.AreaSelect}
+            panHandlers={null}
+          />
+
+          <Scene
+            key={sceneKeys.areaCreate}
+            component={components.AreaCreate}
+            panHandlers={null}
+          />
+
             {/* any modals */}
             <Scene
               key={sceneKeys.storeSelect}
@@ -163,8 +175,8 @@ class RouterComponent extends Component {
                 panHandlers={null}
               />
               <Scene
-                key={sceneKeys.addressDetails}
-                component={components.AddressDetails}
+                key={sceneKeys.addressSelect}
+                component={components.AddressSelect}
                 panHandlers={null}
               />
               <Scene
@@ -175,13 +187,9 @@ class RouterComponent extends Component {
             </Stack>
 
             <Scene
-              key={sceneKeys.locationSelect}
-              component={components.LocationSelect}
-            />
-
-            <Scene
               key={sceneKeys.additionalNotes}
               component={components.AdditionalNotes}
+              panHandlers={null}
             />
 
             <Scene
@@ -213,6 +221,10 @@ class RouterComponent extends Component {
               <Scene
                 key={sceneKeys.refineLocation}
                 component={components.RefineLocation}
+              />
+              <Scene
+                key={sceneKeys.addressDetails}
+                component={components.AddressDetails}
               />
             </Stack>
             <Scene

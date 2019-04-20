@@ -81,12 +81,12 @@ class SettingsMenu extends Component {
   }
 
   renderLocationButton() {
-    const { address, area } = this.props;
+    const { selected_area } = this.props;
     return (
       <TouchableOpacity
         onPress={() => {
           this.props.onClose();
-          navigateTo(sceneKeys.locationSelect);
+          navigateTo(sceneKeys.areaSelect);
         }}
         style={{
           paddingTop: 11,
@@ -100,11 +100,7 @@ class SettingsMenu extends Component {
       >
         <View style={{ alignItems: 'flex-start' }}>
           <AyezText regular color={'#4E4E4E'}>
-            {address.building ? `${address.building} ` : ''}
-            {address.street || address.title}
-          </AyezText>
-          <AyezText regular color={'#4E4E4E'}>
-            {area ? translate(area.display_name) : null}
+            {selected_area ? translate(selected_area.display_name) : null}
           </AyezText>
         </View>
         <AyezText regular color={AYEZ_GREEN}>
@@ -450,22 +446,21 @@ class SettingsMenu extends Component {
 const mapStateToProps = ({
   Seller,
   SellerSearch,
-  Addresses,
+  Areas,
   Customer,
   Settings
 }) => {
   const seller = Seller;
-  const { address } = Addresses;
+  const { selected_area } = Areas;
   const { locale } = Settings;
   const { name, phone, balance } = Customer;
-  const { sellers, area } = SellerSearch;
+  const { sellers } = SellerSearch;
   return {
     seller,
 
-    address,
+    selected_area,
 
     sellers,
-    area,
     locale,
 
     name,

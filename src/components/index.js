@@ -1,11 +1,8 @@
 import Root from './00_Root';
 import LanguageSelect from './01_Tutorial/01_LanguageSelect';
 import TutorialSwipe from './01_Tutorial/02_TutorialSwipe';
-import CurrentLocationSelect from './02_AddressCreate/01_CurrentLocationSelect';
-import AddressSearch from './02_AddressCreate/02_AddressSearch';
-import RefineLocation from './02_AddressCreate/03_RefineLocation';
+import AreaSelect from './02_AreaSelect';
 import StoreSelect from './03_StoreSelect';
-import LocationSelect from './03B_LocationSelect';
 import StoreSearch from './04_StoreSearch';
 import StoreAisle from './05_StoreAisle';
 import StoreShelf from './06_StoreShelf';
@@ -15,7 +12,7 @@ import CustomProduct from './08_CustomProduct';
 import WorkingBasket from './09_WorkingBasket';
 import YallaTimeSelect from './10_YallaTimeSelect';
 import TimeslotSelect from './11_TimeslotSelect';
-import AddressDetails from './12_AddressDetails';
+import AddressSelect from './12_AddressSelect';
 import Checkout from './12_Checkout';
 import OrderTracker from './13_OrderTracker';
 import OrderSummary from './13_OrderTracker/01_OrderSummary';
@@ -36,16 +33,18 @@ import PrivacyPolicy from './25_PrivacyPolicy';
 import TermsAndConditions from './26_TermsAndConditions';
 import ReferralPage from './27_ReferralPage';
 import BarcodeScanner from './28_BarcodeScanner';
+import CurrentLocationSelect from './29_AddressCreate/01_CurrentLocationSelect';
+import AddressSearch from './29_AddressCreate/02_AddressSearch';
+import RefineLocation from './29_AddressCreate/03_RefineLocation';
+import AddressDetails from './29_AddressCreate/04_AddressDetails';
+import AreaCreate from './30_AreaCreate';
 
 export {
   Root,
   LanguageSelect,
   TutorialSwipe,
-  CurrentLocationSelect,
-  AddressSearch,
-  RefineLocation,
+  AreaSelect,
   StoreSelect,
-  LocationSelect,
   StoreSearch,
   StoreAisle,
   StoreShelf,
@@ -55,7 +54,7 @@ export {
   WorkingBasket,
   YallaTimeSelect,
   TimeslotSelect,
-  AddressDetails,
+  AddressSelect,
   Checkout,
   OrderTracker,
   OrderSummary,
@@ -75,15 +74,19 @@ export {
   PrivacyPolicy,
   TermsAndConditions,
   ReferralPage,
-  BarcodeScanner
+  BarcodeScanner,
+  CurrentLocationSelect,
+  AddressSearch,
+  RefineLocation,
+  AddressDetails,
+  AreaCreate,
 };
 
 export const sceneKeys = {
   main: 'main',
   root: 'root',
+  areaSelect: 'areaSelect',
   storeSelect: 'storeSelect',
-  locationSelect: 'locationSelect',
-  locationDetails: 'locationDetails',
   storeSearch: 'storeSearch',
   storeAisle: 'storeAisle',
   storeShelf: 'storeShelf',
@@ -104,16 +107,13 @@ export const sceneKeys = {
   workingBasket: 'workingBasket',
   yallaTimeSelect: 'yallaTimeSelect',
   timeslotSelect: 'timeslotSelect',
-  addressDetails: 'addressDetails',
+  addressSelect: 'addressSelect',
   checkout: 'checkout',
   additionalNotes: 'additionalNotes',
   auth: 'auth',
   phoneEntry: 'phoneEntry',
   verifyCode: 'verifyCode',
-  addressCreate: 'addressCreate',
-  currentLocationSelect: 'currentLocationSelect',
-  addressSearch: 'addressSearch',
-  refineLocation: 'refineLocation',
+
   customProduct: 'customProduct',
   creditCardCreate: 'creditCardCreate',
   orderReview: 'orderReview',
@@ -123,5 +123,12 @@ export const sceneKeys = {
   privacyPolicy: 'privacyPolicy',
   termsConditions: 'termsConditions',
   referralPage: 'referralPage',
-  BarcodeScanner: 'BarcodeScanner'
+  BarcodeScanner: 'BarcodeScanner',
+
+  addressCreate: 'addressCreate',
+  currentLocationSelect: 'currentLocationSelect',
+  addressSearch: 'addressSearch',
+  refineLocation: 'refineLocation',
+  addressDetails: 'addressDetails',
+  areaCreate: 'areaCreate',
 };

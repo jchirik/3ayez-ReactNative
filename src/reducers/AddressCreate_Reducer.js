@@ -11,10 +11,7 @@ import {
 
   ADDRESS_SUBMIT_BEGIN,
   ADDRESS_SUBMIT_SUCCESS,
-  ADDRESS_SUBMIT_ERROR,
-
-  ADDRESS_AREA_BEGIN,
-  ADDRESS_AREA_SET
+  ADDRESS_SUBMIT_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -44,10 +41,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, location: null };
     case ADDRESS_LOCATION_SET:
       return { ...state, location: p.location };
-    case ADDRESS_AREA_BEGIN:
-      return { ...state, area: null };
-    case ADDRESS_AREA_SET:
-      return { ...state, area: p.area };
     case ADDRESS_DETAIL_SET:
       return { ...state, ...p };
     case ADDRESS_SUBMIT_BEGIN:

@@ -7,11 +7,7 @@ import {
   ADDRESS_DETAIL_SET,
 
   CURRENT_LOCATION_BEGIN,
-  CURRENT_LOCATION_ERROR,
-
-  ADDRESS_AREA_BEGIN,
-  ADDRESS_AREA_SET,
-  ADDRESS_AREA_ERROR
+  CURRENT_LOCATION_ERROR
 } from './types';
 
 import {
@@ -82,26 +78,3 @@ export const setCurrentLocation = () => {
 		});
   };
 };
-
-
-export const calculateAreaForLocation = (location) => {
-  return (dispatch) => {
-  dispatch({ type: ADDRESS_AREA_BEGIN });
-
-  // fetch neighborhood for current location, save ID in the object
-  const calculateAreaForCoordinate = firebase.functions().httpsCallable('calculateAreaForCoordinate');
-  calculateAreaForCoordinate(location).then((result) => {
-    // Read result of the Cloud Function.
-    console.log('fetched area', result.data);
-
-    if (result.data) {
-      dispatch({ type: ADDRESS_AREA_SET, payload: { area: result.data }});
-    } else {
-      dispatch({ type: ADDRESS_AREA_ERROR, payload: { error: 'NO_VALID_AREA' }});
-    }
-  }).catch((error) => {
-    console.log('failed to fetch location', error);
-    dispatch({ type: ADDRESS_AREA_ERROR, payload: { error: 'FAILED_CALCULATE_AREA' }});
-  });
-
-}}

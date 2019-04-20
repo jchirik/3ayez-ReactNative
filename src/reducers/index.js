@@ -6,6 +6,8 @@ import { persistStore, persistReducer, createTransform } from 'redux-persist';
 
 
 import Auth from './Auth_Reducer';
+import Areas from './Areas_Reducer';
+import AreaCreate from './AreaCreate_Reducer';
 import Addresses from './Addresses_Reducer';
 import AddressArea from './AddressArea_Reducer';
 import AddressCreate from './AddressCreate_Reducer';
@@ -36,6 +38,8 @@ import Timeslots from './Timeslots_Reducer';
 
 export const REDUCERS_NAMES = {
   Auth: 'Auth',
+  Areas: 'Areas',
+  AreaCreate: 'AreaCreate',
   Addresses: 'Addresses',
   AddressArea: 'AddressArea',
   AddressCreate: 'AddressCreate',
@@ -67,6 +71,8 @@ export const REDUCERS_NAMES = {
 
 const reducers = combineReducers({
   [REDUCERS_NAMES.Auth]: Auth,
+  [REDUCERS_NAMES.Areas]: Areas,
+  [REDUCERS_NAMES.AreaCreate]: AreaCreate,
   [REDUCERS_NAMES.Baskets]: Baskets,
   [REDUCERS_NAMES.Customer]: Customer,
   [REDUCERS_NAMES.Addresses]: Addresses,

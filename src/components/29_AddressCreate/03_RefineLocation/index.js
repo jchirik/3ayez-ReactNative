@@ -22,8 +22,7 @@ import {
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
   setAddressLocation,
-  reverseSearchAddress,
-  createNewAddress
+  reverseSearchAddress
 } from '../../../actions';
 
 import {
@@ -36,16 +35,6 @@ import { sceneKeys, navigateTo } from '../../../router';
 
 class RefineLocation extends Component {
 
-  onSubmitAddress() {
-    const {
-      location,
-      title
-    } = this.props;
-    this.props.createNewAddress({
-      location,
-      title
-    });
-  }
 
   onRegionChange(location) {
     this.props.setAddressLocation({
@@ -157,12 +146,10 @@ class RefineLocation extends Component {
               alignSelf: 'stretch'
             }}
             onPress={() => {
-              this.onSubmitAddress();
+              navigateTo(sceneKeys.addressDetails)
             }}
             />
         </View>
-
-        <LoadingOverlay isVisible={this.props.is_loading_addressCreate} />
       </View>
     );
   }
@@ -182,7 +169,6 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Settings }) => {
 
   return {
     location,
-    is_loading_addressCreate: AddressCreate.is_loading,
 
     title,
     is_loading,
@@ -192,6 +178,5 @@ const mapStateToProps = ({ AddressReverseSearch, AddressCreate, Settings }) => {
 
 export default connect(mapStateToProps, {
   setAddressLocation,
-  reverseSearchAddress,
-  createNewAddress
+  reverseSearchAddress
 })(RefineLocation);

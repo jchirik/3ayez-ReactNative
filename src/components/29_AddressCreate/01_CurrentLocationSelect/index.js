@@ -190,7 +190,7 @@ class CurrentLocationSelect extends Component {
 
         { this.renderLocationPermissionButtons() }
 
-        { this.props.addresses.length ? (<BackButton fixed />) : null }
+        <BackButton fixed />
       </View>
     );
   }

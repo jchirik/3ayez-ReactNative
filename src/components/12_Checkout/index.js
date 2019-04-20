@@ -499,8 +499,9 @@ class Checkout extends Component {
       <ScrollView style={{ flex: 1 }}>
 
          <View style={{ height: 18 }} />
-
-        <Row disabled title={strings('Checkout.addressField')}>
+        <Row
+          onPress={() => navigateBack()}
+          title={strings('Checkout.addressField')}>
           <AyezText regular
           style={{
             fontSize: 16

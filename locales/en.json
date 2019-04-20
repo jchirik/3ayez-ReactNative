@@ -200,7 +200,7 @@
     "addNewCard": "ADD NEW CARD"
   },
   "AddressSelection": {
-    "header": "Please Select a Delivery Location",
+    "header": "Select Your Address",
     "anotherLocation": "Find Another Location",
     "welcomeBack": "Welcome back {{name}}",
     "addNewAddress": "+ NEW ADDRESS"

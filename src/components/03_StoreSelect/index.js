@@ -70,14 +70,14 @@ class StoreSelect extends Component {
   }
 
   fetchNearbySellers() {
-    const { address } = this.props;
-    if (address) {
+    const { selected_area } = this.props;
+    if (selected_area) {
       this.setState({
         loadingPriceAnimation: false,
         animationProgress: 0,
         animationBackgroundFade: new Animated.Value(0)
       });
-      this.props.fetchNearbySellers(address); // load nearby stores upon open
+      this.props.fetchNearbySellers(selected_area); // load nearby stores upon open
     }
   }
 
@@ -87,7 +87,7 @@ class StoreSelect extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.address !== prevProps.address) {
+    if (this.props.selected_area !== prevProps.selected_area) {
       this.fetchNearbySellers(); // load nearby stores upon change
     }
 
@@ -105,19 +105,19 @@ class StoreSelect extends Component {
         ).start();
         setTimeout(() => {
           this.setState({ animationProgress: 0.3 })
-        }, 500);
+        }, 200);
         setTimeout(() => {
           this.setState({ animationProgress: 0.5 })
-        }, 1000);
+        }, 400);
         setTimeout(() => {
           this.setState({ animationProgress: 0.8 })
-        }, 1800);
+        }, 600);
         setTimeout(() => {
           this.setState({ animationProgress: 1 })
-        }, 2300);
+        }, 900);
         setTimeout(() => {
           this.onSelectSeller(this.props.sellers[0])
-        }, 2400);
+        }, 1000);
       }
     }
 
@@ -175,7 +175,7 @@ renderNoAddress() {
         color={'#0094ff'}
         style={{ width: 200 }}
         onPress={() => {
-          navigateTo(sceneKeys.addressCreate)
+          navigateTo(sceneKeys.areaCreate)
         }}
         />
     </View>
@@ -463,7 +463,7 @@ renderSellerList() {
   if (this.props.error) {
     return this.renderNoInternetConnection();
   }
-  if (!this.props.address) {
+  if (!this.props.selected_area) {
     return this.renderNoAddress();
   }
 
@@ -483,7 +483,7 @@ renderSellerList() {
           color={'#0094ff'}
           style={{ width: 250, marginTop: 20 }}
           onPress={() => {
-            navigateTo(sceneKeys.locationSelect)
+            navigateTo(sceneKeys.areaSelect)
           }}
         />
       </View>
@@ -494,24 +494,27 @@ renderSellerList() {
   }
 
   return (
-    <FlatList
-      data={this.props.sellers}
-      renderItem={this.renderItem.bind(this)}
-      style={{ flex: 1, backgroundColor: AYEZ_BACKGROUND_COLOR }}
-      removeClippedSubviews
-      ListHeaderComponent={
-        <View style={{
-          marginTop: STATUS_BAR_HEIGHT + 16,
-          marginBottom: 6,
-          alignItems: 'center'
-        }}>
-          <AyezText medium size={18}>{strings('StoreSelect.selectStore')}</AyezText>
-        </View>
-      }
-      ListFooterComponent={null}
-      showsVerticalScrollIndicator={false}
-      keyExtractor={(item, index) => `${index}`}
-    />
+    <View style={{ flex: 1 }}>
+      <FlatList
+        data={this.props.sellers}
+        renderItem={this.renderItem.bind(this)}
+        style={{ flex: 1, backgroundColor: AYEZ_BACKGROUND_COLOR }}
+        removeClippedSubviews
+        ListHeaderComponent={
+          <View style={{
+            marginTop: STATUS_BAR_HEIGHT + 16,
+            marginBottom: 6,
+            alignItems: 'center'
+          }}>
+            <AyezText medium size={18}>{strings('StoreSelect.selectStore')}</AyezText>
+          </View>
+        }
+        ListFooterComponent={null}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => `${index}`}
+      />
+      <BackButton fixed />
+    </View>
   )
 }
 
@@ -519,7 +522,6 @@ renderSellerList() {
     return (
       <View style={{ flex: 1 }}>
         {this.renderSellerList()}
-        {this.props.seller_id ? (<BackButton fixed />) : null}
       </View>
     );
   }
@@ -540,11 +542,8 @@ const styles = {
   }
 };
 
-const mapStateToProps = ({ Addresses, Seller, SellerSearch }) => {
-  const { addresses, address } = Addresses;
-
-  const street = address ? address.street : null;
-
+const mapStateToProps = ({ Areas, Seller, SellerSearch }) => {
+  const { selected_area } = Areas;
   const { id } = Seller;
 
   const {
@@ -555,8 +554,7 @@ const mapStateToProps = ({ Addresses, Seller, SellerSearch }) => {
 
   return {
     seller_id: id,
-    address,
-    street,
+    selected_area,
 
     sellers,
     is_loading,

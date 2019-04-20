@@ -1,5 +1,7 @@
 export * from './Auth_Actions';
 export * from './Addresses_Actions';
+export * from './Areas_Actions';
+export * from './AreaCreate_Actions';
 export * from './AddressCreate_Actions';
 export * from './AddressReverseSearch_Actions';
 export * from './AddressSearch_Actions';

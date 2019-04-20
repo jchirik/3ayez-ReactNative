@@ -254,35 +254,35 @@ class WorkingBasket extends Component {
     }
   }
 
-  renderDestination() {
-    return (
-      <View style={{ backgroundColor: 'white' }}>
-        {[].map(
-          ({
-            id,
-            destinationTypeLabel,
-            destinationIcon,
-            destinationName,
-            destinationAddress,
-            destinationAddressImage
-          }) => (
-            <DestinationItem
-              key={id}
-              isSelected={this.state.selectedDestinationId == id}
-              onPress={() => {
-                this.setState({ selectedDestinationId: id });
-              }}
-              destinationTypeLabel={destinationTypeLabel}
-              destinationIcon={destinationIcon}
-              destinationName={destinationName}
-              destinationAddress={destinationAddress}
-              destinationAddressImage={destinationAddressImage}
-            />
-          )
-        )}
-      </View>
-    );
-  }
+  // renderDestination() {
+  //   return (
+  //     <View style={{ backgroundColor: 'white' }}>
+  //       {[].map(
+  //         ({
+  //           id,
+  //           destinationTypeLabel,
+  //           destinationIcon,
+  //           destinationName,
+  //           destinationAddress,
+  //           destinationAddressImage
+  //         }) => (
+  //           <DestinationItem
+  //             key={id}
+  //             isSelected={this.state.selectedDestinationId == id}
+  //             onPress={() => {
+  //               this.setState({ selectedDestinationId: id });
+  //             }}
+  //             destinationTypeLabel={destinationTypeLabel}
+  //             destinationIcon={destinationIcon}
+  //             destinationName={destinationName}
+  //             destinationAddress={destinationAddress}
+  //             destinationAddressImage={destinationAddressImage}
+  //           />
+  //         )
+  //       )}
+  //     </View>
+  //   );
+  // }
 
   renderContinue() {
     if (!this.props.phone) {

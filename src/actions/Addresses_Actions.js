@@ -53,6 +53,11 @@ export const createNewAddress = (address) => {
 
     dispatch({ type: ADDRESS_SUBMIT_BEGIN });
 
+    if (!address.street || !address.building || !address.apt || !address.name) {
+      dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
+      return;
+    }
+
     const batch = firebase.firestore().batch();
 
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc();
@@ -60,6 +65,10 @@ export const createNewAddress = (address) => {
     addressRef.set({ ...address, timestamp: Date.now() }).then(() => {
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
       dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address: { ...address, id: address_id } } });
+      navigateBackTo(sceneKeys.addressSelect);
+      setTimeout(() => {
+        navigateTo(sceneKeys.checkout);
+      }, 700);
     }).catch(() => {
       dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })
@@ -67,45 +76,20 @@ export const createNewAddress = (address) => {
 };
 
 
-export const updateAddress = (addressT) => {
-  return (dispatch) => {
-    const { currentUser } = firebase.auth();
-    dispatch({ type: ADDRESS_UPDATE_BEGIN });
 
-    const address = { ...addressT, is_completed: true, timestamp: Date.now() }
-    console.log(address)
-    if (!address.street || !address.building || !address.apt || !address.name) {
-      dispatch({ type: ADDRESS_UPDATE_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
-      return;
-    }
-    const batch = firebase.firestore().batch();
-    const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc(address.id);
-    batch.update(addressRef, address)
-    const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
-    batch.update(customerRef, { name: address.name })
-
-    batch.commit().then(() => {
-      console.log('createNewAddress success');
-      dispatch({ type: ADDRESS_UPDATE_SUCCESS });
-      dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
-      navigateTo(sceneKeys.checkout)
-    })
-  };
-};
-
-
-export const selectAddress = (address, onClose=null) => {
+export const setAddress = (address) => {
   return (dispatch) => {
     // const batch = firebase.firestore().batch();
     const { currentUser } = firebase.auth();
 
-    dispatch({ type: ADDRESS_SELECT_BEGIN });
+    // dispatch({ type: ADDRESS_SELECT_BEGIN });
+
+    dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
+    navigateTo(sceneKeys.checkout);
     // post the address to firestore
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc(address.id);
     addressRef.update({ timestamp: Date.now() }).then(() => {
       console.log('selectAddress success');
-      dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
-      onClose();
     }).catch(() => {
       dispatch({ type: ADDRESS_SELECT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })
@@ -125,6 +109,41 @@ export const deleteAddress = (address_id) => {
     })
   }
 }
+
+
+
+
+
+
+
+
+// export const updateAddress = (addressT) => {
+//   return (dispatch) => {
+//     const { currentUser } = firebase.auth();
+//     dispatch({ type: ADDRESS_UPDATE_BEGIN });
+//
+//     const address = { ...addressT, is_completed: true, timestamp: Date.now() }
+//     console.log(address)
+//     if (!address.street || !address.building || !address.apt || !address.name) {
+//       dispatch({ type: ADDRESS_UPDATE_ERROR, payload: { error: 'INVALID_PARAMETERS' } });
+//       return;
+//     }
+//     const batch = firebase.firestore().batch();
+//     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc(address.id);
+//     batch.update(addressRef, address)
+//     const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
+//     batch.update(customerRef, { name: address.name })
+//
+//     batch.commit().then(() => {
+//       console.log('createNewAddress success');
+//       dispatch({ type: ADDRESS_UPDATE_SUCCESS });
+//       dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
+//       navigateTo(sceneKeys.checkout)
+//     })
+//   };
+// };
+
+
 
 
 // export const setAddressIndex = (address_index) => {

@@ -25,7 +25,7 @@ import {
 import FBSDK from 'react-native-fbsdk';
 
 import StorePage from './StorePage';
-import LocationSelect from '../03B_LocationSelect';
+import AreaSelect from '../02_AreaSelect';
 
 import {
   AyezText,
@@ -44,13 +44,12 @@ import {
   translate
 } from '../../i18n.js';
 
+import firebase from 'react-native-firebase';
+
 import colors from '../../theme/colors'
 import images from '../../theme/images'
 import { sceneKeys, navigateTo } from '../../router';
 
-import {
-  selectAddress
-} from '../../actions';
 
 
 class Root extends Component {
@@ -82,53 +81,55 @@ class Root extends Component {
       navigateTo(sceneKeys.customerFeedback, { order: this.props.feedback_order });
     }
 
-    if (!this.props.addresses.length && !this.props.is_loading_addresses && prevProps.is_loading_addresses) {
-      console.log('FINISHED LOADING ADDRESSES, no address so create')
-      setTimeout(() => {
-        navigateTo(sceneKeys.addressCreate);
-      }, 500);
-    } else if (this.props.address && (!prevProps.address || (this.props.address.id !== prevProps.address.id))) {
-      console.log('FINISHED LOADING ADDRESSES, select store');
-      navigateTo(sceneKeys.storeSelect)
-    }
+    // if (!this.props.saved_areas.length && !this.props.is_loading_saved_areas && prevProps.is_loading_saved_areas) {
+    //   console.log('FINISHED LOADING AREAS, no address so create')
+    //   setTimeout(() => {
+    //     navigateTo(sceneKeys.areaCreate);
+    //   }, 500);
+    // } else
+
+    // if (this.props.selected_area && (!prevProps.selected_area || (this.props.selected_area.id !== prevProps.selected_area.id))) {
+    //   console.log('FINISHED CHANGING AREA, select store');
+    //
+    // }
   }
 
   render() {
-    if (!this.props.locale || this.props.is_loading_addresses || !this.props.addresses.length) {
+    const { currentUser } = firebase.auth();
+
+    if (!this.props.locale || !currentUser) {
       return (
         <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: 'white' }} />
       );
     }
-    if (!this.props.seller_id || !this.props.address) {
-      return <LocationSelect />;
+    if (!this.props.seller_id || !this.props.selected_area) {
+      return <AreaSelect />;
     }
     return <StorePage />;
   }
 }
 
-const mapStateToProps = ({ Customer, Seller, Addresses, Settings, OngoingOrders }) => {
+const mapStateToProps = ({ Customer, Seller, Areas, Settings, OngoingOrders }) => {
 
   const {
     name
   } = Customer;
 
   const { id } = Seller;
-  const { address, addresses, is_loading } = Addresses;
+  const { selected_area, saved_areas, is_loading_saved_areas } = Areas;
   const { review_order, feedback_order } = OngoingOrders;
   const { locale } = Settings;
   return {
     name,
     seller_id: id,
     locale,
-    address,
-    addresses,
-    is_loading_addresses: is_loading,
+    selected_area,
+    saved_areas,
+    is_loading_saved_areas,
 
     review_order,
     feedback_order
   };
 };
 
-export default connect(mapStateToProps, {
-  selectAddress
-})(Root);
+export default connect(mapStateToProps, null)(Root);

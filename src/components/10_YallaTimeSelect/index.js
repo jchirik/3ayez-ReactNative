@@ -56,11 +56,11 @@ class YallaTimeSelect extends Component {
       delivery_fee: seller.delivery_fee
     });
 
-    if (this.props.address.is_completed) {
-      navigateTo(sceneKeys.checkout);
-    } else {
-      navigateTo(sceneKeys.addressDetails);
-    }
+    // if (this.props.address.is_completed) {
+    //   navigateTo(sceneKeys.checkout);
+    // } else {
+    navigateTo(sceneKeys.addressSelect);
+    // }
   }
 
   //
@@ -157,11 +157,9 @@ class YallaTimeSelect extends Component {
     }
   }
 
-  const mapStateToProps = ({ Seller, Addresses }) => {
-    const { address } = Addresses;
+  const mapStateToProps = ({ Seller }) => {
     const seller = Seller;
     return {
-      address,
       seller
     };
   };

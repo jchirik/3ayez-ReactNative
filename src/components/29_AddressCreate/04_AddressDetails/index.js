@@ -23,18 +23,18 @@ import {
   LoadingOverlay,
   AyezText,
   InputRow
-} from '../_common';
+} from '../../_common';
 import {
-  updateAddress
-} from '../../actions';
+  createNewAddress
+} from '../../../actions';
 
 import {
   strings,
   translate,
   FONT_MEDIUM
-} from '../../i18n.js';
+} from '../../../i18n.js';
 
-import images from '../../theme/images'
+import images from '../../../theme/images'
 
 
 class AddressDetails extends Component {
@@ -50,8 +50,8 @@ class AddressDetails extends Component {
     };
   }
 
-  updateAddress() {
-    const { address } = this.props;
+  createAddress() {
+    const { location } = this.props;
     const {
       name,
       street,
@@ -59,8 +59,8 @@ class AddressDetails extends Component {
       apt,
       notes
     } = this.state;
-    this.props.updateAddress({
-      ...address,
+    this.props.createNewAddress({
+      location,
       name,
       street,
       building,
@@ -71,11 +71,7 @@ class AddressDetails extends Component {
 
   componentDidMount() {
     this.setState({
-      street: this.props.address.street || this.props.address.title,
-      apt: this.props.address.apt,
-      building: this.props.address.building,
-      name: this.props.address.name,
-      notes: this.props.address.notes
+      street: this.props.address_title || ''
     })
   }
 
@@ -164,8 +160,8 @@ class AddressDetails extends Component {
                 }}
                 provider={ PROVIDER_GOOGLE }
                 initialRegion={{
-                  latitude: this.props.address.location.lat,
-                  longitude: this.props.address.location.lng,
+                  latitude: this.props.location.lat,
+                  longitude: this.props.location.lng,
                   latitudeDelta: 0.01,
                   longitudeDelta: 0.01,
                 }}
@@ -222,7 +218,7 @@ class AddressDetails extends Component {
                 marginRight: 18,
                 alignSelf: 'stretch'
               }}
-              onPress={this.updateAddress.bind(this)}
+              onPress={this.createAddress.bind(this)}
               />
             </ScrollView>
           </KeyboardAvoidingView>
@@ -233,23 +229,30 @@ class AddressDetails extends Component {
   }
 }
 
-const mapStateToProps = ({ Addresses, AddressUpdate }) => {
+const mapStateToProps = ({ AddressCreate, AddressReverseSearch }) => {
   const {
-    address
-  } = Addresses;
-
-  const {
+    location,
     is_loading,
     error
-  } = AddressUpdate;
+  } = AddressCreate;
+
+  const {
+    title
+  } = AddressReverseSearch;
+
+  // const {
+  //   is_loading,
+  //   error
+  // } = AddressUpdate;
 
   return {
-    address,
+    location,
+    address_title: title,
     is_loading,
     error
   };
 };
 
 export default connect(mapStateToProps, {
-  updateAddress
+  createNewAddress
 })(AddressDetails);
