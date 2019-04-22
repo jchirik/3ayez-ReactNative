@@ -25,6 +25,7 @@ export const fetchNearbySellers = (area) => {
     fetchSellersForArea({ area_id: area.id }).then((result) => {
 
       let { sellers } = result.data;
+      console.log('fetchSellersForArea', sellers)
 
       sellers = sellers.map(seller => {
         // get the open hour, for today in Cairo

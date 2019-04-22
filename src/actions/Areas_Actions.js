@@ -54,6 +54,8 @@ export const selectArea = (selected_area) => {
     if (!currentUser) { return; }
     dispatch({ type: SELECTED_AREA_SET, payload: { selected_area } });
 
+    console.log('selectArea', selected_area.id, selected_area)
+
     navigateTo(sceneKeys.storeSelect)
 
     const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)

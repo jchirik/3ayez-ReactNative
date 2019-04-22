@@ -41,6 +41,7 @@ export default {
   storeLoadingGIF: require(`${IMAGE_PATH}/SellerSearch/store_loading.gif`),
 
   addressIcon: require(`${IMAGE_PATH}/AddressSelect/address_icon.png`),
+  mapLocationIcon: require(`${IMAGE_PATH}/AddressSelect/map_location.png`),
 
   supportTile: require(`${IMAGE_PATH}/Support/support_tile.png`),
   supportStartSideArrow: require(`${IMAGE_PATH}/Support/start_side_arrow.png`),

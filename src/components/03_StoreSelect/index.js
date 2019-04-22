@@ -52,7 +52,7 @@ import {
 
 
 import images from '../../theme/images'
-import { sceneKeys, navigateTo } from '../../router';
+import { sceneKeys, navigateTo, navigateBack } from '../../router';
 
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -463,9 +463,9 @@ renderSellerList() {
   if (this.props.error) {
     return this.renderNoInternetConnection();
   }
-  if (!this.props.selected_area) {
-    return this.renderNoAddress();
-  }
+  // if (!this.props.selected_area) {
+  //   return this.renderNoAddress();
+  // }
 
   if (this.props.sellers.length === 0) {
     return (
@@ -483,7 +483,7 @@ renderSellerList() {
           color={'#0094ff'}
           style={{ width: 250, marginTop: 20 }}
           onPress={() => {
-            navigateTo(sceneKeys.areaSelect)
+            navigateBack()
           }}
         />
       </View>

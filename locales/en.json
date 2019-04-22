@@ -130,7 +130,7 @@
     "hypermarket": "Hypermarket",
     "express": "Express",
     "selectStore": "Please select your store",
-    "findingProvider": "Finding the provider for your address",
+    "findingProvider": "Finding the best store for your neighborhood",
     "fetchingPrices": "Fetching prices...",
     "notInYourArea": "We're not in this area yet 😥",
     "checkAnotherLocation": "Check another location"

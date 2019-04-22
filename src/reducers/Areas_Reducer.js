@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECTED_AREA_SET:
       return { ...state, selected_area: p.selected_area }
     case SAVED_AREAS_SET:
-      return { ...state, is_loading_saved_areas: false, saved_areas: p.saved_areas, selected_area: null }
+      return { ...state, is_loading_saved_areas: false, saved_areas: p.saved_areas }
     case SAVED_AREAS_FAIL:
       return { ...state, is_loading_saved_areas: false, saved_areas_error: p.error }
     case SAVED_AREAS_BEGIN:

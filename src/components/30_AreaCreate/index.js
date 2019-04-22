@@ -140,8 +140,8 @@ class AreaCreate extends Component {
     return (
       <TouchableOpacity
         style={{
-          justifyContent: 'center',
-          alignItems: 'stretch',
+          flexDirection: 'row',
+          alignItems: 'center',
           height: 60,
           backgroundColor: 'white',
           paddingHorizontal: 30,
@@ -150,9 +150,18 @@ class AreaCreate extends Component {
         }}
         onPress={() => this.props.selectArea(item)}
       >
-        <AyezText medium size={15} color={'black'}>
+        <AyezText medium size={15} color={'black'} style={{ flex: 1 }}>
           {translate(item.display_name)}
         </AyezText>
+        <RTLImage
+          source={images.nextArrowIcon}
+          style={{
+            width: 16,
+            height: 16,
+            tintColor: '#4E4E4E'
+          }}
+          resizeMode={'contain'}
+        />
       </TouchableOpacity>
     );
   }
@@ -172,8 +181,8 @@ class AreaCreate extends Component {
     return (
       <TouchableOpacity
         style={{
-          justifyContent: 'center',
-          alignItems: 'stretch',
+          flexDirection: 'row',
+          alignItems: 'center',
           height: 60,
           backgroundColor: 'white',
           paddingHorizontal: 30,
@@ -182,9 +191,18 @@ class AreaCreate extends Component {
         }}
         onPress={() => this.props.selectArea(auto_area)}
       >
-        <AyezText medium size={15} color={'#0094ff'}>
+        <AyezText medium size={15} color={'#0094ff'} style={{ flex: 1 }}>
           {translate(auto_area.display_name)}
         </AyezText>
+        <RTLImage
+          source={images.nextArrowIcon}
+          style={{
+            width: 16,
+            height: 16,
+            tintColor: '#0094ff'
+          }}
+          resizeMode={'contain'}
+        />
       </TouchableOpacity>
     )
   }
@@ -274,7 +292,7 @@ const mapStateToProps = ({ Customer, Areas, AreaCreate }) => {
 
   return {
     beta_tester,
-    
+
     selected_area,
     saved_areas,
 

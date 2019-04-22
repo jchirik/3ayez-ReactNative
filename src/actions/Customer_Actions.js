@@ -211,7 +211,7 @@ const listenToAddresses = (dispatch) => {
       addressesT.docs.forEach(addressDoc => {
         const id = addressDoc.id;
         const data = addressDoc.data();
-        if (data.location && data.street) {
+        if (data.location && data.street && data.name) {
           addresses.push({
             ...data,
             id
