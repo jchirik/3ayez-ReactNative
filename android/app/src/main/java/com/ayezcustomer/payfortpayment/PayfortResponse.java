@@ -3,20 +3,11 @@ package com.ayezcustomer.payfortpayment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Ahmed Ghazy on 4/15/19.
- * https://github.com/afghazy
- * ahmedfathyghazy@gmail.com
- */
 
-public class PayFortData {
+public class PayFortResponse {
 
-  public String paymentResponse = "";
+  public String response = "";
 
-  //Response Params
-  @SerializedName("access_code")
-  @Expose
-  public String accessCode;
   @SerializedName("sdk_token")
   @Expose
   public String sdkToken;
@@ -29,23 +20,6 @@ public class PayFortData {
   @SerializedName("response_code")
   @Expose
   public String responseCode;
-  @SerializedName("device_id")
-  @Expose
-  public String deviceId;
-  @SerializedName("language")
-  @Expose
-  public String language;
-  @SerializedName("service_command")
-  @Expose
-  public String serviceCommand;
-  @SerializedName("signature")
-  @Expose
-  public String signature;
-  @SerializedName("merchant_identifier")
-  @Expose
-  public String merchantIdentifier;
-
-
   @SerializedName("eci")
   @Expose
   public String eci;
@@ -61,6 +35,9 @@ public class PayFortData {
   @SerializedName("customer_ip")
   @Expose
   public String customerIp;
+  @SerializedName("customer_name")
+  @Expose
+  public String customerName;
   @SerializedName("currency")
   @Expose
   public String currency;
@@ -82,4 +59,16 @@ public class PayFortData {
   @SerializedName("authorization_code")
   @Expose
   public String authorizationCode;
+  @SerializedName("order_description")
+  @Expose
+  public String orderDescription;
+  @SerializedName("settlement_reference")
+  @Expose
+  public String settlementReference;
+  @SerializedName("merchant_extra")
+  @Expose
+  public String merchantExtra;
+  @SerializedName("phone_number")
+  @Expose
+  public String phoneNumber;
 }

@@ -25,7 +25,8 @@ ahmedfathyghazy@gmail.com-->
       android:src="@drawable/back"
       android:layout_centerVertical="true"
       android:onClick="onBackPressed"
-      android:layout_margin="@dimen/pf_border_space"/>
+      android:layout_margin="@dimen/pf_border_space"
+      android:rotation="180"/>
 
     <TextView
       android:layout_width="wrap_content"
@@ -38,6 +39,7 @@ ahmedfathyghazy@gmail.com-->
 
   <TextView
     android:id="@+id/amountTV"
+    android:visibility="invisible"
     android:layout_width="match_parent"
     android:layout_height="@dimen/pf_payment_type_header_height"
     android:gravity="center_horizontal|center_vertical"
@@ -95,7 +97,7 @@ ahmedfathyghazy@gmail.com-->
             android:id="@+id/cartTypeIV"
             android:layout_width="@dimen/pf_card_type_width"
             android:layout_height="@dimen/pf_card_type_height"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/pf_card_type_margin_to_align"
             android:layout_marginTop="@dimen/pf_elements_top_space"
             android:text="@string/icon_cc_visa"
@@ -213,7 +215,7 @@ ahmedfathyghazy@gmail.com-->
 
         <RelativeLayout
           android:id="@+id/rememberMeRL"
-          android:visibility="gone"
+          android:visibility="invisible"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/pf_10dp_space"
@@ -222,6 +224,7 @@ ahmedfathyghazy@gmail.com-->
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:layout_centerVertical="true"
             android:textColor="@android:color/darker_gray"
             android:text="@string/pf_remember_me"
@@ -230,6 +233,7 @@ ahmedfathyghazy@gmail.com-->
 
           <ToggleButton
             android:id="@+id/rememberMeTB"
+            android:visibility="invisible"
             android:layout_alignParentEnd="true"
             android:layout_width="@dimen/pf_remember_me_tb_width"
             android:checked="true"
@@ -255,7 +259,7 @@ ahmedfathyghazy@gmail.com-->
             android:layout_height="match_parent"
             android:background="@color/greenBlue"
             android:onClick="onPayPressed"
-            android:text="@string/pf_pay_btn_hint"
+            android:text="@string/save_btn"
             android:textColor="@android:color/white"
             android:textSize="@dimen/pf_20_txt_size" />
 

@@ -5,17 +5,17 @@ package com.ayezcustomer.payfortpayment;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.payfort.fort.android.sdk.base.FortSdk;
 import com.payfort.fort.android.sdk.base.callbacks.FortCallBackManager;
 import com.payfort.fort.android.sdk.base.callbacks.FortCallback;
 
@@ -27,6 +27,9 @@ public class PayFortPaymentModule extends ReactContextBaseJavaModule implements 
   public static final String REACT_CLASS = "PayFortPayment";
   private static ReactApplicationContext reactContext = null;
   public FortCallBackManager fortCallback = null;
+
+  private Callback successCallback = null;
+  private Callback failureCallback = null;
 
   public PayFortPaymentModule(ReactApplicationContext context) {
     // Pass in the context to the constructor and save it so you can emit events
@@ -50,10 +53,17 @@ public class PayFortPaymentModule extends ReactContextBaseJavaModule implements 
     // Export any constants to be used in your native module
     // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
     final Map<String, Object> constants = new HashMap<>();
+
     constants.put("AMOUNT_KEY", PayFortPayment.AMOUNT_KEY);
+    constants.put("COMMAND_KEY", PayFortPayment.COMMAND_KEY);
+    constants.put("CURRENCY_KEY", PayFortPayment.CURRENCY_KEY);
     constants.put("CUSTOMER_EMAIL_KEY", PayFortPayment.CUSTOMER_EMAIL_KEY);
     constants.put("LANGUAGE_KEY", PayFortPayment.LANGUAGE_KEY);
+    constants.put("MERCHANT_REFERENCE_KEY", PayFortPayment.MERCHANT_REFERENCE_KEY);
     constants.put("SDK_TOKEN_KEY", PayFortPayment.SDK_TOKEN_KEY);
+
+    constants.put("AUTHORIZATION_COMMAND", PayFortPayment.AUTHORIZATION);
+    constants.put("PURCHASE_COMMAND", PayFortPayment.PURCHASE);
 
     return constants;
   }
@@ -70,23 +80,31 @@ public class PayFortPaymentModule extends ReactContextBaseJavaModule implements 
   }
 
   @ReactMethod
-  public void pay(ReadableMap rmap) {
+  public void pay(ReadableMap rmap, Callback successCallback, Callback failureCallback) {
+
+    this.successCallback = successCallback;
+    this.failureCallback = failureCallback;
+
     HashMap<String, String> map = convertToStringHashMap(rmap);
 
-    PayFortData payFortData = new PayFortData();
-    if (!TextUtils.isEmpty(map.get(PayFortPayment.AMOUNT_KEY))) {
-      payFortData.amount = new BigDecimal(map.get(PayFortPayment.AMOUNT_KEY)).multiply(BigDecimal.valueOf(100)).toString();// Multiplying with 100, bcz amount should not be in decimal format
-      payFortData.command = PayFortPayment.AUTHORIZATION;
-      payFortData.currency = PayFortPayment.CURRENCY_TYPE;
-      payFortData.customerEmail = map.get(PayFortPayment.CUSTOMER_EMAIL_KEY);
-      String lang = map.get(PayFortPayment.LANGUAGE_KEY);
-      lang = (lang == null || lang.isEmpty() ? PayFortPayment.LANGUAGE_TYPE : lang);
-      payFortData.language = lang;
-      payFortData.merchantReference = String.valueOf(System.currentTimeMillis());
+    PayFortRequest payFortRequest = new PayFortRequest();
 
-      PayFortPayment payFortPayment = new PayFortPayment(getCurrentActivity(), this.fortCallback, this);
-      payFortPayment.requestForPayment(payFortData);
-    }
+    payFortRequest.amount = new BigDecimal(map.get(PayFortPayment.AMOUNT_KEY)).multiply(BigDecimal.valueOf(100)).toString();// Multiplying with 100, bcz amount should not be in decimal format
+    payFortRequest.command = map.get(PayFortPayment.COMMAND_KEY);
+    payFortRequest.currency = map.get(PayFortPayment.CURRENCY_KEY);
+    payFortRequest.customerEmail = map.get(PayFortPayment.CUSTOMER_EMAIL_KEY);
+    payFortRequest.language = map.get(PayFortPayment.LANGUAGE_KEY);
+    payFortRequest.merchantReference = map.get(PayFortPayment.MERCHANT_REFERENCE_KEY);
+    payFortRequest.sdkToken = map.get(PayFortPayment.SDK_TOKEN_KEY);
+
+    PayFortPayment payFortPayment = new PayFortPayment(getCurrentActivity(), this.fortCallback, this);
+    payFortPayment.requestForPayment(payFortRequest);
+
+  }
+
+  @ReactMethod
+  public void getDeviceID(Callback callback) {
+    callback.invoke(FortSdk.getDeviceId(getReactApplicationContext()));
   }
 
   @ReactMethod
@@ -114,19 +132,15 @@ public class PayFortPaymentModule extends ReactContextBaseJavaModule implements 
   }
 
   @Override
-  public void onPaymentRequestResponse(int responseType, final PayFortData responseData) {
-    if (responseType == PayFortPayment.RESPONSE_GET_TOKEN) {
-      Toast.makeText(getCurrentActivity(), "Token not generated", Toast.LENGTH_SHORT).show();
-      Log.e("onPaymentResponse", "Token not generated");
-    } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_CANCEL) {
-      Toast.makeText(getCurrentActivity(), "Payment cancelled", Toast.LENGTH_SHORT).show();
-      Log.e("onPaymentResponse", "Payment cancelled");
-    } else if (responseType == PayFortPayment.RESPONSE_PURCHASE_FAILURE) {
-      Toast.makeText(getCurrentActivity(), "Payment failed", Toast.LENGTH_SHORT).show();
-      Log.e("onPaymentResponse", "Payment failed");
-    } else {
-      Toast.makeText(getCurrentActivity(), "Payment successful", Toast.LENGTH_SHORT).show();
-      Log.e("onPaymentResponse", "Payment successful");
+  public void onPaymentRequestResponse(int responseType, WritableMap responseMap) {
+    if (responseType == PayFortPayment.RESPONSE_PAYMENT_CANCEL) {
+      Toast.makeText(getCurrentActivity(), "Process cancelled", Toast.LENGTH_SHORT).show();
+    } else if (responseType == PayFortPayment.RESPONSE_PAYMENT_FAILURE) {
+      this.failureCallback.invoke(responseMap);
+      Toast.makeText(getCurrentActivity(), "Process failed", Toast.LENGTH_SHORT).show();
+    } else if (responseType == PayFortPayment.RESPONSE_PAYMENT_SUCCESS) {
+      this.successCallback.invoke(responseMap);
+      Toast.makeText(getCurrentActivity(), "Process succeed", Toast.LENGTH_SHORT).show();
     }
   }
 }
