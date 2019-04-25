@@ -47,7 +47,7 @@
     "selectYourCity": "أختار مدينتك",
     "selectYourArea": "أختار منطقتك",
     "addArea": "أضف منطقة +",
-    "noLocationDetected": "No Location Detected"
+    "noLocationDetected": "لم يتم أكتشاف الموقع"
   },
   "Address": {
     "singleLine": "{{street}}, مبني {{building}}, شقة {{apt}}",
