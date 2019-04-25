@@ -11,6 +11,8 @@ import {
 // import { BlurView } from 'react-native-blur';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+ import firebase from 'react-native-firebase';
+ import { AppEventsLogger } from 'react-native-fbsdk';
 // import call from 'react-native-phone-call';
 import { emptyBasket, onCompleteAuth } from '../../actions';
 
@@ -49,6 +51,15 @@ class WorkingBasket extends Component {
       clearBasketModal: false,
       belowMinimumModal: false
     };
+  }
+
+  componentDidMount() {
+    try {
+      firebase.analytics().logEvent("OPENED_BASKET");
+      AppEventsLogger.logEvent('OPENED_BASKET');
+    } catch (e) {
+      console.log('AppEventsLogger error', e)
+    }
   }
 
   renderCouponButton() {

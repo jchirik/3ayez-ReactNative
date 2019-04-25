@@ -41,8 +41,8 @@ class VerifyCode extends Component {
 
   authPhoneVerify() {
     console.log('verify');
-    const { verification, confirmation_function } = this.props;
-    this.props.authPhoneVerify(verification, confirmation_function);
+    const { verification, login_attempt_id } = this.props;
+    this.props.authPhoneVerify(verification, login_attempt_id);
   }
 
   renderSquare(digit, index) {
@@ -56,9 +56,9 @@ class VerifyCode extends Component {
       }}
       activeOpacity={1}
       style={{
-        height: 50,
-        width: 38,
-        margin: 6,
+        height: 64,
+        width: 46,
+        margin: 12,
         backgroundColor: 'white',
         borderRadius: 8,
         justifyContent: 'center',
@@ -70,7 +70,7 @@ class VerifyCode extends Component {
         elevation: 2,
       }}>
         <AyezText semibold style={{
-          fontSize: 24
+          fontSize: 26
         }}>{digit}</AyezText>
       </TouchableOpacity>
     )
@@ -79,7 +79,7 @@ class VerifyCode extends Component {
   renderVerificationInput() {
     const digits = this.props.verification.split('');
     const digitSquares = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 4; i++) {
       digitSquares.push(this.renderSquare((i < digits.length) ? digits[i] : '', i))
     }
     return (
@@ -137,7 +137,7 @@ class VerifyCode extends Component {
           >{strings('Authentication.resend')}</AyezText>
           */}
           <BlockButton
-            deactivated={this.props.verification.length < 6}
+            deactivated={this.props.verification.length < 4}
             text={strings('Common.confirm')}
             style={{
               marginTop: 32,
@@ -158,13 +158,13 @@ const mapStateToProps = ({ Auth }) => {
     verification,
     verification_loading,
     verification_error,
-    confirmation_function
+    login_attempt_id
   } = Auth;
   return {
     verification,
     verification_loading,
     verification_error,
-    confirmation_function
+    login_attempt_id
   };
 };
 

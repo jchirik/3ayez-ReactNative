@@ -1,5 +1,7 @@
 
 
+import firebase from 'react-native-firebase';
+import { AppEventsLogger } from 'react-native-fbsdk';
 import { AsyncStorage } from 'react-native';
 import { playSound, SOUND_SWOOSH } from './sounds'
 import {
@@ -35,6 +37,10 @@ export const saveItemSpecialRequests = (upc, seller_id, special_requests) => {
 
 export const addToBasket = (item, seller_id) => {
   playSound(SOUND_SWOOSH);
+
+  firebase.analytics().logEvent("ADD_TO_BASKET");
+  AppEventsLogger.logEvent('ADD_TO_BASKET');
+
   return { type: BASKET_ITEM_INCR, payload: { item, seller_id } };
 };
 

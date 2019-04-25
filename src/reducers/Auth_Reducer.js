@@ -35,7 +35,7 @@ const INITIAL_STATE = {
   guestlogin_loading: false,
   guestlogin_error: '',
 
-  confirmation_function: null,
+  login_attempt_id: null,
 
   onComplete: null
 };
@@ -56,7 +56,7 @@ export default (state = INITIAL_STATE, action) => {
     case PHONE_ENTRY_SUCCESS:
       return {
         ...state,
-        confirmation_function: p.confirmation_function,
+        login_attempt_id: p.login_attempt_id,
         phone_loading: false
       };
     case PHONE_ENTRY_FAIL:

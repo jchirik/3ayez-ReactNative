@@ -3,6 +3,7 @@ Coupon_Actions.js
 */
 
 import firebase from 'react-native-firebase';
+import { AppEventsLogger } from 'react-native-fbsdk';
 
 import {
   COUPON_CODE_SUCCESS,
@@ -28,6 +29,10 @@ export const applyCoupon = (code) => {
       console.log(result.data);
       if (is_valid) {
         dispatch({ type: COUPON_CODE_SUCCESS, payload: { coupon } });
+
+        firebase.analytics().logEvent("APPLIED_COUPON", { code });
+        AppEventsLogger.logEvent('APPLIED_COUPON', { code });
+
       } else {
         dispatch({ type: COUPON_CODE_FAILURE, payload: { error } });
       }

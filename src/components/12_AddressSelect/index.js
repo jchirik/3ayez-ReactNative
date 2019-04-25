@@ -15,6 +15,8 @@ import {
  } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+ import firebase from 'react-native-firebase';
+ import { AppEventsLogger } from 'react-native-fbsdk';
 
 import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
@@ -87,7 +89,8 @@ class AddressSelect extends Component {
                   height: 80, paddingHorizontal: 10,
                   borderColor: '#f7f7f7',
                   justifyContent: 'center',
-                  alignSelf: 'stretch'
+                  alignSelf: 'stretch',
+                  alignItems: 'flex-start'
                   }}
               >
                 <AyezText medium color={colors.ayezGreen}>{strings('AddressSelection.addNewAddress')}</AyezText>

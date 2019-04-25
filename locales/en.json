@@ -42,6 +42,11 @@
     "stores": "Stores",
     "support": "Support"
   },
+  "AreaSelect": {
+    "selectYourCity": "Select your city",
+    "selectYourArea": "Select your area",
+    "addArea": "+ Add Area"
+  },
   "Address": {
     "singleLine": "{{street}}, Building {{building}}, Apt {{apt}}",
     "detail": "Building {{building}}, Apt {{apt}}",

@@ -110,7 +110,7 @@ class AreaSelect extends Component {
                   textAlign: 'center',
                   marginBottom: 10
                 }}>
-                {'+ Add Area'}
+                {strings('AreaSelect.addArea')}
               </AyezText>
             </View>
           </TouchableOpacity>
@@ -204,12 +204,12 @@ class AreaSelect extends Component {
 
        <OrderStatusBar color={colors.paleGrey}/>
 
-       <View style={{ marginTop: 14, marginLeft: 26}}>
+       <View style={{ marginTop: 14, marginLeft: 26, alignItems: 'flex-start'}}>
          <AyezText medium size={18}>{greetingText}</AyezText>
          <AyezText
           semibold size={20}
           style={{ marginTop: 5}}
-          >Please confirm your area</AyezText>
+          >{strings('AreaSelect.selectYourArea')}</AyezText>
         </View>
 
        <FlatList

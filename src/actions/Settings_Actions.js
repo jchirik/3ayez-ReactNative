@@ -41,6 +41,7 @@ const setLocaleSettings = (locale, dispatch) => {
         CodePush.restartApp();
     },200);
   }
+  firebase.analytics().setUserProperty("language", locale);
   dispatch({ type: LOCALE_SET, payload: { locale } });
 }
 

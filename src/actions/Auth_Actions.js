@@ -51,11 +51,8 @@ export const authGuestLogin = () => {
       console.log('authGuestLogin successful')
       dispatch({ type: GUEST_LOGIN_SUCCESS });
       // navigateTo(sceneKeys.addressCreate)
-      try {
-        AppEventsLogger.logEvent('GUEST_REGISTERED');
-      } catch (e) {
-        console.log('AppEventsLogger error', e)
-      }
+      firebase.analytics().logEvent("ENTERED_AS_GUEST");
+      AppEventsLogger.logEvent('ENTERED_AS_GUEST');
     })
     .catch(error => {
       console.log('authGuestLogin', error);
@@ -66,66 +63,126 @@ export const authGuestLogin = () => {
 
 
 export const authPhoneLogin = (phone, call_code) => {
-  const formatted_phone = `+${call_code}${phone}`.replace(/\s/g, '');
+  let formatted_phone = `+${call_code}${phone}`.replace(/\s/g, '');
+  if (call_code == '20') {
+    formatted_phone = `+2${phone}`.replace(/\s/g, '');
+  }
   console.log('authPhoneLogin', phone, call_code, formatted_phone);
+
+  firebase.analytics().logEvent("PROVIDED_PHONE_NUMBER");
+  AppEventsLogger.logEvent('PROVIDED_PHONE_NUMBER');
+
   // try { firebase.auth().signOut(); }
   return (dispatch) => {
     dispatch({ type: PHONE_ENTRY_BEGIN });
-    firebase.auth().signInWithPhoneNumber(formatted_phone)
-    .then(confirmation_function => {
 
-      if (Platform.OS === "ios") {
-        dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
-        navigateTo(sceneKeys.verifyCode)
-      } else {
-        // IF ANDROID - wait half a second. if not logged in, then go to verify code
-        // this is bc many phone skip confirmation, automatically detect
-        setTimeout(() => {
-          dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { confirmation_function } });
+    const loginAttemptWithPhone = firebase.functions().httpsCallable('loginAttemptWithPhone');
+    loginAttemptWithPhone({ phone: formatted_phone }).then((result) => {
 
-          const { currentUser } = firebase.auth();
-          if (!currentUser) {
-            navigateTo(sceneKeys.verifyCode)
-          }
-        }, 500);
+      const { login_attempt_id, error } = result.data;
+
+      if (error) {
+        console.log(error);
+        dispatch({ type: PHONE_ENTRY_FAIL, payload: { error } })
+        return;
       }
 
-      try {
-        AppEventsLogger.logEvent('ACCOUNT_REGISTERED');
-      } catch (e) {
-        console.log('AppEventsLogger error', e)
-      }
-    }) // save confirm result to use with the manual verification code)
-    .catch(error => {
+      dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { login_attempt_id } });
+      navigateTo(sceneKeys.verifyCode)
+    }).catch(error => {
       console.log(error);
       dispatch({ type: PHONE_ENTRY_FAIL, payload: { error } })
     });
-    // Note: this catch may encompass errors beyond the login process itself
   };
 };
 
-export const authPhoneVerify = (code, confirmation_function) => {
+    // firebase.auth().signInWithPhoneNumber(formatted_phone)
+    // .then(confirmation_function => {
+    //
+    //   if (Platform.OS === "ios") {
+    //     dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { login_attempt_id } });
+    //     navigateTo(sceneKeys.verifyCode)
+    //   } else {
+    //     // IF ANDROID - wait half a second. if not logged in, then go to verify code
+    //     // this is bc many phone skip confirmation, automatically detect
+    //     setTimeout(() => {
+    //       dispatch({ type: PHONE_ENTRY_SUCCESS, payload: { login_attempt_id } });
+    //
+    //       const { currentUser } = firebase.auth();
+    //       if (!currentUser) {
+    //         navigateTo(sceneKeys.verifyCode)
+    //       }
+    //     }, 500);
+    //   }
+    //
+    //   try {
+    //     AppEventsLogger.logEvent('ACCOUNT_REGISTERED');
+    //   } catch (e) {
+    //     console.log('AppEventsLogger error', e)
+    //   }
+    // }) // save confirm result to use with the manual verification code)
+    // .catch(error => {
+    //   console.log(error);
+    //   dispatch({ type: PHONE_ENTRY_FAIL, payload: { error } })
+    // });
+    // Note: this catch may encompass errors beyond the login process itself
+
+
+export const authPhoneVerify = (code, login_attempt_id) => {
   return (dispatch) => {
 
     // check if currently logged in (anonymously)
     const prevUser = firebase.auth().currentUser;
     dispatch({ type: VERIFICATION_BEGIN });
 
-    confirmation_function.confirm(code)
-      .then((user) => {
-        console.log('authPhoneVerify successful')
-        // continues in the Customer Actions onAuthStateChanged
-      }) // User is logged in){
-      .catch(error => {
+    const verifyLoginCode = firebase.functions().httpsCallable('verifyLoginCode');
+    verifyLoginCode({ login_attempt_id, verification_code: code }).then((result) => {
+
+      const { token, error } = result.data;
+
+      if (error) {
         console.log('authPhoneVerify', error)
         Alert.alert(
-          strings("Authentication.verificationCodeError"), 
+          strings("Authentication.verificationCodeError"),
           strings("Authentication.wrongVerificationCode")
         )
         dispatch({ type: VERIFICATION_FAIL, payload: { error } })
-      });
+        return;
+      }
+
+      firebase.analytics().logEvent("VERIFIED_PHONE");
+      AppEventsLogger.logEvent('VERIFIED_PHONE');
+
+      console.log('verified login code, token:', token)
+      firebase.auth().signInWithCustomToken(token)
+    }).catch(error => {
+      console.log('authPhoneVerify', error)
+      Alert.alert(
+        strings("Authentication.verificationCodeError"),
+        strings("Authentication.wrongVerificationCode")
+      )
+      dispatch({ type: VERIFICATION_FAIL, payload: { error } })
+    });
   };
 };
+//
+//     confirmation_function.confirm(code)
+//       .then((user) => {
+//         console.log('authPhoneVerify successful')
+//         // continues in the Customer Actions onAuthStateChanged
+//       }) // User is logged in){
+//       .catch(error => {
+//         console.log('authPhoneVerify', error)
+//         Alert.alert(
+//           strings("Authentication.verificationCodeError"),
+//           strings("Authentication.wrongVerificationCode")
+//         )
+//         dispatch({ type: VERIFICATION_FAIL, payload: { error } })
+//       });
+//   };
+// };
+
+
 
 export const onCompleteAuth = (onComplete) => {
   return { type: AUTH_INIT, payload: { onComplete } };

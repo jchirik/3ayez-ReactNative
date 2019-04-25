@@ -2,6 +2,7 @@
 import firebase from 'react-native-firebase';
 import { Actions } from 'react-native-router-flux';
 import { AsyncStorage } from 'react-native';
+import { AppEventsLogger } from 'react-native-fbsdk';
 import {
   SELECTED_AREA_SET,
   SAVED_AREAS_SET,
@@ -62,5 +63,10 @@ export const selectArea = (selected_area) => {
     const updateObject = {};
     updateObject[`areas.${selected_area.id}`] = Date.now()
     customerRef.update(updateObject).then(() => console.log('Updated areas'));
+
+    firebase.analytics().logEvent("SELECTED_AREA");
+    firebase.analytics().setUserProperty("last_area", selected_area.id);
+    AppEventsLogger.logEvent('SELECTED_AREA');
+
   };
 };

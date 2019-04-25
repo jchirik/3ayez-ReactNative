@@ -83,11 +83,13 @@ export const submitOrder = (order_t, items_array, total) => {
           navigateTo(sceneKeys.orderTracker, { order_id }); // you might have to refresh
         }, 1500);
 
-        try {
-          AppEventsLogger.logPurchase(total, 'EGP');
-        } catch (e) {
-          console.log('AppEventsLogger error', e)
-        }
+        firebase.analytics().logEvent("ecommerce_purchase", {
+          total,
+          seller_id: seller.id,
+          coupon_code: (order.coupon ? order.coupon.code : null)
+        });
+        AppEventsLogger.logEvent('ecommerce_purchase');
+        AppEventsLogger.logPurchase(total, 'EGP');
       })
       .catch((error) => {
         const { code, message, details } = error;
@@ -133,8 +135,14 @@ export const setOrderNotes = (notes) => {
 
 
 export const setTimeslot = (timeslot) => {
+
+  firebase.analytics().logEvent("SET_DELIVERY_TIME");
+  AppEventsLogger.logEvent('SET_DELIVERY_TIME');
+
   return {
     type: TIMESLOT_SET,
     payload: { timeslot, delivery_fee: timeslot.delivery_fee }
   };
+
+
 };

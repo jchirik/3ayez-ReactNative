@@ -2,6 +2,7 @@
 import firebase from 'react-native-firebase';
 import { Actions } from 'react-native-router-flux';
 import { AsyncStorage } from 'react-native';
+import { AppEventsLogger } from 'react-native-fbsdk';
 import {
   ADDRESS_SUBMIT_BEGIN,
   ADDRESS_SUBMIT_SUCCESS,
@@ -58,6 +59,10 @@ export const createNewAddress = (address) => {
       return;
     }
 
+    firebase.analytics().logEvent("CREATED_ADDRESS");
+    AppEventsLogger.logEvent('CREATED_ADDRESS');
+
+
     const batch = firebase.firestore().batch();
 
     const addressRef = firebase.firestore().collection('customers').doc(currentUser.uid).collection('addresses').doc();
@@ -83,6 +88,9 @@ export const setAddress = (address) => {
     const { currentUser } = firebase.auth();
 
     // dispatch({ type: ADDRESS_SELECT_BEGIN });
+
+    firebase.analytics().logEvent("SET_DELIVERY_ADDRESS");
+    AppEventsLogger.logEvent('SET_DELIVERY_ADDRESS');
 
     dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address } });
     navigateTo(sceneKeys.checkout);

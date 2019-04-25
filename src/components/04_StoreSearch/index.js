@@ -33,6 +33,11 @@ import {
   AYEZ_GREEN
 } from '../../Helpers.js';
 
+
+ import firebase from 'react-native-firebase';
+ import { AppEventsLogger } from 'react-native-fbsdk';
+
+
 import images from '../../theme/images'
 
 
@@ -53,6 +58,13 @@ class StoreSearch extends Component {
     this.props.resetQueryItems();
     this.searchInput.focus();
     BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+
+    try {
+      firebase.analytics().logEvent("ENTERED_STORE_SEARCH");
+      AppEventsLogger.logEvent('ENTERED_STORE_SEARCH');
+    } catch (e) {
+      console.log('AppEventsLogger error', e)
+    }
     // InteractionManager.runAfterInteractions(() => {
     //   setTimeout(() => {
     //     this.setState({

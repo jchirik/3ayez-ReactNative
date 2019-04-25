@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
+ import firebase from 'react-native-firebase';
+ import { AppEventsLogger } from 'react-native-fbsdk';
 // import { Tabs } from 'antd-mobile';
 import { connect } from 'react-redux';
 import {

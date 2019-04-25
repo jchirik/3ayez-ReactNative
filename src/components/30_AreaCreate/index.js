@@ -150,7 +150,7 @@ class AreaCreate extends Component {
         }}
         onPress={() => this.props.selectArea(item)}
       >
-        <AyezText medium size={15} color={'black'} style={{ flex: 1 }}>
+        <AyezText medium size={15} color={'black'} style={{ flex: 1, textAlign: 'left' }}>
           {translate(item.display_name)}
         </AyezText>
         <RTLImage
@@ -225,7 +225,7 @@ class AreaCreate extends Component {
           backgroundColor: colors.paleGrey,
           paddingTop: STATUS_BAR_HEIGHT
         }}>
-          <AyezText bold size={24} style={{ paddingTop: 54, paddingLeft: 44 }}>Select your city</AyezText>
+          <AyezText bold size={24} style={{ paddingTop: 54, paddingLeft: 44, alignSelf: 'flex-start' }}>{strings('AreaSelect.selectYourCity')}</AyezText>
 
           <FlatList
             key={'REGION_LIST'}
@@ -251,7 +251,7 @@ class AreaCreate extends Component {
         flex: 1
        }}>
         <Header
-          title={'Select your area'}
+          title={strings('AreaSelect.selectYourArea')}
           onBackButtonPress={() => this.setState({ region: null })}
           />
         <FlatList

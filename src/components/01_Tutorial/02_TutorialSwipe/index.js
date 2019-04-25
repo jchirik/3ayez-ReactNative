@@ -12,6 +12,10 @@ import {
    I18nManager
  } from 'react-native';
 
+
+ import firebase from 'react-native-firebase';
+ import { AppEventsLogger } from 'react-native-fbsdk';
+ 
 import { ViewPager } from 'rn-viewpager';
 
 import { Actions } from 'react-native-router-flux';
@@ -58,6 +62,13 @@ class TutorialSwipe extends Component {
   }
 
   componentDidMount() {
+    try {
+      firebase.analytics().logEvent("PRESSED_GET_STARTED");
+      AppEventsLogger.logEvent('PRESSED_GET_STARTED');
+    } catch (e) {
+      console.log('AppEventsLogger error', e)
+    }
+
     this.props.onCompleteAuth(() => navigateBackTo(sceneKeys.root))
   }
 

@@ -42,6 +42,11 @@
     "stores": "محلات تجارية",
     "support": "دعم"
   },
+  "AreaSelect": {
+    "selectYourCity": "أختار مدينتك",
+    "selectYourArea": "أختار منطقتك",
+    "addArea": "أضف منطقة +"
+  },
   "Address": {
     "singleLine": "{{street}}, مبني {{building}}, شقة {{apt}}",
     "detail": "مبني {{building}}, شقة {{apt}}",

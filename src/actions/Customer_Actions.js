@@ -2,6 +2,7 @@
 import { Actions } from 'react-native-router-flux';
 import firebase from 'react-native-firebase';
 import { setPushToken } from './PushToken_Helpers';
+import { AppEventsLogger } from 'react-native-fbsdk';
 import store from '../reducers';
 import { sceneKeys, navigateTo, navigateBackTo } from '../router';
 
@@ -43,7 +44,7 @@ const completeVerification = (dispatch, user, prevUser) => {
   if (prevUser && prevUser.uid && (user.uid !== prevUser.uid)) {
     console.log('migrating guest account with phone account', prevUser.uid, user.uid);
 
-    const migrateGuestAccount = firebase.functions().httpsCallable('migrateGuestAccount');
+    const migrateGuestAccount = firebase.functions().httpsCallable('migrateGuestAccountv2');
     migrateGuestAccount({ guest_uid: prevUser.uid, user_uid: user.uid }).then((result) => {
       // if (result.data && result.data.success) {
       dispatch({ type: VERIFICATION_SUCCESS });
@@ -94,12 +95,21 @@ export const listenCustomerAuthStatus = () => {
         listenToAddresses(dispatch);
         listenToCreditCards(dispatch);
         setPushToken(firebase.firestore().collection('customers').doc(user.uid));
+
+        if (!user.isAnonymous) {
+          firebase.analytics().logEvent("LOGGED_IN");
+          AppEventsLogger.logEvent('LOGGED_IN');
+        }
         // dispatch({ type: AUTH_INIT, payload: { onComplete: null }});
       } else {
         console.log('onAuthStateChanged logged out');
         dispatch({ type: CUSTOMER_DATA_RESET });
         dispatch({ type: ONGOING_ORDERS_RESET });
         navigateTo(sceneKeys.tutorial);
+
+        firebase.analytics().logEvent("LOGGED_OUT");
+        AppEventsLogger.logEvent('LOGGED_OUT');
+
       }
       prevUser = user;
     });
@@ -108,11 +118,20 @@ export const listenCustomerAuthStatus = () => {
 
 
 
-const generateReferralCode = (uid, phone, referral_code) => {
-  if (uid && phone && !referral_code) {
+const generateReferralCode = (uid, isAnonymous, referral_code) => {
+  console.log('isAnonymous', isAnonymous)
+  if (uid && !isAnonymous && !referral_code) {
     const generateReferralCode = firebase.functions().httpsCallable('generateReferralCode');
     generateReferralCode({ customer_id: uid }).then((result) => {
       console.log('Successful generation', result);
+
+      try {
+        firebase.analytics().logEvent("GENERATED_REFERRAL_CODE");
+        AppEventsLogger.logEvent('GENERATED_REFERRAL_CODE');
+      } catch (e) {
+        console.log('AppEventsLogger error', e)
+      }
+
     }).catch((error) => {
       console.log(error);
     });
@@ -124,7 +143,7 @@ const generateReferralCode = (uid, phone, referral_code) => {
 const listenCustomerData = (dispatch) => {
   const { currentUser } = firebase.auth();
   if (currentUser) {
-    dispatch({ type: CUSTOMER_DATA_SET, payload: { phone: currentUser.phoneNumber } });
+    // dispatch({ type: CUSTOMER_DATA_SET, payload: { phone: currentUser.phoneNumber } });
     // realtime listening
     const listener = firebase.firestore().collection('customers').doc(currentUser.uid)
         .onSnapshot((document) => {
@@ -140,19 +159,19 @@ const listenCustomerData = (dispatch) => {
             const payload = document.data();
             console.log('balanceListenCustomerData', payload)
             dispatch({ type: CUSTOMER_DATA_SET, payload });
-            generateReferralCode(currentUser.uid, currentUser.phoneNumber, payload.referral_code)
+            generateReferralCode(currentUser.uid, currentUser.isAnonymous, payload.referral_code)
           } else {
-            generateReferralCode(currentUser.uid, currentUser.phoneNumber, null)
+            generateReferralCode(currentUser.uid, currentUser.isAnonymous, null)
           }
     });
 
-    firebase.firestore()
-      .collection('customers')
-      .doc(currentUser.uid)
-      .set({ phone: currentUser.phoneNumber }, { merge: true })
-      .then(() => {
-        console.log('set phone number');
-      });
+    // firebase.firestore()
+    //   .collection('customers')
+    //   .doc(currentUser.uid)
+    //   .set({ phone: currentUser.phoneNumber }, { merge: true })
+    //   .then(() => {
+    //     console.log('set phone number');
+    //   });
     dispatch({ type: CUSTOMER_DATA_LISTENER_SET, payload: { listener, balanceListener } });
   }
 };
