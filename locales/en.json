@@ -28,7 +28,8 @@
     "english": "English",
     "arabic": "عربي",
     "requestFailed": "Request Failed. Check your internet connection!",
-    "tryAgain": "Try Again"
+    "tryAgain": "Try Again",
+    "pleaseConnectToInternetNetwork": "This app needs internet connection, please connect to the internet for the app to work"
   },
   "Input": {
     "required": "required",

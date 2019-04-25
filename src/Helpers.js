@@ -15,6 +15,11 @@ export const ORDER_STATUS = Object.freeze({
 export const REJECTION_STATUS = [
   ORDER_STATUS.CANCELED_BY_STORE, ORDER_STATUS.CANCELED_BY_USER, ORDER_STATUS.DELIVERY_FAILED
 ];
+export const CONNECTION_CHANGE_EVENT = 'connectionChange';
+
+export const NET_INFO_STATE = {
+  'NONE': 'none'
+};
 
 export const ZOPIM_ACCOUNT_KEY = __DEV__
   ? '6NFj0gv0sApOZnoEu2t4JRQssHYXoB1q'

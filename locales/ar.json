@@ -28,7 +28,8 @@
     "english": "English",
     "arabic": "عربي",
     "requestFailed": "تعذر الإتصال. تأكد من إتصالك بالشبكة !",
-    "tryAgain": "حاول مرة أخرى"
+    "tryAgain": "حاول مرة أخرى",
+    "pleaseConnectToInternetNetwork": "برجاء الاتصال بالانترنت حتى يعمل التطبيق"
   },
   "Input": {
     "required": "مطلوب",

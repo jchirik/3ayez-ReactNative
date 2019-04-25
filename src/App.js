@@ -4,14 +4,16 @@ import codePush from 'react-native-code-push';
 import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
-import { View, Text, Modal, ActivityIndicator, AppState } from 'react-native';
+import { View, Text, Modal, ActivityIndicator, AppState, NetInfo, Alert } from 'react-native';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
-import { SPLASH_SCREEN_TIME_OUT, isIOS, toast } from './Helpers';
+import { SPLASH_SCREEN_TIME_OUT, isIOS, toast, NET_INFO_STATE, CONNECTION_CHANGE_EVENT } from './Helpers';
 import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
+import {navigateBackTo} from './router/index';
+import AyezText from './components/_common/AyezText';
 
 class App extends Component {
   constructor() {
@@ -23,10 +25,12 @@ class App extends Component {
       progress_percent: 0.0,
       visitorSDK: undefined,
       greetingMessage: undefined,
-      isSplashShown: true
+      isSplashShown: true,
+      isInternetConnected: true
     };
   }
   componentDidMount() {
+    NetInfo.addEventListener(CONNECTION_CHANGE_EVENT, this.handleConnectionChange);
     let that = this;
 
     setTimeout(function() {
@@ -34,7 +38,16 @@ class App extends Component {
     }, SPLASH_SCREEN_TIME_OUT);
   }
 
+  handleConnectionChange = connectionInfo => {
+    if(connectionInfo.type == NET_INFO_STATE.NONE) {
+      this.setState({ isInternetConnected: false });
+    } else {
+      this.setState({ isInternetConnected: true });
+    }
+  }
+
   componentWillUnmount() {
+    NetInfo.removeEventListener(CONNECTION_CHANGE_EVENT);
     zendesk.zendeskEmitter.removeAllListeners();
   }
 
@@ -145,6 +158,17 @@ class App extends Component {
 
     return (
       <Provider store={store}>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={!this.state.isInternetConnected}
+          onRequestClose={() => {}}>
+          <View style={{backgroundColor: 'white', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <AyezText bold style={{marginBottom: 10}}>{strings("Common.noInternet")}</AyezText>
+            <AyezText style={{ textAlign: 'center' }}>{strings("Common.pleaseConnectToInternetNetwork")}</AyezText>
+          </View>
+        </Modal>
+
         <PersistGate loading={null} persistor={persistor}>
           <Router />
         </PersistGate>
