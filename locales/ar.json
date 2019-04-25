@@ -45,7 +45,8 @@
   "AreaSelect": {
     "selectYourCity": "أختار مدينتك",
     "selectYourArea": "أختار منطقتك",
-    "addArea": "أضف منطقة +"
+    "addArea": "أضف منطقة +",
+    "noLocationDetected": "No Location Detected"
   },
   "Address": {
     "singleLine": "{{street}}, مبني {{building}}, شقة {{apt}}",
@@ -316,7 +317,10 @@
     "verificationInstruction": "أدخل الكود الذي تم إرساله أدناه",
     "resend": "لم تتلقي الكود ؟ إعادة الإرسال",
     "verificationCodeError": "خطأ فى الرقم التأكيدى",
-    "wrongVerificationCode": "رقم تأكيدى خاطىء من فضلك اعد الحاولة"
+    "wrongVerificationCode": "رقم تأكيدى خاطىء من فضلك اعد الحاولة",
+    "didntReceiveCode": "لم تستلم الكود الخاص بك ؟",
+    "callInstead": "إرسال الكود عن طريق مكالمة هاتفية",
+    "robocallWaiting": "أنتظر {{seconds}} ث.. ",
   },
   "SupportChat": {
     "header": "الدعم بالدردشة",

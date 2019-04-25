@@ -45,7 +45,8 @@
   "AreaSelect": {
     "selectYourCity": "Select your city",
     "selectYourArea": "Select your area",
-    "addArea": "+ Add Area"
+    "addArea": "+ Add Area",
+    "noLocationDetected": "No Location Detected"
   },
   "Address": {
     "singleLine": "{{street}}, Building {{building}}, Apt {{apt}}",
@@ -316,7 +317,10 @@
     "verificationInstruction": "Enter the code sent to you below",
     "resend": "Didn't receive code? Resend",
     "verificationCodeError": "Verification Code Error",
-    "wrongVerificationCode": "Wrong verification code, please try again."
+    "wrongVerificationCode": "Wrong verification code, please try again.",
+    "didntReceiveCode": "Didn't receive your code?",
+    "callInstead": "Provide my code over the phone",
+    "robocallWaiting": "Waiting {{seconds}}...",
   },
   "SupportChat": {
     "header": "Support Chat",

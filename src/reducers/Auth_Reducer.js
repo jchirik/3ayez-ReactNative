@@ -17,7 +17,11 @@ import {
 
   GUEST_LOGIN_BEGIN,
   GUEST_LOGIN_SUCCESS,
-  GUEST_LOGIN_FAIL
+  GUEST_LOGIN_FAIL,
+
+  ROBOCALL_BEGIN,
+  ROBOCALL_SUCCESS,
+  ROBOCALL_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -37,7 +41,10 @@ const INITIAL_STATE = {
 
   login_attempt_id: null,
 
-  onComplete: null
+  onComplete: null,
+
+  robocall_loading: false,
+  robocall_error: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -73,6 +80,13 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, guestlogin_loading: false };
     case GUEST_LOGIN_FAIL:
       return { ...state, guestlogin_error: p.error, guestlogin_loading: false };
+
+    case ROBOCALL_BEGIN:
+      return { ...state, robocall_error: null, robocall_loading: true };
+    case ROBOCALL_SUCCESS:
+      return { ...state, robocall_loading: false };
+    case ROBOCALL_ERROR:
+      return { ...state, robocall_error: p.error, robocall_loading: false };
     default:
       return state;
   }

@@ -25,7 +25,8 @@ import {
 // import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
   authVerificationSet,
-  authPhoneVerify
+  authPhoneVerify,
+  robocallCode
 } from '../../../actions';
 
 import {
@@ -33,10 +34,27 @@ import {
   translate
 } from '../../../i18n.js';
 
+import colors from '../../../theme/colors';
+
+const timer = require('react-native-timer');
+
 class VerifyCode extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      timerSecond: 15,
+    };
+  }
+
+  componentDidMount() {
+    timer.clearInterval(this);
+    timer.setInterval(this, 'hideMsg', () => {
+      this.setState({ timerSecond: this.state.timerSecond - 1 });
+      if (this.state.timerSecond <= 0) {
+        timer.clearInterval(this);
+      }
+    }, 1000);
   }
 
   authPhoneVerify() {
@@ -106,6 +124,35 @@ class VerifyCode extends Component {
     )
   }
 
+
+  renderRobocallButton() {
+    if (this.state.timerSecond !== 0) {
+      return (
+        <AyezText medium color={colors.ayezGreen}
+          style={{ alignSelf: 'center' }}>{strings('Authentication.robocallWaiting', { seconds: `${this.state.timerSecond}` })}</AyezText>
+      )
+    }
+
+    if (this.props.robocall_loading) {
+      return (
+        <ActivityIndicator size="small" style={{ padding: 20, alignSelf: 'center' }} />
+      )
+    }
+    return (
+      <View style={{ alignItems: 'center' }}>
+        <AyezText regular size={14} color={"#888888"}>{strings('Authentication.didntReceiveCode')}</AyezText>
+
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => this.props.robocallCode(this.props.login_attempt_id)}
+          >
+          <AyezText medium size={14} color={colors.ayezGreen}>{strings('Authentication.callInstead')}</AyezText>
+        </TouchableOpacity>
+      </View>
+    )
+
+  }
+
   render() {
     return (
       <View style={{
@@ -146,6 +193,8 @@ class VerifyCode extends Component {
             }}
             onPress={this.authPhoneVerify.bind(this)}
           />
+          <View style={{ height: 30 }} />
+          { this.renderRobocallButton() }
         </View>
         <LoadingOverlay isVisible={this.props.verification_loading} />
       </View>
@@ -158,17 +207,21 @@ const mapStateToProps = ({ Auth }) => {
     verification,
     verification_loading,
     verification_error,
-    login_attempt_id
+    login_attempt_id,
+
+    robocall_loading
   } = Auth;
   return {
     verification,
     verification_loading,
     verification_error,
-    login_attempt_id
+    login_attempt_id,
+    robocall_loading
   };
 };
 
 export default connect(mapStateToProps, {
   authVerificationSet,
-  authPhoneVerify
+  authPhoneVerify,
+  robocallCode
 })(VerifyCode);

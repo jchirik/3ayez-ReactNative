@@ -79,7 +79,7 @@ import { sceneKeys, navigateBack } from '../../router';
       console.log('OrderTracker exiting')
       navigateBack(); // Android back press
 
-      timer.clearTimeout(this);
+      timer.clearInterval(this);
     }
 
     componentDidMount() {

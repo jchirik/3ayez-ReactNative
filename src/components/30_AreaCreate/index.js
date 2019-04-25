@@ -176,7 +176,23 @@ class AreaCreate extends Component {
     }
 
     if (!auto_area) {
-      return null;
+      return (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            height: 60,
+            backgroundColor: 'white',
+            paddingHorizontal: 30,
+            borderColor: '#eaeaea',
+            borderBottomWidth: 1
+          }}
+        >
+          <AyezText medium size={15} color={'#cecece'} style={{ flex: 1, textAlign: 'left' }}>
+            {strings('AreaSelect.noLocationDetected')}
+          </AyezText>
+        </View>
+      )
     }
     return (
       <TouchableOpacity

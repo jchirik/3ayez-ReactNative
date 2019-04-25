@@ -24,7 +24,11 @@ import {
 
   GUEST_LOGIN_BEGIN,
   GUEST_LOGIN_SUCCESS,
-  GUEST_LOGIN_FAIL
+  GUEST_LOGIN_FAIL,
+
+  ROBOCALL_BEGIN,
+  ROBOCALL_SUCCESS,
+  ROBOCALL_ERROR
 } from './types';
 import {sceneKeys, navigateTo, navigateBackTo} from '../router';
 import {strings} from '../i18n';
@@ -127,7 +131,6 @@ export const authPhoneLogin = (phone, call_code) => {
     // });
     // Note: this catch may encompass errors beyond the login process itself
 
-
 export const authPhoneVerify = (code, login_attempt_id) => {
   return (dispatch) => {
 
@@ -165,6 +168,28 @@ export const authPhoneVerify = (code, login_attempt_id) => {
     });
   };
 };
+
+
+export const robocallCode = (login_attempt_id) => {
+  return (dispatch) => {
+    dispatch({ type: ROBOCALL_BEGIN });
+
+    const robocallCode = firebase.functions().httpsCallable('robocallCode');
+    robocallCode({ login_attempt_id }).then((result) => {
+
+      const { success, error } = result.data;
+      if (success) {
+        dispatch({ type: ROBOCALL_SUCCESS })
+      }
+
+      console.log('robocallCode', error)
+      dispatch({ type: ROBOCALL_ERROR, payload: { error } })
+    }).catch(error => {
+      dispatch({ type: ROBOCALL_ERROR, payload: { error } })
+    });
+  }
+}
+
 //
 //     confirmation_function.confirm(code)
 //       .then((user) => {
