@@ -15,4 +15,5 @@ ahmedfathyghazy@gmail.com-->
   <string name="chat_customer_support_3ayez">عايز الدعم الفنى</string>
   <string name="chat_customer_support_3ayez_desc">رسائل عايز للدعم الفنى</string>
   <string name="chat_customer_support_3ayez_new_message">رسالة جديدة من الدعم الفنى</string>
+  <string name="save_btn">حفظ</string>
 </resources>

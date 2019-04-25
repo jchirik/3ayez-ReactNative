@@ -6,4 +6,5 @@ https://github.com/afghazy
 ahmedfathyghazy@gmail.com-->
 <resources>
   <dimen name="chat_bubble_radius">20dp</dimen>
+  <dimen name="pf_elements_top_space">20dp</dimen>
 </resources>
