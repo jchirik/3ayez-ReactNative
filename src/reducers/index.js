@@ -19,7 +19,6 @@ import AddressReverseSearch from './AddressReverseSearch_Reducer';
 import CurrentLocation from './CurrentLocation_Reducer';
 import Customer from './Customer_Reducer';
 import CreditCards from './CreditCards_Reducer';
-import CreditCardCreate from './CreditCardCreate_Reducer';
 import Baskets from './Baskets_Reducer';
 import SellerSearch from './SellerSearch_Reducer';
 import Seller from './Seller_Reducer';
@@ -51,7 +50,6 @@ export const REDUCERS_NAMES = {
   CurrentLocation: 'CurrentLocation',
   Customer: 'Customer',
   CreditCards: 'CreditCards',
-  CreditCardCreate: 'CreditCardCreate',
   Baskets: 'Baskets',
   SellerSearch: 'SellerSearch',
   Seller: 'Seller',
@@ -85,7 +83,6 @@ const reducers = combineReducers({
   [REDUCERS_NAMES.AddressReverseSearch]: AddressReverseSearch,
   [REDUCERS_NAMES.CurrentLocation]: CurrentLocation,
   [REDUCERS_NAMES.CreditCards]: CreditCards,
-  [REDUCERS_NAMES.CreditCardCreate]: CreditCardCreate,
   [REDUCERS_NAMES.CustomerFeedback]: CustomerFeedback,
   [REDUCERS_NAMES.Checkout]: Checkout,
   [REDUCERS_NAMES.Coupon]: Coupon,

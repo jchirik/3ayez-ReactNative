@@ -90,6 +90,7 @@
     "name": "الإسم كما يظهر على البطاقة ",
     "expiryText": "إنتهاء. {{month}}/{{year}}",
     "errorAddingCard": "خطأ بإضافة الكارت",
+    "cardCreationSuccess": "تم إضافة الكارت بنجاح",
     "verifyingCard": "التحقق من بطاقة الائتمان"
   },
   "OrderStatusBar": {

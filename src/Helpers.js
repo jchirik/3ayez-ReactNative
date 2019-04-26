@@ -27,7 +27,7 @@ export const hasValue = val => {
   return false;
 };
 
-export const toast = str => {
+export const toast = (str, position) => {
   Toast.show(str, {
     shadow: true,
     animation: true,

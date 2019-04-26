@@ -12,7 +12,6 @@ import { strings } from "./i18n"
 import { addSupportMessage, addSupportUser } from "./actions"
 import fonts from "./theme/fonts"
 import zendesk from "./ZendeskChat/ZendeskChatNativeModule"
-import PayFortPaymentNativeModule from "./PayFortPayment/PayFortPaymentNativeModule"
 
 class App extends Component {
   constructor() {
@@ -28,19 +27,6 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    PayFortPaymentNativeModule.pay(
-      {
-        [PayFortPaymentNativeModule.AMOUNT_KEY]: "1",
-        [PayFortPaymentNativeModule.COMMAND_KEY]: PayFortPaymentNativeModule.AUTHORIZATION_COMMAND,
-        [PayFortPaymentNativeModule.CURRENCY_KEY]: "EGP",
-        [PayFortPaymentNativeModule.CUSTOMER_EMAIL_KEY]: "readyandroid@gmail.com",
-        [PayFortPaymentNativeModule.LANGUAGE_KEY]: "ar",
-        [PayFortPaymentNativeModule.MERCHANT_REFERENCE_KEY]: Date.now().toString(),
-        [PayFortPaymentNativeModule.SDK_TOKEN_KEY]: "871F13E7D70F2601E053321E320A917E"
-      },
-      (sucRes) => {},
-      (error) => {}
-    )
     let that = this
 
     setTimeout(function() {

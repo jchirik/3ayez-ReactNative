@@ -134,13 +134,10 @@ public class PayFortPaymentModule extends ReactContextBaseJavaModule implements 
   @Override
   public void onPaymentRequestResponse(int responseType, WritableMap responseMap) {
     if (responseType == PayFortPayment.RESPONSE_PAYMENT_CANCEL) {
-      Toast.makeText(getCurrentActivity(), "Process cancelled", Toast.LENGTH_SHORT).show();
     } else if (responseType == PayFortPayment.RESPONSE_PAYMENT_FAILURE) {
       this.failureCallback.invoke(responseMap);
-      Toast.makeText(getCurrentActivity(), "Process failed", Toast.LENGTH_SHORT).show();
     } else if (responseType == PayFortPayment.RESPONSE_PAYMENT_SUCCESS) {
       this.successCallback.invoke(responseMap);
-      Toast.makeText(getCurrentActivity(), "Process succeed", Toast.LENGTH_SHORT).show();
     }
   }
 }
