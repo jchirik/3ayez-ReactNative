@@ -26,7 +26,8 @@ target 'ayezcustomer' do
   pod 'Fabric', '~> 1.7.13'
   pod 'Crashlytics', '~> 3.10.9'
   pod 'ZDCChat'
-
+  pod 'JVFloatLabeledTextField'
+  
   # all below required for RN Maps
   rn_path = '../node_modules/react-native'
   rn_maps_path = '../node_modules/react-native-maps'

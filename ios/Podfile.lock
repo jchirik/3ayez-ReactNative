@@ -231,6 +231,7 @@ PODS:
     - gRPC-Core (= 1.14.0)
     - gRPC-RxLibrary (= 1.14.0)
   - GTMSessionFetcher/Core (1.2.0)
+  - JVFloatLabeledTextField (1.2.1)
   - JWT (3.0.0-beta.11):
     - Base64 (~> 1.1.2)
   - leveldb-library (1.20)
@@ -355,6 +356,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Google-Maps-iOS-Utils
   - GoogleMaps
+  - JVFloatLabeledTextField
   - RCTRestart (from `../node_modules/react-native-restart/ios`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
@@ -419,6 +421,7 @@ SPEC REPOS:
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
     - GTMSessionFetcher
+    - JVFloatLabeledTextField
     - JWT
     - leveldb-library
     - nanopb
@@ -497,6 +500,7 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 76f6053639a842e1fb45fa82aa598bf3f4d9f66f
   gRPC-RxLibrary: 3c305f32155024b116b780f389323c73a28197e6
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
+  JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
@@ -514,6 +518,6 @@ SPEC CHECKSUMS:
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
   ZDCChat: 1def9764647bb81cf71aebd9df38aa4024c52d12
 
-PODFILE CHECKSUM: c07dc15202a6913d207f3a8e472354a3f6899b90
+PODFILE CHECKSUM: b66ebd546be4f2bcdc0b29ef7416fe3daddbbb50
 
 COCOAPODS: 1.5.3

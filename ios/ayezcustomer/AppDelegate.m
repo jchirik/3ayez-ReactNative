@@ -122,4 +122,13 @@
   return handled;
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+  __block UIBackgroundTaskIdentifier backgroundTask;
+  backgroundTask =
+  [application beginBackgroundTaskWithExpirationHandler: ^ {
+    [application endBackgroundTask:backgroundTask];
+    backgroundTask = UIBackgroundTaskInvalid; }];
+}
+
 @end

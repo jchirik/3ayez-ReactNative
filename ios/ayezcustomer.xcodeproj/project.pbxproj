@@ -35,6 +35,13 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* ayezcustomerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ayezcustomerTests.m */; };
+		32906DE72273CD0900411047 /* PayFortView-ar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32906DB72273CD0700411047 /* PayFortView-ar.xib */; };
+		32906DE82273CD0900411047 /* PayFortView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32906DE62273CD0800411047 /* PayFortView.xib */; };
+		32CB2ABB22736E1900DAB1A5 /* PayFortPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CB2A8822736E1900DAB1A5 /* PayFortPayment.swift */; };
+		32CB2ABC22736E1900DAB1A5 /* PayFortKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CB2A8922736E1900DAB1A5 /* PayFortKeywords.swift */; };
+		32CB2ABD22736E1900DAB1A5 /* PayfortPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CB2A8A22736E1900DAB1A5 /* PayfortPayment.m */; };
+		32CB2AC722736F4400DAB1A5 /* PayFortSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32CB2AC522736F4400DAB1A5 /* PayFortSDK.framework */; };
+		32CB2AC822736F4400DAB1A5 /* PayFortSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 32CB2AC622736F4400DAB1A5 /* PayFortSDK.bundle */; };
 		351046F42246EDE500C9463F /* FrutigerLTArabic-75Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351046C52246EDE500C9463F /* FrutigerLTArabic-75Black.ttf */; };
 		351046F52246EDE500C9463F /* FrutigerLTArabic-45Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351046F12246EDE500C9463F /* FrutigerLTArabic-45Light.ttf */; };
 		351046F62246EDE500C9463F /* FrutigerLTArabic-55Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351046F22246EDE500C9463F /* FrutigerLTArabic-55Roman.ttf */; };
@@ -455,6 +462,14 @@
 		2D02E47B1E0B4A5D006451C7 /* ayezcustomer-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ayezcustomer-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ayezcustomer-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ayezcustomer-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6D4533005F445584157788 /* Frutiger LT Arabic 55 Roman.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Frutiger LT Arabic 55 Roman.ttf"; path = "../assets/fonts/Frutiger LT Arabic 55 Roman.ttf"; sourceTree = "<group>"; };
+		32906DB72273CD0700411047 /* PayFortView-ar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "PayFortView-ar.xib"; sourceTree = "<group>"; };
+		32906DE62273CD0800411047 /* PayFortView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayFortView.xib; sourceTree = "<group>"; };
+		32CB2A8822736E1900DAB1A5 /* PayFortPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayFortPayment.swift; sourceTree = "<group>"; };
+		32CB2A8922736E1900DAB1A5 /* PayFortKeywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayFortKeywords.swift; sourceTree = "<group>"; };
+		32CB2A8A22736E1900DAB1A5 /* PayfortPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayfortPayment.m; sourceTree = "<group>"; };
+		32CB2ABA22736E1900DAB1A5 /* ayezcustomer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ayezcustomer-Bridging-Header.h"; path = "ayezcustomer/ayezcustomer-Bridging-Header.h"; sourceTree = "<group>"; };
+		32CB2AC522736F4400DAB1A5 /* PayFortSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PayFortSDK.framework; sourceTree = "<group>"; };
+		32CB2AC622736F4400DAB1A5 /* PayFortSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PayFortSDK.bundle; sourceTree = "<group>"; };
 		333056BA5B7ADABE709DF4A1 /* libPods-ayezcustomer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ayezcustomer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		351046C52246EDE500C9463F /* FrutigerLTArabic-75Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FrutigerLTArabic-75Black.ttf"; path = "../../assets/fonts/FrutigerLTArabic-75Black.ttf"; sourceTree = "<group>"; };
 		351046F12246EDE500C9463F /* FrutigerLTArabic-45Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FrutigerLTArabic-45Light.ttf"; path = "../../assets/fonts/FrutigerLTArabic-45Light.ttf"; sourceTree = "<group>"; };
@@ -544,6 +559,7 @@
 				D2615AB0221709BE00E38B88 /* libreact-native-fbsdk.a in Frameworks */,
 				D2615AAA221709AD00E38B88 /* libFBSDKCoreKit.a in Frameworks */,
 				D61EBD912247CCC100162998 /* libReactNativeConfig.a in Frameworks */,
+				32CB2AC722736F4400DAB1A5 /* PayFortSDK.framework in Frameworks */,
 				D2615AAC221709AD00E38B88 /* libFBSDKLoginKit.a in Frameworks */,
 				D2615AAE221709AD00E38B88 /* libFBSDKShareKit.a in Frameworks */,
 				D2B136E9220465C200D3B109 /* libFastImage.a in Frameworks */,
@@ -674,6 +690,8 @@
 		13B07FAE1A68108700A75B9A /* ayezcustomer */ = {
 			isa = PBXGroup;
 			children = (
+				32CB2ABA22736E1900DAB1A5 /* ayezcustomer-Bridging-Header.h */,
+				32CB2A8722736E1900DAB1A5 /* payfortpayment */,
 				D2CE0EA621E0F66F00D6EF99 /* ayezcustomer.entitlements */,
 				D22030A622073105005D1B9D /* launch.jpg */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -713,6 +731,21 @@
 				83B7621E1FE42BDD00F21A7A /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		32CB2A8722736E1900DAB1A5 /* payfortpayment */ = {
+			isa = PBXGroup;
+			children = (
+				32CB2A8822736E1900DAB1A5 /* PayFortPayment.swift */,
+				32CB2A8922736E1900DAB1A5 /* PayFortKeywords.swift */,
+				32CB2A8A22736E1900DAB1A5 /* PayfortPayment.m */,
+				32906DB72273CD0700411047 /* PayFortView-ar.xib */,
+				32906DE62273CD0800411047 /* PayFortView.xib */,
+				32CB2AC622736F4400DAB1A5 /* PayFortSDK.bundle */,
+				32CB2AC522736F4400DAB1A5 /* PayFortSDK.framework */,
+			);
+			name = payfortpayment;
+			path = ayezcustomer/payfortpayment;
 			sourceTree = "<group>";
 		};
 		354EB3232229949800740DB3 /* Products */ = {
@@ -1036,12 +1069,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 5YSUQQZPV9;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 5YSUQQZPV9;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1053,12 +1085,10 @@
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5YSUQQZPV9;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 5YSUQQZPV9;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -1538,8 +1568,11 @@
 				D276038A21DEA2650037DE81 /* Poppins-Black.otf in Resources */,
 				351046F42246EDE500C9463F /* FrutigerLTArabic-75Black.ttf in Resources */,
 				D27603A021DEA2650037DE81 /* Poppins-BoldItalic.otf in Resources */,
+				32CB2AC822736F4400DAB1A5 /* PayFortSDK.bundle in Resources */,
 				D276039621DEA2650037DE81 /* Poppins-Light.otf in Resources */,
 				D6C3662A223ABD7400B00B9B /* ZDCChatStrings.bundle in Resources */,
+				32906DE72273CD0900411047 /* PayFortView-ar.xib in Resources */,
+				32906DE82273CD0900411047 /* PayFortView.xib in Resources */,
 				D276038B21DEA2650037DE81 /* Poppins-ThinItalic.otf in Resources */,
 				D276039C21DEA2650037DE81 /* Poppins-Italic.otf in Resources */,
 				351046F72246EDE500C9463F /* FrutigerLTArabic-65Bold.ttf in Resources */,
@@ -1672,7 +1705,10 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				D61B810B223A527D00F162E5 /* ZendeskChat.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				32CB2ABB22736E1900DAB1A5 /* PayFortPayment.swift in Sources */,
+				32CB2ABD22736E1900DAB1A5 /* PayfortPayment.m in Sources */,
 				D61B8110223A52B800F162E5 /* ChatManger.m in Sources */,
+				32CB2ABC22736E1900DAB1A5 /* PayFortKeywords.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1725,6 +1761,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1751,6 +1788,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
@@ -1777,8 +1815,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ayezcustomer/ayezcustomer.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5YSUQQZPV9;
@@ -1786,6 +1824,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/ayezcustomer/payfortpayment",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1807,7 +1846,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayez.ayezcustomer;
 				PRODUCT_NAME = ayezcustomer;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "3ayz customer adhoc profile";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1818,14 +1858,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ayezcustomer/ayezcustomer.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YSUQQZPV9;
 				DISPLAY_NAME = ayezcustomer;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/ayezcustomer/payfortpayment",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1847,7 +1888,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayez.ayezcustomer;
 				PRODUCT_NAME = ayezcustomer;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "3ayz customer adhoc profile";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1992,7 +2034,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 5YSUQQZPV9;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
@@ -2016,6 +2057,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/ayezcustomer/ayezcustomer-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -2049,7 +2091,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 5YSUQQZPV9;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/";
@@ -2065,6 +2106,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/ayezcustomer/ayezcustomer-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
