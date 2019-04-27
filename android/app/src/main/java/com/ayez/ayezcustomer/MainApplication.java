@@ -10,8 +10,10 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
+import com.ayezcustomer.payfortpayment.PayFortPaymentPackage;
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -95,6 +97,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new ReactNativeConfigPackage(),
             new SplashScreenReactPackage(),
         new FBSDKPackage(mCallbackManager),
         new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
@@ -125,7 +128,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         new RNDeviceInfo(),
         new RNLanguagesPackage(),
         new FastImageViewPackage(),
-        new ZendeskChatPackage()
+        new ZendeskChatPackage(),
+        new PayFortPaymentPackage()
       );
     }
 
@@ -145,6 +149,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     super.onCreate();
 
     SoLoader.init(this, /* native exopackage */ false);
+
     ZopimChat.init(getString(R.string.zopim_api_key));
 //    ZopimChat.init(getString(R.string.zopim_api_key_debug));
 

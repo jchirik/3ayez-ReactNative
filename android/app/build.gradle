@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.firebase.firebase-perf"
 apply plugin: 'io.fabric'
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -169,6 +170,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-config')
     compile project(':react-native-splash-screen')
   implementation project(':react-native-fbsdk')
   implementation project(':react-native-code-push')
@@ -257,6 +259,12 @@ dependencies {
   implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
 
   implementation (group: 'com.zopim.android', name: 'sdk', version: '1.4.3')
+
+  implementation 'com.victor:lib:1.0.4'
+
+  implementation project(':FORTSDKv1.5')
+
+  implementation 'com.shamanland:fonticon:0.1.9'
 }
 
 // Run this once to be able to run the application with BUCK

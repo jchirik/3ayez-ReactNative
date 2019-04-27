@@ -90,7 +90,8 @@
     "name": "Name",
     "expiryText": "Exp. {{month}}/{{year}}",
     "errorAddingCard": "Error adding card",
-    "verifyingCard": "verifying card..."
+    "verifyingCard": "verifying card...",
+    "cardCreationSuccess": "Card Added successfully"
   },
   "OrderStatusBar": {
     "trackOrder": "Track your order",

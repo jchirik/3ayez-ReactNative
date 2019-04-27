@@ -11,4 +11,5 @@
   <string name="chat_customer_support_3ayez">3ayez Customer Support</string>
   <string name="chat_customer_support_3ayez_desc">3ayez Customer Support Channel that list support messages</string>
   <string name="chat_customer_support_3ayez_new_message">New Message from 3ayez Customer Support</string>
+  <string name="save_btn">Save</string>
 </resources>
