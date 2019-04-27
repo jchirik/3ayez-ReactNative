@@ -12,6 +12,7 @@ import { strings } from './i18n';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
+import PayFortPaymentNativeModule from './PayFortPayment/PayFortPaymentNativeModule'
 
 class App extends Component {
   constructor() {
@@ -27,9 +28,11 @@ class App extends Component {
     };
   }
   componentDidMount() {
+    PayFortPaymentNativeModule.pay(PayFortPaymentNativeModule.getDefaultParams)
+
     let that = this;
 
-    setTimeout(function() {
+    setTimeout(function () {
       that.setState({ isSplashShown: false });
     }, SPLASH_SCREEN_TIME_OUT);
   }
@@ -91,7 +94,7 @@ class App extends Component {
       });
     }
   }
-  
+
   render() {
     if (!this.state.isSplashShown) {
       SplashScreen.hide();
