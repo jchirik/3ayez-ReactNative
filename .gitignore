@@ -29,6 +29,8 @@ build/
 .gradle
 local.properties
 *.iml
+/android/app/bin/
+.project
 
 # node.js
 #
@@ -65,3 +67,5 @@ buck-out/
 # RNFirebaseStarter
 yarn.lock
 package-lock.json
+
+.vscode
