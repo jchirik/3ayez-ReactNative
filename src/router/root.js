@@ -232,10 +232,6 @@ class RouterComponent extends Component {
               component={components.CustomProduct}
             />
             <Scene
-              key={sceneKeys.creditCardCreate}
-              component={components.CreditCardCreate}
-            />
-            <Scene
               key={sceneKeys.orderReview}
               component={components.OrderReview}
               panHandlers={null}
