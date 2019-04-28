@@ -1,4 +1,5 @@
 PODS:
+  - AppsFlyerFramework (4.8.12)
   - Base64 (1.1.2)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -244,6 +245,9 @@ PODS:
     - React
   - React (0.57.1):
     - React/Core (= 0.57.1)
+  - react-native-appsflyer (1.4.2):
+    - AppsFlyerFramework (~> 4.8.12)
+    - React
   - react-native-camera (2.2.1):
     - React
     - react-native-camera/RCT (= 2.2.1)
@@ -356,6 +360,7 @@ DEPENDENCIES:
   - Google-Maps-iOS-Utils
   - GoogleMaps
   - RCTRestart (from `../node_modules/react-native-restart/ios`)
+  - react-native-appsflyer (from `../node_modules/react-native-appsflyer`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
@@ -382,6 +387,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AppsFlyerFramework
     - Base64
     - Bolts
     - boost-for-react-native
@@ -440,6 +446,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-restart/ios"
   React:
     :path: "../node_modules/react-native"
+  react-native-appsflyer:
+    :path: "../node_modules/react-native-appsflyer"
   react-native-camera:
     :path: "../node_modules/react-native-camera"
   react-native-fbsdk:
@@ -456,6 +464,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
 SPEC CHECKSUMS:
+  AppsFlyerFramework: 726f063384d8dc763d7b423e48cbc8cbe10989ab
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -503,6 +512,7 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   RCTRestart: 2f9ddcfd9abb887f123b6580cec64d72fb6cccaa
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-appsflyer: df0a2f764fd93d5c444be1ba45420153eb042eae
   react-native-camera: 25e0f493dde6e15c814e734685934d55f46e45b2
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
@@ -514,6 +524,6 @@ SPEC CHECKSUMS:
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
   ZDCChat: 1def9764647bb81cf71aebd9df38aa4024c52d12
 
-PODFILE CHECKSUM: c07dc15202a6913d207f3a8e472354a3f6899b90
+PODFILE CHECKSUM: d2feb24c2d60e1edb1dc972724cba5c1e915c96e
 
 COCOAPODS: 1.5.3

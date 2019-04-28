@@ -6,6 +6,7 @@ import firebase from 'react-native-firebase';
 import { playSound, SOUND_SWOOSH, SOUND_SUCCESS } from './sounds'
 
 import { AppEventsLogger } from 'react-native-fbsdk';
+import appsFlyer from 'react-native-appsflyer';
 
 import {
   ORDER_SUBMIT_BEGIN,
@@ -83,13 +84,20 @@ export const submitOrder = (order_t, items_array, total) => {
           navigateTo(sceneKeys.orderTracker, { order_id }); // you might have to refresh
         }, 1500);
 
-        firebase.analytics().logEvent("ecommerce_purchase", {
+        const purchaseTrackingParams = {
           total,
+          af_revenue: total,
+          af_currency: 'EGP',
+          currency: 'EGP',
           seller_id: seller.id,
           coupon_code: (order.coupon ? order.coupon.code : null)
-        });
+        };
+
+        firebase.analytics().logEvent("ecommerce_purchase", purchaseTrackingParams);
         AppEventsLogger.logEvent('ecommerce_purchase');
         AppEventsLogger.logPurchase(total, 'EGP');
+
+        appsFlyer.trackEvent('ecommerce_purchase', purchaseTrackingParams)
       })
       .catch((error) => {
         const { code, message, details } = error;

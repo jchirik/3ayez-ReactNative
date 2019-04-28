@@ -63,6 +63,8 @@ target 'ayezcustomer' do
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
 
+  pod 'react-native-appsflyer', :path => '../node_modules/react-native-appsflyer'
+
   # The following line uses RCTRestart, linking with
   # the library and setting the Header Search Paths for you
   pod 'RCTRestart', :path => '../node_modules/react-native-restart/ios'

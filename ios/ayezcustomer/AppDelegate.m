@@ -17,6 +17,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "RNSplashScreen.h"
 #import <ZDCChat/ZDCChat.h>
+@import AppsFlyerLib;
 
 @implementation AppDelegate
 
@@ -80,6 +81,7 @@
 
 - (void) application:(UIApplication*)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)tokenData {
   [ZDCChat setPushToken:tokenData];
+  [[AppsFlyerTracker sharedTracker] registerUninstall:tokenData];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

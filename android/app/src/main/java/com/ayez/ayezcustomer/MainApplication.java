@@ -47,6 +47,8 @@ import io.invertase.firebase.perf.RNFirebasePerformancePackage;
 import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import com.gettipsi.stripe.StripeReactPackage;
 
+import com.appsflyer.reactnative.RNAppsFlyerPackage;
+
 import com.zmxv.RNSound.RNSoundPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 
@@ -95,7 +97,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
-            new SplashScreenReactPackage(),
+        new SplashScreenReactPackage(),
+        new RNAppsFlyerPackage(),
         new FBSDKPackage(mCallbackManager),
         new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
         new ImagePickerPackage(),

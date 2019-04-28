@@ -4,7 +4,7 @@ import codePush from 'react-native-code-push';
 import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
-import { View, Text, Modal, ActivityIndicator, AppState, NetInfo, Alert } from 'react-native';
+import { View, Text, Modal, ActivityIndicator, AppState, NetInfo, Alert, Platform } from 'react-native';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS, toast, NET_INFO_STATE, CONNECTION_CHANGE_EVENT } from './Helpers';
@@ -14,6 +14,8 @@ import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
 import {navigateBackTo} from './router/index';
 import AyezText from './components/_common/AyezText';
+
+import appsFlyer from 'react-native-appsflyer';
 
 class App extends Component {
   constructor() {
@@ -26,7 +28,8 @@ class App extends Component {
       visitorSDK: undefined,
       greetingMessage: undefined,
       isSplashShown: true,
-      isInternetConnected: true
+      isInternetConnected: true,
+      appState: AppState.currentState
     };
   }
   componentDidMount() {
@@ -36,6 +39,7 @@ class App extends Component {
     setTimeout(function() {
       that.setState({ isSplashShown: false });
     }, SPLASH_SCREEN_TIME_OUT);
+    AppState.addEventListener('change', this._handleAppStateChange);
   }
 
   handleConnectionChange = connectionInfo => {
@@ -46,9 +50,21 @@ class App extends Component {
     }
   }
 
+
+  _handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      if (Platform.OS === 'ios') {
+        appsFlyer.trackAppLaunch();
+      }
+    }
+    this.setState({appState: nextAppState});
+  }
+
   componentWillUnmount() {
     NetInfo.removeEventListener(CONNECTION_CHANGE_EVENT);
     zendesk.zendeskEmitter.removeAllListeners();
+
+    AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
   componentWillMount() {
@@ -57,6 +73,33 @@ class App extends Component {
         zendesk.RECEIVE_MESSAGE,
         this.onReceiveMsg
       );
+    }
+
+    const options = {
+      devKey: "ndKGiAYYohywirYkJfhAFg"
+    };
+    if (isIOS()) { options.appId = "1329892544"; }
+    appsFlyer.initSdk(options,
+      (result) => {
+        console.log(result);
+      }, (error) => {
+        console.error(error);
+      }
+    )
+    if (Platform.OS === 'android') {
+      appsFlyer.setCollectIMEI(true,
+        (result) => {
+           console.log("setCollectIMEI ...");
+         });
+     appsFlyer.setCollectAndroidID(true,
+       (result) => {
+          console.log("setCollectAndroidID ... ");
+        });
+      const  gcmProjectNum = "944939788978";
+      appsFlyer.enableUninstallTracking(gcmProjectNum,
+      (success) => {
+        console.log(success)
+      })
     }
   }
 
@@ -104,7 +147,7 @@ class App extends Component {
       });
     }
   }
-  
+
   render() {
     if (!this.state.isSplashShown) {
       SplashScreen.hide();

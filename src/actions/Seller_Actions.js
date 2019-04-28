@@ -6,6 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import { cleanAlgoliaItems } from '../Helpers';
 import { NetInfo } from 'react-native'
 import { AppEventsLogger } from 'react-native-fbsdk';
+import appsFlyer from 'react-native-appsflyer';
 import {
   SELLER_SELECT,
   BASKET_INIT,
@@ -145,6 +146,7 @@ export const selectSeller = (seller) => {
     firebase.analytics().logEvent("ENTERED_STORE", { seller_id: seller.id });
     firebase.analytics().setUserProperty("last_seller", seller.id);
     AppEventsLogger.logEvent('ENTERED_STORE');
+    appsFlyer.trackEvent('ENTERED_STORE', { seller_id: seller.id })
 
   };
 };

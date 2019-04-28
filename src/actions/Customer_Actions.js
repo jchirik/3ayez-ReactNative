@@ -5,6 +5,7 @@ import { setPushToken } from './PushToken_Helpers';
 import { AppEventsLogger } from 'react-native-fbsdk';
 import store from '../reducers';
 import { sceneKeys, navigateTo, navigateBackTo } from '../router';
+import appsFlyer from 'react-native-appsflyer';
 
 import {
   CUSTOMER_DATA_SET,
@@ -99,6 +100,7 @@ export const listenCustomerAuthStatus = () => {
         if (!user.isAnonymous) {
           firebase.analytics().logEvent("LOGGED_IN");
           AppEventsLogger.logEvent('LOGGED_IN');
+          appsFlyer.trackEvent('LOGGED_IN', { uid: user.uid })
         }
         // dispatch({ type: AUTH_INIT, payload: { onComplete: null }});
       } else {
@@ -109,6 +111,7 @@ export const listenCustomerAuthStatus = () => {
 
         firebase.analytics().logEvent("LOGGED_OUT");
         AppEventsLogger.logEvent('LOGGED_OUT');
+        appsFlyer.trackEvent('LOGGED_OUT', {})
 
       }
       prevUser = user;
@@ -128,6 +131,7 @@ const generateReferralCode = (uid, isAnonymous, referral_code) => {
       try {
         firebase.analytics().logEvent("GENERATED_REFERRAL_CODE");
         AppEventsLogger.logEvent('GENERATED_REFERRAL_CODE');
+        appsFlyer.trackEvent('GENERATED_REFERRAL_CODE', { })
       } catch (e) {
         console.log('AppEventsLogger error', e)
       }
@@ -137,6 +141,38 @@ const generateReferralCode = (uid, isAnonymous, referral_code) => {
     });
   }
 };
+
+
+
+
+
+// const fetchSavedAreas = (dispatch) => {
+//   const { currentUser } = firebase.auth();
+//   dispatch({ type: SAVED_AREAS_BEGIN });
+//   console.log('fetchCustomerSavedAreas BEGIN')
+//
+//   const fetchCustomerSavedAreas = firebase.functions().httpsCallable('fetchCustomerSavedAreas');
+//   fetchCustomerSavedAreas({ customer_id: currentUser.uid }).then((result) => {
+//     console.log('fetchCustomerSavedAreas returned', result)
+//     if (result.data) {
+//       const saved_areas = result.data.saved_areas;
+//
+//       if (!saved_areas.length) {
+//         navigateTo(sceneKeys.areaCreate);
+//       }
+//       dispatch({ type: SAVED_AREAS_SET, payload: { saved_areas } });
+//     } else {
+//       dispatch({ type: SAVED_AREAS_FAIL, payload: { error: 'Bad result' } });
+//     }
+//   }).catch((error) => {
+//     console.log('fetchCustomerSavedAreas error', error);
+//     dispatch({ type: SAVED_AREAS_FAIL, payload: { error } });
+//   });
+// };
+
+
+
+
 
 
 // detected a login & begin fetching customer account information
@@ -150,6 +186,7 @@ const listenCustomerData = (dispatch) => {
           if (document.exists) {
             const payload = document.data();
             console.log('listenCustomerData', payload)
+            // fetchSavedAreas(dispatch);
             dispatch({ type: CUSTOMER_DATA_SET, payload });
           }
     });

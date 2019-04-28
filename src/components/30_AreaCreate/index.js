@@ -93,7 +93,8 @@ class AreaCreate extends Component {
           width: (window.width/2) - 12,
           height: (window.width/2) * 1.3,
           paddingHorizontal: 10,
-          paddingTop: 20
+          paddingTop: 10,
+          paddingBottom: 10
         }}
         onPress={() => this.selectRegion(id)}
       >
@@ -241,7 +242,7 @@ class AreaCreate extends Component {
           backgroundColor: colors.paleGrey,
           paddingTop: STATUS_BAR_HEIGHT
         }}>
-          <AyezText bold size={24} style={{ paddingTop: 54, paddingLeft: 44, alignSelf: 'flex-start' }}>{strings('AreaSelect.selectYourCity')}</AyezText>
+          <AyezText bold size={24} style={{ paddingTop: 54, paddingLeft: 44, paddingRight: 44, alignSelf: 'flex-start' }}>{strings('AreaSelect.selectYourCity')}</AyezText>
 
           <FlatList
             key={'REGION_LIST'}

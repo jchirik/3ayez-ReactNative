@@ -66,8 +66,6 @@ class AreaSelect extends Component {
     this.props.fetchSavedAreas();
   }
 
-
-
     renderAreaTile({ item, index }) {
 
       if (item.isCreateAreaTile) {
@@ -118,6 +116,40 @@ class AreaSelect extends Component {
       }
 
       const { id, display_name, image_url } = item;
+
+      let tileContent = (
+          <AyezText semibold size={15} color={colors.ayezGreen}
+            style={{
+              textAlign: 'center'
+            }}>
+            {translate(display_name)}
+          </AyezText>
+      );
+
+      if (image_url) {
+        tileContent = [
+            <Image
+              source={{ uri: image_url }}
+              style={{
+                width: '95%',
+                height: '80%',
+                marginTop: 4,
+                borderRadius: 10,
+                backgroundColor: '#f7f7f7'
+              }}
+              resizeMode={'cover'}
+            />,
+            <View style={{ flex: 1 }} />,
+            <AyezText semibold size={15} color={colors.ayezGreen}
+              style={{
+                textAlign: 'center',
+                marginBottom: 10
+              }}>
+              {translate(display_name)}
+            </AyezText>
+        ];
+      }
+
       return (
         <TouchableOpacity
           style={{
@@ -148,26 +180,7 @@ class AreaSelect extends Component {
               }
             })
           }}>
-            <Image
-              source={{ uri: image_url }}
-              style={{
-                width: '95%',
-                height: '80%',
-                marginTop: 4,
-                borderRadius: 10,
-                backgroundColor: '#f7f7f7'
-              }}
-              resizeMode={'cover'}
-            />
-
-            <View style={{ flex: 1 }} />
-            <AyezText semibold size={15} color={colors.ayezGreen}
-              style={{
-                textAlign: 'center',
-                marginBottom: 10
-              }}>
-              {translate(display_name)}
-            </AyezText>
+            {tileContent}
           </View>
         </TouchableOpacity>
       );

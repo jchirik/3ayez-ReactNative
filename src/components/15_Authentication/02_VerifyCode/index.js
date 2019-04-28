@@ -47,7 +47,7 @@ class VerifyCode extends Component {
     };
   }
 
-  componentDidMount() {
+  initiateTimer() {
     timer.clearInterval(this);
     timer.setInterval(this, 'hideMsg', () => {
       this.setState({ timerSecond: this.state.timerSecond - 1 });
@@ -55,6 +55,18 @@ class VerifyCode extends Component {
         timer.clearInterval(this);
       }
     }, 1000);
+  }
+
+  componentDidMount() {
+    this.setState({ timerSecond: 15 });
+    this.initiateTimer();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!this.props.robocall_loading && prevProps.robocall_loading) {
+      this.setState({ timerSecond: 10 });
+      this.initiateTimer();
+    }
   }
 
   authPhoneVerify() {
@@ -69,7 +81,14 @@ class VerifyCode extends Component {
       key={`${index}`}
       onPress={() => {
         if (this.verificationInput) {
-          this.verificationInput.focus();
+          if (Platform.OS === "android") {
+            this.verificationInput.blur();
+            setTimeout(() => {
+              this.verificationInput.focus();
+            }, 100);
+          } else {
+            this.verificationInput.focus();
+          }
         }
       }}
       activeOpacity={1}

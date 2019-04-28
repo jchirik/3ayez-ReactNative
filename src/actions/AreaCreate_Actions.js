@@ -17,7 +17,12 @@ import {
   CURRENT_AREA_SET,
   CURRENT_AREA_ERROR
 } from './types';
+
 import {sceneKeys, navigateTo, navigateBackTo, navigateBack} from '../router';
+
+import {
+  strings
+} from '../i18n.js';
 
 
 export const fetchAllRegions = (beta_tester) => {
@@ -69,10 +74,6 @@ export const searchAreas = (query, region) => {
     });
   };
 };
-
-
-
-
 
 
 
@@ -144,6 +145,7 @@ export const calculateAreaForLocation = (region) => {
       },
       { enableHighAccuracy: true, timeout: 3000 }
     );
+  }).catch(() => {
+    dispatch({ type: CURRENT_AREA_ERROR, payload: { error: 'NO_GPS_PERMISSION' }});
   });
-
 }}
