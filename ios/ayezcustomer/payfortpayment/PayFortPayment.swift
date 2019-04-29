@@ -11,6 +11,21 @@ import Foundation
 @objc(PayFortPayment)
 class PayFortPayment : NSObject {
 
+  static let environment : KPayFortEnviroment? = {
+    guard let environment = ReactNativeConfig.env(for: "ENVIRONMENT") else {
+      return nil
+    }
+
+    switch environment {
+    case ReactNativeConfig.env(for: "PRODUCTION_ENVIRONMENT"):
+      return KPayFortEnviromentProduction
+    case ReactNativeConfig.env(for: "DEV_ENVIRONMENT"):
+      return KPayFortEnviromentSandBox
+    default:
+      return nil
+    }
+  }()
+
   // Export constants to use in your native module
   @objc
   func constantsToExport() -> [AnyHashable : Any]! {
@@ -34,20 +49,26 @@ class PayFortPayment : NSObject {
 
   @objc
   func getDeviceID(_ handler: RCTResponseSenderBlock) {
-    let deviceID: String? = nil
+    guard let environment = PayFortPayment.environment else {
+      handler(nil)
+      return
+    }
+
+    let deviceID: String? = PayFortController(enviroment: environment)?.getUDID()
     handler([deviceID as Any])
   }
   
   // Implement methods that you want to export to the native module
   @objc
   func pay(_ params: NSDictionary, onSuccess: @escaping RCTResponseSenderBlock, onFail: @escaping RCTResponseSenderBlock)  {
-    guard let environment = getEnvironment() else {
+    guard let environment = PayFortPayment.environment else {
       // TODO: throw "Invalid Environment \(params["PAYFORT_ENVIRONMENT"])"
       return
     }
 
     let payfortController = PayFortController(enviroment: environment)
     payfortController?.setPayFortCustomViewNib("PayFortView")
+    payfortController?.hideLoading = true
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -62,21 +83,6 @@ class PayFortPayment : NSObject {
         debugPrint("Request failed.\n", "Request:\n", request as Any, "\n", "Response:\n", response as Any, "\nResponse Message: ", message as Any)
         onFail([response as Any])
       })
-    }
-  }
-
-  private func getEnvironment() ->  KPayFortEnviroment? {
-    guard let environment = ReactNativeConfig.env(for: "ENVIRONMENT") else {
-      return nil
-    }
-
-    switch environment {
-    case ReactNativeConfig.env(for: "PRODUCTION_ENVIRONMENT"):
-      return KPayFortEnviromentProduction
-    case ReactNativeConfig.env(for: "DEV_ENVIRONMENT"):
-      return KPayFortEnviromentSandBox
-    default:
-      return nil
     }
   }
 
