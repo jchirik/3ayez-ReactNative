@@ -74,7 +74,7 @@ public class PayFortPayment {
     try {
       String environment = (BuildConfig.ENVIRONMENT.equals(BuildConfig.DEV_ENVIRONMENT) ? FortSdk.ENVIRONMENT.TEST : FortSdk.ENVIRONMENT.PRODUCTION);
       FortSdk.getInstance().registerCallback(context, getPurchaseFortRequest(), environment, REQUEST_PAYMENT,
-        fortCallback, true, new FortInterfaces.OnTnxProcessed() {
+        fortCallback, false, new FortInterfaces.OnTnxProcessed() {
           @Override
           public void onCancel(Map<String, Object> requestParamsMap, Map<String,
             Object> fortResponseMap) {
