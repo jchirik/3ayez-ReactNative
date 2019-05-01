@@ -68,6 +68,7 @@
     "redux-thunk": "^2.3.0",
     "rn-viewpager": "^1.2.9",
     "tipsi-stripe": "^7.1.0",
+    "uuid": "^3.3.2",
     "xcode": "^2.0.0"
   },
   "rnpm": {
