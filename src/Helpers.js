@@ -6,6 +6,10 @@ import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
 
+import { PAYMENT_BRANDS } from './utils/payment';
+import Config from 'react-native-config';
+import UUID from 'uuid/v4';
+
 export const ORDER_STATUS = Object.freeze({
     CANCELED_BY_USER: 300,
     CANCELED_BY_STORE: 400,
@@ -67,19 +71,19 @@ export const paymentIcon = (brand, type) => {
     return require(`${dir}/money.png`);
   }
   switch (brand.toUpperCase()) {
-    case 'VISA':
+    case PAYMENT_BRANDS.VISA:
       return require(`${dir}/visa.png`);
-    case 'MASTERCARD':
+    case PAYMENT_BRANDS.MASTERCARD:
       return require(`${dir}/mastercard.png`);
-    case 'AMERICAN EXPRESS':
+    case PAYMENT_BRANDS.AMEX:
       return require(`${dir}/amex.png`);
-    case 'MAESTRO':
+    case PAYMENT_BRANDS.MAESTRO:
       return require(`${dir}/maestro.png`);
-    case 'DISCOVER':
+    case PAYMENT_BRANDS.DISCOVER:
       return require(`${dir}/discover.png`);
-    case 'DINERS CLUB':
+    case PAYMENT_BRANDS.DINERSCLUB:
       return require(`${dir}/diners.png`);
-    case 'JCB':
+    case PAYMENT_BRANDS.JCB:
       return require(`${dir}/jcb.png`);
     default:
       return require(`${dir}/credit.png`);
@@ -332,4 +336,29 @@ export const checkIfOpen = hours => {
   }
 
   return isOpen;
+};
+
+export function getLocale() {
+  return store.getState().Settings.locale;
+}
+
+export const getLast4Digits = cardNumber =>
+  cardNumber.substr(cardNumber.length - 4);
+
+/**
+ * Generate temporary identifier to use in saving credit card
+ * transaction to get the credit token.
+ */
+export const generateMerchantReference = () => {
+  return generateUUID().replace(/-/g, '');
+};
+
+export const generateUUID = () => UUID();
+
+export const getCurrency = () => {
+  return Config.CURRENCY;
+};
+
+export const getAuthorizeAmount = () => {
+  return Config.AUTHORIZE_AMOUNT;
 };
