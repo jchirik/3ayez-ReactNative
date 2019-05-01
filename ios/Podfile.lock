@@ -324,6 +324,8 @@ PODS:
     - React
   - RNLanguages (3.0.2):
     - React
+  - RNSha256 (1.3.6):
+    - React
   - SSZipArchive (2.1.4)
   - Stripe (13.2.0)
   - yoga (0.57.1.React)
@@ -378,6 +380,7 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNLanguages (from `../node_modules/react-native-languages`)
+  - RNSha256 (from `../node_modules/react-native-sha256`)
   - Stripe
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
   - ZDCChat
@@ -455,6 +458,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNLanguages:
     :path: "../node_modules/react-native-languages"
+  RNSha256:
+    :path: "../node_modules/react-native-sha256"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
@@ -513,11 +518,12 @@ SPEC CHECKSUMS:
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
   RNLanguages: e3ae05ef105937645218272429dac0c3f7633451
+  RNSha256: 175af106c1e4c3c63cdc9a0fde1dc7cc27cdfaed
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
   ZDCChat: 1def9764647bb81cf71aebd9df38aa4024c52d12
 
-PODFILE CHECKSUM: b66ebd546be4f2bcdc0b29ef7416fe3daddbbb50
+PODFILE CHECKSUM: b3ebc3e669ecb001a3cc541f1ab9c95dceb1de8e
 
 COCOAPODS: 1.5.3

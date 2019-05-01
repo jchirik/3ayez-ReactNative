@@ -71,7 +71,8 @@ target 'ayezcustomer' do
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
   pod 'react-native-camera', path: '../node_modules/react-native-camera'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
-
+  pod 'RNSha256', :path => '../node_modules/react-native-sha256'
+  
 end
 
 # all below required for RN Maps
