@@ -20,7 +20,8 @@ import {
 } from '../_common';
 
 import {
-  setPaymentMethod
+  setPaymentMethod,
+  createCreditCard
 } from '../../actions';
 
 import {
@@ -196,7 +197,7 @@ class CreditCardSelection extends Component {
           <BlockButton
             onPress={() => {
                 this.onClose()
-                navigateTo(sceneKeys.creditCardCreate)
+                this.props.createCreditCard()
             }}
             text={strings('CreditCardSelection.addNewCard')}
             color={'#3B7A60'}
@@ -215,5 +216,6 @@ const mapStateToProps = ({ CreditCards }) => {
 };
 
 export default connect(mapStateToProps, {
-  setPaymentMethod
+  setPaymentMethod,
+  createCreditCard
 })(CreditCardSelection);

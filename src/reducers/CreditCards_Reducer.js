@@ -17,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CREDITCARDS_LISTENER_SET:
       if (state.creditCardsListener !== null) {
+        // TODO: this is very wrong. The `creditCardsListener` is the unsubscribe function that return from firebase snapshot
         state.creditCardsListener()
       }
       return { ...INITIAL_STATE, creditCardsListener: p.creditCardsListener }
