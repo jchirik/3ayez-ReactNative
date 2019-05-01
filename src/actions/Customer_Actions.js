@@ -30,6 +30,7 @@ import {
   VERIFICATION_FAIL
 } from './types';
 
+import { cardToPaymentMethod } from '../utils/payment';
 
 const completeVerification = (dispatch, user, prevUser) => {
   // get verification_loading, onProceed, prevUser from Auth
@@ -250,21 +251,24 @@ const listenToAddresses = (dispatch) => {
   }
 };
 
-const listenToCreditCards = (dispatch) => {
+const listenToCreditCards = dispatch => {
   // ensure there is a current user & seller
   const { currentUser } = firebase.auth();
   if (currentUser) {
     // realtime listening
-    const creditCardsRef = firebase.firestore().collection('customers').doc(currentUser.uid)
-      .collection('cards');
-    const creditCardsListener = creditCardsRef.onSnapshot((creditCardsT) => {
-      const credit_cards = creditCardsT.docs.map(card => {
-        const card_id = card.id;
-        const data = card.data();
-        return ({ ...data, card_id, type: 'CREDIT' });
-      });
-      dispatch({ type: CREDITCARDS_SET, payload: { credit_cards } });
-    });
-    dispatch({ type: CREDITCARDS_LISTENER_SET, payload: { creditCardsListener } });
+    const creditCardsRef = firebase
+      .firestore()
+      .collection("customers")
+      .doc(currentUser.uid)
+      .collection("cards")
+    const creditCardsListener = creditCardsRef.onSnapshot(creditCardsT => {
+      const credit_cards = creditCardsT.docs.map(card => cardToPaymentMethod(card))
+      dispatch({ type: CREDITCARDS_SET, payload: { credit_cards } })
+    })
+
+    dispatch({
+      type: CREDITCARDS_LISTENER_SET,
+      payload: { creditCardsListener }
+    })
   }
 };

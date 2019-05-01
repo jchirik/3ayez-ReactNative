@@ -28,6 +28,6 @@ export const paymentBrand = payfortPaymentOption => {
 
 export const cardToPaymentMethod = card => {
   const id = card.id
-  const data = card.data
+  const data = card.data()
   return { ...data, id, type: "CREDIT" }
 }
