@@ -29,7 +29,9 @@
     "arabic": "عربي",
     "requestFailed": "تعذر الإتصال. تأكد من إتصالك بالشبكة !",
     "tryAgain": "حاول مرة أخرى",
-    "pleaseConnectToInternetNetwork": "برجاء الاتصال بالانترنت حتى يعمل التطبيق"
+    "pleaseConnectToInternetNetwork": "برجاء الاتصال بالانترنت حتى يعمل التطبيق",
+    "appOutOfdate": "أوووبس ... نسخة التطبيق الحالية قديمة",
+    "goToUpdate": "اذهب للتحديث"
   },
   "Input": {
     "required": "مطلوب",
@@ -321,7 +323,7 @@
     "wrongVerificationCode": "رقم تأكيدى خاطىء من فضلك اعد الحاولة",
     "didntReceiveCode": "لم تستلم الكود الخاص بك ؟",
     "callInstead": "إرسال الكود عن طريق مكالمة هاتفية",
-    "robocallWaiting": "أنتظر {{seconds}} ث.. ",
+    "robocallWaiting": "أنتظر {{seconds}} ث.. "
   },
   "SupportChat": {
     "header": "الدعم بالدردشة",

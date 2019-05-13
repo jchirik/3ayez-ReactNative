@@ -29,7 +29,9 @@
     "arabic": "عربي",
     "requestFailed": "Request Failed. Check your internet connection!",
     "tryAgain": "Try Again",
-    "pleaseConnectToInternetNetwork": "This app needs internet connection, please connect to the internet for the app to work"
+    "pleaseConnectToInternetNetwork": "This app needs internet connection, please connect to the internet for the app to work",
+    "appOutOfdate": "Ooooooooops! Your app is out-of-date",
+    "goToUpdate": "Go to update"
   },
   "Input": {
     "required": "required",
@@ -321,7 +323,7 @@
     "wrongVerificationCode": "Wrong verification code, please try again.",
     "didntReceiveCode": "Didn't receive your code?",
     "callInstead": "Provide my code over the phone",
-    "robocallWaiting": "Waiting {{seconds}}...",
+    "robocallWaiting": "Waiting {{seconds}}..."
   },
   "SupportChat": {
     "header": "Support Chat",
