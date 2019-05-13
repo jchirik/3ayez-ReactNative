@@ -1,5 +1,5 @@
 //
-//  Test.swift
+//  PayFortPayment.swift
 //  ayezcustomer
 //
 //  Created by Ahmed Abdelmagied on 4/17/19.
@@ -62,7 +62,7 @@ class PayFortPayment : NSObject {
   @objc
   func pay(_ params: NSDictionary, onSuccess: @escaping RCTResponseSenderBlock, onFail: @escaping RCTResponseSenderBlock)  {
     guard let environment = PayFortPayment.environment else {
-      // TODO: throw "Invalid Environment \(params["PAYFORT_ENVIRONMENT"])"
+      onFail(["Configuration file is corrupted: Invalid payment environment"])
       return
     }
 
@@ -75,12 +75,10 @@ class PayFortPayment : NSObject {
     DispatchQueue.main.async {
       // TODO: Check Apple Pay
       payfortController?.callPayFort(withRequest: self.getRequestParameters(from: params), currentViewController: appDelegate.window.rootViewController, success: { (request, response) in
-        debugPrint("Request successed.\n", "Request:\n", request as Any, "\n", "Response:\n", response as Any)
         onSuccess([response as Any])
       }, canceled: { (request, response) in
-        debugPrint("Request canceled.\n", "Request:\n", request as Any, "\n", "Response:\n", response as Any)
+        return
       }, faild: { (request, response, message) in
-        debugPrint("Request failed.\n", "Request:\n", request as Any, "\n", "Response:\n", response as Any, "\nResponse Message: ", message as Any)
         onFail([response as Any])
       })
     }
