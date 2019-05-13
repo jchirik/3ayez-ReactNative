@@ -49,7 +49,7 @@ class CreditCardManager extends Component {
           <AyezText regular>{item.name}</AyezText>
         </View>
         <TouchableOpacity
-          onPress={() => this.setState({ cardToDelete: item.id })}
+          onPress={() => this.setState({ cardToDelete: item.card_id })}
           style={{ padding: 10, marginRight: 5 }}>
           <Image
             source={images.deleteIcon}
