@@ -135,28 +135,6 @@ class StoreSelect extends Component {
 
 
 
-renderNoInternetConnection() {
-  return (
-    <View style={{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
-      <AyezText regular style={{
-        color: '#8E8E93',
-        fontSize: 18,
-        margin: 10
-      }}>{strings('Common.noInternet')}</AyezText>
-      <BlockButton
-        text={strings('Common.refresh')}
-        color={'#666666'}
-        style={{ width: 200 }}
-        onPress={() => this.fetchNearbySellers()}
-        />
-    </View>
-  );
-}
-
 renderNoAddress() {
   return (
     <View style={{
@@ -460,9 +438,6 @@ renderSellerList() {
     return this.renderLoadingStore();
   }
 
-  if (this.props.error) {
-    return this.renderNoInternetConnection();
-  }
   // if (!this.props.selected_area) {
   //   return this.renderNoAddress();
   // }
