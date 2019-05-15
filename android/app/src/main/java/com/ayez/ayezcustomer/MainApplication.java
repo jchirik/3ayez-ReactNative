@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
+import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -97,6 +98,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNSentryPackage(),
         new SplashScreenReactPackage(),
         new RNAppsFlyerPackage(),
         new FBSDKPackage(mCallbackManager),
