@@ -9,6 +9,7 @@ import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS, toast, NET_INFO_STATE, CONNECTION_CHANGE_EVENT } from './Helpers';
 import { strings } from './i18n';
+import { Sentry } from 'react-native-sentry';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
@@ -17,6 +18,10 @@ import AyezText from './components/_common/AyezText';
 
 import appsFlyer from 'react-native-appsflyer';
 
+const sentryDsn =
+  'https://35b44bf400d142f38fd1385cfb41c8cb:fdf921ec0d5a4ff09eaee8fa3044808d@sentry.io/1436918';
+
+Sentry.config(sentryDsn, {}).install();
 class App extends Component {
   constructor() {
     super();
