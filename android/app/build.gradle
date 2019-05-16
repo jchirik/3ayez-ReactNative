@@ -170,7 +170,7 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-sentry')
+  implementation project(':react-native-sentry')
   implementation project(':react-native-splash-screen')
 
   implementation project(':react-native-fbsdk')
