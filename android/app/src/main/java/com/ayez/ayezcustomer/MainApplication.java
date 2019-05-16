@@ -28,6 +28,7 @@ import com.facebook.soloader.SoLoader;
 import org.reactnative.camera.RNCameraPackage;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 
 import io.invertase.firebase.RNFirebasePackage;
 // optional packages - add/remove as appropriate
@@ -104,6 +105,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         new FBSDKPackage(mCallbackManager),
         new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
         new ImagePickerPackage(),
+        new ReactNativeConfigPackage(),
         new StripeReactPackage(),
         new RNFirebasePackage(),
         new RNCameraPackage(),

@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.firebase.firebase-perf"
 apply plugin: 'io.fabric'
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 import com.android.build.OutputFile
 
@@ -176,6 +177,7 @@ dependencies {
   implementation project(':react-native-fbsdk')
   implementation project(':react-native-code-push')
   implementation project(':react-native-camera')
+  implementation project(':react-native-config')
 
 
   implementation project(':react-native-appsflyer')
