@@ -41,6 +41,11 @@ class App extends Component {
     NetInfo.addEventListener(CONNECTION_CHANGE_EVENT, this.handleConnectionChange);
     let that = this;
 
+    codePush.getUpdateMetadata().then(update => {
+      if (update) {
+        Sentry.setVersion(update.appVersion + '-codepush:' + update.label);
+      }
+    });
     setTimeout(function() {
       that.setState({ isSplashShown: false });
     }, SPLASH_SCREEN_TIME_OUT);
