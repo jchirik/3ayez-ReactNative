@@ -70,10 +70,7 @@ export const createNewAddress = (address) => {
     addressRef.set({ ...address, timestamp: Date.now() }).then(() => {
       dispatch({ type: ADDRESS_SUBMIT_SUCCESS });
       dispatch({ type: ADDRESS_SELECT_SUCCESS, payload: { address: { ...address, id: address_id } } });
-      navigateBackTo(sceneKeys.addressSelect);
-      setTimeout(() => {
-        navigateTo(sceneKeys.checkout);
-      }, 700);
+      navigateBackTo(sceneKeys.addressManager);
     }).catch(() => {
       dispatch({ type: ADDRESS_SUBMIT_ERROR, payload: { error: 'BAD_CONNECTION' } });
     })
