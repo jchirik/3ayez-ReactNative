@@ -18,10 +18,6 @@ import AyezText from './components/_common/AyezText';
 
 import appsFlyer from 'react-native-appsflyer';
 
-const sentryDsn =
-  'https://35b44bf400d142f38fd1385cfb41c8cb:fdf921ec0d5a4ff09eaee8fa3044808d@sentry.io/1436918';
-
-Sentry.config(sentryDsn, {}).install();
 class App extends Component {
   constructor() {
     super();
