@@ -73,6 +73,8 @@ target 'ayezcustomer' do
   pod 'react-native-camera', path: '../node_modules/react-native-camera'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
+
 end
 
 # all below required for RN Maps

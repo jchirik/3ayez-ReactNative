@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
 import com.facebook.react.ReactApplication;
+import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ import com.facebook.soloader.SoLoader;
 import org.reactnative.camera.RNCameraPackage;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 
 import io.invertase.firebase.RNFirebasePackage;
 // optional packages - add/remove as appropriate
@@ -97,11 +99,13 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNSentryPackage(),
         new SplashScreenReactPackage(),
         new RNAppsFlyerPackage(),
         new FBSDKPackage(mCallbackManager),
         new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
         new ImagePickerPackage(),
+        new ReactNativeConfigPackage(),
         new StripeReactPackage(),
         new RNFirebasePackage(),
         new RNCameraPackage(),

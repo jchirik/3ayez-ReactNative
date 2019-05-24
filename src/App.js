@@ -9,6 +9,7 @@ import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
 import { SPLASH_SCREEN_TIME_OUT, isIOS, toast, NET_INFO_STATE, CONNECTION_CHANGE_EVENT } from './Helpers';
 import { strings } from './i18n';
+import { Sentry } from 'react-native-sentry';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
@@ -36,6 +37,11 @@ class App extends Component {
     NetInfo.addEventListener(CONNECTION_CHANGE_EVENT, this.handleConnectionChange);
     let that = this;
 
+    codePush.getUpdateMetadata().then(update => {
+      if (update) {
+        Sentry.setVersion(update.appVersion + '-codepush:' + update.label);
+      }
+    });
     setTimeout(function() {
       that.setState({ isSplashShown: false });
     }, SPLASH_SCREEN_TIME_OUT);

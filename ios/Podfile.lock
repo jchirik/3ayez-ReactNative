@@ -14,7 +14,7 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - CodePush (5.5.2):
+  - CodePush (5.6.0):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.7)
     - React
@@ -248,13 +248,13 @@ PODS:
   - react-native-appsflyer (1.4.2):
     - AppsFlyerFramework (~> 4.8.12)
     - React
-  - react-native-camera (2.2.1):
+  - react-native-camera (2.6.0):
     - React
-    - react-native-camera/RCT (= 2.2.1)
-    - react-native-camera/RN (= 2.2.1)
-  - react-native-camera/RCT (2.2.1):
+    - react-native-camera/RCT (= 2.6.0)
+    - react-native-camera/RN (= 2.6.0)
+  - react-native-camera/RCT (2.6.0):
     - React
-  - react-native-camera/RN (2.2.1):
+  - react-native-camera/RN (2.6.0):
     - React
   - react-native-fbsdk (0.8.0):
     - React
@@ -327,7 +327,13 @@ PODS:
     - React
   - RNLanguages (3.0.2):
     - React
-  - SSZipArchive (2.1.4)
+  - Sentry (4.1.3):
+    - Sentry/Core (= 4.1.3)
+  - Sentry/Core (4.1.3)
+  - SentryReactNative (0.42.0):
+    - React
+    - Sentry (~> 4.1.3)
+  - SSZipArchive (2.2.1)
   - Stripe (13.2.0)
   - yoga (0.57.1.React)
   - ZDCChat (1.4.0):
@@ -381,6 +387,7 @@ DEPENDENCIES:
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNLanguages (from `../node_modules/react-native-languages`)
+  - SentryReactNative (from `../node_modules/react-native-sentry`)
   - Stripe
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
   - ZDCChat
@@ -429,6 +436,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - Sentry
     - SSZipArchive
     - Stripe
     - ZDCChat
@@ -460,6 +468,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-device-info"
   RNLanguages:
     :path: "../node_modules/react-native-languages"
+  SentryReactNative:
+    :path: "../node_modules/react-native-sentry"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/yoga.podspec"
 
@@ -513,17 +523,19 @@ SPEC CHECKSUMS:
   RCTRestart: 2f9ddcfd9abb887f123b6580cec64d72fb6cccaa
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-appsflyer: df0a2f764fd93d5c444be1ba45420153eb042eae
-  react-native-camera: 25e0f493dde6e15c814e734685934d55f46e45b2
+  react-native-camera: 9c50d7def800895e7991ccda6203929553ceec9c
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   RNDeviceInfo: 568c5641057313b4912d08a7742ff0b2f753ed5c
   RNLanguages: e3ae05ef105937645218272429dac0c3f7633451
-  SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
+  Sentry: 4e8a17b61ddd116f89536cc81d567fdee1ebca96
+  SentryReactNative: fc630be25b30c1a494b478ba1fa38f761cc6da20
+  SSZipArchive: 8e859da2520142e09166bc9161967db296e9d02f
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
   ZDCChat: 1def9764647bb81cf71aebd9df38aa4024c52d12
 
-PODFILE CHECKSUM: d2feb24c2d60e1edb1dc972724cba5c1e915c96e
+PODFILE CHECKSUM: f4dccbefc1326c2c989e8ab62a9c3a4855b2356b
 
 COCOAPODS: 1.5.3
