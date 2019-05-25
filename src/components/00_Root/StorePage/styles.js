@@ -169,15 +169,6 @@ const styles = StyleSheet.create({
     right: 15,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  settingsIconStyle: {
-    position: 'absolute',
-    width: 22,
-    height: 22,
-    top: 19,
-    left: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 });
 

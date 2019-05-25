@@ -17,12 +17,10 @@ import {
   findNodeHandle
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
-import SideMenu from 'react-native-side-menu';
 
 import { StorePopup } from './StorePopup';
-import FeaturedBrowse from './01_FeaturedBrowse';
 import CategoriesBrowse from './02_CategoriesBrowse';
-import SettingsMenu from './SettingSideMenu';
+
 import {
   AnimatedCheckmarkOverlay,
   ItemTile,
@@ -69,9 +67,9 @@ class StorePage extends Component {
 
     constructor(props) {
       super(props);
-      this.nScroll.addListener(
-        Animated.event([{ value: this.scroll }], { useNativeDriver: false })
-      );
+      // this.nScroll.addListener(
+      //   Animated.event([{ value: this.scroll }], { useNativeDriver: false })
+      // );
       this.state = {
         tabs: [
           strings('StoreHome.categories')
@@ -97,19 +95,18 @@ class StorePage extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // this listener is STILL RUNNING IN FUTURE COMPONENTS
-    if (!this.props.featured_loading && prevProps.featured_loading) {
-      if (this.props.featured.length) {
-        this.setState({
-          tabs: [ strings('StoreHome.featured'), strings('StoreHome.categories') ],
-          tabBarHeight: TAB_BAR_HEIGHT
-        })
-      } else {
-        this.setState({
-          tabs: [ strings('StoreHome.categories') ],
-          tabBarHeight: 0
-        })
-      }
-
+    if (!this.props.categories_loading && prevProps.categories_loading) {
+      // if (this.props.featured.length) {
+      //   this.setState({
+      //     tabs: [ strings('StoreHome.featured'), strings('StoreHome.categories') ],
+      //     tabBarHeight: TAB_BAR_HEIGHT
+      //   })
+      // } else {
+      //   this.setState({
+      //     tabs: [ strings('StoreHome.categories') ],
+      //     tabBarHeight: 0
+      //   })
+      // }
       if (this.props.popup) {
         setTimeout(() => {
           this.setState({ popupVisible: true })
@@ -128,78 +125,78 @@ class StorePage extends Component {
     BackHandler.removeEventListener('hardwareBackPress');
   }
 
-  nScroll = new Animated.Value(0);
+  // nScroll = new Animated.Value(0);
   // Make tabs stop moving up
-  tabY = this.nScroll.interpolate({
-    inputRange: [0, SCROLL_HEIGHT, SCROLL_HEIGHT + 1],
-    outputRange: [0, 0, 1]
-  });
+  // tabY = this.nScroll.interpolate({
+  //   inputRange: [0, SCROLL_HEIGHT, SCROLL_HEIGHT + 1],
+  //   outputRange: [0, 0, 1]
+  // });
+  //
+  // tabsStylesAttributes = [
+  //   {
+  //     width: '20%',
+  //     margin: '16%'
+  //   },
+  //   {
+  //     width: '24%',
+  //     margin: '63%'
+  //   }
+  // ];
 
-  tabsStylesAttributes = [
-    {
-      width: '20%',
-      margin: '16%'
-    },
-    {
-      width: '24%',
-      margin: '63%'
-    }
-  ];
-
-  renderTabs() {
-    if (this.props.featured_loading || this.props.categories_loading || this.state.tabs.length < 2) {
-      return null;
-    }
-    return (
-      <Animated.View
-        style={{
-          transform: [{ translateY: this.tabY }],
-          zIndex: 1,
-          width: '100%',
-          height: this.state.tabBarHeight,
-          position: 'absolute',
-          borderBottomWidth: 0.5,
-          borderColor: 'rgba(0, 0, 0, 0.15)',
-          bottom: 0
-        }}
-      >
-        <SegmentedControlTab
-          values={this.state.tabs}
-          tabsContainerStyle={{
-            height: '100%',
-            backgroundColor: colors.paleGrey
-          }}
-          activeTabStyle={{
-            backgroundColor: colors.paleGrey,
-            borderBottomColor: AYEZ_GREEN
-          }}
-          tabStyle={{
-            marginTop: 5,
-            marginHorizontal: 20,
-            borderWidth: 0,
-            borderBottomWidth: 4,
-            backgroundColor: colors.paleGrey,
-            borderColor: 'transparent'
-          }}
-          selectedIndex={this.state.selected_tab}
-          onTabPress={index => {
-            this.setState({ selected_tab: index });
-          }}
-          tabTextStyle={{
-            fontSize: 14,
-            color: '#8E8E93',
-            fontFamily: FONT_MEDIUM(),
-          }}
-          activeTabTextStyle={{
-            fontSize: 14,
-            color: '#2DD38F',
-            fontFamily: FONT_MEDIUM()
-          }}
-          borderRadius={0}
-        />
-      </Animated.View>
-    );
-  }
+  // renderTabs() {
+  //   if (this.props.featured_loading || this.props.categories_loading || this.state.tabs.length < 2) {
+  //     return null;
+  //   }
+  //   return (
+  //     <Animated.View
+  //       style={{
+  //         transform: [{ translateY: this.tabY }],
+  //         zIndex: 1,
+  //         width: '100%',
+  //         height: this.state.tabBarHeight,
+  //         position: 'absolute',
+  //         borderBottomWidth: 0.5,
+  //         borderColor: 'rgba(0, 0, 0, 0.15)',
+  //         bottom: 0
+  //       }}
+  //     >
+  //       <SegmentedControlTab
+  //         values={this.state.tabs}
+  //         tabsContainerStyle={{
+  //           height: '100%',
+  //           backgroundColor: colors.paleGrey
+  //         }}
+  //         activeTabStyle={{
+  //           backgroundColor: colors.paleGrey,
+  //           borderBottomColor: AYEZ_GREEN
+  //         }}
+  //         tabStyle={{
+  //           marginTop: 5,
+  //           marginHorizontal: 20,
+  //           borderWidth: 0,
+  //           borderBottomWidth: 4,
+  //           backgroundColor: colors.paleGrey,
+  //           borderColor: 'transparent'
+  //         }}
+  //         selectedIndex={this.state.selected_tab}
+  //         onTabPress={index => {
+  //           this.setState({ selected_tab: index });
+  //         }}
+  //         tabTextStyle={{
+  //           fontSize: 14,
+  //           color: '#8E8E93',
+  //           fontFamily: FONT_MEDIUM(),
+  //         }}
+  //         activeTabTextStyle={{
+  //           fontSize: 14,
+  //           color: '#2DD38F',
+  //           fontFamily: FONT_MEDIUM()
+  //         }}
+  //         borderRadius={0}
+  //       />
+  //     </Animated.View>
+  //   );
+  // }
 
   renderBasket() {
     return (
@@ -221,21 +218,6 @@ class StorePage extends Component {
             </AyezText>
           </View>
         ) : null}
-      </TouchableOpacity>
-    );
-  }
-
-  renderSettings() {
-    return (
-      <TouchableOpacity
-        style={styles.settingsIconStyle}
-        onPress={() => this.setState({ isSideMenuOpen: true })}
-      >
-        <Image
-          source={images.menuIcon}
-          style={{ width: 28, height: 28, tintColor: 'white' }}
-          resizeMode={'contain'}
-        />
       </TouchableOpacity>
     );
   }
@@ -292,27 +274,17 @@ class StorePage extends Component {
         />
       );
     }
-    else if (this.props.featured_loading || this.props.categories_loading) {
+    else if (this.props.categories_loading) {
       mainScrollComponent = (
         <ActivityIndicator size="small" style={{ flex: 1, marginTop: 50 }} />
       );
-    } else if (tabs[selected_tab] === strings('StoreHome.featured')) {
-      mainScrollComponent = (<FeaturedBrowse />);
     } else {
       mainScrollComponent = (<CategoriesBrowse />);
     }
 
 // {this.renderAddressBar()}
     return (
-      <SideMenu
-        openMenuOffset={window.width * 4/5}
-        menu={<SettingsMenu onClose={() => this.setState({ isSideMenuOpen: false })} />}
-        isOpen={this.state.isSideMenuOpen}
-        onChange={(isOpen) => this.setState({ isSideMenuOpen: isOpen })}
-        menuPosition={(this.props.locale === 'ar') ? 'right' : 'left'}
-        style={{ flex: 1, backgroundColor: 'white' }}
-        bounceBackOnOverdraw={false}
-      >
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <OrderStatusBar color={this.props.seller_color}/>
 
         <View style={styles.container}>
@@ -326,15 +298,21 @@ class StorePage extends Component {
             cover_url={this.props.cover_url}
             color={this.props.seller_color}
             location_text={this.props.location_text}
-            Tabs={this.renderTabs()}
+            Tabs={null}
           >
             {mainScrollComponent}
           </CollapsibleHeaderScrollView>
-          {this.renderSettings()}
+
           {this.renderBasket()}
           <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
 
         </View>
+
+        <BackButton
+          fixed
+          color={'white'}
+          onPress={() => navigateTo(sceneKeys.storeSelect)}
+          />
 
         <AnimatedCheckmarkOverlay />
         <AddressSelection
@@ -359,7 +337,7 @@ class StorePage extends Component {
           onClose={() => this.setState({ popupVisible: false })}
           popup={this.props.popup}
         />
-      </SideMenu>
+      </View>
     );
   }
 }
@@ -371,8 +349,6 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     logo_url,
     cover_url,
     promotions,
-    featured_loading,
-    featured,
     categories_loading,
     location_text,
     display_name,
@@ -400,8 +376,6 @@ const mapStateToProps = ({ Seller, Settings, Baskets, Addresses, SellerSearch })
     logo_url,
     cover_url,
     promotions,
-    featured_loading,
-    featured,
     categories_loading,
     location_text,
     display_name,

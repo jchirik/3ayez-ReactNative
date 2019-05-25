@@ -20,9 +20,9 @@ import {
   BlockButton,
   AyezText,
   RTLImage
-} from '../../../_common';
+} from '../../_common';
 
-import { setLocale, logoutUser, onCompleteAuth } from '../../../../actions';
+import { setLocale, logoutUser, onCompleteAuth } from '../../../actions';
 
 import {
   AYEZ_GREEN,
@@ -30,13 +30,13 @@ import {
   STATUS_BAR_HEIGHT,
   ZOPIM_ACCOUNT_KEY,
   padNumberZeros
-} from '../../../../Helpers.js';
+} from '../../../Helpers.js';
 
-import images from '../../../../theme/images';
+import images from '../../../theme/images';
 
-import { strings, translate } from '../../../../i18n.js';
-import zendesk from '../../../../ZendeskChat/ZendeskChatNativeModule';
-import { sceneKeys, navigateTo, navigateBackTo } from '../../../../router';
+import { strings, translate } from '../../../i18n.js';
+import zendesk from '../../../ZendeskChat/ZendeskChatNativeModule';
+import { sceneKeys, navigateTo, navigateBackTo } from '../../../router';
 
 // { text: 'Credit Cards', action: null, icon: '' },
 
@@ -110,53 +110,53 @@ class SettingsMenu extends Component {
     );
   }
 
-  renderStoreButton() {
-    const { seller, sellers } = this.props;
-
-    console.log('sellers', sellers);
-    if (sellers.length <= 1) {
-      return null;
-    }
-
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          this.props.onClose();
-          navigateTo(sceneKeys.storeSelect);
-        }}
-        style={{
-          paddingTop: 11,
-          paddingBottom: 11,
-          borderBottomWidth: 1,
-          borderColor: '#f7f7f7',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-      >
-        <View style={{ alignItems: 'flex-start'}} >
-          <AyezText medium color={'#4E4E4E'}>
-            {strings('Settings.changeStore')}
-          </AyezText>
-          <AyezText regular color={'#4E4E4E'}>
-            {translate(seller.display_name)}
-          </AyezText>
-          <AyezText regular color={'#4E4E4E'}>
-            {translate(seller.location_text)}
-          </AyezText>
-        </View>
-        <RTLImage
-          source={images.nextArrowIcon}
-          style={{
-            width: 16,
-            height: 16,
-            tintColor: '#4E4E4E'
-          }}
-          resizeMode={'contain'}
-        />
-      </TouchableOpacity>
-    );
-  }
+  // renderStoreButton() {
+  //   const { seller, sellers } = this.props;
+  //
+  //   console.log('sellers', sellers);
+  //   if (sellers.length <= 1) {
+  //     return null;
+  //   }
+  //
+  //   return (
+  //     <TouchableOpacity
+  //       onPress={() => {
+  //         this.props.onClose();
+  //         navigateTo(sceneKeys.storeSelect);
+  //       }}
+  //       style={{
+  //         paddingTop: 11,
+  //         paddingBottom: 11,
+  //         borderBottomWidth: 1,
+  //         borderColor: '#f7f7f7',
+  //         flexDirection: 'row',
+  //         justifyContent: 'space-between',
+  //         alignItems: 'center'
+  //       }}
+  //     >
+  //       <View style={{ alignItems: 'flex-start'}} >
+  //         <AyezText medium color={'#4E4E4E'}>
+  //           {strings('Settings.changeStore')}
+  //         </AyezText>
+  //         <AyezText regular color={'#4E4E4E'}>
+  //           {translate(seller.display_name)}
+  //         </AyezText>
+  //         <AyezText regular color={'#4E4E4E'}>
+  //           {translate(seller.location_text)}
+  //         </AyezText>
+  //       </View>
+  //       <RTLImage
+  //         source={images.nextArrowIcon}
+  //         style={{
+  //           width: 16,
+  //           height: 16,
+  //           tintColor: '#4E4E4E'
+  //         }}
+  //         resizeMode={'contain'}
+  //       />
+  //     </TouchableOpacity>
+  //   );
+  // }
 
   renderHeader() {
     let topAccountHeader = (
@@ -221,9 +221,10 @@ class SettingsMenu extends Component {
       >
         {topAccountHeader}
         {this.renderLocationButton()}
-        {this.renderStoreButton()}
       </View>
     );
+
+    // {this.renderStoreButton()}
   }
 
   renderItem({ item: { text, action, icon, color }, index, section }) {

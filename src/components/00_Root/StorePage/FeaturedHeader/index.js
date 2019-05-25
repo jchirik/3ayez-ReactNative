@@ -37,7 +37,7 @@ import styles from '../styles';
 import colors from '../../../../theme/colors';
 import { sceneKeys, navigateTo } from '../../../../router';
 
-class FeaturedBrowse extends Component {
+class FeaturedHeader extends Component {
 
   constructor(props) {
     super(props);
@@ -87,9 +87,9 @@ class FeaturedBrowse extends Component {
     );
   }
 
-  renderFeaturedRows({ item, index }) {
+  renderFeaturedRow({ item, index }) {
     return (
-      <View style={styles.featuredRowStyle}>
+      <View style={styles.featuredRowStyle} key={index}>
         <View style={styles.sectionHeaderStyle}>
           <AyezText medium size={15} color={'#8E8E93'} style={{ marginLeft: 20 }}>
             {translate(item.name)}
@@ -118,33 +118,41 @@ class FeaturedBrowse extends Component {
     );
   }
 
-  renderEmptyFeatured() {
-    return (
-        <AyezText medium style={{ marginTop: 100, marginBottom: 100, textAlign: 'center' }}>
-          {strings('Common.noResults')}
-        </AyezText>
-    )
-  }
+  // renderEmptyFeatured() {
+  //   return (
+  //       <AyezText medium style={{ marginTop: 100, marginBottom: 100, textAlign: 'center' }}>
+  //         {strings('Common.noResults')}
+  //       </AyezText>
+  //   )
+  // }
 
 
   // go to shelf ->>
   render() {
     const {
       featured,
+      featured_loading
     } = this.props;
-    return (
-      <FlatList
-        data={featured}
-        renderItem={this.renderFeaturedRows.bind(this)}
-        style={{ flex: 1 }}
-        removeClippedSubviews
-        ListEmptyComponent={this.renderEmptyFeatured.bind(this)}
-        ListFooterComponent={<View style={{ height: 28 }} />}
-        scrollEventThrottle={10}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    );
+    if (featured_loading) {
+      return (
+        <ActivityIndicator size="large" style={{ height: 80 }} />
+      )
+    }
+    if (!featured.length) { return null; }
+
+    return featured.map((item, index) => this.renderFeaturedRow({ item, index }))
+    // return (
+    //   <FlatList
+    //     data={featured}
+    //     renderItem={this.renderFeaturedRows.bind(this)}
+    //     style={{ flex: 1 }}
+    //     removeClippedSubviews
+    //     ListFooterComponent={<View style={{ height: 28 }} />}
+    //     scrollEventThrottle={10}
+    //     showsVerticalScrollIndicator={false}
+    //     keyExtractor={(item, index) => index.toString()}
+    //   />
+    // );
   }
 }
 
@@ -161,4 +169,4 @@ const mapStateToProps = ({ Seller }) => {
   };
 };
 
-export default connect(mapStateToProps, null)(FeaturedBrowse);
+export default connect(mapStateToProps, null)(FeaturedHeader);

@@ -98,6 +98,7 @@ const fetchFeaturedItems = (seller_id, featuredT, dispatch) => {
 
       featuredT.forEach((row, index) => {
         const allItems = customFeaturedResults[index].hits;
+        if (!allItems.length) { return; }
         featured.push({
           name: row.name,
           items: cleanAlgoliaItems(allItems)

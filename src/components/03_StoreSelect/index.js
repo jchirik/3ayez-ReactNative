@@ -24,9 +24,11 @@ import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
 import { ViewPager } from 'rn-viewpager';
 import FastImage from 'react-native-fast-image'
 
+import SideMenu from 'react-native-side-menu';
+import SettingsMenu from './SettingSideMenu';
 
 import {
-  fetchNearbySellers,
+  selectArea,
   selectSeller
 } from '../../actions';
 import {
@@ -65,37 +67,41 @@ class StoreSelect extends Component {
     this.state = {
       loadingPriceAnimation: false,
       animationProgress: 0,
-      animationBackgroundFade: new Animated.Value(0)
+      animationBackgroundFade: new Animated.Value(0),
+      isSideMenuOpen: false
     };
   }
 
-  fetchNearbySellers() {
-    const { selected_area } = this.props;
-    if (selected_area) {
-      this.setState({
-        loadingPriceAnimation: false,
-        animationProgress: 0,
-        animationBackgroundFade: new Animated.Value(0)
-      });
-      this.props.fetchNearbySellers(selected_area); // load nearby stores upon open
-    }
-  }
+  // fetchNearbySellers() {
+  //   const { selected_area } = this.props;
+  //   if (selected_area) {
+  //     this.setState({
+  //       loadingPriceAnimation: false,
+  //       animationProgress: 0,
+  //       animationBackgroundFade: new Animated.Value(0)
+  //     });
+  //     this.props.fetchNearbySellers(selected_area); // load nearby stores upon open
+  //   }
+  // }
 
   componentDidMount() {
     console.log('Store Select mounted')
-    this.fetchNearbySellers();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.selected_area !== prevProps.selected_area) {
-      this.fetchNearbySellers(); // load nearby stores upon change
-    }
+
+    // if (this.props.selected_area !== prevProps.selected_area) {
+    //   this.fetchNearbySellers(); // load nearby stores upon change
+    // }
 
     // animations if only store option
     if (this.props.sellers.length === 1) {
       if (!this.props.is_loading && prevProps.is_loading) {
         console.log('begin price loading animation')
-        this.setState({ loadingPriceAnimation: true });
+        this.setState({
+          loadingPriceAnimation: true,
+          animationProgress: 0
+        });
         Animated.timing(
           this.state.animationBackgroundFade,
           {
@@ -118,6 +124,9 @@ class StoreSelect extends Component {
         setTimeout(() => {
           this.onSelectSeller(this.props.sellers[0])
         }, 1000);
+        setTimeout(() => {
+          this.setState({ loadingPriceAnimation: false })
+        }, 1200);
       }
     }
 
@@ -151,8 +160,9 @@ renderNoInternetConnection() {
         text={strings('Common.refresh')}
         color={'#666666'}
         style={{ width: 200 }}
-        onPress={() => this.fetchNearbySellers()}
+        onPress={() => this.props.selectArea(this.props.selected_area)}
         />
+      {this.renderSideMenuButton()}
     </View>
   );
 }
@@ -410,7 +420,8 @@ renderLoadingBestPrices(seller) {
     <View style={{
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      backgroundColor: AYEZ_BACKGROUND_COLOR
     }}>
       <Animated.View style={{
         position: 'absolute',
@@ -452,6 +463,21 @@ renderLoadingBestPrices(seller) {
   )
 }
 
+renderSideMenuButton() {
+  return (
+    <TouchableOpacity
+      style={{ ...styles.settingsIconStyle, top: STATUS_BAR_HEIGHT+10 }}
+      onPress={() => this.setState({ isSideMenuOpen: true })}
+    >
+      <Image
+        source={images.menuIcon}
+        style={{ width: 28, height: 28, tintColor: AYEZ_GREEN }}
+        resizeMode={'contain'}
+      />
+    </TouchableOpacity>
+  );
+}
+
 
 
 renderSellerList() {
@@ -486,9 +512,10 @@ renderSellerList() {
             navigateBack()
           }}
         />
+        {this.renderSideMenuButton()}
       </View>
     )
-  } else if (this.props.sellers.length === 1) {
+  } else if (this.state.loadingPriceAnimation) {
     const seller = this.props.sellers[0];
     return this.renderLoadingBestPrices(seller);
   }
@@ -513,16 +540,25 @@ renderSellerList() {
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => `${index}`}
       />
-      <BackButton fixed />
+      {this.renderSideMenuButton()}
     </View>
   )
 }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <SideMenu
+        openMenuOffset={SCREEN_WIDTH * 4/5}
+        menu={<SettingsMenu onClose={() => this.setState({ isSideMenuOpen: false })} />}
+        isOpen={this.state.isSideMenuOpen}
+        onChange={(isOpen) => this.setState({ isSideMenuOpen: isOpen })}
+        menuPosition={(this.props.locale === 'ar') ? 'right' : 'left'}
+        style={{ flex: 1 }}
+        bounceBackOnOverdraw={false}
+        disableGestures={this.state.loadingPriceAnimation}
+      >
         {this.renderSellerList()}
-      </View>
+      </SideMenu>
     );
   }
 }
@@ -539,10 +575,18 @@ const styles = {
   storeDetailText: {
     fontSize: 13,
     color: '#8E8E93'
+  },
+  settingsIconStyle: {
+    position: 'absolute',
+    width: 32,
+    height: 32,
+    left: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 };
 
-const mapStateToProps = ({ Areas, Seller, SellerSearch }) => {
+const mapStateToProps = ({ Areas, Seller, SellerSearch, Settings }) => {
   const { selected_area } = Areas;
   const { id } = Seller;
 
@@ -552,17 +596,21 @@ const mapStateToProps = ({ Areas, Seller, SellerSearch }) => {
     error
   } = SellerSearch;
 
+  const { locale } = Settings;
+
   return {
     seller_id: id,
     selected_area,
 
     sellers,
     is_loading,
-    error
+    error,
+
+    locale
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchNearbySellers,
+  selectArea,
   selectSeller
 })(StoreSelect);

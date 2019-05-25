@@ -38,6 +38,8 @@ import { onSelectCategory } from '../../../../actions';
 
 
 
+import FeaturedHeader from '../FeaturedHeader';
+
 import {
   strings,
   translate
@@ -127,7 +129,12 @@ class CategoriesBrowse extends Component {
         renderItem={this.renderItem.bind(this)}
         style={styles.categoryList}
         removeClippedSubviews
-        ListHeaderComponent={<View style={{ height: 10 }} />}
+        ListHeaderComponent={
+          <View>
+            <FeaturedHeader />
+            <View style={{ height: 10 }} />
+          </View>
+        }
         numColumns={CATEGORY_COL_NUM}
         ListEmptyComponent={this.renderEmptyCategories.bind(this)}
         ListFooterComponent={this.renderFooter.bind(this)}

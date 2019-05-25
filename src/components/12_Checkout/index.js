@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   Image,
+  Alert,
   TextInput,
   FlatList,
   TouchableOpacity,
@@ -20,7 +21,8 @@ import {
   setOrderNotes,
   setPaymentMethod,
   setTip,
-  submitOrder
+  submitOrder,
+  applyCoupon
 } from '../../actions';
 // setPushToken,
 // submitOrder,
@@ -79,6 +81,10 @@ class Checkout extends Component {
     // } else {
     //   this.props.setPaymentMethod({ type: 'CASH' }, this.props.seller.id);
     // }
+    if (this.props.coupon) {
+      this.props.applyCoupon(this.props.coupon.code)
+    }
+
 
     let balance_applied = 0;
     if (this.props.balance) {
@@ -87,6 +93,20 @@ class Checkout extends Component {
     this.setState({ balance_applied });
 
     // BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackPress);
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.props.coupon && prevProps.coupon) {
+      Alert.alert(
+        strings('CouponModal.invalid'),
+        `${prevProps.coupon.code} removed`,
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        {cancelable: false},
+      );
+    }
   }
 
 
@@ -457,6 +477,7 @@ class Checkout extends Component {
     const {
       seller,
       coupon,
+      coupon_loading,
       subtotal,
       total,
       items_array,
@@ -470,13 +491,13 @@ class Checkout extends Component {
       address
     } = this.props;
 
-    // if (isLoading) {
-    //   return (
-    //     <View style={{ flex: 1 }}>
-    //       <ActivityIndicator size="large" style={{ height: 40, flex: 1 }} />
-    //     </View>
-    //   );
-    // }
+    if (coupon_loading) {
+      return (
+        <View style={{ flex: 1 }}>
+          <ActivityIndicator size="small" style={{ flex: 1 }} />
+        </View>
+      );
+    }
 
 
     return (
@@ -641,7 +662,11 @@ class Checkout extends Component {
     const basket = Baskets.baskets[Seller.id];
     const { subtotal, items_array } = basket;
     // this is for submitting to Checkout in componentDidMount only
-    const { coupon } = Coupon;
+    const {
+      coupon
+    } = Coupon;
+    const coupon_loading = Coupon.is_loading;
+
     const total = calculateTotal(basket, Checkout, coupon);
     // const { coupon_discount } = orderData;
 
@@ -664,6 +689,7 @@ class Checkout extends Component {
       customer,
       seller,
       coupon,
+      coupon_loading,
       total,
       subtotal,
 
@@ -725,6 +751,7 @@ class Checkout extends Component {
       setOrderNotes,
       setPaymentMethod,
       setTip,
-      submitOrder
+      submitOrder,
+      applyCoupon
     }
   )(Checkout);

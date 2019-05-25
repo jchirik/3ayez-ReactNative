@@ -11,6 +11,10 @@ import {
 } from './types';
 import {sceneKeys, navigateTo, navigateBackTo, navigateBack} from '../router';
 
+import {
+  fetchNearbySellers
+} from './SellerSearch_Actions'
+
 
 // fetchSavedAreas
 // selectArea
@@ -57,6 +61,9 @@ export const selectArea = (selected_area) => {
 
     console.log('selectArea', selected_area.id, selected_area)
 
+    // fetch the store from seller search
+    fetchNearbySellers(selected_area, dispatch);
+
     navigateTo(sceneKeys.storeSelect)
 
     const customerRef = firebase.firestore().collection('customers').doc(currentUser.uid)
@@ -67,6 +74,5 @@ export const selectArea = (selected_area) => {
     firebase.analytics().logEvent("SELECTED_AREA");
     firebase.analytics().setUserProperty("last_area", selected_area.id);
     AppEventsLogger.logEvent('SELECTED_AREA');
-
   };
 };

@@ -14,8 +14,7 @@ import {
 
 
 
-export const fetchNearbySellers = (area) => {
-  return (dispatch) => {
+export const fetchNearbySellers = (area, dispatch) => {
     const ogTime = Date.now();
     dispatch({ type: SELLERS_FETCH_BEGIN });
 
@@ -44,19 +43,20 @@ export const fetchNearbySellers = (area) => {
         }
       });
       console.log(sellers)
+      dispatch({ type: SELLERS_FETCH_END, payload: { sellers } });
 
-      let additionalTimeout = 0;
-      if (sellers.length === 1) {
-        additionalTimeout = Math.max((2400 - (Date.now() - ogTime)), 0);
-      }
-      setTimeout(() => {
-        dispatch({ type: SELLERS_FETCH_END, payload: { sellers } });
-      }, additionalTimeout);
+      // let additionalTimeout = 0;
+      // if (sellers.length === 1) {
+      //   additionalTimeout = Math.max((2400 - (Date.now() - ogTime)), 0);
+      // }
+      // setTimeout(() => {
+      //
+      // }, additionalTimeout);
 
     }).catch((error) => {
+      console.log('Error fetching sellers', error)
       dispatch({ type: SELLERS_FETCH_ERROR });
     });
-  };
 };
 
 
