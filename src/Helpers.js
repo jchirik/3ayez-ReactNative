@@ -5,7 +5,7 @@ import store from './reducers';
 import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
-
+import { subCategoryType } from './utils/constants';
 export const ORDER_STATUS = Object.freeze({
   CANCELED_BY_USER: 300,
   CANCELED_BY_STORE: 400,
@@ -28,10 +28,6 @@ export const ZOPIM_ACCOUNT_KEY = __DEV__
   : 'pRVfyd50YAOsuwoV7WHrDXi5UBLmKE78';
 
 export const isIOS = () => Platform.OS === 'ios';
-export const subCategoryType = Object.freeze({
-  lvl1: 'lvl1',
-  lvl2: 'lvl2'
-});
 
 export const hasValue = val => {
   if (val) return true;
