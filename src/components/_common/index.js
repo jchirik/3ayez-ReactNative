@@ -12,6 +12,7 @@ export * from './SearchBarButton';
 export * from './Row';
 export * from './CustomItemPrompt';
 export * from './ModalPanel';
+export GroupedItemTile from './GroupedItemTile'
 
 export ItemTile from './ItemTile';
 export ItemRow from './ItemRow';

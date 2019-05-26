@@ -38,6 +38,7 @@ import AddressSearch from './29_AddressCreate/02_AddressSearch';
 import RefineLocation from './29_AddressCreate/03_RefineLocation';
 import AddressDetails from './29_AddressCreate/04_AddressDetails';
 import AreaCreate from './30_AreaCreate';
+import ItemSubCategory from './31_ItemSubCategory';
 
 export {
   Root,
@@ -80,6 +81,7 @@ export {
   RefineLocation,
   AddressDetails,
   AreaCreate,
+  ItemSubCategory
 };
 
 export const sceneKeys = {
@@ -131,4 +133,5 @@ export const sceneKeys = {
   refineLocation: 'refineLocation',
   addressDetails: 'addressDetails',
   areaCreate: 'areaCreate',
+  ItemSubCategory: 'ItemSubCategory'
 };

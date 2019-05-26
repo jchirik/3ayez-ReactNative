@@ -122,6 +122,8 @@ class RouterComponent extends Component {
               <Scene
                 key={sceneKeys.BarcodeScanner}
                 component={components.BarcodeScanner}
+                key={sceneKeys.ItemSubCategory}
+                component={components.ItemSubCategory}
               />
             </Stack>
 

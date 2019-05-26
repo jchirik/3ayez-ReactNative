@@ -5,15 +5,17 @@ import store from './reducers';
 import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
-
+import { subCategoryType } from './utils/constants';
 export const ORDER_STATUS = Object.freeze({
-    CANCELED_BY_USER: 300,
-    CANCELED_BY_STORE: 400,
-    DELIVERY_FAILED: 500
-  });
+  CANCELED_BY_USER: 300,
+  CANCELED_BY_STORE: 400,
+  DELIVERY_FAILED: 500
+});
 
 export const REJECTION_STATUS = [
-  ORDER_STATUS.CANCELED_BY_STORE, ORDER_STATUS.CANCELED_BY_USER, ORDER_STATUS.DELIVERY_FAILED
+  ORDER_STATUS.CANCELED_BY_STORE,
+  ORDER_STATUS.CANCELED_BY_USER,
+  ORDER_STATUS.DELIVERY_FAILED
 ];
 export const CONNECTION_CHANGE_EVENT = 'connectionChange';
 
@@ -40,6 +42,33 @@ export const toast = str => {
     // backgroundColor: colors.white,
     // textColor: colors.black
   });
+};
+
+export const lightenColor = (color, ratio) => {
+  return lightenDarkenColor(color, ratio);
+};
+
+export const darkenColor = (color, ratio) => {
+  return lightenDarkenColor(color, -1 * ratio);
+};
+
+const lightenDarkenColor = (color, ratio) => {
+  var usePound = false;
+  if (color[0] == '#') {
+    color = color.slice(1);
+    usePound = true;
+  }
+  var num = parseInt(color, 16);
+  var r = (num >> 16) + ratio;
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+  var b = ((num >> 8) & 0x00ff) + ratio;
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+  var g = (num & 0x0000ff) + ratio;
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 };
 
 export const getScreenDimensions = () => Dimensions.get('window');
@@ -107,6 +136,31 @@ export const getTitleFromGooglePlace = result => {
   }
   console.log('getTitleFromGooglePlace', title, type);
   return { title, type };
+};
+export const isLvl1Item = item => {
+  return item.subCategoryType === subCategoryType.lvl1;
+};
+const getItemCategoriesTypes = item => {
+  return Object.values(item.categories).flat();
+};
+
+const isBelongToCategory = (item, subcategory) => {
+  return subcategory.some(sub => {
+    return getItemCategoriesTypes(item).includes(sub.filter);
+  });
+};
+
+export const groupAlgoliaItems = (items, subcategory = []) => {
+  var groupedItems = items.filter(item => {
+    return !item.categories.lvl2 || !isBelongToCategory(item, subcategory);
+  });
+  groupedItems.map(item => {
+    item.subCategoryType = subCategoryType.lvl1;
+  });
+  subcategory.map(item => {
+    item.subCategoryType = subCategoryType.lvl2;
+  });
+  return groupedItems.concat(subcategory);
 };
 
 export const cleanAlgoliaItems = allItems => {

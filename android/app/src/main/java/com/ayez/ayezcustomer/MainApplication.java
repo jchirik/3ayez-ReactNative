@@ -26,6 +26,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.reactnative.camera.RNCameraPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -109,6 +110,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
         new StripeReactPackage(),
         new RNFirebasePackage(),
         new RNCameraPackage(),
+        new LinearGradientPackage(),
         new RNSharePackage(),
         // add/remove these packages as appropriate
         new RNFirebaseAdMobPackage(),

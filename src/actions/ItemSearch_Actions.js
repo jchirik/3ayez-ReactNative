@@ -4,8 +4,8 @@ ItemSearch_Actions.js
 
 import algoliasearch from 'algoliasearch/reactnative';
 import firebase from 'react-native-firebase';
-
-import { cleanAlgoliaItems } from '../Helpers';
+import _ from 'lodash';
+import { cleanAlgoliaItems, groupAlgoliaItems } from '../Helpers';
 import { strings } from '../i18n';
 import { Actions } from 'react-native-router-flux';
 
@@ -162,9 +162,20 @@ export const onSelectCategory = (sellerID, category) => {
       const categoryData = [];
       category.sub.forEach((subcategory, index) => {
         const allItems = content.results[index].hits;
+        const items = cleanAlgoliaItems(allItems);
+        const groupedItems = groupAlgoliaItems(items, subcategory.sub);
+        const groups = _.groupBy(items, item => {
+          if (item.categories.lvl2) {
+            return item.categories.lvl2;
+          } else {
+            return item.categories.lvl1;
+          }
+        });
         categoryData.push({
           name: subcategory.name,
-          items: cleanAlgoliaItems(allItems)
+          items,
+          groupedItems,
+          groups
         });
         //
         // allItems.forEach((item) => {
