@@ -82,6 +82,7 @@ export default {
   whatsIcon: require(`${IMAGE_PATH}/Referral/whats_logo.png`),
 
   scaleIcon: require(`${IMAGE_PATH}/Item/scale.png`),
+  soldOutIcon: require(`${IMAGE_PATH}/Item/sold_out.png`),
 
   customProductPlaceholder: require(`${IMAGE_PATH}/CustomProduct/placeholder.png`),
   customProductHeader: require(`${IMAGE_PATH}/CustomProduct/background_gradient.png`),

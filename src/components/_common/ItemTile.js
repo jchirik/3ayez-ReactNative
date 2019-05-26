@@ -37,6 +37,22 @@ class ItemTile extends PureComponent {
     );
   }
 
+  _renderSoldOutBadge(out_of_stock) {
+    if (!out_of_stock) {
+      return null;
+    }
+
+    return (
+      <View style={styles.soldOutContainer}>
+        <Image
+          style={{ height: '100%', width: '100%' }}
+          resizeMode={'contain'}
+          source={images.soldOutIcon}
+          />
+      </View>
+    );
+  }
+
   _renderMaxBadge(max_per_basket) {
     if (!max_per_basket) {
       return null;
@@ -120,6 +136,15 @@ class ItemTile extends PureComponent {
   }
 
   _renderItemIncrementer(item, quantity) {
+
+    if (item.out_of_stock) {
+      return (
+        <View style={{ height: 35, alignItems: 'center', justifyContent: 'center' }}>
+          <AyezText regular size={13} color={'#888888'}>{strings('Items.outOfStock')}</AyezText>
+        </View>
+      );
+    }
+
     let incrementer = (
       <ItemIncrementer
         style={{ height: '100%' }}
@@ -139,8 +164,10 @@ class ItemTile extends PureComponent {
       </View>
     );
   }
-  _renderImage(url, unit, draggable) {
-    const disabled = (this.props.customerIncrementer);
+
+
+  _renderImage(url, unit, draggable, out_of_stock) {
+    const disabled = (this.props.customerIncrementer) || out_of_stock;
 
     const mainComponent = (
       <TouchableOpacity
@@ -161,7 +188,7 @@ class ItemTile extends PureComponent {
       </TouchableOpacity>
     );
 
-    if (draggable) {
+    if (draggable && !out_of_stock) {
       return (
         <View style={styles.itemImageContainer}>
           <Draggable data={this.props.item} style={{...styles.itemImageContainer, height: '100%'}}>
@@ -190,6 +217,7 @@ class ItemTile extends PureComponent {
       price,
       promotion_price,
       max_per_basket,
+      out_of_stock,
       unit
     } = item;
     const url = thumbnail_url || image_url;
@@ -202,17 +230,25 @@ class ItemTile extends PureComponent {
 
     return (
       <View style={[styles.itemCellContainer, { width, height }, style]}>
-        {this._renderImage(url, unit, draggable)}
+        {this._renderImage(url, unit, draggable, out_of_stock)}
         {this._renderItemText(price, promotion_price, item)}
         {this._renderItemIncrementer(item, quantity)}
         {this._renderPromotionBadge(item.price, item.promotion_price)}
         {this._renderMaxBadge(max_per_basket)}
+        {this._renderSoldOutBadge(out_of_stock)}
       </View>
     );
   }
 }
 
 const styles = {
+  soldOutContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: Image_HEIGHT_RATIO
+  },
   scaleStyle: {
     zIndex: 10,
     position: 'absolute',

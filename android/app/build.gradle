@@ -115,8 +115,8 @@ android {
     applicationId "com.ayez.ayezcustomer"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 63
-    versionName "5.7.1"
+    versionCode 64
+    versionName "5.8.0"
     ndk {
       abiFilters "armeabi-v7a", "x86"
     }
