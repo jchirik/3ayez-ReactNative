@@ -62,7 +62,7 @@ const lightenDarkenColor = (color, ratio) => {
     color = color.slice(1);
     usePound = true;
   }
-  var num = parseInt(col, 16);
+  var num = parseInt(color, 16);
   var r = (num >> 16) + ratio;
   if (r > 255) r = 255;
   else if (r < 0) r = 0;
@@ -144,15 +144,19 @@ export const getTitleFromGooglePlace = result => {
 export const isLvl1Item = item => {
   return item.subCategoryType === subCategoryType.lvl1;
 };
+const getItemCategoriesTypes = item => {
+  return Object.values(item.categories).flat();
+};
+
+const isBelongToCategory = (item, subcategory) => {
+  return subcategory.some(sub => {
+    return getItemCategoriesTypes(item).includes(sub.filter);
+  });
+};
 
 export const groupAlgoliaItems = (items, subcategory = []) => {
   var groupedItems = items.filter(item => {
-    var isGroup =
-      !item.categories.lvl2 ||
-      !subcategory.some(sub => {
-        return sub.filter === item.categories.lvl2[0];
-      });
-    return isGroup;
+    return !item.categories.lvl2 || !isBelongToCategory(item, subcategory);
   });
   groupedItems.map(item => {
     item.subCategoryType = subCategoryType.lvl1;
