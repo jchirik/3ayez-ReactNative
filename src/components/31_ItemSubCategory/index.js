@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { View, FlatList, Image, TouchableOpacity } from 'react-native';
 import { strings, translate, formatCurrency } from '../../i18n';
 import _ from 'lodash';
-import { LightenDarkenColor } from '../../Helpers';
+import { lightenColor, darkenColor } from '../../Helpers';
 import {
   AyezText,
   BackButton,
@@ -135,10 +135,10 @@ class ItemSubCategory extends Component {
       <LinearGradient
         locations={[0.1, 0.8, 0.9, 1]}
         colors={[
-          LightenDarkenColor(color, 80),
+          lightenColor(color, 80),
           color,
-          LightenDarkenColor(color, -40),
-          LightenDarkenColor(color, -100)
+          darkenColor(color, 40),
+          darkenColor(color, 100)
         ]}
         style={[styles.container]}
       >
