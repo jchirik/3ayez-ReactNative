@@ -150,7 +150,7 @@ export const groupAlgoliaItems = (items, subcategory = []) => {
     var isGroup =
       !item.categories.lvl2 ||
       !subcategory.some(sub => {
-        return item.categories.lvl2 && sub.filter === item.categories.lvl2[0];
+        return sub.filter === item.categories.lvl2[0];
       });
     return isGroup;
   });
