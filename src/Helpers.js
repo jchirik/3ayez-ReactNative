@@ -138,7 +138,7 @@ export const getTitleFromGooglePlace = result => {
   return { title, type };
 };
 export const isLvl1Item = item => {
-  return item.subCategoryType === subCategoryType.lvl1;
+  return !item.subCategoryType || item.subCategoryType === subCategoryType.lvl1;
 };
 const getItemCategoriesTypes = item => {
   return Object.values(item.categories).flat();
