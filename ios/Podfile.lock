@@ -14,7 +14,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - CodePush (5.5.2):
+  - CodePush (5.6.0):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.7)
     - React
@@ -166,9 +166,8 @@ PODS:
     - GoogleMaps
   - Google-Maps-iOS-Utils/QuadTree (2.1.0):
     - GoogleMaps
-  - Google-Mobile-Ads-SDK (7.43.0):
-    - GoogleAppMeasurement (~> 5.7)
-  - GoogleAppMeasurement (5.8.1):
+  - Google-Mobile-Ads-SDK (7.41.0)
+  - GoogleAppMeasurement (5.3.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
     - GoogleUtilities/Network (~> 5.2)
@@ -249,13 +248,13 @@ PODS:
   - react-native-appsflyer (1.4.2):
     - AppsFlyerFramework (~> 4.8.12)
     - React
-  - react-native-camera (2.2.1):
+  - react-native-camera (2.6.0):
     - React
-    - react-native-camera/RCT (= 2.2.1)
-    - react-native-camera/RN (= 2.2.1)
-  - react-native-camera/RCT (2.2.1):
+    - react-native-camera/RCT (= 2.6.0)
+    - react-native-camera/RN (= 2.6.0)
+  - react-native-camera/RCT (2.6.0):
     - React
-  - react-native-camera/RN (2.2.1):
+  - react-native-camera/RN (2.6.0):
     - React
   - react-native-fbsdk (0.8.0):
     - React
@@ -368,6 +367,7 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - Google-Maps-iOS-Utils
+  - GoogleAppMeasurement (~> 5.3.0)
   - GoogleMaps
   - RCTRestart (from `../node_modules/react-native-restart/ios`)
   - react-native-appsflyer (from `../node_modules/react-native-appsflyer`)
@@ -509,8 +509,8 @@ SPEC CHECKSUMS:
   Folly: c89ac2d5c6ab169cd7397ef27485c44f35f742c7
   glog: e8acf0ebbf99759d3ff18c86c292a5898282dcde
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
-  Google-Mobile-Ads-SDK: e911f5544fc6488f8372a183627a802c8bdb5e36
-  GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
+  Google-Mobile-Ads-SDK: 101ce89b94fdf60ec64ba7b6e9b9d812dc765936
+  GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
@@ -527,7 +527,7 @@ SPEC CHECKSUMS:
   RCTRestart: 2f9ddcfd9abb887f123b6580cec64d72fb6cccaa
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-appsflyer: df0a2f764fd93d5c444be1ba45420153eb042eae
-  react-native-camera: 25e0f493dde6e15c814e734685934d55f46e45b2
+  react-native-camera: 9c50d7def800895e7991ccda6203929553ceec9c
   react-native-fbsdk: d5f98cc5abecbcc463e3c35c04743d716d002d37
   react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
@@ -540,6 +540,6 @@ SPEC CHECKSUMS:
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
   ZDCChat: 1def9764647bb81cf71aebd9df38aa4024c52d12
 
-PODFILE CHECKSUM: b4421d5eed77783cf8e65cab2957201043320478
+PODFILE CHECKSUM: 11cf7c11acb0f2f5b162984aed7a64b10e2b9c49
 
 COCOAPODS: 1.5.3
