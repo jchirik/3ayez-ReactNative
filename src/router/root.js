@@ -11,7 +11,7 @@ import {
 import * as components from '../components';
 import { navigateTo, navigateBack, navigateBackTo } from './index';
 
-import { loadBaskets, loadLocale, listenCustomerAuthStatus } from '../actions';
+import { loadLocale, listenCustomerAuthStatus } from '../actions';
 const sceneKeys = components.sceneKeys;
 
 class RouterComponent extends Component {
@@ -20,7 +20,6 @@ class RouterComponent extends Component {
   }
 
   componentDidMount() {
-    this.props.loadBaskets();
     this.props.loadLocale();
     this.props.listenCustomerAuthStatus();
   }
@@ -261,7 +260,6 @@ class RouterComponent extends Component {
 export default connect(
   null,
   {
-    loadBaskets,
     loadLocale,
     listenCustomerAuthStatus
   }

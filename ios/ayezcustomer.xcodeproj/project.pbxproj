@@ -1654,6 +1654,7 @@
 				"${PODS_ROOT}/ZDCChat/ZDCChatStrings.bundle",
 				"${PODS_ROOT}/ZDCChat/ZDCChat.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC/gRPCCertificates.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1663,6 +1664,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZDCChatStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZDCChat.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

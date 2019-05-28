@@ -16,20 +16,21 @@ import {
 } from './types';
 
 
-export const loadBaskets = () => {
-  return (dispatch) => {
-    AsyncStorage.getItem('WORKING_BASKETS', (err, baskets_t) => {
-      if (baskets_t && JSON.parse(baskets_t)) {
-        const baskets = JSON.parse(baskets_t);
-        console.log('loadBaskets', baskets)
-        dispatch({
-          type: LOAD_BASKETS,
-          payload: { baskets }
-        });
-      }
-    });
-  }
-}
+// export const loadBaskets = () => {
+//   return (dispatch) => {
+//     console.log('init')
+//     // AsyncStorage.getItem('WORKING_BASKETS', (err, baskets_t) => {
+//     //   if (baskets_t && JSON.parse(baskets_t)) {
+//     //     const baskets = JSON.parse(baskets_t);
+//     //     console.log('loadBaskets', baskets)
+//     //     dispatch({
+//     //       type: LOAD_BASKETS,
+//     //       payload: { baskets }
+//     //     });
+//     //   }
+//     // });
+//   }
+// }
 
 export const saveItemSpecialRequests = (upc, seller_id, special_requests) => {
   return { type: BASKET_ITEM_SPECIAL_REQ, payload: { upc, seller_id, special_requests } };

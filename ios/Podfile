@@ -72,6 +72,9 @@ target 'ayezcustomer' do
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
   pod 'react-native-camera', path: '../node_modules/react-native-camera'
   pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'FBSDKCoreKit', '~>4.42.0'
+  pod 'FBSDKLoginKit', '~>4.42.0'
+  pod 'FBSDKShareKit', '~>4.42.0'
 
   pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
 

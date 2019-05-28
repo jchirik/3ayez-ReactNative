@@ -27,9 +27,9 @@ export default (state = INITIAL_STATE, action) => {
   const p = action.payload;
 
   // rehydrate from persistent storage
-  if (action.type === LOAD_BASKETS) {
-    return { baskets: p.baskets };
-  }
+  // if (action.type === LOAD_BASKETS) {
+  //   return { baskets: p.baskets };
+  // }
 
   if (!p || !p.seller_id) { return state; }
   const seller_id = p.seller_id;
@@ -40,19 +40,19 @@ export default (state = INITIAL_STATE, action) => {
       if (!baskets[seller_id] || !baskets[seller_id].items_array) {
         baskets[seller_id] = { ...NEW_BASKET }
       }
-      return saveBaskets(baskets);
+      return { baskets };
     case BASKET_ITEM_INCR:
       baskets[seller_id] = incrementItem(baskets[seller_id], p.item, +(p.item.incr || 1));
-      return saveBaskets(baskets);
+      return { baskets };
     case BASKET_ITEM_DECR:
       baskets[seller_id] = incrementItem(baskets[seller_id], p.item, -(p.item.incr || 1));
-      return saveBaskets(baskets);
+      return { baskets };
     case BASKET_ITEMS_CLEAR: // if customer clears basket
       baskets[seller_id] = { ...NEW_BASKET };
-      return saveBaskets(baskets);
+      return { baskets };
     case BASKET_ITEM_SPECIAL_REQ:
       baskets[seller_id] = addSpecialRequests(baskets[seller_id], p.upc, p.special_requests)
-      return saveBaskets(baskets);
+      return { baskets };
     default:
       return state;
   }

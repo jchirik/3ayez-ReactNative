@@ -2,11 +2,11 @@
 import { AsyncStorage } from 'react-native';
 
 // update in reducer + async storage
-export const saveBaskets = (baskets) => {
-  AsyncStorage.setItem('WORKING_BASKETS', JSON.stringify(baskets));
-  console.log('saveBaskets', baskets);
-  return { baskets };
-}
+// export const saveBaskets = (baskets) => {
+//   // AsyncStorage.setItem('WORKING_BASKETS', JSON.stringify(baskets));
+//   console.log('saveBaskets', baskets);
+//   return { baskets };
+// }
 
 const updateBasket = (basket) => {
   const { items_array } = basket;
