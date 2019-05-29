@@ -21,7 +21,8 @@ import {
   isIOS,
   toast,
   NET_INFO_STATE,
-  CONNECTION_CHANGE_EVENT
+  CONNECTION_CHANGE_EVENT,
+  goToStore
 } from './Helpers';
 import { strings } from './i18n';
 import { Sentry } from 'react-native-sentry';
@@ -32,9 +33,8 @@ import { navigateBackTo } from './router/index';
 import { AyezText, BlockButton } from './components/_common';
 
 import appsFlyer from 'react-native-appsflyer';
-import { Linking } from 'react-native';
 import VersionCheck from 'react-native-version-check';
-import AppConstants from './utils/Constants';
+
 
 class App extends Component {
   constructor() {
@@ -90,25 +90,6 @@ class App extends Component {
         this.setState({ isUptoDate: false });
       }
     });
-  };
-
-  goToStore = async () => {
-    console.log('go to store');
-    const storeLink = isIOS()
-      ? AppConstants.APP_STORE_LINK
-      : AppConstants.PLAY_STORE_LINK;
-
-    const storeUrl = isIOS()
-      ? AppConstants.APP_STORE_URL
-      : AppConstants.PLAY_STORE_URL;
-
-    Linking.canOpenURL(storeLink).then(
-      supported => {
-        if (supported) Linking.openURL(storeLink);
-        else Linking.openURL(storeUrl);
-      },
-      err => console.log(err)
-    );
   };
 
   _handleAppStateChange = nextAppState => {
@@ -312,7 +293,7 @@ class App extends Component {
                 paddingLeft: 18,
                 paddingRight: 18
               }}
-              onPress={() => this.goToStore()}
+              onPress={() => goToStore()}
             />
           </View>
         </Modal>
