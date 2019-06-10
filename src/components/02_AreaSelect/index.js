@@ -193,8 +193,7 @@ class AreaSelect extends Component {
 
     // indicate no internet issues
     // show tracking order from this screen
-
-    if (this.props.is_loading_saved_areas || !this.props.saved_areas.length) {
+    if (this.props.is_loading_saved_areas) {
       return (
         <ActivityIndicator size="small" style={{ flex: 1, backgroundColor: colors.paleGrey }} />
       )
