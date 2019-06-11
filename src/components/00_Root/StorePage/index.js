@@ -305,14 +305,13 @@ class StorePage extends Component {
 
           {this.renderBasket()}
           <BasketBlockButton bluredViewRef={this.state.bluredViewRef} />
-
-        </View>
-
-        <BackButton
-          fixed
-          color={'white'}
-          onPress={() => navigateTo(sceneKeys.storeSelect)}
+         
+          <BackButton
+            style={styles.backButton}
+            color={'white'}
+            onPress={() => navigateTo(sceneKeys.storeSelect)}
           />
+        </View>
 
         <AnimatedCheckmarkOverlay />
         <AddressSelection
