@@ -1,0 +1,68 @@
+
+
+default_platform(:android)
+
+# it's better to remove this values from here and add them to enviroments varibles
+ENV['SENTRY_AUTH_TOKEN']="7e5804b3e736408795b48e000a2ddf2f8e1fdcdc4b7a402c9be55c49a853dfab"
+ENV['SENTRY_ORG_SLUG']="blink22-r9"
+ENV['SENTRY_PROJECT_SLUG']="react-native"
+ENV['CRASHLYTICS_API_TOKEN']="5fbdeaafed47311c905f6ccd85d6531f126b781a"
+ENV['CRASHLYTICS_BUILD_SECRET']="834e2088751acaaba39931760fe7ecedf1a387197186e331fb8d973097099a28"
+
+platform :android do
+  
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do 
+    build_app("1.0.0","1")
+    apk_path =  lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    crashlytics(apk_path: apk_path)
+  end
+
+  def build_app(version_name, version_code)
+    bundle_android_assets = %(cd ../.. && yarn bundle_android_assets)
+    bundle_android_sentry = %(cd ../.. && yarn bundle_android_sentry)
+    app_identifier = get_application_id(ext_constant_name:"applicationId")
+    set_version(version_code, version_name)
+    gradle(task: "clean" )
+    sh bundle_android_assets
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+    )
+    sh bundle_android_sentry
+    create_sentry_release(app_identifier, version_code, version_name)
+  end
+
+   def set_version(version_code, version_name)
+    android_set_version_name(version_name: version_name)
+    android_set_version_code(version_code: version_code)
+   end
+   
+   def create_sentry_release(app_identifier, version_code, version_name)
+    sentry_create_release(
+      version: version_name, 
+      app_identifier: app_identifier,
+    )
+      sentry_upload_file(
+      version: version_name,
+      app_identifier: app_identifier,
+      file: '../android.main.bundle'
+    )
+    sentry_upload_sourcemap(
+      version: version_name,
+      app_identifier: app_identifier,
+      dist: version_code,
+      sourcemap: '../android.main.bundle.map', 
+      rewrite: true
+    )
+      sentry_finalize_release(
+      version: version_name, 
+      app_identifier: app_identifier,
+    )
+	end
+end
