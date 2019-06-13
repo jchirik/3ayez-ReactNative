@@ -1,0 +1,4 @@
+app_identifier("com.ayez.ayezcustomer") # The bundle identifier of your app
+apple_id("developer@blink22.com") # Your Apple email address
+itc_team_id("117695628") # App Store Connect Team ID
+team_id("5YSUQQZPV9") # Developer Portal Team ID
