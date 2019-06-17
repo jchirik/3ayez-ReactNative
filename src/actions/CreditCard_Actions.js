@@ -86,10 +86,6 @@ const callPayFortNativeModule = (dispatch, SDKToken, language) => {
 
 const getSDKToken = dispatch => {
   PayFortPaymentNativeModule.getDeviceID(async id => {
-    // call backend to generate a token
-    // on response: dispatch({ type: LOADING_OFF })
-    // on success: callPayFortNativeModule(dispatch, "sdk_token")
-    // on failure: toast(strings("CreditCard.errorAddingCard"), Toast.positions.CENTER)
     const language = getLocale()
 
     const sdkTokenRequest = firebase
@@ -113,12 +109,6 @@ const getSDKToken = dispatch => {
 }
 
 export const createCreditCard = () => {
-  /**
-   * get Device ID
-   * get SDK token from backend
-   * call payfort SDK
-   * handle resonse
-   */
   return dispatch => {
     dispatch({ type: LOADING_ON })
     getSDKToken(dispatch)
@@ -151,71 +141,3 @@ export const deleteCreditCard = card_id => {
 const generateMerchantReference = () => {
   return generateUUID().replace(/-/g, '');
 };
-
-// export const createStripeCard = (card_data) => {
-//   return (dispatch) => {
-//     const { currentUser } = firebase.auth()
-//     const { name, number, expiry, cvc, type } = card_data
-
-//     dispatch({ type: CREDITCARD_CREATE_BEGIN })
-
-//     const expirySplit = expiry.split("/")
-//     const params = {
-//       // mandatory
-//       number,
-//       expMonth: parseInt(expirySplit[0], 10),
-//       expYear: parseInt(expirySplit[1], 10),
-//       cvc,
-//       // optional
-//       name
-//     }
-//     stripe
-//       .createTokenWithCard(params)
-//       .then((success) => {
-//         console.log("createStripeCard success", success)
-//         const cardData = success.card
-//         const card = {
-//           type: "CREDIT",
-//           id: cardData.cardId,
-//           token: success.tokenId,
-//           brand: cardData.brand,
-//           country: cardData.country,
-//           exp_month: cardData.expMonth,
-//           exp_year: cardData.expYear,
-//           last4: cardData.last4,
-//           customer_id: currentUser.uid
-//         }
-
-//         const addStripeCreditCard = firebase.functions().httpsCallable("addStripeCreditCard")
-//         addStripeCreditCard(card)
-//           .then((result) => {
-//             console.log("addStripeCreditCard returned", result)
-//             if (result.data && result.data.success) {
-//               dispatch({
-//                 type: PAYMENT_METHOD_SET,
-//                 payload: { payment_method: card }
-//               })
-//               dispatch({ type: CREDITCARD_CREATE_SUCCESS })
-//               navigateBack()
-//             } else {
-//               dispatch({ type: CREDITCARD_CREATE_FAIL, payload: { error: "Invalid from server" } })
-//               console.log("credit card error")
-//             }
-//           })
-//           .catch((error) => {
-//             dispatch({ type: CREDITCARD_CREATE_FAIL, payload: { error } })
-//             console.log("credit card error")
-//           })
-//       })
-//       .catch((error) => {
-//         dispatch({ type: CREDITCARD_CREATE_FAIL, payload: { error } })
-//         console.log("CREDIT CARD", error)
-//       })
-//   }
-// }
-
-// export const createStripeCardReset = () => {
-//   return (dispatch) => {
-//     dispatch({ type: CREDITCARD_CREATE_RESET })
-//   }
-// }
