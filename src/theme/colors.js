@@ -17,5 +17,7 @@ export default {
   paleGrey: '#fafcfd',
   darkGrayishRed: '#353333',
   coralPink: '#fe6668',
-  darkGreyBlue: '#293d50'
+  darkGreyBlue: '#293d50',
+  whiteSmokeBorder: '#f7f7f7',
+  valenciaDelete: '#E64E47',
 };

@@ -6,6 +6,10 @@ import { Header, BlockButton, BottomChoiceSelection, AyezText } from "../_common
 import { padNumberZeros, paymentIcon } from "../../Helpers.js"
 import { strings } from "../../i18n.js"
 import images from "../../theme/images"
+import styles from "./styles"
+import sharedStyles from "../styles";
+import colors from "../../theme/colors";
+import stringConstants from "../../utils/string";
 
 class CreditCardManager extends Component {
   constructor(props) {
@@ -18,25 +22,13 @@ class CreditCardManager extends Component {
   renderItem({ item, index }) {
     return (
       <View
-        style={{
-          height: 90,
-          backgroundColor: "white",
-          flexDirection: "row",
-          borderBottomWidth: 1,
-          borderColor: "#f7f7f7",
-          alignItems: "center"
-        }}>
+        style={styles.creditCardItem}>
         <Image
-          source={paymentIcon(item.brand, "CREDIT")}
-          style={{
-            width: 50,
-            height: 50,
-            marginLeft: 24,
-            marginRight: 24
-          }}
+          source={paymentIcon(item.brand, stringConstants.creditType)}
+          style={styles.paymentIcon}
           resizeMode={"contain"}
         />
-        <View style={{ flex: 1, alignItems: "flex-start" }}>
+        <View style={styles.creditCardInfoContainer}>
           <AyezText medium>
             {item.brand} (**** {item.last4})
           </AyezText>
@@ -50,10 +42,10 @@ class CreditCardManager extends Component {
         </View>
         <TouchableOpacity
           onPress={() => this.setState({ cardToDelete: item.card_id })}
-          style={{ padding: 10, marginRight: 5 }}>
+          style={styles.deleteCreditButton}>
           <Image
             source={images.deleteIcon}
-            style={{ width: 20, height: 20 }}
+            style={styles.deleteCreditIcon}
             resizeMode={"contain"}
           />
         </TouchableOpacity>
@@ -67,21 +59,21 @@ class CreditCardManager extends Component {
 
   render() {
     if (this.props.loading) {
-      return <ActivityIndicator size="small" style={{ flex: 1 }} />
+      return <ActivityIndicator size="small" style={sharedStyles.ActivityIndicator} />
     }
 
     return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={styles.creditCardManagerContainer}>
         <Header title={strings("Settings.creditCards")} />
         <FlatList
-          style={{ flex: 1 }}
+          style={styles.creditCardList}
           data={this.props.credit_cards}
           renderItem={this.renderItem.bind(this)}
-          ListHeaderComponent={<View style={{ width: 8 }} />}
+          ListHeaderComponent={<View style={styles.creditCardListHeader} />}
           keyExtractor={(item) => item.id}
         />
         <BlockButton
-          style={{ margin: 20 }}
+          style={styles.addCreditCardButton}
           text={strings("CreditCard.addCard")}
           onPress={() => {
             this.props.createCreditCard()
@@ -91,7 +83,7 @@ class CreditCardManager extends Component {
         <BottomChoiceSelection
           isVisible={this.state.cardToDelete}
           onClose={this.closeDeleteCardConfirm.bind(this)}
-          backgroundColor="#E64E47"
+          backgroundColor={colors.valenciaDelete}
           title={strings("DeleteConfirmation.query")}
           buttons={[
             {
