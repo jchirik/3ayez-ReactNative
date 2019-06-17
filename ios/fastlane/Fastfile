@@ -25,7 +25,7 @@ platform :ios do
   def build(version_number, build_number)
     match
     set_version(version_number, build_number)
-    build_app(workspace: "ayezcustomer.xcworkspace", scheme: "ayezcustomer")
+    gym
   end
 
   def set_version(version_number, build_number)
