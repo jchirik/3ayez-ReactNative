@@ -25,16 +25,17 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do |options|
       app_version = build(bump_type:options[:version_type])
-      #  upload_to_testflight
-      # download_dsyms(version: app_version[:version_number], build_number: app_version[:build_number])
-      # sentry_upload_dsym
-       
+      upload_to_testflight
+      commit_version_bump(message: "Version #{version_number} build #{build_number}", xcodeproj: "ayezcustomer.xcodeproj")
+      add_git_tag(tag: "v-#{version_number}b-#{build_number}")
+      download_dsyms(version: app_version[:version_number], build_number: app_version[:build_number])
+      sentry_upload_dsym
   end
 
   private_lane :build do |options|
-    #  match
+     match
      app_version = update_version(bump_type:options[:bump_type])
-    #  gym
+     gym
      app_version
   end
 
@@ -42,7 +43,6 @@ platform :ios do
     version_number =  increment_version_number_in_plist(version_source: 'appstore', bump_type:options[:bump_type], scheme:'ayezcustomer')  
     build_number = latest_testflight_build_number(version: version_number) + 1   
     increment_build_number_in_plist(build_number:build_number.to_s, scheme:'ayezcustomer') 
-    commit_version_bump(message: "Version Update #{version_number} build #{build_number}", xcodeproj: "ayezcustomer.xcodeproj")
     {version_number: version_number, build_number: build_number.to_s}
   end
   
