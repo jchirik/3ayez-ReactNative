@@ -12,7 +12,9 @@
   },
   "scripts": {
     "upload-android-beta": "cd android/fastlane && fastlane beta",
-    "upload-ios-beta": "cd ios/fastlane && fastlane beta",
+    "upload-ios-beta-patch": "cd ios/fastlane && fastlane beta version_type:patch ",
+    "upload-ios-beta-minor": "cd ios/fastlane && fastlane beta version_type:minor",
+    "upload-ios-beta-major": "cd ios/fastlane && fastlane beta version_type:major",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "bundle_android_assets": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
