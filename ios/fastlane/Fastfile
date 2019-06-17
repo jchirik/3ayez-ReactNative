@@ -22,25 +22,24 @@ before_all do |lane, options|
 end
 
 platform :ios do
+
+
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    build("5.8.2", 1)
-    upload_to_testflight(skip_waiting_for_build_processing: true)
+       build
+       upload_to_testflight(skip_waiting_for_build_processing: true)
   end
 
-  def build(version_number, build_number)
-    match
-    set_version(version_number, build_number)
-    gym
+  private_lane :build do |options|
+     match
+     update_version
+     gym
   end
 
-  def set_version(version_number, build_number)
-    new_version_number = increment_version_number(
-			version_number: version_number
-		)
-		build_number = increment_build_number(
-		  build_number: build_number
-		)
+  private_lane :update_version do |options|
+    version_number =  increment_version_number_in_plist(version_source: 'appstore', bump_type:'patch', scheme:'ayezcustomer')  
+    build_number = latest_testflight_build_number(version: version_number) + 1
+  	increment_build_number_in_plist(build_number:build_number.to_s, scheme:'ayezcustomer')
   end
   
 end
