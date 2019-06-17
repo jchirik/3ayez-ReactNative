@@ -7,7 +7,7 @@ import {
   getAuthorizeAmount,
   getCurrency,
   getLast4Digits,
-  generateMerchantReference
+  generateUUID
 } from "../Helpers"
 import { formatUTCDate, getMonth, getYear } from "../utils/date.js"
 import { paymentBrand, cardToPaymentMethod } from "../utils/payment.js"
@@ -143,6 +143,14 @@ export const deleteCreditCard = card_id => {
     })
   }
 }
+
+/**
+ * Generate temporary identifier to use in saving credit card
+ * transaction to get the credit token.
+ */
+const generateMerchantReference = () => {
+  return generateUUID().replace(/-/g, '');
+};
 
 // export const createStripeCard = (card_data) => {
 //   return (dispatch) => {

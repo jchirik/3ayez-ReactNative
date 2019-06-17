@@ -345,14 +345,6 @@ export function getLocale() {
 export const getLast4Digits = cardNumber =>
   cardNumber.substr(cardNumber.length - 4);
 
-/**
- * Generate temporary identifier to use in saving credit card
- * transaction to get the credit token.
- */
-export const generateMerchantReference = () => {
-  return generateUUID().replace(/-/g, '');
-};
-
 export const generateUUID = () => UUID();
 
 export const getCurrency = () => {
