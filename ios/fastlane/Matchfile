@@ -4,4 +4,5 @@ storage_mode("git")
 type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
 app_identifier("com.ayez.ayezcustomer")
 username("developer@blink22.com") # Your Apple Developer Portal username
-clone_branch_directly
+clone_branch_directly(true)
+readonly(true)

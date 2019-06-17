@@ -23,7 +23,7 @@ platform :ios do
   end
 
   def build(version_number, build_number)
-    match(type: "appstore", clone_branch_directly: true)
+    match
     set_version(version_number, build_number)
     build_app(workspace: "ayezcustomer.xcworkspace", scheme: "ayezcustomer")
   end
