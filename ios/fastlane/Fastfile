@@ -12,8 +12,14 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+fastlane_require 'dotenv'
 
 default_platform(:ios)
+
+before_all do |lane, options|
+  Dotenv.load('../../.env')
+  ensure_git_branch(branch: ENV['GIT_BRANCH'])
+end
 
 platform :ios do
   desc "Push a new beta build to TestFlight"

@@ -1,9 +1,13 @@
 fastlane_require 'dotenv'
 default_platform(:android)
-Dotenv.load('../../.env')
 
 
 platform :android do
+
+  before_all do |lane, options|
+    Dotenv.load('../../.env')
+    ensure_git_branch(branch: ENV['GIT_BRANCH'])
+  end
   
   desc "Runs all the tests"
   lane :test do
