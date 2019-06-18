@@ -18,7 +18,7 @@ default_platform(:ios)
 
 before_all do |lane, options|
   Dotenv.load('../../.env')
-  ensure_git_branch
+  ensure_git_branch(branch: ENV['DEPLOY_BRANCH'])
 end
 
 platform :ios do

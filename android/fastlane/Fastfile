@@ -6,7 +6,7 @@ platform :android do
 
   before_all do |lane, options|
     Dotenv.load('../../.env')
-    ensure_git_branch
+    ensure_git_branch(branch: ENV['DEPLOY_BRANCH'])
   end
   
   desc "Runs all the tests"
