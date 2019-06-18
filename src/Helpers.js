@@ -228,6 +228,13 @@ export const statusBarMargin =
 
 export const isAndroid = Platform.OS === 'android';
 
+export const showOrderStatusBar = () => {
+  const orders = store.getState().OngoingOrders.orders
+  return orders.length > 0 &&  orders.some( order => 
+    !REJECTION_STATUS.includes(order.status)  
+  )
+}
+
 //
 //
 // export const onAddressSelectComplete = (originPage) => {

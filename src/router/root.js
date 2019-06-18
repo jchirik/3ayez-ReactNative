@@ -122,27 +122,26 @@ class RouterComponent extends Component {
                 key={sceneKeys.BarcodeScanner}
                 component={components.BarcodeScanner}
               />
+
+              <Scene
+                key={sceneKeys.areaSelect}
+                component={components.AreaSelect}
+                modal
+              />
+              <Scene
+                key={sceneKeys.areaCreate}
+                component={components.AreaCreate}
+                modal
+              />
+              <Scene
+                key={sceneKeys.storeSelect}
+                component={components.StoreSelect}
+                modal
+              />
             </Stack>
 
-          <Scene
-            key={sceneKeys.areaSelect}
-            component={components.AreaSelect}
-            panHandlers={null}
-          />
-
-          <Scene
-            key={sceneKeys.areaCreate}
-            component={components.AreaCreate}
-            panHandlers={null}
-          />
-
             {/* any modals */}
-            <Scene
-              key={sceneKeys.storeSelect}
-              component={components.StoreSelect}
-              panHandlers={null}
-            />
-
+            
             <Stack key={sceneKeys.tutorial} hideNavBar panHandlers={null}>
               <Scene
                 key={sceneKeys.languageSelect}

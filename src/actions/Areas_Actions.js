@@ -35,18 +35,15 @@ export const fetchSavedAreas = () => {
     const fetchCustomerSavedAreas = firebase.functions().httpsCallable('fetchCustomerSavedAreas');
     fetchCustomerSavedAreas({ customer_id: currentUser.uid }).then((result) => {
       console.log('fetchCustomerSavedAreas returned', result)
-      if (result.data) {
+      if (result.data && result.data.saved_areas.length > 0) {
         const saved_areas = result.data.saved_areas;
-
-        if (!saved_areas.length) {
-          navigateTo(sceneKeys.areaCreate);
-        }
         dispatch({ type: SAVED_AREAS_SET, payload: { saved_areas } });
       } else {
-        dispatch({ type: SAVED_AREAS_FAIL, payload: { error: 'Bad result' } });
+        return Promise.reject('Bad result');
       }
     }).catch((error) => {
       console.log('fetchCustomerSavedAreas error', error);
+      navigateTo(sceneKeys.areaCreate);
       dispatch({ type: SAVED_AREAS_FAIL, payload: { error } });
     });
   };
