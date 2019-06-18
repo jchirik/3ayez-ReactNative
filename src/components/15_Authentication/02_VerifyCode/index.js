@@ -2,59 +2,45 @@ import React, { Component } from 'react';
 import {
   View,
   TextInput,
-  FlatList,
-   Image,
-   ActivityIndicator,
-   TouchableOpacity,
-   SectionList,
-   Platform,
-   BackHandler,
-   AsyncStorage,
-   I18nManager
- } from 'react-native';
-
-import { Actions } from 'react-native-router-flux';
+  ActivityIndicator,
+  TouchableOpacity,
+  Platform,
+  I18nManager
+} from 'react-native';
 import { connect } from 'react-redux';
-import {
-  Header,
-  BlockButton,
-  LoadingOverlay,
-  AyezText
-} from '../../_common';
-// import { Circle } from 'react-native-progress';
-// import MapView, { Marker, Polygon, PROVIDER_GOOGLE } from 'react-native-maps';
+import { Header, BlockButton, LoadingOverlay, AyezText } from '../../_common';
 import {
   authVerificationSet,
   authPhoneVerify,
   robocallCode
 } from '../../../actions';
-
-import {
-  strings,
-  translate
-} from '../../../i18n.js';
-
+import { strings } from '../../../i18n.js';
 import colors from '../../../theme/colors';
+import styles from './styles';
 
 const timer = require('react-native-timer');
 
 class VerifyCode extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      timerSecond: 15,
+      timerSecond: 15
     };
   }
 
   initiateTimer() {
     timer.clearInterval(this);
-    timer.setInterval(this, 'hideMsg', () => {
-      this.setState({ timerSecond: this.state.timerSecond - 1 });
-      if (this.state.timerSecond <= 0) {
-        timer.clearInterval(this);
-      }
-    }, 1000);
+    timer.setInterval(
+      this,
+      'hideMsg',
+      () => {
+        this.setState({ timerSecond: this.state.timerSecond - 1 });
+        if (this.state.timerSecond <= 0) {
+          timer.clearInterval(this);
+        }
+      },
+      1000
+    );
   }
 
   componentDidMount() {
@@ -78,62 +64,51 @@ class VerifyCode extends Component {
   renderSquare(digit, index) {
     return (
       <TouchableOpacity
-      key={`${index}`}
-      onPress={() => {
-        if (this.verificationInput) {
-          if (Platform.OS === "android") {
-            this.verificationInput.blur();
-            setTimeout(() => {
+        key={`${index}`}
+        onPress={() => {
+          if (this.verificationInput) {
+            if (Platform.OS === 'android') {
+              this.verificationInput.blur();
+              setTimeout(() => {
+                this.verificationInput.focus();
+              }, 100);
+            } else {
               this.verificationInput.focus();
-            }, 100);
-          } else {
-            this.verificationInput.focus();
+            }
           }
-        }
-      }}
-      activeOpacity={1}
-      style={{
-        height: 64,
-        width: 46,
-        margin: 12,
-        backgroundColor: 'white',
-        borderRadius: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: { width: -1, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-        elevation: 2,
-      }}>
-        <AyezText semibold style={{
-          fontSize: 26
-        }}>{digit}</AyezText>
+        }}
+        activeOpacity={1}
+        style={styles.digitSquare}
+      >
+        <AyezText semibold style={styles.digitText}>
+          {digit}
+        </AyezText>
       </TouchableOpacity>
-    )
+    );
   }
 
   renderVerificationInput() {
     const digits = this.props.verification.split('');
     const digitSquares = [];
     for (let i = 0; i < 4; i++) {
-      digitSquares.push(this.renderSquare((i < digits.length) ? digits[i] : '', i))
+      digitSquares.push(
+        this.renderSquare(i < digits.length ? digits[i] : '', i)
+      );
     }
     return (
-      <View style={{
-        flexDirection: (I18nManager.isRTL ? 'row-reverse' : 'row'),
-        justifyContent: 'center'
-      }}>
+      <View style={styles.verificationCodeContainer}>
         <TextInput
-          ref={(input) => { this.verificationInput = input; }}
-          style={{
-            position: 'absolute', color: 'transparent', opacity: 0,
-            backgroundColor: 'transparent',fontSize: 1 }}
+          ref={input => {
+            this.verificationInput = input;
+          }}
+          style={styles.verificationCodeText}
           value={this.props.verification}
-          onChangeText={(verification) => this.props.authVerificationSet(verification)}
+          onChangeText={verification =>
+            this.props.authVerificationSet(verification)
+          }
           autoCorrect={false}
-          keyboardType='numeric'
-          autoCapitalize = 'none'
+          keyboardType="numeric"
+          autoCapitalize="none"
           selectTextOnFocus={false}
           caretHidden
           autoFocus
@@ -141,80 +116,56 @@ class VerifyCode extends Component {
         />
         {digitSquares}
       </View>
-    )
+    );
   }
-
 
   renderRobocallButton() {
     if (this.state.timerSecond !== 0) {
       return (
-        <AyezText medium color={colors.ayezGreen}
-          style={{ alignSelf: 'center' }}>{strings('Authentication.robocallWaiting', { seconds: `${this.state.timerSecond}` })}</AyezText>
-      )
+        <AyezText medium color={colors.ayezGreen} style={styles.robocallWaitingText}>
+          {strings('Authentication.robocallWaiting', {
+            seconds: `${this.state.timerSecond}`
+          })}
+        </AyezText>
+      );
     }
 
     if (this.props.robocall_loading) {
-      return (
-        <ActivityIndicator size="small" style={{ padding: 20, alignSelf: 'center' }} />
-      )
+      return <ActivityIndicator size="small" style={styles.loadingIndicator} />;
     }
     return (
-      <View style={{ alignItems: 'center' }}>
-        <AyezText regular size={14} color={"#888888"}>{strings('Authentication.didntReceiveCode')}</AyezText>
-
+      <View style={styles.robocalButtonContainer}>
+        <AyezText regular size={14} color={'#888888'}>
+          {strings('Authentication.didntReceiveCode')}
+        </AyezText>
         <TouchableOpacity
-          style={{ padding: 10 }}
+          style={styles.robocalButton}
           onPress={() => this.props.robocallCode(this.props.login_attempt_id)}
-          >
-          <AyezText medium size={14} color={colors.ayezGreen}>{strings('Authentication.callInstead')}</AyezText>
+        >
+          <AyezText medium size={14} color={colors.ayezGreen}>
+            {strings('Authentication.callInstead')}
+          </AyezText>
         </TouchableOpacity>
       </View>
-    )
-
+    );
   }
 
   render() {
     return (
-      <View style={{
-        flex: 1,
-        backgroundColor: '#FAFCFD'
-      }}>
-        <Header title={strings('Authentication.verificationHeader')}/>
+      <View style={styles.container}>
+        <Header title={strings('Authentication.verificationHeader')} />
         <View>
-          <AyezText bold
-            style={{
-              fontSize: 14,
-              marginTop: 22,
-              marginLeft: 26,
-              marginBottom: 10,
-              alignSelf: 'flex-start'
-            }}
-          >{strings('Authentication.verificationInstruction')}</AyezText>
-
-          { this.renderVerificationInput() }
-
-          {/*
-            <AyezText light
-            style={{
-              fontSize: 12,
-              textAlign: 'center',
-              marginTop: 22,
-              marginBottom: 10
-            }}
-          >{strings('Authentication.resend')}</AyezText>
-          */}
+          <AyezText bold style={styles.verificationInstructionText}>
+            {strings('Authentication.verificationInstruction')}
+          </AyezText>
+          {this.renderVerificationInput()}
           <BlockButton
             deactivated={this.props.verification.length < 4}
             text={strings('Common.confirm')}
-            style={{
-              marginTop: 32,
-              marginLeft: 18,
-              marginRight: 18
-            }}
+            style={styles.confirmButton}
             onPress={this.authPhoneVerify.bind(this)}
           />
-          <View style={{ height: 30 }} />
-          { this.renderRobocallButton() }
+          {this.renderRobocallButton()}
         </View>
         <LoadingOverlay isVisible={this.props.verification_loading} />
       </View>
@@ -240,8 +191,11 @@ const mapStateToProps = ({ Auth }) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  authVerificationSet,
-  authPhoneVerify,
-  robocallCode
-})(VerifyCode);
+export default connect(
+  mapStateToProps,
+  {
+    authVerificationSet,
+    authPhoneVerify,
+    robocallCode
+  }
+)(VerifyCode);
