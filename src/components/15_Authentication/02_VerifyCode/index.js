@@ -137,6 +137,7 @@ class VerifyCode extends Component {
           selectTextOnFocus={false}
           caretHidden
           autoFocus
+          maxLength={4}
         />
         {digitSquares}
       </View>
