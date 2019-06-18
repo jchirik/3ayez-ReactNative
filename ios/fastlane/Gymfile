@@ -3,6 +3,6 @@
 
 # In general, you can use the options available
 
-scheme("ayezcustomer")
+scheme ENV["SCHEME"]
 workspace("ayezcustomer.xcworkspace")
 
