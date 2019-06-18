@@ -15,6 +15,7 @@ import {
 import { strings } from '../../../i18n.js';
 import colors from '../../../theme/colors';
 import { isAndroid } from '../../../Helpers';
+import { constants } from '../../../utils/contants';
 import styles from './styles';
 
 const timer = require('react-native-timer');
@@ -89,7 +90,7 @@ class VerifyCode extends Component {
   renderVerificationInput() {
     const digits = this.props.verification.split('');
     const digitSquares = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < constants.VERFICATION_CODE_LENGTH; i++) {
       digitSquares.push(
         this.renderSquare(i < digits.length ? digits[i] : '', i)
       );
@@ -106,12 +107,12 @@ class VerifyCode extends Component {
             this.props.authVerificationSet(verification)
           }
           autoCorrect={false}
-          keyboardType="numeric"
+          keyboardType="phone-pad"
           autoCapitalize="none"
           selectTextOnFocus={false}
           caretHidden
           autoFocus
-          maxLength={4}
+          maxLength={constants.VERFICATION_CODE_LENGTH}
         />
         {digitSquares}
       </View>
@@ -163,7 +164,7 @@ class VerifyCode extends Component {
           </AyezText>
           {this.renderVerificationInput()}
           <BlockButton
-            deactivated={this.props.verification.length < 4}
+            deactivated={this.props.verification.length < constants.VERFICATION_CODE_LENGTH}
             text={strings('Common.confirm')}
             style={styles.confirmButton}
             onPress={this.authPhoneVerify.bind(this)}
