@@ -3,9 +3,7 @@ import {
   View,
   TextInput,
   ActivityIndicator,
-  TouchableOpacity,
-  Platform,
-  I18nManager
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Header, BlockButton, LoadingOverlay, AyezText } from '../../_common';
@@ -16,6 +14,7 @@ import {
 } from '../../../actions';
 import { strings } from '../../../i18n.js';
 import colors from '../../../theme/colors';
+import { isAndroid } from '../../../Helpers';
 import styles from './styles';
 
 const timer = require('react-native-timer');
@@ -67,7 +66,7 @@ class VerifyCode extends Component {
         key={`${index}`}
         onPress={() => {
           if (this.verificationInput) {
-            if (Platform.OS === 'android') {
+            if (isAndroid) {
               this.verificationInput.blur();
               setTimeout(() => {
                 this.verificationInput.focus();
@@ -122,7 +121,11 @@ class VerifyCode extends Component {
   renderRobocallButton() {
     if (this.state.timerSecond !== 0) {
       return (
-        <AyezText medium color={colors.ayezGreen} style={styles.robocallWaitingText}>
+        <AyezText
+          medium
+          color={colors.ayezGreen}
+          style={styles.robocallWaitingText}
+        >
           {strings('Authentication.robocallWaiting', {
             seconds: `${this.state.timerSecond}`
           })}
@@ -135,7 +138,7 @@ class VerifyCode extends Component {
     }
     return (
       <View style={styles.robocalButtonContainer}>
-        <AyezText regular size={14} color={'#888888'}>
+        <AyezText regular size={14} color={colors.grey}>
           {strings('Authentication.didntReceiveCode')}
         </AyezText>
         <TouchableOpacity

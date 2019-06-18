@@ -4,7 +4,7 @@ import colors from '../../../theme/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFCFD'
+    backgroundColor: colors.ayezBackgroundGray
   },
   verificationInstructionText: {
     fontSize: 14,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: { width: -1, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
