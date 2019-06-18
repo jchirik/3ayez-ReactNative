@@ -18,7 +18,7 @@ default_platform(:ios)
 
 before_all do |lane, options|
   Dotenv.load('../../.env')
-  ensure_git_branch(branch: ENV['GIT_BRANCH'])
+  ensure_git_branch
 end
 
 platform :ios do
@@ -26,8 +26,8 @@ platform :ios do
   lane :beta do |options|
       app_version = build(bump_type:options[:version_type])
       upload_to_testflight
-      commit_version_bump(message: "Version #{version_number} build #{build_number}", xcodeproj: "ayezcustomer.xcodeproj")
-      add_git_tag(tag: "v-#{version_number}b-#{build_number}")
+      commit_version_bump(message: "Version #{app_version[:version_number]} build #{app_version[:build_number]}", xcodeproj: "ayezcustomer.xcodeproj")
+      add_git_tag(tag: "v-#{app_version[:version_number]}b-#{app_version[:build_number]}")
       download_dsyms(version: app_version[:version_number], build_number: app_version[:build_number])
       sentry_upload_dsym
   end
