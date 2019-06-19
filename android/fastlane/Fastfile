@@ -1,0 +1,67 @@
+fastlane_require 'dotenv'
+default_platform(:android)
+
+
+platform :android do
+
+  before_all do |lane, options|
+    Dotenv.load('../../.env')
+    ensure_git_branch(branch: ENV['DEPLOY_BRANCH'])
+  end
+  
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do 
+    build(version_name: "1.0.0", version_code: "1")
+    apk_path =  lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    crashlytics(apk_path: apk_path)
+  end
+
+  private_lane :build do |options|
+    bundle_android_assets = %(cd ../.. && yarn bundle_android_assets)
+    bundle_android_sentry = %(cd ../.. && yarn bundle_android_sentry)
+    app_identifier = get_application_id(ext_constant_name:"applicationId")
+    set_version(version_code: options[:version_code], version_name: options[:version_name])
+    gradle(task: "clean" )
+    sh bundle_android_assets
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+    )
+    sh bundle_android_sentry
+    create_sentry_release(app_identifier, version_code, version_name)
+  end 
+
+  private_lane :set_version do |options|
+    android_set_version_name(version_name: options[:version_name])
+    android_set_version_code(version_code: options[:version_code])
+  end
+ 
+  private_lane :create_sentry_release do |options|
+    sentry_create_release(
+      version:  options[:version_name], 
+      app_identifier: options[:app_identifier],
+    )
+      sentry_upload_file(
+      version:  options[:version_name],
+      app_identifier: options[:app_identifier],
+      file: '../android.main.bundle'
+    )
+    sentry_upload_sourcemap(
+      version: options[:version_name],
+      app_identifier: options[:app_identifier],
+      dist: options[:version_code],
+      sourcemap: '../android.main.bundle.map', 
+      rewrite: true
+    )
+      sentry_finalize_release(
+      version:  options[:version_name], 
+      app_identifier: options[:app_identifier],
+    )
+  end
+
+end

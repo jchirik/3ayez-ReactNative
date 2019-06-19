@@ -11,7 +11,9 @@ import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
 import com.ayezcustomer.zendeskchat.ZendeskChatPackage;
+import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import io.fabric.sdk.android.Fabric;
 import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -150,6 +152,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
   @Override
   public void onCreate() {
     super.onCreate();
+    Fabric.with(this, new Crashlytics());
 
     SoLoader.init(this, /* native exopackage */ false);
     ZopimChat.init(getString(R.string.zopim_api_key));

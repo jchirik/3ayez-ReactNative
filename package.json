@@ -11,8 +11,14 @@
     "replace-in-file": "^3.4.0"
   },
   "scripts": {
+    "upload-android-beta": "cd android/fastlane && fastlane beta",
+    "upload-ios-beta-patch": "cd ios/fastlane && fastlane beta version_type:patch ",
+    "upload-ios-beta-minor": "cd ios/fastlane && fastlane beta version_type:minor",
+    "upload-ios-beta-major": "cd ios/fastlane && fastlane beta version_type:major",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "bundle_android_assets": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "bundle_android_sentry": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output android.main.bundle --sourcemap-output android.main.bundle.map",
     "apk": "cd android && ./gradlew assembleRelease",
     "rename": "node ./bin/rename.js",
     "start": "react-native start",
