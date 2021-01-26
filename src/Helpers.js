@@ -227,6 +227,7 @@ export const statusBarMargin =
   Platform.OS === 'ios' ? (isIPhoneX() ? 35 : 20) : 5;
 
 export const isAndroid = Platform.OS === 'android';
+export const androidVersion = Platform.Version;
 
 export const showOrderStatusBar = () => {
   const orders = store.getState().OngoingOrders.orders

@@ -28,3 +28,4 @@ export ItemIncrementer from './ItemIncrementer';
 export Incrementer from './Incrementer';
 
 export * from './RTLImage';
+export ClickableShadow from './ClickableShadow';

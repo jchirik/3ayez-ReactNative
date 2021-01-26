@@ -7,21 +7,15 @@ const STICKY_HEADER_HEIGHT = 88;
 const SCROLL_HEIGHT = PARALLAX_HEADER_HEIGHT - STICKY_HEADER_HEIGHT;
 
 const styles = StyleSheet.create({
+  categoryCardContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10
+  },
   categoryCard: {
     backgroundColor: colors.whiteGrey,
     width: '100%',
-    height: '100%',
-    borderRadius: 10,
-    ...Platform.select({
-      ios: {
-        shadowColor: colors.warmGrey,
-        shadowOpacity: 0.25,
-        shadowRadius: 5
-      },
-      android: {
-        elevation: 2
-      }
-    })
+    height: '100%'
   },
   categoryImage: {
     position: 'absolute',
@@ -30,6 +24,11 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     borderRadius: 10
+  },
+  categoryText: {
+    position: 'absolute',
+    bottom: 12,
+    left: 10
   },
   categoryList: {
     flex: 1
