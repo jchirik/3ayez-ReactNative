@@ -1,10 +1,11 @@
 import _ from 'lodash';
-import { Platform, Dimensions, AsyncStorage } from 'react-native';
+import { Platform, Dimensions, AsyncStorage, Linking } from 'react-native';
 import Moment from 'moment-timezone';
 import store from './reducers';
 import { strings } from './i18n';
 import Toast from 'react-native-root-toast';
 import colors from './theme/colors';
+import { getStoreDirectLink, getStoreURL } from './utils/appStore';
 
 export const ORDER_STATUS = Object.freeze({
     CANCELED_BY_USER: 300,
@@ -344,4 +345,35 @@ export const checkIfOpen = hours => {
   }
 
   return isOpen;
+};
+
+export const getUrlResponse = async (url) => {
+  try {
+    const response = await fetch(url)
+    const responseJson = await response.json()
+    return responseJson
+  } catch {
+    return null
+  }
+}
+
+export const goToStore = async () => {
+  console.log('go to store');
+
+  const storeLink = await getStoreDirectLink();
+  const storeUrl = await getStoreURL();
+
+  if (!storeLink && !storeUrl) {
+    // TODO: handle this error                                    
+    console.log("Failed to connect to store")
+    return
+  }
+
+  Linking.canOpenURL(storeLink).then(
+    supported => {
+      if (supported) Linking.openURL(storeLink);
+      else Linking.openURL(storeUrl);
+    },
+    err => console.log(err)
+  );
 };

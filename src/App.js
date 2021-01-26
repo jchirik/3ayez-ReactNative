@@ -4,19 +4,37 @@ import codePush from 'react-native-code-push';
 import store, { persistor, REDUCERS_NAMES } from './reducers';
 import Router from './router/root';
 import { PersistGate } from 'redux-persist/integration/react';
-import { View, Text, Modal, ActivityIndicator, AppState, NetInfo, Alert, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  ActivityIndicator,
+  AppState,
+  NetInfo,
+  Alert,
+  Platform
+} from 'react-native';
 import { sceneKeys } from './router';
 import SplashScreen from 'react-native-splash-screen';
-import { SPLASH_SCREEN_TIME_OUT, isIOS, toast, NET_INFO_STATE, CONNECTION_CHANGE_EVENT } from './Helpers';
+import {
+  SPLASH_SCREEN_TIME_OUT,
+  isIOS,
+  toast,
+  NET_INFO_STATE,
+  CONNECTION_CHANGE_EVENT,
+  goToStore
+} from './Helpers';
 import { strings } from './i18n';
 import { Sentry } from 'react-native-sentry';
 import { addSupportMessage, addSupportUser } from './actions';
 import fonts from './theme/fonts';
 import zendesk from './ZendeskChat/ZendeskChatNativeModule';
-import {navigateBackTo} from './router/index';
-import AyezText from './components/_common/AyezText';
+import { navigateBackTo } from './router/index';
+import { AyezText, BlockButton } from './components/_common';
 
 import appsFlyer from 'react-native-appsflyer';
+import VersionCheck from 'react-native-version-check';
+
 
 class App extends Component {
   constructor() {
@@ -30,11 +48,18 @@ class App extends Component {
       greetingMessage: undefined,
       isSplashShown: true,
       isInternetConnected: true,
-      appState: AppState.currentState
+      appState: AppState.currentState,
+      isUptoDate: true
     };
   }
   componentDidMount() {
-    NetInfo.addEventListener(CONNECTION_CHANGE_EVENT, this.handleConnectionChange);
+    NetInfo.addEventListener(
+      CONNECTION_CHANGE_EVENT,
+      this.handleConnectionChange
+    );
+
+    this.checkForUpdates();
+
     let that = this;
 
     codePush.getUpdateMetadata().then(update => {
@@ -49,22 +74,35 @@ class App extends Component {
   }
 
   handleConnectionChange = connectionInfo => {
-    if(connectionInfo.type == NET_INFO_STATE.NONE) {
+    if (connectionInfo.type == NET_INFO_STATE.NONE) {
       this.setState({ isInternetConnected: false });
     } else {
       this.setState({ isInternetConnected: true });
     }
-  }
+  };
 
+  checkForUpdates = () => {
+    console.log('entered ya hamada');
+    VersionCheck.needUpdate().then(async res => {
+      console.log(res.isNeeded); // true
+      if (res.isNeeded) {
+        console.log('need update');
+        this.setState({ isUptoDate: false });
+      }
+    });
+  };
 
-  _handleAppStateChange = (nextAppState) => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+  _handleAppStateChange = nextAppState => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
       if (Platform.OS === 'ios') {
         appsFlyer.trackAppLaunch();
       }
     }
-    this.setState({appState: nextAppState});
-  }
+    this.setState({ appState: nextAppState });
+  };
 
   componentWillUnmount() {
     NetInfo.removeEventListener(CONNECTION_CHANGE_EVENT);
@@ -82,30 +120,31 @@ class App extends Component {
     }
 
     const options = {
-      devKey: "ndKGiAYYohywirYkJfhAFg"
+      devKey: 'ndKGiAYYohywirYkJfhAFg'
     };
-    if (isIOS()) { options.appId = "1329892544"; }
-    appsFlyer.initSdk(options,
-      (result) => {
+    if (isIOS()) {
+      options.appId = '1329892544';
+    }
+    appsFlyer.initSdk(
+      options,
+      result => {
         console.log(result);
-      }, (error) => {
+      },
+      error => {
         console.error(error);
       }
-    )
+    );
     if (Platform.OS === 'android') {
-      appsFlyer.setCollectIMEI(true,
-        (result) => {
-           console.log("setCollectIMEI ...");
-         });
-     appsFlyer.setCollectAndroidID(true,
-       (result) => {
-          console.log("setCollectAndroidID ... ");
-        });
-      const  gcmProjectNum = "944939788978";
-      appsFlyer.enableUninstallTracking(gcmProjectNum,
-      (success) => {
-        console.log(success)
-      })
+      appsFlyer.setCollectIMEI(true, result => {
+        console.log('setCollectIMEI ...');
+      });
+      appsFlyer.setCollectAndroidID(true, result => {
+        console.log('setCollectAndroidID ... ');
+      });
+      const gcmProjectNum = '944939788978';
+      appsFlyer.enableUninstallTracking(gcmProjectNum, success => {
+        console.log(success);
+      });
     }
   }
 
@@ -211,10 +250,51 @@ class App extends Component {
           animationType="slide"
           transparent={false}
           visible={!this.state.isInternetConnected}
-          onRequestClose={() => {}}>
-          <View style={{backgroundColor: 'white', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <AyezText bold style={{marginBottom: 10}}>{strings("Common.noInternet")}</AyezText>
-            <AyezText style={{ textAlign: 'center' }}>{strings("Common.pleaseConnectToInternetNetwork")}</AyezText>
+          onRequestClose={() => {}}
+        >
+          <View
+            style={{
+              backgroundColor: 'white',
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <AyezText bold style={{ marginBottom: 10 }}>
+              {strings('Common.noInternet')}
+            </AyezText>
+            <AyezText style={{ textAlign: 'center' }}>
+              {strings('Common.pleaseConnectToInternetNetwork')}
+            </AyezText>
+          </View>
+        </Modal>
+
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.isInternetConnected && !this.state.isUptoDate}
+          onRequestClose={() => {}}
+        >
+          <View
+            style={{
+              backgroundColor: 'white',
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <AyezText bold style={{ marginBottom: 10 }}>
+              {strings('Common.appOutOfdate')}
+            </AyezText>
+            <BlockButton
+              text={strings('Common.goToUpdate')}
+              style={{
+                marginTop: 10,
+                paddingLeft: 18,
+                paddingRight: 18
+              }}
+              onPress={() => goToStore()}
+            />
           </View>
         </Modal>
 

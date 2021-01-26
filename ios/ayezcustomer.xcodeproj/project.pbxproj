@@ -40,6 +40,7 @@
 		351046F62246EDE500C9463F /* FrutigerLTArabic-55Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351046F22246EDE500C9463F /* FrutigerLTArabic-55Roman.ttf */; };
 		351046F72246EDE500C9463F /* FrutigerLTArabic-65Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 351046F32246EDE500C9463F /* FrutigerLTArabic-65Bold.ttf */; };
 		354EB352222994D700740DB3 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354EB3502229949800740DB3 /* libSplashScreen.a */; };
+		59A6421A2289B6840024AC58 /* libRNVersionCheck.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A642172289B6710024AC58 /* libRNVersionCheck.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8E7D4B171F8AFD9C00699FE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E7D4B161F8AFD9B00699FE4 /* GoogleService-Info.plist */; };
 		A038CD85D39748E122AC50D7 /* libPods-ayezcustomer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 333056BA5B7ADABE709DF4A1 /* libPods-ayezcustomer.a */; };
@@ -276,6 +277,13 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		59A642162289B6710024AC58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59A641E62289B6710024AC58 /* RNVersionCheck.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNVersionCheck;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -462,6 +470,7 @@
 		351046F32246EDE500C9463F /* FrutigerLTArabic-65Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FrutigerLTArabic-65Bold.ttf"; path = "../../assets/fonts/FrutigerLTArabic-65Bold.ttf"; sourceTree = "<group>"; };
 		354EB3222229949800740DB3 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		4031C5D3468A6410BB4016B9 /* Pods-ayezcustomer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ayezcustomer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ayezcustomer/Pods-ayezcustomer.debug.xcconfig"; sourceTree = "<group>"; };
+		59A641E62289B6710024AC58 /* RNVersionCheck.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVersionCheck.xcodeproj; path = "../node_modules/react-native-version-check/ios/RNVersionCheck.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -539,6 +548,7 @@
 			files = (
 				D2CD307A2247C53200D1741C /* MessageUI.framework in Frameworks */,
 				D2CD30782247C52800D1741C /* Social.framework in Frameworks */,
+				59A6421A2289B6840024AC58 /* libRNVersionCheck.a in Frameworks */,
 				D2CD30762247C50D00D1741C /* libRNShare.a in Frameworks */,
 				354EB352222994D700740DB3 /* libSplashScreen.a in Frameworks */,
 				D2615AB0221709BE00E38B88 /* libreact-native-fbsdk.a in Frameworks */,
@@ -723,6 +733,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		59A641E72289B6710024AC58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59A642172289B6710024AC58 /* libRNVersionCheck.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,6 +771,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				59A641E62289B6710024AC58 /* RNVersionCheck.xcodeproj */,
 				D2CD30452247C4FA00D1741C /* RNShare.xcodeproj */,
 				D61EBD872247CBD100162998 /* ReactNativeConfig.xcodeproj */,
 				354EB3222229949800740DB3 /* SplashScreen.xcodeproj */,
@@ -1152,6 +1171,10 @@
 					ProjectRef = D276029221DD156A0037DE81 /* RNSound.xcodeproj */;
 				},
 				{
+					ProductGroup = 59A641E72289B6710024AC58 /* Products */;
+					ProjectRef = 59A641E62289B6710024AC58 /* RNVersionCheck.xcodeproj */;
+				},
+				{
 					ProductGroup = 354EB3232229949800740DB3 /* Products */;
 					ProjectRef = 354EB3222229949800740DB3 /* SplashScreen.xcodeproj */;
 				},
@@ -1337,6 +1360,13 @@
 			fileType = archive.ar;
 			path = libjschelpers.a;
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		59A642172289B6710024AC58 /* libRNVersionCheck.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVersionCheck.a;
+			remoteRef = 59A642162289B6710024AC58 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
